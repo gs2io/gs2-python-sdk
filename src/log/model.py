@@ -365,7 +365,7 @@ class IssueStampSheetLog(core.Gs2Model):
     user_id: str = None
     action: str = None
     args: str = None
-    tasks: str = None
+    tasks: List[str] = None
 
     def with_timestamp(self, timestamp: int) -> IssueStampSheetLog:
         self.timestamp = timestamp
@@ -395,7 +395,7 @@ class IssueStampSheetLog(core.Gs2Model):
         self.args = args
         return self
 
-    def with_tasks(self, tasks: str) -> IssueStampSheetLog:
+    def with_tasks(self, tasks: List[str]) -> IssueStampSheetLog:
         self.tasks = tasks
         return self
 
@@ -425,7 +425,10 @@ class IssueStampSheetLog(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_action(data.get('action'))\
             .with_args(data.get('args'))\
-            .with_tasks(data.get('tasks'))
+            .with_tasks([
+                data.get('tasks')[i]
+                for i in range(len(data.get('tasks')) if data.get('tasks') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -436,7 +439,10 @@ class IssueStampSheetLog(core.Gs2Model):
             "userId": self.user_id,
             "action": self.action,
             "args": self.args,
-            "tasks": self.tasks,
+            "tasks": [
+                self.tasks[i]
+                for i in range(len(self.tasks) if self.tasks else 0)
+            ],
         }
 
 
@@ -583,6 +589,7 @@ class Namespace(core.Gs2Model):
     aws_access_key_id: str = None
     aws_secret_access_key: str = None
     firehose_stream_name: str = None
+    status: str = None
     created_at: int = None
     updated_at: int = None
 
@@ -628,6 +635,10 @@ class Namespace(core.Gs2Model):
 
     def with_firehose_stream_name(self, firehose_stream_name: str) -> Namespace:
         self.firehose_stream_name = firehose_stream_name
+        return self
+
+    def with_status(self, status: str) -> Namespace:
+        self.status = status
         return self
 
     def with_created_at(self, created_at: int) -> Namespace:
@@ -711,6 +722,7 @@ class Namespace(core.Gs2Model):
             .with_aws_access_key_id(data.get('awsAccessKeyId'))\
             .with_aws_secret_access_key(data.get('awsSecretAccessKey'))\
             .with_firehose_stream_name(data.get('firehoseStreamName'))\
+            .with_status(data.get('status'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
 
@@ -727,6 +739,7 @@ class Namespace(core.Gs2Model):
             "awsAccessKeyId": self.aws_access_key_id,
             "awsSecretAccessKey": self.aws_secret_access_key,
             "firehoseStreamName": self.firehose_stream_name,
+            "status": self.status,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }
