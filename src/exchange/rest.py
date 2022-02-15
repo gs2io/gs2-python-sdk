@@ -122,6 +122,8 @@ class Gs2ExchangeRestClient(AbstractGs2RestClient):
             body["queueNamespaceId"] = request.queue_namespace_id
         if request.key_id is not None:
             body["keyId"] = request.key_id
+        if request.exchange_script is not None:
+            body["exchangeScript"] = request.exchange_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -347,6 +349,8 @@ class Gs2ExchangeRestClient(AbstractGs2RestClient):
             body["queueNamespaceId"] = request.queue_namespace_id
         if request.key_id is not None:
             body["keyId"] = request.key_id
+        if request.exchange_script is not None:
+            body["exchangeScript"] = request.exchange_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

@@ -69,6 +69,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     enable_direct_exchange: bool = None
     queue_namespace_id: str = None
     key_id: str = None
+    exchange_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -93,6 +94,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_key_id(self, key_id: str) -> CreateNamespaceRequest:
         self.key_id = key_id
+        return self
+
+    def with_exchange_script(self, exchange_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.exchange_script = exchange_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -124,6 +129,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_enable_direct_exchange(data.get('enableDirectExchange'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))\
+            .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -134,6 +140,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "enableDirectExchange": self.enable_direct_exchange,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -219,6 +226,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     enable_direct_exchange: bool = None
     queue_namespace_id: str = None
     key_id: str = None
+    exchange_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -243,6 +251,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_key_id(self, key_id: str) -> UpdateNamespaceRequest:
         self.key_id = key_id
+        return self
+
+    def with_exchange_script(self, exchange_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.exchange_script = exchange_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -274,6 +286,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_enable_direct_exchange(data.get('enableDirectExchange'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))\
+            .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -284,6 +297,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "enableDirectExchange": self.enable_direct_exchange,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

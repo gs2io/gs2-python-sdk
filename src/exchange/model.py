@@ -135,6 +135,61 @@ class LogSetting(core.Gs2Model):
         }
 
 
+class ScriptSetting(core.Gs2Model):
+    trigger_script_id: str = None
+    done_trigger_target_type: str = None
+    done_trigger_script_id: str = None
+    done_trigger_queue_namespace_id: str = None
+
+    def with_trigger_script_id(self, trigger_script_id: str) -> ScriptSetting:
+        self.trigger_script_id = trigger_script_id
+        return self
+
+    def with_done_trigger_target_type(self, done_trigger_target_type: str) -> ScriptSetting:
+        self.done_trigger_target_type = done_trigger_target_type
+        return self
+
+    def with_done_trigger_script_id(self, done_trigger_script_id: str) -> ScriptSetting:
+        self.done_trigger_script_id = done_trigger_script_id
+        return self
+
+    def with_done_trigger_queue_namespace_id(self, done_trigger_queue_namespace_id: str) -> ScriptSetting:
+        self.done_trigger_queue_namespace_id = done_trigger_queue_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ScriptSetting]:
+        if data is None:
+            return None
+        return ScriptSetting()\
+            .with_trigger_script_id(data.get('triggerScriptId'))\
+            .with_done_trigger_target_type(data.get('doneTriggerTargetType'))\
+            .with_done_trigger_script_id(data.get('doneTriggerScriptId'))\
+            .with_done_trigger_queue_namespace_id(data.get('doneTriggerQueueNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "triggerScriptId": self.trigger_script_id,
+            "doneTriggerTargetType": self.done_trigger_target_type,
+            "doneTriggerScriptId": self.done_trigger_script_id,
+            "doneTriggerQueueNamespaceId": self.done_trigger_queue_namespace_id,
+        }
+
+
 class GitHubCheckoutSetting(core.Gs2Model):
     api_key_id: str = None
     repository_name: str = None
@@ -827,6 +882,7 @@ class Namespace(core.Gs2Model):
     enable_await_exchange: bool = None
     queue_namespace_id: str = None
     key_id: str = None
+    exchange_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -857,6 +913,10 @@ class Namespace(core.Gs2Model):
 
     def with_key_id(self, key_id: str) -> Namespace:
         self.key_id = key_id
+        return self
+
+    def with_exchange_script(self, exchange_script: ScriptSetting) -> Namespace:
+        self.exchange_script = exchange_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -940,6 +1000,7 @@ class Namespace(core.Gs2Model):
             .with_enable_await_exchange(data.get('enableAwaitExchange'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))\
+            .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
@@ -953,6 +1014,7 @@ class Namespace(core.Gs2Model):
             "enableAwaitExchange": self.enable_await_exchange,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
