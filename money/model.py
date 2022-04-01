@@ -152,6 +152,7 @@ class WalletDetail(core.Gs2Model):
 class Receipt(core.Gs2Model):
     receipt_id: str = None
     transaction_id: str = None
+    purchase_token: str = None
     user_id: str = None
     type: str = None
     slot: int = None
@@ -168,6 +169,10 @@ class Receipt(core.Gs2Model):
 
     def with_transaction_id(self, transaction_id: str) -> Receipt:
         self.transaction_id = transaction_id
+        return self
+
+    def with_purchase_token(self, purchase_token: str) -> Receipt:
+        self.purchase_token = purchase_token
         return self
 
     def with_user_id(self, user_id: str) -> Receipt:
@@ -294,6 +299,7 @@ class Receipt(core.Gs2Model):
         return Receipt()\
             .with_receipt_id(data.get('receiptId'))\
             .with_transaction_id(data.get('transactionId'))\
+            .with_purchase_token(data.get('purchaseToken'))\
             .with_user_id(data.get('userId'))\
             .with_type(data.get('type'))\
             .with_slot(data.get('slot'))\
@@ -308,6 +314,7 @@ class Receipt(core.Gs2Model):
         return {
             "receiptId": self.receipt_id,
             "transactionId": self.transaction_id,
+            "purchaseToken": self.purchase_token,
             "userId": self.user_id,
             "type": self.type,
             "slot": self.slot,
