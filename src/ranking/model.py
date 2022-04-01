@@ -424,7 +424,7 @@ class Score(core.Gs2Model):
         scorer_user_id,
         unique_id,
     ):
-        return 'grn:gs2:{region}:{ownerId}:ranking:{namespaceName}:user:{userId}:score:{categoryName}:{scorerUserId}:{uniqueId}'.format(
+        return 'grn:gs2:{region}:{ownerId}:ranking:{namespaceName}:user:{userId}:category:{categoryName}:score:{scorerUserId}:{uniqueId}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
@@ -439,7 +439,7 @@ class Score(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):score:(?P<categoryName>.+):(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):category:(?P<categoryName>.+):score:(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -449,7 +449,7 @@ class Score(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):score:(?P<categoryName>.+):(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):category:(?P<categoryName>.+):score:(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -459,7 +459,7 @@ class Score(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):score:(?P<categoryName>.+):(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):category:(?P<categoryName>.+):score:(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -469,7 +469,7 @@ class Score(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):score:(?P<categoryName>.+):(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):category:(?P<categoryName>.+):score:(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
         if match is None:
             return None
         return match.group('user_id')
@@ -479,7 +479,7 @@ class Score(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):score:(?P<categoryName>.+):(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):category:(?P<categoryName>.+):score:(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
         if match is None:
             return None
         return match.group('category_name')
@@ -489,7 +489,7 @@ class Score(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):score:(?P<categoryName>.+):(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):category:(?P<categoryName>.+):score:(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
         if match is None:
             return None
         return match.group('scorer_user_id')
@@ -499,7 +499,7 @@ class Score(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):score:(?P<categoryName>.+):(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):category:(?P<categoryName>.+):score:(?P<scorerUserId>.+):(?P<uniqueId>.+)', grn)
         if match is None:
             return None
         return match.group('unique_id')
@@ -586,7 +586,7 @@ class Subscribe(core.Gs2Model):
         user_id,
         category_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:ranking:{namespaceName}:user:{userId}:subscribe:{categoryName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:ranking:{namespaceName}:user:{userId}:subscribe:category:{categoryName}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
@@ -599,7 +599,7 @@ class Subscribe(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:(?P<categoryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -609,7 +609,7 @@ class Subscribe(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:(?P<categoryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -619,7 +619,7 @@ class Subscribe(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:(?P<categoryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -629,7 +629,7 @@ class Subscribe(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:(?P<categoryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+)', grn)
         if match is None:
             return None
         return match.group('user_id')
@@ -639,7 +639,7 @@ class Subscribe(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:(?P<categoryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+)', grn)
         if match is None:
             return None
         return match.group('category_name')

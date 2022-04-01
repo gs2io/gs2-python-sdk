@@ -27,7 +27,7 @@ class Billing(core.Gs2Model):
     region: str = None
     service: str = None
     activity_type: str = None
-    unit: int = None
+    unit: float = None
     unit_name: str = None
     price: int = None
     currency: str = None
@@ -62,7 +62,7 @@ class Billing(core.Gs2Model):
         self.activity_type = activity_type
         return self
 
-    def with_unit(self, unit: int) -> Billing:
+    def with_unit(self, unit: float) -> Billing:
         self.unit = unit
         return self
 

@@ -231,6 +231,13 @@ class DisplayItem(core.Gs2Model):
         self.sales_period_event_id = sales_period_event_id
         return self
 
+    @classmethod
+    def create_grn(
+        cls,
+    ):
+        return ''.format(
+        )
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():

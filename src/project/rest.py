@@ -45,6 +45,8 @@ class Gs2ProjectRestClient(AbstractGs2RestClient):
             body["companyName"] = request.company_name
         if request.password is not None:
             body["password"] = request.password
+        if request.lang is not None:
+            body["lang"] = request.lang
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -331,6 +333,8 @@ class Gs2ProjectRestClient(AbstractGs2RestClient):
         }
         if request.email is not None:
             body["email"] = request.email
+        if request.lang is not None:
+            body["lang"] = request.lang
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

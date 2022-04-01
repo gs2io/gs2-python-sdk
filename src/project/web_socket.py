@@ -48,6 +48,8 @@ class Gs2ProjectWebSocketClient(AbstractGs2WebSocketClient):
             body["companyName"] = request.company_name
         if request.password is not None:
             body["password"] = request.password
+        if request.lang is not None:
+            body["lang"] = request.lang
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -334,6 +336,8 @@ class Gs2ProjectWebSocketClient(AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.email is not None:
             body["email"] = request.email
+        if request.lang is not None:
+            body["lang"] = request.lang
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

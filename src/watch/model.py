@@ -19,6 +19,95 @@ from typing import *
 import core
 
 
+class StatsEvent(core.Gs2Model):
+    grn: str = None
+    service: str = None
+    method: str = None
+    metric: str = None
+    cumulative: bool = None
+    value: float = None
+    tags: List[str] = None
+    call_at: int = None
+
+    def with_grn(self, grn: str) -> StatsEvent:
+        self.grn = grn
+        return self
+
+    def with_service(self, service: str) -> StatsEvent:
+        self.service = service
+        return self
+
+    def with_method(self, method: str) -> StatsEvent:
+        self.method = method
+        return self
+
+    def with_metric(self, metric: str) -> StatsEvent:
+        self.metric = metric
+        return self
+
+    def with_cumulative(self, cumulative: bool) -> StatsEvent:
+        self.cumulative = cumulative
+        return self
+
+    def with_value(self, value: float) -> StatsEvent:
+        self.value = value
+        return self
+
+    def with_tags(self, tags: List[str]) -> StatsEvent:
+        self.tags = tags
+        return self
+
+    def with_call_at(self, call_at: int) -> StatsEvent:
+        self.call_at = call_at
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[StatsEvent]:
+        if data is None:
+            return None
+        return StatsEvent()\
+            .with_grn(data.get('grn'))\
+            .with_service(data.get('service'))\
+            .with_method(data.get('method'))\
+            .with_metric(data.get('metric'))\
+            .with_cumulative(data.get('cumulative'))\
+            .with_value(data.get('value'))\
+            .with_tags([
+                data.get('tags')[i]
+                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+            ])\
+            .with_call_at(data.get('callAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "grn": self.grn,
+            "service": self.service,
+            "method": self.method,
+            "metric": self.metric,
+            "cumulative": self.cumulative,
+            "value": self.value,
+            "tags": [
+                self.tags[i]
+                for i in range(len(self.tags) if self.tags else 0)
+            ],
+            "callAt": self.call_at,
+        }
+
+
 class BillingActivity(core.Gs2Model):
     billing_activity_id: str = None
     year: int = None

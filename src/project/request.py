@@ -24,6 +24,7 @@ class CreateAccountRequest(core.Gs2Request):
     full_name: str = None
     company_name: str = None
     password: str = None
+    lang: str = None
 
     def with_email(self, email: str) -> CreateAccountRequest:
         self.email = email
@@ -39,6 +40,10 @@ class CreateAccountRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> CreateAccountRequest:
         self.password = password
+        return self
+
+    def with_lang(self, lang: str) -> CreateAccountRequest:
+        self.lang = lang
         return self
 
     def get(self, key, default=None):
@@ -63,7 +68,8 @@ class CreateAccountRequest(core.Gs2Request):
             .with_email(data.get('email'))\
             .with_full_name(data.get('fullName'))\
             .with_company_name(data.get('companyName'))\
-            .with_password(data.get('password'))
+            .with_password(data.get('password'))\
+            .with_lang(data.get('lang'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -71,6 +77,7 @@ class CreateAccountRequest(core.Gs2Request):
             "fullName": self.full_name,
             "companyName": self.company_name,
             "password": self.password,
+            "lang": self.lang,
         }
 
 
@@ -193,9 +200,14 @@ class ForgetRequest(core.Gs2Request):
 
     context_stack: str = None
     email: str = None
+    lang: str = None
 
     def with_email(self, email: str) -> ForgetRequest:
         self.email = email
+        return self
+
+    def with_lang(self, lang: str) -> ForgetRequest:
+        self.lang = lang
         return self
 
     def get(self, key, default=None):
@@ -217,11 +229,13 @@ class ForgetRequest(core.Gs2Request):
         if data is None:
             return None
         return ForgetRequest()\
-            .with_email(data.get('email'))
+            .with_email(data.get('email'))\
+            .with_lang(data.get('lang'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "email": self.email,
+            "lang": self.lang,
         }
 
 

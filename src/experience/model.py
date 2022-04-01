@@ -192,6 +192,7 @@ class Status(core.Gs2Model):
     experience_value: int = None
     rank_value: int = None
     rank_cap_value: int = None
+    next_rank_up_experience_value: int = None
     created_at: int = None
     updated_at: int = None
 
@@ -221,6 +222,10 @@ class Status(core.Gs2Model):
 
     def with_rank_cap_value(self, rank_cap_value: int) -> Status:
         self.rank_cap_value = rank_cap_value
+        return self
+
+    def with_next_rank_up_experience_value(self, next_rank_up_experience_value: int) -> Status:
+        self.next_rank_up_experience_value = next_rank_up_experience_value
         return self
 
     def with_created_at(self, created_at: int) -> Status:
@@ -336,6 +341,7 @@ class Status(core.Gs2Model):
             .with_experience_value(data.get('experienceValue'))\
             .with_rank_value(data.get('rankValue'))\
             .with_rank_cap_value(data.get('rankCapValue'))\
+            .with_next_rank_up_experience_value(data.get('nextRankUpExperienceValue'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
 
@@ -348,6 +354,7 @@ class Status(core.Gs2Model):
             "experienceValue": self.experience_value,
             "rankValue": self.rank_value,
             "rankCapValue": self.rank_cap_value,
+            "nextRankUpExperienceValue": self.next_rank_up_experience_value,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }
