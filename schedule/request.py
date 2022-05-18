@@ -910,6 +910,7 @@ class TriggerByUserIdRequest(core.Gs2Request):
     user_id: str = None
     trigger_strategy: str = None
     ttl: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> TriggerByUserIdRequest:
         self.namespace_name = namespace_name
@@ -929,6 +930,10 @@ class TriggerByUserIdRequest(core.Gs2Request):
 
     def with_ttl(self, ttl: int) -> TriggerByUserIdRequest:
         self.ttl = ttl
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> TriggerByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1023,6 +1028,7 @@ class DeleteTriggerByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     trigger_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteTriggerByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1034,6 +1040,10 @@ class DeleteTriggerByUserIdRequest(core.Gs2Request):
 
     def with_trigger_name(self, trigger_name: str) -> DeleteTriggerByUserIdRequest:
         self.trigger_name = trigger_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteTriggerByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

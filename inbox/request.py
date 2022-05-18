@@ -490,6 +490,7 @@ class SendMessageByUserIdRequest(core.Gs2Request):
     read_acquire_actions: List[AcquireAction] = None
     expires_at: int = None
     expires_time_span: TimeSpan = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SendMessageByUserIdRequest:
         self.namespace_name = namespace_name
@@ -513,6 +514,10 @@ class SendMessageByUserIdRequest(core.Gs2Request):
 
     def with_expires_time_span(self, expires_time_span: TimeSpan) -> SendMessageByUserIdRequest:
         self.expires_time_span = expires_time_span
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SendMessageByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -708,6 +713,7 @@ class ReceiveGlobalMessageByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ReceiveGlobalMessageByUserIdRequest:
         self.namespace_name = namespace_name
@@ -715,6 +721,10 @@ class ReceiveGlobalMessageByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> ReceiveGlobalMessageByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ReceiveGlobalMessageByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -803,6 +813,7 @@ class OpenMessageByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     message_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> OpenMessageByUserIdRequest:
         self.namespace_name = namespace_name
@@ -814,6 +825,10 @@ class OpenMessageByUserIdRequest(core.Gs2Request):
 
     def with_message_name(self, message_name: str) -> OpenMessageByUserIdRequest:
         self.message_name = message_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> OpenMessageByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -918,6 +933,7 @@ class ReadMessageByUserIdRequest(core.Gs2Request):
     user_id: str = None
     message_name: str = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ReadMessageByUserIdRequest:
         self.namespace_name = namespace_name
@@ -933,6 +949,10 @@ class ReadMessageByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> ReadMessageByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ReadMessageByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1031,6 +1051,7 @@ class DeleteMessageByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     message_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMessageByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1042,6 +1063,10 @@ class DeleteMessageByUserIdRequest(core.Gs2Request):
 
     def with_message_name(self, message_name: str) -> DeleteMessageByUserIdRequest:
         self.message_name = message_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMessageByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1737,6 +1762,7 @@ class UpdateReceivedByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     received_global_message_names: List[str] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateReceivedByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1748,6 +1774,10 @@ class UpdateReceivedByUserIdRequest(core.Gs2Request):
 
     def with_received_global_message_names(self, received_global_message_names: List[str]) -> UpdateReceivedByUserIdRequest:
         self.received_global_message_names = received_global_message_names
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateReceivedByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1792,6 +1822,7 @@ class DeleteReceivedByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteReceivedByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1799,6 +1830,10 @@ class DeleteReceivedByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteReceivedByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteReceivedByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

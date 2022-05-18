@@ -1324,6 +1324,7 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
     user_id: str = None
     mold_name: str = None
     capacity: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetMoldCapacityByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1339,6 +1340,10 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
 
     def with_capacity(self, capacity: int) -> SetMoldCapacityByUserIdRequest:
         self.capacity = capacity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetMoldCapacityByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1381,6 +1386,7 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
     user_id: str = None
     mold_name: str = None
     capacity: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddMoldCapacityByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1396,6 +1402,10 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
 
     def with_capacity(self, capacity: int) -> AddMoldCapacityByUserIdRequest:
         self.capacity = capacity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddMoldCapacityByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1488,6 +1498,7 @@ class DeleteMoldByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     mold_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMoldByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1499,6 +1510,10 @@ class DeleteMoldByUserIdRequest(core.Gs2Request):
 
     def with_mold_name(self, mold_name: str) -> DeleteMoldByUserIdRequest:
         self.mold_name = mold_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMoldByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1999,6 +2014,7 @@ class SetFormByUserIdRequest(core.Gs2Request):
     mold_name: str = None
     index: int = None
     slots: List[Slot] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetFormByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2018,6 +2034,10 @@ class SetFormByUserIdRequest(core.Gs2Request):
 
     def with_slots(self, slots: List[Slot]) -> SetFormByUserIdRequest:
         self.slots = slots
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetFormByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2150,6 +2170,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
     queue_namespace_id: str = None
     key_id: str = None
     config: List[AcquireActionConfig] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireActionsToFormPropertiesRequest:
         self.namespace_name = namespace_name
@@ -2181,6 +2202,10 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
 
     def with_config(self, config: List[AcquireActionConfig]) -> AcquireActionsToFormPropertiesRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcquireActionsToFormPropertiesRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2295,6 +2320,7 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
     user_id: str = None
     mold_name: str = None
     index: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteFormByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2310,6 +2336,10 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
 
     def with_index(self, index: int) -> DeleteFormByUserIdRequest:
         self.index = index
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteFormByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

@@ -66,6 +66,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     change_password_if_take_over: bool = None
+    different_user_id_for_login_and_data_retention: bool = None
     create_account_script: ScriptSetting = None
     authentication_script: ScriptSetting = None
     create_take_over_script: ScriptSetting = None
@@ -82,6 +83,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_change_password_if_take_over(self, change_password_if_take_over: bool) -> CreateNamespaceRequest:
         self.change_password_if_take_over = change_password_if_take_over
+        return self
+
+    def with_different_user_id_for_login_and_data_retention(self, different_user_id_for_login_and_data_retention: bool) -> CreateNamespaceRequest:
+        self.different_user_id_for_login_and_data_retention = different_user_id_for_login_and_data_retention
         return self
 
     def with_create_account_script(self, create_account_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -126,6 +131,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_change_password_if_take_over(data.get('changePasswordIfTakeOver'))\
+            .with_different_user_id_for_login_and_data_retention(data.get('differentUserIdForLoginAndDataRetention'))\
             .with_create_account_script(ScriptSetting.from_dict(data.get('createAccountScript')))\
             .with_authentication_script(ScriptSetting.from_dict(data.get('authenticationScript')))\
             .with_create_take_over_script(ScriptSetting.from_dict(data.get('createTakeOverScript')))\
@@ -137,6 +143,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "changePasswordIfTakeOver": self.change_password_if_take_over,
+            "differentUserIdForLoginAndDataRetention": self.different_user_id_for_login_and_data_retention,
             "createAccountScript": self.create_account_script.to_dict() if self.create_account_script else None,
             "authenticationScript": self.authentication_script.to_dict() if self.authentication_script else None,
             "createTakeOverScript": self.create_take_over_script.to_dict() if self.create_take_over_script else None,
@@ -223,6 +230,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     change_password_if_take_over: bool = None
+    different_user_id_for_login_and_data_retention: bool = None
     create_account_script: ScriptSetting = None
     authentication_script: ScriptSetting = None
     create_take_over_script: ScriptSetting = None
@@ -239,6 +247,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_change_password_if_take_over(self, change_password_if_take_over: bool) -> UpdateNamespaceRequest:
         self.change_password_if_take_over = change_password_if_take_over
+        return self
+
+    def with_different_user_id_for_login_and_data_retention(self, different_user_id_for_login_and_data_retention: bool) -> UpdateNamespaceRequest:
+        self.different_user_id_for_login_and_data_retention = different_user_id_for_login_and_data_retention
         return self
 
     def with_create_account_script(self, create_account_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -283,6 +295,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_change_password_if_take_over(data.get('changePasswordIfTakeOver'))\
+            .with_different_user_id_for_login_and_data_retention(data.get('differentUserIdForLoginAndDataRetention'))\
             .with_create_account_script(ScriptSetting.from_dict(data.get('createAccountScript')))\
             .with_authentication_script(ScriptSetting.from_dict(data.get('authenticationScript')))\
             .with_create_take_over_script(ScriptSetting.from_dict(data.get('createTakeOverScript')))\
@@ -294,6 +307,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "changePasswordIfTakeOver": self.change_password_if_take_over,
+            "differentUserIdForLoginAndDataRetention": self.different_user_id_for_login_and_data_retention,
             "createAccountScript": self.create_account_script.to_dict() if self.create_account_script else None,
             "authenticationScript": self.authentication_script.to_dict() if self.authentication_script else None,
             "createTakeOverScript": self.create_take_over_script.to_dict() if self.create_take_over_script else None,
@@ -430,6 +444,7 @@ class UpdateTimeOffsetRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     time_offset: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateTimeOffsetRequest:
         self.namespace_name = namespace_name
@@ -441,6 +456,10 @@ class UpdateTimeOffsetRequest(core.Gs2Request):
 
     def with_time_offset(self, time_offset: int) -> UpdateTimeOffsetRequest:
         self.time_offset = time_offset
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateTimeOffsetRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -805,6 +824,7 @@ class CreateTakeOverByUserIdRequest(core.Gs2Request):
     type: int = None
     user_identifier: str = None
     password: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateTakeOverByUserIdRequest:
         self.namespace_name = namespace_name
@@ -824,6 +844,10 @@ class CreateTakeOverByUserIdRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> CreateTakeOverByUserIdRequest:
         self.password = password
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateTakeOverByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1035,6 +1059,7 @@ class UpdateTakeOverByUserIdRequest(core.Gs2Request):
     type: int = None
     old_password: str = None
     password: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateTakeOverByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1054,6 +1079,10 @@ class UpdateTakeOverByUserIdRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> UpdateTakeOverByUserIdRequest:
         self.password = password
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateTakeOverByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1155,6 +1184,7 @@ class DeleteTakeOverByUserIdentifierRequest(core.Gs2Request):
     namespace_name: str = None
     type: int = None
     user_identifier: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteTakeOverByUserIdentifierRequest:
         self.namespace_name = namespace_name
@@ -1166,6 +1196,10 @@ class DeleteTakeOverByUserIdentifierRequest(core.Gs2Request):
 
     def with_user_identifier(self, user_identifier: str) -> DeleteTakeOverByUserIdentifierRequest:
         self.user_identifier = user_identifier
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteTakeOverByUserIdentifierRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1253,4 +1287,90 @@ class DoTakeOverRequest(core.Gs2Request):
             "type": self.type,
             "userIdentifier": self.user_identifier,
             "password": self.password,
+        }
+
+
+class GetDataOwnerByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetDataOwnerByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetDataOwnerByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetDataOwnerByUserIdRequest]:
+        if data is None:
+            return None
+        return GetDataOwnerByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+        }
+
+
+class DeleteDataOwnerByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteDataOwnerByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DeleteDataOwnerByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteDataOwnerByUserIdRequest]:
+        if data is None:
+            return None
+        return DeleteDataOwnerByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
         }

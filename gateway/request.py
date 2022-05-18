@@ -454,6 +454,7 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     allow_concurrent_access: bool = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetUserIdByUserIdRequest:
         self.namespace_name = namespace_name
@@ -465,6 +466,10 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
 
     def with_allow_concurrent_access(self, allow_concurrent_access: bool) -> SetUserIdByUserIdRequest:
         self.allow_concurrent_access = allow_concurrent_access
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetUserIdByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -507,6 +512,7 @@ class SendNotificationRequest(core.Gs2Request):
     payload: str = None
     enable_transfer_mobile_notification: bool = None
     sound: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SendNotificationRequest:
         self.namespace_name = namespace_name
@@ -530,6 +536,10 @@ class SendNotificationRequest(core.Gs2Request):
 
     def with_sound(self, sound: str) -> SendNotificationRequest:
         self.sound = sound
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SendNotificationRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -626,6 +636,7 @@ class SetFirebaseTokenByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetFirebaseTokenByUserIdRequest:
         self.namespace_name = namespace_name
@@ -637,6 +648,10 @@ class SetFirebaseTokenByUserIdRequest(core.Gs2Request):
 
     def with_token(self, token: str) -> SetFirebaseTokenByUserIdRequest:
         self.token = token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetFirebaseTokenByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -806,6 +821,7 @@ class DeleteFirebaseTokenByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteFirebaseTokenByUserIdRequest:
         self.namespace_name = namespace_name
@@ -813,6 +829,10 @@ class DeleteFirebaseTokenByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteFirebaseTokenByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteFirebaseTokenByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -852,6 +872,7 @@ class SendMobileNotificationByUserIdRequest(core.Gs2Request):
     subject: str = None
     payload: str = None
     sound: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SendMobileNotificationByUserIdRequest:
         self.namespace_name = namespace_name
@@ -871,6 +892,10 @@ class SendMobileNotificationByUserIdRequest(core.Gs2Request):
 
     def with_sound(self, sound: str) -> SendMobileNotificationByUserIdRequest:
         self.sound = sound
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SendMobileNotificationByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

@@ -166,7 +166,7 @@ class Output(core.Gs2Model):
         stack_name,
         output_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:deploy:{stackName}:output:{outputName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:stack:{stackName}:output:{outputName}'.format(
             region=region,
             ownerId=owner_id,
             stackName=stack_name,
@@ -178,7 +178,7 @@ class Output(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):output:(?P<outputName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):output:(?P<outputName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -188,7 +188,7 @@ class Output(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):output:(?P<outputName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):output:(?P<outputName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -198,7 +198,7 @@ class Output(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):output:(?P<outputName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):output:(?P<outputName>.+)', grn)
         if match is None:
             return None
         return match.group('stack_name')
@@ -208,7 +208,7 @@ class Output(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):output:(?P<outputName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):output:(?P<outputName>.+)', grn)
         if match is None:
             return None
         return match.group('output_name')
@@ -286,7 +286,7 @@ class Event(core.Gs2Model):
         stack_name,
         event_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:deploy:{stackName}:event:{eventName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:stack:{stackName}:event:{eventName}'.format(
             region=region,
             ownerId=owner_id,
             stackName=stack_name,
@@ -298,7 +298,7 @@ class Event(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):event:(?P<eventName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):event:(?P<eventName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -308,7 +308,7 @@ class Event(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):event:(?P<eventName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):event:(?P<eventName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -318,7 +318,7 @@ class Event(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):event:(?P<eventName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):event:(?P<eventName>.+)', grn)
         if match is None:
             return None
         return match.group('stack_name')
@@ -328,7 +328,7 @@ class Event(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):event:(?P<eventName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):event:(?P<eventName>.+)', grn)
         if match is None:
             return None
         return match.group('event_name')
@@ -435,7 +435,7 @@ class Resource(core.Gs2Model):
         stack_name,
         resource_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:deploy:{stackName}:resource:{resourceName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:stack:{stackName}:resource:{resourceName}'.format(
             region=region,
             ownerId=owner_id,
             stackName=stack_name,
@@ -447,7 +447,7 @@ class Resource(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):resource:(?P<resourceName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):resource:(?P<resourceName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -457,7 +457,7 @@ class Resource(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):resource:(?P<resourceName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):resource:(?P<resourceName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -467,7 +467,7 @@ class Resource(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):resource:(?P<resourceName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):resource:(?P<resourceName>.+)', grn)
         if match is None:
             return None
         return match.group('stack_name')
@@ -477,7 +477,7 @@ class Resource(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+):resource:(?P<resourceName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+):resource:(?P<resourceName>.+)', grn)
         if match is None:
             return None
         return match.group('resource_name')
@@ -585,7 +585,7 @@ class Stack(core.Gs2Model):
         owner_id,
         stack_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:deploy:{stackName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:stack:{stackName}'.format(
             region=region,
             ownerId=owner_id,
             stackName=stack_name,
@@ -596,7 +596,7 @@ class Stack(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -606,7 +606,7 @@ class Stack(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -616,7 +616,7 @@ class Stack(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):deploy:(?P<stackName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stack:(?P<stackName>.+)', grn)
         if match is None:
             return None
         return match.group('stack_name')

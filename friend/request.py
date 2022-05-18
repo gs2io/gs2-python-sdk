@@ -582,6 +582,7 @@ class UpdateProfileByUserIdRequest(core.Gs2Request):
     public_profile: str = None
     follower_profile: str = None
     friend_profile: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateProfileByUserIdRequest:
         self.namespace_name = namespace_name
@@ -601,6 +602,10 @@ class UpdateProfileByUserIdRequest(core.Gs2Request):
 
     def with_friend_profile(self, friend_profile: str) -> UpdateProfileByUserIdRequest:
         self.friend_profile = friend_profile
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateProfileByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -643,6 +648,7 @@ class DeleteProfileByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteProfileByUserIdRequest:
         self.namespace_name = namespace_name
@@ -650,6 +656,10 @@ class DeleteProfileByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteProfileByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteProfileByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -982,6 +992,7 @@ class RegisterBlackListByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RegisterBlackListByUserIdRequest:
         self.namespace_name = namespace_name
@@ -993,6 +1004,10 @@ class RegisterBlackListByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> RegisterBlackListByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RegisterBlackListByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1083,6 +1098,7 @@ class UnregisterBlackListByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnregisterBlackListByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1094,6 +1110,10 @@ class UnregisterBlackListByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> UnregisterBlackListByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnregisterBlackListByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1428,6 +1448,7 @@ class FollowByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FollowByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1439,6 +1460,10 @@ class FollowByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> FollowByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> FollowByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1529,6 +1554,7 @@ class UnfollowByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnfollowByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1540,6 +1566,10 @@ class UnfollowByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> UnfollowByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnfollowByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1745,6 +1775,7 @@ class DeleteFriendByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteFriendByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1756,6 +1787,10 @@ class DeleteFriendByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> DeleteFriendByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteFriendByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2062,6 +2097,7 @@ class SendRequestByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SendRequestByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2073,6 +2109,10 @@ class SendRequestByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> SendRequestByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SendRequestByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2163,6 +2203,7 @@ class DeleteRequestByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteRequestByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2174,6 +2215,10 @@ class DeleteRequestByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> DeleteRequestByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteRequestByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2480,6 +2525,7 @@ class AcceptRequestByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     from_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcceptRequestByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2491,6 +2537,10 @@ class AcceptRequestByUserIdRequest(core.Gs2Request):
 
     def with_from_user_id(self, from_user_id: str) -> AcceptRequestByUserIdRequest:
         self.from_user_id = from_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcceptRequestByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2581,6 +2631,7 @@ class RejectRequestByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     from_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RejectRequestByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2592,6 +2643,10 @@ class RejectRequestByUserIdRequest(core.Gs2Request):
 
     def with_from_user_id(self, from_user_id: str) -> RejectRequestByUserIdRequest:
         self.from_user_id = from_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RejectRequestByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

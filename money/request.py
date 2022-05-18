@@ -604,6 +604,7 @@ class DepositByUserIdRequest(core.Gs2Request):
     slot: int = None
     price: float = None
     count: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DepositByUserIdRequest:
         self.namespace_name = namespace_name
@@ -623,6 +624,10 @@ class DepositByUserIdRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> DepositByUserIdRequest:
         self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DepositByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -733,6 +738,7 @@ class WithdrawByUserIdRequest(core.Gs2Request):
     slot: int = None
     count: int = None
     paid_only: bool = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> WithdrawByUserIdRequest:
         self.namespace_name = namespace_name
@@ -752,6 +758,10 @@ class WithdrawByUserIdRequest(core.Gs2Request):
 
     def with_paid_only(self, paid_only: bool) -> WithdrawByUserIdRequest:
         self.paid_only = paid_only
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> WithdrawByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1010,6 +1020,7 @@ class RecordReceiptRequest(core.Gs2Request):
     user_id: str = None
     contents_id: str = None
     receipt: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RecordReceiptRequest:
         self.namespace_name = namespace_name
@@ -1025,6 +1036,10 @@ class RecordReceiptRequest(core.Gs2Request):
 
     def with_receipt(self, receipt: str) -> RecordReceiptRequest:
         self.receipt = receipt
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RecordReceiptRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

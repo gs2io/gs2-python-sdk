@@ -161,11 +161,6 @@ class IssueAccountTokenResult(core.Gs2Result):
 
 
 class ForgetResult(core.Gs2Result):
-    issue_password_token: str = None
-
-    def with_issue_password_token(self, issue_password_token: str) -> ForgetResult:
-        self.issue_password_token = issue_password_token
-        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -186,11 +181,9 @@ class ForgetResult(core.Gs2Result):
         if data is None:
             return None
         return ForgetResult()\
-            .with_issue_password_token(data.get('issuePasswordToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "issuePasswordToken": self.issue_password_token,
         }
 
 
@@ -263,6 +256,11 @@ class UpdateAccountResult(core.Gs2Result):
 
 
 class DeleteAccountResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> DeleteAccountResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -283,9 +281,11 @@ class DeleteAccountResult(core.Gs2Result):
         if data is None:
             return None
         return DeleteAccountResult()\
+            .with_item(Account.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 

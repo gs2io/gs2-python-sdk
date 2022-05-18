@@ -895,6 +895,7 @@ class AcceptByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     version_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcceptByUserIdRequest:
         self.namespace_name = namespace_name
@@ -906,6 +907,10 @@ class AcceptByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> AcceptByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcceptByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1097,6 +1102,7 @@ class DeleteAcceptVersionByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     version_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteAcceptVersionByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1108,6 +1114,10 @@ class DeleteAcceptVersionByUserIdRequest(core.Gs2Request):
 
     def with_version_name(self, version_name: str) -> DeleteAcceptVersionByUserIdRequest:
         self.version_name = version_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteAcceptVersionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1204,6 +1214,7 @@ class CheckVersionByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_versions: List[TargetVersion] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CheckVersionByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1215,6 +1226,10 @@ class CheckVersionByUserIdRequest(core.Gs2Request):
 
     def with_target_versions(self, target_versions: List[TargetVersion]) -> CheckVersionByUserIdRequest:
         self.target_versions = target_versions
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CheckVersionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

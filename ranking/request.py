@@ -816,6 +816,7 @@ class SubscribeByUserIdRequest(core.Gs2Request):
     category_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SubscribeByUserIdRequest:
         self.namespace_name = namespace_name
@@ -831,6 +832,10 @@ class SubscribeByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> SubscribeByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SubscribeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1533,6 +1538,7 @@ class PutScoreByUserIdRequest(core.Gs2Request):
     user_id: str = None
     score: int = None
     metadata: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PutScoreByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1552,6 +1558,10 @@ class PutScoreByUserIdRequest(core.Gs2Request):
 
     def with_metadata(self, metadata: str) -> PutScoreByUserIdRequest:
         self.metadata = metadata
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PutScoreByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1970,6 +1980,7 @@ class UnsubscribeByUserIdRequest(core.Gs2Request):
     category_name: str = None
     user_id: str = None
     target_user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnsubscribeByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1985,6 +1996,10 @@ class UnsubscribeByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> UnsubscribeByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnsubscribeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

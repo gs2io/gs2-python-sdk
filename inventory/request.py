@@ -1482,6 +1482,7 @@ class AddCapacityByUserIdRequest(core.Gs2Request):
     inventory_name: str = None
     user_id: str = None
     add_capacity_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddCapacityByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1497,6 +1498,10 @@ class AddCapacityByUserIdRequest(core.Gs2Request):
 
     def with_add_capacity_value(self, add_capacity_value: int) -> AddCapacityByUserIdRequest:
         self.add_capacity_value = add_capacity_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddCapacityByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1539,6 +1544,7 @@ class SetCapacityByUserIdRequest(core.Gs2Request):
     inventory_name: str = None
     user_id: str = None
     new_capacity_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetCapacityByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1554,6 +1560,10 @@ class SetCapacityByUserIdRequest(core.Gs2Request):
 
     def with_new_capacity_value(self, new_capacity_value: int) -> SetCapacityByUserIdRequest:
         self.new_capacity_value = new_capacity_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetCapacityByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1595,6 +1605,7 @@ class DeleteInventoryByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     inventory_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteInventoryByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1606,6 +1617,10 @@ class DeleteInventoryByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteInventoryByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteInventoryByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2137,6 +2152,7 @@ class AcquireItemSetByUserIdRequest(core.Gs2Request):
     expires_at: int = None
     create_new_item_set: bool = None
     item_set_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireItemSetByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2168,6 +2184,10 @@ class AcquireItemSetByUserIdRequest(core.Gs2Request):
 
     def with_item_set_name(self, item_set_name: str) -> AcquireItemSetByUserIdRequest:
         self.item_set_name = item_set_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcquireItemSetByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2292,6 +2312,7 @@ class ConsumeItemSetByUserIdRequest(core.Gs2Request):
     item_name: str = None
     consume_count: int = None
     item_set_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ConsumeItemSetByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2315,6 +2336,10 @@ class ConsumeItemSetByUserIdRequest(core.Gs2Request):
 
     def with_item_set_name(self, item_set_name: str) -> ConsumeItemSetByUserIdRequest:
         self.item_set_name = item_set_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ConsumeItemSetByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2362,6 +2387,7 @@ class DeleteItemSetByUserIdRequest(core.Gs2Request):
     user_id: str = None
     item_name: str = None
     item_set_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteItemSetByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2381,6 +2407,10 @@ class DeleteItemSetByUserIdRequest(core.Gs2Request):
 
     def with_item_set_name(self, item_set_name: str) -> DeleteItemSetByUserIdRequest:
         self.item_set_name = item_set_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteItemSetByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2865,6 +2895,7 @@ class VerifyReferenceOfByUserIdRequest(core.Gs2Request):
     item_set_name: str = None
     reference_of: str = None
     verify_type: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyReferenceOfByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2892,6 +2923,10 @@ class VerifyReferenceOfByUserIdRequest(core.Gs2Request):
 
     def with_verify_type(self, verify_type: str) -> VerifyReferenceOfByUserIdRequest:
         self.verify_type = verify_type
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyReferenceOfByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -3014,6 +3049,7 @@ class AddReferenceOfByUserIdRequest(core.Gs2Request):
     item_name: str = None
     item_set_name: str = None
     reference_of: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddReferenceOfByUserIdRequest:
         self.namespace_name = namespace_name
@@ -3037,6 +3073,10 @@ class AddReferenceOfByUserIdRequest(core.Gs2Request):
 
     def with_reference_of(self, reference_of: str) -> AddReferenceOfByUserIdRequest:
         self.reference_of = reference_of
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddReferenceOfByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -3157,6 +3197,7 @@ class DeleteReferenceOfByUserIdRequest(core.Gs2Request):
     item_name: str = None
     item_set_name: str = None
     reference_of: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteReferenceOfByUserIdRequest:
         self.namespace_name = namespace_name
@@ -3180,6 +3221,10 @@ class DeleteReferenceOfByUserIdRequest(core.Gs2Request):
 
     def with_reference_of(self, reference_of: str) -> DeleteReferenceOfByUserIdRequest:
         self.reference_of = reference_of
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteReferenceOfByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

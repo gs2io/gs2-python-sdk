@@ -371,6 +371,11 @@ class UpdateProfileByUserIdResult(core.Gs2Result):
 
 
 class DeleteProfileByUserIdResult(core.Gs2Result):
+    item: Profile = None
+
+    def with_item(self, item: Profile) -> DeleteProfileByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -391,9 +396,11 @@ class DeleteProfileByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DeleteProfileByUserIdResult()\
+            .with_item(Profile.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 

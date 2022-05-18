@@ -456,6 +456,7 @@ class LockByUserIdRequest(core.Gs2Request):
     user_id: str = None
     transaction_id: str = None
     ttl: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> LockByUserIdRequest:
         self.namespace_name = namespace_name
@@ -475,6 +476,10 @@ class LockByUserIdRequest(core.Gs2Request):
 
     def with_ttl(self, ttl: int) -> LockByUserIdRequest:
         self.ttl = ttl
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> LockByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -577,6 +582,7 @@ class UnlockByUserIdRequest(core.Gs2Request):
     property_id: str = None
     user_id: str = None
     transaction_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnlockByUserIdRequest:
         self.namespace_name = namespace_name
@@ -592,6 +598,10 @@ class UnlockByUserIdRequest(core.Gs2Request):
 
     def with_transaction_id(self, transaction_id: str) -> UnlockByUserIdRequest:
         self.transaction_id = transaction_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnlockByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -734,6 +744,7 @@ class DeleteMutexByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     property_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMutexByUserIdRequest:
         self.namespace_name = namespace_name
@@ -745,6 +756,10 @@ class DeleteMutexByUserIdRequest(core.Gs2Request):
 
     def with_property_id(self, property_id: str) -> DeleteMutexByUserIdRequest:
         self.property_id = property_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMutexByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

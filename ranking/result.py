@@ -992,6 +992,11 @@ class PutScoreByUserIdResult(core.Gs2Result):
 
 
 class CalcRankingResult(core.Gs2Result):
+    processing: bool = None
+
+    def with_processing(self, processing: bool) -> CalcRankingResult:
+        self.processing = processing
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1012,9 +1017,11 @@ class CalcRankingResult(core.Gs2Result):
         if data is None:
             return None
         return CalcRankingResult()\
+            .with_processing(data.get('processing'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "processing": self.processing,
         }
 
 

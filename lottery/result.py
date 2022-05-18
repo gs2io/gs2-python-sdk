@@ -762,40 +762,6 @@ class GetBoxByUserIdResult(core.Gs2Result):
         }
 
 
-class GetRawBoxByUserIdResult(core.Gs2Result):
-    item: Box = None
-
-    def with_item(self, item: Box) -> GetRawBoxByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetRawBoxByUserIdResult]:
-        if data is None:
-            return None
-        return GetRawBoxByUserIdResult()\
-            .with_item(Box.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
 class ResetBoxResult(core.Gs2Result):
 
     def get(self, key, default=None):
@@ -1002,7 +968,6 @@ class DrawByUserIdResult(core.Gs2Result):
     items: List[DrawnPrize] = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
-    box_items: BoxItems = None
 
     def with_items(self, items: List[DrawnPrize]) -> DrawByUserIdResult:
         self.items = items
@@ -1014,10 +979,6 @@ class DrawByUserIdResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> DrawByUserIdResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
-        return self
-
-    def with_box_items(self, box_items: BoxItems) -> DrawByUserIdResult:
-        self.box_items = box_items
         return self
 
     def get(self, key, default=None):
@@ -1044,8 +1005,7 @@ class DrawByUserIdResult(core.Gs2Result):
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_box_items(BoxItems.from_dict(data.get('boxItems')))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1055,7 +1015,6 @@ class DrawByUserIdResult(core.Gs2Result):
             ],
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
-            "boxItems": self.box_items.to_dict() if self.box_items else None,
         }
 
 
@@ -1063,7 +1022,6 @@ class DrawByStampSheetResult(core.Gs2Result):
     items: List[DrawnPrize] = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
-    box_items: BoxItems = None
 
     def with_items(self, items: List[DrawnPrize]) -> DrawByStampSheetResult:
         self.items = items
@@ -1075,10 +1033,6 @@ class DrawByStampSheetResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> DrawByStampSheetResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
-        return self
-
-    def with_box_items(self, box_items: BoxItems) -> DrawByStampSheetResult:
-        self.box_items = box_items
         return self
 
     def get(self, key, default=None):
@@ -1105,8 +1059,7 @@ class DrawByStampSheetResult(core.Gs2Result):
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_box_items(BoxItems.from_dict(data.get('boxItems')))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1116,7 +1069,6 @@ class DrawByStampSheetResult(core.Gs2Result):
             ],
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
-            "boxItems": self.box_items.to_dict() if self.box_items else None,
         }
 
 

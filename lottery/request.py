@@ -1122,56 +1122,6 @@ class GetBoxByUserIdRequest(core.Gs2Request):
         }
 
 
-class GetRawBoxByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    prize_table_name: str = None
-    user_id: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> GetRawBoxByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_prize_table_name(self, prize_table_name: str) -> GetRawBoxByUserIdRequest:
-        self.prize_table_name = prize_table_name
-        return self
-
-    def with_user_id(self, user_id: str) -> GetRawBoxByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetRawBoxByUserIdRequest]:
-        if data is None:
-            return None
-        return GetRawBoxByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_prize_table_name(data.get('prizeTableName'))\
-            .with_user_id(data.get('userId'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "prizeTableName": self.prize_table_name,
-            "userId": self.user_id,
-        }
-
-
 class ResetBoxRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1229,6 +1179,7 @@ class ResetBoxByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     prize_table_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ResetBoxByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1240,6 +1191,10 @@ class ResetBoxByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> ResetBoxByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetBoxByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1439,6 +1394,7 @@ class DrawByUserIdRequest(core.Gs2Request):
     user_id: str = None
     count: int = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DrawByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1458,6 +1414,10 @@ class DrawByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> DrawByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DrawByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

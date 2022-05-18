@@ -746,6 +746,7 @@ class AddEntriesByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     entry_model_names: List[str] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddEntriesByUserIdRequest:
         self.namespace_name = namespace_name
@@ -757,6 +758,10 @@ class AddEntriesByUserIdRequest(core.Gs2Request):
 
     def with_entry_model_names(self, entry_model_names: List[str]) -> AddEntriesByUserIdRequest:
         self.entry_model_names = entry_model_names
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddEntriesByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1017,6 +1022,7 @@ class ResetByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ResetByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1024,6 +1030,10 @@ class ResetByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> ResetByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

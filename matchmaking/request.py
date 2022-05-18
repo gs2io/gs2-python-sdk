@@ -573,6 +573,7 @@ class CreateGatheringByUserIdRequest(core.Gs2Request):
     allow_user_ids: List[str] = None
     expires_at: int = None
     expires_at_time_span: TimeSpan = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateGatheringByUserIdRequest:
         self.namespace_name = namespace_name
@@ -604,6 +605,10 @@ class CreateGatheringByUserIdRequest(core.Gs2Request):
 
     def with_expires_at_time_span(self, expires_at_time_span: TimeSpan) -> CreateGatheringByUserIdRequest:
         self.expires_at_time_span = expires_at_time_span
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateGatheringByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -736,6 +741,7 @@ class UpdateGatheringByUserIdRequest(core.Gs2Request):
     gathering_name: str = None
     user_id: str = None
     attribute_ranges: List[AttributeRange] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateGatheringByUserIdRequest:
         self.namespace_name = namespace_name
@@ -751,6 +757,10 @@ class UpdateGatheringByUserIdRequest(core.Gs2Request):
 
     def with_attribute_ranges(self, attribute_ranges: List[AttributeRange]) -> UpdateGatheringByUserIdRequest:
         self.attribute_ranges = attribute_ranges
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateGatheringByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -907,6 +917,7 @@ class DoMatchmakingByUserIdRequest(core.Gs2Request):
     user_id: str = None
     player: Player = None
     matchmaking_context_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DoMatchmakingByUserIdRequest:
         self.namespace_name = namespace_name
@@ -922,6 +933,10 @@ class DoMatchmakingByUserIdRequest(core.Gs2Request):
 
     def with_matchmaking_context_token(self, matchmaking_context_token: str) -> DoMatchmakingByUserIdRequest:
         self.matchmaking_context_token = matchmaking_context_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DoMatchmakingByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1057,6 +1072,7 @@ class CancelMatchmakingByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     gathering_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CancelMatchmakingByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1068,6 +1084,10 @@ class CancelMatchmakingByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> CancelMatchmakingByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CancelMatchmakingByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1923,6 +1943,7 @@ class DeleteRatingRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     rating_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteRatingRequest:
         self.namespace_name = namespace_name
@@ -1934,6 +1955,10 @@ class DeleteRatingRequest(core.Gs2Request):
 
     def with_rating_name(self, rating_name: str) -> DeleteRatingRequest:
         self.rating_name = rating_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteRatingRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

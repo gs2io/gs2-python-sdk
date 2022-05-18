@@ -63,14 +63,9 @@ class LoginRequest(core.Gs2Request):
 class LoginBySignatureRequest(core.Gs2Request):
 
     context_stack: str = None
-    user_id: str = None
     key_id: str = None
     body: str = None
     signature: str = None
-
-    def with_user_id(self, user_id: str) -> LoginBySignatureRequest:
-        self.user_id = user_id
-        return self
 
     def with_key_id(self, key_id: str) -> LoginBySignatureRequest:
         self.key_id = key_id
@@ -103,14 +98,12 @@ class LoginBySignatureRequest(core.Gs2Request):
         if data is None:
             return None
         return LoginBySignatureRequest()\
-            .with_user_id(data.get('userId'))\
             .with_key_id(data.get('keyId'))\
             .with_body(data.get('body'))\
             .with_signature(data.get('signature'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "userId": self.user_id,
             "keyId": self.key_id,
             "body": self.body,
             "signature": self.signature,

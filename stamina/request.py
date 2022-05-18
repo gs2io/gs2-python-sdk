@@ -1977,6 +1977,7 @@ class UpdateStaminaByUserIdRequest(core.Gs2Request):
     max_value: int = None
     recover_interval_minutes: int = None
     recover_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateStaminaByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2004,6 +2005,10 @@ class UpdateStaminaByUserIdRequest(core.Gs2Request):
 
     def with_recover_value(self, recover_value: int) -> UpdateStaminaByUserIdRequest:
         self.recover_value = recover_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateStaminaByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2110,6 +2115,7 @@ class ConsumeStaminaByUserIdRequest(core.Gs2Request):
     stamina_name: str = None
     user_id: str = None
     consume_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ConsumeStaminaByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2125,6 +2131,10 @@ class ConsumeStaminaByUserIdRequest(core.Gs2Request):
 
     def with_consume_value(self, consume_value: int) -> ConsumeStaminaByUserIdRequest:
         self.consume_value = consume_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ConsumeStaminaByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2167,6 +2177,7 @@ class RecoverStaminaByUserIdRequest(core.Gs2Request):
     stamina_name: str = None
     user_id: str = None
     recover_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RecoverStaminaByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2182,6 +2193,10 @@ class RecoverStaminaByUserIdRequest(core.Gs2Request):
 
     def with_recover_value(self, recover_value: int) -> RecoverStaminaByUserIdRequest:
         self.recover_value = recover_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RecoverStaminaByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2224,6 +2239,7 @@ class RaiseMaxValueByUserIdRequest(core.Gs2Request):
     stamina_name: str = None
     user_id: str = None
     raise_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RaiseMaxValueByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2239,6 +2255,10 @@ class RaiseMaxValueByUserIdRequest(core.Gs2Request):
 
     def with_raise_value(self, raise_value: int) -> RaiseMaxValueByUserIdRequest:
         self.raise_value = raise_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RaiseMaxValueByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2281,6 +2301,7 @@ class SetMaxValueByUserIdRequest(core.Gs2Request):
     stamina_name: str = None
     user_id: str = None
     max_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetMaxValueByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2296,6 +2317,10 @@ class SetMaxValueByUserIdRequest(core.Gs2Request):
 
     def with_max_value(self, max_value: int) -> SetMaxValueByUserIdRequest:
         self.max_value = max_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetMaxValueByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2338,6 +2363,7 @@ class SetRecoverIntervalByUserIdRequest(core.Gs2Request):
     stamina_name: str = None
     user_id: str = None
     recover_interval_minutes: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetRecoverIntervalByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2353,6 +2379,10 @@ class SetRecoverIntervalByUserIdRequest(core.Gs2Request):
 
     def with_recover_interval_minutes(self, recover_interval_minutes: int) -> SetRecoverIntervalByUserIdRequest:
         self.recover_interval_minutes = recover_interval_minutes
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetRecoverIntervalByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2395,6 +2425,7 @@ class SetRecoverValueByUserIdRequest(core.Gs2Request):
     stamina_name: str = None
     user_id: str = None
     recover_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetRecoverValueByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2410,6 +2441,10 @@ class SetRecoverValueByUserIdRequest(core.Gs2Request):
 
     def with_recover_value(self, recover_value: int) -> SetRecoverValueByUserIdRequest:
         self.recover_value = recover_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetRecoverValueByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2667,6 +2702,7 @@ class DeleteStaminaByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     stamina_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteStaminaByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2678,6 +2714,10 @@ class DeleteStaminaByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteStaminaByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteStaminaByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

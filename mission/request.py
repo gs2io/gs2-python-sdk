@@ -211,6 +211,7 @@ class CompleteByUserIdRequest(core.Gs2Request):
     mission_task_name: str = None
     user_id: str = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CompleteByUserIdRequest:
         self.namespace_name = namespace_name
@@ -230,6 +231,10 @@ class CompleteByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> CompleteByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CompleteByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -280,6 +285,7 @@ class ReceiveByUserIdRequest(core.Gs2Request):
     mission_group_name: str = None
     mission_task_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ReceiveByUserIdRequest:
         self.namespace_name = namespace_name
@@ -295,6 +301,10 @@ class ReceiveByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> ReceiveByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ReceiveByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -437,6 +447,7 @@ class DeleteCompleteByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     mission_group_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteCompleteByUserIdRequest:
         self.namespace_name = namespace_name
@@ -448,6 +459,10 @@ class DeleteCompleteByUserIdRequest(core.Gs2Request):
 
     def with_mission_group_name(self, mission_group_name: str) -> DeleteCompleteByUserIdRequest:
         self.mission_group_name = mission_group_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteCompleteByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1591,6 +1606,7 @@ class IncreaseCounterByUserIdRequest(core.Gs2Request):
     counter_name: str = None
     user_id: str = None
     value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> IncreaseCounterByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1606,6 +1622,10 @@ class IncreaseCounterByUserIdRequest(core.Gs2Request):
 
     def with_value(self, value: int) -> IncreaseCounterByUserIdRequest:
         self.value = value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> IncreaseCounterByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1748,6 +1768,7 @@ class DeleteCounterByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     counter_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteCounterByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1759,6 +1780,10 @@ class DeleteCounterByUserIdRequest(core.Gs2Request):
 
     def with_counter_name(self, counter_name: str) -> DeleteCounterByUserIdRequest:
         self.counter_name = counter_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteCounterByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

@@ -809,6 +809,7 @@ class LotteryModel(core.Gs2Model):
 class Box(core.Gs2Model):
     box_id: str = None
     prize_table_name: str = None
+    index: int = None
     user_id: str = None
     drawn_indexes: List[int] = None
     created_at: int = None
@@ -820,6 +821,10 @@ class Box(core.Gs2Model):
 
     def with_prize_table_name(self, prize_table_name: str) -> Box:
         self.prize_table_name = prize_table_name
+        return self
+
+    def with_index(self, index: int) -> Box:
+        self.index = index
         return self
 
     def with_user_id(self, user_id: str) -> Box:
@@ -846,13 +851,15 @@ class Box(core.Gs2Model):
         namespace_name,
         user_id,
         prize_table_name,
+        index,
     ):
-        return 'grn:gs2:{region}:{ownerId}:lottery:{namespaceName}:user:{userId}:box:table:{prizeTableName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:lottery:{namespaceName}:user:{userId}:box:table:{prizeTableName}:{index}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
             userId=user_id,
             prizeTableName=prize_table_name,
+            index=index,
         )
 
     @classmethod
@@ -860,7 +867,7 @@ class Box(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+):(?P<index>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -870,7 +877,7 @@ class Box(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+):(?P<index>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -880,7 +887,7 @@ class Box(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+):(?P<index>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -890,7 +897,7 @@ class Box(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+):(?P<index>.+)', grn)
         if match is None:
             return None
         return match.group('user_id')
@@ -900,10 +907,20 @@ class Box(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+):(?P<index>.+)', grn)
         if match is None:
             return None
         return match.group('prize_table_name')
+
+    @classmethod
+    def get_index_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:table:(?P<prizeTableName>.+):(?P<index>.+)', grn)
+        if match is None:
+            return None
+        return match.group('index')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -926,6 +943,7 @@ class Box(core.Gs2Model):
         return Box()\
             .with_box_id(data.get('boxId'))\
             .with_prize_table_name(data.get('prizeTableName'))\
+            .with_index(data.get('index'))\
             .with_user_id(data.get('userId'))\
             .with_drawn_indexes([
                 data.get('drawnIndexes')[i]
@@ -938,6 +956,7 @@ class Box(core.Gs2Model):
         return {
             "boxId": self.box_id,
             "prizeTableName": self.prize_table_name,
+            "index": self.index,
             "userId": self.user_id,
             "drawnIndexes": [
                 self.drawn_indexes[i]

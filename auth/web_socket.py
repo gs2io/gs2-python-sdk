@@ -113,8 +113,6 @@ class Gs2AuthWebSocketClient(AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
-        if request.user_id is not None:
-            body["userId"] = request.user_id
         if request.key_id is not None:
             body["keyId"] = request.key_id
         if request.body is not None:

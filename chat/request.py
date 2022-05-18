@@ -1094,6 +1094,7 @@ class PostByUserIdRequest(core.Gs2Request):
     category: int = None
     metadata: str = None
     password: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PostByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1117,6 +1118,10 @@ class PostByUserIdRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> PostByUserIdRequest:
         self.password = password
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PostByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1585,6 +1590,7 @@ class SubscribeByUserIdRequest(core.Gs2Request):
     room_name: str = None
     user_id: str = None
     notification_types: List[NotificationType] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SubscribeByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1600,6 +1606,10 @@ class SubscribeByUserIdRequest(core.Gs2Request):
 
     def with_notification_types(self, notification_types: List[NotificationType]) -> SubscribeByUserIdRequest:
         self.notification_types = notification_types
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SubscribeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1813,6 +1823,7 @@ class UpdateNotificationTypeByUserIdRequest(core.Gs2Request):
     room_name: str = None
     user_id: str = None
     notification_types: List[NotificationType] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNotificationTypeByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1828,6 +1839,10 @@ class UpdateNotificationTypeByUserIdRequest(core.Gs2Request):
 
     def with_notification_types(self, notification_types: List[NotificationType]) -> UpdateNotificationTypeByUserIdRequest:
         self.notification_types = notification_types
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateNotificationTypeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1926,6 +1941,7 @@ class UnsubscribeByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnsubscribeByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1937,6 +1953,10 @@ class UnsubscribeByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> UnsubscribeByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnsubscribeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

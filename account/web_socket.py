@@ -119,6 +119,8 @@ class Gs2AccountWebSocketClient(AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.change_password_if_take_over is not None:
             body["changePasswordIfTakeOver"] = request.change_password_if_take_over
+        if request.different_user_id_for_login_and_data_retention is not None:
+            body["differentUserIdForLoginAndDataRetention"] = request.different_user_id_for_login_and_data_retention
         if request.create_account_script is not None:
             body["createAccountScript"] = request.create_account_script.to_dict()
         if request.authentication_script is not None:
@@ -346,6 +348,8 @@ class Gs2AccountWebSocketClient(AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.change_password_if_take_over is not None:
             body["changePasswordIfTakeOver"] = request.change_password_if_take_over
+        if request.different_user_id_for_login_and_data_retention is not None:
+            body["differentUserIdForLoginAndDataRetention"] = request.different_user_id_for_login_and_data_retention
         if request.create_account_script is not None:
             body["createAccountScript"] = request.create_account_script.to_dict()
         if request.authentication_script is not None:
@@ -1769,6 +1773,152 @@ class Gs2AccountWebSocketClient(AbstractGs2WebSocketClient):
     ) -> DoTakeOverResult:
         async_result = []
         self._do_take_over(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_data_owner_by_user_id(
+        self,
+        request: GetDataOwnerByUserIdRequest,
+        callback: Callable[[AsyncResult[GetDataOwnerByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='dataOwner',
+            function='getDataOwnerByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=GetDataOwnerByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_data_owner_by_user_id(
+        self,
+        request: GetDataOwnerByUserIdRequest,
+    ) -> GetDataOwnerByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_data_owner_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_data_owner_by_user_id_async(
+        self,
+        request: GetDataOwnerByUserIdRequest,
+    ) -> GetDataOwnerByUserIdResult:
+        async_result = []
+        self._get_data_owner_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_data_owner_by_user_id(
+        self,
+        request: DeleteDataOwnerByUserIdRequest,
+        callback: Callable[[AsyncResult[DeleteDataOwnerByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='dataOwner',
+            function='deleteDataOwnerByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=DeleteDataOwnerByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_data_owner_by_user_id(
+        self,
+        request: DeleteDataOwnerByUserIdRequest,
+    ) -> DeleteDataOwnerByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_data_owner_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_data_owner_by_user_id_async(
+        self,
+        request: DeleteDataOwnerByUserIdRequest,
+    ) -> DeleteDataOwnerByUserIdResult:
+        async_result = []
+        self._delete_data_owner_by_user_id(
             request,
             lambda result: async_result.append(result),
         )

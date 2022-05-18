@@ -1538,6 +1538,7 @@ class AddExperienceByUserIdRequest(core.Gs2Request):
     experience_name: str = None
     property_id: str = None
     experience_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddExperienceByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1557,6 +1558,10 @@ class AddExperienceByUserIdRequest(core.Gs2Request):
 
     def with_experience_value(self, experience_value: int) -> AddExperienceByUserIdRequest:
         self.experience_value = experience_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddExperienceByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1602,6 +1607,7 @@ class SetExperienceByUserIdRequest(core.Gs2Request):
     experience_name: str = None
     property_id: str = None
     experience_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetExperienceByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1621,6 +1627,10 @@ class SetExperienceByUserIdRequest(core.Gs2Request):
 
     def with_experience_value(self, experience_value: int) -> SetExperienceByUserIdRequest:
         self.experience_value = experience_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetExperienceByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1666,6 +1676,7 @@ class AddRankCapByUserIdRequest(core.Gs2Request):
     experience_name: str = None
     property_id: str = None
     rank_cap_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddRankCapByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1685,6 +1696,10 @@ class AddRankCapByUserIdRequest(core.Gs2Request):
 
     def with_rank_cap_value(self, rank_cap_value: int) -> AddRankCapByUserIdRequest:
         self.rank_cap_value = rank_cap_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddRankCapByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1730,6 +1745,7 @@ class SetRankCapByUserIdRequest(core.Gs2Request):
     experience_name: str = None
     property_id: str = None
     rank_cap_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetRankCapByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1749,6 +1765,10 @@ class SetRankCapByUserIdRequest(core.Gs2Request):
 
     def with_rank_cap_value(self, rank_cap_value: int) -> SetRankCapByUserIdRequest:
         self.rank_cap_value = rank_cap_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetRankCapByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1793,6 +1813,7 @@ class DeleteStatusByUserIdRequest(core.Gs2Request):
     user_id: str = None
     experience_name: str = None
     property_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteStatusByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1808,6 +1829,10 @@ class DeleteStatusByUserIdRequest(core.Gs2Request):
 
     def with_property_id(self, property_id: str) -> DeleteStatusByUserIdRequest:
         self.property_id = property_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteStatusByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

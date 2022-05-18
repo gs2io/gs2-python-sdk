@@ -23,6 +23,7 @@ class AccessToken(core.Gs2Model):
     token: str = None
     user_id: str = None
     expire: int = None
+    time_offset: int = None
 
     def with_token(self, token: str) -> AccessToken:
         self.token = token
@@ -36,12 +37,9 @@ class AccessToken(core.Gs2Model):
         self.expire = expire
         return self
 
-    @classmethod
-    def create_grn(
-        cls,
-    ):
-        return ''.format(
-        )
+    def with_time_offset(self, time_offset: int) -> AccessToken:
+        self.time_offset = time_offset
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -64,11 +62,13 @@ class AccessToken(core.Gs2Model):
         return AccessToken()\
             .with_token(data.get('token'))\
             .with_user_id(data.get('userId'))\
-            .with_expire(data.get('expire'))
+            .with_expire(data.get('expire'))\
+            .with_time_offset(data.get('timeOffset'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "token": self.token,
             "userId": self.user_id,
             "expire": self.expire,
+            "timeOffset": self.time_offset,
         }

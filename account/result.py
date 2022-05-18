@@ -863,3 +863,71 @@ class DoTakeOverResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
         }
+
+
+class GetDataOwnerByUserIdResult(core.Gs2Result):
+    item: DataOwner = None
+
+    def with_item(self, item: DataOwner) -> GetDataOwnerByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetDataOwnerByUserIdResult]:
+        if data is None:
+            return None
+        return GetDataOwnerByUserIdResult()\
+            .with_item(DataOwner.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteDataOwnerByUserIdResult(core.Gs2Result):
+    item: DataOwner = None
+
+    def with_item(self, item: DataOwner) -> DeleteDataOwnerByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteDataOwnerByUserIdResult]:
+        if data is None:
+            return None
+        return DeleteDataOwnerByUserIdResult()\
+            .with_item(DataOwner.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }

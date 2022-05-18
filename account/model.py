@@ -108,6 +108,116 @@ class ScriptSetting(core.Gs2Model):
         }
 
 
+class DataOwner(core.Gs2Model):
+    data_owner_id: str = None
+    user_id: str = None
+    name: str = None
+    created_at: int = None
+
+    def with_data_owner_id(self, data_owner_id: str) -> DataOwner:
+        self.data_owner_id = data_owner_id
+        return self
+
+    def with_user_id(self, user_id: str) -> DataOwner:
+        self.user_id = user_id
+        return self
+
+    def with_name(self, name: str) -> DataOwner:
+        self.name = name
+        return self
+
+    def with_created_at(self, created_at: int) -> DataOwner:
+        self.created_at = created_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:account:{namespaceName}:account:{userId}:dataOwner:{dataOwnerName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):account:(?P<userId>.+):dataOwner:(?P<dataOwnerName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):account:(?P<userId>.+):dataOwner:(?P<dataOwnerName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):account:(?P<userId>.+):dataOwner:(?P<dataOwnerName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):account:(?P<userId>.+):dataOwner:(?P<dataOwnerName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DataOwner]:
+        if data is None:
+            return None
+        return DataOwner()\
+            .with_data_owner_id(data.get('dataOwnerId'))\
+            .with_user_id(data.get('userId'))\
+            .with_name(data.get('name'))\
+            .with_created_at(data.get('createdAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "dataOwnerId": self.data_owner_id,
+            "userId": self.user_id,
+            "name": self.name,
+            "createdAt": self.created_at,
+        }
+
+
 class TakeOver(core.Gs2Model):
     take_over_id: str = None
     user_id: str = None
@@ -366,6 +476,7 @@ class Namespace(core.Gs2Model):
     name: str = None
     description: str = None
     change_password_if_take_over: bool = None
+    different_user_id_for_login_and_data_retention: bool = None
     create_account_script: ScriptSetting = None
     authentication_script: ScriptSetting = None
     create_take_over_script: ScriptSetting = None
@@ -388,6 +499,10 @@ class Namespace(core.Gs2Model):
 
     def with_change_password_if_take_over(self, change_password_if_take_over: bool) -> Namespace:
         self.change_password_if_take_over = change_password_if_take_over
+        return self
+
+    def with_different_user_id_for_login_and_data_retention(self, different_user_id_for_login_and_data_retention: bool) -> Namespace:
+        self.different_user_id_for_login_and_data_retention = different_user_id_for_login_and_data_retention
         return self
 
     def with_create_account_script(self, create_account_script: ScriptSetting) -> Namespace:
@@ -484,6 +599,7 @@ class Namespace(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_change_password_if_take_over(data.get('changePasswordIfTakeOver'))\
+            .with_different_user_id_for_login_and_data_retention(data.get('differentUserIdForLoginAndDataRetention'))\
             .with_create_account_script(ScriptSetting.from_dict(data.get('createAccountScript')))\
             .with_authentication_script(ScriptSetting.from_dict(data.get('authenticationScript')))\
             .with_create_take_over_script(ScriptSetting.from_dict(data.get('createTakeOverScript')))\
@@ -498,6 +614,7 @@ class Namespace(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "changePasswordIfTakeOver": self.change_password_if_take_over,
+            "differentUserIdForLoginAndDataRetention": self.different_user_id_for_login_and_data_retention,
             "createAccountScript": self.create_account_script.to_dict() if self.create_account_script else None,
             "authenticationScript": self.authentication_script.to_dict() if self.authentication_script else None,
             "createTakeOverScript": self.create_take_over_script.to_dict() if self.create_take_over_script else None,

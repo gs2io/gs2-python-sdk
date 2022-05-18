@@ -593,6 +593,7 @@ class CountUpByUserIdRequest(core.Gs2Request):
     user_id: str = None
     count_up_value: int = None
     max_value: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CountUpByUserIdRequest:
         self.namespace_name = namespace_name
@@ -616,6 +617,10 @@ class CountUpByUserIdRequest(core.Gs2Request):
 
     def with_max_value(self, max_value: int) -> CountUpByUserIdRequest:
         self.max_value = max_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CountUpByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -662,6 +667,7 @@ class DeleteCounterByUserIdRequest(core.Gs2Request):
     limit_name: str = None
     user_id: str = None
     counter_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteCounterByUserIdRequest:
         self.namespace_name = namespace_name
@@ -677,6 +683,10 @@ class DeleteCounterByUserIdRequest(core.Gs2Request):
 
     def with_counter_name(self, counter_name: str) -> DeleteCounterByUserIdRequest:
         self.counter_name = counter_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteCounterByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

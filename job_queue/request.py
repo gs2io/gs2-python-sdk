@@ -395,6 +395,7 @@ class PushByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     jobs: List[JobEntry] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PushByUserIdRequest:
         self.namespace_name = namespace_name
@@ -406,6 +407,10 @@ class PushByUserIdRequest(core.Gs2Request):
 
     def with_jobs(self, jobs: List[JobEntry]) -> PushByUserIdRequest:
         self.jobs = jobs
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PushByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -494,6 +499,7 @@ class RunByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RunByUserIdRequest:
         self.namespace_name = namespace_name
@@ -501,6 +507,10 @@ class RunByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> RunByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RunByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -538,6 +548,7 @@ class DeleteJobByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     job_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteJobByUserIdRequest:
         self.namespace_name = namespace_name
@@ -549,6 +560,10 @@ class DeleteJobByUserIdRequest(core.Gs2Request):
 
     def with_job_name(self, job_name: str) -> DeleteJobByUserIdRequest:
         self.job_name = job_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteJobByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -738,6 +753,7 @@ class DeleteDeadLetterJobByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     dead_letter_job_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteDeadLetterJobByUserIdRequest:
         self.namespace_name = namespace_name
@@ -749,6 +765,10 @@ class DeleteDeadLetterJobByUserIdRequest(core.Gs2Request):
 
     def with_dead_letter_job_name(self, dead_letter_job_name: str) -> DeleteDeadLetterJobByUserIdRequest:
         self.dead_letter_job_name = dead_letter_job_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteDeadLetterJobByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

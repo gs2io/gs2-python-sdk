@@ -866,6 +866,7 @@ class ExchangeByUserIdRequest(core.Gs2Request):
     user_id: str = None
     count: int = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ExchangeByUserIdRequest:
         self.namespace_name = namespace_name
@@ -885,6 +886,10 @@ class ExchangeByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> ExchangeByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ExchangeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1136,6 +1141,7 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
     user_id: str = None
     rate_name: str = None
     count: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateAwaitByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1151,6 +1157,10 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> CreateAwaitByUserIdRequest:
         self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateAwaitByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1509,6 +1519,7 @@ class AcquireByUserIdRequest(core.Gs2Request):
     rate_name: str = None
     await_name: str = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1528,6 +1539,10 @@ class AcquireByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> AcquireByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcquireByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1579,6 +1594,7 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
     rate_name: str = None
     await_name: str = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireForceByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1598,6 +1614,10 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> AcquireForceByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcquireForceByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1720,6 +1740,7 @@ class SkipByUserIdRequest(core.Gs2Request):
     rate_name: str = None
     await_name: str = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SkipByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1739,6 +1760,10 @@ class SkipByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> SkipByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SkipByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1847,6 +1872,7 @@ class DeleteAwaitByUserIdRequest(core.Gs2Request):
     user_id: str = None
     rate_name: str = None
     await_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteAwaitByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1862,6 +1888,10 @@ class DeleteAwaitByUserIdRequest(core.Gs2Request):
 
     def with_await_name(self, await_name: str) -> DeleteAwaitByUserIdRequest:
         self.await_name = await_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteAwaitByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

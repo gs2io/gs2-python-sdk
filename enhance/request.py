@@ -854,6 +854,7 @@ class DirectEnhanceByUserIdRequest(core.Gs2Request):
     target_item_set_id: str = None
     materials: List[Material] = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DirectEnhanceByUserIdRequest:
         self.namespace_name = namespace_name
@@ -877,6 +878,10 @@ class DirectEnhanceByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> DirectEnhanceByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DirectEnhanceByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1037,6 +1042,7 @@ class CreateProgressByUserIdRequest(core.Gs2Request):
     target_item_set_id: str = None
     materials: List[Material] = None
     force: bool = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateProgressByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1060,6 +1066,10 @@ class CreateProgressByUserIdRequest(core.Gs2Request):
 
     def with_force(self, force: bool) -> CreateProgressByUserIdRequest:
         self.force = force
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateProgressByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1293,6 +1303,7 @@ class StartByUserIdRequest(core.Gs2Request):
     user_id: str = None
     force: bool = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> StartByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1320,6 +1331,10 @@ class StartByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> StartByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> StartByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1436,6 +1451,7 @@ class EndByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> EndByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1447,6 +1463,10 @@ class EndByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> EndByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> EndByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1535,6 +1555,7 @@ class DeleteProgressByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteProgressByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1542,6 +1563,10 @@ class DeleteProgressByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteProgressByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteProgressByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
