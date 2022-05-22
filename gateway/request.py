@@ -579,6 +579,90 @@ class SendNotificationRequest(core.Gs2Request):
         }
 
 
+class DisconnectByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DisconnectByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DisconnectByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DisconnectByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DisconnectByUserIdRequest]:
+        if data is None:
+            return None
+        return DisconnectByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+        }
+
+
+class DisconnectAllRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DisconnectAllRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DisconnectAllRequest]:
+        if data is None:
+            return None
+        return DisconnectAllRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
 class SetFirebaseTokenRequest(core.Gs2Request):
 
     context_stack: str = None

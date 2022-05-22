@@ -852,6 +852,150 @@ class Gs2GatewayWebSocketClient(AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _disconnect_by_user_id(
+        self,
+        request: DisconnectByUserIdRequest,
+        callback: Callable[[AsyncResult[DisconnectByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="gateway",
+            component='webSocketSession',
+            function='disconnectByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=DisconnectByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def disconnect_by_user_id(
+        self,
+        request: DisconnectByUserIdRequest,
+    ) -> DisconnectByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._disconnect_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def disconnect_by_user_id_async(
+        self,
+        request: DisconnectByUserIdRequest,
+    ) -> DisconnectByUserIdResult:
+        async_result = []
+        self._disconnect_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _disconnect_all(
+        self,
+        request: DisconnectAllRequest,
+        callback: Callable[[AsyncResult[DisconnectAllResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="gateway",
+            component='webSocketSession',
+            function='disconnectAll',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=DisconnectAllResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def disconnect_all(
+        self,
+        request: DisconnectAllRequest,
+    ) -> DisconnectAllResult:
+        async_result = []
+        with timeout(30):
+            self._disconnect_all(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def disconnect_all_async(
+        self,
+        request: DisconnectAllRequest,
+    ) -> DisconnectAllResult:
+        async_result = []
+        self._disconnect_all(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _set_firebase_token(
         self,
         request: SetFirebaseTokenRequest,

@@ -844,6 +844,149 @@ class Gs2GatewayRestClient(AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _disconnect_by_user_id(
+        self,
+        request: DisconnectByUserIdRequest,
+        callback: Callable[[AsyncResult[DisconnectByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='gateway',
+            region=self.session.region,
+        ) + "/{namespaceName}/session/user/{userId}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DisconnectByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def disconnect_by_user_id(
+        self,
+        request: DisconnectByUserIdRequest,
+    ) -> DisconnectByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._disconnect_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def disconnect_by_user_id_async(
+        self,
+        request: DisconnectByUserIdRequest,
+    ) -> DisconnectByUserIdResult:
+        async_result = []
+        self._disconnect_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _disconnect_all(
+        self,
+        request: DisconnectAllRequest,
+        callback: Callable[[AsyncResult[DisconnectAllResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='gateway',
+            region=self.session.region,
+        ) + "/{namespaceName}/session".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DisconnectAllResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def disconnect_all(
+        self,
+        request: DisconnectAllRequest,
+    ) -> DisconnectAllResult:
+        async_result = []
+        with timeout(30):
+            self._disconnect_all(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def disconnect_all_async(
+        self,
+        request: DisconnectAllRequest,
+    ) -> DisconnectAllResult:
+        async_result = []
+        self._disconnect_all(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _set_firebase_token(
         self,
         request: SetFirebaseTokenRequest,
