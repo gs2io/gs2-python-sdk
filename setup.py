@@ -24,7 +24,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='gs2-python-sdk',
-    version='1.0.49',
+    version='1.0.50',
     package_dir={
         'gs2': '.'
     },
