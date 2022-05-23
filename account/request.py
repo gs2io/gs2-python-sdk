@@ -493,6 +493,61 @@ class UpdateTimeOffsetRequest(core.Gs2Request):
         }
 
 
+class UpdateBannedRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    banned: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateBannedRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> UpdateBannedRequest:
+        self.user_id = user_id
+        return self
+
+    def with_banned(self, banned: bool) -> UpdateBannedRequest:
+        self.banned = banned
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateBannedRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateBannedRequest]:
+        if data is None:
+            return None
+        return UpdateBannedRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_banned(data.get('banned'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "banned": self.banned,
+        }
+
+
 class GetAccountRequest(core.Gs2Request):
 
     context_stack: str = None

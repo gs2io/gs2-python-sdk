@@ -359,6 +359,7 @@ class Account(core.Gs2Model):
     user_id: str = None
     password: str = None
     time_offset: int = None
+    banned: bool = None
     created_at: int = None
 
     def with_account_id(self, account_id: str) -> Account:
@@ -375,6 +376,10 @@ class Account(core.Gs2Model):
 
     def with_time_offset(self, time_offset: int) -> Account:
         self.time_offset = time_offset
+        return self
+
+    def with_banned(self, banned: bool) -> Account:
+        self.banned = banned
         return self
 
     def with_created_at(self, created_at: int) -> Account:
@@ -459,6 +464,7 @@ class Account(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_password(data.get('password'))\
             .with_time_offset(data.get('timeOffset'))\
+            .with_banned(data.get('banned'))\
             .with_created_at(data.get('createdAt'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -467,6 +473,7 @@ class Account(core.Gs2Model):
             "userId": self.user_id,
             "password": self.password,
             "timeOffset": self.time_offset,
+            "banned": self.banned,
             "createdAt": self.created_at,
         }
 

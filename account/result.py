@@ -349,6 +349,40 @@ class UpdateTimeOffsetResult(core.Gs2Result):
         }
 
 
+class UpdateBannedResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> UpdateBannedResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateBannedResult]:
+        if data is None:
+            return None
+        return UpdateBannedResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class GetAccountResult(core.Gs2Result):
     item: Account = None
 

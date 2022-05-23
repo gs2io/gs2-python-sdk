@@ -704,6 +704,81 @@ class Gs2AccountWebSocketClient(AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _update_banned(
+        self,
+        request: UpdateBannedRequest,
+        callback: Callable[[AsyncResult[UpdateBannedResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='account',
+            function='updateBanned',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.banned is not None:
+            body["banned"] = request.banned
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=UpdateBannedResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_banned(
+        self,
+        request: UpdateBannedRequest,
+    ) -> UpdateBannedResult:
+        async_result = []
+        with timeout(30):
+            self._update_banned(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_banned_async(
+        self,
+        request: UpdateBannedRequest,
+    ) -> UpdateBannedResult:
+        async_result = []
+        self._update_banned(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_account(
         self,
         request: GetAccountRequest,
