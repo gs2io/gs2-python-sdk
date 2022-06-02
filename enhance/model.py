@@ -395,6 +395,7 @@ class Progress(core.Gs2Model):
     progress_id: str = None
     user_id: str = None
     rate_name: str = None
+    name: str = None
     property_id: str = None
     experience_value: int = None
     rate: float = None
@@ -411,6 +412,10 @@ class Progress(core.Gs2Model):
 
     def with_rate_name(self, rate_name: str) -> Progress:
         self.rate_name = rate_name
+        return self
+
+    def with_name(self, name: str) -> Progress:
+        self.name = name
         return self
 
     def with_property_id(self, property_id: str) -> Progress:
@@ -436,9 +441,81 @@ class Progress(core.Gs2Model):
     @classmethod
     def create_grn(
         cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+        rate_name,
+        progress_name,
     ):
-        return ''.format(
+        return 'grn:gs2:{region}:{ownerId}:enhance:{namespaceName}:user:{userId}:rate:{rateName}:progress:{progressName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+            rateName=rate_name,
+            progressName=progress_name,
         )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    @classmethod
+    def get_rate_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('rate_name')
+
+    @classmethod
+    def get_progress_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('progress_name')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -462,6 +539,7 @@ class Progress(core.Gs2Model):
             .with_progress_id(data.get('progressId'))\
             .with_user_id(data.get('userId'))\
             .with_rate_name(data.get('rateName'))\
+            .with_name(data.get('name'))\
             .with_property_id(data.get('propertyId'))\
             .with_experience_value(data.get('experienceValue'))\
             .with_rate(data.get('rate'))\
@@ -473,6 +551,7 @@ class Progress(core.Gs2Model):
             "progressId": self.progress_id,
             "userId": self.user_id,
             "rateName": self.rate_name,
+            "name": self.name,
             "propertyId": self.property_id,
             "experienceValue": self.experience_value,
             "rate": self.rate,

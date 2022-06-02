@@ -1461,6 +1461,10 @@ class Gs2EnhanceWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.progress_name is not None:
+            body["progressName"] = request.progress_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1536,6 +1540,10 @@ class Gs2EnhanceWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.progress_name is not None:
+            body["progressName"] = request.progress_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1789,6 +1797,10 @@ class Gs2EnhanceWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.progress_name is not None:
+            body["progressName"] = request.progress_name
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
@@ -1869,6 +1881,10 @@ class Gs2EnhanceWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.progress_name is not None:
+            body["progressName"] = request.progress_name
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
@@ -1947,6 +1963,10 @@ class Gs2EnhanceWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.progress_name is not None:
+            body["progressName"] = request.progress_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2022,6 +2042,10 @@ class Gs2EnhanceWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.progress_name is not None:
+            body["progressName"] = request.progress_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

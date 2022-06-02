@@ -137,12 +137,14 @@ class DataOwner(core.Gs2Model):
         owner_id,
         namespace_name,
         user_id,
+        data_owner_name,
     ):
         return 'grn:gs2:{region}:{ownerId}:account:{namespaceName}:account:{userId}:dataOwner:{dataOwnerName}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
             userId=user_id,
+            dataOwnerName=data_owner_name,
         )
 
     @classmethod
@@ -184,6 +186,16 @@ class DataOwner(core.Gs2Model):
         if match is None:
             return None
         return match.group('user_id')
+
+    @classmethod
+    def get_data_owner_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):account:(?P<userId>.+):dataOwner:(?P<dataOwnerName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('data_owner_name')
 
     def get(self, key, default=None):
         items = self.to_dict()
