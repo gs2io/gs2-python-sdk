@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     queue_namespace_id: str = None
     key_id: str = None
     log_setting: LogSetting = None
@@ -75,6 +76,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_queue_namespace_id(self, queue_namespace_id: str) -> CreateNamespaceRequest:
@@ -110,6 +115,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
@@ -118,6 +124,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
@@ -201,9 +208,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
+    log_setting: LogSetting = None
     queue_namespace_id: str = None
     key_id: str = None
-    log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
         self.namespace_name = namespace_name
@@ -213,16 +221,20 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.description = description
         return self
 
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
+        return self
+
+    def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
+        self.log_setting = log_setting
+        return self
+
     def with_queue_namespace_id(self, queue_namespace_id: str) -> UpdateNamespaceRequest:
         self.queue_namespace_id = queue_namespace_id
         return self
 
     def with_key_id(self, key_id: str) -> UpdateNamespaceRequest:
         self.key_id = key_id
-        return self
-
-    def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
-        self.log_setting = log_setting
         return self
 
     def get(self, key, default=None):
@@ -246,17 +258,19 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
-            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
-            "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
 

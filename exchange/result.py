@@ -493,11 +493,17 @@ class DeleteRateModelMasterResult(core.Gs2Result):
 
 class ExchangeResult(core.Gs2Result):
     item: RateModel = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: RateModel) -> ExchangeResult:
         self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> ExchangeResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> ExchangeResult:
@@ -506,6 +512,10 @@ class ExchangeResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> ExchangeResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ExchangeResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -528,24 +538,34 @@ class ExchangeResult(core.Gs2Result):
             return None
         return ExchangeResult()\
             .with_item(RateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
 class ExchangeByUserIdResult(core.Gs2Result):
     item: RateModel = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: RateModel) -> ExchangeByUserIdResult:
         self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> ExchangeByUserIdResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> ExchangeByUserIdResult:
@@ -554,6 +574,10 @@ class ExchangeByUserIdResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> ExchangeByUserIdResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ExchangeByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -576,24 +600,34 @@ class ExchangeByUserIdResult(core.Gs2Result):
             return None
         return ExchangeByUserIdResult()\
             .with_item(RateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
 class ExchangeByStampSheetResult(core.Gs2Result):
     item: RateModel = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: RateModel) -> ExchangeByStampSheetResult:
         self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> ExchangeByStampSheetResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> ExchangeByStampSheetResult:
@@ -602,6 +636,10 @@ class ExchangeByStampSheetResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> ExchangeByStampSheetResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ExchangeByStampSheetResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -624,14 +662,18 @@ class ExchangeByStampSheetResult(core.Gs2Result):
             return None
         return ExchangeByStampSheetResult()\
             .with_item(RateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
@@ -976,11 +1018,17 @@ class GetAwaitByUserIdResult(core.Gs2Result):
 
 class AcquireResult(core.Gs2Result):
     item: Await = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: Await) -> AcquireResult:
         self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> AcquireResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> AcquireResult:
@@ -989,6 +1037,10 @@ class AcquireResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> AcquireResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1011,24 +1063,34 @@ class AcquireResult(core.Gs2Result):
             return None
         return AcquireResult()\
             .with_item(Await.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
 class AcquireByUserIdResult(core.Gs2Result):
     item: Await = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: Await) -> AcquireByUserIdResult:
         self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> AcquireByUserIdResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> AcquireByUserIdResult:
@@ -1037,6 +1099,10 @@ class AcquireByUserIdResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> AcquireByUserIdResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1059,24 +1125,34 @@ class AcquireByUserIdResult(core.Gs2Result):
             return None
         return AcquireByUserIdResult()\
             .with_item(Await.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
 class AcquireForceByUserIdResult(core.Gs2Result):
     item: Await = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: Await) -> AcquireForceByUserIdResult:
         self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> AcquireForceByUserIdResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> AcquireForceByUserIdResult:
@@ -1085,6 +1161,10 @@ class AcquireForceByUserIdResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> AcquireForceByUserIdResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireForceByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1107,24 +1187,34 @@ class AcquireForceByUserIdResult(core.Gs2Result):
             return None
         return AcquireForceByUserIdResult()\
             .with_item(Await.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
 class SkipResult(core.Gs2Result):
     item: Await = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: Await) -> SkipResult:
         self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> SkipResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> SkipResult:
@@ -1133,6 +1223,10 @@ class SkipResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> SkipResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> SkipResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1155,24 +1249,34 @@ class SkipResult(core.Gs2Result):
             return None
         return SkipResult()\
             .with_item(Await.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
 class SkipByUserIdResult(core.Gs2Result):
     item: Await = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: Await) -> SkipByUserIdResult:
         self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> SkipByUserIdResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> SkipByUserIdResult:
@@ -1181,6 +1285,10 @@ class SkipByUserIdResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> SkipByUserIdResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> SkipByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1203,14 +1311,18 @@ class SkipByUserIdResult(core.Gs2Result):
             return None
         return SkipByUserIdResult()\
             .with_item(Await.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 

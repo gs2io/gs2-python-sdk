@@ -66,6 +66,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     assume_user_id: str = None
+    auto_run_stamp_sheet_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -78,6 +79,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_assume_user_id(self, assume_user_id: str) -> CreateNamespaceRequest:
         self.assume_user_id = assume_user_id
+        return self
+
+    def with_auto_run_stamp_sheet_notification(self, auto_run_stamp_sheet_notification: NotificationSetting) -> CreateNamespaceRequest:
+        self.auto_run_stamp_sheet_notification = auto_run_stamp_sheet_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -106,6 +111,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_assume_user_id(data.get('assumeUserId'))\
+            .with_auto_run_stamp_sheet_notification(NotificationSetting.from_dict(data.get('autoRunStampSheetNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -113,6 +119,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "assumeUserId": self.assume_user_id,
+            "autoRunStampSheetNotification": self.auto_run_stamp_sheet_notification.to_dict() if self.auto_run_stamp_sheet_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -195,6 +202,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     assume_user_id: str = None
+    auto_run_stamp_sheet_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -207,6 +215,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_assume_user_id(self, assume_user_id: str) -> UpdateNamespaceRequest:
         self.assume_user_id = assume_user_id
+        return self
+
+    def with_auto_run_stamp_sheet_notification(self, auto_run_stamp_sheet_notification: NotificationSetting) -> UpdateNamespaceRequest:
+        self.auto_run_stamp_sheet_notification = auto_run_stamp_sheet_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -235,6 +247,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_assume_user_id(data.get('assumeUserId'))\
+            .with_auto_run_stamp_sheet_notification(NotificationSetting.from_dict(data.get('autoRunStampSheetNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -242,6 +255,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "assumeUserId": self.assume_user_id,
+            "autoRunStampSheetNotification": self.auto_run_stamp_sheet_notification.to_dict() if self.auto_run_stamp_sheet_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -1185,4 +1199,105 @@ class RunStampSheetExpressWithoutNamespaceRequest(core.Gs2Request):
         return {
             "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
+        }
+
+
+class GetStampSheetResultRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    transaction_id: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetStampSheetResultRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetStampSheetResultRequest:
+        self.access_token = access_token
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> GetStampSheetResultRequest:
+        self.transaction_id = transaction_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetStampSheetResultRequest]:
+        if data is None:
+            return None
+        return GetStampSheetResultRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_transaction_id(data.get('transactionId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "transactionId": self.transaction_id,
+        }
+
+
+class GetStampSheetResultByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    transaction_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetStampSheetResultByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetStampSheetResultByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> GetStampSheetResultByUserIdRequest:
+        self.transaction_id = transaction_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetStampSheetResultByUserIdRequest]:
+        if data is None:
+            return None
+        return GetStampSheetResultByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_transaction_id(data.get('transactionId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "transactionId": self.transaction_id,
         }

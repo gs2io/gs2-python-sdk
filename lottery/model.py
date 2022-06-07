@@ -19,6 +19,171 @@ from typing import *
 import core
 
 
+class TransactionSetting(core.Gs2Model):
+    enable_auto_run: bool = None
+    distributor_namespace_id: str = None
+    key_id: str = None
+    queue_namespace_id: str = None
+
+    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
+        self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
+        self.distributor_namespace_id = distributor_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> TransactionSetting:
+        self.key_id = key_id
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TransactionSetting]:
+        if data is None:
+            return None
+        return TransactionSetting()\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "enableAutoRun": self.enable_auto_run,
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "keyId": self.key_id,
+            "queueNamespaceId": self.queue_namespace_id,
+        }
+
+
+class LogSetting(core.Gs2Model):
+    logging_namespace_id: str = None
+
+    def with_logging_namespace_id(self, logging_namespace_id: str) -> LogSetting:
+        self.logging_namespace_id = logging_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[LogSetting]:
+        if data is None:
+            return None
+        return LogSetting()\
+            .with_logging_namespace_id(data.get('loggingNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "loggingNamespaceId": self.logging_namespace_id,
+        }
+
+
+class GitHubCheckoutSetting(core.Gs2Model):
+    api_key_id: str = None
+    repository_name: str = None
+    source_path: str = None
+    reference_type: str = None
+    commit_hash: str = None
+    branch_name: str = None
+    tag_name: str = None
+
+    def with_api_key_id(self, api_key_id: str) -> GitHubCheckoutSetting:
+        self.api_key_id = api_key_id
+        return self
+
+    def with_repository_name(self, repository_name: str) -> GitHubCheckoutSetting:
+        self.repository_name = repository_name
+        return self
+
+    def with_source_path(self, source_path: str) -> GitHubCheckoutSetting:
+        self.source_path = source_path
+        return self
+
+    def with_reference_type(self, reference_type: str) -> GitHubCheckoutSetting:
+        self.reference_type = reference_type
+        return self
+
+    def with_commit_hash(self, commit_hash: str) -> GitHubCheckoutSetting:
+        self.commit_hash = commit_hash
+        return self
+
+    def with_branch_name(self, branch_name: str) -> GitHubCheckoutSetting:
+        self.branch_name = branch_name
+        return self
+
+    def with_tag_name(self, tag_name: str) -> GitHubCheckoutSetting:
+        self.tag_name = tag_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GitHubCheckoutSetting]:
+        if data is None:
+            return None
+        return GitHubCheckoutSetting()\
+            .with_api_key_id(data.get('apiKeyId'))\
+            .with_repository_name(data.get('repositoryName'))\
+            .with_source_path(data.get('sourcePath'))\
+            .with_reference_type(data.get('referenceType'))\
+            .with_commit_hash(data.get('commitHash'))\
+            .with_branch_name(data.get('branchName'))\
+            .with_tag_name(data.get('tagName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "apiKeyId": self.api_key_id,
+            "repositoryName": self.repository_name,
+            "sourcePath": self.source_path,
+            "referenceType": self.reference_type,
+            "commitHash": self.commit_hash,
+            "branchName": self.branch_name,
+            "tagName": self.tag_name,
+        }
+
+
 class Config(core.Gs2Model):
     key: str = None
     value: str = None
@@ -57,6 +222,47 @@ class Config(core.Gs2Model):
         return {
             "key": self.key,
             "value": self.value,
+        }
+
+
+class AcquireAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> AcquireAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> AcquireAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireAction]:
+        if data is None:
+            return None
+        return AcquireAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
         }
 
 
@@ -215,47 +421,6 @@ class DrawnPrize(core.Gs2Model):
         }
 
 
-class AcquireAction(core.Gs2Model):
-    action: str = None
-    request: str = None
-
-    def with_action(self, action: str) -> AcquireAction:
-        self.action = action
-        return self
-
-    def with_request(self, request: str) -> AcquireAction:
-        self.request = request
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[AcquireAction]:
-        if data is None:
-            return None
-        return AcquireAction()\
-            .with_action(data.get('action'))\
-            .with_request(data.get('request'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "action": self.action,
-            "request": self.request,
-        }
-
-
 class Prize(core.Gs2Model):
     prize_id: str = None
     type: str = None
@@ -321,116 +486,6 @@ class Prize(core.Gs2Model):
             ],
             "prizeTableName": self.prize_table_name,
             "weight": self.weight,
-        }
-
-
-class LogSetting(core.Gs2Model):
-    logging_namespace_id: str = None
-
-    def with_logging_namespace_id(self, logging_namespace_id: str) -> LogSetting:
-        self.logging_namespace_id = logging_namespace_id
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[LogSetting]:
-        if data is None:
-            return None
-        return LogSetting()\
-            .with_logging_namespace_id(data.get('loggingNamespaceId'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "loggingNamespaceId": self.logging_namespace_id,
-        }
-
-
-class GitHubCheckoutSetting(core.Gs2Model):
-    api_key_id: str = None
-    repository_name: str = None
-    source_path: str = None
-    reference_type: str = None
-    commit_hash: str = None
-    branch_name: str = None
-    tag_name: str = None
-
-    def with_api_key_id(self, api_key_id: str) -> GitHubCheckoutSetting:
-        self.api_key_id = api_key_id
-        return self
-
-    def with_repository_name(self, repository_name: str) -> GitHubCheckoutSetting:
-        self.repository_name = repository_name
-        return self
-
-    def with_source_path(self, source_path: str) -> GitHubCheckoutSetting:
-        self.source_path = source_path
-        return self
-
-    def with_reference_type(self, reference_type: str) -> GitHubCheckoutSetting:
-        self.reference_type = reference_type
-        return self
-
-    def with_commit_hash(self, commit_hash: str) -> GitHubCheckoutSetting:
-        self.commit_hash = commit_hash
-        return self
-
-    def with_branch_name(self, branch_name: str) -> GitHubCheckoutSetting:
-        self.branch_name = branch_name
-        return self
-
-    def with_tag_name(self, tag_name: str) -> GitHubCheckoutSetting:
-        self.tag_name = tag_name
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GitHubCheckoutSetting]:
-        if data is None:
-            return None
-        return GitHubCheckoutSetting()\
-            .with_api_key_id(data.get('apiKeyId'))\
-            .with_repository_name(data.get('repositoryName'))\
-            .with_source_path(data.get('sourcePath'))\
-            .with_reference_type(data.get('referenceType'))\
-            .with_commit_hash(data.get('commitHash'))\
-            .with_branch_name(data.get('branchName'))\
-            .with_tag_name(data.get('tagName'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "apiKeyId": self.api_key_id,
-            "repositoryName": self.repository_name,
-            "sourcePath": self.source_path,
-            "referenceType": self.reference_type,
-            "commitHash": self.commit_hash,
-            "branchName": self.branch_name,
-            "tagName": self.tag_name,
         }
 
 
@@ -1260,13 +1315,14 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
-    queue_namespace_id: str = None
-    key_id: str = None
+    transaction_setting: TransactionSetting = None
     lottery_trigger_script_id: str = None
     choice_prize_table_script_id: str = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    queue_namespace_id: str = None
+    key_id: str = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1280,12 +1336,8 @@ class Namespace(core.Gs2Model):
         self.description = description
         return self
 
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> Namespace:
-        self.key_id = key_id
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_lottery_trigger_script_id(self, lottery_trigger_script_id: str) -> Namespace:
@@ -1306,6 +1358,14 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> Namespace:
+        self.key_id = key_id
         return self
 
     @classmethod
@@ -1373,24 +1433,26 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_lottery_trigger_script_id(data.get('lotteryTriggerScriptId'))\
             .with_choice_prize_table_script_id(data.get('choicePrizeTableScriptId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))\
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "lotteryTriggerScriptId": self.lottery_trigger_script_id,
             "choicePrizeTableScriptId": self.choice_prize_table_script_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "queueNamespaceId": self.queue_namespace_id,
+            "keyId": self.key_id,
         }

@@ -119,20 +119,22 @@ class Gs2InboxWebSocketClient(AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.is_automatic_deleting_enabled is not None:
             body["isAutomaticDeletingEnabled"] = request.is_automatic_deleting_enabled
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.receive_message_script is not None:
             body["receiveMessageScript"] = request.receive_message_script.to_dict()
         if request.read_message_script is not None:
             body["readMessageScript"] = request.read_message_script.to_dict()
         if request.delete_message_script is not None:
             body["deleteMessageScript"] = request.delete_message_script.to_dict()
-        if request.queue_namespace_id is not None:
-            body["queueNamespaceId"] = request.queue_namespace_id
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
         if request.receive_notification is not None:
             body["receiveNotification"] = request.receive_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
+        if request.queue_namespace_id is not None:
+            body["queueNamespaceId"] = request.queue_namespace_id
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -350,20 +352,22 @@ class Gs2InboxWebSocketClient(AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.is_automatic_deleting_enabled is not None:
             body["isAutomaticDeletingEnabled"] = request.is_automatic_deleting_enabled
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.receive_message_script is not None:
             body["receiveMessageScript"] = request.receive_message_script.to_dict()
         if request.read_message_script is not None:
             body["readMessageScript"] = request.read_message_script.to_dict()
         if request.delete_message_script is not None:
             body["deleteMessageScript"] = request.delete_message_script.to_dict()
-        if request.queue_namespace_id is not None:
-            body["queueNamespaceId"] = request.queue_namespace_id
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
         if request.receive_notification is not None:
             body["receiveNotification"] = request.receive_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
+        if request.queue_namespace_id is not None:
+            body["queueNamespaceId"] = request.queue_namespace_id
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     update_mold_script: ScriptSetting = None
     update_form_script: ScriptSetting = None
     log_setting: LogSetting = None
@@ -75,6 +76,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_update_mold_script(self, update_mold_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -110,6 +115,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_update_mold_script(ScriptSetting.from_dict(data.get('updateMoldScript')))\
             .with_update_form_script(ScriptSetting.from_dict(data.get('updateFormScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
@@ -118,6 +124,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "updateMoldScript": self.update_mold_script.to_dict() if self.update_mold_script else None,
             "updateFormScript": self.update_form_script.to_dict() if self.update_form_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
@@ -201,6 +208,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     update_mold_script: ScriptSetting = None
     update_form_script: ScriptSetting = None
     log_setting: LogSetting = None
@@ -211,6 +219,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_update_mold_script(self, update_mold_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -246,6 +258,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_update_mold_script(ScriptSetting.from_dict(data.get('updateMoldScript')))\
             .with_update_form_script(ScriptSetting.from_dict(data.get('updateFormScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
@@ -254,6 +267,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "updateMoldScript": self.update_mold_script.to_dict() if self.update_mold_script else None,
             "updateFormScript": self.update_form_script.to_dict() if self.update_form_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
@@ -2167,8 +2181,6 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
     mold_name: str = None
     index: int = None
     acquire_action: AcquireAction = None
-    queue_namespace_id: str = None
-    key_id: str = None
     config: List[AcquireActionConfig] = None
     duplication_avoider: str = None
 
@@ -2190,14 +2202,6 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
 
     def with_acquire_action(self, acquire_action: AcquireAction) -> AcquireActionsToFormPropertiesRequest:
         self.acquire_action = acquire_action
-        return self
-
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> AcquireActionsToFormPropertiesRequest:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> AcquireActionsToFormPropertiesRequest:
-        self.key_id = key_id
         return self
 
     def with_config(self, config: List[AcquireActionConfig]) -> AcquireActionsToFormPropertiesRequest:
@@ -2232,8 +2236,6 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
             .with_mold_name(data.get('moldName'))\
             .with_index(data.get('index'))\
             .with_acquire_action(AcquireAction.from_dict(data.get('acquireAction')))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
             .with_config([
                 AcquireActionConfig.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
@@ -2246,8 +2248,6 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
             "moldName": self.mold_name,
             "index": self.index,
             "acquireAction": self.acquire_action.to_dict() if self.acquire_action else None,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)

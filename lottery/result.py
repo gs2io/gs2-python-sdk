@@ -966,11 +966,17 @@ class GetPrizeTableResult(core.Gs2Result):
 
 class DrawByUserIdResult(core.Gs2Result):
     items: List[DrawnPrize] = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_items(self, items: List[DrawnPrize]) -> DrawByUserIdResult:
         self.items = items
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> DrawByUserIdResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> DrawByUserIdResult:
@@ -979,6 +985,10 @@ class DrawByUserIdResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> DrawByUserIdResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> DrawByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1004,8 +1014,10 @@ class DrawByUserIdResult(core.Gs2Result):
                 DrawnPrize.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1013,18 +1025,26 @@ class DrawByUserIdResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
 class DrawByStampSheetResult(core.Gs2Result):
     items: List[DrawnPrize] = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_items(self, items: List[DrawnPrize]) -> DrawByStampSheetResult:
         self.items = items
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> DrawByStampSheetResult:
+        self.transaction_id = transaction_id
         return self
 
     def with_stamp_sheet(self, stamp_sheet: str) -> DrawByStampSheetResult:
@@ -1033,6 +1053,10 @@ class DrawByStampSheetResult(core.Gs2Result):
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> DrawByStampSheetResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> DrawByStampSheetResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1058,8 +1082,10 @@ class DrawByStampSheetResult(core.Gs2Result):
                 DrawnPrize.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1067,8 +1093,10 @@ class DrawByStampSheetResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 

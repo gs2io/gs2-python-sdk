@@ -119,6 +119,8 @@ class Gs2DistributorWebSocketClient(AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.assume_user_id is not None:
             body["assumeUserId"] = request.assume_user_id
+        if request.auto_run_stamp_sheet_notification is not None:
+            body["autoRunStampSheetNotification"] = request.auto_run_stamp_sheet_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -338,6 +340,8 @@ class Gs2DistributorWebSocketClient(AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.assume_user_id is not None:
             body["assumeUserId"] = request.assume_user_id
+        if request.auto_run_stamp_sheet_notification is not None:
+            body["autoRunStampSheetNotification"] = request.auto_run_stamp_sheet_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -1865,6 +1869,158 @@ class Gs2DistributorWebSocketClient(AbstractGs2WebSocketClient):
     ) -> RunStampSheetExpressWithoutNamespaceResult:
         async_result = []
         self._run_stamp_sheet_express_without_namespace(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_stamp_sheet_result(
+        self,
+        request: GetStampSheetResultRequest,
+        callback: Callable[[AsyncResult[GetStampSheetResultResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='stampSheetResult',
+            function='getStampSheetResult',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.transaction_id is not None:
+            body["transactionId"] = request.transaction_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=GetStampSheetResultResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_stamp_sheet_result(
+        self,
+        request: GetStampSheetResultRequest,
+    ) -> GetStampSheetResultResult:
+        async_result = []
+        with timeout(30):
+            self._get_stamp_sheet_result(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_stamp_sheet_result_async(
+        self,
+        request: GetStampSheetResultRequest,
+    ) -> GetStampSheetResultResult:
+        async_result = []
+        self._get_stamp_sheet_result(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_stamp_sheet_result_by_user_id(
+        self,
+        request: GetStampSheetResultByUserIdRequest,
+        callback: Callable[[AsyncResult[GetStampSheetResultByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='stampSheetResult',
+            function='getStampSheetResultByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.transaction_id is not None:
+            body["transactionId"] = request.transaction_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=GetStampSheetResultByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_stamp_sheet_result_by_user_id(
+        self,
+        request: GetStampSheetResultByUserIdRequest,
+    ) -> GetStampSheetResultByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_stamp_sheet_result_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_stamp_sheet_result_by_user_id_async(
+        self,
+        request: GetStampSheetResultByUserIdRequest,
+    ) -> GetStampSheetResultByUserIdResult:
+        async_result = []
+        self._get_stamp_sheet_result_by_user_id(
             request,
             lambda result: async_result.append(result),
         )

@@ -67,10 +67,11 @@ class CreateNamespaceRequest(core.Gs2Request):
     description: str = None
     enable_await_exchange: bool = None
     enable_direct_exchange: bool = None
-    queue_namespace_id: str = None
-    key_id: str = None
+    transaction_setting: TransactionSetting = None
     exchange_script: ScriptSetting = None
     log_setting: LogSetting = None
+    queue_namespace_id: str = None
+    key_id: str = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
         self.name = name
@@ -88,12 +89,8 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.enable_direct_exchange = enable_direct_exchange
         return self
 
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> CreateNamespaceRequest:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> CreateNamespaceRequest:
-        self.key_id = key_id
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_exchange_script(self, exchange_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -102,6 +99,14 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
         self.log_setting = log_setting
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> CreateNamespaceRequest:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> CreateNamespaceRequest:
+        self.key_id = key_id
         return self
 
     def get(self, key, default=None):
@@ -127,10 +132,11 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_enable_await_exchange(data.get('enableAwaitExchange'))\
             .with_enable_direct_exchange(data.get('enableDirectExchange'))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
-            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
+            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))\
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -138,10 +144,11 @@ class CreateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "enableAwaitExchange": self.enable_await_exchange,
             "enableDirectExchange": self.enable_direct_exchange,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
+            "queueNamespaceId": self.queue_namespace_id,
+            "keyId": self.key_id,
         }
 
 
@@ -224,10 +231,11 @@ class UpdateNamespaceRequest(core.Gs2Request):
     description: str = None
     enable_await_exchange: bool = None
     enable_direct_exchange: bool = None
-    queue_namespace_id: str = None
-    key_id: str = None
+    transaction_setting: TransactionSetting = None
     exchange_script: ScriptSetting = None
     log_setting: LogSetting = None
+    queue_namespace_id: str = None
+    key_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
         self.namespace_name = namespace_name
@@ -245,12 +253,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.enable_direct_exchange = enable_direct_exchange
         return self
 
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> UpdateNamespaceRequest:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> UpdateNamespaceRequest:
-        self.key_id = key_id
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_exchange_script(self, exchange_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -259,6 +263,14 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
         self.log_setting = log_setting
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> UpdateNamespaceRequest:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> UpdateNamespaceRequest:
+        self.key_id = key_id
         return self
 
     def get(self, key, default=None):
@@ -284,10 +296,11 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_enable_await_exchange(data.get('enableAwaitExchange'))\
             .with_enable_direct_exchange(data.get('enableDirectExchange'))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
-            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
+            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))\
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -295,10 +308,11 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "enableAwaitExchange": self.enable_await_exchange,
             "enableDirectExchange": self.enable_direct_exchange,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
+            "queueNamespaceId": self.queue_namespace_id,
+            "keyId": self.key_id,
         }
 
 

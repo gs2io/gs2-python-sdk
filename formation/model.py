@@ -19,16 +19,26 @@ from typing import *
 import core
 
 
-class AcquireAction(core.Gs2Model):
-    action: str = None
-    request: str = None
+class TransactionSetting(core.Gs2Model):
+    enable_auto_run: bool = None
+    distributor_namespace_id: str = None
+    key_id: str = None
+    queue_namespace_id: str = None
 
-    def with_action(self, action: str) -> AcquireAction:
-        self.action = action
+    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
+        self.enable_auto_run = enable_auto_run
         return self
 
-    def with_request(self, request: str) -> AcquireAction:
-        self.request = request
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
+        self.distributor_namespace_id = distributor_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> TransactionSetting:
+        self.key_id = key_id
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
+        self.queue_namespace_id = queue_namespace_id
         return self
 
     def get(self, key, default=None):
@@ -46,17 +56,21 @@ class AcquireAction(core.Gs2Model):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[AcquireAction]:
+    ) -> Optional[TransactionSetting]:
         if data is None:
             return None
-        return AcquireAction()\
-            .with_action(data.get('action'))\
-            .with_request(data.get('request'))
+        return TransactionSetting()\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "action": self.action,
-            "request": self.request,
+            "enableAutoRun": self.enable_auto_run,
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "keyId": self.key_id,
+            "queueNamespaceId": self.queue_namespace_id,
         }
 
 
@@ -310,6 +324,47 @@ class AcquireActionConfig(core.Gs2Model):
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
+        }
+
+
+class AcquireAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> AcquireAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> AcquireAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireAction]:
+        if data is None:
+            return None
+        return AcquireAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
         }
 
 
@@ -1371,6 +1426,7 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     update_mold_script: ScriptSetting = None
     update_form_script: ScriptSetting = None
     log_setting: LogSetting = None
@@ -1387,6 +1443,10 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_update_mold_script(self, update_mold_script: ScriptSetting) -> Namespace:
@@ -1474,6 +1534,7 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_update_mold_script(ScriptSetting.from_dict(data.get('updateMoldScript')))\
             .with_update_form_script(ScriptSetting.from_dict(data.get('updateFormScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
@@ -1485,6 +1546,7 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "updateMoldScript": self.update_mold_script.to_dict() if self.update_mold_script else None,
             "updateFormScript": self.update_form_script.to_dict() if self.update_form_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,

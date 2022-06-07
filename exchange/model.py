@@ -19,57 +19,26 @@ from typing import *
 import core
 
 
-class ConsumeAction(core.Gs2Model):
-    action: str = None
-    request: str = None
+class TransactionSetting(core.Gs2Model):
+    enable_auto_run: bool = None
+    distributor_namespace_id: str = None
+    key_id: str = None
+    queue_namespace_id: str = None
 
-    def with_action(self, action: str) -> ConsumeAction:
-        self.action = action
+    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
+        self.enable_auto_run = enable_auto_run
         return self
 
-    def with_request(self, request: str) -> ConsumeAction:
-        self.request = request
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
+        self.distributor_namespace_id = distributor_namespace_id
         return self
 
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[ConsumeAction]:
-        if data is None:
-            return None
-        return ConsumeAction()\
-            .with_action(data.get('action'))\
-            .with_request(data.get('request'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "action": self.action,
-            "request": self.request,
-        }
-
-
-class AcquireAction(core.Gs2Model):
-    action: str = None
-    request: str = None
-
-    def with_action(self, action: str) -> AcquireAction:
-        self.action = action
+    def with_key_id(self, key_id: str) -> TransactionSetting:
+        self.key_id = key_id
         return self
 
-    def with_request(self, request: str) -> AcquireAction:
-        self.request = request
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
+        self.queue_namespace_id = queue_namespace_id
         return self
 
     def get(self, key, default=None):
@@ -87,17 +56,21 @@ class AcquireAction(core.Gs2Model):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[AcquireAction]:
+    ) -> Optional[TransactionSetting]:
         if data is None:
             return None
-        return AcquireAction()\
-            .with_action(data.get('action'))\
-            .with_request(data.get('request'))
+        return TransactionSetting()\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "action": self.action,
-            "request": self.request,
+            "enableAutoRun": self.enable_auto_run,
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "keyId": self.key_id,
+            "queueNamespaceId": self.queue_namespace_id,
         }
 
 
@@ -304,6 +277,88 @@ class Config(core.Gs2Model):
         return {
             "key": self.key,
             "value": self.value,
+        }
+
+
+class ConsumeAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> ConsumeAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> ConsumeAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeAction]:
+        if data is None:
+            return None
+        return ConsumeAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
+class AcquireAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> AcquireAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> AcquireAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireAction]:
+        if data is None:
+            return None
+        return AcquireAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
         }
 
 
@@ -880,12 +935,13 @@ class Namespace(core.Gs2Model):
     description: str = None
     enable_direct_exchange: bool = None
     enable_await_exchange: bool = None
-    queue_namespace_id: str = None
-    key_id: str = None
+    transaction_setting: TransactionSetting = None
     exchange_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    queue_namespace_id: str = None
+    key_id: str = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -907,12 +963,8 @@ class Namespace(core.Gs2Model):
         self.enable_await_exchange = enable_await_exchange
         return self
 
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> Namespace:
-        self.key_id = key_id
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_exchange_script(self, exchange_script: ScriptSetting) -> Namespace:
@@ -929,6 +981,14 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> Namespace:
+        self.key_id = key_id
         return self
 
     @classmethod
@@ -998,12 +1058,13 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_enable_direct_exchange(data.get('enableDirectExchange'))\
             .with_enable_await_exchange(data.get('enableAwaitExchange'))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))\
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1012,10 +1073,11 @@ class Namespace(core.Gs2Model):
             "description": self.description,
             "enableDirectExchange": self.enable_direct_exchange,
             "enableAwaitExchange": self.enable_await_exchange,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "queueNamespaceId": self.queue_namespace_id,
+            "keyId": self.key_id,
         }

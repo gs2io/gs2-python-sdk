@@ -117,16 +117,18 @@ class Gs2LotteryWebSocketClient(AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
-        if request.queue_namespace_id is not None:
-            body["queueNamespaceId"] = request.queue_namespace_id
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.lottery_trigger_script_id is not None:
             body["lotteryTriggerScriptId"] = request.lottery_trigger_script_id
         if request.choice_prize_table_script_id is not None:
             body["choicePrizeTableScriptId"] = request.choice_prize_table_script_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
+        if request.queue_namespace_id is not None:
+            body["queueNamespaceId"] = request.queue_namespace_id
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -342,16 +344,18 @@ class Gs2LotteryWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
-        if request.queue_namespace_id is not None:
-            body["queueNamespaceId"] = request.queue_namespace_id
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.lottery_trigger_script_id is not None:
             body["lotteryTriggerScriptId"] = request.lottery_trigger_script_id
         if request.choice_prize_table_script_id is not None:
             body["choicePrizeTableScriptId"] = request.choice_prize_table_script_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
+        if request.queue_namespace_id is not None:
+            body["queueNamespaceId"] = request.queue_namespace_id
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

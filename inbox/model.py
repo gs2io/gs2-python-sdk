@@ -19,62 +19,26 @@ from typing import *
 import core
 
 
-class AcquireAction(core.Gs2Model):
-    action: str = None
-    request: str = None
+class TransactionSetting(core.Gs2Model):
+    enable_auto_run: bool = None
+    distributor_namespace_id: str = None
+    key_id: str = None
+    queue_namespace_id: str = None
 
-    def with_action(self, action: str) -> AcquireAction:
-        self.action = action
+    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
+        self.enable_auto_run = enable_auto_run
         return self
 
-    def with_request(self, request: str) -> AcquireAction:
-        self.request = request
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
+        self.distributor_namespace_id = distributor_namespace_id
         return self
 
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[AcquireAction]:
-        if data is None:
-            return None
-        return AcquireAction()\
-            .with_action(data.get('action'))\
-            .with_request(data.get('request'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "action": self.action,
-            "request": self.request,
-        }
-
-
-class TimeSpan(core.Gs2Model):
-    days: int = None
-    hours: int = None
-    minutes: int = None
-
-    def with_days(self, days: int) -> TimeSpan:
-        self.days = days
+    def with_key_id(self, key_id: str) -> TransactionSetting:
+        self.key_id = key_id
         return self
 
-    def with_hours(self, hours: int) -> TimeSpan:
-        self.hours = hours
-        return self
-
-    def with_minutes(self, minutes: int) -> TimeSpan:
-        self.minutes = minutes
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
+        self.queue_namespace_id = queue_namespace_id
         return self
 
     def get(self, key, default=None):
@@ -92,19 +56,21 @@ class TimeSpan(core.Gs2Model):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[TimeSpan]:
+    ) -> Optional[TransactionSetting]:
         if data is None:
             return None
-        return TimeSpan()\
-            .with_days(data.get('days'))\
-            .with_hours(data.get('hours'))\
-            .with_minutes(data.get('minutes'))
+        return TransactionSetting()\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "days": self.days,
-            "hours": self.hours,
-            "minutes": self.minutes,
+            "enableAutoRun": self.enable_auto_run,
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "keyId": self.key_id,
+            "queueNamespaceId": self.queue_namespace_id,
         }
 
 
@@ -359,6 +325,95 @@ class Config(core.Gs2Model):
         return {
             "key": self.key,
             "value": self.value,
+        }
+
+
+class AcquireAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> AcquireAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> AcquireAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireAction]:
+        if data is None:
+            return None
+        return AcquireAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
+class TimeSpan(core.Gs2Model):
+    days: int = None
+    hours: int = None
+    minutes: int = None
+
+    def with_days(self, days: int) -> TimeSpan:
+        self.days = days
+        return self
+
+    def with_hours(self, hours: int) -> TimeSpan:
+        self.hours = hours
+        return self
+
+    def with_minutes(self, minutes: int) -> TimeSpan:
+        self.minutes = minutes
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TimeSpan]:
+        if data is None:
+            return None
+        return TimeSpan()\
+            .with_days(data.get('days'))\
+            .with_hours(data.get('hours'))\
+            .with_minutes(data.get('minutes'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "days": self.days,
+            "hours": self.hours,
+            "minutes": self.minutes,
         }
 
 
@@ -1004,15 +1059,16 @@ class Namespace(core.Gs2Model):
     name: str = None
     description: str = None
     is_automatic_deleting_enabled: bool = None
+    transaction_setting: TransactionSetting = None
     receive_message_script: ScriptSetting = None
     read_message_script: ScriptSetting = None
     delete_message_script: ScriptSetting = None
-    queue_namespace_id: str = None
-    key_id: str = None
     receive_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    queue_namespace_id: str = None
+    key_id: str = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1030,6 +1086,10 @@ class Namespace(core.Gs2Model):
         self.is_automatic_deleting_enabled = is_automatic_deleting_enabled
         return self
 
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
+        return self
+
     def with_receive_message_script(self, receive_message_script: ScriptSetting) -> Namespace:
         self.receive_message_script = receive_message_script
         return self
@@ -1040,14 +1100,6 @@ class Namespace(core.Gs2Model):
 
     def with_delete_message_script(self, delete_message_script: ScriptSetting) -> Namespace:
         self.delete_message_script = delete_message_script
-        return self
-
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> Namespace:
-        self.key_id = key_id
         return self
 
     def with_receive_notification(self, receive_notification: NotificationSetting) -> Namespace:
@@ -1064,6 +1116,14 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> Namespace:
+        self.key_id = key_id
         return self
 
     @classmethod
@@ -1132,15 +1192,16 @@ class Namespace(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_is_automatic_deleting_enabled(data.get('isAutomaticDeletingEnabled'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_receive_message_script(ScriptSetting.from_dict(data.get('receiveMessageScript')))\
             .with_read_message_script(ScriptSetting.from_dict(data.get('readMessageScript')))\
             .with_delete_message_script(ScriptSetting.from_dict(data.get('deleteMessageScript')))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
             .with_receive_notification(NotificationSetting.from_dict(data.get('receiveNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))\
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1148,13 +1209,14 @@ class Namespace(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "isAutomaticDeletingEnabled": self.is_automatic_deleting_enabled,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "receiveMessageScript": self.receive_message_script.to_dict() if self.receive_message_script else None,
             "readMessageScript": self.read_message_script.to_dict() if self.read_message_script else None,
             "deleteMessageScript": self.delete_message_script.to_dict() if self.delete_message_script else None,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
             "receiveNotification": self.receive_notification.to_dict() if self.receive_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "queueNamespaceId": self.queue_namespace_id,
+            "keyId": self.key_id,
         }

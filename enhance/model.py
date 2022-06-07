@@ -19,57 +19,26 @@ from typing import *
 import core
 
 
-class Material(core.Gs2Model):
-    material_item_set_id: str = None
-    count: int = None
+class TransactionSetting(core.Gs2Model):
+    enable_auto_run: bool = None
+    distributor_namespace_id: str = None
+    key_id: str = None
+    queue_namespace_id: str = None
 
-    def with_material_item_set_id(self, material_item_set_id: str) -> Material:
-        self.material_item_set_id = material_item_set_id
+    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
+        self.enable_auto_run = enable_auto_run
         return self
 
-    def with_count(self, count: int) -> Material:
-        self.count = count
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
+        self.distributor_namespace_id = distributor_namespace_id
         return self
 
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[Material]:
-        if data is None:
-            return None
-        return Material()\
-            .with_material_item_set_id(data.get('materialItemSetId'))\
-            .with_count(data.get('count'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "materialItemSetId": self.material_item_set_id,
-            "count": self.count,
-        }
-
-
-class BonusRate(core.Gs2Model):
-    rate: float = None
-    weight: int = None
-
-    def with_rate(self, rate: float) -> BonusRate:
-        self.rate = rate
+    def with_key_id(self, key_id: str) -> TransactionSetting:
+        self.key_id = key_id
         return self
 
-    def with_weight(self, weight: int) -> BonusRate:
-        self.weight = weight
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
+        self.queue_namespace_id = queue_namespace_id
         return self
 
     def get(self, key, default=None):
@@ -87,17 +56,21 @@ class BonusRate(core.Gs2Model):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[BonusRate]:
+    ) -> Optional[TransactionSetting]:
         if data is None:
             return None
-        return BonusRate()\
-            .with_rate(data.get('rate'))\
-            .with_weight(data.get('weight'))
+        return TransactionSetting()\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "rate": self.rate,
-            "weight": self.weight,
+            "enableAutoRun": self.enable_auto_run,
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "keyId": self.key_id,
+            "queueNamespaceId": self.queue_namespace_id,
         }
 
 
@@ -304,6 +277,88 @@ class Config(core.Gs2Model):
         return {
             "key": self.key,
             "value": self.value,
+        }
+
+
+class Material(core.Gs2Model):
+    material_item_set_id: str = None
+    count: int = None
+
+    def with_material_item_set_id(self, material_item_set_id: str) -> Material:
+        self.material_item_set_id = material_item_set_id
+        return self
+
+    def with_count(self, count: int) -> Material:
+        self.count = count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Material]:
+        if data is None:
+            return None
+        return Material()\
+            .with_material_item_set_id(data.get('materialItemSetId'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "materialItemSetId": self.material_item_set_id,
+            "count": self.count,
+        }
+
+
+class BonusRate(core.Gs2Model):
+    rate: float = None
+    weight: int = None
+
+    def with_rate(self, rate: float) -> BonusRate:
+        self.rate = rate
+        return self
+
+    def with_weight(self, weight: int) -> BonusRate:
+        self.weight = weight
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BonusRate]:
+        if data is None:
+            return None
+        return BonusRate()\
+            .with_rate(data.get('rate'))\
+            .with_weight(data.get('weight'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "rate": self.rate,
+            "weight": self.weight,
         }
 
 
@@ -907,12 +962,13 @@ class Namespace(core.Gs2Model):
     name: str = None
     description: str = None
     enable_direct_enhance: bool = None
-    queue_namespace_id: str = None
-    key_id: str = None
+    transaction_setting: TransactionSetting = None
     enhance_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    queue_namespace_id: str = None
+    key_id: str = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -930,12 +986,8 @@ class Namespace(core.Gs2Model):
         self.enable_direct_enhance = enable_direct_enhance
         return self
 
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> Namespace:
-        self.key_id = key_id
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_enhance_script(self, enhance_script: ScriptSetting) -> Namespace:
@@ -952,6 +1004,14 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> Namespace:
+        self.key_id = key_id
         return self
 
     @classmethod
@@ -1020,12 +1080,13 @@ class Namespace(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_enable_direct_enhance(data.get('enableDirectEnhance'))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_enhance_script(ScriptSetting.from_dict(data.get('enhanceScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))\
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1033,10 +1094,11 @@ class Namespace(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "enableDirectEnhance": self.enable_direct_enhance,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "enhanceScript": self.enhance_script.to_dict() if self.enhance_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "queueNamespaceId": self.queue_namespace_id,
+            "keyId": self.key_id,
         }

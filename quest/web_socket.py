@@ -117,18 +117,20 @@ class Gs2QuestWebSocketClient(AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.start_quest_script is not None:
             body["startQuestScript"] = request.start_quest_script.to_dict()
         if request.complete_quest_script is not None:
             body["completeQuestScript"] = request.complete_quest_script.to_dict()
         if request.failed_quest_script is not None:
             body["failedQuestScript"] = request.failed_quest_script.to_dict()
+        if request.log_setting is not None:
+            body["logSetting"] = request.log_setting.to_dict()
         if request.queue_namespace_id is not None:
             body["queueNamespaceId"] = request.queue_namespace_id
         if request.key_id is not None:
             body["keyId"] = request.key_id
-        if request.log_setting is not None:
-            body["logSetting"] = request.log_setting.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -344,18 +346,20 @@ class Gs2QuestWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.start_quest_script is not None:
             body["startQuestScript"] = request.start_quest_script.to_dict()
         if request.complete_quest_script is not None:
             body["completeQuestScript"] = request.complete_quest_script.to_dict()
         if request.failed_quest_script is not None:
             body["failedQuestScript"] = request.failed_quest_script.to_dict()
+        if request.log_setting is not None:
+            body["logSetting"] = request.log_setting.to_dict()
         if request.queue_namespace_id is not None:
             body["queueNamespaceId"] = request.queue_namespace_id
         if request.key_id is not None:
             body["keyId"] = request.key_id
-        if request.log_setting is not None:
-            body["logSetting"] = request.log_setting.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

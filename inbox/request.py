@@ -66,13 +66,14 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     is_automatic_deleting_enabled: bool = None
+    transaction_setting: TransactionSetting = None
     receive_message_script: ScriptSetting = None
     read_message_script: ScriptSetting = None
     delete_message_script: ScriptSetting = None
-    queue_namespace_id: str = None
-    key_id: str = None
     receive_notification: NotificationSetting = None
     log_setting: LogSetting = None
+    queue_namespace_id: str = None
+    key_id: str = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
         self.name = name
@@ -84,6 +85,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_is_automatic_deleting_enabled(self, is_automatic_deleting_enabled: bool) -> CreateNamespaceRequest:
         self.is_automatic_deleting_enabled = is_automatic_deleting_enabled
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_receive_message_script(self, receive_message_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -98,20 +103,20 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.delete_message_script = delete_message_script
         return self
 
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> CreateNamespaceRequest:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> CreateNamespaceRequest:
-        self.key_id = key_id
-        return self
-
     def with_receive_notification(self, receive_notification: NotificationSetting) -> CreateNamespaceRequest:
         self.receive_notification = receive_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
         self.log_setting = log_setting
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> CreateNamespaceRequest:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> CreateNamespaceRequest:
+        self.key_id = key_id
         return self
 
     def get(self, key, default=None):
@@ -136,26 +141,28 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_is_automatic_deleting_enabled(data.get('isAutomaticDeletingEnabled'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_receive_message_script(ScriptSetting.from_dict(data.get('receiveMessageScript')))\
             .with_read_message_script(ScriptSetting.from_dict(data.get('readMessageScript')))\
             .with_delete_message_script(ScriptSetting.from_dict(data.get('deleteMessageScript')))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
             .with_receive_notification(NotificationSetting.from_dict(data.get('receiveNotification')))\
-            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
+            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))\
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
             "description": self.description,
             "isAutomaticDeletingEnabled": self.is_automatic_deleting_enabled,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "receiveMessageScript": self.receive_message_script.to_dict() if self.receive_message_script else None,
             "readMessageScript": self.read_message_script.to_dict() if self.read_message_script else None,
             "deleteMessageScript": self.delete_message_script.to_dict() if self.delete_message_script else None,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
             "receiveNotification": self.receive_notification.to_dict() if self.receive_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
+            "queueNamespaceId": self.queue_namespace_id,
+            "keyId": self.key_id,
         }
 
 
@@ -237,13 +244,14 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     is_automatic_deleting_enabled: bool = None
+    transaction_setting: TransactionSetting = None
     receive_message_script: ScriptSetting = None
     read_message_script: ScriptSetting = None
     delete_message_script: ScriptSetting = None
-    queue_namespace_id: str = None
-    key_id: str = None
     receive_notification: NotificationSetting = None
     log_setting: LogSetting = None
+    queue_namespace_id: str = None
+    key_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
         self.namespace_name = namespace_name
@@ -255,6 +263,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_is_automatic_deleting_enabled(self, is_automatic_deleting_enabled: bool) -> UpdateNamespaceRequest:
         self.is_automatic_deleting_enabled = is_automatic_deleting_enabled
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_receive_message_script(self, receive_message_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -269,20 +281,20 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.delete_message_script = delete_message_script
         return self
 
-    def with_queue_namespace_id(self, queue_namespace_id: str) -> UpdateNamespaceRequest:
-        self.queue_namespace_id = queue_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> UpdateNamespaceRequest:
-        self.key_id = key_id
-        return self
-
     def with_receive_notification(self, receive_notification: NotificationSetting) -> UpdateNamespaceRequest:
         self.receive_notification = receive_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
         self.log_setting = log_setting
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> UpdateNamespaceRequest:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> UpdateNamespaceRequest:
+        self.key_id = key_id
         return self
 
     def get(self, key, default=None):
@@ -307,26 +319,28 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_is_automatic_deleting_enabled(data.get('isAutomaticDeletingEnabled'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_receive_message_script(ScriptSetting.from_dict(data.get('receiveMessageScript')))\
             .with_read_message_script(ScriptSetting.from_dict(data.get('readMessageScript')))\
             .with_delete_message_script(ScriptSetting.from_dict(data.get('deleteMessageScript')))\
-            .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
             .with_receive_notification(NotificationSetting.from_dict(data.get('receiveNotification')))\
-            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
+            .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))\
+            .with_key_id(data.get('keyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
             "isAutomaticDeletingEnabled": self.is_automatic_deleting_enabled,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "receiveMessageScript": self.receive_message_script.to_dict() if self.receive_message_script else None,
             "readMessageScript": self.read_message_script.to_dict() if self.read_message_script else None,
             "deleteMessageScript": self.delete_message_script.to_dict() if self.delete_message_script else None,
-            "queueNamespaceId": self.queue_namespace_id,
-            "keyId": self.key_id,
             "receiveNotification": self.receive_notification.to_dict() if self.receive_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
+            "queueNamespaceId": self.queue_namespace_id,
+            "keyId": self.key_id,
         }
 
 

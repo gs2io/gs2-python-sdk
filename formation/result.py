@@ -1673,8 +1673,10 @@ class SetFormWithSignatureResult(core.Gs2Result):
 class AcquireActionsToFormPropertiesResult(core.Gs2Result):
     item: Form = None
     mold: Mold = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: Form) -> AcquireActionsToFormPropertiesResult:
         self.item = item
@@ -1684,12 +1686,20 @@ class AcquireActionsToFormPropertiesResult(core.Gs2Result):
         self.mold = mold
         return self
 
+    def with_transaction_id(self, transaction_id: str) -> AcquireActionsToFormPropertiesResult:
+        self.transaction_id = transaction_id
+        return self
+
     def with_stamp_sheet(self, stamp_sheet: str) -> AcquireActionsToFormPropertiesResult:
         self.stamp_sheet = stamp_sheet
         return self
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> AcquireActionsToFormPropertiesResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireActionsToFormPropertiesResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1713,15 +1723,19 @@ class AcquireActionsToFormPropertiesResult(core.Gs2Result):
         return AcquireActionsToFormPropertiesResult()\
             .with_item(Form.from_dict(data.get('item')))\
             .with_mold(Mold.from_dict(data.get('mold')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "mold": self.mold.to_dict() if self.mold else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
@@ -1838,8 +1852,10 @@ class DeleteFormByUserIdResult(core.Gs2Result):
 class AcquireActionToFormPropertiesByStampSheetResult(core.Gs2Result):
     item: Form = None
     mold: Mold = None
+    transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: Form) -> AcquireActionToFormPropertiesByStampSheetResult:
         self.item = item
@@ -1849,12 +1865,20 @@ class AcquireActionToFormPropertiesByStampSheetResult(core.Gs2Result):
         self.mold = mold
         return self
 
+    def with_transaction_id(self, transaction_id: str) -> AcquireActionToFormPropertiesByStampSheetResult:
+        self.transaction_id = transaction_id
+        return self
+
     def with_stamp_sheet(self, stamp_sheet: str) -> AcquireActionToFormPropertiesByStampSheetResult:
         self.stamp_sheet = stamp_sheet
         return self
 
     def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> AcquireActionToFormPropertiesByStampSheetResult:
         self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireActionToFormPropertiesByStampSheetResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -1878,13 +1902,17 @@ class AcquireActionToFormPropertiesByStampSheetResult(core.Gs2Result):
         return AcquireActionToFormPropertiesByStampSheetResult()\
             .with_item(Form.from_dict(data.get('item')))\
             .with_mold(Mold.from_dict(data.get('mold')))\
+            .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "mold": self.mold.to_dict() if self.mold else None,
+            "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }

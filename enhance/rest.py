@@ -116,14 +116,16 @@ class Gs2EnhanceRestClient(AbstractGs2RestClient):
             body["description"] = request.description
         if request.enable_direct_enhance is not None:
             body["enableDirectEnhance"] = request.enable_direct_enhance
-        if request.queue_namespace_id is not None:
-            body["queueNamespaceId"] = request.queue_namespace_id
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.enhance_script is not None:
             body["enhanceScript"] = request.enhance_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
+        if request.queue_namespace_id is not None:
+            body["queueNamespaceId"] = request.queue_namespace_id
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -341,14 +343,16 @@ class Gs2EnhanceRestClient(AbstractGs2RestClient):
             body["description"] = request.description
         if request.enable_direct_enhance is not None:
             body["enableDirectEnhance"] = request.enable_direct_enhance
-        if request.queue_namespace_id is not None:
-            body["queueNamespaceId"] = request.queue_namespace_id
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.enhance_script is not None:
             body["enhanceScript"] = request.enhance_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
+        if request.queue_namespace_id is not None:
+            body["queueNamespaceId"] = request.queue_namespace_id
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

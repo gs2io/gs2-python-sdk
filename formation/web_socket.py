@@ -117,6 +117,8 @@ class Gs2FormationWebSocketClient(AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.update_mold_script is not None:
             body["updateMoldScript"] = request.update_mold_script.to_dict()
         if request.update_form_script is not None:
@@ -338,6 +340,8 @@ class Gs2FormationWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.update_mold_script is not None:
             body["updateMoldScript"] = request.update_mold_script.to_dict()
         if request.update_form_script is not None:
@@ -3102,10 +3106,6 @@ class Gs2FormationWebSocketClient(AbstractGs2WebSocketClient):
             body["index"] = request.index
         if request.acquire_action is not None:
             body["acquireAction"] = request.acquire_action.to_dict()
-        if request.queue_namespace_id is not None:
-            body["queueNamespaceId"] = request.queue_namespace_id
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
