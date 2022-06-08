@@ -669,6 +669,8 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    enable_auto_run: bool = None
+    run_notification: NotificationSetting = None
     push_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
@@ -684,6 +686,14 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_enable_auto_run(self, enable_auto_run: bool) -> Namespace:
+        self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_run_notification(self, run_notification: NotificationSetting) -> Namespace:
+        self.run_notification = run_notification
         return self
 
     def with_push_notification(self, push_notification: NotificationSetting) -> Namespace:
@@ -767,6 +777,8 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_run_notification(NotificationSetting.from_dict(data.get('runNotification')))\
             .with_push_notification(NotificationSetting.from_dict(data.get('pushNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
@@ -777,6 +789,8 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "enableAutoRun": self.enable_auto_run,
+            "runNotification": self.run_notification.to_dict() if self.run_notification else None,
             "pushNotification": self.push_notification.to_dict() if self.push_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,

@@ -117,8 +117,12 @@ class Gs2JobQueueWebSocketClient(AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.enable_auto_run is not None:
+            body["enableAutoRun"] = request.enable_auto_run
         if request.push_notification is not None:
             body["pushNotification"] = request.push_notification.to_dict()
+        if request.run_notification is not None:
+            body["runNotification"] = request.run_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -336,8 +340,12 @@ class Gs2JobQueueWebSocketClient(AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.enable_auto_run is not None:
+            body["enableAutoRun"] = request.enable_auto_run
         if request.push_notification is not None:
             body["pushNotification"] = request.push_notification.to_dict()
+        if request.run_notification is not None:
+            body["runNotification"] = request.run_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -976,6 +984,158 @@ class Gs2JobQueueWebSocketClient(AbstractGs2WebSocketClient):
     ) -> PushByStampSheetResult:
         async_result = []
         self._push_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_job_result(
+        self,
+        request: GetJobResultRequest,
+        callback: Callable[[AsyncResult[GetJobResultResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="jobQueue",
+            component='jobResult',
+            function='getJobResult',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.job_name is not None:
+            body["jobName"] = request.job_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=GetJobResultResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_job_result(
+        self,
+        request: GetJobResultRequest,
+    ) -> GetJobResultResult:
+        async_result = []
+        with timeout(30):
+            self._get_job_result(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_job_result_async(
+        self,
+        request: GetJobResultRequest,
+    ) -> GetJobResultResult:
+        async_result = []
+        self._get_job_result(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_job_result_by_user_id(
+        self,
+        request: GetJobResultByUserIdRequest,
+        callback: Callable[[AsyncResult[GetJobResultByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="jobQueue",
+            component='jobResult',
+            function='getJobResultByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.job_name is not None:
+            body["jobName"] = request.job_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=GetJobResultByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_job_result_by_user_id(
+        self,
+        request: GetJobResultByUserIdRequest,
+    ) -> GetJobResultByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_job_result_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_job_result_by_user_id_async(
+        self,
+        request: GetJobResultByUserIdRequest,
+    ) -> GetJobResultByUserIdResult:
+        async_result = []
+        self._get_job_result_by_user_id(
             request,
             lambda result: async_result.append(result),
         )

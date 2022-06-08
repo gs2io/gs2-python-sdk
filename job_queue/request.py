@@ -65,7 +65,9 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    enable_auto_run: bool = None
     push_notification: NotificationSetting = None
+    run_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -76,8 +78,16 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.description = description
         return self
 
+    def with_enable_auto_run(self, enable_auto_run: bool) -> CreateNamespaceRequest:
+        self.enable_auto_run = enable_auto_run
+        return self
+
     def with_push_notification(self, push_notification: NotificationSetting) -> CreateNamespaceRequest:
         self.push_notification = push_notification
+        return self
+
+    def with_run_notification(self, run_notification: NotificationSetting) -> CreateNamespaceRequest:
+        self.run_notification = run_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -105,14 +115,18 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
             .with_push_notification(NotificationSetting.from_dict(data.get('pushNotification')))\
+            .with_run_notification(NotificationSetting.from_dict(data.get('runNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
             "description": self.description,
+            "enableAutoRun": self.enable_auto_run,
             "pushNotification": self.push_notification.to_dict() if self.push_notification else None,
+            "runNotification": self.run_notification.to_dict() if self.run_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -194,7 +208,9 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    enable_auto_run: bool = None
     push_notification: NotificationSetting = None
+    run_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -205,8 +221,16 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.description = description
         return self
 
+    def with_enable_auto_run(self, enable_auto_run: bool) -> UpdateNamespaceRequest:
+        self.enable_auto_run = enable_auto_run
+        return self
+
     def with_push_notification(self, push_notification: NotificationSetting) -> UpdateNamespaceRequest:
         self.push_notification = push_notification
+        return self
+
+    def with_run_notification(self, run_notification: NotificationSetting) -> UpdateNamespaceRequest:
+        self.run_notification = run_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -234,14 +258,18 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
             .with_push_notification(NotificationSetting.from_dict(data.get('pushNotification')))\
+            .with_run_notification(NotificationSetting.from_dict(data.get('runNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "enableAutoRun": self.enable_auto_run,
             "pushNotification": self.push_notification.to_dict() if self.push_notification else None,
+            "runNotification": self.run_notification.to_dict() if self.run_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -637,6 +665,107 @@ class PushByStampSheetRequest(core.Gs2Request):
         return {
             "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
+        }
+
+
+class GetJobResultRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    job_name: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetJobResultRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetJobResultRequest:
+        self.access_token = access_token
+        return self
+
+    def with_job_name(self, job_name: str) -> GetJobResultRequest:
+        self.job_name = job_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetJobResultRequest]:
+        if data is None:
+            return None
+        return GetJobResultRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_job_name(data.get('jobName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "jobName": self.job_name,
+        }
+
+
+class GetJobResultByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    job_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetJobResultByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetJobResultByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_job_name(self, job_name: str) -> GetJobResultByUserIdRequest:
+        self.job_name = job_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetJobResultByUserIdRequest]:
+        if data is None:
+            return None
+        return GetJobResultByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_job_name(data.get('jobName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "jobName": self.job_name,
         }
 
 

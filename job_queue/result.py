@@ -525,6 +525,74 @@ class PushByStampSheetResult(core.Gs2Result):
         }
 
 
+class GetJobResultResult(core.Gs2Result):
+    item: JobResult = None
+
+    def with_item(self, item: JobResult) -> GetJobResultResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetJobResultResult]:
+        if data is None:
+            return None
+        return GetJobResultResult()\
+            .with_item(JobResult.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetJobResultByUserIdResult(core.Gs2Result):
+    item: JobResult = None
+
+    def with_item(self, item: JobResult) -> GetJobResultByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetJobResultByUserIdResult]:
+        if data is None:
+            return None
+        return GetJobResultByUserIdResult()\
+            .with_item(JobResult.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DescribeDeadLetterJobsByUserIdResult(core.Gs2Result):
     items: List[DeadLetterJob] = None
     next_page_token: str = None
