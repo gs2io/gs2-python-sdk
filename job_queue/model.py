@@ -363,6 +363,8 @@ class DeadLetterJob(core.Gs2Model):
 class JobResult(core.Gs2Model):
     job_result_id: str = None
     job_id: str = None
+    script_id: str = None
+    args: str = None
     try_number: int = None
     status_code: int = None
     result: str = None
@@ -374,6 +376,14 @@ class JobResult(core.Gs2Model):
 
     def with_job_id(self, job_id: str) -> JobResult:
         self.job_id = job_id
+        return self
+
+    def with_script_id(self, script_id: str) -> JobResult:
+        self.script_id = script_id
+        return self
+
+    def with_args(self, args: str) -> JobResult:
+        self.args = args
         return self
 
     def with_try_number(self, try_number: int) -> JobResult:
@@ -492,6 +502,8 @@ class JobResult(core.Gs2Model):
         return JobResult()\
             .with_job_result_id(data.get('jobResultId'))\
             .with_job_id(data.get('jobId'))\
+            .with_script_id(data.get('scriptId'))\
+            .with_args(data.get('args'))\
             .with_try_number(data.get('tryNumber'))\
             .with_status_code(data.get('statusCode'))\
             .with_result(data.get('result'))\
@@ -501,6 +513,8 @@ class JobResult(core.Gs2Model):
         return {
             "jobResultId": self.job_result_id,
             "jobId": self.job_id,
+            "scriptId": self.script_id,
+            "args": self.args,
             "tryNumber": self.try_number,
             "statusCode": self.status_code,
             "result": self.result,

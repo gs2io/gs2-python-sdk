@@ -317,9 +317,14 @@ class GetJobByUserIdResult(core.Gs2Result):
 
 class PushByUserIdResult(core.Gs2Result):
     items: List[Job] = None
+    auto_run: bool = None
 
     def with_items(self, items: List[Job]) -> PushByUserIdResult:
         self.items = items
+        return self
+
+    def with_auto_run(self, auto_run: bool) -> PushByUserIdResult:
+        self.auto_run = auto_run
         return self
 
     def get(self, key, default=None):
@@ -344,7 +349,8 @@ class PushByUserIdResult(core.Gs2Result):
             .with_items([
                 Job.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
-            ])
+            ])\
+            .with_auto_run(data.get('autoRun'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -352,6 +358,7 @@ class PushByUserIdResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "autoRun": self.auto_run,
         }
 
 
@@ -487,9 +494,14 @@ class DeleteJobByUserIdResult(core.Gs2Result):
 
 class PushByStampSheetResult(core.Gs2Result):
     items: List[Job] = None
+    auto_run: bool = None
 
     def with_items(self, items: List[Job]) -> PushByStampSheetResult:
         self.items = items
+        return self
+
+    def with_auto_run(self, auto_run: bool) -> PushByStampSheetResult:
+        self.auto_run = auto_run
         return self
 
     def get(self, key, default=None):
@@ -514,7 +526,8 @@ class PushByStampSheetResult(core.Gs2Result):
             .with_items([
                 Job.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
-            ])
+            ])\
+            .with_auto_run(data.get('autoRun'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -522,6 +535,7 @@ class PushByStampSheetResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "autoRun": self.auto_run,
         }
 
 
