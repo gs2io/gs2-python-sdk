@@ -218,10 +218,94 @@ class GitHubCheckoutSetting(core.Gs2Model):
         }
 
 
+class ConsumeAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> ConsumeAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> ConsumeAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeAction]:
+        if data is None:
+            return None
+        return ConsumeAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
+class AcquireAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> AcquireAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> AcquireAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireAction]:
+        if data is None:
+            return None
+        return AcquireAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
 class StampSheetResult(core.Gs2Model):
     stamp_sheet_result_id: str = None
     user_id: str = None
     transaction_id: str = None
+    task_requests: List[ConsumeAction] = None
+    sheet_request: AcquireAction = None
     task_results: List[str] = None
     sheet_result: str = None
     next_transaction_id: str = None
@@ -237,6 +321,14 @@ class StampSheetResult(core.Gs2Model):
 
     def with_transaction_id(self, transaction_id: str) -> StampSheetResult:
         self.transaction_id = transaction_id
+        return self
+
+    def with_task_requests(self, task_requests: List[ConsumeAction]) -> StampSheetResult:
+        self.task_requests = task_requests
+        return self
+
+    def with_sheet_request(self, sheet_request: AcquireAction) -> StampSheetResult:
+        self.sheet_request = sheet_request
         return self
 
     def with_task_results(self, task_results: List[str]) -> StampSheetResult:
@@ -344,6 +436,11 @@ class StampSheetResult(core.Gs2Model):
             .with_stamp_sheet_result_id(data.get('stampSheetResultId'))\
             .with_user_id(data.get('userId'))\
             .with_transaction_id(data.get('transactionId'))\
+            .with_task_requests([
+                ConsumeAction.from_dict(data.get('taskRequests')[i])
+                for i in range(len(data.get('taskRequests')) if data.get('taskRequests') else 0)
+            ])\
+            .with_sheet_request(AcquireAction.from_dict(data.get('sheetRequest')))\
             .with_task_results([
                 data.get('taskResults')[i]
                 for i in range(len(data.get('taskResults')) if data.get('taskResults') else 0)
@@ -357,6 +454,11 @@ class StampSheetResult(core.Gs2Model):
             "stampSheetResultId": self.stamp_sheet_result_id,
             "userId": self.user_id,
             "transactionId": self.transaction_id,
+            "taskRequests": [
+                self.task_requests[i].to_dict() if self.task_requests[i] else None
+                for i in range(len(self.task_requests) if self.task_requests else 0)
+            ],
+            "sheetRequest": self.sheet_request.to_dict() if self.sheet_request else None,
             "taskResults": [
                 self.task_results[i]
                 for i in range(len(self.task_results) if self.task_results else 0)
