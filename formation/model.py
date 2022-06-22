@@ -526,6 +526,167 @@ class Slot(core.Gs2Model):
         }
 
 
+class PropertyForm(core.Gs2Model):
+    form_id: str = None
+    user_id: str = None
+    name: str = None
+    property_id: str = None
+    slots: List[Slot] = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_form_id(self, form_id: str) -> PropertyForm:
+        self.form_id = form_id
+        return self
+
+    def with_user_id(self, user_id: str) -> PropertyForm:
+        self.user_id = user_id
+        return self
+
+    def with_name(self, name: str) -> PropertyForm:
+        self.name = name
+        return self
+
+    def with_property_id(self, property_id: str) -> PropertyForm:
+        self.property_id = property_id
+        return self
+
+    def with_slots(self, slots: List[Slot]) -> PropertyForm:
+        self.slots = slots
+        return self
+
+    def with_created_at(self, created_at: int) -> PropertyForm:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> PropertyForm:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+        form_model_name,
+        property_id,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:formation:{namespaceName}:user:{userId}:propertyForm:{formModelName}:{propertyId}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+            formModelName=form_model_name,
+            propertyId=property_id,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):user:(?P<userId>.+):propertyForm:(?P<formModelName>.+):(?P<propertyId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):user:(?P<userId>.+):propertyForm:(?P<formModelName>.+):(?P<propertyId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):user:(?P<userId>.+):propertyForm:(?P<formModelName>.+):(?P<propertyId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):user:(?P<userId>.+):propertyForm:(?P<formModelName>.+):(?P<propertyId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    @classmethod
+    def get_form_model_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):user:(?P<userId>.+):propertyForm:(?P<formModelName>.+):(?P<propertyId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('form_model_name')
+
+    @classmethod
+    def get_property_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):user:(?P<userId>.+):propertyForm:(?P<formModelName>.+):(?P<propertyId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('property_id')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PropertyForm]:
+        if data is None:
+            return None
+        return PropertyForm()\
+            .with_form_id(data.get('formId'))\
+            .with_user_id(data.get('userId'))\
+            .with_name(data.get('name'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_slots([
+                Slot.from_dict(data.get('slots')[i])
+                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+            ])\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "formId": self.form_id,
+            "userId": self.user_id,
+            "name": self.name,
+            "propertyId": self.property_id,
+            "slots": [
+                self.slots[i].to_dict() if self.slots[i] else None
+                for i in range(len(self.slots) if self.slots else 0)
+            ],
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+        }
+
+
 class Form(core.Gs2Model):
     form_id: str = None
     name: str = None

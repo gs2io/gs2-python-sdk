@@ -310,6 +310,85 @@ class DeleteNamespaceRequest(core.Gs2Request):
         }
 
 
+class DescribeFormModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeFormModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeFormModelsRequest]:
+        if data is None:
+            return None
+        return DescribeFormModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetFormModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    form_model_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetFormModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> GetFormModelRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetFormModelRequest]:
+        if data is None:
+            return None
+        return GetFormModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_form_model_name(data.get('formModelName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "formModelName": self.form_model_name,
+        }
+
+
 class DescribeFormModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2408,6 +2487,777 @@ class AcquireActionToFormPropertiesByStampSheetRequest(core.Gs2Request):
         if data is None:
             return None
         return AcquireActionToFormPropertiesByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class DescribePropertyFormsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    form_model_name: str = None
+    page_token: str = None
+    limit: int = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribePropertyFormsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribePropertyFormsRequest:
+        self.access_token = access_token
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> DescribePropertyFormsRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribePropertyFormsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribePropertyFormsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePropertyFormsRequest]:
+        if data is None:
+            return None
+        return DescribePropertyFormsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "formModelName": self.form_model_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    form_model_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribePropertyFormsByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribePropertyFormsByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> DescribePropertyFormsByUserIdRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribePropertyFormsByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribePropertyFormsByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePropertyFormsByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribePropertyFormsByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "formModelName": self.form_model_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetPropertyFormRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    form_model_name: str = None
+    property_id: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPropertyFormRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetPropertyFormRequest:
+        self.access_token = access_token
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> GetPropertyFormRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> GetPropertyFormRequest:
+        self.property_id = property_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPropertyFormRequest]:
+        if data is None:
+            return None
+        return GetPropertyFormRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+        }
+
+
+class GetPropertyFormByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    form_model_name: str = None
+    property_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPropertyFormByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetPropertyFormByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> GetPropertyFormByUserIdRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> GetPropertyFormByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPropertyFormByUserIdRequest]:
+        if data is None:
+            return None
+        return GetPropertyFormByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+        }
+
+
+class GetPropertyFormWithSignatureRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    form_model_name: str = None
+    property_id: str = None
+    key_id: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPropertyFormWithSignatureRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetPropertyFormWithSignatureRequest:
+        self.access_token = access_token
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> GetPropertyFormWithSignatureRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> GetPropertyFormWithSignatureRequest:
+        self.property_id = property_id
+        return self
+
+    def with_key_id(self, key_id: str) -> GetPropertyFormWithSignatureRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPropertyFormWithSignatureRequest]:
+        if data is None:
+            return None
+        return GetPropertyFormWithSignatureRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+            "keyId": self.key_id,
+        }
+
+
+class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    form_model_name: str = None
+    property_id: str = None
+    key_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPropertyFormWithSignatureByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetPropertyFormWithSignatureByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> GetPropertyFormWithSignatureByUserIdRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> GetPropertyFormWithSignatureByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_key_id(self, key_id: str) -> GetPropertyFormWithSignatureByUserIdRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPropertyFormWithSignatureByUserIdRequest]:
+        if data is None:
+            return None
+        return GetPropertyFormWithSignatureByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+            "keyId": self.key_id,
+        }
+
+
+class SetPropertyFormByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    form_model_name: str = None
+    property_id: str = None
+    slots: List[Slot] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetPropertyFormByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SetPropertyFormByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> SetPropertyFormByUserIdRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> SetPropertyFormByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_slots(self, slots: List[Slot]) -> SetPropertyFormByUserIdRequest:
+        self.slots = slots
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetPropertyFormByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetPropertyFormByUserIdRequest]:
+        if data is None:
+            return None
+        return SetPropertyFormByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_slots([
+                Slot.from_dict(data.get('slots')[i])
+                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+            "slots": [
+                self.slots[i].to_dict() if self.slots[i] else None
+                for i in range(len(self.slots) if self.slots else 0)
+            ],
+        }
+
+
+class SetPropertyFormWithSignatureRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    form_model_name: str = None
+    property_id: str = None
+    slots: List[SlotWithSignature] = None
+    key_id: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetPropertyFormWithSignatureRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> SetPropertyFormWithSignatureRequest:
+        self.access_token = access_token
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> SetPropertyFormWithSignatureRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> SetPropertyFormWithSignatureRequest:
+        self.property_id = property_id
+        return self
+
+    def with_slots(self, slots: List[SlotWithSignature]) -> SetPropertyFormWithSignatureRequest:
+        self.slots = slots
+        return self
+
+    def with_key_id(self, key_id: str) -> SetPropertyFormWithSignatureRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetPropertyFormWithSignatureRequest]:
+        if data is None:
+            return None
+        return SetPropertyFormWithSignatureRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_slots([
+                SlotWithSignature.from_dict(data.get('slots')[i])
+                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+            ])\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+            "slots": [
+                self.slots[i].to_dict() if self.slots[i] else None
+                for i in range(len(self.slots) if self.slots else 0)
+            ],
+            "keyId": self.key_id,
+        }
+
+
+class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    form_model_name: str = None
+    property_id: str = None
+    acquire_action: AcquireAction = None
+    config: List[AcquireActionConfig] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.user_id = user_id
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.property_id = property_id
+        return self
+
+    def with_acquire_action(self, acquire_action: AcquireAction) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.acquire_action = acquire_action
+        return self
+
+    def with_config(self, config: List[AcquireActionConfig]) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireActionsToPropertyFormPropertiesRequest]:
+        if data is None:
+            return None
+        return AcquireActionsToPropertyFormPropertiesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_acquire_action(AcquireAction.from_dict(data.get('acquireAction')))\
+            .with_config([
+                AcquireActionConfig.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+            "acquireAction": self.acquire_action.to_dict() if self.acquire_action else None,
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+        }
+
+
+class DeletePropertyFormRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    form_model_name: str = None
+    property_id: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeletePropertyFormRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DeletePropertyFormRequest:
+        self.access_token = access_token
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> DeletePropertyFormRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> DeletePropertyFormRequest:
+        self.property_id = property_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePropertyFormRequest]:
+        if data is None:
+            return None
+        return DeletePropertyFormRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+        }
+
+
+class DeletePropertyFormByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    form_model_name: str = None
+    property_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeletePropertyFormByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DeletePropertyFormByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_form_model_name(self, form_model_name: str) -> DeletePropertyFormByUserIdRequest:
+        self.form_model_name = form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> DeletePropertyFormByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeletePropertyFormByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePropertyFormByUserIdRequest]:
+        if data is None:
+            return None
+        return DeletePropertyFormByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_form_model_name(data.get('formModelName'))\
+            .with_property_id(data.get('propertyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "formModelName": self.form_model_name,
+            "propertyId": self.property_id,
+        }
+
+
+class AcquireActionToPropertyFormPropertiesByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> AcquireActionToPropertyFormPropertiesByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> AcquireActionToPropertyFormPropertiesByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireActionToPropertyFormPropertiesByStampSheetRequest]:
+        if data is None:
+            return None
+        return AcquireActionToPropertyFormPropertiesByStampSheetRequest()\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_key_id(data.get('keyId'))
 
