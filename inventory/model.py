@@ -525,6 +525,7 @@ class Inventory(core.Gs2Model):
     current_inventory_max_capacity: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_inventory_id(self, inventory_id: str) -> Inventory:
         self.inventory_id = inventory_id
@@ -552,6 +553,10 @@ class Inventory(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Inventory:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Inventory:
+        self.revision = revision
         return self
 
     @classmethod
@@ -646,7 +651,8 @@ class Inventory(core.Gs2Model):
             .with_current_inventory_capacity_usage(data.get('currentInventoryCapacityUsage'))\
             .with_current_inventory_max_capacity(data.get('currentInventoryMaxCapacity'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -657,6 +663,7 @@ class Inventory(core.Gs2Model):
             "currentInventoryMaxCapacity": self.current_inventory_max_capacity,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
