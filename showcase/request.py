@@ -1531,6 +1531,7 @@ class BuyRequest(core.Gs2Request):
     showcase_name: str = None
     display_item_id: str = None
     access_token: str = None
+    quantity: int = None
     config: List[Config] = None
     access_token: str = None
 
@@ -1548,6 +1549,10 @@ class BuyRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> BuyRequest:
         self.access_token = access_token
+        return self
+
+    def with_quantity(self, quantity: int) -> BuyRequest:
+        self.quantity = quantity
         return self
 
     def with_config(self, config: List[Config]) -> BuyRequest:
@@ -1577,6 +1582,7 @@ class BuyRequest(core.Gs2Request):
             .with_showcase_name(data.get('showcaseName'))\
             .with_display_item_id(data.get('displayItemId'))\
             .with_access_token(data.get('accessToken'))\
+            .with_quantity(data.get('quantity'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
@@ -1588,6 +1594,7 @@ class BuyRequest(core.Gs2Request):
             "showcaseName": self.showcase_name,
             "displayItemId": self.display_item_id,
             "accessToken": self.access_token,
+            "quantity": self.quantity,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
@@ -1602,6 +1609,7 @@ class BuyByUserIdRequest(core.Gs2Request):
     showcase_name: str = None
     display_item_id: str = None
     user_id: str = None
+    quantity: int = None
     config: List[Config] = None
 
     def with_namespace_name(self, namespace_name: str) -> BuyByUserIdRequest:
@@ -1618,6 +1626,10 @@ class BuyByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> BuyByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_quantity(self, quantity: int) -> BuyByUserIdRequest:
+        self.quantity = quantity
         return self
 
     def with_config(self, config: List[Config]) -> BuyByUserIdRequest:
@@ -1647,6 +1659,7 @@ class BuyByUserIdRequest(core.Gs2Request):
             .with_showcase_name(data.get('showcaseName'))\
             .with_display_item_id(data.get('displayItemId'))\
             .with_user_id(data.get('userId'))\
+            .with_quantity(data.get('quantity'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
@@ -1658,6 +1671,7 @@ class BuyByUserIdRequest(core.Gs2Request):
             "showcaseName": self.showcase_name,
             "displayItemId": self.display_item_id,
             "userId": self.user_id,
+            "quantity": self.quantity,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)

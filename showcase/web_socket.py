@@ -2253,6 +2253,8 @@ class Gs2ShowcaseWebSocketClient(AbstractGs2WebSocketClient):
             body["displayItemId"] = request.display_item_id
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.quantity is not None:
+            body["quantity"] = request.quantity
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
@@ -2337,6 +2339,8 @@ class Gs2ShowcaseWebSocketClient(AbstractGs2WebSocketClient):
             body["displayItemId"] = request.display_item_id
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.quantity is not None:
+            body["quantity"] = request.quantity
         if request.config is not None:
             body["config"] = [
                 item.to_dict()

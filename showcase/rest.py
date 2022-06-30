@@ -2229,6 +2229,8 @@ class Gs2ShowcaseRestClient(AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.quantity is not None:
+            body["quantity"] = request.quantity
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
@@ -2310,6 +2312,8 @@ class Gs2ShowcaseRestClient(AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.quantity is not None:
+            body["quantity"] = request.quantity
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
