@@ -973,6 +973,11 @@ class Gs2QuestWebSocketClient(AbstractGs2WebSocketClient):
             ]
         if request.challenge_period_event_id is not None:
             body["challengePeriodEventId"] = request.challenge_period_event_id
+        if request.first_complete_acquire_actions is not None:
+            body["firstCompleteAcquireActions"] = [
+                item.to_dict()
+                for item in request.first_complete_acquire_actions
+            ]
         if request.consume_actions is not None:
             body["consumeActions"] = [
                 item.to_dict()
@@ -1149,6 +1154,11 @@ class Gs2QuestWebSocketClient(AbstractGs2WebSocketClient):
             ]
         if request.challenge_period_event_id is not None:
             body["challengePeriodEventId"] = request.challenge_period_event_id
+        if request.first_complete_acquire_actions is not None:
+            body["firstCompleteAcquireActions"] = [
+                item.to_dict()
+                for item in request.first_complete_acquire_actions
+            ]
         if request.consume_actions is not None:
             body["consumeActions"] = [
                 item.to_dict()
