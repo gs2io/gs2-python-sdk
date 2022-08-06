@@ -2568,3 +2568,225 @@ class Gs2LotteryRestClient(AbstractGs2RestClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_prize_limits(
+        self,
+        request: DescribePrizeLimitsRequest,
+        callback: Callable[[AsyncResult[DescribePrizeLimitsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='lottery',
+            region=self.session.region,
+        ) + "/{namespaceName}/prizeLimit/{prizeTableName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            prizeTableName=request.prize_table_name if request.prize_table_name is not None and request.prize_table_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribePrizeLimitsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_prize_limits(
+        self,
+        request: DescribePrizeLimitsRequest,
+    ) -> DescribePrizeLimitsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_prize_limits(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_prize_limits_async(
+        self,
+        request: DescribePrizeLimitsRequest,
+    ) -> DescribePrizeLimitsResult:
+        async_result = []
+        self._describe_prize_limits(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_prize_limit(
+        self,
+        request: GetPrizeLimitRequest,
+        callback: Callable[[AsyncResult[GetPrizeLimitResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='lottery',
+            region=self.session.region,
+        ) + "/{namespaceName}/prizeLimit/{prizeTableName}/{prizeId}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            prizeTableName=request.prize_table_name if request.prize_table_name is not None and request.prize_table_name != '' else 'null',
+            prizeId=request.prize_id if request.prize_id is not None and request.prize_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetPrizeLimitResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_prize_limit(
+        self,
+        request: GetPrizeLimitRequest,
+    ) -> GetPrizeLimitResult:
+        async_result = []
+        with timeout(30):
+            self._get_prize_limit(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_prize_limit_async(
+        self,
+        request: GetPrizeLimitRequest,
+    ) -> GetPrizeLimitResult:
+        async_result = []
+        self._get_prize_limit(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _reset_prize_limit(
+        self,
+        request: ResetPrizeLimitRequest,
+        callback: Callable[[AsyncResult[ResetPrizeLimitResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='lottery',
+            region=self.session.region,
+        ) + "/{namespaceName}/prizeLimit/{prizeTableName}/{prizeId}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            prizeTableName=request.prize_table_name if request.prize_table_name is not None and request.prize_table_name != '' else 'null',
+            prizeId=request.prize_id if request.prize_id is not None and request.prize_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=ResetPrizeLimitResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def reset_prize_limit(
+        self,
+        request: ResetPrizeLimitRequest,
+    ) -> ResetPrizeLimitResult:
+        async_result = []
+        with timeout(30):
+            self._reset_prize_limit(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_prize_limit_async(
+        self,
+        request: ResetPrizeLimitRequest,
+    ) -> ResetPrizeLimitResult:
+        async_result = []
+        self._reset_prize_limit(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

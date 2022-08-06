@@ -1314,3 +1314,111 @@ class UpdateCurrentLotteryMasterFromGitHubResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
         }
+
+
+class DescribePrizeLimitsResult(core.Gs2Result):
+    items: List[PrizeLimit] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[PrizeLimit]) -> DescribePrizeLimitsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribePrizeLimitsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePrizeLimitsResult]:
+        if data is None:
+            return None
+        return DescribePrizeLimitsResult()\
+            .with_items([
+                PrizeLimit.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetPrizeLimitResult(core.Gs2Result):
+    item: PrizeLimit = None
+
+    def with_item(self, item: PrizeLimit) -> GetPrizeLimitResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPrizeLimitResult]:
+        if data is None:
+            return None
+        return GetPrizeLimitResult()\
+            .with_item(PrizeLimit.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ResetPrizeLimitResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetPrizeLimitResult]:
+        if data is None:
+            return None
+        return ResetPrizeLimitResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }

@@ -382,7 +382,12 @@ class BoxItem(core.Gs2Model):
 
 
 class DrawnPrize(core.Gs2Model):
+    prize_id: str = None
     acquire_actions: List[AcquireAction] = None
+
+    def with_prize_id(self, prize_id: str) -> DrawnPrize:
+        self.prize_id = prize_id
+        return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> DrawnPrize:
         self.acquire_actions = acquire_actions
@@ -407,6 +412,7 @@ class DrawnPrize(core.Gs2Model):
         if data is None:
             return None
         return DrawnPrize()\
+            .with_prize_id(data.get('prizeId'))\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -414,6 +420,7 @@ class DrawnPrize(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "prizeId": self.prize_id,
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
@@ -421,10 +428,141 @@ class DrawnPrize(core.Gs2Model):
         }
 
 
+class PrizeLimit(core.Gs2Model):
+    prize_limit_id: str = None
+    prize_id: str = None
+    drawn_count: int = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_prize_limit_id(self, prize_limit_id: str) -> PrizeLimit:
+        self.prize_limit_id = prize_limit_id
+        return self
+
+    def with_prize_id(self, prize_id: str) -> PrizeLimit:
+        self.prize_id = prize_id
+        return self
+
+    def with_drawn_count(self, drawn_count: int) -> PrizeLimit:
+        self.drawn_count = drawn_count
+        return self
+
+    def with_created_at(self, created_at: int) -> PrizeLimit:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> PrizeLimit:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        prize_table_name,
+        prize_id,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:lottery:{namespaceName}:table:{prizeTableName}:prize:{prizeId}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            prizeTableName=prize_table_name,
+            prizeId=prize_id,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):table:(?P<prizeTableName>.+):prize:(?P<prizeId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):table:(?P<prizeTableName>.+):prize:(?P<prizeId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):table:(?P<prizeTableName>.+):prize:(?P<prizeId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_prize_table_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):table:(?P<prizeTableName>.+):prize:(?P<prizeId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('prize_table_name')
+
+    @classmethod
+    def get_prize_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):table:(?P<prizeTableName>.+):prize:(?P<prizeId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('prize_id')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PrizeLimit]:
+        if data is None:
+            return None
+        return PrizeLimit()\
+            .with_prize_limit_id(data.get('prizeLimitId'))\
+            .with_prize_id(data.get('prizeId'))\
+            .with_drawn_count(data.get('drawnCount'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "prizeLimitId": self.prize_limit_id,
+            "prizeId": self.prize_id,
+            "drawnCount": self.drawn_count,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+        }
+
+
 class Prize(core.Gs2Model):
     prize_id: str = None
     type: str = None
     acquire_actions: List[AcquireAction] = None
+    drawn_limit: int = None
+    limit_fail_over_prize_id: str = None
     prize_table_name: str = None
     weight: int = None
 
@@ -438,6 +576,14 @@ class Prize(core.Gs2Model):
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> Prize:
         self.acquire_actions = acquire_actions
+        return self
+
+    def with_drawn_limit(self, drawn_limit: int) -> Prize:
+        self.drawn_limit = drawn_limit
+        return self
+
+    def with_limit_fail_over_prize_id(self, limit_fail_over_prize_id: str) -> Prize:
+        self.limit_fail_over_prize_id = limit_fail_over_prize_id
         return self
 
     def with_prize_table_name(self, prize_table_name: str) -> Prize:
@@ -473,6 +619,8 @@ class Prize(core.Gs2Model):
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
             ])\
+            .with_drawn_limit(data.get('drawnLimit'))\
+            .with_limit_fail_over_prize_id(data.get('limitFailOverPrizeId'))\
             .with_prize_table_name(data.get('prizeTableName'))\
             .with_weight(data.get('weight'))
 
@@ -484,6 +632,8 @@ class Prize(core.Gs2Model):
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
+            "drawnLimit": self.drawn_limit,
+            "limitFailOverPrizeId": self.limit_fail_over_prize_id,
             "prizeTableName": self.prize_table_name,
             "weight": self.weight,
         }

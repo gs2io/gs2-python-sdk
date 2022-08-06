@@ -2597,3 +2597,230 @@ class Gs2LotteryWebSocketClient(AbstractGs2WebSocketClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_prize_limits(
+        self,
+        request: DescribePrizeLimitsRequest,
+        callback: Callable[[AsyncResult[DescribePrizeLimitsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='prizeLimit',
+            function='describePrizeLimits',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.prize_table_name is not None:
+            body["prizeTableName"] = request.prize_table_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=DescribePrizeLimitsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_prize_limits(
+        self,
+        request: DescribePrizeLimitsRequest,
+    ) -> DescribePrizeLimitsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_prize_limits(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_prize_limits_async(
+        self,
+        request: DescribePrizeLimitsRequest,
+    ) -> DescribePrizeLimitsResult:
+        async_result = []
+        self._describe_prize_limits(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_prize_limit(
+        self,
+        request: GetPrizeLimitRequest,
+        callback: Callable[[AsyncResult[GetPrizeLimitResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='prizeLimit',
+            function='getPrizeLimit',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.prize_table_name is not None:
+            body["prizeTableName"] = request.prize_table_name
+        if request.prize_id is not None:
+            body["prizeId"] = request.prize_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=GetPrizeLimitResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_prize_limit(
+        self,
+        request: GetPrizeLimitRequest,
+    ) -> GetPrizeLimitResult:
+        async_result = []
+        with timeout(30):
+            self._get_prize_limit(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_prize_limit_async(
+        self,
+        request: GetPrizeLimitRequest,
+    ) -> GetPrizeLimitResult:
+        async_result = []
+        self._get_prize_limit(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _reset_prize_limit(
+        self,
+        request: ResetPrizeLimitRequest,
+        callback: Callable[[AsyncResult[ResetPrizeLimitResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='prizeLimit',
+            function='resetPrizeLimit',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.prize_table_name is not None:
+            body["prizeTableName"] = request.prize_table_name
+        if request.prize_id is not None:
+            body["prizeId"] = request.prize_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=ResetPrizeLimitResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_prize_limit(
+        self,
+        request: ResetPrizeLimitRequest,
+    ) -> ResetPrizeLimitResult:
+        async_result = []
+        with timeout(30):
+            self._reset_prize_limit(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_prize_limit_async(
+        self,
+        request: ResetPrizeLimitRequest,
+    ) -> ResetPrizeLimitResult:
+        async_result = []
+        self._reset_prize_limit(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

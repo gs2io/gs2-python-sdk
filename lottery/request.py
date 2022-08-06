@@ -1775,3 +1775,160 @@ class UpdateCurrentLotteryMasterFromGitHubRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "checkoutSetting": self.checkout_setting.to_dict() if self.checkout_setting else None,
         }
+
+
+class DescribePrizeLimitsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    prize_table_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribePrizeLimitsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_prize_table_name(self, prize_table_name: str) -> DescribePrizeLimitsRequest:
+        self.prize_table_name = prize_table_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribePrizeLimitsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribePrizeLimitsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePrizeLimitsRequest]:
+        if data is None:
+            return None
+        return DescribePrizeLimitsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_prize_table_name(data.get('prizeTableName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "prizeTableName": self.prize_table_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetPrizeLimitRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    prize_table_name: str = None
+    prize_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPrizeLimitRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_prize_table_name(self, prize_table_name: str) -> GetPrizeLimitRequest:
+        self.prize_table_name = prize_table_name
+        return self
+
+    def with_prize_id(self, prize_id: str) -> GetPrizeLimitRequest:
+        self.prize_id = prize_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPrizeLimitRequest]:
+        if data is None:
+            return None
+        return GetPrizeLimitRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_prize_table_name(data.get('prizeTableName'))\
+            .with_prize_id(data.get('prizeId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "prizeTableName": self.prize_table_name,
+            "prizeId": self.prize_id,
+        }
+
+
+class ResetPrizeLimitRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    prize_table_name: str = None
+    prize_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ResetPrizeLimitRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_prize_table_name(self, prize_table_name: str) -> ResetPrizeLimitRequest:
+        self.prize_table_name = prize_table_name
+        return self
+
+    def with_prize_id(self, prize_id: str) -> ResetPrizeLimitRequest:
+        self.prize_id = prize_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetPrizeLimitRequest]:
+        if data is None:
+            return None
+        return ResetPrizeLimitRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_prize_table_name(data.get('prizeTableName'))\
+            .with_prize_id(data.get('prizeId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "prizeTableName": self.prize_table_name,
+            "prizeId": self.prize_id,
+        }
