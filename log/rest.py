@@ -1353,7 +1353,7 @@ class Gs2LogRestClient(AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
-        ) + "/{namespaceName}/insight/{insightName}".format(
+        ) + "/{namespaceName}/insight".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
         )
 
