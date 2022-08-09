@@ -1269,3 +1269,295 @@ class Gs2LogWebSocketClient(AbstractGs2WebSocketClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_insights(
+        self,
+        request: DescribeInsightsRequest,
+        callback: Callable[[AsyncResult[DescribeInsightsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="log",
+            component='insight',
+            function='describeInsights',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=DescribeInsightsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_insights(
+        self,
+        request: DescribeInsightsRequest,
+    ) -> DescribeInsightsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_insights(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_insights_async(
+        self,
+        request: DescribeInsightsRequest,
+    ) -> DescribeInsightsResult:
+        async_result = []
+        self._describe_insights(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_insight(
+        self,
+        request: CreateInsightRequest,
+        callback: Callable[[AsyncResult[CreateInsightResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="log",
+            component='insight',
+            function='createInsight',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=CreateInsightResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_insight(
+        self,
+        request: CreateInsightRequest,
+    ) -> CreateInsightResult:
+        async_result = []
+        with timeout(30):
+            self._create_insight(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_insight_async(
+        self,
+        request: CreateInsightRequest,
+    ) -> CreateInsightResult:
+        async_result = []
+        self._create_insight(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_insight(
+        self,
+        request: GetInsightRequest,
+        callback: Callable[[AsyncResult[GetInsightResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="log",
+            component='insight',
+            function='getInsight',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.insight_name is not None:
+            body["insightName"] = request.insight_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=GetInsightResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_insight(
+        self,
+        request: GetInsightRequest,
+    ) -> GetInsightResult:
+        async_result = []
+        with timeout(30):
+            self._get_insight(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_insight_async(
+        self,
+        request: GetInsightRequest,
+    ) -> GetInsightResult:
+        async_result = []
+        self._get_insight(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_insight(
+        self,
+        request: DeleteInsightRequest,
+        callback: Callable[[AsyncResult[DeleteInsightResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="log",
+            component='insight',
+            function='deleteInsight',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.insight_name is not None:
+            body["insightName"] = request.insight_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            NetworkJob(
+                request_id=request_id,
+                result_type=DeleteInsightResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_insight(
+        self,
+        request: DeleteInsightRequest,
+    ) -> DeleteInsightResult:
+        async_result = []
+        with timeout(30):
+            self._delete_insight(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_insight_async(
+        self,
+        request: DeleteInsightRequest,
+    ) -> DeleteInsightResult:
+        async_result = []
+        self._delete_insight(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

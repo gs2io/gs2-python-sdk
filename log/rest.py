@@ -1268,3 +1268,293 @@ class Gs2LogRestClient(AbstractGs2RestClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_insights(
+        self,
+        request: DescribeInsightsRequest,
+        callback: Callable[[AsyncResult[DescribeInsightsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='log',
+            region=self.session.region,
+        ) + "/{namespaceName}/insight".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeInsightsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_insights(
+        self,
+        request: DescribeInsightsRequest,
+    ) -> DescribeInsightsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_insights(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_insights_async(
+        self,
+        request: DescribeInsightsRequest,
+    ) -> DescribeInsightsResult:
+        async_result = []
+        self._describe_insights(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_insight(
+        self,
+        request: CreateInsightRequest,
+        callback: Callable[[AsyncResult[CreateInsightResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='log',
+            region=self.session.region,
+        ) + "/{namespaceName}/insight/{insightName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateInsightResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_insight(
+        self,
+        request: CreateInsightRequest,
+    ) -> CreateInsightResult:
+        async_result = []
+        with timeout(30):
+            self._create_insight(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_insight_async(
+        self,
+        request: CreateInsightRequest,
+    ) -> CreateInsightResult:
+        async_result = []
+        self._create_insight(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_insight(
+        self,
+        request: GetInsightRequest,
+        callback: Callable[[AsyncResult[GetInsightResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='log',
+            region=self.session.region,
+        ) + "/{namespaceName}/insight/{insightName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            insightName=request.insight_name if request.insight_name is not None and request.insight_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetInsightResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_insight(
+        self,
+        request: GetInsightRequest,
+    ) -> GetInsightResult:
+        async_result = []
+        with timeout(30):
+            self._get_insight(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_insight_async(
+        self,
+        request: GetInsightRequest,
+    ) -> GetInsightResult:
+        async_result = []
+        self._get_insight(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_insight(
+        self,
+        request: DeleteInsightRequest,
+        callback: Callable[[AsyncResult[DeleteInsightResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='log',
+            region=self.session.region,
+        ) + "/{namespaceName}/insight/{insightName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            insightName=request.insight_name if request.insight_name is not None and request.insight_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteInsightResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_insight(
+        self,
+        request: DeleteInsightRequest,
+    ) -> DeleteInsightResult:
+        async_result = []
+        with timeout(30):
+            self._delete_insight(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_insight_async(
+        self,
+        request: DeleteInsightRequest,
+    ) -> DeleteInsightResult:
+        async_result = []
+        self._delete_insight(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

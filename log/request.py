@@ -1192,3 +1192,175 @@ class PutLogRequest(core.Gs2Request):
             "logCategory": self.log_category,
             "payload": self.payload,
         }
+
+
+class DescribeInsightsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeInsightsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeInsightsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeInsightsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeInsightsRequest]:
+        if data is None:
+            return None
+        return DescribeInsightsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateInsightRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateInsightRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateInsightRequest]:
+        if data is None:
+            return None
+        return CreateInsightRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetInsightRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    insight_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetInsightRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_insight_name(self, insight_name: str) -> GetInsightRequest:
+        self.insight_name = insight_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetInsightRequest]:
+        if data is None:
+            return None
+        return GetInsightRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_insight_name(data.get('insightName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "insightName": self.insight_name,
+        }
+
+
+class DeleteInsightRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    insight_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteInsightRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_insight_name(self, insight_name: str) -> DeleteInsightRequest:
+        self.insight_name = insight_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteInsightRequest]:
+        if data is None:
+            return None
+        return DeleteInsightRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_insight_name(data.get('insightName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "insightName": self.insight_name,
+        }

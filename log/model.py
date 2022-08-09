@@ -19,6 +19,137 @@ from typing import *
 import core
 
 
+class Insight(core.Gs2Model):
+    insight_id: str = None
+    name: str = None
+    task_id: str = None
+    host: str = None
+    password: str = None
+    status: str = None
+    created_at: int = None
+
+    def with_insight_id(self, insight_id: str) -> Insight:
+        self.insight_id = insight_id
+        return self
+
+    def with_name(self, name: str) -> Insight:
+        self.name = name
+        return self
+
+    def with_task_id(self, task_id: str) -> Insight:
+        self.task_id = task_id
+        return self
+
+    def with_host(self, host: str) -> Insight:
+        self.host = host
+        return self
+
+    def with_password(self, password: str) -> Insight:
+        self.password = password
+        return self
+
+    def with_status(self, status: str) -> Insight:
+        self.status = status
+        return self
+
+    def with_created_at(self, created_at: int) -> Insight:
+        self.created_at = created_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        insight_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:log:{namespaceName}:insight:{insightName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            insightName=insight_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):insight:(?P<insightName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):insight:(?P<insightName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):insight:(?P<insightName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_insight_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):insight:(?P<insightName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('insight_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Insight]:
+        if data is None:
+            return None
+        return Insight()\
+            .with_insight_id(data.get('insightId'))\
+            .with_name(data.get('name'))\
+            .with_task_id(data.get('taskId'))\
+            .with_host(data.get('host'))\
+            .with_password(data.get('password'))\
+            .with_status(data.get('status'))\
+            .with_created_at(data.get('createdAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "insightId": self.insight_id,
+            "name": self.name,
+            "taskId": self.task_id,
+            "host": self.host,
+            "password": self.password,
+            "status": self.status,
+            "createdAt": self.created_at,
+        }
+
+
 class ExecuteStampTaskLogCount(core.Gs2Model):
     service: str = None
     method: str = None
