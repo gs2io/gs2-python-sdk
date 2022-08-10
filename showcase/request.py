@@ -66,6 +66,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    buy_script: ScriptSetting = None
     queue_namespace_id: str = None
     key_id: str = None
     log_setting: LogSetting = None
@@ -80,6 +81,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_buy_script(self, buy_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.buy_script = buy_script
         return self
 
     def with_queue_namespace_id(self, queue_namespace_id: str) -> CreateNamespaceRequest:
@@ -116,6 +121,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_buy_script(ScriptSetting.from_dict(data.get('buyScript')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
@@ -125,6 +131,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "buyScript": self.buy_script.to_dict() if self.buy_script else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
@@ -209,6 +216,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    buy_script: ScriptSetting = None
     log_setting: LogSetting = None
     queue_namespace_id: str = None
     key_id: str = None
@@ -223,6 +231,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_buy_script(self, buy_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.buy_script = buy_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -259,6 +271,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_buy_script(ScriptSetting.from_dict(data.get('buyScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))
@@ -268,6 +281,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "buyScript": self.buy_script.to_dict() if self.buy_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
