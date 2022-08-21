@@ -127,6 +127,9 @@ class Gs2WebSocketSession(ISession):
     def connection(self) -> websocket.WebSocket:
         return self._connection
 
+    def ping(self):
+        self.connection.ping()
+
     def send(self, job: NetworkJob):
         if not self._connection:
             raise BrokenPipeError()
