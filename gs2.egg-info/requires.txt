@@ -1,3 +1,0 @@
-websocket_client>=0.59.0
-simplejson>=3.17.2
-requests>=2.25.1
