@@ -2270,7 +2270,7 @@ class Gs2MegaFieldRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mega-field',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/spatial/{areaModelName}/{layerModelName}".format(
+        ) + "/{namespaceName}/user/me/spatial/{areaModelName}/{layerModelName}/action".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             areaModelName=request.area_model_name if request.area_model_name is not None and request.area_model_name != '' else 'null',
             layerModelName=request.layer_model_name if request.layer_model_name is not None and request.layer_model_name != '' else 'null',
@@ -2349,7 +2349,7 @@ class Gs2MegaFieldRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mega-field',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/spatial/{areaModelName}/{layerModelName}".format(
+        ) + "/{namespaceName}/user/{userId}/spatial/{areaModelName}/{layerModelName}/action".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
             areaModelName=request.area_model_name if request.area_model_name is not None and request.area_model_name != '' else 'null',
