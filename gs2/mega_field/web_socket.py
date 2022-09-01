@@ -2322,8 +2322,11 @@ class Gs2MegaFieldWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["layerModelName"] = request.layer_model_name
         if request.position is not None:
             body["position"] = request.position.to_dict()
-        if request.scope is not None:
-            body["scope"] = request.scope.to_dict()
+        if request.scopes is not None:
+            body["scopes"] = [
+                item.to_dict()
+                for item in request.scopes
+            ]
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2405,8 +2408,11 @@ class Gs2MegaFieldWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["layerModelName"] = request.layer_model_name
         if request.position is not None:
             body["position"] = request.position.to_dict()
-        if request.scope is not None:
-            body["scope"] = request.scope.to_dict()
+        if request.scopes is not None:
+            body["scopes"] = [
+                item.to_dict()
+                for item in request.scopes
+            ]
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

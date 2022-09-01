@@ -178,8 +178,13 @@ class Vector(core.Gs2Model):
 
 
 class Scope(core.Gs2Model):
+    layer_name: str = None
     r: float = None
     limit: int = None
+
+    def with_layer_name(self, layer_name: str) -> Scope:
+        self.layer_name = layer_name
+        return self
 
     def with_r(self, r: float) -> Scope:
         self.r = r
@@ -208,11 +213,13 @@ class Scope(core.Gs2Model):
         if data is None:
             return None
         return Scope()\
+            .with_layer_name(data.get('layerName'))\
             .with_r(data.get('r'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "layerName": self.layer_name,
             "r": self.r,
             "limit": self.limit,
         }

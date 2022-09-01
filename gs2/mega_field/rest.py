@@ -2282,8 +2282,11 @@ class Gs2MegaFieldRestClient(rest.AbstractGs2RestClient):
         }
         if request.position is not None:
             body["position"] = request.position.to_dict()
-        if request.scope is not None:
-            body["scope"] = request.scope.to_dict()
+        if request.scopes is not None:
+            body["scopes"] = [
+                item.to_dict()
+                for item in request.scopes
+            ]
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2362,8 +2365,11 @@ class Gs2MegaFieldRestClient(rest.AbstractGs2RestClient):
         }
         if request.position is not None:
             body["position"] = request.position.to_dict()
-        if request.scope is not None:
-            body["scope"] = request.scope.to_dict()
+        if request.scopes is not None:
+            body["scopes"] = [
+                item.to_dict()
+                for item in request.scopes
+            ]
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

@@ -1597,7 +1597,7 @@ class ActionRequest(core.Gs2Request):
     area_model_name: str = None
     layer_model_name: str = None
     position: MyPosition = None
-    scope: Scope = None
+    scopes: List[Scope] = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ActionRequest:
@@ -1620,8 +1620,8 @@ class ActionRequest(core.Gs2Request):
         self.position = position
         return self
 
-    def with_scope(self, scope: Scope) -> ActionRequest:
-        self.scope = scope
+    def with_scopes(self, scopes: List[Scope]) -> ActionRequest:
+        self.scopes = scopes
         return self
 
     def get(self, key, default=None):
@@ -1648,7 +1648,10 @@ class ActionRequest(core.Gs2Request):
             .with_area_model_name(data.get('areaModelName'))\
             .with_layer_model_name(data.get('layerModelName'))\
             .with_position(MyPosition.from_dict(data.get('position')))\
-            .with_scope(Scope.from_dict(data.get('scope')))
+            .with_scopes([
+                Scope.from_dict(data.get('scopes')[i])
+                for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1657,7 +1660,10 @@ class ActionRequest(core.Gs2Request):
             "areaModelName": self.area_model_name,
             "layerModelName": self.layer_model_name,
             "position": self.position.to_dict() if self.position else None,
-            "scope": self.scope.to_dict() if self.scope else None,
+            "scopes": [
+                self.scopes[i].to_dict() if self.scopes[i] else None
+                for i in range(len(self.scopes) if self.scopes else 0)
+            ],
         }
 
 
@@ -1669,7 +1675,7 @@ class ActionByUserIdRequest(core.Gs2Request):
     area_model_name: str = None
     layer_model_name: str = None
     position: MyPosition = None
-    scope: Scope = None
+    scopes: List[Scope] = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ActionByUserIdRequest:
@@ -1692,8 +1698,8 @@ class ActionByUserIdRequest(core.Gs2Request):
         self.position = position
         return self
 
-    def with_scope(self, scope: Scope) -> ActionByUserIdRequest:
-        self.scope = scope
+    def with_scopes(self, scopes: List[Scope]) -> ActionByUserIdRequest:
+        self.scopes = scopes
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> ActionByUserIdRequest:
@@ -1724,7 +1730,10 @@ class ActionByUserIdRequest(core.Gs2Request):
             .with_area_model_name(data.get('areaModelName'))\
             .with_layer_model_name(data.get('layerModelName'))\
             .with_position(MyPosition.from_dict(data.get('position')))\
-            .with_scope(Scope.from_dict(data.get('scope')))
+            .with_scopes([
+                Scope.from_dict(data.get('scopes')[i])
+                for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1733,5 +1742,8 @@ class ActionByUserIdRequest(core.Gs2Request):
             "areaModelName": self.area_model_name,
             "layerModelName": self.layer_model_name,
             "position": self.position.to_dict() if self.position else None,
-            "scope": self.scope.to_dict() if self.scope else None,
+            "scopes": [
+                self.scopes[i].to_dict() if self.scopes[i] else None
+                for i in range(len(self.scopes) if self.scopes else 0)
+            ],
         }
