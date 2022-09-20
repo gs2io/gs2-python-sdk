@@ -31,6 +31,7 @@ from . import ranking
 from . import realtime
 from . import schedule
 from . import script
+from . import serial_key
 from . import showcase
 from . import stamina
 from . import version

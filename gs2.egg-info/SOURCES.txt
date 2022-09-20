@@ -205,6 +205,12 @@ src/gs2/script/request.py
 src/gs2/script/rest.py
 src/gs2/script/result.py
 src/gs2/script/web_socket.py
+src/gs2/serial_key/__init__.py
+src/gs2/serial_key/model.py
+src/gs2/serial_key/request.py
+src/gs2/serial_key/rest.py
+src/gs2/serial_key/result.py
+src/gs2/serial_key/web_socket.py
 src/gs2/showcase/__init__.py
 src/gs2/showcase/model.py
 src/gs2/showcase/request.py
