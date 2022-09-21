@@ -349,15 +349,15 @@ class IssueResult(core.Gs2Result):
         }
 
 
-class DescribeSerialCodesResult(core.Gs2Result):
-    items: List[str] = None
+class DescribeSerialKeysResult(core.Gs2Result):
+    items: List[SerialKey] = None
     next_page_token: str = None
 
-    def with_items(self, items: List[str]) -> DescribeSerialCodesResult:
+    def with_items(self, items: List[SerialKey]) -> DescribeSerialKeysResult:
         self.items = items
         return self
 
-    def with_next_page_token(self, next_page_token: str) -> DescribeSerialCodesResult:
+    def with_next_page_token(self, next_page_token: str) -> DescribeSerialKeysResult:
         self.next_page_token = next_page_token
         return self
 
@@ -376,12 +376,12 @@ class DescribeSerialCodesResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[DescribeSerialCodesResult]:
+    ) -> Optional[DescribeSerialKeysResult]:
         if data is None:
             return None
-        return DescribeSerialCodesResult()\
+        return DescribeSerialKeysResult()\
             .with_items([
-                data.get('items')[i]
+                SerialKey.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
             .with_next_page_token(data.get('nextPageToken'))
@@ -389,10 +389,85 @@ class DescribeSerialCodesResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": [
-                self.items[i]
+                self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
             "nextPageToken": self.next_page_token,
+        }
+
+
+class DownloadSerialCodesResult(core.Gs2Result):
+    url: str = None
+
+    def with_url(self, url: str) -> DownloadSerialCodesResult:
+        self.url = url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DownloadSerialCodesResult]:
+        if data is None:
+            return None
+        return DownloadSerialCodesResult()\
+            .with_url(data.get('url'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "url": self.url,
+        }
+
+
+class GetSerialKeyResult(core.Gs2Result):
+    item: SerialKey = None
+    campaign_model: CampaignModel = None
+
+    def with_item(self, item: SerialKey) -> GetSerialKeyResult:
+        self.item = item
+        return self
+
+    def with_campaign_model(self, campaign_model: CampaignModel) -> GetSerialKeyResult:
+        self.campaign_model = campaign_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSerialKeyResult]:
+        if data is None:
+            return None
+        return GetSerialKeyResult()\
+            .with_item(SerialKey.from_dict(data.get('item')))\
+            .with_campaign_model(CampaignModel.from_dict(data.get('campaignModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "campaignModel": self.campaign_model.to_dict() if self.campaign_model else None,
         }
 
 

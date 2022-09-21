@@ -686,10 +686,10 @@ class Gs2SerialKeyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_serial_codes(
+    def _describe_serial_keys(
         self,
-        request: DescribeSerialCodesRequest,
-        callback: Callable[[AsyncResult[DescribeSerialCodesResult]], None],
+        request: DescribeSerialKeysRequest,
+        callback: Callable[[AsyncResult[DescribeSerialKeysResult]], None],
     ):
         import uuid
 
@@ -697,7 +697,7 @@ class Gs2SerialKeyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         body = self._create_metadata(
             service="serialKey",
             component='serialKey',
-            function='describeSerialCodes',
+            function='describeSerialKeys',
             request_id=request_id,
         )
 
@@ -720,19 +720,19 @@ class Gs2SerialKeyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=DescribeSerialCodesResult,
+                result_type=DescribeSerialKeysResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def describe_serial_codes(
+    def describe_serial_keys(
         self,
-        request: DescribeSerialCodesRequest,
-    ) -> DescribeSerialCodesResult:
+        request: DescribeSerialKeysRequest,
+    ) -> DescribeSerialKeysResult:
         async_result = []
         with timeout(30):
-            self._describe_serial_codes(
+            self._describe_serial_keys(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -746,12 +746,160 @@ class Gs2SerialKeyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def describe_serial_codes_async(
+    async def describe_serial_keys_async(
         self,
-        request: DescribeSerialCodesRequest,
-    ) -> DescribeSerialCodesResult:
+        request: DescribeSerialKeysRequest,
+    ) -> DescribeSerialKeysResult:
         async_result = []
-        self._describe_serial_codes(
+        self._describe_serial_keys(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _download_serial_codes(
+        self,
+        request: DownloadSerialCodesRequest,
+        callback: Callable[[AsyncResult[DownloadSerialCodesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="serialKey",
+            component='serialKey',
+            function='downloadSerialCodes',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.campaign_model_name is not None:
+            body["campaignModelName"] = request.campaign_model_name
+        if request.issue_job_name is not None:
+            body["issueJobName"] = request.issue_job_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DownloadSerialCodesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def download_serial_codes(
+        self,
+        request: DownloadSerialCodesRequest,
+    ) -> DownloadSerialCodesResult:
+        async_result = []
+        with timeout(30):
+            self._download_serial_codes(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def download_serial_codes_async(
+        self,
+        request: DownloadSerialCodesRequest,
+    ) -> DownloadSerialCodesResult:
+        async_result = []
+        self._download_serial_codes(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_serial_key(
+        self,
+        request: GetSerialKeyRequest,
+        callback: Callable[[AsyncResult[GetSerialKeyResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="serialKey",
+            component='serialKey',
+            function='getSerialKey',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.code is not None:
+            body["code"] = request.code
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetSerialKeyResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_serial_key(
+        self,
+        request: GetSerialKeyRequest,
+    ) -> GetSerialKeyResult:
+        async_result = []
+        with timeout(30):
+            self._get_serial_key(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_serial_key_async(
+        self,
+        request: GetSerialKeyRequest,
+    ) -> GetSerialKeyResult:
+        async_result = []
+        self._get_serial_key(
             request,
             lambda result: async_result.append(result),
         )

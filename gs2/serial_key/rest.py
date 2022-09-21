@@ -682,16 +682,16 @@ class Gs2SerialKeyRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_serial_codes(
+    def _describe_serial_keys(
         self,
-        request: DescribeSerialCodesRequest,
-        callback: Callable[[AsyncResult[DescribeSerialCodesResult]], None],
+        request: DescribeSerialKeysRequest,
+        callback: Callable[[AsyncResult[DescribeSerialKeysResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='serial-key',
             region=self.session.region,
-        ) + "/{namespaceName}/campaign/{campaignModelName}/issue/{issueJobName}/serialCode".format(
+        ) + "/{namespaceName}/campaign/{campaignModelName}/issue/{issueJobName}/serialKey".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             campaignModelName=request.campaign_model_name if request.campaign_model_name is not None and request.campaign_model_name != '' else 'null',
             issueJobName=request.issue_job_name if request.issue_job_name is not None and request.issue_job_name != '' else 'null',
@@ -711,7 +711,7 @@ class Gs2SerialKeyRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='GET',
-            result_type=DescribeSerialCodesResult,
+            result_type=DescribeSerialKeysResult,
             callback=callback,
             headers=headers,
             query_strings=query_strings,
@@ -722,13 +722,13 @@ class Gs2SerialKeyRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def describe_serial_codes(
+    def describe_serial_keys(
         self,
-        request: DescribeSerialCodesRequest,
-    ) -> DescribeSerialCodesResult:
+        request: DescribeSerialKeysRequest,
+    ) -> DescribeSerialKeysResult:
         async_result = []
         with timeout(30):
-            self._describe_serial_codes(
+            self._describe_serial_keys(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -739,12 +739,157 @@ class Gs2SerialKeyRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def describe_serial_codes_async(
+    async def describe_serial_keys_async(
         self,
-        request: DescribeSerialCodesRequest,
-    ) -> DescribeSerialCodesResult:
+        request: DescribeSerialKeysRequest,
+    ) -> DescribeSerialKeysResult:
         async_result = []
-        self._describe_serial_codes(
+        self._describe_serial_keys(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _download_serial_codes(
+        self,
+        request: DownloadSerialCodesRequest,
+        callback: Callable[[AsyncResult[DownloadSerialCodesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='serial-key',
+            region=self.session.region,
+        ) + "/{namespaceName}/campaign/{campaignModelName}/issue/{issueJobName}/serialCode/download".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            campaignModelName=request.campaign_model_name if request.campaign_model_name is not None and request.campaign_model_name != '' else 'null',
+            issueJobName=request.issue_job_name if request.issue_job_name is not None and request.issue_job_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DownloadSerialCodesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def download_serial_codes(
+        self,
+        request: DownloadSerialCodesRequest,
+    ) -> DownloadSerialCodesResult:
+        async_result = []
+        with timeout(30):
+            self._download_serial_codes(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def download_serial_codes_async(
+        self,
+        request: DownloadSerialCodesRequest,
+    ) -> DownloadSerialCodesResult:
+        async_result = []
+        self._download_serial_codes(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_serial_key(
+        self,
+        request: GetSerialKeyRequest,
+        callback: Callable[[AsyncResult[GetSerialKeyResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='serial-key',
+            region=self.session.region,
+        ) + "/{namespaceName}/serialKey/{code}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            code=request.code if request.code is not None and request.code != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSerialKeyResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_serial_key(
+        self,
+        request: GetSerialKeyRequest,
+    ) -> GetSerialKeyResult:
+        async_result = []
+        with timeout(30):
+            self._get_serial_key(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_serial_key_async(
+        self,
+        request: GetSerialKeyRequest,
+    ) -> GetSerialKeyResult:
+        async_result = []
+        self._get_serial_key(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

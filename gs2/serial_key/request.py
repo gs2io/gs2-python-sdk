@@ -432,7 +432,7 @@ class IssueRequest(core.Gs2Request):
         }
 
 
-class DescribeSerialCodesRequest(core.Gs2Request):
+class DescribeSerialKeysRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
@@ -441,23 +441,23 @@ class DescribeSerialCodesRequest(core.Gs2Request):
     page_token: str = None
     limit: int = None
 
-    def with_namespace_name(self, namespace_name: str) -> DescribeSerialCodesRequest:
+    def with_namespace_name(self, namespace_name: str) -> DescribeSerialKeysRequest:
         self.namespace_name = namespace_name
         return self
 
-    def with_campaign_model_name(self, campaign_model_name: str) -> DescribeSerialCodesRequest:
+    def with_campaign_model_name(self, campaign_model_name: str) -> DescribeSerialKeysRequest:
         self.campaign_model_name = campaign_model_name
         return self
 
-    def with_issue_job_name(self, issue_job_name: str) -> DescribeSerialCodesRequest:
+    def with_issue_job_name(self, issue_job_name: str) -> DescribeSerialKeysRequest:
         self.issue_job_name = issue_job_name
         return self
 
-    def with_page_token(self, page_token: str) -> DescribeSerialCodesRequest:
+    def with_page_token(self, page_token: str) -> DescribeSerialKeysRequest:
         self.page_token = page_token
         return self
 
-    def with_limit(self, limit: int) -> DescribeSerialCodesRequest:
+    def with_limit(self, limit: int) -> DescribeSerialKeysRequest:
         self.limit = limit
         return self
 
@@ -476,10 +476,10 @@ class DescribeSerialCodesRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[DescribeSerialCodesRequest]:
+    ) -> Optional[DescribeSerialKeysRequest]:
         if data is None:
             return None
-        return DescribeSerialCodesRequest()\
+        return DescribeSerialKeysRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_campaign_model_name(data.get('campaignModelName'))\
             .with_issue_job_name(data.get('issueJobName'))\
@@ -493,6 +493,99 @@ class DescribeSerialCodesRequest(core.Gs2Request):
             "issueJobName": self.issue_job_name,
             "pageToken": self.page_token,
             "limit": self.limit,
+        }
+
+
+class DownloadSerialCodesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    campaign_model_name: str = None
+    issue_job_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DownloadSerialCodesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_campaign_model_name(self, campaign_model_name: str) -> DownloadSerialCodesRequest:
+        self.campaign_model_name = campaign_model_name
+        return self
+
+    def with_issue_job_name(self, issue_job_name: str) -> DownloadSerialCodesRequest:
+        self.issue_job_name = issue_job_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DownloadSerialCodesRequest]:
+        if data is None:
+            return None
+        return DownloadSerialCodesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_campaign_model_name(data.get('campaignModelName'))\
+            .with_issue_job_name(data.get('issueJobName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "campaignModelName": self.campaign_model_name,
+            "issueJobName": self.issue_job_name,
+        }
+
+
+class GetSerialKeyRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    code: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetSerialKeyRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_code(self, code: str) -> GetSerialKeyRequest:
+        self.code = code
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSerialKeyRequest]:
+        if data is None:
+            return None
+        return GetSerialKeyRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_code(data.get('code'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "code": self.code,
         }
 
 
