@@ -234,6 +234,40 @@ class DeleteNamespaceResult(core.Gs2Result):
         }
 
 
+class NowResult(core.Gs2Result):
+    timestamp: int = None
+
+    def with_timestamp(self, timestamp: int) -> NowResult:
+        self.timestamp = timestamp
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[NowResult]:
+        if data is None:
+            return None
+        return NowResult()\
+            .with_timestamp(data.get('timestamp'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "timestamp": self.timestamp,
+        }
+
+
 class DescribeRoomsResult(core.Gs2Result):
     items: List[Room] = None
     next_page_token: str = None
