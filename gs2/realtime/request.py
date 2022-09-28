@@ -313,6 +313,12 @@ class DeleteNamespaceRequest(core.Gs2Request):
 class NowRequest(core.Gs2Request):
 
     context_stack: str = None
+    access_token: str = None
+    access_token: str = None
+
+    def with_access_token(self, access_token: str) -> NowRequest:
+        self.access_token = access_token
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -333,9 +339,11 @@ class NowRequest(core.Gs2Request):
         if data is None:
             return None
         return NowRequest()\
+            .with_access_token(data.get('accessToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "accessToken": self.access_token,
         }
 
 

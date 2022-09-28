@@ -486,9 +486,13 @@ class Gs2RealtimeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
 
         self.session.send(
             web_socket.NetworkJob(

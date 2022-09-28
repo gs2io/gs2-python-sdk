@@ -487,6 +487,8 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
