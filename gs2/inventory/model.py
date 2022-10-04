@@ -1058,6 +1058,7 @@ class InventoryModel(core.Gs2Model):
     initial_capacity: int = None
     max_capacity: int = None
     protect_referenced_item: bool = None
+    item_models: List[ItemModel] = None
 
     def with_inventory_model_id(self, inventory_model_id: str) -> InventoryModel:
         self.inventory_model_id = inventory_model_id
@@ -1081,6 +1082,10 @@ class InventoryModel(core.Gs2Model):
 
     def with_protect_referenced_item(self, protect_referenced_item: bool) -> InventoryModel:
         self.protect_referenced_item = protect_referenced_item
+        return self
+
+    def with_item_models(self, item_models: List[ItemModel]) -> InventoryModel:
+        self.item_models = item_models
         return self
 
     @classmethod
@@ -1162,7 +1167,11 @@ class InventoryModel(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_initial_capacity(data.get('initialCapacity'))\
             .with_max_capacity(data.get('maxCapacity'))\
-            .with_protect_referenced_item(data.get('protectReferencedItem'))
+            .with_protect_referenced_item(data.get('protectReferencedItem'))\
+            .with_item_models([
+                ItemModel.from_dict(data.get('itemModels')[i])
+                for i in range(len(data.get('itemModels')) if data.get('itemModels') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1172,6 +1181,10 @@ class InventoryModel(core.Gs2Model):
             "initialCapacity": self.initial_capacity,
             "maxCapacity": self.max_capacity,
             "protectReferencedItem": self.protect_referenced_item,
+            "itemModels": [
+                self.item_models[i].to_dict() if self.item_models[i] else None
+                for i in range(len(self.item_models) if self.item_models else 0)
+            ],
         }
 
 
