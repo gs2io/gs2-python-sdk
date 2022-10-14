@@ -129,6 +129,8 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["completeMatchmakingTriggerRealtimeNamespaceId"] = request.complete_matchmaking_trigger_realtime_namespace_id
         if request.complete_matchmaking_trigger_script_id is not None:
             body["completeMatchmakingTriggerScriptId"] = request.complete_matchmaking_trigger_script_id
+        if request.change_rating_script is not None:
+            body["changeRatingScript"] = request.change_rating_script.to_dict()
         if request.join_notification is not None:
             body["joinNotification"] = request.join_notification.to_dict()
         if request.leave_notification is not None:
@@ -366,6 +368,8 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["completeMatchmakingTriggerRealtimeNamespaceId"] = request.complete_matchmaking_trigger_realtime_namespace_id
         if request.complete_matchmaking_trigger_script_id is not None:
             body["completeMatchmakingTriggerScriptId"] = request.complete_matchmaking_trigger_script_id
+        if request.change_rating_script is not None:
+            body["changeRatingScript"] = request.change_rating_script.to_dict()
         if request.join_notification is not None:
             body["joinNotification"] = request.join_notification.to_dict()
         if request.leave_notification is not None:

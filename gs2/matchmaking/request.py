@@ -72,6 +72,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     complete_matchmaking_trigger_type: str = None
     complete_matchmaking_trigger_realtime_namespace_id: str = None
     complete_matchmaking_trigger_script_id: str = None
+    change_rating_script: ScriptSetting = None
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
     complete_notification: NotificationSetting = None
@@ -111,6 +112,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_complete_matchmaking_trigger_script_id(self, complete_matchmaking_trigger_script_id: str) -> CreateNamespaceRequest:
         self.complete_matchmaking_trigger_script_id = complete_matchmaking_trigger_script_id
+        return self
+
+    def with_change_rating_script(self, change_rating_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.change_rating_script = change_rating_script
         return self
 
     def with_join_notification(self, join_notification: NotificationSetting) -> CreateNamespaceRequest:
@@ -157,6 +162,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_complete_matchmaking_trigger_type(data.get('completeMatchmakingTriggerType'))\
             .with_complete_matchmaking_trigger_realtime_namespace_id(data.get('completeMatchmakingTriggerRealtimeNamespaceId'))\
             .with_complete_matchmaking_trigger_script_id(data.get('completeMatchmakingTriggerScriptId'))\
+            .with_change_rating_script(ScriptSetting.from_dict(data.get('changeRatingScript')))\
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
             .with_complete_notification(NotificationSetting.from_dict(data.get('completeNotification')))\
@@ -173,6 +179,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "completeMatchmakingTriggerType": self.complete_matchmaking_trigger_type,
             "completeMatchmakingTriggerRealtimeNamespaceId": self.complete_matchmaking_trigger_realtime_namespace_id,
             "completeMatchmakingTriggerScriptId": self.complete_matchmaking_trigger_script_id,
+            "changeRatingScript": self.change_rating_script.to_dict() if self.change_rating_script else None,
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
             "completeNotification": self.complete_notification.to_dict() if self.complete_notification else None,
@@ -264,6 +271,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     complete_matchmaking_trigger_type: str = None
     complete_matchmaking_trigger_realtime_namespace_id: str = None
     complete_matchmaking_trigger_script_id: str = None
+    change_rating_script: ScriptSetting = None
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
     complete_notification: NotificationSetting = None
@@ -303,6 +311,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_complete_matchmaking_trigger_script_id(self, complete_matchmaking_trigger_script_id: str) -> UpdateNamespaceRequest:
         self.complete_matchmaking_trigger_script_id = complete_matchmaking_trigger_script_id
+        return self
+
+    def with_change_rating_script(self, change_rating_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.change_rating_script = change_rating_script
         return self
 
     def with_join_notification(self, join_notification: NotificationSetting) -> UpdateNamespaceRequest:
@@ -349,6 +361,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_complete_matchmaking_trigger_type(data.get('completeMatchmakingTriggerType'))\
             .with_complete_matchmaking_trigger_realtime_namespace_id(data.get('completeMatchmakingTriggerRealtimeNamespaceId'))\
             .with_complete_matchmaking_trigger_script_id(data.get('completeMatchmakingTriggerScriptId'))\
+            .with_change_rating_script(ScriptSetting.from_dict(data.get('changeRatingScript')))\
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
             .with_complete_notification(NotificationSetting.from_dict(data.get('completeNotification')))\
@@ -365,6 +378,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "completeMatchmakingTriggerType": self.complete_matchmaking_trigger_type,
             "completeMatchmakingTriggerRealtimeNamespaceId": self.complete_matchmaking_trigger_realtime_namespace_id,
             "completeMatchmakingTriggerScriptId": self.complete_matchmaking_trigger_script_id,
+            "changeRatingScript": self.change_rating_script.to_dict() if self.change_rating_script else None,
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
             "completeNotification": self.complete_notification.to_dict() if self.complete_notification else None,

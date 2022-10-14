@@ -910,6 +910,61 @@ class NotificationSetting(core.Gs2Model):
         }
 
 
+class ScriptSetting(core.Gs2Model):
+    trigger_script_id: str = None
+    done_trigger_target_type: str = None
+    done_trigger_script_id: str = None
+    done_trigger_queue_namespace_id: str = None
+
+    def with_trigger_script_id(self, trigger_script_id: str) -> ScriptSetting:
+        self.trigger_script_id = trigger_script_id
+        return self
+
+    def with_done_trigger_target_type(self, done_trigger_target_type: str) -> ScriptSetting:
+        self.done_trigger_target_type = done_trigger_target_type
+        return self
+
+    def with_done_trigger_script_id(self, done_trigger_script_id: str) -> ScriptSetting:
+        self.done_trigger_script_id = done_trigger_script_id
+        return self
+
+    def with_done_trigger_queue_namespace_id(self, done_trigger_queue_namespace_id: str) -> ScriptSetting:
+        self.done_trigger_queue_namespace_id = done_trigger_queue_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ScriptSetting]:
+        if data is None:
+            return None
+        return ScriptSetting()\
+            .with_trigger_script_id(data.get('triggerScriptId'))\
+            .with_done_trigger_target_type(data.get('doneTriggerTargetType'))\
+            .with_done_trigger_script_id(data.get('doneTriggerScriptId'))\
+            .with_done_trigger_queue_namespace_id(data.get('doneTriggerQueueNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "triggerScriptId": self.trigger_script_id,
+            "doneTriggerTargetType": self.done_trigger_target_type,
+            "doneTriggerScriptId": self.done_trigger_script_id,
+            "doneTriggerQueueNamespaceId": self.done_trigger_queue_namespace_id,
+        }
+
+
 class CurrentRatingModelMaster(core.Gs2Model):
     namespace_id: str = None
     settings: str = None
@@ -1409,6 +1464,7 @@ class Namespace(core.Gs2Model):
     complete_matchmaking_trigger_type: str = None
     complete_matchmaking_trigger_realtime_namespace_id: str = None
     complete_matchmaking_trigger_script_id: str = None
+    change_rating_script: ScriptSetting = None
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
     complete_notification: NotificationSetting = None
@@ -1454,6 +1510,10 @@ class Namespace(core.Gs2Model):
 
     def with_complete_matchmaking_trigger_script_id(self, complete_matchmaking_trigger_script_id: str) -> Namespace:
         self.complete_matchmaking_trigger_script_id = complete_matchmaking_trigger_script_id
+        return self
+
+    def with_change_rating_script(self, change_rating_script: ScriptSetting) -> Namespace:
+        self.change_rating_script = change_rating_script
         return self
 
     def with_join_notification(self, join_notification: NotificationSetting) -> Namespace:
@@ -1552,6 +1612,7 @@ class Namespace(core.Gs2Model):
             .with_complete_matchmaking_trigger_type(data.get('completeMatchmakingTriggerType'))\
             .with_complete_matchmaking_trigger_realtime_namespace_id(data.get('completeMatchmakingTriggerRealtimeNamespaceId'))\
             .with_complete_matchmaking_trigger_script_id(data.get('completeMatchmakingTriggerScriptId'))\
+            .with_change_rating_script(ScriptSetting.from_dict(data.get('changeRatingScript')))\
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
             .with_complete_notification(NotificationSetting.from_dict(data.get('completeNotification')))\
@@ -1571,6 +1632,7 @@ class Namespace(core.Gs2Model):
             "completeMatchmakingTriggerType": self.complete_matchmaking_trigger_type,
             "completeMatchmakingTriggerRealtimeNamespaceId": self.complete_matchmaking_trigger_realtime_namespace_id,
             "completeMatchmakingTriggerScriptId": self.complete_matchmaking_trigger_script_id,
+            "changeRatingScript": self.change_rating_script.to_dict() if self.change_rating_script else None,
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
             "completeNotification": self.complete_notification.to_dict() if self.complete_notification else None,
