@@ -1625,6 +1625,7 @@ class BuyByUserIdRequest(core.Gs2Request):
     user_id: str = None
     quantity: int = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> BuyByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1648,6 +1649,10 @@ class BuyByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> BuyByUserIdRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BuyByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
