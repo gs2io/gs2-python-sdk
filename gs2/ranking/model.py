@@ -305,6 +305,7 @@ class CurrentRankingMaster(core.Gs2Model):
 class Ranking(core.Gs2Model):
     rank: int = None
     index: int = None
+    category_name: str = None
     user_id: str = None
     score: int = None
     metadata: str = None
@@ -316,6 +317,10 @@ class Ranking(core.Gs2Model):
 
     def with_index(self, index: int) -> Ranking:
         self.index = index
+        return self
+
+    def with_category_name(self, category_name: str) -> Ranking:
+        self.category_name = category_name
         return self
 
     def with_user_id(self, user_id: str) -> Ranking:
@@ -355,6 +360,7 @@ class Ranking(core.Gs2Model):
         return Ranking()\
             .with_rank(data.get('rank'))\
             .with_index(data.get('index'))\
+            .with_category_name(data.get('categoryName'))\
             .with_user_id(data.get('userId'))\
             .with_score(data.get('score'))\
             .with_metadata(data.get('metadata'))\
@@ -364,6 +370,7 @@ class Ranking(core.Gs2Model):
         return {
             "rank": self.rank,
             "index": self.index,
+            "categoryName": self.category_name,
             "userId": self.user_id,
             "score": self.score,
             "metadata": self.metadata,
