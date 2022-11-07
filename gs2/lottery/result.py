@@ -601,10 +601,10 @@ class DeletePrizeTableMasterResult(core.Gs2Result):
 
 
 class DescribeBoxesResult(core.Gs2Result):
-    items: List[Box] = None
+    items: List[BoxItems] = None
     next_page_token: str = None
 
-    def with_items(self, items: List[Box]) -> DescribeBoxesResult:
+    def with_items(self, items: List[BoxItems]) -> DescribeBoxesResult:
         self.items = items
         return self
 
@@ -632,7 +632,7 @@ class DescribeBoxesResult(core.Gs2Result):
             return None
         return DescribeBoxesResult()\
             .with_items([
-                Box.from_dict(data.get('items')[i])
+                BoxItems.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
             .with_next_page_token(data.get('nextPageToken'))
@@ -648,10 +648,10 @@ class DescribeBoxesResult(core.Gs2Result):
 
 
 class DescribeBoxesByUserIdResult(core.Gs2Result):
-    items: List[Box] = None
+    items: List[BoxItems] = None
     next_page_token: str = None
 
-    def with_items(self, items: List[Box]) -> DescribeBoxesByUserIdResult:
+    def with_items(self, items: List[BoxItems]) -> DescribeBoxesByUserIdResult:
         self.items = items
         return self
 
@@ -679,7 +679,7 @@ class DescribeBoxesByUserIdResult(core.Gs2Result):
             return None
         return DescribeBoxesByUserIdResult()\
             .with_items([
-                Box.from_dict(data.get('items')[i])
+                BoxItems.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
             .with_next_page_token(data.get('nextPageToken'))
