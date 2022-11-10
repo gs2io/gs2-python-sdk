@@ -636,10 +636,15 @@ class InvokeScriptRequest(core.Gs2Request):
 
     context_stack: str = None
     script_id: str = None
+    user_id: str = None
     args: str = None
 
     def with_script_id(self, script_id: str) -> InvokeScriptRequest:
         self.script_id = script_id
+        return self
+
+    def with_user_id(self, user_id: str) -> InvokeScriptRequest:
+        self.user_id = user_id
         return self
 
     def with_args(self, args: str) -> InvokeScriptRequest:
@@ -666,11 +671,13 @@ class InvokeScriptRequest(core.Gs2Request):
             return None
         return InvokeScriptRequest()\
             .with_script_id(data.get('scriptId'))\
+            .with_user_id(data.get('userId'))\
             .with_args(data.get('args'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "scriptId": self.script_id,
+            "userId": self.user_id,
             "args": self.args,
         }
 

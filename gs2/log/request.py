@@ -378,6 +378,7 @@ class QueryAccessLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryAccessLogRequest:
         self.namespace_name = namespace_name
@@ -413,6 +414,10 @@ class QueryAccessLogRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> QueryAccessLogRequest:
         self.limit = limit
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> QueryAccessLogRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -563,6 +568,7 @@ class QueryIssueStampSheetLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryIssueStampSheetLogRequest:
         self.namespace_name = namespace_name
@@ -602,6 +608,10 @@ class QueryIssueStampSheetLogRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> QueryIssueStampSheetLogRequest:
         self.limit = limit
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> QueryIssueStampSheetLogRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -761,6 +771,7 @@ class QueryExecuteStampSheetLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryExecuteStampSheetLogRequest:
         self.namespace_name = namespace_name
@@ -800,6 +811,10 @@ class QueryExecuteStampSheetLogRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> QueryExecuteStampSheetLogRequest:
         self.limit = limit
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> QueryExecuteStampSheetLogRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -959,6 +974,7 @@ class QueryExecuteStampTaskLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryExecuteStampTaskLogRequest:
         self.namespace_name = namespace_name
@@ -998,6 +1014,10 @@ class QueryExecuteStampTaskLogRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> QueryExecuteStampTaskLogRequest:
         self.limit = limit
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> QueryExecuteStampTaskLogRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

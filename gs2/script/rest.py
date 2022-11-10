@@ -999,6 +999,8 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         }
         if request.script_id is not None:
             body["scriptId"] = request.script_id
+        if request.user_id is not None:
+            body["userId"] = request.user_id
         if request.args is not None:
             body["args"] = request.args
 

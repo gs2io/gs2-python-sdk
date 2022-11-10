@@ -503,6 +503,7 @@ class CreateRoomFromBackendRequest(core.Gs2Request):
     metadata: str = None
     password: str = None
     white_list_user_ids: List[str] = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateRoomFromBackendRequest:
         self.namespace_name = namespace_name
@@ -526,6 +527,10 @@ class CreateRoomFromBackendRequest(core.Gs2Request):
 
     def with_white_list_user_ids(self, white_list_user_ids: List[str]) -> CreateRoomFromBackendRequest:
         self.white_list_user_ids = white_list_user_ids
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateRoomFromBackendRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -701,6 +706,7 @@ class UpdateRoomFromBackendRequest(core.Gs2Request):
     password: str = None
     white_list_user_ids: List[str] = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateRoomFromBackendRequest:
         self.namespace_name = namespace_name
@@ -724,6 +730,10 @@ class UpdateRoomFromBackendRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> UpdateRoomFromBackendRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateRoomFromBackendRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -826,6 +836,7 @@ class DeleteRoomFromBackendRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     user_id: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteRoomFromBackendRequest:
         self.namespace_name = namespace_name
@@ -837,6 +848,10 @@ class DeleteRoomFromBackendRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteRoomFromBackendRequest:
         self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteRoomFromBackendRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1297,6 +1312,7 @@ class DeleteMessageRequest(core.Gs2Request):
     room_name: str = None
     user_id: str = None
     message_name: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMessageRequest:
         self.namespace_name = namespace_name
@@ -1312,6 +1328,10 @@ class DeleteMessageRequest(core.Gs2Request):
 
     def with_message_name(self, message_name: str) -> DeleteMessageRequest:
         self.message_name = message_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMessageRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
