@@ -1143,7 +1143,7 @@ class PutPositionRequest(core.Gs2Request):
     position: Position = None
     vector: Vector = None
     r: float = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PutPositionRequest:
         self.namespace_name = namespace_name
@@ -1171,6 +1171,10 @@ class PutPositionRequest(core.Gs2Request):
 
     def with_r(self, r: float) -> PutPositionRequest:
         self.r = r
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PutPositionRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1303,7 +1307,7 @@ class FetchPositionRequest(core.Gs2Request):
     area_model_name: str = None
     layer_model_name: str = None
     user_ids: List[str] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FetchPositionRequest:
         self.namespace_name = namespace_name
@@ -1323,6 +1327,10 @@ class FetchPositionRequest(core.Gs2Request):
 
     def with_user_ids(self, user_ids: List[str]) -> FetchPositionRequest:
         self.user_ids = user_ids
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> FetchPositionRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1444,7 +1452,7 @@ class NearUserIdsRequest(core.Gs2Request):
     point: Position = None
     r: float = None
     limit: int = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> NearUserIdsRequest:
         self.namespace_name = namespace_name
@@ -1472,6 +1480,10 @@ class NearUserIdsRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> NearUserIdsRequest:
         self.limit = limit
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> NearUserIdsRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1598,7 +1610,7 @@ class ActionRequest(core.Gs2Request):
     layer_model_name: str = None
     position: MyPosition = None
     scopes: List[Scope] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ActionRequest:
         self.namespace_name = namespace_name
@@ -1622,6 +1634,10 @@ class ActionRequest(core.Gs2Request):
 
     def with_scopes(self, scopes: List[Scope]) -> ActionRequest:
         self.scopes = scopes
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ActionRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

@@ -387,7 +387,6 @@ class DescribeWalletsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeWalletsRequest:
         self.namespace_name = namespace_name
@@ -501,7 +500,6 @@ class GetWalletRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     slot: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetWalletRequest:
         self.namespace_name = namespace_name
@@ -673,7 +671,7 @@ class WithdrawRequest(core.Gs2Request):
     slot: int = None
     count: int = None
     paid_only: bool = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> WithdrawRequest:
         self.namespace_name = namespace_name
@@ -693,6 +691,10 @@ class WithdrawRequest(core.Gs2Request):
 
     def with_paid_only(self, paid_only: bool) -> WithdrawRequest:
         self.paid_only = paid_only
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> WithdrawRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

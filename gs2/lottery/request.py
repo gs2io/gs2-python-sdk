@@ -927,7 +927,6 @@ class DescribeBoxesRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeBoxesRequest:
         self.namespace_name = namespace_name
@@ -1041,7 +1040,6 @@ class GetBoxRequest(core.Gs2Request):
     namespace_name: str = None
     prize_table_name: str = None
     access_token: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetBoxRequest:
         self.namespace_name = namespace_name
@@ -1142,7 +1140,7 @@ class ResetBoxRequest(core.Gs2Request):
     namespace_name: str = None
     prize_table_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ResetBoxRequest:
         self.namespace_name = namespace_name
@@ -1154,6 +1152,10 @@ class ResetBoxRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> ResetBoxRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetBoxRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1523,7 +1525,6 @@ class DescribeProbabilitiesRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     lottery_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeProbabilitiesRequest:

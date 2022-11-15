@@ -758,7 +758,7 @@ class SubscribeRequest(core.Gs2Request):
     category_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SubscribeRequest:
         self.namespace_name = namespace_name
@@ -774,6 +774,10 @@ class SubscribeRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> SubscribeRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SubscribeRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -880,7 +884,6 @@ class DescribeScoresRequest(core.Gs2Request):
     scorer_user_id: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeScoresRequest:
         self.namespace_name = namespace_name
@@ -1022,7 +1025,6 @@ class GetScoreRequest(core.Gs2Request):
     access_token: str = None
     scorer_user_id: str = None
     unique_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetScoreRequest:
         self.namespace_name = namespace_name
@@ -1152,7 +1154,6 @@ class DescribeRankingsRequest(core.Gs2Request):
     start_index: int = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeRankingsRequest:
         self.namespace_name = namespace_name
@@ -1344,7 +1345,6 @@ class GetRankingRequest(core.Gs2Request):
     access_token: str = None
     scorer_user_id: str = None
     unique_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetRankingRequest:
         self.namespace_name = namespace_name
@@ -1473,7 +1473,7 @@ class PutScoreRequest(core.Gs2Request):
     access_token: str = None
     score: int = None
     metadata: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PutScoreRequest:
         self.namespace_name = namespace_name
@@ -1493,6 +1493,10 @@ class PutScoreRequest(core.Gs2Request):
 
     def with_metadata(self, metadata: str) -> PutScoreRequest:
         self.metadata = metadata
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PutScoreRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1807,7 +1811,6 @@ class GetSubscribeRequest(core.Gs2Request):
     category_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetSubscribeRequest:
         self.namespace_name = namespace_name
@@ -1922,7 +1925,7 @@ class UnsubscribeRequest(core.Gs2Request):
     category_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnsubscribeRequest:
         self.namespace_name = namespace_name
@@ -1938,6 +1941,10 @@ class UnsubscribeRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> UnsubscribeRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnsubscribeRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2040,7 +2047,6 @@ class DescribeSubscribesByCategoryNameRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     category_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSubscribesByCategoryNameRequest:

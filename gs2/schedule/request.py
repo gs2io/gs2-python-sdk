@@ -693,7 +693,6 @@ class DescribeTriggersRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeTriggersRequest:
         self.namespace_name = namespace_name
@@ -807,7 +806,6 @@ class GetTriggerRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     trigger_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetTriggerRequest:
         self.namespace_name = namespace_name
@@ -977,7 +975,7 @@ class DeleteTriggerRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     trigger_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteTriggerRequest:
         self.namespace_name = namespace_name
@@ -989,6 +987,10 @@ class DeleteTriggerRequest(core.Gs2Request):
 
     def with_trigger_name(self, trigger_name: str) -> DeleteTriggerRequest:
         self.trigger_name = trigger_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteTriggerRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1081,7 +1083,6 @@ class DescribeEventsRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeEventsRequest:
@@ -1205,7 +1206,6 @@ class GetEventRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     event_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetEventRequest:

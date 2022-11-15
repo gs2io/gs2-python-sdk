@@ -24,7 +24,6 @@ class DescribeCompletesRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeCompletesRequest:
         self.namespace_name = namespace_name
@@ -140,7 +139,7 @@ class CompleteRequest(core.Gs2Request):
     mission_task_name: str = None
     access_token: str = None
     config: List[Config] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CompleteRequest:
         self.namespace_name = namespace_name
@@ -160,6 +159,10 @@ class CompleteRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> CompleteRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CompleteRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -345,7 +348,6 @@ class GetCompleteRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     mission_group_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetCompleteRequest:
@@ -1505,7 +1507,6 @@ class DescribeCountersRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeCountersRequest:
         self.namespace_name = namespace_name
@@ -1680,7 +1681,6 @@ class GetCounterRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     counter_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetCounterRequest:

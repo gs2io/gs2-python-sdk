@@ -1165,7 +1165,6 @@ class DescribeStatusesRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeStatusesRequest:
         self.namespace_name = namespace_name
@@ -1293,7 +1292,6 @@ class GetStatusRequest(core.Gs2Request):
     access_token: str = None
     experience_name: str = None
     property_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetStatusRequest:
         self.namespace_name = namespace_name
@@ -1409,7 +1407,6 @@ class GetStatusWithSignatureRequest(core.Gs2Request):
     experience_name: str = None
     property_id: str = None
     key_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetStatusWithSignatureRequest:
         self.namespace_name = namespace_name

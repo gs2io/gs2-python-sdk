@@ -276,7 +276,6 @@ class DescribeCountersRequest(core.Gs2Request):
     limit_name: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeCountersRequest:
         self.namespace_name = namespace_name
@@ -404,7 +403,6 @@ class GetCounterRequest(core.Gs2Request):
     limit_name: str = None
     access_token: str = None
     counter_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetCounterRequest:
         self.namespace_name = namespace_name
@@ -521,7 +519,7 @@ class CountUpRequest(core.Gs2Request):
     access_token: str = None
     count_up_value: int = None
     max_value: int = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CountUpRequest:
         self.namespace_name = namespace_name
@@ -545,6 +543,10 @@ class CountUpRequest(core.Gs2Request):
 
     def with_max_value(self, max_value: int) -> CountUpRequest:
         self.max_value = max_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CountUpRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

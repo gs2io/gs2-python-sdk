@@ -595,7 +595,7 @@ class UseRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     code: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UseRequest:
         self.namespace_name = namespace_name
@@ -607,6 +607,10 @@ class UseRequest(core.Gs2Request):
 
     def with_code(self, code: str) -> UseRequest:
         self.code = code
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UseRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

@@ -1758,7 +1758,6 @@ class DescribeStaminasRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeStaminasRequest:
         self.namespace_name = namespace_name
@@ -1871,7 +1870,6 @@ class GetStaminaRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     stamina_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetStaminaRequest:
@@ -2057,7 +2055,7 @@ class ConsumeStaminaRequest(core.Gs2Request):
     stamina_name: str = None
     access_token: str = None
     consume_value: int = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ConsumeStaminaRequest:
         self.namespace_name = namespace_name
@@ -2073,6 +2071,10 @@ class ConsumeStaminaRequest(core.Gs2Request):
 
     def with_consume_value(self, consume_value: int) -> ConsumeStaminaRequest:
         self.consume_value = consume_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ConsumeStaminaRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2489,7 +2491,7 @@ class SetMaxValueByStatusRequest(core.Gs2Request):
     key_id: str = None
     signed_status_body: str = None
     signed_status_signature: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetMaxValueByStatusRequest:
         self.namespace_name = namespace_name
@@ -2513,6 +2515,10 @@ class SetMaxValueByStatusRequest(core.Gs2Request):
 
     def with_signed_status_signature(self, signed_status_signature: str) -> SetMaxValueByStatusRequest:
         self.signed_status_signature = signed_status_signature
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetMaxValueByStatusRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2561,7 +2567,7 @@ class SetRecoverIntervalByStatusRequest(core.Gs2Request):
     key_id: str = None
     signed_status_body: str = None
     signed_status_signature: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetRecoverIntervalByStatusRequest:
         self.namespace_name = namespace_name
@@ -2585,6 +2591,10 @@ class SetRecoverIntervalByStatusRequest(core.Gs2Request):
 
     def with_signed_status_signature(self, signed_status_signature: str) -> SetRecoverIntervalByStatusRequest:
         self.signed_status_signature = signed_status_signature
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetRecoverIntervalByStatusRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2633,7 +2643,7 @@ class SetRecoverValueByStatusRequest(core.Gs2Request):
     key_id: str = None
     signed_status_body: str = None
     signed_status_signature: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetRecoverValueByStatusRequest:
         self.namespace_name = namespace_name
@@ -2657,6 +2667,10 @@ class SetRecoverValueByStatusRequest(core.Gs2Request):
 
     def with_signed_status_signature(self, signed_status_signature: str) -> SetRecoverValueByStatusRequest:
         self.signed_status_signature = signed_status_signature
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetRecoverValueByStatusRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

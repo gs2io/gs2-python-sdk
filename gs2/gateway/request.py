@@ -289,7 +289,6 @@ class DescribeWebSocketSessionsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeWebSocketSessionsRequest:
         self.namespace_name = namespace_name
@@ -403,7 +402,7 @@ class SetUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     allow_concurrent_access: bool = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetUserIdRequest:
         self.namespace_name = namespace_name
@@ -415,6 +414,10 @@ class SetUserIdRequest(core.Gs2Request):
 
     def with_allow_concurrent_access(self, allow_concurrent_access: bool) -> SetUserIdRequest:
         self.allow_concurrent_access = allow_concurrent_access
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -669,7 +672,7 @@ class SetFirebaseTokenRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetFirebaseTokenRequest:
         self.namespace_name = namespace_name
@@ -681,6 +684,10 @@ class SetFirebaseTokenRequest(core.Gs2Request):
 
     def with_token(self, token: str) -> SetFirebaseTokenRequest:
         self.token = token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetFirebaseTokenRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -774,7 +781,6 @@ class GetFirebaseTokenRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFirebaseTokenRequest:
         self.namespace_name = namespace_name
@@ -861,7 +867,7 @@ class DeleteFirebaseTokenRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteFirebaseTokenRequest:
         self.namespace_name = namespace_name
@@ -869,6 +875,10 @@ class DeleteFirebaseTokenRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DeleteFirebaseTokenRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteFirebaseTokenRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

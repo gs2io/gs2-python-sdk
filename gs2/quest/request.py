@@ -1340,7 +1340,6 @@ class GetProgressRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetProgressRequest:
         self.namespace_name = namespace_name
@@ -1431,7 +1430,7 @@ class StartRequest(core.Gs2Request):
     access_token: str = None
     force: bool = None
     config: List[Config] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> StartRequest:
         self.namespace_name = namespace_name
@@ -1455,6 +1454,10 @@ class StartRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> StartRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> StartRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1591,7 +1594,7 @@ class EndRequest(core.Gs2Request):
     rewards: List[Reward] = None
     is_complete: bool = None
     config: List[Config] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> EndRequest:
         self.namespace_name = namespace_name
@@ -1615,6 +1618,10 @@ class EndRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> EndRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> EndRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1759,7 +1766,7 @@ class DeleteProgressRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteProgressRequest:
         self.namespace_name = namespace_name
@@ -1767,6 +1774,10 @@ class DeleteProgressRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DeleteProgressRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteProgressRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1939,7 +1950,6 @@ class DescribeCompletedQuestListsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeCompletedQuestListsRequest:
         self.namespace_name = namespace_name
@@ -2052,7 +2062,6 @@ class GetCompletedQuestListRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     quest_group_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetCompletedQuestListRequest:

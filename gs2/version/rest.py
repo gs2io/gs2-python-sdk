@@ -1186,6 +1186,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.access_token:
             headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -1260,6 +1262,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -1481,6 +1485,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.access_token:
             headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='DELETE',
@@ -1554,6 +1560,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='DELETE',
@@ -1632,6 +1640,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.access_token:
             headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -1709,6 +1719,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='POST',

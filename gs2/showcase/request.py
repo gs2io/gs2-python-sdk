@@ -1355,7 +1355,6 @@ class DescribeShowcasesRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeShowcasesRequest:
         self.namespace_name = namespace_name
@@ -1442,7 +1441,6 @@ class GetShowcaseRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     showcase_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetShowcaseRequest:
@@ -1547,7 +1545,7 @@ class BuyRequest(core.Gs2Request):
     access_token: str = None
     quantity: int = None
     config: List[Config] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> BuyRequest:
         self.namespace_name = namespace_name
@@ -1571,6 +1569,10 @@ class BuyRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> BuyRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BuyRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

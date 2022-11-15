@@ -483,7 +483,7 @@ class RunRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RunRequest:
         self.namespace_name = namespace_name
@@ -491,6 +491,10 @@ class RunRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> RunRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RunRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -674,7 +678,6 @@ class GetJobResultRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     job_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetJobResultRequest:
         self.namespace_name = namespace_name

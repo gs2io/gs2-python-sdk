@@ -275,7 +275,6 @@ class DescribeMutexesRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeMutexesRequest:
         self.namespace_name = namespace_name
@@ -391,7 +390,7 @@ class LockRequest(core.Gs2Request):
     access_token: str = None
     transaction_id: str = None
     ttl: int = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> LockRequest:
         self.namespace_name = namespace_name
@@ -411,6 +410,10 @@ class LockRequest(core.Gs2Request):
 
     def with_ttl(self, ttl: int) -> LockRequest:
         self.ttl = ttl
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> LockRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -524,7 +527,7 @@ class UnlockRequest(core.Gs2Request):
     property_id: str = None
     access_token: str = None
     transaction_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnlockRequest:
         self.namespace_name = namespace_name
@@ -540,6 +543,10 @@ class UnlockRequest(core.Gs2Request):
 
     def with_transaction_id(self, transaction_id: str) -> UnlockRequest:
         self.transaction_id = transaction_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnlockRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -643,7 +650,6 @@ class GetMutexRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     property_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMutexRequest:
         self.namespace_name = namespace_name

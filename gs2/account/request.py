@@ -698,7 +698,6 @@ class DescribeTakeOversRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeTakeOversRequest:
         self.namespace_name = namespace_name
@@ -814,7 +813,7 @@ class CreateTakeOverRequest(core.Gs2Request):
     type: int = None
     user_identifier: str = None
     password: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateTakeOverRequest:
         self.namespace_name = namespace_name
@@ -834,6 +833,10 @@ class CreateTakeOverRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> CreateTakeOverRequest:
         self.password = password
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateTakeOverRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -946,7 +949,6 @@ class GetTakeOverRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     type: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetTakeOverRequest:
         self.namespace_name = namespace_name
@@ -1049,7 +1051,7 @@ class UpdateTakeOverRequest(core.Gs2Request):
     type: int = None
     old_password: str = None
     password: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateTakeOverRequest:
         self.namespace_name = namespace_name
@@ -1069,6 +1071,10 @@ class UpdateTakeOverRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> UpdateTakeOverRequest:
         self.password = password
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateTakeOverRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1182,7 +1188,7 @@ class DeleteTakeOverRequest(core.Gs2Request):
     access_token: str = None
     type: int = None
     user_identifier: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteTakeOverRequest:
         self.namespace_name = namespace_name
@@ -1198,6 +1204,10 @@ class DeleteTakeOverRequest(core.Gs2Request):
 
     def with_user_identifier(self, user_identifier: str) -> DeleteTakeOverRequest:
         self.user_identifier = user_identifier
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteTakeOverRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

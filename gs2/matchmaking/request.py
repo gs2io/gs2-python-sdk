@@ -483,7 +483,7 @@ class CreateGatheringRequest(core.Gs2Request):
     allow_user_ids: List[str] = None
     expires_at: int = None
     expires_at_time_span: TimeSpan = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateGatheringRequest:
         self.namespace_name = namespace_name
@@ -515,6 +515,10 @@ class CreateGatheringRequest(core.Gs2Request):
 
     def with_expires_at_time_span(self, expires_at_time_span: TimeSpan) -> CreateGatheringRequest:
         self.expires_at_time_span = expires_at_time_span
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateGatheringRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -691,7 +695,7 @@ class UpdateGatheringRequest(core.Gs2Request):
     gathering_name: str = None
     access_token: str = None
     attribute_ranges: List[AttributeRange] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateGatheringRequest:
         self.namespace_name = namespace_name
@@ -707,6 +711,10 @@ class UpdateGatheringRequest(core.Gs2Request):
 
     def with_attribute_ranges(self, attribute_ranges: List[AttributeRange]) -> UpdateGatheringRequest:
         self.attribute_ranges = attribute_ranges
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateGatheringRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -873,7 +881,7 @@ class DoMatchmakingRequest(core.Gs2Request):
     access_token: str = None
     player: Player = None
     matchmaking_context_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DoMatchmakingRequest:
         self.namespace_name = namespace_name
@@ -889,6 +897,10 @@ class DoMatchmakingRequest(core.Gs2Request):
 
     def with_matchmaking_context_token(self, matchmaking_context_token: str) -> DoMatchmakingRequest:
         self.matchmaking_context_token = matchmaking_context_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DoMatchmakingRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1035,7 +1047,7 @@ class CancelMatchmakingRequest(core.Gs2Request):
     namespace_name: str = None
     gathering_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CancelMatchmakingRequest:
         self.namespace_name = namespace_name
@@ -1047,6 +1059,10 @@ class CancelMatchmakingRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> CancelMatchmakingRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CancelMatchmakingRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1686,7 +1702,6 @@ class DescribeRatingsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeRatingsRequest:
         self.namespace_name = namespace_name
@@ -1800,7 +1815,6 @@ class GetRatingRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     rating_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetRatingRequest:
         self.namespace_name = namespace_name
@@ -2015,7 +2029,6 @@ class GetBallotRequest(core.Gs2Request):
     access_token: str = None
     number_of_player: int = None
     key_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetBallotRequest:
         self.namespace_name = namespace_name

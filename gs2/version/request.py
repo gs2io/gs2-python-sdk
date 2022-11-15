@@ -730,7 +730,6 @@ class DescribeAcceptVersionsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeAcceptVersionsRequest:
         self.namespace_name = namespace_name
@@ -844,7 +843,7 @@ class AcceptRequest(core.Gs2Request):
     namespace_name: str = None
     version_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcceptRequest:
         self.namespace_name = namespace_name
@@ -856,6 +855,10 @@ class AcceptRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> AcceptRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcceptRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -950,7 +953,6 @@ class GetAcceptVersionRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     version_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetAcceptVersionRequest:
         self.namespace_name = namespace_name
@@ -1051,7 +1053,7 @@ class DeleteAcceptVersionRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     version_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteAcceptVersionRequest:
         self.namespace_name = namespace_name
@@ -1063,6 +1065,10 @@ class DeleteAcceptVersionRequest(core.Gs2Request):
 
     def with_version_name(self, version_name: str) -> DeleteAcceptVersionRequest:
         self.version_name = version_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteAcceptVersionRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1157,7 +1163,7 @@ class CheckVersionRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_versions: List[TargetVersion] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CheckVersionRequest:
         self.namespace_name = namespace_name
@@ -1169,6 +1175,10 @@ class CheckVersionRequest(core.Gs2Request):
 
     def with_target_versions(self, target_versions: List[TargetVersion]) -> CheckVersionRequest:
         self.target_versions = target_versions
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CheckVersionRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

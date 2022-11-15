@@ -314,7 +314,6 @@ class NowRequest(core.Gs2Request):
 
     context_stack: str = None
     access_token: str = None
-    access_token: str = None
 
     def with_access_token(self, access_token: str) -> NowRequest:
         self.access_token = access_token

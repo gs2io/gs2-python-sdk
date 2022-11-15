@@ -1208,7 +1208,6 @@ class GetStampSheetResultRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     transaction_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetStampSheetResultRequest:
         self.namespace_name = namespace_name

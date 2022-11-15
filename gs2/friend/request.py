@@ -427,7 +427,6 @@ class GetProfileRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetProfileRequest:
         self.namespace_name = namespace_name
@@ -517,7 +516,7 @@ class UpdateProfileRequest(core.Gs2Request):
     public_profile: str = None
     follower_profile: str = None
     friend_profile: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateProfileRequest:
         self.namespace_name = namespace_name
@@ -537,6 +536,10 @@ class UpdateProfileRequest(core.Gs2Request):
 
     def with_friend_profile(self, friend_profile: str) -> UpdateProfileRequest:
         self.friend_profile = friend_profile
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateProfileRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -699,7 +702,6 @@ class DescribeFriendsRequest(core.Gs2Request):
     with_profile: bool = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeFriendsRequest:
         self.namespace_name = namespace_name
@@ -827,7 +829,6 @@ class DescribeBlackListRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeBlackListRequest:
         self.namespace_name = namespace_name
@@ -941,7 +942,7 @@ class RegisterBlackListRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RegisterBlackListRequest:
         self.namespace_name = namespace_name
@@ -953,6 +954,10 @@ class RegisterBlackListRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> RegisterBlackListRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RegisterBlackListRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1047,7 +1052,7 @@ class UnregisterBlackListRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnregisterBlackListRequest:
         self.namespace_name = namespace_name
@@ -1059,6 +1064,10 @@ class UnregisterBlackListRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> UnregisterBlackListRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnregisterBlackListRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1155,7 +1164,6 @@ class DescribeFollowsRequest(core.Gs2Request):
     with_profile: bool = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeFollowsRequest:
         self.namespace_name = namespace_name
@@ -1283,7 +1291,6 @@ class GetFollowRequest(core.Gs2Request):
     access_token: str = None
     target_user_id: str = None
     with_profile: bool = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFollowRequest:
         self.namespace_name = namespace_name
@@ -1397,7 +1404,7 @@ class FollowRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FollowRequest:
         self.namespace_name = namespace_name
@@ -1409,6 +1416,10 @@ class FollowRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> FollowRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> FollowRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1503,7 +1514,7 @@ class UnfollowRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnfollowRequest:
         self.namespace_name = namespace_name
@@ -1515,6 +1526,10 @@ class UnfollowRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> UnfollowRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnfollowRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1610,7 +1625,6 @@ class GetFriendRequest(core.Gs2Request):
     access_token: str = None
     target_user_id: str = None
     with_profile: bool = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFriendRequest:
         self.namespace_name = namespace_name
@@ -1724,7 +1738,7 @@ class DeleteFriendRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteFriendRequest:
         self.namespace_name = namespace_name
@@ -1736,6 +1750,10 @@ class DeleteFriendRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> DeleteFriendRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteFriendRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1831,7 +1849,6 @@ class DescribeSendRequestsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSendRequestsRequest:
         self.namespace_name = namespace_name
@@ -1945,7 +1962,6 @@ class GetSendRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetSendRequestRequest:
         self.namespace_name = namespace_name
@@ -2046,7 +2062,7 @@ class SendRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SendRequestRequest:
         self.namespace_name = namespace_name
@@ -2058,6 +2074,10 @@ class SendRequestRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> SendRequestRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SendRequestRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2152,7 +2172,7 @@ class DeleteRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteRequestRequest:
         self.namespace_name = namespace_name
@@ -2164,6 +2184,10 @@ class DeleteRequestRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> DeleteRequestRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteRequestRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2259,7 +2283,6 @@ class DescribeReceiveRequestsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeReceiveRequestsRequest:
         self.namespace_name = namespace_name
@@ -2373,7 +2396,6 @@ class GetReceiveRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     from_user_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetReceiveRequestRequest:
         self.namespace_name = namespace_name
@@ -2474,7 +2496,7 @@ class AcceptRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     from_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcceptRequestRequest:
         self.namespace_name = namespace_name
@@ -2486,6 +2508,10 @@ class AcceptRequestRequest(core.Gs2Request):
 
     def with_from_user_id(self, from_user_id: str) -> AcceptRequestRequest:
         self.from_user_id = from_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcceptRequestRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2580,7 +2606,7 @@ class RejectRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     from_user_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> RejectRequestRequest:
         self.namespace_name = namespace_name
@@ -2592,6 +2618,10 @@ class RejectRequestRequest(core.Gs2Request):
 
     def with_from_user_id(self, from_user_id: str) -> RejectRequestRequest:
         self.from_user_id = from_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RejectRequestRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

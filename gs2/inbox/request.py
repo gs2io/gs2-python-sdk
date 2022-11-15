@@ -387,7 +387,6 @@ class DescribeMessagesRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeMessagesRequest:
         self.namespace_name = namespace_name
@@ -583,7 +582,6 @@ class GetMessageRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     message_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMessageRequest:
         self.namespace_name = namespace_name
@@ -683,7 +681,7 @@ class ReceiveGlobalMessageRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ReceiveGlobalMessageRequest:
         self.namespace_name = namespace_name
@@ -691,6 +689,10 @@ class ReceiveGlobalMessageRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> ReceiveGlobalMessageRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ReceiveGlobalMessageRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -776,7 +778,7 @@ class OpenMessageRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     message_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> OpenMessageRequest:
         self.namespace_name = namespace_name
@@ -788,6 +790,10 @@ class OpenMessageRequest(core.Gs2Request):
 
     def with_message_name(self, message_name: str) -> OpenMessageRequest:
         self.message_name = message_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> OpenMessageRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -883,7 +889,7 @@ class ReadMessageRequest(core.Gs2Request):
     access_token: str = None
     message_name: str = None
     config: List[Config] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ReadMessageRequest:
         self.namespace_name = namespace_name
@@ -899,6 +905,10 @@ class ReadMessageRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> ReadMessageRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ReadMessageRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1014,7 +1024,7 @@ class DeleteMessageRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     message_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMessageRequest:
         self.namespace_name = namespace_name
@@ -1026,6 +1036,10 @@ class DeleteMessageRequest(core.Gs2Request):
 
     def with_message_name(self, message_name: str) -> DeleteMessageRequest:
         self.message_name = message_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMessageRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

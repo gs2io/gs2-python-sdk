@@ -395,7 +395,6 @@ class DescribeNewsRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeNewsRequest:
         self.namespace_name = namespace_name
@@ -481,7 +480,6 @@ class WantGrantRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> WantGrantRequest:

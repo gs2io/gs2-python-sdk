@@ -632,7 +632,6 @@ class DescribeEntriesRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeEntriesRequest:
         self.namespace_name = namespace_name
@@ -807,7 +806,6 @@ class GetEntryRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     entry_model_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetEntryRequest:
         self.namespace_name = namespace_name
@@ -909,7 +907,6 @@ class GetEntryWithSignatureRequest(core.Gs2Request):
     access_token: str = None
     entry_model_name: str = None
     key_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetEntryWithSignatureRequest:
         self.namespace_name = namespace_name

@@ -1201,7 +1201,6 @@ class DescribeMoldsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeMoldsRequest:
         self.namespace_name = namespace_name
@@ -1315,7 +1314,6 @@ class GetMoldRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     mold_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMoldRequest:
         self.namespace_name = namespace_name
@@ -1540,7 +1538,7 @@ class DeleteMoldRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     mold_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMoldRequest:
         self.namespace_name = namespace_name
@@ -1552,6 +1550,10 @@ class DeleteMoldRequest(core.Gs2Request):
 
     def with_mold_name(self, mold_name: str) -> DeleteMoldRequest:
         self.mold_name = mold_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMoldRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1734,7 +1736,6 @@ class DescribeFormsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeFormsRequest:
         self.namespace_name = namespace_name
@@ -1862,7 +1863,6 @@ class GetFormRequest(core.Gs2Request):
     access_token: str = None
     mold_name: str = None
     index: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFormRequest:
         self.namespace_name = namespace_name
@@ -1978,7 +1978,6 @@ class GetFormWithSignatureRequest(core.Gs2Request):
     mold_name: str = None
     index: int = None
     key_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFormWithSignatureRequest:
         self.namespace_name = namespace_name
@@ -2183,7 +2182,7 @@ class SetFormWithSignatureRequest(core.Gs2Request):
     index: int = None
     slots: List[SlotWithSignature] = None
     key_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetFormWithSignatureRequest:
         self.namespace_name = namespace_name
@@ -2207,6 +2206,10 @@ class SetFormWithSignatureRequest(core.Gs2Request):
 
     def with_key_id(self, key_id: str) -> SetFormWithSignatureRequest:
         self.key_id = key_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetFormWithSignatureRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2341,7 +2344,7 @@ class DeleteFormRequest(core.Gs2Request):
     access_token: str = None
     mold_name: str = None
     index: int = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteFormRequest:
         self.namespace_name = namespace_name
@@ -2357,6 +2360,10 @@ class DeleteFormRequest(core.Gs2Request):
 
     def with_index(self, index: int) -> DeleteFormRequest:
         self.index = index
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteFormRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2505,7 +2512,6 @@ class DescribePropertyFormsRequest(core.Gs2Request):
     form_model_name: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribePropertyFormsRequest:
         self.namespace_name = namespace_name
@@ -2633,7 +2639,6 @@ class GetPropertyFormRequest(core.Gs2Request):
     access_token: str = None
     form_model_name: str = None
     property_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetPropertyFormRequest:
         self.namespace_name = namespace_name
@@ -2749,7 +2754,6 @@ class GetPropertyFormWithSignatureRequest(core.Gs2Request):
     form_model_name: str = None
     property_id: str = None
     key_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetPropertyFormWithSignatureRequest:
         self.namespace_name = namespace_name
@@ -2954,7 +2958,7 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
     property_id: str = None
     slots: List[SlotWithSignature] = None
     key_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetPropertyFormWithSignatureRequest:
         self.namespace_name = namespace_name
@@ -2978,6 +2982,10 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
 
     def with_key_id(self, key_id: str) -> SetPropertyFormWithSignatureRequest:
         self.key_id = key_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetPropertyFormWithSignatureRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -3112,7 +3120,7 @@ class DeletePropertyFormRequest(core.Gs2Request):
     access_token: str = None
     form_model_name: str = None
     property_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeletePropertyFormRequest:
         self.namespace_name = namespace_name
@@ -3128,6 +3136,10 @@ class DeletePropertyFormRequest(core.Gs2Request):
 
     def with_property_id(self, property_id: str) -> DeletePropertyFormRequest:
         self.property_id = property_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeletePropertyFormRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

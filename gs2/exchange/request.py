@@ -809,7 +809,7 @@ class ExchangeRequest(core.Gs2Request):
     access_token: str = None
     count: int = None
     config: List[Config] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ExchangeRequest:
         self.namespace_name = namespace_name
@@ -829,6 +829,10 @@ class ExchangeRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> ExchangeRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ExchangeRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1218,7 +1222,6 @@ class DescribeAwaitsRequest(core.Gs2Request):
     rate_name: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeAwaitsRequest:
         self.namespace_name = namespace_name
@@ -1346,7 +1349,6 @@ class GetAwaitRequest(core.Gs2Request):
     access_token: str = None
     rate_name: str = None
     await_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetAwaitRequest:
         self.namespace_name = namespace_name
@@ -1462,7 +1464,7 @@ class AcquireRequest(core.Gs2Request):
     rate_name: str = None
     await_name: str = None
     config: List[Config] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireRequest:
         self.namespace_name = namespace_name
@@ -1482,6 +1484,10 @@ class AcquireRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> AcquireRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcquireRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1683,7 +1689,7 @@ class SkipRequest(core.Gs2Request):
     rate_name: str = None
     await_name: str = None
     config: List[Config] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SkipRequest:
         self.namespace_name = namespace_name
@@ -1703,6 +1709,10 @@ class SkipRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> SkipRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SkipRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1828,7 +1838,7 @@ class DeleteAwaitRequest(core.Gs2Request):
     access_token: str = None
     rate_name: str = None
     await_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteAwaitRequest:
         self.namespace_name = namespace_name
@@ -1844,6 +1854,10 @@ class DeleteAwaitRequest(core.Gs2Request):
 
     def with_await_name(self, await_name: str) -> DeleteAwaitRequest:
         self.await_name = await_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteAwaitRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

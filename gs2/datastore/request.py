@@ -290,7 +290,6 @@ class DescribeDataObjectsRequest(core.Gs2Request):
     status: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeDataObjectsRequest:
         self.namespace_name = namespace_name
@@ -421,7 +420,7 @@ class PrepareUploadRequest(core.Gs2Request):
     scope: str = None
     allow_user_ids: List[str] = None
     update_if_exists: bool = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PrepareUploadRequest:
         self.namespace_name = namespace_name
@@ -449,6 +448,10 @@ class PrepareUploadRequest(core.Gs2Request):
 
     def with_update_if_exists(self, update_if_exists: bool) -> PrepareUploadRequest:
         self.update_if_exists = update_if_exists
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PrepareUploadRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -593,7 +596,7 @@ class UpdateDataObjectRequest(core.Gs2Request):
     access_token: str = None
     scope: str = None
     allow_user_ids: List[str] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateDataObjectRequest:
         self.namespace_name = namespace_name
@@ -613,6 +616,10 @@ class UpdateDataObjectRequest(core.Gs2Request):
 
     def with_allow_user_ids(self, allow_user_ids: List[str]) -> UpdateDataObjectRequest:
         self.allow_user_ids = allow_user_ids
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateDataObjectRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -738,7 +745,7 @@ class PrepareReUploadRequest(core.Gs2Request):
     data_object_name: str = None
     access_token: str = None
     content_type: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PrepareReUploadRequest:
         self.namespace_name = namespace_name
@@ -754,6 +761,10 @@ class PrepareReUploadRequest(core.Gs2Request):
 
     def with_content_type(self, content_type: str) -> PrepareReUploadRequest:
         self.content_type = content_type
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PrepareReUploadRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -857,7 +868,7 @@ class DoneUploadRequest(core.Gs2Request):
     namespace_name: str = None
     data_object_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DoneUploadRequest:
         self.namespace_name = namespace_name
@@ -869,6 +880,10 @@ class DoneUploadRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DoneUploadRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DoneUploadRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -963,7 +978,7 @@ class DeleteDataObjectRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     data_object_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteDataObjectRequest:
         self.namespace_name = namespace_name
@@ -975,6 +990,10 @@ class DeleteDataObjectRequest(core.Gs2Request):
 
     def with_data_object_name(self, data_object_name: str) -> DeleteDataObjectRequest:
         self.data_object_name = data_object_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteDataObjectRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1069,7 +1088,7 @@ class PrepareDownloadRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     data_object_id: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PrepareDownloadRequest:
         self.namespace_name = namespace_name
@@ -1081,6 +1100,10 @@ class PrepareDownloadRequest(core.Gs2Request):
 
     def with_data_object_id(self, data_object_id: str) -> PrepareDownloadRequest:
         self.data_object_id = data_object_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PrepareDownloadRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1176,7 +1199,7 @@ class PrepareDownloadByGenerationRequest(core.Gs2Request):
     access_token: str = None
     data_object_id: str = None
     generation: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PrepareDownloadByGenerationRequest:
         self.namespace_name = namespace_name
@@ -1192,6 +1215,10 @@ class PrepareDownloadByGenerationRequest(core.Gs2Request):
 
     def with_generation(self, generation: str) -> PrepareDownloadByGenerationRequest:
         self.generation = generation
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PrepareDownloadByGenerationRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1295,7 +1322,7 @@ class PrepareDownloadOwnDataRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     data_object_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PrepareDownloadOwnDataRequest:
         self.namespace_name = namespace_name
@@ -1307,6 +1334,10 @@ class PrepareDownloadOwnDataRequest(core.Gs2Request):
 
     def with_data_object_name(self, data_object_name: str) -> PrepareDownloadOwnDataRequest:
         self.data_object_name = data_object_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PrepareDownloadOwnDataRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1402,7 +1433,7 @@ class PrepareDownloadOwnDataByGenerationRequest(core.Gs2Request):
     access_token: str = None
     data_object_name: str = None
     generation: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PrepareDownloadOwnDataByGenerationRequest:
         self.namespace_name = namespace_name
@@ -1418,6 +1449,10 @@ class PrepareDownloadOwnDataByGenerationRequest(core.Gs2Request):
 
     def with_generation(self, generation: str) -> PrepareDownloadOwnDataByGenerationRequest:
         self.generation = generation
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PrepareDownloadOwnDataByGenerationRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1566,7 +1601,6 @@ class DescribeDataObjectHistoriesRequest(core.Gs2Request):
     data_object_name: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeDataObjectHistoriesRequest:
         self.namespace_name = namespace_name
@@ -1694,7 +1728,6 @@ class GetDataObjectHistoryRequest(core.Gs2Request):
     access_token: str = None
     data_object_name: str = None
     generation: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetDataObjectHistoryRequest:
         self.namespace_name = namespace_name

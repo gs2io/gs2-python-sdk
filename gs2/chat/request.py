@@ -425,7 +425,7 @@ class CreateRoomRequest(core.Gs2Request):
     metadata: str = None
     password: str = None
     white_list_user_ids: List[str] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateRoomRequest:
         self.namespace_name = namespace_name
@@ -449,6 +449,10 @@ class CreateRoomRequest(core.Gs2Request):
 
     def with_white_list_user_ids(self, white_list_user_ids: List[str]) -> CreateRoomRequest:
         self.white_list_user_ids = white_list_user_ids
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateRoomRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -628,7 +632,7 @@ class UpdateRoomRequest(core.Gs2Request):
     password: str = None
     white_list_user_ids: List[str] = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateRoomRequest:
         self.namespace_name = namespace_name
@@ -652,6 +656,10 @@ class UpdateRoomRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> UpdateRoomRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateRoomRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -785,7 +793,7 @@ class DeleteRoomRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteRoomRequest:
         self.namespace_name = namespace_name
@@ -797,6 +805,10 @@ class DeleteRoomRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DeleteRoomRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteRoomRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -894,7 +906,6 @@ class DescribeMessagesRequest(core.Gs2Request):
     access_token: str = None
     start_at: int = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeMessagesRequest:
         self.namespace_name = namespace_name
@@ -1037,7 +1048,7 @@ class PostRequest(core.Gs2Request):
     category: int = None
     metadata: str = None
     password: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PostRequest:
         self.namespace_name = namespace_name
@@ -1061,6 +1072,10 @@ class PostRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> PostRequest:
         self.password = password
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PostRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1183,7 +1198,6 @@ class GetMessageRequest(core.Gs2Request):
     room_name: str = None
     message_name: str = None
     password: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMessageRequest:
@@ -1374,7 +1388,6 @@ class DescribeSubscribesRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSubscribesRequest:
         self.namespace_name = namespace_name
@@ -1546,7 +1559,7 @@ class SubscribeRequest(core.Gs2Request):
     room_name: str = None
     access_token: str = None
     notification_types: List[NotificationType] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SubscribeRequest:
         self.namespace_name = namespace_name
@@ -1562,6 +1575,10 @@ class SubscribeRequest(core.Gs2Request):
 
     def with_notification_types(self, notification_types: List[NotificationType]) -> SubscribeRequest:
         self.notification_types = notification_types
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SubscribeRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1677,7 +1694,6 @@ class GetSubscribeRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     access_token: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetSubscribeRequest:
         self.namespace_name = namespace_name
@@ -1779,7 +1795,7 @@ class UpdateNotificationTypeRequest(core.Gs2Request):
     room_name: str = None
     access_token: str = None
     notification_types: List[NotificationType] = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNotificationTypeRequest:
         self.namespace_name = namespace_name
@@ -1795,6 +1811,10 @@ class UpdateNotificationTypeRequest(core.Gs2Request):
 
     def with_notification_types(self, notification_types: List[NotificationType]) -> UpdateNotificationTypeRequest:
         self.notification_types = notification_types
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateNotificationTypeRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1910,7 +1930,7 @@ class UnsubscribeRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     access_token: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnsubscribeRequest:
         self.namespace_name = namespace_name
@@ -1922,6 +1942,10 @@ class UnsubscribeRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> UnsubscribeRequest:
         self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnsubscribeRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

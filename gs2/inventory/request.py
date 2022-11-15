@@ -1266,7 +1266,6 @@ class DescribeInventoriesRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeInventoriesRequest:
         self.namespace_name = namespace_name
@@ -1379,7 +1378,6 @@ class GetInventoryRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     inventory_name: str = None
-    access_token: str = None
     access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetInventoryRequest:
@@ -1748,7 +1746,6 @@ class DescribeItemSetsRequest(core.Gs2Request):
     access_token: str = None
     page_token: str = None
     limit: int = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeItemSetsRequest:
         self.namespace_name = namespace_name
@@ -1877,7 +1874,6 @@ class GetItemSetRequest(core.Gs2Request):
     access_token: str = None
     item_name: str = None
     item_set_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetItemSetRequest:
         self.namespace_name = namespace_name
@@ -2007,7 +2003,6 @@ class GetItemWithSignatureRequest(core.Gs2Request):
     item_name: str = None
     item_set_name: str = None
     key_id: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetItemWithSignatureRequest:
         self.namespace_name = namespace_name
@@ -2240,7 +2235,7 @@ class ConsumeItemSetRequest(core.Gs2Request):
     item_name: str = None
     consume_count: int = None
     item_set_name: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ConsumeItemSetRequest:
         self.namespace_name = namespace_name
@@ -2264,6 +2259,10 @@ class ConsumeItemSetRequest(core.Gs2Request):
 
     def with_item_set_name(self, item_set_name: str) -> ConsumeItemSetRequest:
         self.item_set_name = item_set_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ConsumeItemSetRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2542,7 +2541,6 @@ class DescribeReferenceOfRequest(core.Gs2Request):
     access_token: str = None
     item_name: str = None
     item_set_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeReferenceOfRequest:
         self.namespace_name = namespace_name
@@ -2672,7 +2670,6 @@ class GetReferenceOfRequest(core.Gs2Request):
     item_name: str = None
     item_set_name: str = None
     reference_of: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetReferenceOfRequest:
         self.namespace_name = namespace_name
@@ -2816,7 +2813,7 @@ class VerifyReferenceOfRequest(core.Gs2Request):
     item_set_name: str = None
     reference_of: str = None
     verify_type: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyReferenceOfRequest:
         self.namespace_name = namespace_name
@@ -2844,6 +2841,10 @@ class VerifyReferenceOfRequest(core.Gs2Request):
 
     def with_verify_type(self, verify_type: str) -> VerifyReferenceOfRequest:
         self.verify_type = verify_type
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyReferenceOfRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2977,7 +2978,7 @@ class AddReferenceOfRequest(core.Gs2Request):
     item_name: str = None
     item_set_name: str = None
     reference_of: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddReferenceOfRequest:
         self.namespace_name = namespace_name
@@ -3001,6 +3002,10 @@ class AddReferenceOfRequest(core.Gs2Request):
 
     def with_reference_of(self, reference_of: str) -> AddReferenceOfRequest:
         self.reference_of = reference_of
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddReferenceOfRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -3125,7 +3130,7 @@ class DeleteReferenceOfRequest(core.Gs2Request):
     item_name: str = None
     item_set_name: str = None
     reference_of: str = None
-    access_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteReferenceOfRequest:
         self.namespace_name = namespace_name
@@ -3149,6 +3154,10 @@ class DeleteReferenceOfRequest(core.Gs2Request):
 
     def with_reference_of(self, reference_of: str) -> DeleteReferenceOfRequest:
         self.reference_of = reference_of
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteReferenceOfRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
