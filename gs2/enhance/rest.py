@@ -1276,83 +1276,6 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_progresses_by_user_id(
-        self,
-        request: DescribeProgressesByUserIdRequest,
-        callback: Callable[[AsyncResult[DescribeProgressesByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='enhance',
-            region=self.session.region,
-        ) + "/{namespaceName}/progress".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-        if request.user_id is not None:
-            query_strings["userId"] = request.user_id
-        if request.page_token is not None:
-            query_strings["pageToken"] = request.page_token
-        if request.limit is not None:
-            query_strings["limit"] = request.limit
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=DescribeProgressesByUserIdResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def describe_progresses_by_user_id(
-        self,
-        request: DescribeProgressesByUserIdRequest,
-    ) -> DescribeProgressesByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._describe_progresses_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_progresses_by_user_id_async(
-        self,
-        request: DescribeProgressesByUserIdRequest,
-    ) -> DescribeProgressesByUserIdResult:
-        async_result = []
-        self._describe_progresses_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _create_progress_by_user_id(
         self,
         request: CreateProgressByUserIdRequest,
@@ -1447,10 +1370,8 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='enhance',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/progress/{rateName}/progress/{progressName}".format(
+        ) + "/{namespaceName}/user/me/progress".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
-            progressName=request.progress_name if request.progress_name is not None and request.progress_name != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1522,11 +1443,9 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='enhance',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/progress/{rateName}/progress/{progressName}".format(
+        ) + "/{namespaceName}/user/{userId}/progress".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
-            progressName=request.progress_name if request.progress_name is not None and request.progress_name != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1775,10 +1694,8 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='enhance',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/progress/rate/{rateName}/progress/{progressName}/end".format(
+        ) + "/{namespaceName}/user/me/progress/end".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
-            progressName=request.progress_name if request.progress_name is not None and request.progress_name != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1857,11 +1774,9 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='enhance',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/progress/rate/{rateName}/progress/{progressName}/end".format(
+        ) + "/{namespaceName}/user/{userId}/progress/end".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
-            progressName=request.progress_name if request.progress_name is not None and request.progress_name != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1938,10 +1853,8 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='enhance',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/progress/rate/{rateName}/progress/{progressName}".format(
+        ) + "/{namespaceName}/user/me/progress".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
-            progressName=request.progress_name if request.progress_name is not None and request.progress_name != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -2015,11 +1928,9 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='enhance',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/progress/rate/{rateName}/progress/{progressName}".format(
+        ) + "/{namespaceName}/user/{userId}/progress".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
-            progressName=request.progress_name if request.progress_name is not None and request.progress_name != '' else 'null',
         )
 
         headers = self._create_authorized_headers()

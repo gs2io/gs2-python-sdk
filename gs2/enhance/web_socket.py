@@ -1285,83 +1285,6 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_progresses_by_user_id(
-        self,
-        request: DescribeProgressesByUserIdRequest,
-        callback: Callable[[AsyncResult[DescribeProgressesByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="enhance",
-            component='progress',
-            function='describeProgressesByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-        if request.page_token is not None:
-            body["pageToken"] = request.page_token
-        if request.limit is not None:
-            body["limit"] = request.limit
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeProgressesByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_progresses_by_user_id(
-        self,
-        request: DescribeProgressesByUserIdRequest,
-    ) -> DescribeProgressesByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._describe_progresses_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_progresses_by_user_id_async(
-        self,
-        request: DescribeProgressesByUserIdRequest,
-    ) -> DescribeProgressesByUserIdResult:
-        async_result = []
-        self._describe_progresses_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _create_progress_by_user_id(
         self,
         request: CreateProgressByUserIdRequest,
@@ -1469,10 +1392,6 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
-        if request.progress_name is not None:
-            body["progressName"] = request.progress_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1548,10 +1467,6 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
-        if request.progress_name is not None:
-            body["progressName"] = request.progress_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1809,10 +1724,6 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
-        if request.progress_name is not None:
-            body["progressName"] = request.progress_name
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
@@ -1895,10 +1806,6 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
-        if request.progress_name is not None:
-            body["progressName"] = request.progress_name
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
@@ -1979,10 +1886,6 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
-        if request.progress_name is not None:
-            body["progressName"] = request.progress_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2060,10 +1963,6 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
-        if request.progress_name is not None:
-            body["progressName"] = request.progress_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

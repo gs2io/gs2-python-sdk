@@ -500,16 +500,12 @@ class Progress(core.Gs2Model):
         owner_id,
         namespace_name,
         user_id,
-        rate_name,
-        progress_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:enhance:{namespaceName}:user:{userId}:rate:{rateName}:progress:{progressName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:enhance:{namespaceName}:user:{userId}:progress'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
             userId=user_id,
-            rateName=rate_name,
-            progressName=progress_name,
         )
 
     @classmethod
@@ -517,7 +513,7 @@ class Progress(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):progress', grn)
         if match is None:
             return None
         return match.group('region')
@@ -527,7 +523,7 @@ class Progress(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):progress', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -537,7 +533,7 @@ class Progress(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):progress', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -547,30 +543,10 @@ class Progress(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):progress', grn)
         if match is None:
             return None
         return match.group('user_id')
-
-    @classmethod
-    def get_rate_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('rate_name')
-
-    @classmethod
-    def get_progress_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):user:(?P<userId>.+):rate:(?P<rateName>.+):progress:(?P<progressName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('progress_name')
 
     def get(self, key, default=None):
         items = self.to_dict()

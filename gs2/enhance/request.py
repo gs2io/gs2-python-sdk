@@ -994,63 +994,6 @@ class DirectEnhanceByStampSheetRequest(core.Gs2Request):
         }
 
 
-class DescribeProgressesByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    user_id: str = None
-    page_token: str = None
-    limit: int = None
-
-    def with_namespace_name(self, namespace_name: str) -> DescribeProgressesByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_user_id(self, user_id: str) -> DescribeProgressesByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def with_page_token(self, page_token: str) -> DescribeProgressesByUserIdRequest:
-        self.page_token = page_token
-        return self
-
-    def with_limit(self, limit: int) -> DescribeProgressesByUserIdRequest:
-        self.limit = limit
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeProgressesByUserIdRequest]:
-        if data is None:
-            return None
-        return DescribeProgressesByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))\
-            .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "userId": self.user_id,
-            "pageToken": self.page_token,
-            "limit": self.limit,
-        }
-
-
 class CreateProgressByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1138,8 +1081,6 @@ class GetProgressRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    rate_name: str = None
-    progress_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetProgressRequest:
         self.namespace_name = namespace_name
@@ -1147,14 +1088,6 @@ class GetProgressRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> GetProgressRequest:
         self.access_token = access_token
-        return self
-
-    def with_rate_name(self, rate_name: str) -> GetProgressRequest:
-        self.rate_name = rate_name
-        return self
-
-    def with_progress_name(self, progress_name: str) -> GetProgressRequest:
-        self.progress_name = progress_name
         return self
 
     def get(self, key, default=None):
@@ -1177,16 +1110,12 @@ class GetProgressRequest(core.Gs2Request):
             return None
         return GetProgressRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_access_token(data.get('accessToken'))\
-            .with_rate_name(data.get('rateName'))\
-            .with_progress_name(data.get('progressName'))
+            .with_access_token(data.get('accessToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "rateName": self.rate_name,
-            "progressName": self.progress_name,
         }
 
 
@@ -1195,8 +1124,6 @@ class GetProgressByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    rate_name: str = None
-    progress_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetProgressByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1204,14 +1131,6 @@ class GetProgressByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> GetProgressByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_rate_name(self, rate_name: str) -> GetProgressByUserIdRequest:
-        self.rate_name = rate_name
-        return self
-
-    def with_progress_name(self, progress_name: str) -> GetProgressByUserIdRequest:
-        self.progress_name = progress_name
         return self
 
     def get(self, key, default=None):
@@ -1234,16 +1153,12 @@ class GetProgressByUserIdRequest(core.Gs2Request):
             return None
         return GetProgressByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))\
-            .with_rate_name(data.get('rateName'))\
-            .with_progress_name(data.get('progressName'))
+            .with_user_id(data.get('userId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "rateName": self.rate_name,
-            "progressName": self.progress_name,
         }
 
 
@@ -1442,8 +1357,6 @@ class EndRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    rate_name: str = None
-    progress_name: str = None
     config: List[Config] = None
     duplication_avoider: str = None
 
@@ -1453,14 +1366,6 @@ class EndRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> EndRequest:
         self.access_token = access_token
-        return self
-
-    def with_rate_name(self, rate_name: str) -> EndRequest:
-        self.rate_name = rate_name
-        return self
-
-    def with_progress_name(self, progress_name: str) -> EndRequest:
-        self.progress_name = progress_name
         return self
 
     def with_config(self, config: List[Config]) -> EndRequest:
@@ -1492,8 +1397,6 @@ class EndRequest(core.Gs2Request):
         return EndRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_rate_name(data.get('rateName'))\
-            .with_progress_name(data.get('progressName'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
@@ -1503,8 +1406,6 @@ class EndRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "rateName": self.rate_name,
-            "progressName": self.progress_name,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
@@ -1517,8 +1418,6 @@ class EndByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    rate_name: str = None
-    progress_name: str = None
     config: List[Config] = None
     duplication_avoider: str = None
 
@@ -1528,14 +1427,6 @@ class EndByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> EndByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_rate_name(self, rate_name: str) -> EndByUserIdRequest:
-        self.rate_name = rate_name
-        return self
-
-    def with_progress_name(self, progress_name: str) -> EndByUserIdRequest:
-        self.progress_name = progress_name
         return self
 
     def with_config(self, config: List[Config]) -> EndByUserIdRequest:
@@ -1567,8 +1458,6 @@ class EndByUserIdRequest(core.Gs2Request):
         return EndByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_rate_name(data.get('rateName'))\
-            .with_progress_name(data.get('progressName'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
@@ -1578,8 +1467,6 @@ class EndByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "rateName": self.rate_name,
-            "progressName": self.progress_name,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
@@ -1592,8 +1479,6 @@ class DeleteProgressRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    rate_name: str = None
-    progress_name: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteProgressRequest:
@@ -1602,14 +1487,6 @@ class DeleteProgressRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DeleteProgressRequest:
         self.access_token = access_token
-        return self
-
-    def with_rate_name(self, rate_name: str) -> DeleteProgressRequest:
-        self.rate_name = rate_name
-        return self
-
-    def with_progress_name(self, progress_name: str) -> DeleteProgressRequest:
-        self.progress_name = progress_name
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteProgressRequest:
@@ -1636,16 +1513,12 @@ class DeleteProgressRequest(core.Gs2Request):
             return None
         return DeleteProgressRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_access_token(data.get('accessToken'))\
-            .with_rate_name(data.get('rateName'))\
-            .with_progress_name(data.get('progressName'))
+            .with_access_token(data.get('accessToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "rateName": self.rate_name,
-            "progressName": self.progress_name,
         }
 
 
@@ -1654,8 +1527,6 @@ class DeleteProgressByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    rate_name: str = None
-    progress_name: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteProgressByUserIdRequest:
@@ -1664,14 +1535,6 @@ class DeleteProgressByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteProgressByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_rate_name(self, rate_name: str) -> DeleteProgressByUserIdRequest:
-        self.rate_name = rate_name
-        return self
-
-    def with_progress_name(self, progress_name: str) -> DeleteProgressByUserIdRequest:
-        self.progress_name = progress_name
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteProgressByUserIdRequest:
@@ -1698,16 +1561,12 @@ class DeleteProgressByUserIdRequest(core.Gs2Request):
             return None
         return DeleteProgressByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))\
-            .with_rate_name(data.get('rateName'))\
-            .with_progress_name(data.get('progressName'))
+            .with_user_id(data.get('userId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "rateName": self.rate_name,
-            "progressName": self.progress_name,
         }
 
 
