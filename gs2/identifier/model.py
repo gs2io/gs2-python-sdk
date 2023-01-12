@@ -139,9 +139,14 @@ class AttachSecurityPolicy(core.Gs2Model):
 
 
 class Password(core.Gs2Model):
+    password_id: str = None
     user_id: str = None
     user_name: str = None
     created_at: int = None
+
+    def with_password_id(self, password_id: str) -> Password:
+        self.password_id = password_id
+        return self
 
     def with_user_id(self, user_id: str) -> Password:
         self.user_id = user_id
@@ -205,12 +210,14 @@ class Password(core.Gs2Model):
         if data is None:
             return None
         return Password()\
+            .with_password_id(data.get('passwordId'))\
             .with_user_id(data.get('userId'))\
             .with_user_name(data.get('userName'))\
             .with_created_at(data.get('createdAt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "passwordId": self.password_id,
             "userId": self.user_id,
             "userName": self.user_name,
             "createdAt": self.created_at,

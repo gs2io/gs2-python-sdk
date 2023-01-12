@@ -1096,6 +1096,7 @@ class AreaModel(core.Gs2Model):
     area_model_id: str = None
     name: str = None
     metadata: str = None
+    layer_models: List[LayerModel] = None
 
     def with_area_model_id(self, area_model_id: str) -> AreaModel:
         self.area_model_id = area_model_id
@@ -1107,6 +1108,10 @@ class AreaModel(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> AreaModel:
         self.metadata = metadata
+        return self
+
+    def with_layer_models(self, layer_models: List[LayerModel]) -> AreaModel:
+        self.layer_models = layer_models
         return self
 
     @classmethod
@@ -1185,13 +1190,21 @@ class AreaModel(core.Gs2Model):
         return AreaModel()\
             .with_area_model_id(data.get('areaModelId'))\
             .with_name(data.get('name'))\
-            .with_metadata(data.get('metadata'))
+            .with_metadata(data.get('metadata'))\
+            .with_layer_models([
+                LayerModel.from_dict(data.get('layerModels')[i])
+                for i in range(len(data.get('layerModels')) if data.get('layerModels') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "areaModelId": self.area_model_id,
             "name": self.name,
             "metadata": self.metadata,
+            "layerModels": [
+                self.layer_models[i].to_dict() if self.layer_models[i] else None
+                for i in range(len(self.layer_models) if self.layer_models else 0)
+            ],
         }
 
 
