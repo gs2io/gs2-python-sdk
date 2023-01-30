@@ -848,16 +848,11 @@ class LayerModelMaster(core.Gs2Model):
 
 class LayerModel(core.Gs2Model):
     layer_model_id: str = None
-    area_model_name: str = None
     name: str = None
     metadata: str = None
 
     def with_layer_model_id(self, layer_model_id: str) -> LayerModel:
         self.layer_model_id = layer_model_id
-        return self
-
-    def with_area_model_name(self, area_model_name: str) -> LayerModel:
-        self.area_model_name = area_model_name
         return self
 
     def with_name(self, name: str) -> LayerModel:
@@ -955,14 +950,12 @@ class LayerModel(core.Gs2Model):
             return None
         return LayerModel()\
             .with_layer_model_id(data.get('layerModelId'))\
-            .with_area_model_name(data.get('areaModelName'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "layerModelId": self.layer_model_id,
-            "areaModelName": self.area_model_name,
             "name": self.name,
             "metadata": self.metadata,
         }
