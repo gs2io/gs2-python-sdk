@@ -920,330 +920,6 @@ class DeletePrizeTableMasterRequest(core.Gs2Request):
         }
 
 
-class DescribeBoxesRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    access_token: str = None
-    page_token: str = None
-    limit: int = None
-
-    def with_namespace_name(self, namespace_name: str) -> DescribeBoxesRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_access_token(self, access_token: str) -> DescribeBoxesRequest:
-        self.access_token = access_token
-        return self
-
-    def with_page_token(self, page_token: str) -> DescribeBoxesRequest:
-        self.page_token = page_token
-        return self
-
-    def with_limit(self, limit: int) -> DescribeBoxesRequest:
-        self.limit = limit
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeBoxesRequest]:
-        if data is None:
-            return None
-        return DescribeBoxesRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_access_token(data.get('accessToken'))\
-            .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "accessToken": self.access_token,
-            "pageToken": self.page_token,
-            "limit": self.limit,
-        }
-
-
-class DescribeBoxesByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    user_id: str = None
-    page_token: str = None
-    limit: int = None
-
-    def with_namespace_name(self, namespace_name: str) -> DescribeBoxesByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_user_id(self, user_id: str) -> DescribeBoxesByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def with_page_token(self, page_token: str) -> DescribeBoxesByUserIdRequest:
-        self.page_token = page_token
-        return self
-
-    def with_limit(self, limit: int) -> DescribeBoxesByUserIdRequest:
-        self.limit = limit
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeBoxesByUserIdRequest]:
-        if data is None:
-            return None
-        return DescribeBoxesByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))\
-            .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "userId": self.user_id,
-            "pageToken": self.page_token,
-            "limit": self.limit,
-        }
-
-
-class GetBoxRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    prize_table_name: str = None
-    access_token: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> GetBoxRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_prize_table_name(self, prize_table_name: str) -> GetBoxRequest:
-        self.prize_table_name = prize_table_name
-        return self
-
-    def with_access_token(self, access_token: str) -> GetBoxRequest:
-        self.access_token = access_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetBoxRequest]:
-        if data is None:
-            return None
-        return GetBoxRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_prize_table_name(data.get('prizeTableName'))\
-            .with_access_token(data.get('accessToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "prizeTableName": self.prize_table_name,
-            "accessToken": self.access_token,
-        }
-
-
-class GetBoxByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    prize_table_name: str = None
-    user_id: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> GetBoxByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_prize_table_name(self, prize_table_name: str) -> GetBoxByUserIdRequest:
-        self.prize_table_name = prize_table_name
-        return self
-
-    def with_user_id(self, user_id: str) -> GetBoxByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetBoxByUserIdRequest]:
-        if data is None:
-            return None
-        return GetBoxByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_prize_table_name(data.get('prizeTableName'))\
-            .with_user_id(data.get('userId'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "prizeTableName": self.prize_table_name,
-            "userId": self.user_id,
-        }
-
-
-class ResetBoxRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    prize_table_name: str = None
-    access_token: str = None
-    duplication_avoider: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> ResetBoxRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_prize_table_name(self, prize_table_name: str) -> ResetBoxRequest:
-        self.prize_table_name = prize_table_name
-        return self
-
-    def with_access_token(self, access_token: str) -> ResetBoxRequest:
-        self.access_token = access_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> ResetBoxRequest:
-        self.duplication_avoider = duplication_avoider
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[ResetBoxRequest]:
-        if data is None:
-            return None
-        return ResetBoxRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_prize_table_name(data.get('prizeTableName'))\
-            .with_access_token(data.get('accessToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "prizeTableName": self.prize_table_name,
-            "accessToken": self.access_token,
-        }
-
-
-class ResetBoxByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    prize_table_name: str = None
-    user_id: str = None
-    duplication_avoider: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> ResetBoxByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_prize_table_name(self, prize_table_name: str) -> ResetBoxByUserIdRequest:
-        self.prize_table_name = prize_table_name
-        return self
-
-    def with_user_id(self, user_id: str) -> ResetBoxByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> ResetBoxByUserIdRequest:
-        self.duplication_avoider = duplication_avoider
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[ResetBoxByUserIdRequest]:
-        if data is None:
-            return None
-        return ResetBoxByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_prize_table_name(data.get('prizeTableName'))\
-            .with_user_id(data.get('userId'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "prizeTableName": self.prize_table_name,
-            "userId": self.user_id,
-        }
-
-
 class DescribeLotteryModelsRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1932,4 +1608,328 @@ class ResetPrizeLimitRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "prizeTableName": self.prize_table_name,
             "prizeId": self.prize_id,
+        }
+
+
+class DescribeBoxesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeBoxesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeBoxesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeBoxesRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeBoxesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBoxesRequest]:
+        if data is None:
+            return None
+        return DescribeBoxesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeBoxesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeBoxesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeBoxesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeBoxesByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeBoxesByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBoxesByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeBoxesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetBoxRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    prize_table_name: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetBoxRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_prize_table_name(self, prize_table_name: str) -> GetBoxRequest:
+        self.prize_table_name = prize_table_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetBoxRequest:
+        self.access_token = access_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBoxRequest]:
+        if data is None:
+            return None
+        return GetBoxRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_prize_table_name(data.get('prizeTableName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "prizeTableName": self.prize_table_name,
+            "accessToken": self.access_token,
+        }
+
+
+class GetBoxByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    prize_table_name: str = None
+    user_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetBoxByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_prize_table_name(self, prize_table_name: str) -> GetBoxByUserIdRequest:
+        self.prize_table_name = prize_table_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetBoxByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBoxByUserIdRequest]:
+        if data is None:
+            return None
+        return GetBoxByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_prize_table_name(data.get('prizeTableName'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "prizeTableName": self.prize_table_name,
+            "userId": self.user_id,
+        }
+
+
+class ResetBoxRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    prize_table_name: str = None
+    access_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ResetBoxRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_prize_table_name(self, prize_table_name: str) -> ResetBoxRequest:
+        self.prize_table_name = prize_table_name
+        return self
+
+    def with_access_token(self, access_token: str) -> ResetBoxRequest:
+        self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetBoxRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetBoxRequest]:
+        if data is None:
+            return None
+        return ResetBoxRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_prize_table_name(data.get('prizeTableName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "prizeTableName": self.prize_table_name,
+            "accessToken": self.access_token,
+        }
+
+
+class ResetBoxByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    prize_table_name: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ResetBoxByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_prize_table_name(self, prize_table_name: str) -> ResetBoxByUserIdRequest:
+        self.prize_table_name = prize_table_name
+        return self
+
+    def with_user_id(self, user_id: str) -> ResetBoxByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetBoxByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetBoxByUserIdRequest]:
+        if data is None:
+            return None
+        return ResetBoxByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_prize_table_name(data.get('prizeTableName'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "prizeTableName": self.prize_table_name,
+            "userId": self.user_id,
         }

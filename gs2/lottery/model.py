@@ -288,6 +288,73 @@ class BoxItems(core.Gs2Model):
         self.items = items
         return self
 
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+        prize_table_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:lottery:{namespaceName}:user:{userId}:box:items:{prizeTableName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+            prizeTableName=prize_table_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:items:(?P<prizeTableName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:items:(?P<prizeTableName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:items:(?P<prizeTableName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:items:(?P<prizeTableName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    @classmethod
+    def get_prize_table_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):lottery:(?P<namespaceName>.+):user:(?P<userId>.+):box:items:(?P<prizeTableName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('prize_table_name')
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():

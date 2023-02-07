@@ -600,222 +600,6 @@ class DeletePrizeTableMasterResult(core.Gs2Result):
         }
 
 
-class DescribeBoxesResult(core.Gs2Result):
-    items: List[BoxItems] = None
-    next_page_token: str = None
-
-    def with_items(self, items: List[BoxItems]) -> DescribeBoxesResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribeBoxesResult:
-        self.next_page_token = next_page_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeBoxesResult]:
-        if data is None:
-            return None
-        return DescribeBoxesResult()\
-            .with_items([
-                BoxItems.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
-            ],
-            "nextPageToken": self.next_page_token,
-        }
-
-
-class DescribeBoxesByUserIdResult(core.Gs2Result):
-    items: List[BoxItems] = None
-    next_page_token: str = None
-
-    def with_items(self, items: List[BoxItems]) -> DescribeBoxesByUserIdResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribeBoxesByUserIdResult:
-        self.next_page_token = next_page_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeBoxesByUserIdResult]:
-        if data is None:
-            return None
-        return DescribeBoxesByUserIdResult()\
-            .with_items([
-                BoxItems.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
-            ],
-            "nextPageToken": self.next_page_token,
-        }
-
-
-class GetBoxResult(core.Gs2Result):
-    item: BoxItems = None
-
-    def with_item(self, item: BoxItems) -> GetBoxResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetBoxResult]:
-        if data is None:
-            return None
-        return GetBoxResult()\
-            .with_item(BoxItems.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class GetBoxByUserIdResult(core.Gs2Result):
-    item: BoxItems = None
-
-    def with_item(self, item: BoxItems) -> GetBoxByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetBoxByUserIdResult]:
-        if data is None:
-            return None
-        return GetBoxByUserIdResult()\
-            .with_item(BoxItems.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class ResetBoxResult(core.Gs2Result):
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[ResetBoxResult]:
-        if data is None:
-            return None
-        return ResetBoxResult()\
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-        }
-
-
-class ResetBoxByUserIdResult(core.Gs2Result):
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[ResetBoxByUserIdResult]:
-        if data is None:
-            return None
-        return ResetBoxByUserIdResult()\
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-        }
-
-
 class DescribeLotteryModelsResult(core.Gs2Result):
     items: List[LotteryModel] = None
 
@@ -1418,6 +1202,222 @@ class ResetPrizeLimitResult(core.Gs2Result):
         if data is None:
             return None
         return ResetPrizeLimitResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class DescribeBoxesResult(core.Gs2Result):
+    items: List[BoxItems] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[BoxItems]) -> DescribeBoxesResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeBoxesResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBoxesResult]:
+        if data is None:
+            return None
+        return DescribeBoxesResult()\
+            .with_items([
+                BoxItems.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeBoxesByUserIdResult(core.Gs2Result):
+    items: List[BoxItems] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[BoxItems]) -> DescribeBoxesByUserIdResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeBoxesByUserIdResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBoxesByUserIdResult]:
+        if data is None:
+            return None
+        return DescribeBoxesByUserIdResult()\
+            .with_items([
+                BoxItems.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetBoxResult(core.Gs2Result):
+    item: BoxItems = None
+
+    def with_item(self, item: BoxItems) -> GetBoxResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBoxResult]:
+        if data is None:
+            return None
+        return GetBoxResult()\
+            .with_item(BoxItems.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetBoxByUserIdResult(core.Gs2Result):
+    item: BoxItems = None
+
+    def with_item(self, item: BoxItems) -> GetBoxByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBoxByUserIdResult]:
+        if data is None:
+            return None
+        return GetBoxByUserIdResult()\
+            .with_item(BoxItems.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ResetBoxResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetBoxResult]:
+        if data is None:
+            return None
+        return ResetBoxResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class ResetBoxByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetBoxByUserIdResult]:
+        if data is None:
+            return None
+        return ResetBoxByUserIdResult()\
 
     def to_dict(self) -> Dict[str, Any]:
         return {

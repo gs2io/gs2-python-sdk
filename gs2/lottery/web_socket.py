@@ -1253,470 +1253,6 @@ class Gs2LotteryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_boxes(
-        self,
-        request: DescribeBoxesRequest,
-        callback: Callable[[AsyncResult[DescribeBoxesResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="lottery",
-            component='box',
-            function='describeBoxes',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
-        if request.page_token is not None:
-            body["pageToken"] = request.page_token
-        if request.limit is not None:
-            body["limit"] = request.limit
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeBoxesResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_boxes(
-        self,
-        request: DescribeBoxesRequest,
-    ) -> DescribeBoxesResult:
-        async_result = []
-        with timeout(30):
-            self._describe_boxes(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_boxes_async(
-        self,
-        request: DescribeBoxesRequest,
-    ) -> DescribeBoxesResult:
-        async_result = []
-        self._describe_boxes(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _describe_boxes_by_user_id(
-        self,
-        request: DescribeBoxesByUserIdRequest,
-        callback: Callable[[AsyncResult[DescribeBoxesByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="lottery",
-            component='box',
-            function='describeBoxesByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-        if request.page_token is not None:
-            body["pageToken"] = request.page_token
-        if request.limit is not None:
-            body["limit"] = request.limit
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeBoxesByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_boxes_by_user_id(
-        self,
-        request: DescribeBoxesByUserIdRequest,
-    ) -> DescribeBoxesByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._describe_boxes_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_boxes_by_user_id_async(
-        self,
-        request: DescribeBoxesByUserIdRequest,
-    ) -> DescribeBoxesByUserIdResult:
-        async_result = []
-        self._describe_boxes_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_box(
-        self,
-        request: GetBoxRequest,
-        callback: Callable[[AsyncResult[GetBoxResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="lottery",
-            component='box',
-            function='getBox',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.prize_table_name is not None:
-            body["prizeTableName"] = request.prize_table_name
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=GetBoxResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def get_box(
-        self,
-        request: GetBoxRequest,
-    ) -> GetBoxResult:
-        async_result = []
-        with timeout(30):
-            self._get_box(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_box_async(
-        self,
-        request: GetBoxRequest,
-    ) -> GetBoxResult:
-        async_result = []
-        self._get_box(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_box_by_user_id(
-        self,
-        request: GetBoxByUserIdRequest,
-        callback: Callable[[AsyncResult[GetBoxByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="lottery",
-            component='box',
-            function='getBoxByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.prize_table_name is not None:
-            body["prizeTableName"] = request.prize_table_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=GetBoxByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def get_box_by_user_id(
-        self,
-        request: GetBoxByUserIdRequest,
-    ) -> GetBoxByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._get_box_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_box_by_user_id_async(
-        self,
-        request: GetBoxByUserIdRequest,
-    ) -> GetBoxByUserIdResult:
-        async_result = []
-        self._get_box_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _reset_box(
-        self,
-        request: ResetBoxRequest,
-        callback: Callable[[AsyncResult[ResetBoxResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="lottery",
-            component='box',
-            function='resetBox',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.prize_table_name is not None:
-            body["prizeTableName"] = request.prize_table_name
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=ResetBoxResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def reset_box(
-        self,
-        request: ResetBoxRequest,
-    ) -> ResetBoxResult:
-        async_result = []
-        with timeout(30):
-            self._reset_box(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def reset_box_async(
-        self,
-        request: ResetBoxRequest,
-    ) -> ResetBoxResult:
-        async_result = []
-        self._reset_box(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _reset_box_by_user_id(
-        self,
-        request: ResetBoxByUserIdRequest,
-        callback: Callable[[AsyncResult[ResetBoxByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="lottery",
-            component='box',
-            function='resetBoxByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.prize_table_name is not None:
-            body["prizeTableName"] = request.prize_table_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=ResetBoxByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def reset_box_by_user_id(
-        self,
-        request: ResetBoxByUserIdRequest,
-    ) -> ResetBoxByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._reset_box_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def reset_box_by_user_id_async(
-        self,
-        request: ResetBoxByUserIdRequest,
-    ) -> ResetBoxByUserIdResult:
-        async_result = []
-        self._reset_box_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _describe_lottery_models(
         self,
         request: DescribeLotteryModelsRequest,
@@ -2816,6 +2352,470 @@ class Gs2LotteryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ResetPrizeLimitResult:
         async_result = []
         self._reset_prize_limit(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_boxes(
+        self,
+        request: DescribeBoxesRequest,
+        callback: Callable[[AsyncResult[DescribeBoxesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='boxItems',
+            function='describeBoxes',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeBoxesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_boxes(
+        self,
+        request: DescribeBoxesRequest,
+    ) -> DescribeBoxesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_boxes(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_boxes_async(
+        self,
+        request: DescribeBoxesRequest,
+    ) -> DescribeBoxesResult:
+        async_result = []
+        self._describe_boxes(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_boxes_by_user_id(
+        self,
+        request: DescribeBoxesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeBoxesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='boxItems',
+            function='describeBoxesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeBoxesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_boxes_by_user_id(
+        self,
+        request: DescribeBoxesByUserIdRequest,
+    ) -> DescribeBoxesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_boxes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_boxes_by_user_id_async(
+        self,
+        request: DescribeBoxesByUserIdRequest,
+    ) -> DescribeBoxesByUserIdResult:
+        async_result = []
+        self._describe_boxes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_box(
+        self,
+        request: GetBoxRequest,
+        callback: Callable[[AsyncResult[GetBoxResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='boxItems',
+            function='getBox',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.prize_table_name is not None:
+            body["prizeTableName"] = request.prize_table_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBoxResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_box(
+        self,
+        request: GetBoxRequest,
+    ) -> GetBoxResult:
+        async_result = []
+        with timeout(30):
+            self._get_box(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_box_async(
+        self,
+        request: GetBoxRequest,
+    ) -> GetBoxResult:
+        async_result = []
+        self._get_box(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_box_by_user_id(
+        self,
+        request: GetBoxByUserIdRequest,
+        callback: Callable[[AsyncResult[GetBoxByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='boxItems',
+            function='getBoxByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.prize_table_name is not None:
+            body["prizeTableName"] = request.prize_table_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBoxByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_box_by_user_id(
+        self,
+        request: GetBoxByUserIdRequest,
+    ) -> GetBoxByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_box_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_box_by_user_id_async(
+        self,
+        request: GetBoxByUserIdRequest,
+    ) -> GetBoxByUserIdResult:
+        async_result = []
+        self._get_box_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _reset_box(
+        self,
+        request: ResetBoxRequest,
+        callback: Callable[[AsyncResult[ResetBoxResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='boxItems',
+            function='resetBox',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.prize_table_name is not None:
+            body["prizeTableName"] = request.prize_table_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ResetBoxResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_box(
+        self,
+        request: ResetBoxRequest,
+    ) -> ResetBoxResult:
+        async_result = []
+        with timeout(30):
+            self._reset_box(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_box_async(
+        self,
+        request: ResetBoxRequest,
+    ) -> ResetBoxResult:
+        async_result = []
+        self._reset_box(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _reset_box_by_user_id(
+        self,
+        request: ResetBoxByUserIdRequest,
+        callback: Callable[[AsyncResult[ResetBoxByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='boxItems',
+            function='resetBoxByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.prize_table_name is not None:
+            body["prizeTableName"] = request.prize_table_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ResetBoxByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_box_by_user_id(
+        self,
+        request: ResetBoxByUserIdRequest,
+    ) -> ResetBoxByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._reset_box_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_box_by_user_id_async(
+        self,
+        request: ResetBoxByUserIdRequest,
+    ) -> ResetBoxByUserIdResult:
+        async_result = []
+        self._reset_box_by_user_id(
             request,
             lambda result: async_result.append(result),
         )
