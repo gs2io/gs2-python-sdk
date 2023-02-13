@@ -1833,8 +1833,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
 
@@ -1912,8 +1910,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
 
@@ -1989,8 +1985,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
         if request.config is not None:
@@ -2075,8 +2069,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
         if request.config is not None:
@@ -2159,8 +2151,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
         if request.config is not None:
@@ -2243,8 +2233,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
         if request.config is not None:
@@ -2329,8 +2317,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
         if request.config is not None:
@@ -2413,8 +2399,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
 
@@ -2494,8 +2478,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.rate_name is not None:
-            body["rateName"] = request.rate_name
         if request.await_name is not None:
             body["awaitName"] = request.await_name
 

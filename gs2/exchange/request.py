@@ -1347,7 +1347,6 @@ class GetAwaitRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    rate_name: str = None
     await_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetAwaitRequest:
@@ -1356,10 +1355,6 @@ class GetAwaitRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> GetAwaitRequest:
         self.access_token = access_token
-        return self
-
-    def with_rate_name(self, rate_name: str) -> GetAwaitRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> GetAwaitRequest:
@@ -1387,14 +1382,12 @@ class GetAwaitRequest(core.Gs2Request):
         return GetAwaitRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
         }
 
@@ -1404,7 +1397,6 @@ class GetAwaitByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    rate_name: str = None
     await_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetAwaitByUserIdRequest:
@@ -1413,10 +1405,6 @@ class GetAwaitByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> GetAwaitByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_rate_name(self, rate_name: str) -> GetAwaitByUserIdRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> GetAwaitByUserIdRequest:
@@ -1444,14 +1432,12 @@ class GetAwaitByUserIdRequest(core.Gs2Request):
         return GetAwaitByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
         }
 
@@ -1461,7 +1447,6 @@ class AcquireRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    rate_name: str = None
     await_name: str = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1472,10 +1457,6 @@ class AcquireRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> AcquireRequest:
         self.access_token = access_token
-        return self
-
-    def with_rate_name(self, rate_name: str) -> AcquireRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> AcquireRequest:
@@ -1511,7 +1492,6 @@ class AcquireRequest(core.Gs2Request):
         return AcquireRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
@@ -1522,7 +1502,6 @@ class AcquireRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
@@ -1536,7 +1515,6 @@ class AcquireByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    rate_name: str = None
     await_name: str = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1547,10 +1525,6 @@ class AcquireByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> AcquireByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_rate_name(self, rate_name: str) -> AcquireByUserIdRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> AcquireByUserIdRequest:
@@ -1586,7 +1560,6 @@ class AcquireByUserIdRequest(core.Gs2Request):
         return AcquireByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
@@ -1597,7 +1570,6 @@ class AcquireByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
@@ -1611,7 +1583,6 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    rate_name: str = None
     await_name: str = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1622,10 +1593,6 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> AcquireForceByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_rate_name(self, rate_name: str) -> AcquireForceByUserIdRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> AcquireForceByUserIdRequest:
@@ -1661,7 +1628,6 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
         return AcquireForceByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
@@ -1672,7 +1638,6 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
@@ -1686,7 +1651,6 @@ class SkipRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    rate_name: str = None
     await_name: str = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1697,10 +1661,6 @@ class SkipRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> SkipRequest:
         self.access_token = access_token
-        return self
-
-    def with_rate_name(self, rate_name: str) -> SkipRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> SkipRequest:
@@ -1736,7 +1696,6 @@ class SkipRequest(core.Gs2Request):
         return SkipRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
@@ -1747,7 +1706,6 @@ class SkipRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
@@ -1761,7 +1719,6 @@ class SkipByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    rate_name: str = None
     await_name: str = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1772,10 +1729,6 @@ class SkipByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> SkipByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_rate_name(self, rate_name: str) -> SkipByUserIdRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> SkipByUserIdRequest:
@@ -1811,7 +1764,6 @@ class SkipByUserIdRequest(core.Gs2Request):
         return SkipByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
@@ -1822,7 +1774,6 @@ class SkipByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
@@ -1836,7 +1787,6 @@ class DeleteAwaitRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    rate_name: str = None
     await_name: str = None
     duplication_avoider: str = None
 
@@ -1846,10 +1796,6 @@ class DeleteAwaitRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DeleteAwaitRequest:
         self.access_token = access_token
-        return self
-
-    def with_rate_name(self, rate_name: str) -> DeleteAwaitRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> DeleteAwaitRequest:
@@ -1881,14 +1827,12 @@ class DeleteAwaitRequest(core.Gs2Request):
         return DeleteAwaitRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
         }
 
@@ -1898,7 +1842,6 @@ class DeleteAwaitByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    rate_name: str = None
     await_name: str = None
     duplication_avoider: str = None
 
@@ -1908,10 +1851,6 @@ class DeleteAwaitByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DeleteAwaitByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_rate_name(self, rate_name: str) -> DeleteAwaitByUserIdRequest:
-        self.rate_name = rate_name
         return self
 
     def with_await_name(self, await_name: str) -> DeleteAwaitByUserIdRequest:
@@ -1943,14 +1882,12 @@ class DeleteAwaitByUserIdRequest(core.Gs2Request):
         return DeleteAwaitByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_rate_name(data.get('rateName'))\
             .with_await_name(data.get('awaitName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "rateName": self.rate_name,
             "awaitName": self.await_name,
         }
 

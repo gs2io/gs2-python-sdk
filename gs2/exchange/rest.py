@@ -1807,9 +1807,8 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/exchange/{rateName}/await/{awaitName}".format(
+        ) + "/{namespaceName}/user/me/exchange/await/{awaitName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 
@@ -1882,10 +1881,9 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}".format(
+        ) + "/{namespaceName}/user/{userId}/exchange/await/{awaitName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 
@@ -1956,9 +1954,8 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/exchange/{rateName}/await/{awaitName}".format(
+        ) + "/{namespaceName}/user/me/exchange/await/{awaitName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 
@@ -2038,10 +2035,9 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}".format(
+        ) + "/{namespaceName}/user/{userId}/exchange/await/{awaitName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 
@@ -2119,10 +2115,9 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}/force".format(
+        ) + "/{namespaceName}/user/{userId}/exchange/await/{awaitName}/force".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 
@@ -2200,9 +2195,8 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/exchange/{rateName}/await/{awaitName}/skip".format(
+        ) + "/{namespaceName}/user/me/exchange/await/{awaitName}/skip".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 
@@ -2282,10 +2276,9 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}/skip".format(
+        ) + "/{namespaceName}/user/{userId}/exchange/await/{awaitName}/skip".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 
@@ -2363,9 +2356,8 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/exchange/{rateName}/await/{awaitName}".format(
+        ) + "/{namespaceName}/user/me/exchange/await/{awaitName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 
@@ -2440,10 +2432,9 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='exchange',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}".format(
+        ) + "/{namespaceName}/user/{userId}/exchange/await/{awaitName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
             awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
         )
 

@@ -130,9 +130,14 @@ class GitHubCheckoutSetting(core.Gs2Model):
 
 
 class SubscribeUser(core.Gs2Model):
+    subscribe_user_id: str = None
     category_name: str = None
     user_id: str = None
     target_user_id: str = None
+
+    def with_subscribe_user_id(self, subscribe_user_id: str) -> SubscribeUser:
+        self.subscribe_user_id = subscribe_user_id
+        return self
 
     def with_category_name(self, category_name: str) -> SubscribeUser:
         self.category_name = category_name
@@ -145,6 +150,85 @@ class SubscribeUser(core.Gs2Model):
     def with_target_user_id(self, target_user_id: str) -> SubscribeUser:
         self.target_user_id = target_user_id
         return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+        category_name,
+        target_user_id,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:ranking:{namespaceName}:user:{userId}:subscribe:category:{categoryName}:{targetUserId}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+            categoryName=category_name,
+            targetUserId=target_user_id,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+):(?P<targetUserId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+):(?P<targetUserId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+):(?P<targetUserId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+):(?P<targetUserId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    @classmethod
+    def get_category_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+):(?P<targetUserId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('category_name')
+
+    @classmethod
+    def get_target_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking:(?P<namespaceName>.+):user:(?P<userId>.+):subscribe:category:(?P<categoryName>.+):(?P<targetUserId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('target_user_id')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -165,12 +249,14 @@ class SubscribeUser(core.Gs2Model):
         if data is None:
             return None
         return SubscribeUser()\
+            .with_subscribe_user_id(data.get('subscribeUserId'))\
             .with_category_name(data.get('categoryName'))\
             .with_user_id(data.get('userId'))\
             .with_target_user_id(data.get('targetUserId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "subscribeUserId": self.subscribe_user_id,
             "categoryName": self.category_name,
             "userId": self.user_id,
             "targetUserId": self.target_user_id,
