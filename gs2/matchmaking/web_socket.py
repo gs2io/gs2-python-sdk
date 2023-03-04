@@ -137,6 +137,8 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["leaveNotification"] = request.leave_notification.to_dict()
         if request.complete_notification is not None:
             body["completeNotification"] = request.complete_notification.to_dict()
+        if request.change_rating_notification is not None:
+            body["changeRatingNotification"] = request.change_rating_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -376,6 +378,8 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["leaveNotification"] = request.leave_notification.to_dict()
         if request.complete_notification is not None:
             body["completeNotification"] = request.complete_notification.to_dict()
+        if request.change_rating_notification is not None:
+            body["changeRatingNotification"] = request.change_rating_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

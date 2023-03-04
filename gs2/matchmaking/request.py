@@ -76,6 +76,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
     complete_notification: NotificationSetting = None
+    change_rating_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -130,6 +131,10 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.complete_notification = complete_notification
         return self
 
+    def with_change_rating_notification(self, change_rating_notification: NotificationSetting) -> CreateNamespaceRequest:
+        self.change_rating_notification = change_rating_notification
+        return self
+
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
         self.log_setting = log_setting
         return self
@@ -166,6 +171,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
             .with_complete_notification(NotificationSetting.from_dict(data.get('completeNotification')))\
+            .with_change_rating_notification(NotificationSetting.from_dict(data.get('changeRatingNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -183,6 +189,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
             "completeNotification": self.complete_notification.to_dict() if self.complete_notification else None,
+            "changeRatingNotification": self.change_rating_notification.to_dict() if self.change_rating_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -275,6 +282,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
     complete_notification: NotificationSetting = None
+    change_rating_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -329,6 +337,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.complete_notification = complete_notification
         return self
 
+    def with_change_rating_notification(self, change_rating_notification: NotificationSetting) -> UpdateNamespaceRequest:
+        self.change_rating_notification = change_rating_notification
+        return self
+
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
         self.log_setting = log_setting
         return self
@@ -365,6 +377,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
             .with_complete_notification(NotificationSetting.from_dict(data.get('completeNotification')))\
+            .with_change_rating_notification(NotificationSetting.from_dict(data.get('changeRatingNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -382,6 +395,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
             "completeNotification": self.complete_notification.to_dict() if self.complete_notification else None,
+            "changeRatingNotification": self.change_rating_notification.to_dict() if self.change_rating_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

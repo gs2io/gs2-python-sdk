@@ -1468,6 +1468,7 @@ class Namespace(core.Gs2Model):
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
     complete_notification: NotificationSetting = None
+    change_rating_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1526,6 +1527,10 @@ class Namespace(core.Gs2Model):
 
     def with_complete_notification(self, complete_notification: NotificationSetting) -> Namespace:
         self.complete_notification = complete_notification
+        return self
+
+    def with_change_rating_notification(self, change_rating_notification: NotificationSetting) -> Namespace:
+        self.change_rating_notification = change_rating_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1616,6 +1621,7 @@ class Namespace(core.Gs2Model):
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
             .with_complete_notification(NotificationSetting.from_dict(data.get('completeNotification')))\
+            .with_change_rating_notification(NotificationSetting.from_dict(data.get('changeRatingNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
@@ -1636,6 +1642,7 @@ class Namespace(core.Gs2Model):
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
             "completeNotification": self.complete_notification.to_dict() if self.complete_notification else None,
+            "changeRatingNotification": self.change_rating_notification.to_dict() if self.change_rating_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
