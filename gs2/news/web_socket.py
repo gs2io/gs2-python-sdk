@@ -457,6 +457,306 @@ class Gs2NewsWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_progresses(
+        self,
+        request: DescribeProgressesRequest,
+        callback: Callable[[AsyncResult[DescribeProgressesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="news",
+            component='progress',
+            function='describeProgresses',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeProgressesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_progresses(
+        self,
+        request: DescribeProgressesRequest,
+    ) -> DescribeProgressesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_progresses(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_progresses_async(
+        self,
+        request: DescribeProgressesRequest,
+    ) -> DescribeProgressesResult:
+        async_result = []
+        self._describe_progresses(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_progress(
+        self,
+        request: GetProgressRequest,
+        callback: Callable[[AsyncResult[GetProgressResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="news",
+            component='progress',
+            function='getProgress',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetProgressResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_progress(
+        self,
+        request: GetProgressRequest,
+    ) -> GetProgressResult:
+        async_result = []
+        with timeout(30):
+            self._get_progress(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_progress_async(
+        self,
+        request: GetProgressRequest,
+    ) -> GetProgressResult:
+        async_result = []
+        self._get_progress(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_outputs(
+        self,
+        request: DescribeOutputsRequest,
+        callback: Callable[[AsyncResult[DescribeOutputsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="news",
+            component='output',
+            function='describeOutputs',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeOutputsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_outputs(
+        self,
+        request: DescribeOutputsRequest,
+    ) -> DescribeOutputsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_outputs(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_outputs_async(
+        self,
+        request: DescribeOutputsRequest,
+    ) -> DescribeOutputsResult:
+        async_result = []
+        self._describe_outputs(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_output(
+        self,
+        request: GetOutputRequest,
+        callback: Callable[[AsyncResult[GetOutputResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="news",
+            component='output',
+            function='getOutput',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
+        if request.output_name is not None:
+            body["outputName"] = request.output_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetOutputResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_output(
+        self,
+        request: GetOutputRequest,
+    ) -> GetOutputResult:
+        async_result = []
+        with timeout(30):
+            self._get_output(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_output_async(
+        self,
+        request: GetOutputRequest,
+    ) -> GetOutputResult:
+        async_result = []
+        self._get_output(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _prepare_update_current_news_master(
         self,
         request: PrepareUpdateCurrentNewsMasterRequest,

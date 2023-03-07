@@ -239,6 +239,353 @@ class News(core.Gs2Model):
         }
 
 
+class Content(core.Gs2Model):
+    section: str = None
+    content: str = None
+    front_matter: str = None
+
+    def with_section(self, section: str) -> Content:
+        self.section = section
+        return self
+
+    def with_content(self, content: str) -> Content:
+        self.content = content
+        return self
+
+    def with_front_matter(self, front_matter: str) -> Content:
+        self.front_matter = front_matter
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Content]:
+        if data is None:
+            return None
+        return Content()\
+            .with_section(data.get('section'))\
+            .with_content(data.get('content'))\
+            .with_front_matter(data.get('frontMatter'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "section": self.section,
+            "content": self.content,
+            "frontMatter": self.front_matter,
+        }
+
+
+class View(core.Gs2Model):
+    contents: List[Content] = None
+    remove_contents: List[Content] = None
+
+    def with_contents(self, contents: List[Content]) -> View:
+        self.contents = contents
+        return self
+
+    def with_remove_contents(self, remove_contents: List[Content]) -> View:
+        self.remove_contents = remove_contents
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[View]:
+        if data is None:
+            return None
+        return View()\
+            .with_contents([
+                Content.from_dict(data.get('contents')[i])
+                for i in range(len(data.get('contents')) if data.get('contents') else 0)
+            ])\
+            .with_remove_contents([
+                Content.from_dict(data.get('removeContents')[i])
+                for i in range(len(data.get('removeContents')) if data.get('removeContents') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "contents": [
+                self.contents[i].to_dict() if self.contents[i] else None
+                for i in range(len(self.contents) if self.contents else 0)
+            ],
+            "removeContents": [
+                self.remove_contents[i].to_dict() if self.remove_contents[i] else None
+                for i in range(len(self.remove_contents) if self.remove_contents else 0)
+            ],
+        }
+
+
+class Output(core.Gs2Model):
+    output_id: str = None
+    name: str = None
+    text: str = None
+    created_at: int = None
+
+    def with_output_id(self, output_id: str) -> Output:
+        self.output_id = output_id
+        return self
+
+    def with_name(self, name: str) -> Output:
+        self.name = name
+        return self
+
+    def with_text(self, text: str) -> Output:
+        self.text = text
+        return self
+
+    def with_created_at(self, created_at: int) -> Output:
+        self.created_at = created_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        upload_token,
+        output_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:news:{namespaceName}:progress:{uploadToken}:output:{outputName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            uploadToken=upload_token,
+            outputName=output_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+):output:(?P<outputName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+):output:(?P<outputName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+):output:(?P<outputName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_upload_token_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+):output:(?P<outputName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('upload_token')
+
+    @classmethod
+    def get_output_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+):output:(?P<outputName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('output_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Output]:
+        if data is None:
+            return None
+        return Output()\
+            .with_output_id(data.get('outputId'))\
+            .with_name(data.get('name'))\
+            .with_text(data.get('text'))\
+            .with_created_at(data.get('createdAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "outputId": self.output_id,
+            "name": self.name,
+            "text": self.text,
+            "createdAt": self.created_at,
+        }
+
+
+class Progress(core.Gs2Model):
+    progress_id: str = None
+    upload_token: str = None
+    generated: int = None
+    pattern_count: int = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_progress_id(self, progress_id: str) -> Progress:
+        self.progress_id = progress_id
+        return self
+
+    def with_upload_token(self, upload_token: str) -> Progress:
+        self.upload_token = upload_token
+        return self
+
+    def with_generated(self, generated: int) -> Progress:
+        self.generated = generated
+        return self
+
+    def with_pattern_count(self, pattern_count: int) -> Progress:
+        self.pattern_count = pattern_count
+        return self
+
+    def with_created_at(self, created_at: int) -> Progress:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> Progress:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        upload_token,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:news:{namespaceName}:progress:{uploadToken}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            uploadToken=upload_token,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_upload_token_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):news:(?P<namespaceName>.+):progress:(?P<uploadToken>.+)', grn)
+        if match is None:
+            return None
+        return match.group('upload_token')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Progress]:
+        if data is None:
+            return None
+        return Progress()\
+            .with_progress_id(data.get('progressId'))\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_generated(data.get('generated'))\
+            .with_pattern_count(data.get('patternCount'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "progressId": self.progress_id,
+            "uploadToken": self.upload_token,
+            "generated": self.generated,
+            "patternCount": self.pattern_count,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+        }
+
+
 class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None

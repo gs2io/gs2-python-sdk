@@ -234,6 +234,168 @@ class DeleteNamespaceResult(core.Gs2Result):
         }
 
 
+class DescribeProgressesResult(core.Gs2Result):
+    items: List[Progress] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[Progress]) -> DescribeProgressesResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeProgressesResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeProgressesResult]:
+        if data is None:
+            return None
+        return DescribeProgressesResult()\
+            .with_items([
+                Progress.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetProgressResult(core.Gs2Result):
+    item: Progress = None
+
+    def with_item(self, item: Progress) -> GetProgressResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetProgressResult]:
+        if data is None:
+            return None
+        return GetProgressResult()\
+            .with_item(Progress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeOutputsResult(core.Gs2Result):
+    items: List[Output] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[Output]) -> DescribeOutputsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeOutputsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeOutputsResult]:
+        if data is None:
+            return None
+        return DescribeOutputsResult()\
+            .with_items([
+                Output.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetOutputResult(core.Gs2Result):
+    item: Output = None
+
+    def with_item(self, item: Output) -> GetOutputResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetOutputResult]:
+        if data is None:
+            return None
+        return GetOutputResult()\
+            .with_item(Output.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class PrepareUpdateCurrentNewsMasterResult(core.Gs2Result):
     upload_token: str = None
     template_upload_url: str = None

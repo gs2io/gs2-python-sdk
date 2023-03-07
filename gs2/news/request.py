@@ -268,6 +268,206 @@ class DeleteNamespaceRequest(core.Gs2Request):
         }
 
 
+class DescribeProgressesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeProgressesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeProgressesRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeProgressesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeProgressesRequest]:
+        if data is None:
+            return None
+        return DescribeProgressesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetProgressRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    upload_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetProgressRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_upload_token(self, upload_token: str) -> GetProgressRequest:
+        self.upload_token = upload_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetProgressRequest]:
+        if data is None:
+            return None
+        return GetProgressRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_upload_token(data.get('uploadToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "uploadToken": self.upload_token,
+        }
+
+
+class DescribeOutputsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    upload_token: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeOutputsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_upload_token(self, upload_token: str) -> DescribeOutputsRequest:
+        self.upload_token = upload_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeOutputsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeOutputsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeOutputsRequest]:
+        if data is None:
+            return None
+        return DescribeOutputsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "uploadToken": self.upload_token,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetOutputRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    upload_token: str = None
+    output_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetOutputRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_upload_token(self, upload_token: str) -> GetOutputRequest:
+        self.upload_token = upload_token
+        return self
+
+    def with_output_name(self, output_name: str) -> GetOutputRequest:
+        self.output_name = output_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetOutputRequest]:
+        if data is None:
+            return None
+        return GetOutputRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_output_name(data.get('outputName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "uploadToken": self.upload_token,
+            "outputName": self.output_name,
+        }
+
+
 class PrepareUpdateCurrentNewsMasterRequest(core.Gs2Request):
 
     context_stack: str = None

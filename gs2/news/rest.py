@@ -457,6 +457,302 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_progresses(
+        self,
+        request: DescribeProgressesRequest,
+        callback: Callable[[AsyncResult[DescribeProgressesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='news',
+            region=self.session.region,
+        ) + "/{namespaceName}/progress".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeProgressesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_progresses(
+        self,
+        request: DescribeProgressesRequest,
+    ) -> DescribeProgressesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_progresses(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_progresses_async(
+        self,
+        request: DescribeProgressesRequest,
+    ) -> DescribeProgressesResult:
+        async_result = []
+        self._describe_progresses(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_progress(
+        self,
+        request: GetProgressRequest,
+        callback: Callable[[AsyncResult[GetProgressResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='news',
+            region=self.session.region,
+        ) + "/{namespaceName}/progress/{uploadToken}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            uploadToken=request.upload_token if request.upload_token is not None and request.upload_token != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetProgressResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_progress(
+        self,
+        request: GetProgressRequest,
+    ) -> GetProgressResult:
+        async_result = []
+        with timeout(30):
+            self._get_progress(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_progress_async(
+        self,
+        request: GetProgressRequest,
+    ) -> GetProgressResult:
+        async_result = []
+        self._get_progress(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_outputs(
+        self,
+        request: DescribeOutputsRequest,
+        callback: Callable[[AsyncResult[DescribeOutputsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='news',
+            region=self.session.region,
+        ) + "/{namespaceName}/progress/{uploadToken}/output".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            uploadToken=request.upload_token if request.upload_token is not None and request.upload_token != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeOutputsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_outputs(
+        self,
+        request: DescribeOutputsRequest,
+    ) -> DescribeOutputsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_outputs(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_outputs_async(
+        self,
+        request: DescribeOutputsRequest,
+    ) -> DescribeOutputsResult:
+        async_result = []
+        self._describe_outputs(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_output(
+        self,
+        request: GetOutputRequest,
+        callback: Callable[[AsyncResult[GetOutputResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='news',
+            region=self.session.region,
+        ) + "/{namespaceName}/progress/{uploadToken}/output/{outputName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            uploadToken=request.upload_token if request.upload_token is not None and request.upload_token != '' else 'null',
+            outputName=request.output_name if request.output_name is not None and request.output_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetOutputResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_output(
+        self,
+        request: GetOutputRequest,
+    ) -> GetOutputResult:
+        async_result = []
+        with timeout(30):
+            self._get_output(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_output_async(
+        self,
+        request: GetOutputRequest,
+    ) -> GetOutputResult:
+        async_result = []
+        self._get_output(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _prepare_update_current_news_master(
         self,
         request: PrepareUpdateCurrentNewsMasterRequest,
