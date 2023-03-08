@@ -796,6 +796,7 @@ class CategoryModelMaster(core.Gs2Model):
     order_direction: str = None
     scope: str = None
     unique_by_user_id: bool = None
+    sum: bool = None
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
@@ -839,6 +840,10 @@ class CategoryModelMaster(core.Gs2Model):
 
     def with_unique_by_user_id(self, unique_by_user_id: bool) -> CategoryModelMaster:
         self.unique_by_user_id = unique_by_user_id
+        return self
+
+    def with_sum(self, sum: bool) -> CategoryModelMaster:
+        self.sum = sum
         return self
 
     def with_calculate_fixed_timing_hour(self, calculate_fixed_timing_hour: int) -> CategoryModelMaster:
@@ -956,6 +961,7 @@ class CategoryModelMaster(core.Gs2Model):
             .with_order_direction(data.get('orderDirection'))\
             .with_scope(data.get('scope'))\
             .with_unique_by_user_id(data.get('uniqueByUserId'))\
+            .with_sum(data.get('sum'))\
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
@@ -976,6 +982,7 @@ class CategoryModelMaster(core.Gs2Model):
             "orderDirection": self.order_direction,
             "scope": self.scope,
             "uniqueByUserId": self.unique_by_user_id,
+            "sum": self.sum,
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
@@ -996,6 +1003,7 @@ class CategoryModel(core.Gs2Model):
     order_direction: str = None
     scope: str = None
     unique_by_user_id: bool = None
+    sum: bool = None
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
@@ -1033,6 +1041,10 @@ class CategoryModel(core.Gs2Model):
 
     def with_unique_by_user_id(self, unique_by_user_id: bool) -> CategoryModel:
         self.unique_by_user_id = unique_by_user_id
+        return self
+
+    def with_sum(self, sum: bool) -> CategoryModel:
+        self.sum = sum
         return self
 
     def with_calculate_fixed_timing_hour(self, calculate_fixed_timing_hour: int) -> CategoryModel:
@@ -1141,6 +1153,7 @@ class CategoryModel(core.Gs2Model):
             .with_order_direction(data.get('orderDirection'))\
             .with_scope(data.get('scope'))\
             .with_unique_by_user_id(data.get('uniqueByUserId'))\
+            .with_sum(data.get('sum'))\
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
@@ -1158,6 +1171,7 @@ class CategoryModel(core.Gs2Model):
             "orderDirection": self.order_direction,
             "scope": self.scope,
             "uniqueByUserId": self.unique_by_user_id,
+            "sum": self.sum,
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,

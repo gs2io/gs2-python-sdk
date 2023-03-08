@@ -708,6 +708,8 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
             body["scope"] = request.scope
         if request.unique_by_user_id is not None:
             body["uniqueByUserId"] = request.unique_by_user_id
+        if request.sum is not None:
+            body["sum"] = request.sum
         if request.calculate_fixed_timing_hour is not None:
             body["calculateFixedTimingHour"] = request.calculate_fixed_timing_hour
         if request.calculate_fixed_timing_minute is not None:
@@ -878,6 +880,8 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
             body["scope"] = request.scope
         if request.unique_by_user_id is not None:
             body["uniqueByUserId"] = request.unique_by_user_id
+        if request.sum is not None:
+            body["sum"] = request.sum
         if request.calculate_fixed_timing_hour is not None:
             body["calculateFixedTimingHour"] = request.calculate_fixed_timing_hour
         if request.calculate_fixed_timing_minute is not None:
