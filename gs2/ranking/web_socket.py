@@ -723,6 +723,11 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
             body["accessPeriodEventId"] = request.access_period_event_id
+        if request.ignore_user_ids is not None:
+            body["ignoreUserIds"] = [
+                item
+                for item in request.ignore_user_ids
+            ]
         if request.generation is not None:
             body["generation"] = request.generation
 
@@ -897,6 +902,11 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
             body["accessPeriodEventId"] = request.access_period_event_id
+        if request.ignore_user_ids is not None:
+            body["ignoreUserIds"] = [
+                item
+                for item in request.ignore_user_ids
+            ]
         if request.generation is not None:
             body["generation"] = request.generation
 

@@ -415,6 +415,7 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
     calculate_interval_minutes: int = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
+    ignore_user_ids: List[str] = None
     generation: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateCategoryModelMasterRequest:
@@ -477,6 +478,10 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
         self.access_period_event_id = access_period_event_id
         return self
 
+    def with_ignore_user_ids(self, ignore_user_ids: List[str]) -> CreateCategoryModelMasterRequest:
+        self.ignore_user_ids = ignore_user_ids
+        return self
+
     def with_generation(self, generation: str) -> CreateCategoryModelMasterRequest:
         self.generation = generation
         return self
@@ -515,6 +520,10 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
+            .with_ignore_user_ids([
+                data.get('ignoreUserIds')[i]
+                for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
+            ])\
             .with_generation(data.get('generation'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -534,6 +543,10 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             "calculateIntervalMinutes": self.calculate_interval_minutes,
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
+            "ignoreUserIds": [
+                self.ignore_user_ids[i]
+                for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
+            ],
             "generation": self.generation,
         }
 
@@ -599,6 +612,7 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
     calculate_interval_minutes: int = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
+    ignore_user_ids: List[str] = None
     generation: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateCategoryModelMasterRequest:
@@ -661,6 +675,10 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
         self.access_period_event_id = access_period_event_id
         return self
 
+    def with_ignore_user_ids(self, ignore_user_ids: List[str]) -> UpdateCategoryModelMasterRequest:
+        self.ignore_user_ids = ignore_user_ids
+        return self
+
     def with_generation(self, generation: str) -> UpdateCategoryModelMasterRequest:
         self.generation = generation
         return self
@@ -699,6 +717,10 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
+            .with_ignore_user_ids([
+                data.get('ignoreUserIds')[i]
+                for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
+            ])\
             .with_generation(data.get('generation'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -718,6 +740,10 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             "calculateIntervalMinutes": self.calculate_interval_minutes,
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
+            "ignoreUserIds": [
+                self.ignore_user_ids[i]
+                for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
+            ],
             "generation": self.generation,
         }
 
