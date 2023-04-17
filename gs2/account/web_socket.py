@@ -346,8 +346,6 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.change_password_if_take_over is not None:
             body["changePasswordIfTakeOver"] = request.change_password_if_take_over
-        if request.different_user_id_for_login_and_data_retention is not None:
-            body["differentUserIdForLoginAndDataRetention"] = request.different_user_id_for_login_and_data_retention
         if request.create_account_script is not None:
             body["createAccountScript"] = request.create_account_script.to_dict()
         if request.authentication_script is not None:
@@ -878,6 +876,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -955,6 +955,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -1972,6 +1974,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(

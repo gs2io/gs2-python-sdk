@@ -344,8 +344,6 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.change_password_if_take_over is not None:
             body["changePasswordIfTakeOver"] = request.change_password_if_take_over
-        if request.different_user_id_for_login_and_data_retention is not None:
-            body["differentUserIdForLoginAndDataRetention"] = request.different_user_id_for_login_and_data_retention
         if request.create_account_script is not None:
             body["createAccountScript"] = request.create_account_script.to_dict()
         if request.authentication_script is not None:
@@ -872,6 +870,8 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='DELETE',
@@ -948,6 +948,8 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='PUT',
@@ -1941,6 +1943,8 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='DELETE',

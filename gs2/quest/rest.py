@@ -2065,8 +2065,6 @@ class Gs2QuestRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
-        if request.transaction_id is not None:
-            body["transactionId"] = request.transaction_id
         if request.rewards is not None:
             body["rewards"] = [
                 item.to_dict()
@@ -2155,8 +2153,6 @@ class Gs2QuestRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
-        if request.transaction_id is not None:
-            body["transactionId"] = request.transaction_id
         if request.rewards is not None:
             body["rewards"] = [
                 item.to_dict()

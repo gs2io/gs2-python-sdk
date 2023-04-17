@@ -1590,7 +1590,6 @@ class EndRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    transaction_id: str = None
     rewards: List[Reward] = None
     is_complete: bool = None
     config: List[Config] = None
@@ -1602,10 +1601,6 @@ class EndRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> EndRequest:
         self.access_token = access_token
-        return self
-
-    def with_transaction_id(self, transaction_id: str) -> EndRequest:
-        self.transaction_id = transaction_id
         return self
 
     def with_rewards(self, rewards: List[Reward]) -> EndRequest:
@@ -1645,7 +1640,6 @@ class EndRequest(core.Gs2Request):
         return EndRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_transaction_id(data.get('transactionId'))\
             .with_rewards([
                 Reward.from_dict(data.get('rewards')[i])
                 for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
@@ -1660,7 +1654,6 @@ class EndRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "transactionId": self.transaction_id,
             "rewards": [
                 self.rewards[i].to_dict() if self.rewards[i] else None
                 for i in range(len(self.rewards) if self.rewards else 0)
@@ -1678,7 +1671,6 @@ class EndByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    transaction_id: str = None
     rewards: List[Reward] = None
     is_complete: bool = None
     config: List[Config] = None
@@ -1690,10 +1682,6 @@ class EndByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> EndByUserIdRequest:
         self.user_id = user_id
-        return self
-
-    def with_transaction_id(self, transaction_id: str) -> EndByUserIdRequest:
-        self.transaction_id = transaction_id
         return self
 
     def with_rewards(self, rewards: List[Reward]) -> EndByUserIdRequest:
@@ -1733,7 +1721,6 @@ class EndByUserIdRequest(core.Gs2Request):
         return EndByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_transaction_id(data.get('transactionId'))\
             .with_rewards([
                 Reward.from_dict(data.get('rewards')[i])
                 for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
@@ -1748,7 +1735,6 @@ class EndByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "transactionId": self.transaction_id,
             "rewards": [
                 self.rewards[i].to_dict() if self.rewards[i] else None
                 for i in range(len(self.rewards) if self.rewards else 0)

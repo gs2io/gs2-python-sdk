@@ -507,13 +507,13 @@ class SerialKey(core.Gs2Model):
         region,
         owner_id,
         namespace_name,
-        code,
+        serial_key_code,
     ):
-        return 'grn:gs2:{region}:{ownerId}:serialKey:{namespaceName}:serialKey:{code}'.format(
+        return 'grn:gs2:{region}:{ownerId}:serialKey:{namespaceName}:serialKey:{serialKeyCode}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
-            code=code,
+            serialKeyCode=serial_key_code,
         )
 
     @classmethod
@@ -521,7 +521,7 @@ class SerialKey(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):serialKey:(?P<code>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):serialKey:(?P<serialKeyCode>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -531,7 +531,7 @@ class SerialKey(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):serialKey:(?P<code>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):serialKey:(?P<serialKeyCode>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -541,20 +541,20 @@ class SerialKey(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):serialKey:(?P<code>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):serialKey:(?P<serialKeyCode>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
 
     @classmethod
-    def get_code_from_grn(
+    def get_serial_key_code_from_grn(
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):serialKey:(?P<code>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):serialKey:(?P<serialKeyCode>.+)', grn)
         if match is None:
             return None
-        return match.group('code')
+        return match.group('serial_key_code')
 
     def get(self, key, default=None):
         items = self.to_dict()

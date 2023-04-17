@@ -2091,8 +2091,6 @@ class Gs2QuestWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.transaction_id is not None:
-            body["transactionId"] = request.transaction_id
         if request.rewards is not None:
             body["rewards"] = [
                 item.to_dict()
@@ -2182,8 +2180,6 @@ class Gs2QuestWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.transaction_id is not None:
-            body["transactionId"] = request.transaction_id
         if request.rewards is not None:
             body["rewards"] = [
                 item.to_dict()
