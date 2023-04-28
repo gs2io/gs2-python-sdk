@@ -1557,6 +1557,8 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.initial_value is not None:
+            body["initialValue"] = request.initial_value
         if request.volatility is not None:
             body["volatility"] = request.volatility
 
@@ -1707,6 +1709,8 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.initial_value is not None:
+            body["initialValue"] = request.initial_value
         if request.volatility is not None:
             body["volatility"] = request.volatility
 

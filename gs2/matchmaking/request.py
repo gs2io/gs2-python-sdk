@@ -1265,6 +1265,7 @@ class CreateRatingModelMasterRequest(core.Gs2Request):
     name: str = None
     description: str = None
     metadata: str = None
+    initial_value: int = None
     volatility: int = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateRatingModelMasterRequest:
@@ -1281,6 +1282,10 @@ class CreateRatingModelMasterRequest(core.Gs2Request):
 
     def with_metadata(self, metadata: str) -> CreateRatingModelMasterRequest:
         self.metadata = metadata
+        return self
+
+    def with_initial_value(self, initial_value: int) -> CreateRatingModelMasterRequest:
+        self.initial_value = initial_value
         return self
 
     def with_volatility(self, volatility: int) -> CreateRatingModelMasterRequest:
@@ -1310,6 +1315,7 @@ class CreateRatingModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_initial_value(data.get('initialValue'))\
             .with_volatility(data.get('volatility'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1318,6 +1324,7 @@ class CreateRatingModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
+            "initialValue": self.initial_value,
             "volatility": self.volatility,
         }
 
@@ -1372,6 +1379,7 @@ class UpdateRatingModelMasterRequest(core.Gs2Request):
     rating_name: str = None
     description: str = None
     metadata: str = None
+    initial_value: int = None
     volatility: int = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateRatingModelMasterRequest:
@@ -1388,6 +1396,10 @@ class UpdateRatingModelMasterRequest(core.Gs2Request):
 
     def with_metadata(self, metadata: str) -> UpdateRatingModelMasterRequest:
         self.metadata = metadata
+        return self
+
+    def with_initial_value(self, initial_value: int) -> UpdateRatingModelMasterRequest:
+        self.initial_value = initial_value
         return self
 
     def with_volatility(self, volatility: int) -> UpdateRatingModelMasterRequest:
@@ -1417,6 +1429,7 @@ class UpdateRatingModelMasterRequest(core.Gs2Request):
             .with_rating_name(data.get('ratingName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_initial_value(data.get('initialValue'))\
             .with_volatility(data.get('volatility'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1425,6 +1438,7 @@ class UpdateRatingModelMasterRequest(core.Gs2Request):
             "ratingName": self.rating_name,
             "description": self.description,
             "metadata": self.metadata,
+            "initialValue": self.initial_value,
             "volatility": self.volatility,
         }
 

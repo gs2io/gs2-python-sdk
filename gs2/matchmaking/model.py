@@ -1053,6 +1053,7 @@ class RatingModel(core.Gs2Model):
     rating_model_id: str = None
     name: str = None
     metadata: str = None
+    initial_value: int = None
     volatility: int = None
 
     def with_rating_model_id(self, rating_model_id: str) -> RatingModel:
@@ -1065,6 +1066,10 @@ class RatingModel(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> RatingModel:
         self.metadata = metadata
+        return self
+
+    def with_initial_value(self, initial_value: int) -> RatingModel:
+        self.initial_value = initial_value
         return self
 
     def with_volatility(self, volatility: int) -> RatingModel:
@@ -1148,6 +1153,7 @@ class RatingModel(core.Gs2Model):
             .with_rating_model_id(data.get('ratingModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
+            .with_initial_value(data.get('initialValue'))\
             .with_volatility(data.get('volatility'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1155,6 +1161,7 @@ class RatingModel(core.Gs2Model):
             "ratingModelId": self.rating_model_id,
             "name": self.name,
             "metadata": self.metadata,
+            "initialValue": self.initial_value,
             "volatility": self.volatility,
         }
 
@@ -1164,6 +1171,7 @@ class RatingModelMaster(core.Gs2Model):
     name: str = None
     metadata: str = None
     description: str = None
+    initial_value: int = None
     volatility: int = None
     created_at: int = None
     updated_at: int = None
@@ -1182,6 +1190,10 @@ class RatingModelMaster(core.Gs2Model):
 
     def with_description(self, description: str) -> RatingModelMaster:
         self.description = description
+        return self
+
+    def with_initial_value(self, initial_value: int) -> RatingModelMaster:
+        self.initial_value = initial_value
         return self
 
     def with_volatility(self, volatility: int) -> RatingModelMaster:
@@ -1274,6 +1286,7 @@ class RatingModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
+            .with_initial_value(data.get('initialValue'))\
             .with_volatility(data.get('volatility'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
@@ -1284,6 +1297,7 @@ class RatingModelMaster(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "description": self.description,
+            "initialValue": self.initial_value,
             "volatility": self.volatility,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
