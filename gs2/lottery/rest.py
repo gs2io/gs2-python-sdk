@@ -1615,6 +1615,248 @@ class Gs2LotteryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _prediction(
+        self,
+        request: PredictionRequest,
+        callback: Callable[[AsyncResult[PredictionResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='lottery',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/lottery/{lotteryName}/prediction".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            lotteryName=request.lottery_name if request.lottery_name is not None and request.lottery_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.random_seed is not None:
+            body["randomSeed"] = request.random_seed
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PredictionResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def prediction(
+        self,
+        request: PredictionRequest,
+    ) -> PredictionResult:
+        async_result = []
+        with timeout(30):
+            self._prediction(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def prediction_async(
+        self,
+        request: PredictionRequest,
+    ) -> PredictionResult:
+        async_result = []
+        self._prediction(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _prediction_by_user_id(
+        self,
+        request: PredictionByUserIdRequest,
+        callback: Callable[[AsyncResult[PredictionByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='lottery',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/lottery/{lotteryName}/prediction".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            lotteryName=request.lottery_name if request.lottery_name is not None and request.lottery_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.random_seed is not None:
+            body["randomSeed"] = request.random_seed
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PredictionByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def prediction_by_user_id(
+        self,
+        request: PredictionByUserIdRequest,
+    ) -> PredictionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._prediction_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def prediction_by_user_id_async(
+        self,
+        request: PredictionByUserIdRequest,
+    ) -> PredictionByUserIdResult:
+        async_result = []
+        self._prediction_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _draw_with_random_seed_by_user_id(
+        self,
+        request: DrawWithRandomSeedByUserIdRequest,
+        callback: Callable[[AsyncResult[DrawWithRandomSeedByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='lottery',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/lottery/{lotteryName}/draw/withSeed".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            lotteryName=request.lottery_name if request.lottery_name is not None and request.lottery_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.random_seed is not None:
+            body["randomSeed"] = request.random_seed
+        if request.count is not None:
+            body["count"] = request.count
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DrawWithRandomSeedByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def draw_with_random_seed_by_user_id(
+        self,
+        request: DrawWithRandomSeedByUserIdRequest,
+    ) -> DrawWithRandomSeedByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._draw_with_random_seed_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def draw_with_random_seed_by_user_id_async(
+        self,
+        request: DrawWithRandomSeedByUserIdRequest,
+    ) -> DrawWithRandomSeedByUserIdResult:
+        async_result = []
+        self._draw_with_random_seed_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _draw_by_stamp_sheet(
         self,
         request: DrawByStampSheetRequest,

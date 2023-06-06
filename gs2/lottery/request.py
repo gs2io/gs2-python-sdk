@@ -1153,6 +1153,226 @@ class DrawByUserIdRequest(core.Gs2Request):
         }
 
 
+class PredictionRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    lottery_name: str = None
+    user_id: str = None
+    random_seed: int = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PredictionRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_lottery_name(self, lottery_name: str) -> PredictionRequest:
+        self.lottery_name = lottery_name
+        return self
+
+    def with_user_id(self, user_id: str) -> PredictionRequest:
+        self.user_id = user_id
+        return self
+
+    def with_random_seed(self, random_seed: int) -> PredictionRequest:
+        self.random_seed = random_seed
+        return self
+
+    def with_count(self, count: int) -> PredictionRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PredictionRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PredictionRequest]:
+        if data is None:
+            return None
+        return PredictionRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_lottery_name(data.get('lotteryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_random_seed(data.get('randomSeed'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "lotteryName": self.lottery_name,
+            "userId": self.user_id,
+            "randomSeed": self.random_seed,
+            "count": self.count,
+        }
+
+
+class PredictionByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    lottery_name: str = None
+    user_id: str = None
+    random_seed: int = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PredictionByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_lottery_name(self, lottery_name: str) -> PredictionByUserIdRequest:
+        self.lottery_name = lottery_name
+        return self
+
+    def with_user_id(self, user_id: str) -> PredictionByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_random_seed(self, random_seed: int) -> PredictionByUserIdRequest:
+        self.random_seed = random_seed
+        return self
+
+    def with_count(self, count: int) -> PredictionByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PredictionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PredictionByUserIdRequest]:
+        if data is None:
+            return None
+        return PredictionByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_lottery_name(data.get('lotteryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_random_seed(data.get('randomSeed'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "lotteryName": self.lottery_name,
+            "userId": self.user_id,
+            "randomSeed": self.random_seed,
+            "count": self.count,
+        }
+
+
+class DrawWithRandomSeedByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    lottery_name: str = None
+    user_id: str = None
+    random_seed: int = None
+    count: int = None
+    config: List[Config] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DrawWithRandomSeedByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_lottery_name(self, lottery_name: str) -> DrawWithRandomSeedByUserIdRequest:
+        self.lottery_name = lottery_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DrawWithRandomSeedByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_random_seed(self, random_seed: int) -> DrawWithRandomSeedByUserIdRequest:
+        self.random_seed = random_seed
+        return self
+
+    def with_count(self, count: int) -> DrawWithRandomSeedByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_config(self, config: List[Config]) -> DrawWithRandomSeedByUserIdRequest:
+        self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DrawWithRandomSeedByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DrawWithRandomSeedByUserIdRequest]:
+        if data is None:
+            return None
+        return DrawWithRandomSeedByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_lottery_name(data.get('lotteryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_random_seed(data.get('randomSeed'))\
+            .with_count(data.get('count'))\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "lotteryName": self.lottery_name,
+            "userId": self.user_id,
+            "randomSeed": self.random_seed,
+            "count": self.count,
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+        }
+
+
 class DrawByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None

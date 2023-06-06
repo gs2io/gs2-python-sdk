@@ -816,6 +816,154 @@ class DrawByUserIdResult(core.Gs2Result):
         }
 
 
+class PredictionResult(core.Gs2Result):
+    items: List[DrawnPrize] = None
+
+    def with_items(self, items: List[DrawnPrize]) -> PredictionResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PredictionResult]:
+        if data is None:
+            return None
+        return PredictionResult()\
+            .with_items([
+                DrawnPrize.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class PredictionByUserIdResult(core.Gs2Result):
+    items: List[DrawnPrize] = None
+
+    def with_items(self, items: List[DrawnPrize]) -> PredictionByUserIdResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PredictionByUserIdResult]:
+        if data is None:
+            return None
+        return PredictionByUserIdResult()\
+            .with_items([
+                DrawnPrize.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class DrawWithRandomSeedByUserIdResult(core.Gs2Result):
+    items: List[DrawnPrize] = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_items(self, items: List[DrawnPrize]) -> DrawWithRandomSeedByUserIdResult:
+        self.items = items
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> DrawWithRandomSeedByUserIdResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> DrawWithRandomSeedByUserIdResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> DrawWithRandomSeedByUserIdResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> DrawWithRandomSeedByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DrawWithRandomSeedByUserIdResult]:
+        if data is None:
+            return None
+        return DrawWithRandomSeedByUserIdResult()\
+            .with_items([
+                DrawnPrize.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
 class DrawByStampSheetResult(core.Gs2Result):
     items: List[DrawnPrize] = None
     transaction_id: str = None
