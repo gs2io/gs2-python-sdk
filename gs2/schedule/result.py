@@ -803,9 +803,14 @@ class DescribeRawEventsResult(core.Gs2Result):
 
 class GetEventResult(core.Gs2Result):
     item: Event = None
+    repeat_count: int = None
 
     def with_item(self, item: Event) -> GetEventResult:
         self.item = item
+        return self
+
+    def with_repeat_count(self, repeat_count: int) -> GetEventResult:
+        self.repeat_count = repeat_count
         return self
 
     def get(self, key, default=None):
@@ -827,19 +832,26 @@ class GetEventResult(core.Gs2Result):
         if data is None:
             return None
         return GetEventResult()\
-            .with_item(Event.from_dict(data.get('item')))
+            .with_item(Event.from_dict(data.get('item')))\
+            .with_repeat_count(data.get('repeatCount'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "repeatCount": self.repeat_count,
         }
 
 
 class GetEventByUserIdResult(core.Gs2Result):
     item: Event = None
+    repeat_count: int = None
 
     def with_item(self, item: Event) -> GetEventByUserIdResult:
         self.item = item
+        return self
+
+    def with_repeat_count(self, repeat_count: int) -> GetEventByUserIdResult:
+        self.repeat_count = repeat_count
         return self
 
     def get(self, key, default=None):
@@ -861,11 +873,13 @@ class GetEventByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return GetEventByUserIdResult()\
-            .with_item(Event.from_dict(data.get('item')))
+            .with_item(Event.from_dict(data.get('item')))\
+            .with_repeat_count(data.get('repeatCount'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "repeatCount": self.repeat_count,
         }
 
 
