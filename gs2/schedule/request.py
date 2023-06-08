@@ -336,7 +336,6 @@ class CreateEventMasterRequest(core.Gs2Request):
     repeat_begin_hour: int = None
     repeat_end_hour: int = None
     relative_trigger_name: str = None
-    relative_duration: int = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateEventMasterRequest:
         self.namespace_name = namespace_name
@@ -398,10 +397,6 @@ class CreateEventMasterRequest(core.Gs2Request):
         self.relative_trigger_name = relative_trigger_name
         return self
 
-    def with_relative_duration(self, relative_duration: int) -> CreateEventMasterRequest:
-        self.relative_duration = relative_duration
-        return self
-
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -435,8 +430,7 @@ class CreateEventMasterRequest(core.Gs2Request):
             .with_repeat_end_day_of_week(data.get('repeatEndDayOfWeek'))\
             .with_repeat_begin_hour(data.get('repeatBeginHour'))\
             .with_repeat_end_hour(data.get('repeatEndHour'))\
-            .with_relative_trigger_name(data.get('relativeTriggerName'))\
-            .with_relative_duration(data.get('relativeDuration'))
+            .with_relative_trigger_name(data.get('relativeTriggerName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -455,7 +449,6 @@ class CreateEventMasterRequest(core.Gs2Request):
             "repeatBeginHour": self.repeat_begin_hour,
             "repeatEndHour": self.repeat_end_hour,
             "relativeTriggerName": self.relative_trigger_name,
-            "relativeDuration": self.relative_duration,
         }
 
 
@@ -520,7 +513,6 @@ class UpdateEventMasterRequest(core.Gs2Request):
     repeat_begin_hour: int = None
     repeat_end_hour: int = None
     relative_trigger_name: str = None
-    relative_duration: int = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateEventMasterRequest:
         self.namespace_name = namespace_name
@@ -582,10 +574,6 @@ class UpdateEventMasterRequest(core.Gs2Request):
         self.relative_trigger_name = relative_trigger_name
         return self
 
-    def with_relative_duration(self, relative_duration: int) -> UpdateEventMasterRequest:
-        self.relative_duration = relative_duration
-        return self
-
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -619,8 +607,7 @@ class UpdateEventMasterRequest(core.Gs2Request):
             .with_repeat_end_day_of_week(data.get('repeatEndDayOfWeek'))\
             .with_repeat_begin_hour(data.get('repeatBeginHour'))\
             .with_repeat_end_hour(data.get('repeatEndHour'))\
-            .with_relative_trigger_name(data.get('relativeTriggerName'))\
-            .with_relative_duration(data.get('relativeDuration'))
+            .with_relative_trigger_name(data.get('relativeTriggerName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -639,7 +626,6 @@ class UpdateEventMasterRequest(core.Gs2Request):
             "repeatBeginHour": self.repeat_begin_hour,
             "repeatEndHour": self.repeat_end_hour,
             "relativeTriggerName": self.relative_trigger_name,
-            "relativeDuration": self.relative_duration,
         }
 
 
@@ -1207,6 +1193,7 @@ class GetEventRequest(core.Gs2Request):
     namespace_name: str = None
     event_name: str = None
     access_token: str = None
+    is_in_schedule: bool = None
 
     def with_namespace_name(self, namespace_name: str) -> GetEventRequest:
         self.namespace_name = namespace_name
@@ -1218,6 +1205,10 @@ class GetEventRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> GetEventRequest:
         self.access_token = access_token
+        return self
+
+    def with_is_in_schedule(self, is_in_schedule: bool) -> GetEventRequest:
+        self.is_in_schedule = is_in_schedule
         return self
 
     def get(self, key, default=None):
@@ -1241,13 +1232,15 @@ class GetEventRequest(core.Gs2Request):
         return GetEventRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_event_name(data.get('eventName'))\
-            .with_access_token(data.get('accessToken'))
+            .with_access_token(data.get('accessToken'))\
+            .with_is_in_schedule(data.get('isInSchedule'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "eventName": self.event_name,
             "accessToken": self.access_token,
+            "isInSchedule": self.is_in_schedule,
         }
 
 
@@ -1257,6 +1250,7 @@ class GetEventByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     event_name: str = None
     user_id: str = None
+    is_in_schedule: bool = None
 
     def with_namespace_name(self, namespace_name: str) -> GetEventByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1268,6 +1262,10 @@ class GetEventByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> GetEventByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_is_in_schedule(self, is_in_schedule: bool) -> GetEventByUserIdRequest:
+        self.is_in_schedule = is_in_schedule
         return self
 
     def get(self, key, default=None):
@@ -1291,13 +1289,15 @@ class GetEventByUserIdRequest(core.Gs2Request):
         return GetEventByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_event_name(data.get('eventName'))\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_is_in_schedule(data.get('isInSchedule'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "eventName": self.event_name,
             "userId": self.user_id,
+            "isInSchedule": self.is_in_schedule,
         }
 
 

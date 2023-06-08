@@ -1158,7 +1158,7 @@ class PredictionRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     lottery_name: str = None
-    user_id: str = None
+    access_token: str = None
     random_seed: int = None
     count: int = None
     duplication_avoider: str = None
@@ -1171,8 +1171,8 @@ class PredictionRequest(core.Gs2Request):
         self.lottery_name = lottery_name
         return self
 
-    def with_user_id(self, user_id: str) -> PredictionRequest:
-        self.user_id = user_id
+    def with_access_token(self, access_token: str) -> PredictionRequest:
+        self.access_token = access_token
         return self
 
     def with_random_seed(self, random_seed: int) -> PredictionRequest:
@@ -1208,7 +1208,7 @@ class PredictionRequest(core.Gs2Request):
         return PredictionRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_lottery_name(data.get('lotteryName'))\
-            .with_user_id(data.get('userId'))\
+            .with_access_token(data.get('accessToken'))\
             .with_random_seed(data.get('randomSeed'))\
             .with_count(data.get('count'))
 
@@ -1216,7 +1216,7 @@ class PredictionRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "lotteryName": self.lottery_name,
-            "userId": self.user_id,
+            "accessToken": self.access_token,
             "randomSeed": self.random_seed,
             "count": self.count,
         }

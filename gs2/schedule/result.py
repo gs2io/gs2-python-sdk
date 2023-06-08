@@ -804,6 +804,8 @@ class DescribeRawEventsResult(core.Gs2Result):
 class GetEventResult(core.Gs2Result):
     item: Event = None
     repeat_count: int = None
+    in_schedule: bool = None
+    repeat_schedule: RepeatSchedule = None
 
     def with_item(self, item: Event) -> GetEventResult:
         self.item = item
@@ -811,6 +813,14 @@ class GetEventResult(core.Gs2Result):
 
     def with_repeat_count(self, repeat_count: int) -> GetEventResult:
         self.repeat_count = repeat_count
+        return self
+
+    def with_in_schedule(self, in_schedule: bool) -> GetEventResult:
+        self.in_schedule = in_schedule
+        return self
+
+    def with_repeat_schedule(self, repeat_schedule: RepeatSchedule) -> GetEventResult:
+        self.repeat_schedule = repeat_schedule
         return self
 
     def get(self, key, default=None):
@@ -833,18 +843,24 @@ class GetEventResult(core.Gs2Result):
             return None
         return GetEventResult()\
             .with_item(Event.from_dict(data.get('item')))\
-            .with_repeat_count(data.get('repeatCount'))
+            .with_repeat_count(data.get('repeatCount'))\
+            .with_in_schedule(data.get('inSchedule'))\
+            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "repeatCount": self.repeat_count,
+            "inSchedule": self.in_schedule,
+            "repeatSchedule": self.repeat_schedule.to_dict() if self.repeat_schedule else None,
         }
 
 
 class GetEventByUserIdResult(core.Gs2Result):
     item: Event = None
     repeat_count: int = None
+    in_schedule: bool = None
+    repeat_schedule: RepeatSchedule = None
 
     def with_item(self, item: Event) -> GetEventByUserIdResult:
         self.item = item
@@ -852,6 +868,14 @@ class GetEventByUserIdResult(core.Gs2Result):
 
     def with_repeat_count(self, repeat_count: int) -> GetEventByUserIdResult:
         self.repeat_count = repeat_count
+        return self
+
+    def with_in_schedule(self, in_schedule: bool) -> GetEventByUserIdResult:
+        self.in_schedule = in_schedule
+        return self
+
+    def with_repeat_schedule(self, repeat_schedule: RepeatSchedule) -> GetEventByUserIdResult:
+        self.repeat_schedule = repeat_schedule
         return self
 
     def get(self, key, default=None):
@@ -874,12 +898,16 @@ class GetEventByUserIdResult(core.Gs2Result):
             return None
         return GetEventByUserIdResult()\
             .with_item(Event.from_dict(data.get('item')))\
-            .with_repeat_count(data.get('repeatCount'))
+            .with_repeat_count(data.get('repeatCount'))\
+            .with_in_schedule(data.get('inSchedule'))\
+            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "repeatCount": self.repeat_count,
+            "inSchedule": self.in_schedule,
+            "repeatSchedule": self.repeat_schedule.to_dict() if self.repeat_schedule else None,
         }
 
 

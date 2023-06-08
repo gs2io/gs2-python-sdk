@@ -1646,8 +1646,8 @@ class Gs2LotteryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.lottery_name is not None:
             body["lotteryName"] = request.lottery_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
         if request.random_seed is not None:
             body["randomSeed"] = request.random_seed
         if request.count is not None:
@@ -1655,6 +1655,8 @@ class Gs2LotteryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
         if request.duplication_avoider:
             body["xGs2DuplicationAvoider"] = request.duplication_avoider
 

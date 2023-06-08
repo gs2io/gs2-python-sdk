@@ -19,6 +19,68 @@ from typing import *
 from gs2 import core
 
 
+class RepeatSchedule(core.Gs2Model):
+    repeat_count: int = None
+    current_repeat_start_at: int = None
+    current_repeat_end_at: int = None
+    last_repeat_end_at: int = None
+    next_repeat_start_at: int = None
+
+    def with_repeat_count(self, repeat_count: int) -> RepeatSchedule:
+        self.repeat_count = repeat_count
+        return self
+
+    def with_current_repeat_start_at(self, current_repeat_start_at: int) -> RepeatSchedule:
+        self.current_repeat_start_at = current_repeat_start_at
+        return self
+
+    def with_current_repeat_end_at(self, current_repeat_end_at: int) -> RepeatSchedule:
+        self.current_repeat_end_at = current_repeat_end_at
+        return self
+
+    def with_last_repeat_end_at(self, last_repeat_end_at: int) -> RepeatSchedule:
+        self.last_repeat_end_at = last_repeat_end_at
+        return self
+
+    def with_next_repeat_start_at(self, next_repeat_start_at: int) -> RepeatSchedule:
+        self.next_repeat_start_at = next_repeat_start_at
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RepeatSchedule]:
+        if data is None:
+            return None
+        return RepeatSchedule()\
+            .with_repeat_count(data.get('repeatCount'))\
+            .with_current_repeat_start_at(data.get('currentRepeatStartAt'))\
+            .with_current_repeat_end_at(data.get('currentRepeatEndAt'))\
+            .with_last_repeat_end_at(data.get('lastRepeatEndAt'))\
+            .with_next_repeat_start_at(data.get('nextRepeatStartAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "repeatCount": self.repeat_count,
+            "currentRepeatStartAt": self.current_repeat_start_at,
+            "currentRepeatEndAt": self.current_repeat_end_at,
+            "lastRepeatEndAt": self.last_repeat_end_at,
+            "nextRepeatStartAt": self.next_repeat_start_at,
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -228,7 +290,6 @@ class Event(core.Gs2Model):
     repeat_begin_hour: int = None
     repeat_end_hour: int = None
     relative_trigger_name: str = None
-    relative_duration: int = None
 
     def with_event_id(self, event_id: str) -> Event:
         self.event_id = event_id
@@ -284,10 +345,6 @@ class Event(core.Gs2Model):
 
     def with_relative_trigger_name(self, relative_trigger_name: str) -> Event:
         self.relative_trigger_name = relative_trigger_name
-        return self
-
-    def with_relative_duration(self, relative_duration: int) -> Event:
-        self.relative_duration = relative_duration
         return self
 
     @classmethod
@@ -377,8 +434,7 @@ class Event(core.Gs2Model):
             .with_repeat_end_day_of_week(data.get('repeatEndDayOfWeek'))\
             .with_repeat_begin_hour(data.get('repeatBeginHour'))\
             .with_repeat_end_hour(data.get('repeatEndHour'))\
-            .with_relative_trigger_name(data.get('relativeTriggerName'))\
-            .with_relative_duration(data.get('relativeDuration'))
+            .with_relative_trigger_name(data.get('relativeTriggerName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -396,7 +452,6 @@ class Event(core.Gs2Model):
             "repeatBeginHour": self.repeat_begin_hour,
             "repeatEndHour": self.repeat_end_hour,
             "relativeTriggerName": self.relative_trigger_name,
-            "relativeDuration": self.relative_duration,
         }
 
 
@@ -545,7 +600,6 @@ class EventMaster(core.Gs2Model):
     repeat_begin_hour: int = None
     repeat_end_hour: int = None
     relative_trigger_name: str = None
-    relative_duration: int = None
     created_at: int = None
     updated_at: int = None
 
@@ -607,10 +661,6 @@ class EventMaster(core.Gs2Model):
 
     def with_relative_trigger_name(self, relative_trigger_name: str) -> EventMaster:
         self.relative_trigger_name = relative_trigger_name
-        return self
-
-    def with_relative_duration(self, relative_duration: int) -> EventMaster:
-        self.relative_duration = relative_duration
         return self
 
     def with_created_at(self, created_at: int) -> EventMaster:
@@ -710,7 +760,6 @@ class EventMaster(core.Gs2Model):
             .with_repeat_begin_hour(data.get('repeatBeginHour'))\
             .with_repeat_end_hour(data.get('repeatEndHour'))\
             .with_relative_trigger_name(data.get('relativeTriggerName'))\
-            .with_relative_duration(data.get('relativeDuration'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
 
@@ -731,7 +780,6 @@ class EventMaster(core.Gs2Model):
             "repeatBeginHour": self.repeat_begin_hour,
             "repeatEndHour": self.repeat_end_hour,
             "relativeTriggerName": self.relative_trigger_name,
-            "relativeDuration": self.relative_duration,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }

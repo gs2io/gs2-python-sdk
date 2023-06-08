@@ -1627,7 +1627,6 @@ class Gs2LotteryRestClient(rest.AbstractGs2RestClient):
         ) + "/{namespaceName}/user/me/lottery/{lotteryName}/prediction".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             lotteryName=request.lottery_name if request.lottery_name is not None and request.lottery_name != '' else 'null',
-            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1641,6 +1640,8 @@ class Gs2LotteryRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(

@@ -577,8 +577,6 @@ class Gs2ScheduleRestClient(rest.AbstractGs2RestClient):
             body["repeatEndHour"] = request.repeat_end_hour
         if request.relative_trigger_name is not None:
             body["relativeTriggerName"] = request.relative_trigger_name
-        if request.relative_duration is not None:
-            body["relativeDuration"] = request.relative_duration
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -749,8 +747,6 @@ class Gs2ScheduleRestClient(rest.AbstractGs2RestClient):
             body["repeatEndHour"] = request.repeat_end_hour
         if request.relative_trigger_name is not None:
             body["relativeTriggerName"] = request.relative_trigger_name
-        if request.relative_duration is not None:
-            body["relativeDuration"] = request.relative_duration
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

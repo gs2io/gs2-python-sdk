@@ -579,8 +579,6 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["repeatEndHour"] = request.repeat_end_hour
         if request.relative_trigger_name is not None:
             body["relativeTriggerName"] = request.relative_trigger_name
-        if request.relative_duration is not None:
-            body["relativeDuration"] = request.relative_duration
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -753,8 +751,6 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["repeatEndHour"] = request.repeat_end_hour
         if request.relative_trigger_name is not None:
             body["relativeTriggerName"] = request.relative_trigger_name
-        if request.relative_duration is not None:
-            body["relativeDuration"] = request.relative_duration
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1667,6 +1663,8 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["eventName"] = request.event_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.is_in_schedule is not None:
+            body["isInSchedule"] = request.is_in_schedule
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1744,6 +1742,8 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["eventName"] = request.event_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.is_in_schedule is not None:
+            body["isInSchedule"] = request.is_in_schedule
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
