@@ -14,6 +14,7 @@ from . import formation
 from . import friend
 from . import gateway
 from . import identifier
+from . import idle
 from . import inbox
 from . import inventory
 from . import job_queue

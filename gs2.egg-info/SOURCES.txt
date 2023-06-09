@@ -97,6 +97,12 @@ src/gs2/identifier/request.py
 src/gs2/identifier/rest.py
 src/gs2/identifier/result.py
 src/gs2/identifier/web_socket.py
+src/gs2/idle/__init__.py
+src/gs2/idle/model.py
+src/gs2/idle/request.py
+src/gs2/idle/rest.py
+src/gs2/idle/result.py
+src/gs2/idle/web_socket.py
 src/gs2/inbox/__init__.py
 src/gs2/inbox/model.py
 src/gs2/inbox/request.py
