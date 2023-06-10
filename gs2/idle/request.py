@@ -711,17 +711,12 @@ class DescribeStatusesRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    category_name: str = None
     access_token: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeStatusesRequest:
         self.namespace_name = namespace_name
-        return self
-
-    def with_category_name(self, category_name: str) -> DescribeStatusesRequest:
-        self.category_name = category_name
         return self
 
     def with_access_token(self, access_token: str) -> DescribeStatusesRequest:
@@ -756,7 +751,6 @@ class DescribeStatusesRequest(core.Gs2Request):
             return None
         return DescribeStatusesRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_category_name(data.get('categoryName'))\
             .with_access_token(data.get('accessToken'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
@@ -764,7 +758,6 @@ class DescribeStatusesRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "categoryName": self.category_name,
             "accessToken": self.access_token,
             "pageToken": self.page_token,
             "limit": self.limit,
@@ -775,17 +768,12 @@ class DescribeStatusesByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    category_name: str = None
     user_id: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeStatusesByUserIdRequest:
         self.namespace_name = namespace_name
-        return self
-
-    def with_category_name(self, category_name: str) -> DescribeStatusesByUserIdRequest:
-        self.category_name = category_name
         return self
 
     def with_user_id(self, user_id: str) -> DescribeStatusesByUserIdRequest:
@@ -820,7 +808,6 @@ class DescribeStatusesByUserIdRequest(core.Gs2Request):
             return None
         return DescribeStatusesByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_category_name(data.get('categoryName'))\
             .with_user_id(data.get('userId'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
@@ -828,7 +815,6 @@ class DescribeStatusesByUserIdRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "categoryName": self.category_name,
             "userId": self.user_id,
             "pageToken": self.page_token,
             "limit": self.limit,
@@ -1322,12 +1308,12 @@ class ExportMasterRequest(core.Gs2Request):
         }
 
 
-class GetCurrentIdleMasterRequest(core.Gs2Request):
+class GetCurrentCategoryMasterRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
 
-    def with_namespace_name(self, namespace_name: str) -> GetCurrentIdleMasterRequest:
+    def with_namespace_name(self, namespace_name: str) -> GetCurrentCategoryMasterRequest:
         self.namespace_name = namespace_name
         return self
 
@@ -1346,10 +1332,10 @@ class GetCurrentIdleMasterRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[GetCurrentIdleMasterRequest]:
+    ) -> Optional[GetCurrentCategoryMasterRequest]:
         if data is None:
             return None
-        return GetCurrentIdleMasterRequest()\
+        return GetCurrentCategoryMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1358,17 +1344,17 @@ class GetCurrentIdleMasterRequest(core.Gs2Request):
         }
 
 
-class UpdateCurrentIdleMasterRequest(core.Gs2Request):
+class UpdateCurrentCategoryMasterRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
     settings: str = None
 
-    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentIdleMasterRequest:
+    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentCategoryMasterRequest:
         self.namespace_name = namespace_name
         return self
 
-    def with_settings(self, settings: str) -> UpdateCurrentIdleMasterRequest:
+    def with_settings(self, settings: str) -> UpdateCurrentCategoryMasterRequest:
         self.settings = settings
         return self
 
@@ -1387,10 +1373,10 @@ class UpdateCurrentIdleMasterRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentIdleMasterRequest]:
+    ) -> Optional[UpdateCurrentCategoryMasterRequest]:
         if data is None:
             return None
-        return UpdateCurrentIdleMasterRequest()\
+        return UpdateCurrentCategoryMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_settings(data.get('settings'))
 
@@ -1401,17 +1387,17 @@ class UpdateCurrentIdleMasterRequest(core.Gs2Request):
         }
 
 
-class UpdateCurrentIdleMasterFromGitHubRequest(core.Gs2Request):
+class UpdateCurrentCategoryMasterFromGitHubRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
     checkout_setting: GitHubCheckoutSetting = None
 
-    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentIdleMasterFromGitHubRequest:
+    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentCategoryMasterFromGitHubRequest:
         self.namespace_name = namespace_name
         return self
 
-    def with_checkout_setting(self, checkout_setting: GitHubCheckoutSetting) -> UpdateCurrentIdleMasterFromGitHubRequest:
+    def with_checkout_setting(self, checkout_setting: GitHubCheckoutSetting) -> UpdateCurrentCategoryMasterFromGitHubRequest:
         self.checkout_setting = checkout_setting
         return self
 
@@ -1430,10 +1416,10 @@ class UpdateCurrentIdleMasterFromGitHubRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentIdleMasterFromGitHubRequest]:
+    ) -> Optional[UpdateCurrentCategoryMasterFromGitHubRequest]:
         if data is None:
             return None
-        return UpdateCurrentIdleMasterFromGitHubRequest()\
+        return UpdateCurrentCategoryMasterFromGitHubRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_checkout_setting(GitHubCheckoutSetting.from_dict(data.get('checkoutSetting')))
 

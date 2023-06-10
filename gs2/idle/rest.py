@@ -1023,8 +1023,6 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
-        if request.category_name is not None:
-            query_strings["categoryName"] = request.category_name
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -1103,8 +1101,6 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
-        if request.category_name is not None:
-            query_strings["categoryName"] = request.category_name
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -1843,10 +1839,10 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _get_current_idle_master(
+    def _get_current_category_master(
         self,
-        request: GetCurrentIdleMasterRequest,
-        callback: Callable[[AsyncResult[GetCurrentIdleMasterResult]], None],
+        request: GetCurrentCategoryMasterRequest,
+        callback: Callable[[AsyncResult[GetCurrentCategoryMasterResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
@@ -1866,7 +1862,7 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='GET',
-            result_type=GetCurrentIdleMasterResult,
+            result_type=GetCurrentCategoryMasterResult,
             callback=callback,
             headers=headers,
             query_strings=query_strings,
@@ -1877,13 +1873,13 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def get_current_idle_master(
+    def get_current_category_master(
         self,
-        request: GetCurrentIdleMasterRequest,
-    ) -> GetCurrentIdleMasterResult:
+        request: GetCurrentCategoryMasterRequest,
+    ) -> GetCurrentCategoryMasterResult:
         async_result = []
         with timeout(30):
-            self._get_current_idle_master(
+            self._get_current_category_master(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -1894,12 +1890,12 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def get_current_idle_master_async(
+    async def get_current_category_master_async(
         self,
-        request: GetCurrentIdleMasterRequest,
-    ) -> GetCurrentIdleMasterResult:
+        request: GetCurrentCategoryMasterRequest,
+    ) -> GetCurrentCategoryMasterResult:
         async_result = []
-        self._get_current_idle_master(
+        self._get_current_category_master(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -1914,10 +1910,10 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_idle_master(
+    def _update_current_category_master(
         self,
-        request: UpdateCurrentIdleMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentIdleMasterResult]], None],
+        request: UpdateCurrentCategoryMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentCategoryMasterResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
@@ -1939,7 +1935,7 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='PUT',
-            result_type=UpdateCurrentIdleMasterResult,
+            result_type=UpdateCurrentCategoryMasterResult,
             callback=callback,
             headers=headers,
             body=body,
@@ -1950,13 +1946,13 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def update_current_idle_master(
+    def update_current_category_master(
         self,
-        request: UpdateCurrentIdleMasterRequest,
-    ) -> UpdateCurrentIdleMasterResult:
+        request: UpdateCurrentCategoryMasterRequest,
+    ) -> UpdateCurrentCategoryMasterResult:
         async_result = []
         with timeout(30):
-            self._update_current_idle_master(
+            self._update_current_category_master(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -1967,12 +1963,12 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def update_current_idle_master_async(
+    async def update_current_category_master_async(
         self,
-        request: UpdateCurrentIdleMasterRequest,
-    ) -> UpdateCurrentIdleMasterResult:
+        request: UpdateCurrentCategoryMasterRequest,
+    ) -> UpdateCurrentCategoryMasterResult:
         async_result = []
-        self._update_current_idle_master(
+        self._update_current_category_master(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -1987,10 +1983,10 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_idle_master_from_git_hub(
+    def _update_current_category_master_from_git_hub(
         self,
-        request: UpdateCurrentIdleMasterFromGitHubRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentIdleMasterFromGitHubResult]], None],
+        request: UpdateCurrentCategoryMasterFromGitHubRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentCategoryMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
@@ -2012,7 +2008,7 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='PUT',
-            result_type=UpdateCurrentIdleMasterFromGitHubResult,
+            result_type=UpdateCurrentCategoryMasterFromGitHubResult,
             callback=callback,
             headers=headers,
             body=body,
@@ -2023,13 +2019,13 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def update_current_idle_master_from_git_hub(
+    def update_current_category_master_from_git_hub(
         self,
-        request: UpdateCurrentIdleMasterFromGitHubRequest,
-    ) -> UpdateCurrentIdleMasterFromGitHubResult:
+        request: UpdateCurrentCategoryMasterFromGitHubRequest,
+    ) -> UpdateCurrentCategoryMasterFromGitHubResult:
         async_result = []
         with timeout(30):
-            self._update_current_idle_master_from_git_hub(
+            self._update_current_category_master_from_git_hub(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -2040,12 +2036,12 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def update_current_idle_master_from_git_hub_async(
+    async def update_current_category_master_from_git_hub_async(
         self,
-        request: UpdateCurrentIdleMasterFromGitHubRequest,
-    ) -> UpdateCurrentIdleMasterFromGitHubResult:
+        request: UpdateCurrentCategoryMasterFromGitHubRequest,
+    ) -> UpdateCurrentCategoryMasterFromGitHubResult:
         async_result = []
-        self._update_current_idle_master_from_git_hub(
+        self._update_current_category_master_from_git_hub(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

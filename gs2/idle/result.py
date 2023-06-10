@@ -985,10 +985,10 @@ class ExportMasterResult(core.Gs2Result):
         }
 
 
-class GetCurrentIdleMasterResult(core.Gs2Result):
+class GetCurrentCategoryMasterResult(core.Gs2Result):
     item: CurrentCategoryMaster = None
 
-    def with_item(self, item: CurrentCategoryMaster) -> GetCurrentIdleMasterResult:
+    def with_item(self, item: CurrentCategoryMaster) -> GetCurrentCategoryMasterResult:
         self.item = item
         return self
 
@@ -1007,10 +1007,10 @@ class GetCurrentIdleMasterResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[GetCurrentIdleMasterResult]:
+    ) -> Optional[GetCurrentCategoryMasterResult]:
         if data is None:
             return None
-        return GetCurrentIdleMasterResult()\
+        return GetCurrentCategoryMasterResult()\
             .with_item(CurrentCategoryMaster.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1019,10 +1019,10 @@ class GetCurrentIdleMasterResult(core.Gs2Result):
         }
 
 
-class UpdateCurrentIdleMasterResult(core.Gs2Result):
+class UpdateCurrentCategoryMasterResult(core.Gs2Result):
     item: CurrentCategoryMaster = None
 
-    def with_item(self, item: CurrentCategoryMaster) -> UpdateCurrentIdleMasterResult:
+    def with_item(self, item: CurrentCategoryMaster) -> UpdateCurrentCategoryMasterResult:
         self.item = item
         return self
 
@@ -1041,10 +1041,10 @@ class UpdateCurrentIdleMasterResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentIdleMasterResult]:
+    ) -> Optional[UpdateCurrentCategoryMasterResult]:
         if data is None:
             return None
-        return UpdateCurrentIdleMasterResult()\
+        return UpdateCurrentCategoryMasterResult()\
             .with_item(CurrentCategoryMaster.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1053,10 +1053,10 @@ class UpdateCurrentIdleMasterResult(core.Gs2Result):
         }
 
 
-class UpdateCurrentIdleMasterFromGitHubResult(core.Gs2Result):
+class UpdateCurrentCategoryMasterFromGitHubResult(core.Gs2Result):
     item: CurrentCategoryMaster = None
 
-    def with_item(self, item: CurrentCategoryMaster) -> UpdateCurrentIdleMasterFromGitHubResult:
+    def with_item(self, item: CurrentCategoryMaster) -> UpdateCurrentCategoryMasterFromGitHubResult:
         self.item = item
         return self
 
@@ -1075,10 +1075,10 @@ class UpdateCurrentIdleMasterFromGitHubResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentIdleMasterFromGitHubResult]:
+    ) -> Optional[UpdateCurrentCategoryMasterFromGitHubResult]:
         if data is None:
             return None
-        return UpdateCurrentIdleMasterFromGitHubResult()\
+        return UpdateCurrentCategoryMasterFromGitHubResult()\
             .with_item(CurrentCategoryMaster.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:

@@ -1029,8 +1029,6 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.category_name is not None:
-            body["categoryName"] = request.category_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
         if request.page_token is not None:
@@ -1110,8 +1108,6 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.category_name is not None:
-            body["categoryName"] = request.category_name
         if request.user_id is not None:
             body["userId"] = request.user_id
         if request.page_token is not None:
@@ -1867,10 +1863,10 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _get_current_idle_master(
+    def _get_current_category_master(
         self,
-        request: GetCurrentIdleMasterRequest,
-        callback: Callable[[AsyncResult[GetCurrentIdleMasterResult]], None],
+        request: GetCurrentCategoryMasterRequest,
+        callback: Callable[[AsyncResult[GetCurrentCategoryMasterResult]], None],
     ):
         import uuid
 
@@ -1878,7 +1874,7 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         body = self._create_metadata(
             service="idle",
             component='currentCategoryMaster',
-            function='getCurrentIdleMaster',
+            function='getCurrentCategoryMaster',
             request_id=request_id,
         )
 
@@ -1893,19 +1889,19 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=GetCurrentIdleMasterResult,
+                result_type=GetCurrentCategoryMasterResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def get_current_idle_master(
+    def get_current_category_master(
         self,
-        request: GetCurrentIdleMasterRequest,
-    ) -> GetCurrentIdleMasterResult:
+        request: GetCurrentCategoryMasterRequest,
+    ) -> GetCurrentCategoryMasterResult:
         async_result = []
         with timeout(30):
-            self._get_current_idle_master(
+            self._get_current_category_master(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -1919,12 +1915,12 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def get_current_idle_master_async(
+    async def get_current_category_master_async(
         self,
-        request: GetCurrentIdleMasterRequest,
-    ) -> GetCurrentIdleMasterResult:
+        request: GetCurrentCategoryMasterRequest,
+    ) -> GetCurrentCategoryMasterResult:
         async_result = []
-        self._get_current_idle_master(
+        self._get_current_category_master(
             request,
             lambda result: async_result.append(result),
         )
@@ -1938,10 +1934,10 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_idle_master(
+    def _update_current_category_master(
         self,
-        request: UpdateCurrentIdleMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentIdleMasterResult]], None],
+        request: UpdateCurrentCategoryMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentCategoryMasterResult]], None],
     ):
         import uuid
 
@@ -1949,7 +1945,7 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         body = self._create_metadata(
             service="idle",
             component='currentCategoryMaster',
-            function='updateCurrentIdleMaster',
+            function='updateCurrentCategoryMaster',
             request_id=request_id,
         )
 
@@ -1966,19 +1962,19 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=UpdateCurrentIdleMasterResult,
+                result_type=UpdateCurrentCategoryMasterResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def update_current_idle_master(
+    def update_current_category_master(
         self,
-        request: UpdateCurrentIdleMasterRequest,
-    ) -> UpdateCurrentIdleMasterResult:
+        request: UpdateCurrentCategoryMasterRequest,
+    ) -> UpdateCurrentCategoryMasterResult:
         async_result = []
         with timeout(30):
-            self._update_current_idle_master(
+            self._update_current_category_master(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -1992,12 +1988,12 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def update_current_idle_master_async(
+    async def update_current_category_master_async(
         self,
-        request: UpdateCurrentIdleMasterRequest,
-    ) -> UpdateCurrentIdleMasterResult:
+        request: UpdateCurrentCategoryMasterRequest,
+    ) -> UpdateCurrentCategoryMasterResult:
         async_result = []
-        self._update_current_idle_master(
+        self._update_current_category_master(
             request,
             lambda result: async_result.append(result),
         )
@@ -2011,10 +2007,10 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_idle_master_from_git_hub(
+    def _update_current_category_master_from_git_hub(
         self,
-        request: UpdateCurrentIdleMasterFromGitHubRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentIdleMasterFromGitHubResult]], None],
+        request: UpdateCurrentCategoryMasterFromGitHubRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentCategoryMasterFromGitHubResult]], None],
     ):
         import uuid
 
@@ -2022,7 +2018,7 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         body = self._create_metadata(
             service="idle",
             component='currentCategoryMaster',
-            function='updateCurrentIdleMasterFromGitHub',
+            function='updateCurrentCategoryMasterFromGitHub',
             request_id=request_id,
         )
 
@@ -2039,19 +2035,19 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=UpdateCurrentIdleMasterFromGitHubResult,
+                result_type=UpdateCurrentCategoryMasterFromGitHubResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def update_current_idle_master_from_git_hub(
+    def update_current_category_master_from_git_hub(
         self,
-        request: UpdateCurrentIdleMasterFromGitHubRequest,
-    ) -> UpdateCurrentIdleMasterFromGitHubResult:
+        request: UpdateCurrentCategoryMasterFromGitHubRequest,
+    ) -> UpdateCurrentCategoryMasterFromGitHubResult:
         async_result = []
         with timeout(30):
-            self._update_current_idle_master_from_git_hub(
+            self._update_current_category_master_from_git_hub(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -2065,12 +2061,12 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def update_current_idle_master_from_git_hub_async(
+    async def update_current_category_master_from_git_hub_async(
         self,
-        request: UpdateCurrentIdleMasterFromGitHubRequest,
-    ) -> UpdateCurrentIdleMasterFromGitHubResult:
+        request: UpdateCurrentCategoryMasterFromGitHubRequest,
+    ) -> UpdateCurrentCategoryMasterFromGitHubResult:
         async_result = []
-        self._update_current_idle_master_from_git_hub(
+        self._update_current_category_master_from_git_hub(
             request,
             lambda result: async_result.append(result),
         )
