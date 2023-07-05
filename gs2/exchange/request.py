@@ -801,6 +801,445 @@ class DeleteRateModelMasterRequest(core.Gs2Request):
         }
 
 
+class DescribeIncrementalRateModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeIncrementalRateModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeIncrementalRateModelsRequest]:
+        if data is None:
+            return None
+        return DescribeIncrementalRateModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetIncrementalRateModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetIncrementalRateModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> GetIncrementalRateModelRequest:
+        self.rate_name = rate_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetIncrementalRateModelRequest]:
+        if data is None:
+            return None
+        return GetIncrementalRateModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+        }
+
+
+class DescribeIncrementalRateModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeIncrementalRateModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeIncrementalRateModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeIncrementalRateModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeIncrementalRateModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribeIncrementalRateModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateIncrementalRateModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    consume_action: ConsumeAction = None
+    calculate_type: str = None
+    base_value: int = None
+    coefficient_value: int = None
+    calculate_script_id: str = None
+    exchange_count_id: str = None
+    acquire_actions: List[AcquireAction] = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateIncrementalRateModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name(self, name: str) -> CreateIncrementalRateModelMasterRequest:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> CreateIncrementalRateModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateIncrementalRateModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_consume_action(self, consume_action: ConsumeAction) -> CreateIncrementalRateModelMasterRequest:
+        self.consume_action = consume_action
+        return self
+
+    def with_calculate_type(self, calculate_type: str) -> CreateIncrementalRateModelMasterRequest:
+        self.calculate_type = calculate_type
+        return self
+
+    def with_base_value(self, base_value: int) -> CreateIncrementalRateModelMasterRequest:
+        self.base_value = base_value
+        return self
+
+    def with_coefficient_value(self, coefficient_value: int) -> CreateIncrementalRateModelMasterRequest:
+        self.coefficient_value = coefficient_value
+        return self
+
+    def with_calculate_script_id(self, calculate_script_id: str) -> CreateIncrementalRateModelMasterRequest:
+        self.calculate_script_id = calculate_script_id
+        return self
+
+    def with_exchange_count_id(self, exchange_count_id: str) -> CreateIncrementalRateModelMasterRequest:
+        self.exchange_count_id = exchange_count_id
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> CreateIncrementalRateModelMasterRequest:
+        self.acquire_actions = acquire_actions
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateIncrementalRateModelMasterRequest]:
+        if data is None:
+            return None
+        return CreateIncrementalRateModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_consume_action(ConsumeAction.from_dict(data.get('consumeAction')))\
+            .with_calculate_type(data.get('calculateType'))\
+            .with_base_value(data.get('baseValue'))\
+            .with_coefficient_value(data.get('coefficientValue'))\
+            .with_calculate_script_id(data.get('calculateScriptId'))\
+            .with_exchange_count_id(data.get('exchangeCountId'))\
+            .with_acquire_actions([
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "consumeAction": self.consume_action.to_dict() if self.consume_action else None,
+            "calculateType": self.calculate_type,
+            "baseValue": self.base_value,
+            "coefficientValue": self.coefficient_value,
+            "calculateScriptId": self.calculate_script_id,
+            "exchangeCountId": self.exchange_count_id,
+            "acquireActions": [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+        }
+
+
+class GetIncrementalRateModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetIncrementalRateModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> GetIncrementalRateModelMasterRequest:
+        self.rate_name = rate_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetIncrementalRateModelMasterRequest]:
+        if data is None:
+            return None
+        return GetIncrementalRateModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+        }
+
+
+class UpdateIncrementalRateModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+    description: str = None
+    metadata: str = None
+    consume_action: ConsumeAction = None
+    calculate_type: str = None
+    base_value: int = None
+    coefficient_value: int = None
+    calculate_script_id: str = None
+    exchange_count_id: str = None
+    acquire_actions: List[AcquireAction] = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateIncrementalRateModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> UpdateIncrementalRateModelMasterRequest:
+        self.rate_name = rate_name
+        return self
+
+    def with_description(self, description: str) -> UpdateIncrementalRateModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateIncrementalRateModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_consume_action(self, consume_action: ConsumeAction) -> UpdateIncrementalRateModelMasterRequest:
+        self.consume_action = consume_action
+        return self
+
+    def with_calculate_type(self, calculate_type: str) -> UpdateIncrementalRateModelMasterRequest:
+        self.calculate_type = calculate_type
+        return self
+
+    def with_base_value(self, base_value: int) -> UpdateIncrementalRateModelMasterRequest:
+        self.base_value = base_value
+        return self
+
+    def with_coefficient_value(self, coefficient_value: int) -> UpdateIncrementalRateModelMasterRequest:
+        self.coefficient_value = coefficient_value
+        return self
+
+    def with_calculate_script_id(self, calculate_script_id: str) -> UpdateIncrementalRateModelMasterRequest:
+        self.calculate_script_id = calculate_script_id
+        return self
+
+    def with_exchange_count_id(self, exchange_count_id: str) -> UpdateIncrementalRateModelMasterRequest:
+        self.exchange_count_id = exchange_count_id
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> UpdateIncrementalRateModelMasterRequest:
+        self.acquire_actions = acquire_actions
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateIncrementalRateModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateIncrementalRateModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_consume_action(ConsumeAction.from_dict(data.get('consumeAction')))\
+            .with_calculate_type(data.get('calculateType'))\
+            .with_base_value(data.get('baseValue'))\
+            .with_coefficient_value(data.get('coefficientValue'))\
+            .with_calculate_script_id(data.get('calculateScriptId'))\
+            .with_exchange_count_id(data.get('exchangeCountId'))\
+            .with_acquire_actions([
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "consumeAction": self.consume_action.to_dict() if self.consume_action else None,
+            "calculateType": self.calculate_type,
+            "baseValue": self.base_value,
+            "coefficientValue": self.coefficient_value,
+            "calculateScriptId": self.calculate_script_id,
+            "exchangeCountId": self.exchange_count_id,
+            "acquireActions": [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+        }
+
+
+class DeleteIncrementalRateModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteIncrementalRateModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> DeleteIncrementalRateModelMasterRequest:
+        self.rate_name = rate_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteIncrementalRateModelMasterRequest]:
+        if data is None:
+            return None
+        return DeleteIncrementalRateModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+        }
+
+
 class ExchangeRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -984,6 +1423,304 @@ class ExchangeByStampSheetRequest(core.Gs2Request):
         if data is None:
             return None
         return ExchangeByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class IncrementalExchangeRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+    access_token: str = None
+    count: int = None
+    config: List[Config] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> IncrementalExchangeRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> IncrementalExchangeRequest:
+        self.rate_name = rate_name
+        return self
+
+    def with_access_token(self, access_token: str) -> IncrementalExchangeRequest:
+        self.access_token = access_token
+        return self
+
+    def with_count(self, count: int) -> IncrementalExchangeRequest:
+        self.count = count
+        return self
+
+    def with_config(self, config: List[Config]) -> IncrementalExchangeRequest:
+        self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> IncrementalExchangeRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementalExchangeRequest]:
+        if data is None:
+            return None
+        return IncrementalExchangeRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_count(data.get('count'))\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+            "accessToken": self.access_token,
+            "count": self.count,
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+        }
+
+
+class IncrementalExchangeByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+    user_id: str = None
+    count: int = None
+    config: List[Config] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> IncrementalExchangeByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> IncrementalExchangeByUserIdRequest:
+        self.rate_name = rate_name
+        return self
+
+    def with_user_id(self, user_id: str) -> IncrementalExchangeByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_count(self, count: int) -> IncrementalExchangeByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_config(self, config: List[Config]) -> IncrementalExchangeByUserIdRequest:
+        self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> IncrementalExchangeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementalExchangeByUserIdRequest]:
+        if data is None:
+            return None
+        return IncrementalExchangeByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))\
+            .with_user_id(data.get('userId'))\
+            .with_count(data.get('count'))\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+            "userId": self.user_id,
+            "count": self.count,
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+        }
+
+
+class IncrementalExchangeByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> IncrementalExchangeByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> IncrementalExchangeByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementalExchangeByStampSheetRequest]:
+        if data is None:
+            return None
+        return IncrementalExchangeByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class UnlockIncrementalExchangeByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+    user_id: str = None
+    lock_transaction_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UnlockIncrementalExchangeByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> UnlockIncrementalExchangeByUserIdRequest:
+        self.rate_name = rate_name
+        return self
+
+    def with_user_id(self, user_id: str) -> UnlockIncrementalExchangeByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_lock_transaction_id(self, lock_transaction_id: str) -> UnlockIncrementalExchangeByUserIdRequest:
+        self.lock_transaction_id = lock_transaction_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnlockIncrementalExchangeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnlockIncrementalExchangeByUserIdRequest]:
+        if data is None:
+            return None
+        return UnlockIncrementalExchangeByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))\
+            .with_user_id(data.get('userId'))\
+            .with_lock_transaction_id(data.get('lockTransactionId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+            "userId": self.user_id,
+            "lockTransactionId": self.lock_transaction_id,
+        }
+
+
+class UnlockIncrementalExchangeByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> UnlockIncrementalExchangeByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> UnlockIncrementalExchangeByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnlockIncrementalExchangeByStampSheetRequest]:
+        if data is None:
+            return None
+        return UnlockIncrementalExchangeByStampSheetRequest()\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_key_id(data.get('keyId'))
 

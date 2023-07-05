@@ -491,6 +491,263 @@ class DeleteRateModelMasterResult(core.Gs2Result):
         }
 
 
+class DescribeIncrementalRateModelsResult(core.Gs2Result):
+    items: List[IncrementalRateModel] = None
+
+    def with_items(self, items: List[IncrementalRateModel]) -> DescribeIncrementalRateModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeIncrementalRateModelsResult]:
+        if data is None:
+            return None
+        return DescribeIncrementalRateModelsResult()\
+            .with_items([
+                IncrementalRateModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetIncrementalRateModelResult(core.Gs2Result):
+    item: IncrementalRateModel = None
+
+    def with_item(self, item: IncrementalRateModel) -> GetIncrementalRateModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetIncrementalRateModelResult]:
+        if data is None:
+            return None
+        return GetIncrementalRateModelResult()\
+            .with_item(IncrementalRateModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeIncrementalRateModelMastersResult(core.Gs2Result):
+    items: List[IncrementalRateModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[IncrementalRateModelMaster]) -> DescribeIncrementalRateModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeIncrementalRateModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeIncrementalRateModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeIncrementalRateModelMastersResult()\
+            .with_items([
+                IncrementalRateModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateIncrementalRateModelMasterResult(core.Gs2Result):
+    item: IncrementalRateModelMaster = None
+
+    def with_item(self, item: IncrementalRateModelMaster) -> CreateIncrementalRateModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateIncrementalRateModelMasterResult]:
+        if data is None:
+            return None
+        return CreateIncrementalRateModelMasterResult()\
+            .with_item(IncrementalRateModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetIncrementalRateModelMasterResult(core.Gs2Result):
+    item: IncrementalRateModelMaster = None
+
+    def with_item(self, item: IncrementalRateModelMaster) -> GetIncrementalRateModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetIncrementalRateModelMasterResult]:
+        if data is None:
+            return None
+        return GetIncrementalRateModelMasterResult()\
+            .with_item(IncrementalRateModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateIncrementalRateModelMasterResult(core.Gs2Result):
+    item: IncrementalRateModelMaster = None
+
+    def with_item(self, item: IncrementalRateModelMaster) -> UpdateIncrementalRateModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateIncrementalRateModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateIncrementalRateModelMasterResult()\
+            .with_item(IncrementalRateModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteIncrementalRateModelMasterResult(core.Gs2Result):
+    item: IncrementalRateModelMaster = None
+
+    def with_item(self, item: IncrementalRateModelMaster) -> DeleteIncrementalRateModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteIncrementalRateModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteIncrementalRateModelMasterResult()\
+            .with_item(IncrementalRateModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class ExchangeResult(core.Gs2Result):
     item: RateModel = None
     transaction_id: str = None
@@ -674,6 +931,260 @@ class ExchangeByStampSheetResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
+class IncrementalExchangeResult(core.Gs2Result):
+    item: IncrementalRateModel = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_item(self, item: IncrementalRateModel) -> IncrementalExchangeResult:
+        self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> IncrementalExchangeResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> IncrementalExchangeResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> IncrementalExchangeResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> IncrementalExchangeResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementalExchangeResult]:
+        if data is None:
+            return None
+        return IncrementalExchangeResult()\
+            .with_item(IncrementalRateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
+class IncrementalExchangeByUserIdResult(core.Gs2Result):
+    item: IncrementalRateModel = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_item(self, item: IncrementalRateModel) -> IncrementalExchangeByUserIdResult:
+        self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> IncrementalExchangeByUserIdResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> IncrementalExchangeByUserIdResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> IncrementalExchangeByUserIdResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> IncrementalExchangeByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementalExchangeByUserIdResult]:
+        if data is None:
+            return None
+        return IncrementalExchangeByUserIdResult()\
+            .with_item(IncrementalRateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
+class IncrementalExchangeByStampSheetResult(core.Gs2Result):
+    item: IncrementalRateModel = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_item(self, item: IncrementalRateModel) -> IncrementalExchangeByStampSheetResult:
+        self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> IncrementalExchangeByStampSheetResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> IncrementalExchangeByStampSheetResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> IncrementalExchangeByStampSheetResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> IncrementalExchangeByStampSheetResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementalExchangeByStampSheetResult]:
+        if data is None:
+            return None
+        return IncrementalExchangeByStampSheetResult()\
+            .with_item(IncrementalRateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
+class UnlockIncrementalExchangeByUserIdResult(core.Gs2Result):
+    item: IncrementalRateModel = None
+
+    def with_item(self, item: IncrementalRateModel) -> UnlockIncrementalExchangeByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnlockIncrementalExchangeByUserIdResult]:
+        if data is None:
+            return None
+        return UnlockIncrementalExchangeByUserIdResult()\
+            .with_item(IncrementalRateModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UnlockIncrementalExchangeByStampSheetResult(core.Gs2Result):
+    item: IncrementalRateModel = None
+
+    def with_item(self, item: IncrementalRateModel) -> UnlockIncrementalExchangeByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnlockIncrementalExchangeByStampSheetResult]:
+        if data is None:
+            return None
+        return UnlockIncrementalExchangeByStampSheetResult()\
+            .with_item(IncrementalRateModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 

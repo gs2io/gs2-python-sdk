@@ -1042,6 +1042,559 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_incremental_rate_models(
+        self,
+        request: DescribeIncrementalRateModelsRequest,
+        callback: Callable[[AsyncResult[DescribeIncrementalRateModelsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='incrementalRateModel',
+            function='describeIncrementalRateModels',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeIncrementalRateModelsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_incremental_rate_models(
+        self,
+        request: DescribeIncrementalRateModelsRequest,
+    ) -> DescribeIncrementalRateModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_incremental_rate_models(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_incremental_rate_models_async(
+        self,
+        request: DescribeIncrementalRateModelsRequest,
+    ) -> DescribeIncrementalRateModelsResult:
+        async_result = []
+        self._describe_incremental_rate_models(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_incremental_rate_model(
+        self,
+        request: GetIncrementalRateModelRequest,
+        callback: Callable[[AsyncResult[GetIncrementalRateModelResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='incrementalRateModel',
+            function='getIncrementalRateModel',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetIncrementalRateModelResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_incremental_rate_model(
+        self,
+        request: GetIncrementalRateModelRequest,
+    ) -> GetIncrementalRateModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_incremental_rate_model(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_incremental_rate_model_async(
+        self,
+        request: GetIncrementalRateModelRequest,
+    ) -> GetIncrementalRateModelResult:
+        async_result = []
+        self._get_incremental_rate_model(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_incremental_rate_model_masters(
+        self,
+        request: DescribeIncrementalRateModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeIncrementalRateModelMastersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='incrementalRateModelMaster',
+            function='describeIncrementalRateModelMasters',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeIncrementalRateModelMastersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_incremental_rate_model_masters(
+        self,
+        request: DescribeIncrementalRateModelMastersRequest,
+    ) -> DescribeIncrementalRateModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_incremental_rate_model_masters(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_incremental_rate_model_masters_async(
+        self,
+        request: DescribeIncrementalRateModelMastersRequest,
+    ) -> DescribeIncrementalRateModelMastersResult:
+        async_result = []
+        self._describe_incremental_rate_model_masters(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_incremental_rate_model_master(
+        self,
+        request: CreateIncrementalRateModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateIncrementalRateModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='incrementalRateModelMaster',
+            function='createIncrementalRateModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.consume_action is not None:
+            body["consumeAction"] = request.consume_action.to_dict()
+        if request.calculate_type is not None:
+            body["calculateType"] = request.calculate_type
+        if request.base_value is not None:
+            body["baseValue"] = request.base_value
+        if request.coefficient_value is not None:
+            body["coefficientValue"] = request.coefficient_value
+        if request.calculate_script_id is not None:
+            body["calculateScriptId"] = request.calculate_script_id
+        if request.exchange_count_id is not None:
+            body["exchangeCountId"] = request.exchange_count_id
+        if request.acquire_actions is not None:
+            body["acquireActions"] = [
+                item.to_dict()
+                for item in request.acquire_actions
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateIncrementalRateModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_incremental_rate_model_master(
+        self,
+        request: CreateIncrementalRateModelMasterRequest,
+    ) -> CreateIncrementalRateModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_incremental_rate_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_incremental_rate_model_master_async(
+        self,
+        request: CreateIncrementalRateModelMasterRequest,
+    ) -> CreateIncrementalRateModelMasterResult:
+        async_result = []
+        self._create_incremental_rate_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_incremental_rate_model_master(
+        self,
+        request: GetIncrementalRateModelMasterRequest,
+        callback: Callable[[AsyncResult[GetIncrementalRateModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='incrementalRateModelMaster',
+            function='getIncrementalRateModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetIncrementalRateModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_incremental_rate_model_master(
+        self,
+        request: GetIncrementalRateModelMasterRequest,
+    ) -> GetIncrementalRateModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_incremental_rate_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_incremental_rate_model_master_async(
+        self,
+        request: GetIncrementalRateModelMasterRequest,
+    ) -> GetIncrementalRateModelMasterResult:
+        async_result = []
+        self._get_incremental_rate_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_incremental_rate_model_master(
+        self,
+        request: UpdateIncrementalRateModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateIncrementalRateModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='incrementalRateModelMaster',
+            function='updateIncrementalRateModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.consume_action is not None:
+            body["consumeAction"] = request.consume_action.to_dict()
+        if request.calculate_type is not None:
+            body["calculateType"] = request.calculate_type
+        if request.base_value is not None:
+            body["baseValue"] = request.base_value
+        if request.coefficient_value is not None:
+            body["coefficientValue"] = request.coefficient_value
+        if request.calculate_script_id is not None:
+            body["calculateScriptId"] = request.calculate_script_id
+        if request.exchange_count_id is not None:
+            body["exchangeCountId"] = request.exchange_count_id
+        if request.acquire_actions is not None:
+            body["acquireActions"] = [
+                item.to_dict()
+                for item in request.acquire_actions
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateIncrementalRateModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_incremental_rate_model_master(
+        self,
+        request: UpdateIncrementalRateModelMasterRequest,
+    ) -> UpdateIncrementalRateModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_incremental_rate_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_incremental_rate_model_master_async(
+        self,
+        request: UpdateIncrementalRateModelMasterRequest,
+    ) -> UpdateIncrementalRateModelMasterResult:
+        async_result = []
+        self._update_incremental_rate_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_incremental_rate_model_master(
+        self,
+        request: DeleteIncrementalRateModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteIncrementalRateModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='incrementalRateModelMaster',
+            function='deleteIncrementalRateModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteIncrementalRateModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_incremental_rate_model_master(
+        self,
+        request: DeleteIncrementalRateModelMasterRequest,
+    ) -> DeleteIncrementalRateModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_incremental_rate_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_incremental_rate_model_master_async(
+        self,
+        request: DeleteIncrementalRateModelMasterRequest,
+    ) -> DeleteIncrementalRateModelMasterResult:
+        async_result = []
+        self._delete_incremental_rate_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _exchange(
         self,
         request: ExchangeRequest,
@@ -1272,6 +1825,401 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ExchangeByStampSheetResult:
         async_result = []
         self._exchange_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _incremental_exchange(
+        self,
+        request: IncrementalExchangeRequest,
+        callback: Callable[[AsyncResult[IncrementalExchangeResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='exchange',
+            function='incrementalExchange',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.count is not None:
+            body["count"] = request.count
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=IncrementalExchangeResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def incremental_exchange(
+        self,
+        request: IncrementalExchangeRequest,
+    ) -> IncrementalExchangeResult:
+        async_result = []
+        with timeout(30):
+            self._incremental_exchange(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def incremental_exchange_async(
+        self,
+        request: IncrementalExchangeRequest,
+    ) -> IncrementalExchangeResult:
+        async_result = []
+        self._incremental_exchange(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _incremental_exchange_by_user_id(
+        self,
+        request: IncrementalExchangeByUserIdRequest,
+        callback: Callable[[AsyncResult[IncrementalExchangeByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='exchange',
+            function='incrementalExchangeByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.count is not None:
+            body["count"] = request.count
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=IncrementalExchangeByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def incremental_exchange_by_user_id(
+        self,
+        request: IncrementalExchangeByUserIdRequest,
+    ) -> IncrementalExchangeByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._incremental_exchange_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def incremental_exchange_by_user_id_async(
+        self,
+        request: IncrementalExchangeByUserIdRequest,
+    ) -> IncrementalExchangeByUserIdResult:
+        async_result = []
+        self._incremental_exchange_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _incremental_exchange_by_stamp_sheet(
+        self,
+        request: IncrementalExchangeByStampSheetRequest,
+        callback: Callable[[AsyncResult[IncrementalExchangeByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='exchange',
+            function='incrementalExchangeByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=IncrementalExchangeByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def incremental_exchange_by_stamp_sheet(
+        self,
+        request: IncrementalExchangeByStampSheetRequest,
+    ) -> IncrementalExchangeByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._incremental_exchange_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def incremental_exchange_by_stamp_sheet_async(
+        self,
+        request: IncrementalExchangeByStampSheetRequest,
+    ) -> IncrementalExchangeByStampSheetResult:
+        async_result = []
+        self._incremental_exchange_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _unlock_incremental_exchange_by_user_id(
+        self,
+        request: UnlockIncrementalExchangeByUserIdRequest,
+        callback: Callable[[AsyncResult[UnlockIncrementalExchangeByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='exchange',
+            function='unlockIncrementalExchangeByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.lock_transaction_id is not None:
+            body["lockTransactionId"] = request.lock_transaction_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UnlockIncrementalExchangeByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def unlock_incremental_exchange_by_user_id(
+        self,
+        request: UnlockIncrementalExchangeByUserIdRequest,
+    ) -> UnlockIncrementalExchangeByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._unlock_incremental_exchange_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def unlock_incremental_exchange_by_user_id_async(
+        self,
+        request: UnlockIncrementalExchangeByUserIdRequest,
+    ) -> UnlockIncrementalExchangeByUserIdResult:
+        async_result = []
+        self._unlock_incremental_exchange_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _unlock_incremental_exchange_by_stamp_sheet(
+        self,
+        request: UnlockIncrementalExchangeByStampSheetRequest,
+        callback: Callable[[AsyncResult[UnlockIncrementalExchangeByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='exchange',
+            function='unlockIncrementalExchangeByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UnlockIncrementalExchangeByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def unlock_incremental_exchange_by_stamp_sheet(
+        self,
+        request: UnlockIncrementalExchangeByStampSheetRequest,
+    ) -> UnlockIncrementalExchangeByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._unlock_incremental_exchange_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def unlock_incremental_exchange_by_stamp_sheet_async(
+        self,
+        request: UnlockIncrementalExchangeByStampSheetRequest,
+    ) -> UnlockIncrementalExchangeByStampSheetResult:
+        async_result = []
+        self._unlock_incremental_exchange_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
         )

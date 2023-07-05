@@ -582,6 +582,343 @@ class CurrentRateMaster(core.Gs2Model):
         }
 
 
+class IncrementalRateModelMaster(core.Gs2Model):
+    incremental_rate_model_id: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    consume_action: ConsumeAction = None
+    calculate_type: str = None
+    base_value: int = None
+    coefficient_value: int = None
+    calculate_script_id: str = None
+    exchange_count_id: str = None
+    acquire_actions: List[AcquireAction] = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_incremental_rate_model_id(self, incremental_rate_model_id: str) -> IncrementalRateModelMaster:
+        self.incremental_rate_model_id = incremental_rate_model_id
+        return self
+
+    def with_name(self, name: str) -> IncrementalRateModelMaster:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> IncrementalRateModelMaster:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> IncrementalRateModelMaster:
+        self.metadata = metadata
+        return self
+
+    def with_consume_action(self, consume_action: ConsumeAction) -> IncrementalRateModelMaster:
+        self.consume_action = consume_action
+        return self
+
+    def with_calculate_type(self, calculate_type: str) -> IncrementalRateModelMaster:
+        self.calculate_type = calculate_type
+        return self
+
+    def with_base_value(self, base_value: int) -> IncrementalRateModelMaster:
+        self.base_value = base_value
+        return self
+
+    def with_coefficient_value(self, coefficient_value: int) -> IncrementalRateModelMaster:
+        self.coefficient_value = coefficient_value
+        return self
+
+    def with_calculate_script_id(self, calculate_script_id: str) -> IncrementalRateModelMaster:
+        self.calculate_script_id = calculate_script_id
+        return self
+
+    def with_exchange_count_id(self, exchange_count_id: str) -> IncrementalRateModelMaster:
+        self.exchange_count_id = exchange_count_id
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> IncrementalRateModelMaster:
+        self.acquire_actions = acquire_actions
+        return self
+
+    def with_created_at(self, created_at: int) -> IncrementalRateModelMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> IncrementalRateModelMaster:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        rate_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:exchange:{namespaceName}:incremental:model:{rateName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            rateName=rate_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):exchange:(?P<namespaceName>.+):incremental:model:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):exchange:(?P<namespaceName>.+):incremental:model:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):exchange:(?P<namespaceName>.+):incremental:model:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_rate_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):exchange:(?P<namespaceName>.+):incremental:model:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('rate_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementalRateModelMaster]:
+        if data is None:
+            return None
+        return IncrementalRateModelMaster()\
+            .with_incremental_rate_model_id(data.get('incrementalRateModelId'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_consume_action(ConsumeAction.from_dict(data.get('consumeAction')))\
+            .with_calculate_type(data.get('calculateType'))\
+            .with_base_value(data.get('baseValue'))\
+            .with_coefficient_value(data.get('coefficientValue'))\
+            .with_calculate_script_id(data.get('calculateScriptId'))\
+            .with_exchange_count_id(data.get('exchangeCountId'))\
+            .with_acquire_actions([
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+            ])\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "incrementalRateModelId": self.incremental_rate_model_id,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "consumeAction": self.consume_action.to_dict() if self.consume_action else None,
+            "calculateType": self.calculate_type,
+            "baseValue": self.base_value,
+            "coefficientValue": self.coefficient_value,
+            "calculateScriptId": self.calculate_script_id,
+            "exchangeCountId": self.exchange_count_id,
+            "acquireActions": [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+        }
+
+
+class IncrementalRateModel(core.Gs2Model):
+    incremental_rate_model_id: str = None
+    name: str = None
+    metadata: str = None
+    consume_action: ConsumeAction = None
+    calculate_type: str = None
+    base_value: int = None
+    coefficient_value: int = None
+    calculate_script_id: str = None
+    exchange_count_id: str = None
+    acquire_actions: List[AcquireAction] = None
+
+    def with_incremental_rate_model_id(self, incremental_rate_model_id: str) -> IncrementalRateModel:
+        self.incremental_rate_model_id = incremental_rate_model_id
+        return self
+
+    def with_name(self, name: str) -> IncrementalRateModel:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> IncrementalRateModel:
+        self.metadata = metadata
+        return self
+
+    def with_consume_action(self, consume_action: ConsumeAction) -> IncrementalRateModel:
+        self.consume_action = consume_action
+        return self
+
+    def with_calculate_type(self, calculate_type: str) -> IncrementalRateModel:
+        self.calculate_type = calculate_type
+        return self
+
+    def with_base_value(self, base_value: int) -> IncrementalRateModel:
+        self.base_value = base_value
+        return self
+
+    def with_coefficient_value(self, coefficient_value: int) -> IncrementalRateModel:
+        self.coefficient_value = coefficient_value
+        return self
+
+    def with_calculate_script_id(self, calculate_script_id: str) -> IncrementalRateModel:
+        self.calculate_script_id = calculate_script_id
+        return self
+
+    def with_exchange_count_id(self, exchange_count_id: str) -> IncrementalRateModel:
+        self.exchange_count_id = exchange_count_id
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> IncrementalRateModel:
+        self.acquire_actions = acquire_actions
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        rate_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:exchange:{namespaceName}:incremental:model:{rateName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            rateName=rate_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):exchange:(?P<namespaceName>.+):incremental:model:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):exchange:(?P<namespaceName>.+):incremental:model:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):exchange:(?P<namespaceName>.+):incremental:model:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_rate_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):exchange:(?P<namespaceName>.+):incremental:model:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('rate_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementalRateModel]:
+        if data is None:
+            return None
+        return IncrementalRateModel()\
+            .with_incremental_rate_model_id(data.get('incrementalRateModelId'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_consume_action(ConsumeAction.from_dict(data.get('consumeAction')))\
+            .with_calculate_type(data.get('calculateType'))\
+            .with_base_value(data.get('baseValue'))\
+            .with_coefficient_value(data.get('coefficientValue'))\
+            .with_calculate_script_id(data.get('calculateScriptId'))\
+            .with_exchange_count_id(data.get('exchangeCountId'))\
+            .with_acquire_actions([
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "incrementalRateModelId": self.incremental_rate_model_id,
+            "name": self.name,
+            "metadata": self.metadata,
+            "consumeAction": self.consume_action.to_dict() if self.consume_action else None,
+            "calculateType": self.calculate_type,
+            "baseValue": self.base_value,
+            "coefficientValue": self.coefficient_value,
+            "calculateScriptId": self.calculate_script_id,
+            "exchangeCountId": self.exchange_count_id,
+            "acquireActions": [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+        }
+
+
 class RateModelMaster(core.Gs2Model):
     rate_model_id: str = None
     name: str = None
