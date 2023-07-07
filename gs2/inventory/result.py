@@ -748,6 +748,520 @@ class GetItemModelResult(core.Gs2Result):
         }
 
 
+class DescribeSimpleInventoryModelMastersResult(core.Gs2Result):
+    items: List[SimpleInventoryModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[SimpleInventoryModelMaster]) -> DescribeSimpleInventoryModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeSimpleInventoryModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSimpleInventoryModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeSimpleInventoryModelMastersResult()\
+            .with_items([
+                SimpleInventoryModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateSimpleInventoryModelMasterResult(core.Gs2Result):
+    item: SimpleInventoryModelMaster = None
+
+    def with_item(self, item: SimpleInventoryModelMaster) -> CreateSimpleInventoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateSimpleInventoryModelMasterResult]:
+        if data is None:
+            return None
+        return CreateSimpleInventoryModelMasterResult()\
+            .with_item(SimpleInventoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetSimpleInventoryModelMasterResult(core.Gs2Result):
+    item: SimpleInventoryModelMaster = None
+
+    def with_item(self, item: SimpleInventoryModelMaster) -> GetSimpleInventoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSimpleInventoryModelMasterResult]:
+        if data is None:
+            return None
+        return GetSimpleInventoryModelMasterResult()\
+            .with_item(SimpleInventoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateSimpleInventoryModelMasterResult(core.Gs2Result):
+    item: SimpleInventoryModelMaster = None
+
+    def with_item(self, item: SimpleInventoryModelMaster) -> UpdateSimpleInventoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateSimpleInventoryModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateSimpleInventoryModelMasterResult()\
+            .with_item(SimpleInventoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteSimpleInventoryModelMasterResult(core.Gs2Result):
+    item: SimpleInventoryModelMaster = None
+
+    def with_item(self, item: SimpleInventoryModelMaster) -> DeleteSimpleInventoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteSimpleInventoryModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteSimpleInventoryModelMasterResult()\
+            .with_item(SimpleInventoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeSimpleInventoryModelsResult(core.Gs2Result):
+    items: List[SimpleInventoryModel] = None
+
+    def with_items(self, items: List[SimpleInventoryModel]) -> DescribeSimpleInventoryModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSimpleInventoryModelsResult]:
+        if data is None:
+            return None
+        return DescribeSimpleInventoryModelsResult()\
+            .with_items([
+                SimpleInventoryModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetSimpleInventoryModelResult(core.Gs2Result):
+    item: SimpleInventoryModel = None
+
+    def with_item(self, item: SimpleInventoryModel) -> GetSimpleInventoryModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSimpleInventoryModelResult]:
+        if data is None:
+            return None
+        return GetSimpleInventoryModelResult()\
+            .with_item(SimpleInventoryModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeSimpleItemModelMastersResult(core.Gs2Result):
+    items: List[SimpleItemModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[SimpleItemModelMaster]) -> DescribeSimpleItemModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeSimpleItemModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSimpleItemModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeSimpleItemModelMastersResult()\
+            .with_items([
+                SimpleItemModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateSimpleItemModelMasterResult(core.Gs2Result):
+    item: SimpleItemModelMaster = None
+
+    def with_item(self, item: SimpleItemModelMaster) -> CreateSimpleItemModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateSimpleItemModelMasterResult]:
+        if data is None:
+            return None
+        return CreateSimpleItemModelMasterResult()\
+            .with_item(SimpleItemModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetSimpleItemModelMasterResult(core.Gs2Result):
+    item: SimpleItemModelMaster = None
+
+    def with_item(self, item: SimpleItemModelMaster) -> GetSimpleItemModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSimpleItemModelMasterResult]:
+        if data is None:
+            return None
+        return GetSimpleItemModelMasterResult()\
+            .with_item(SimpleItemModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateSimpleItemModelMasterResult(core.Gs2Result):
+    item: SimpleItemModelMaster = None
+
+    def with_item(self, item: SimpleItemModelMaster) -> UpdateSimpleItemModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateSimpleItemModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateSimpleItemModelMasterResult()\
+            .with_item(SimpleItemModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteSimpleItemModelMasterResult(core.Gs2Result):
+    item: SimpleItemModelMaster = None
+
+    def with_item(self, item: SimpleItemModelMaster) -> DeleteSimpleItemModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteSimpleItemModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteSimpleItemModelMasterResult()\
+            .with_item(SimpleItemModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeSimpleItemModelsResult(core.Gs2Result):
+    items: List[SimpleItemModel] = None
+
+    def with_items(self, items: List[SimpleItemModel]) -> DescribeSimpleItemModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSimpleItemModelsResult]:
+        if data is None:
+            return None
+        return DescribeSimpleItemModelsResult()\
+            .with_items([
+                SimpleItemModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetSimpleItemModelResult(core.Gs2Result):
+    item: SimpleItemModel = None
+
+    def with_item(self, item: SimpleItemModel) -> GetSimpleItemModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSimpleItemModelResult]:
+        if data is None:
+            return None
+        return GetSimpleItemModelResult()\
+            .with_item(SimpleItemModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class ExportMasterResult(core.Gs2Result):
     item: CurrentItemModelMaster = None
 
@@ -2695,5 +3209,525 @@ class VerifyReferenceOfByStampTaskResult(core.Gs2Result):
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class DescribeSimpleItemsResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[SimpleItem]) -> DescribeSimpleItemsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeSimpleItemsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSimpleItemsResult]:
+        if data is None:
+            return None
+        return DescribeSimpleItemsResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeSimpleItemsByUserIdResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[SimpleItem]) -> DescribeSimpleItemsByUserIdResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeSimpleItemsByUserIdResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSimpleItemsByUserIdResult]:
+        if data is None:
+            return None
+        return DescribeSimpleItemsByUserIdResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetSimpleItemResult(core.Gs2Result):
+    item: SimpleItem = None
+    item_model: SimpleItemModel = None
+
+    def with_item(self, item: SimpleItem) -> GetSimpleItemResult:
+        self.item = item
+        return self
+
+    def with_item_model(self, item_model: SimpleItemModel) -> GetSimpleItemResult:
+        self.item_model = item_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSimpleItemResult]:
+        if data is None:
+            return None
+        return GetSimpleItemResult()\
+            .with_item(SimpleItem.from_dict(data.get('item')))\
+            .with_item_model(SimpleItemModel.from_dict(data.get('itemModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "itemModel": self.item_model.to_dict() if self.item_model else None,
+        }
+
+
+class GetSimpleItemByUserIdResult(core.Gs2Result):
+    item: SimpleItem = None
+    item_model: SimpleItemModel = None
+
+    def with_item(self, item: SimpleItem) -> GetSimpleItemByUserIdResult:
+        self.item = item
+        return self
+
+    def with_item_model(self, item_model: SimpleItemModel) -> GetSimpleItemByUserIdResult:
+        self.item_model = item_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSimpleItemByUserIdResult]:
+        if data is None:
+            return None
+        return GetSimpleItemByUserIdResult()\
+            .with_item(SimpleItem.from_dict(data.get('item')))\
+            .with_item_model(SimpleItemModel.from_dict(data.get('itemModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "itemModel": self.item_model.to_dict() if self.item_model else None,
+        }
+
+
+class GetSimpleItemWithSignatureResult(core.Gs2Result):
+    item: SimpleItem = None
+    simple_item_model: SimpleItemModel = None
+    body: str = None
+    signature: str = None
+
+    def with_item(self, item: SimpleItem) -> GetSimpleItemWithSignatureResult:
+        self.item = item
+        return self
+
+    def with_simple_item_model(self, simple_item_model: SimpleItemModel) -> GetSimpleItemWithSignatureResult:
+        self.simple_item_model = simple_item_model
+        return self
+
+    def with_body(self, body: str) -> GetSimpleItemWithSignatureResult:
+        self.body = body
+        return self
+
+    def with_signature(self, signature: str) -> GetSimpleItemWithSignatureResult:
+        self.signature = signature
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSimpleItemWithSignatureResult]:
+        if data is None:
+            return None
+        return GetSimpleItemWithSignatureResult()\
+            .with_item(SimpleItem.from_dict(data.get('item')))\
+            .with_simple_item_model(SimpleItemModel.from_dict(data.get('simpleItemModel')))\
+            .with_body(data.get('body'))\
+            .with_signature(data.get('signature'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "simpleItemModel": self.simple_item_model.to_dict() if self.simple_item_model else None,
+            "body": self.body,
+            "signature": self.signature,
+        }
+
+
+class GetSimpleItemWithSignatureByUserIdResult(core.Gs2Result):
+    item: SimpleItem = None
+    simple_item_model: SimpleItemModel = None
+    body: str = None
+    signature: str = None
+
+    def with_item(self, item: SimpleItem) -> GetSimpleItemWithSignatureByUserIdResult:
+        self.item = item
+        return self
+
+    def with_simple_item_model(self, simple_item_model: SimpleItemModel) -> GetSimpleItemWithSignatureByUserIdResult:
+        self.simple_item_model = simple_item_model
+        return self
+
+    def with_body(self, body: str) -> GetSimpleItemWithSignatureByUserIdResult:
+        self.body = body
+        return self
+
+    def with_signature(self, signature: str) -> GetSimpleItemWithSignatureByUserIdResult:
+        self.signature = signature
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSimpleItemWithSignatureByUserIdResult]:
+        if data is None:
+            return None
+        return GetSimpleItemWithSignatureByUserIdResult()\
+            .with_item(SimpleItem.from_dict(data.get('item')))\
+            .with_simple_item_model(SimpleItemModel.from_dict(data.get('simpleItemModel')))\
+            .with_body(data.get('body'))\
+            .with_signature(data.get('signature'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "simpleItemModel": self.simple_item_model.to_dict() if self.simple_item_model else None,
+            "body": self.body,
+            "signature": self.signature,
+        }
+
+
+class AcquireSimpleItemsByUserIdResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+
+    def with_items(self, items: List[SimpleItem]) -> AcquireSimpleItemsByUserIdResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireSimpleItemsByUserIdResult]:
+        if data is None:
+            return None
+        return AcquireSimpleItemsByUserIdResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class ConsumeSimpleItemsResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+
+    def with_items(self, items: List[SimpleItem]) -> ConsumeSimpleItemsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeSimpleItemsResult]:
+        if data is None:
+            return None
+        return ConsumeSimpleItemsResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class ConsumeSimpleItemsByUserIdResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+
+    def with_items(self, items: List[SimpleItem]) -> ConsumeSimpleItemsByUserIdResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeSimpleItemsByUserIdResult]:
+        if data is None:
+            return None
+        return ConsumeSimpleItemsByUserIdResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class DeleteSimpleItemsByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteSimpleItemsByUserIdResult]:
+        if data is None:
+            return None
+        return DeleteSimpleItemsByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class AcquireSimpleItemsByStampSheetResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+
+    def with_items(self, items: List[SimpleItem]) -> AcquireSimpleItemsByStampSheetResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireSimpleItemsByStampSheetResult]:
+        if data is None:
+            return None
+        return AcquireSimpleItemsByStampSheetResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class ConsumeSimpleItemsByStampTaskResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+    new_context_stack: str = None
+
+    def with_items(self, items: List[SimpleItem]) -> ConsumeSimpleItemsByStampTaskResult:
+        self.items = items
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> ConsumeSimpleItemsByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeSimpleItemsByStampTaskResult]:
+        if data is None:
+            return None
+        return ConsumeSimpleItemsByStampTaskResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
             "newContextStack": self.new_context_stack,
         }

@@ -19,6 +19,88 @@ from typing import *
 from gs2 import core
 
 
+class ConsumeCount(core.Gs2Model):
+    item_name: str = None
+    count: int = None
+
+    def with_item_name(self, item_name: str) -> ConsumeCount:
+        self.item_name = item_name
+        return self
+
+    def with_count(self, count: int) -> ConsumeCount:
+        self.count = count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeCount]:
+        if data is None:
+            return None
+        return ConsumeCount()\
+            .with_item_name(data.get('itemName'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "itemName": self.item_name,
+            "count": self.count,
+        }
+
+
+class AcquireCount(core.Gs2Model):
+    item_name: str = None
+    count: int = None
+
+    def with_item_name(self, item_name: str) -> AcquireCount:
+        self.item_name = item_name
+        return self
+
+    def with_count(self, count: int) -> AcquireCount:
+        self.count = count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireCount]:
+        if data is None:
+            return None
+        return AcquireCount()\
+            .with_item_name(data.get('itemName'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "itemName": self.item_name,
+            "count": self.count,
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -181,6 +263,269 @@ class GitHubCheckoutSetting(core.Gs2Model):
             "commitHash": self.commit_hash,
             "branchName": self.branch_name,
             "tagName": self.tag_name,
+        }
+
+
+class SimpleItem(core.Gs2Model):
+    item_id: str = None
+    user_id: str = None
+    item_name: str = None
+    count: int = None
+
+    def with_item_id(self, item_id: str) -> SimpleItem:
+        self.item_id = item_id
+        return self
+
+    def with_user_id(self, user_id: str) -> SimpleItem:
+        self.user_id = user_id
+        return self
+
+    def with_item_name(self, item_name: str) -> SimpleItem:
+        self.item_name = item_name
+        return self
+
+    def with_count(self, count: int) -> SimpleItem:
+        self.count = count
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+        inventory_name,
+        item_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:inventory:{namespaceName}:user:{userId}:simple:inventory:{inventoryName}:item:{itemName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+            inventoryName=inventory_name,
+            itemName=item_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    @classmethod
+    def get_inventory_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('inventory_name')
+
+    @classmethod
+    def get_item_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('item_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SimpleItem]:
+        if data is None:
+            return None
+        return SimpleItem()\
+            .with_item_id(data.get('itemId'))\
+            .with_user_id(data.get('userId'))\
+            .with_item_name(data.get('itemName'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "itemId": self.item_id,
+            "userId": self.user_id,
+            "itemName": self.item_name,
+            "count": self.count,
+        }
+
+
+class SimpleInventory(core.Gs2Model):
+    inventory_id: str = None
+    inventory_name: str = None
+    user_id: str = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_inventory_id(self, inventory_id: str) -> SimpleInventory:
+        self.inventory_id = inventory_id
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> SimpleInventory:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SimpleInventory:
+        self.user_id = user_id
+        return self
+
+    def with_created_at(self, created_at: int) -> SimpleInventory:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> SimpleInventory:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+        inventory_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:inventory:{namespaceName}:user:{userId}:simple:inventory:{inventoryName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+            inventoryName=inventory_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    @classmethod
+    def get_inventory_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):simple:inventory:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('inventory_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SimpleInventory]:
+        if data is None:
+            return None
+        return SimpleInventory()\
+            .with_inventory_id(data.get('inventoryId'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "inventoryId": self.inventory_id,
+            "inventoryName": self.inventory_name,
+            "userId": self.user_id,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
         }
 
 
@@ -748,6 +1093,497 @@ class CurrentItemModelMaster(core.Gs2Model):
         return {
             "namespaceId": self.namespace_id,
             "settings": self.settings,
+        }
+
+
+class SimpleItemModel(core.Gs2Model):
+    item_model_id: str = None
+    name: str = None
+    metadata: str = None
+
+    def with_item_model_id(self, item_model_id: str) -> SimpleItemModel:
+        self.item_model_id = item_model_id
+        return self
+
+    def with_name(self, name: str) -> SimpleItemModel:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> SimpleItemModel:
+        self.metadata = metadata
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        inventory_name,
+        item_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:inventory:{namespaceName}:simple:model:{inventoryName}:item:{itemName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            inventoryName=inventory_name,
+            itemName=item_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_inventory_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('inventory_name')
+
+    @classmethod
+    def get_item_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('item_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SimpleItemModel]:
+        if data is None:
+            return None
+        return SimpleItemModel()\
+            .with_item_model_id(data.get('itemModelId'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "itemModelId": self.item_model_id,
+            "name": self.name,
+            "metadata": self.metadata,
+        }
+
+
+class SimpleItemModelMaster(core.Gs2Model):
+    item_model_id: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_item_model_id(self, item_model_id: str) -> SimpleItemModelMaster:
+        self.item_model_id = item_model_id
+        return self
+
+    def with_name(self, name: str) -> SimpleItemModelMaster:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> SimpleItemModelMaster:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> SimpleItemModelMaster:
+        self.metadata = metadata
+        return self
+
+    def with_created_at(self, created_at: int) -> SimpleItemModelMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> SimpleItemModelMaster:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        inventory_name,
+        item_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:inventory:{namespaceName}:simple:model:{inventoryName}:item:{itemName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            inventoryName=inventory_name,
+            itemName=item_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_inventory_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('inventory_name')
+
+    @classmethod
+    def get_item_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+):item:(?P<itemName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('item_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SimpleItemModelMaster]:
+        if data is None:
+            return None
+        return SimpleItemModelMaster()\
+            .with_item_model_id(data.get('itemModelId'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "itemModelId": self.item_model_id,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+        }
+
+
+class SimpleInventoryModel(core.Gs2Model):
+    inventory_model_id: str = None
+    name: str = None
+    metadata: str = None
+    simple_item_models: List[SimpleItemModel] = None
+
+    def with_inventory_model_id(self, inventory_model_id: str) -> SimpleInventoryModel:
+        self.inventory_model_id = inventory_model_id
+        return self
+
+    def with_name(self, name: str) -> SimpleInventoryModel:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> SimpleInventoryModel:
+        self.metadata = metadata
+        return self
+
+    def with_simple_item_models(self, simple_item_models: List[SimpleItemModel]) -> SimpleInventoryModel:
+        self.simple_item_models = simple_item_models
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        inventory_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:inventory:{namespaceName}:simple:model:{inventoryName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            inventoryName=inventory_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_inventory_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('inventory_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SimpleInventoryModel]:
+        if data is None:
+            return None
+        return SimpleInventoryModel()\
+            .with_inventory_model_id(data.get('inventoryModelId'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_simple_item_models([
+                SimpleItemModel.from_dict(data.get('simpleItemModels')[i])
+                for i in range(len(data.get('simpleItemModels')) if data.get('simpleItemModels') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "inventoryModelId": self.inventory_model_id,
+            "name": self.name,
+            "metadata": self.metadata,
+            "simpleItemModels": [
+                self.simple_item_models[i].to_dict() if self.simple_item_models[i] else None
+                for i in range(len(self.simple_item_models) if self.simple_item_models else 0)
+            ],
+        }
+
+
+class SimpleInventoryModelMaster(core.Gs2Model):
+    inventory_model_id: str = None
+    name: str = None
+    metadata: str = None
+    description: str = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_inventory_model_id(self, inventory_model_id: str) -> SimpleInventoryModelMaster:
+        self.inventory_model_id = inventory_model_id
+        return self
+
+    def with_name(self, name: str) -> SimpleInventoryModelMaster:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> SimpleInventoryModelMaster:
+        self.metadata = metadata
+        return self
+
+    def with_description(self, description: str) -> SimpleInventoryModelMaster:
+        self.description = description
+        return self
+
+    def with_created_at(self, created_at: int) -> SimpleInventoryModelMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> SimpleInventoryModelMaster:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        inventory_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:inventory:{namespaceName}:simple:model:{inventoryName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            inventoryName=inventory_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_inventory_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):simple:model:(?P<inventoryName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('inventory_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SimpleInventoryModelMaster]:
+        if data is None:
+            return None
+        return SimpleInventoryModelMaster()\
+            .with_inventory_model_id(data.get('inventoryModelId'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_description(data.get('description'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "inventoryModelId": self.inventory_model_id,
+            "name": self.name,
+            "metadata": self.metadata,
+            "description": self.description,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
         }
 
 

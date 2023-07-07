@@ -1530,6 +1530,1043 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_simple_inventory_model_masters(
+        self,
+        request: DescribeSimpleInventoryModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeSimpleInventoryModelMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSimpleInventoryModelMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_simple_inventory_model_masters(
+        self,
+        request: DescribeSimpleInventoryModelMastersRequest,
+    ) -> DescribeSimpleInventoryModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_simple_inventory_model_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_simple_inventory_model_masters_async(
+        self,
+        request: DescribeSimpleInventoryModelMastersRequest,
+    ) -> DescribeSimpleInventoryModelMastersResult:
+        async_result = []
+        self._describe_simple_inventory_model_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_simple_inventory_model_master(
+        self,
+        request: CreateSimpleInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateSimpleInventoryModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateSimpleInventoryModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_simple_inventory_model_master(
+        self,
+        request: CreateSimpleInventoryModelMasterRequest,
+    ) -> CreateSimpleInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_simple_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_simple_inventory_model_master_async(
+        self,
+        request: CreateSimpleInventoryModelMasterRequest,
+    ) -> CreateSimpleInventoryModelMasterResult:
+        async_result = []
+        self._create_simple_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_simple_inventory_model_master(
+        self,
+        request: GetSimpleInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[GetSimpleInventoryModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSimpleInventoryModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_simple_inventory_model_master(
+        self,
+        request: GetSimpleInventoryModelMasterRequest,
+    ) -> GetSimpleInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_simple_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_simple_inventory_model_master_async(
+        self,
+        request: GetSimpleInventoryModelMasterRequest,
+    ) -> GetSimpleInventoryModelMasterResult:
+        async_result = []
+        self._get_simple_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_simple_inventory_model_master(
+        self,
+        request: UpdateSimpleInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateSimpleInventoryModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateSimpleInventoryModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_simple_inventory_model_master(
+        self,
+        request: UpdateSimpleInventoryModelMasterRequest,
+    ) -> UpdateSimpleInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_simple_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_simple_inventory_model_master_async(
+        self,
+        request: UpdateSimpleInventoryModelMasterRequest,
+    ) -> UpdateSimpleInventoryModelMasterResult:
+        async_result = []
+        self._update_simple_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_simple_inventory_model_master(
+        self,
+        request: DeleteSimpleInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteSimpleInventoryModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteSimpleInventoryModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_simple_inventory_model_master(
+        self,
+        request: DeleteSimpleInventoryModelMasterRequest,
+    ) -> DeleteSimpleInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_simple_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_simple_inventory_model_master_async(
+        self,
+        request: DeleteSimpleInventoryModelMasterRequest,
+    ) -> DeleteSimpleInventoryModelMasterResult:
+        async_result = []
+        self._delete_simple_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_simple_inventory_models(
+        self,
+        request: DescribeSimpleInventoryModelsRequest,
+        callback: Callable[[AsyncResult[DescribeSimpleInventoryModelsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/simple/inventory".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSimpleInventoryModelsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_simple_inventory_models(
+        self,
+        request: DescribeSimpleInventoryModelsRequest,
+    ) -> DescribeSimpleInventoryModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_simple_inventory_models(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_simple_inventory_models_async(
+        self,
+        request: DescribeSimpleInventoryModelsRequest,
+    ) -> DescribeSimpleInventoryModelsResult:
+        async_result = []
+        self._describe_simple_inventory_models(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_simple_inventory_model(
+        self,
+        request: GetSimpleInventoryModelRequest,
+        callback: Callable[[AsyncResult[GetSimpleInventoryModelResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/simple/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSimpleInventoryModelResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_simple_inventory_model(
+        self,
+        request: GetSimpleInventoryModelRequest,
+    ) -> GetSimpleInventoryModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_simple_inventory_model(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_simple_inventory_model_async(
+        self,
+        request: GetSimpleInventoryModelRequest,
+    ) -> GetSimpleInventoryModelResult:
+        async_result = []
+        self._get_simple_inventory_model(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_simple_item_model_masters(
+        self,
+        request: DescribeSimpleItemModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeSimpleItemModelMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSimpleItemModelMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_simple_item_model_masters(
+        self,
+        request: DescribeSimpleItemModelMastersRequest,
+    ) -> DescribeSimpleItemModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_simple_item_model_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_simple_item_model_masters_async(
+        self,
+        request: DescribeSimpleItemModelMastersRequest,
+    ) -> DescribeSimpleItemModelMastersResult:
+        async_result = []
+        self._describe_simple_item_model_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_simple_item_model_master(
+        self,
+        request: CreateSimpleItemModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateSimpleItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateSimpleItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_simple_item_model_master(
+        self,
+        request: CreateSimpleItemModelMasterRequest,
+    ) -> CreateSimpleItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_simple_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_simple_item_model_master_async(
+        self,
+        request: CreateSimpleItemModelMasterRequest,
+    ) -> CreateSimpleItemModelMasterResult:
+        async_result = []
+        self._create_simple_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_simple_item_model_master(
+        self,
+        request: GetSimpleItemModelMasterRequest,
+        callback: Callable[[AsyncResult[GetSimpleItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSimpleItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_simple_item_model_master(
+        self,
+        request: GetSimpleItemModelMasterRequest,
+    ) -> GetSimpleItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_simple_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_simple_item_model_master_async(
+        self,
+        request: GetSimpleItemModelMasterRequest,
+    ) -> GetSimpleItemModelMasterResult:
+        async_result = []
+        self._get_simple_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_simple_item_model_master(
+        self,
+        request: UpdateSimpleItemModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateSimpleItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateSimpleItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_simple_item_model_master(
+        self,
+        request: UpdateSimpleItemModelMasterRequest,
+    ) -> UpdateSimpleItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_simple_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_simple_item_model_master_async(
+        self,
+        request: UpdateSimpleItemModelMasterRequest,
+    ) -> UpdateSimpleItemModelMasterResult:
+        async_result = []
+        self._update_simple_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_simple_item_model_master(
+        self,
+        request: DeleteSimpleItemModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteSimpleItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/simple/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteSimpleItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_simple_item_model_master(
+        self,
+        request: DeleteSimpleItemModelMasterRequest,
+    ) -> DeleteSimpleItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_simple_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_simple_item_model_master_async(
+        self,
+        request: DeleteSimpleItemModelMasterRequest,
+    ) -> DeleteSimpleItemModelMasterResult:
+        async_result = []
+        self._delete_simple_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_simple_item_models(
+        self,
+        request: DescribeSimpleItemModelsRequest,
+        callback: Callable[[AsyncResult[DescribeSimpleItemModelsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/simple/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSimpleItemModelsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_simple_item_models(
+        self,
+        request: DescribeSimpleItemModelsRequest,
+    ) -> DescribeSimpleItemModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_simple_item_models(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_simple_item_models_async(
+        self,
+        request: DescribeSimpleItemModelsRequest,
+    ) -> DescribeSimpleItemModelsResult:
+        async_result = []
+        self._describe_simple_item_models(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_simple_item_model(
+        self,
+        request: GetSimpleItemModelRequest,
+        callback: Callable[[AsyncResult[GetSimpleItemModelResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/simple/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSimpleItemModelResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_simple_item_model(
+        self,
+        request: GetSimpleItemModelRequest,
+    ) -> GetSimpleItemModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_simple_item_model(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_simple_item_model_async(
+        self,
+        request: GetSimpleItemModelRequest,
+    ) -> GetSimpleItemModelResult:
+        async_result = []
+        self._get_simple_item_model(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _export_master(
         self,
         request: ExportMasterRequest,
@@ -4411,6 +5448,925 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
     ) -> VerifyReferenceOfByStampTaskResult:
         async_result = []
         self._verify_reference_of_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_simple_items(
+        self,
+        request: DescribeSimpleItemsRequest,
+        callback: Callable[[AsyncResult[DescribeSimpleItemsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/simple/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSimpleItemsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_simple_items(
+        self,
+        request: DescribeSimpleItemsRequest,
+    ) -> DescribeSimpleItemsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_simple_items(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_simple_items_async(
+        self,
+        request: DescribeSimpleItemsRequest,
+    ) -> DescribeSimpleItemsResult:
+        async_result = []
+        self._describe_simple_items(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_simple_items_by_user_id(
+        self,
+        request: DescribeSimpleItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeSimpleItemsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSimpleItemsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_simple_items_by_user_id(
+        self,
+        request: DescribeSimpleItemsByUserIdRequest,
+    ) -> DescribeSimpleItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_simple_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_simple_items_by_user_id_async(
+        self,
+        request: DescribeSimpleItemsByUserIdRequest,
+    ) -> DescribeSimpleItemsByUserIdResult:
+        async_result = []
+        self._describe_simple_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_simple_item(
+        self,
+        request: GetSimpleItemRequest,
+        callback: Callable[[AsyncResult[GetSimpleItemResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/simple/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSimpleItemResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_simple_item(
+        self,
+        request: GetSimpleItemRequest,
+    ) -> GetSimpleItemResult:
+        async_result = []
+        with timeout(30):
+            self._get_simple_item(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_simple_item_async(
+        self,
+        request: GetSimpleItemRequest,
+    ) -> GetSimpleItemResult:
+        async_result = []
+        self._get_simple_item(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_simple_item_by_user_id(
+        self,
+        request: GetSimpleItemByUserIdRequest,
+        callback: Callable[[AsyncResult[GetSimpleItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSimpleItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_simple_item_by_user_id(
+        self,
+        request: GetSimpleItemByUserIdRequest,
+    ) -> GetSimpleItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_simple_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_simple_item_by_user_id_async(
+        self,
+        request: GetSimpleItemByUserIdRequest,
+    ) -> GetSimpleItemByUserIdResult:
+        async_result = []
+        self._get_simple_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_simple_item_with_signature(
+        self,
+        request: GetSimpleItemWithSignatureRequest,
+        callback: Callable[[AsyncResult[GetSimpleItemWithSignatureResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/simple/inventory/{inventoryName}/item/{itemName}/signature".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.key_id is not None:
+            query_strings["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSimpleItemWithSignatureResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_simple_item_with_signature(
+        self,
+        request: GetSimpleItemWithSignatureRequest,
+    ) -> GetSimpleItemWithSignatureResult:
+        async_result = []
+        with timeout(30):
+            self._get_simple_item_with_signature(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_simple_item_with_signature_async(
+        self,
+        request: GetSimpleItemWithSignatureRequest,
+    ) -> GetSimpleItemWithSignatureResult:
+        async_result = []
+        self._get_simple_item_with_signature(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_simple_item_with_signature_by_user_id(
+        self,
+        request: GetSimpleItemWithSignatureByUserIdRequest,
+        callback: Callable[[AsyncResult[GetSimpleItemWithSignatureByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}/item/{itemName}/signature".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.key_id is not None:
+            query_strings["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSimpleItemWithSignatureByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_simple_item_with_signature_by_user_id(
+        self,
+        request: GetSimpleItemWithSignatureByUserIdRequest,
+    ) -> GetSimpleItemWithSignatureByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_simple_item_with_signature_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_simple_item_with_signature_by_user_id_async(
+        self,
+        request: GetSimpleItemWithSignatureByUserIdRequest,
+    ) -> GetSimpleItemWithSignatureByUserIdResult:
+        async_result = []
+        self._get_simple_item_with_signature_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _acquire_simple_items_by_user_id(
+        self,
+        request: AcquireSimpleItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[AcquireSimpleItemsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}/acquire".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.acquire_counts is not None:
+            body["acquireCounts"] = [
+                item.to_dict()
+                for item in request.acquire_counts
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AcquireSimpleItemsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def acquire_simple_items_by_user_id(
+        self,
+        request: AcquireSimpleItemsByUserIdRequest,
+    ) -> AcquireSimpleItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._acquire_simple_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def acquire_simple_items_by_user_id_async(
+        self,
+        request: AcquireSimpleItemsByUserIdRequest,
+    ) -> AcquireSimpleItemsByUserIdResult:
+        async_result = []
+        self._acquire_simple_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_simple_items(
+        self,
+        request: ConsumeSimpleItemsRequest,
+        callback: Callable[[AsyncResult[ConsumeSimpleItemsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/simple/inventory/{inventoryName}/consume".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.consume_counts is not None:
+            body["consumeCounts"] = [
+                item.to_dict()
+                for item in request.consume_counts
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ConsumeSimpleItemsResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def consume_simple_items(
+        self,
+        request: ConsumeSimpleItemsRequest,
+    ) -> ConsumeSimpleItemsResult:
+        async_result = []
+        with timeout(30):
+            self._consume_simple_items(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_simple_items_async(
+        self,
+        request: ConsumeSimpleItemsRequest,
+    ) -> ConsumeSimpleItemsResult:
+        async_result = []
+        self._consume_simple_items(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_simple_items_by_user_id(
+        self,
+        request: ConsumeSimpleItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[ConsumeSimpleItemsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}/consume".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.consume_counts is not None:
+            body["consumeCounts"] = [
+                item.to_dict()
+                for item in request.consume_counts
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ConsumeSimpleItemsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def consume_simple_items_by_user_id(
+        self,
+        request: ConsumeSimpleItemsByUserIdRequest,
+    ) -> ConsumeSimpleItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._consume_simple_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_simple_items_by_user_id_async(
+        self,
+        request: ConsumeSimpleItemsByUserIdRequest,
+    ) -> ConsumeSimpleItemsByUserIdResult:
+        async_result = []
+        self._consume_simple_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_simple_items_by_user_id(
+        self,
+        request: DeleteSimpleItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[DeleteSimpleItemsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteSimpleItemsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_simple_items_by_user_id(
+        self,
+        request: DeleteSimpleItemsByUserIdRequest,
+    ) -> DeleteSimpleItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_simple_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_simple_items_by_user_id_async(
+        self,
+        request: DeleteSimpleItemsByUserIdRequest,
+    ) -> DeleteSimpleItemsByUserIdResult:
+        async_result = []
+        self._delete_simple_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _acquire_simple_items_by_stamp_sheet(
+        self,
+        request: AcquireSimpleItemsByStampSheetRequest,
+        callback: Callable[[AsyncResult[AcquireSimpleItemsByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/simple/item/acquire"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AcquireSimpleItemsByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def acquire_simple_items_by_stamp_sheet(
+        self,
+        request: AcquireSimpleItemsByStampSheetRequest,
+    ) -> AcquireSimpleItemsByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._acquire_simple_items_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def acquire_simple_items_by_stamp_sheet_async(
+        self,
+        request: AcquireSimpleItemsByStampSheetRequest,
+    ) -> AcquireSimpleItemsByStampSheetResult:
+        async_result = []
+        self._acquire_simple_items_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_simple_items_by_stamp_task(
+        self,
+        request: ConsumeSimpleItemsByStampTaskRequest,
+        callback: Callable[[AsyncResult[ConsumeSimpleItemsByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/simple/item/consume"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ConsumeSimpleItemsByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def consume_simple_items_by_stamp_task(
+        self,
+        request: ConsumeSimpleItemsByStampTaskRequest,
+    ) -> ConsumeSimpleItemsByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._consume_simple_items_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_simple_items_by_stamp_task_async(
+        self,
+        request: ConsumeSimpleItemsByStampTaskRequest,
+    ) -> ConsumeSimpleItemsByStampTaskResult:
+        async_result = []
+        self._consume_simple_items_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
