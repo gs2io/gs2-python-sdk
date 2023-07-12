@@ -20,6 +20,7 @@ from . import inventory
 from . import job_queue
 from . import key
 from . import limit
+from . import login_reward
 from . import lock
 from . import log
 from . import lottery

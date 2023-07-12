@@ -145,6 +145,12 @@ src/gs2/log/request.py
 src/gs2/log/rest.py
 src/gs2/log/result.py
 src/gs2/log/web_socket.py
+src/gs2/login_reward/__init__.py
+src/gs2/login_reward/model.py
+src/gs2/login_reward/request.py
+src/gs2/login_reward/rest.py
+src/gs2/login_reward/result.py
+src/gs2/login_reward/web_socket.py
 src/gs2/lottery/__init__.py
 src/gs2/lottery/model.py
 src/gs2/lottery/request.py
