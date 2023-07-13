@@ -1187,13 +1187,9 @@ class Gs2LoginRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
 
         self.session.send(
             web_socket.NetworkJob(
@@ -1243,79 +1239,6 @@ class Gs2LoginRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_bonus_models_by_user_id(
-        self,
-        request: DescribeBonusModelsByUserIdRequest,
-        callback: Callable[[AsyncResult[DescribeBonusModelsByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="loginReward",
-            component='bonusModel',
-            function='describeBonusModelsByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeBonusModelsByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_bonus_models_by_user_id(
-        self,
-        request: DescribeBonusModelsByUserIdRequest,
-    ) -> DescribeBonusModelsByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._describe_bonus_models_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_bonus_models_by_user_id_async(
-        self,
-        request: DescribeBonusModelsByUserIdRequest,
-    ) -> DescribeBonusModelsByUserIdResult:
-        async_result = []
-        self._describe_bonus_models_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _get_bonus_model(
         self,
         request: GetBonusModelRequest,
@@ -1337,13 +1260,9 @@ class Gs2LoginRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.bonus_model_name is not None:
             body["bonusModelName"] = request.bonus_model_name
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
 
         self.session.send(
             web_socket.NetworkJob(
@@ -1380,81 +1299,6 @@ class Gs2LoginRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> GetBonusModelResult:
         async_result = []
         self._get_bonus_model(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_bonus_model_by_user_id(
-        self,
-        request: GetBonusModelByUserIdRequest,
-        callback: Callable[[AsyncResult[GetBonusModelByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="loginReward",
-            component='bonusModel',
-            function='getBonusModelByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.bonus_model_name is not None:
-            body["bonusModelName"] = request.bonus_model_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=GetBonusModelByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def get_bonus_model_by_user_id(
-        self,
-        request: GetBonusModelByUserIdRequest,
-    ) -> GetBonusModelByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._get_bonus_model_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_bonus_model_by_user_id_async(
-        self,
-        request: GetBonusModelByUserIdRequest,
-    ) -> GetBonusModelByUserIdResult:
-        async_result = []
-        self._get_bonus_model_by_user_id(
             request,
             lambda result: async_result.append(result),
         )

@@ -830,14 +830,9 @@ class DescribeBonusModelsRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeBonusModelsRequest:
         self.namespace_name = namespace_name
-        return self
-
-    def with_access_token(self, access_token: str) -> DescribeBonusModelsRequest:
-        self.access_token = access_token
         return self
 
     def get(self, key, default=None):
@@ -859,56 +854,11 @@ class DescribeBonusModelsRequest(core.Gs2Request):
         if data is None:
             return None
         return DescribeBonusModelsRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_access_token(data.get('accessToken'))
+            .with_namespace_name(data.get('namespaceName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "accessToken": self.access_token,
-        }
-
-
-class DescribeBonusModelsByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    user_id: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> DescribeBonusModelsByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_user_id(self, user_id: str) -> DescribeBonusModelsByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeBonusModelsByUserIdRequest]:
-        if data is None:
-            return None
-        return DescribeBonusModelsByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "userId": self.user_id,
         }
 
 
@@ -917,7 +867,6 @@ class GetBonusModelRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     bonus_model_name: str = None
-    access_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetBonusModelRequest:
         self.namespace_name = namespace_name
@@ -925,10 +874,6 @@ class GetBonusModelRequest(core.Gs2Request):
 
     def with_bonus_model_name(self, bonus_model_name: str) -> GetBonusModelRequest:
         self.bonus_model_name = bonus_model_name
-        return self
-
-    def with_access_token(self, access_token: str) -> GetBonusModelRequest:
-        self.access_token = access_token
         return self
 
     def get(self, key, default=None):
@@ -951,64 +896,12 @@ class GetBonusModelRequest(core.Gs2Request):
             return None
         return GetBonusModelRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_bonus_model_name(data.get('bonusModelName'))\
-            .with_access_token(data.get('accessToken'))
+            .with_bonus_model_name(data.get('bonusModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "bonusModelName": self.bonus_model_name,
-            "accessToken": self.access_token,
-        }
-
-
-class GetBonusModelByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    bonus_model_name: str = None
-    user_id: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> GetBonusModelByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_bonus_model_name(self, bonus_model_name: str) -> GetBonusModelByUserIdRequest:
-        self.bonus_model_name = bonus_model_name
-        return self
-
-    def with_user_id(self, user_id: str) -> GetBonusModelByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetBonusModelByUserIdRequest]:
-        if data is None:
-            return None
-        return GetBonusModelByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_bonus_model_name(data.get('bonusModelName'))\
-            .with_user_id(data.get('userId'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "bonusModelName": self.bonus_model_name,
-            "userId": self.user_id,
         }
 
 

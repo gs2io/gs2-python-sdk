@@ -593,46 +593,6 @@ class DescribeBonusModelsResult(core.Gs2Result):
         }
 
 
-class DescribeBonusModelsByUserIdResult(core.Gs2Result):
-    items: List[BonusModel] = None
-
-    def with_items(self, items: List[BonusModel]) -> DescribeBonusModelsByUserIdResult:
-        self.items = items
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeBonusModelsByUserIdResult]:
-        if data is None:
-            return None
-        return DescribeBonusModelsByUserIdResult()\
-            .with_items([
-                BonusModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
-            ],
-        }
-
-
 class GetBonusModelResult(core.Gs2Result):
     item: BonusModel = None
 
@@ -659,40 +619,6 @@ class GetBonusModelResult(core.Gs2Result):
         if data is None:
             return None
         return GetBonusModelResult()\
-            .with_item(BonusModel.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class GetBonusModelByUserIdResult(core.Gs2Result):
-    item: BonusModel = None
-
-    def with_item(self, item: BonusModel) -> GetBonusModelByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetBonusModelByUserIdResult]:
-        if data is None:
-            return None
-        return GetBonusModelByUserIdResult()\
             .with_item(BonusModel.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:

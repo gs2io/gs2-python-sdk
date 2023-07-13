@@ -1174,7 +1174,7 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='login-reward',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/bonusModel".format(
+        ) + "/{namespaceName}/model/bonusModel".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
         )
 
@@ -1185,8 +1185,6 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.access_token:
-            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
@@ -1238,78 +1236,6 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_bonus_models_by_user_id(
-        self,
-        request: DescribeBonusModelsByUserIdRequest,
-        callback: Callable[[AsyncResult[DescribeBonusModelsByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='login-reward',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/bonusModel".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=DescribeBonusModelsByUserIdResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def describe_bonus_models_by_user_id(
-        self,
-        request: DescribeBonusModelsByUserIdRequest,
-    ) -> DescribeBonusModelsByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._describe_bonus_models_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_bonus_models_by_user_id_async(
-        self,
-        request: DescribeBonusModelsByUserIdRequest,
-    ) -> DescribeBonusModelsByUserIdResult:
-        async_result = []
-        self._describe_bonus_models_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _get_bonus_model(
         self,
         request: GetBonusModelRequest,
@@ -1319,7 +1245,7 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='login-reward',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/bonusModel/{bonusModelName}".format(
+        ) + "/{namespaceName}/model/bonusModel/{bonusModelName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             bonusModelName=request.bonus_model_name if request.bonus_model_name is not None and request.bonus_model_name != '' else 'null',
         )
@@ -1331,8 +1257,6 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.access_token:
-            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
@@ -1370,79 +1294,6 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
     ) -> GetBonusModelResult:
         async_result = []
         self._get_bonus_model(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_bonus_model_by_user_id(
-        self,
-        request: GetBonusModelByUserIdRequest,
-        callback: Callable[[AsyncResult[GetBonusModelByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='login-reward',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/bonusModel/{bonusModelName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            bonusModelName=request.bonus_model_name if request.bonus_model_name is not None and request.bonus_model_name != '' else 'null',
-            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetBonusModelByUserIdResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_bonus_model_by_user_id(
-        self,
-        request: GetBonusModelByUserIdRequest,
-    ) -> GetBonusModelByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._get_bonus_model_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_bonus_model_by_user_id_async(
-        self,
-        request: GetBonusModelByUserIdRequest,
-    ) -> GetBonusModelByUserIdResult:
-        async_result = []
-        self._get_bonus_model_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -2246,9 +2097,11 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
         )
 
         headers = self._create_authorized_headers()
-        query_strings = {
+        body = {
             'contextStack': request.context_stack,
         }
+        if request.step_number is not None:
+            body["stepNumber"] = request.step_number
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2258,11 +2111,11 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
-            method='GET',
+            method='POST',
             result_type=MarkReceivedResult,
             callback=callback,
             headers=headers,
-            query_strings=query_strings,
+            body=body,
         )
 
         self.session.send(
@@ -2323,9 +2176,11 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
         )
 
         headers = self._create_authorized_headers()
-        query_strings = {
+        body = {
             'contextStack': request.context_stack,
         }
+        if request.step_number is not None:
+            body["stepNumber"] = request.step_number
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2333,11 +2188,11 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
-            method='GET',
+            method='POST',
             result_type=MarkReceivedByUserIdResult,
             callback=callback,
             headers=headers,
-            query_strings=query_strings,
+            body=body,
         )
 
         self.session.send(
