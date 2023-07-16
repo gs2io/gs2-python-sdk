@@ -1189,3 +1189,613 @@ class BuyByUserIdResult(core.Gs2Result):
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
+
+
+class DescribeRandomShowcaseMastersResult(core.Gs2Result):
+    items: List[RandomShowcaseMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[RandomShowcaseMaster]) -> DescribeRandomShowcaseMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeRandomShowcaseMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRandomShowcaseMastersResult]:
+        if data is None:
+            return None
+        return DescribeRandomShowcaseMastersResult()\
+            .with_items([
+                RandomShowcaseMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateRandomShowcaseMasterResult(core.Gs2Result):
+    item: RandomShowcaseMaster = None
+
+    def with_item(self, item: RandomShowcaseMaster) -> CreateRandomShowcaseMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateRandomShowcaseMasterResult]:
+        if data is None:
+            return None
+        return CreateRandomShowcaseMasterResult()\
+            .with_item(RandomShowcaseMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetRandomShowcaseMasterResult(core.Gs2Result):
+    item: RandomShowcaseMaster = None
+
+    def with_item(self, item: RandomShowcaseMaster) -> GetRandomShowcaseMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetRandomShowcaseMasterResult]:
+        if data is None:
+            return None
+        return GetRandomShowcaseMasterResult()\
+            .with_item(RandomShowcaseMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateRandomShowcaseMasterResult(core.Gs2Result):
+    item: RandomShowcaseMaster = None
+
+    def with_item(self, item: RandomShowcaseMaster) -> UpdateRandomShowcaseMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateRandomShowcaseMasterResult]:
+        if data is None:
+            return None
+        return UpdateRandomShowcaseMasterResult()\
+            .with_item(RandomShowcaseMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteRandomShowcaseMasterResult(core.Gs2Result):
+    item: RandomShowcaseMaster = None
+
+    def with_item(self, item: RandomShowcaseMaster) -> DeleteRandomShowcaseMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteRandomShowcaseMasterResult]:
+        if data is None:
+            return None
+        return DeleteRandomShowcaseMasterResult()\
+            .with_item(RandomShowcaseMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeRandomShowcaseSalesItemsResult(core.Gs2Result):
+    items: List[RandomDisplayItem] = None
+
+    def with_items(self, items: List[RandomDisplayItem]) -> DescribeRandomShowcaseSalesItemsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRandomShowcaseSalesItemsResult]:
+        if data is None:
+            return None
+        return DescribeRandomShowcaseSalesItemsResult()\
+            .with_items([
+                RandomDisplayItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class DescribeRandomShowcaseSalesItemsByUserIdResult(core.Gs2Result):
+    items: List[RandomDisplayItem] = None
+
+    def with_items(self, items: List[RandomDisplayItem]) -> DescribeRandomShowcaseSalesItemsByUserIdResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRandomShowcaseSalesItemsByUserIdResult]:
+        if data is None:
+            return None
+        return DescribeRandomShowcaseSalesItemsByUserIdResult()\
+            .with_items([
+                RandomDisplayItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetRandomShowcaseSalesItemResult(core.Gs2Result):
+    item: RandomDisplayItem = None
+
+    def with_item(self, item: RandomDisplayItem) -> GetRandomShowcaseSalesItemResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetRandomShowcaseSalesItemResult]:
+        if data is None:
+            return None
+        return GetRandomShowcaseSalesItemResult()\
+            .with_item(RandomDisplayItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetRandomShowcaseSalesItemByUserIdResult(core.Gs2Result):
+    item: RandomDisplayItem = None
+
+    def with_item(self, item: RandomDisplayItem) -> GetRandomShowcaseSalesItemByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetRandomShowcaseSalesItemByUserIdResult]:
+        if data is None:
+            return None
+        return GetRandomShowcaseSalesItemByUserIdResult()\
+            .with_item(RandomDisplayItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class IncrementPurchaseCountByUserIdResult(core.Gs2Result):
+    item: RandomDisplayItem = None
+
+    def with_item(self, item: RandomDisplayItem) -> IncrementPurchaseCountByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementPurchaseCountByUserIdResult]:
+        if data is None:
+            return None
+        return IncrementPurchaseCountByUserIdResult()\
+            .with_item(RandomDisplayItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class IncrementPurchaseCountByStampTaskResult(core.Gs2Result):
+    item: RandomDisplayItem = None
+    new_context_stack: str = None
+
+    def with_item(self, item: RandomDisplayItem) -> IncrementPurchaseCountByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> IncrementPurchaseCountByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementPurchaseCountByStampTaskResult]:
+        if data is None:
+            return None
+        return IncrementPurchaseCountByStampTaskResult()\
+            .with_item(RandomDisplayItem.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class ForceReDrawByUserIdResult(core.Gs2Result):
+    items: List[RandomDisplayItem] = None
+
+    def with_items(self, items: List[RandomDisplayItem]) -> ForceReDrawByUserIdResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ForceReDrawByUserIdResult]:
+        if data is None:
+            return None
+        return ForceReDrawByUserIdResult()\
+            .with_items([
+                RandomDisplayItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class ForceReDrawByUserIdByStampSheetResult(core.Gs2Result):
+    items: List[RandomDisplayItem] = None
+
+    def with_items(self, items: List[RandomDisplayItem]) -> ForceReDrawByUserIdByStampSheetResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ForceReDrawByUserIdByStampSheetResult]:
+        if data is None:
+            return None
+        return ForceReDrawByUserIdByStampSheetResult()\
+            .with_items([
+                RandomDisplayItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class RandomShowcaseBuyResult(core.Gs2Result):
+    item: RandomDisplayItem = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_item(self, item: RandomDisplayItem) -> RandomShowcaseBuyResult:
+        self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> RandomShowcaseBuyResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> RandomShowcaseBuyResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> RandomShowcaseBuyResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> RandomShowcaseBuyResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomShowcaseBuyResult]:
+        if data is None:
+            return None
+        return RandomShowcaseBuyResult()\
+            .with_item(RandomDisplayItem.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
+class RandomShowcaseBuyByUserIdResult(core.Gs2Result):
+    item: RandomDisplayItem = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_item(self, item: RandomDisplayItem) -> RandomShowcaseBuyByUserIdResult:
+        self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> RandomShowcaseBuyByUserIdResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> RandomShowcaseBuyByUserIdResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> RandomShowcaseBuyByUserIdResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> RandomShowcaseBuyByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomShowcaseBuyByUserIdResult]:
+        if data is None:
+            return None
+        return RandomShowcaseBuyByUserIdResult()\
+            .with_item(RandomDisplayItem.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }

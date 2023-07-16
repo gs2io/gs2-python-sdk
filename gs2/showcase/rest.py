@@ -2379,3 +2379,1163 @@ class Gs2ShowcaseRestClient(rest.AbstractGs2RestClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_random_showcase_masters(
+        self,
+        request: DescribeRandomShowcaseMastersRequest,
+        callback: Callable[[AsyncResult[DescribeRandomShowcaseMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/random/showcase".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeRandomShowcaseMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_random_showcase_masters(
+        self,
+        request: DescribeRandomShowcaseMastersRequest,
+    ) -> DescribeRandomShowcaseMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_random_showcase_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_random_showcase_masters_async(
+        self,
+        request: DescribeRandomShowcaseMastersRequest,
+    ) -> DescribeRandomShowcaseMastersResult:
+        async_result = []
+        self._describe_random_showcase_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_random_showcase_master(
+        self,
+        request: CreateRandomShowcaseMasterRequest,
+        callback: Callable[[AsyncResult[CreateRandomShowcaseMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/random/showcase".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.maximum_number_of_choice is not None:
+            body["maximumNumberOfChoice"] = request.maximum_number_of_choice
+        if request.display_items is not None:
+            body["displayItems"] = [
+                item.to_dict()
+                for item in request.display_items
+            ]
+        if request.base_timestamp is not None:
+            body["baseTimestamp"] = request.base_timestamp
+        if request.reset_interval_hours is not None:
+            body["resetIntervalHours"] = request.reset_interval_hours
+        if request.sales_period_event_id is not None:
+            body["salesPeriodEventId"] = request.sales_period_event_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateRandomShowcaseMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_random_showcase_master(
+        self,
+        request: CreateRandomShowcaseMasterRequest,
+    ) -> CreateRandomShowcaseMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_random_showcase_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_random_showcase_master_async(
+        self,
+        request: CreateRandomShowcaseMasterRequest,
+    ) -> CreateRandomShowcaseMasterResult:
+        async_result = []
+        self._create_random_showcase_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_random_showcase_master(
+        self,
+        request: GetRandomShowcaseMasterRequest,
+        callback: Callable[[AsyncResult[GetRandomShowcaseMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/random/showcase/{showcaseName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetRandomShowcaseMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_random_showcase_master(
+        self,
+        request: GetRandomShowcaseMasterRequest,
+    ) -> GetRandomShowcaseMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_random_showcase_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_random_showcase_master_async(
+        self,
+        request: GetRandomShowcaseMasterRequest,
+    ) -> GetRandomShowcaseMasterResult:
+        async_result = []
+        self._get_random_showcase_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_random_showcase_master(
+        self,
+        request: UpdateRandomShowcaseMasterRequest,
+        callback: Callable[[AsyncResult[UpdateRandomShowcaseMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/random/showcase/{showcaseName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.maximum_number_of_choice is not None:
+            body["maximumNumberOfChoice"] = request.maximum_number_of_choice
+        if request.display_items is not None:
+            body["displayItems"] = [
+                item.to_dict()
+                for item in request.display_items
+            ]
+        if request.base_timestamp is not None:
+            body["baseTimestamp"] = request.base_timestamp
+        if request.reset_interval_hours is not None:
+            body["resetIntervalHours"] = request.reset_interval_hours
+        if request.sales_period_event_id is not None:
+            body["salesPeriodEventId"] = request.sales_period_event_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateRandomShowcaseMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_random_showcase_master(
+        self,
+        request: UpdateRandomShowcaseMasterRequest,
+    ) -> UpdateRandomShowcaseMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_random_showcase_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_random_showcase_master_async(
+        self,
+        request: UpdateRandomShowcaseMasterRequest,
+    ) -> UpdateRandomShowcaseMasterResult:
+        async_result = []
+        self._update_random_showcase_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_random_showcase_master(
+        self,
+        request: DeleteRandomShowcaseMasterRequest,
+        callback: Callable[[AsyncResult[DeleteRandomShowcaseMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/random/showcase/{showcaseName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteRandomShowcaseMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_random_showcase_master(
+        self,
+        request: DeleteRandomShowcaseMasterRequest,
+    ) -> DeleteRandomShowcaseMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_random_showcase_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_random_showcase_master_async(
+        self,
+        request: DeleteRandomShowcaseMasterRequest,
+    ) -> DeleteRandomShowcaseMasterResult:
+        async_result = []
+        self._delete_random_showcase_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_random_showcase_sales_items(
+        self,
+        request: DescribeRandomShowcaseSalesItemsRequest,
+        callback: Callable[[AsyncResult[DescribeRandomShowcaseSalesItemsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/random/showcase/{showcaseName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeRandomShowcaseSalesItemsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_random_showcase_sales_items(
+        self,
+        request: DescribeRandomShowcaseSalesItemsRequest,
+    ) -> DescribeRandomShowcaseSalesItemsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_random_showcase_sales_items(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_random_showcase_sales_items_async(
+        self,
+        request: DescribeRandomShowcaseSalesItemsRequest,
+    ) -> DescribeRandomShowcaseSalesItemsResult:
+        async_result = []
+        self._describe_random_showcase_sales_items(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_random_showcase_sales_items_by_user_id(
+        self,
+        request: DescribeRandomShowcaseSalesItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeRandomShowcaseSalesItemsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/random/showcase/{showcaseName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeRandomShowcaseSalesItemsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_random_showcase_sales_items_by_user_id(
+        self,
+        request: DescribeRandomShowcaseSalesItemsByUserIdRequest,
+    ) -> DescribeRandomShowcaseSalesItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_random_showcase_sales_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_random_showcase_sales_items_by_user_id_async(
+        self,
+        request: DescribeRandomShowcaseSalesItemsByUserIdRequest,
+    ) -> DescribeRandomShowcaseSalesItemsByUserIdResult:
+        async_result = []
+        self._describe_random_showcase_sales_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_random_showcase_sales_item(
+        self,
+        request: GetRandomShowcaseSalesItemRequest,
+        callback: Callable[[AsyncResult[GetRandomShowcaseSalesItemResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/random/showcase/{showcaseName}/displayItem/{displayItemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+            displayItemName=request.display_item_name if request.display_item_name is not None and request.display_item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetRandomShowcaseSalesItemResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_random_showcase_sales_item(
+        self,
+        request: GetRandomShowcaseSalesItemRequest,
+    ) -> GetRandomShowcaseSalesItemResult:
+        async_result = []
+        with timeout(30):
+            self._get_random_showcase_sales_item(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_random_showcase_sales_item_async(
+        self,
+        request: GetRandomShowcaseSalesItemRequest,
+    ) -> GetRandomShowcaseSalesItemResult:
+        async_result = []
+        self._get_random_showcase_sales_item(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_random_showcase_sales_item_by_user_id(
+        self,
+        request: GetRandomShowcaseSalesItemByUserIdRequest,
+        callback: Callable[[AsyncResult[GetRandomShowcaseSalesItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/random/showcase/{showcaseName}/displayItem/{displayItemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+            displayItemName=request.display_item_name if request.display_item_name is not None and request.display_item_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetRandomShowcaseSalesItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_random_showcase_sales_item_by_user_id(
+        self,
+        request: GetRandomShowcaseSalesItemByUserIdRequest,
+    ) -> GetRandomShowcaseSalesItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_random_showcase_sales_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_random_showcase_sales_item_by_user_id_async(
+        self,
+        request: GetRandomShowcaseSalesItemByUserIdRequest,
+    ) -> GetRandomShowcaseSalesItemByUserIdResult:
+        async_result = []
+        self._get_random_showcase_sales_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _increment_purchase_count_by_user_id(
+        self,
+        request: IncrementPurchaseCountByUserIdRequest,
+        callback: Callable[[AsyncResult[IncrementPurchaseCountByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/random/showcase/user/{userId}/status/{showcaseName}/{displayItemName}/purchase/count".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+            displayItemName=request.display_item_name if request.display_item_name is not None and request.display_item_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=IncrementPurchaseCountByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def increment_purchase_count_by_user_id(
+        self,
+        request: IncrementPurchaseCountByUserIdRequest,
+    ) -> IncrementPurchaseCountByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._increment_purchase_count_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def increment_purchase_count_by_user_id_async(
+        self,
+        request: IncrementPurchaseCountByUserIdRequest,
+    ) -> IncrementPurchaseCountByUserIdResult:
+        async_result = []
+        self._increment_purchase_count_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _increment_purchase_count_by_stamp_task(
+        self,
+        request: IncrementPurchaseCountByStampTaskRequest,
+        callback: Callable[[AsyncResult[IncrementPurchaseCountByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/stamp/random/showcase/status/purchase/count"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=IncrementPurchaseCountByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def increment_purchase_count_by_stamp_task(
+        self,
+        request: IncrementPurchaseCountByStampTaskRequest,
+    ) -> IncrementPurchaseCountByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._increment_purchase_count_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def increment_purchase_count_by_stamp_task_async(
+        self,
+        request: IncrementPurchaseCountByStampTaskRequest,
+    ) -> IncrementPurchaseCountByStampTaskResult:
+        async_result = []
+        self._increment_purchase_count_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _force_re_draw_by_user_id(
+        self,
+        request: ForceReDrawByUserIdRequest,
+        callback: Callable[[AsyncResult[ForceReDrawByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/random/showcase/{showcaseName}/user/{userId}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=ForceReDrawByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def force_re_draw_by_user_id(
+        self,
+        request: ForceReDrawByUserIdRequest,
+    ) -> ForceReDrawByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._force_re_draw_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def force_re_draw_by_user_id_async(
+        self,
+        request: ForceReDrawByUserIdRequest,
+    ) -> ForceReDrawByUserIdResult:
+        async_result = []
+        self._force_re_draw_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _force_re_draw_by_user_id_by_stamp_sheet(
+        self,
+        request: ForceReDrawByUserIdByStampSheetRequest,
+        callback: Callable[[AsyncResult[ForceReDrawByUserIdByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/stamp/random/showcase/status/redraw"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ForceReDrawByUserIdByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def force_re_draw_by_user_id_by_stamp_sheet(
+        self,
+        request: ForceReDrawByUserIdByStampSheetRequest,
+    ) -> ForceReDrawByUserIdByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._force_re_draw_by_user_id_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def force_re_draw_by_user_id_by_stamp_sheet_async(
+        self,
+        request: ForceReDrawByUserIdByStampSheetRequest,
+    ) -> ForceReDrawByUserIdByStampSheetResult:
+        async_result = []
+        self._force_re_draw_by_user_id_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _random_showcase_buy(
+        self,
+        request: RandomShowcaseBuyRequest,
+        callback: Callable[[AsyncResult[RandomShowcaseBuyResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/random/showcase/{showcaseName}/{displayItemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+            displayItemName=request.display_item_name if request.display_item_name is not None and request.display_item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.quantity is not None:
+            body["quantity"] = request.quantity
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RandomShowcaseBuyResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def random_showcase_buy(
+        self,
+        request: RandomShowcaseBuyRequest,
+    ) -> RandomShowcaseBuyResult:
+        async_result = []
+        with timeout(30):
+            self._random_showcase_buy(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def random_showcase_buy_async(
+        self,
+        request: RandomShowcaseBuyRequest,
+    ) -> RandomShowcaseBuyResult:
+        async_result = []
+        self._random_showcase_buy(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _random_showcase_buy_by_user_id(
+        self,
+        request: RandomShowcaseBuyByUserIdRequest,
+        callback: Callable[[AsyncResult[RandomShowcaseBuyByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/random/showcase/{showcaseName}/{displayItemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+            displayItemName=request.display_item_name if request.display_item_name is not None and request.display_item_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.quantity is not None:
+            body["quantity"] = request.quantity
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RandomShowcaseBuyByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def random_showcase_buy_by_user_id(
+        self,
+        request: RandomShowcaseBuyByUserIdRequest,
+    ) -> RandomShowcaseBuyByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._random_showcase_buy_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def random_showcase_buy_by_user_id_async(
+        self,
+        request: RandomShowcaseBuyByUserIdRequest,
+    ) -> RandomShowcaseBuyByUserIdResult:
+        async_result = []
+        self._random_showcase_buy_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

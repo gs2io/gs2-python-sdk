@@ -362,6 +362,525 @@ class ConsumeAction(core.Gs2Model):
         }
 
 
+class RandomDisplayItemModel(core.Gs2Model):
+    name: str = None
+    metadata: str = None
+    consume_actions: List[ConsumeAction] = None
+    acquire_actions: List[AcquireAction] = None
+    stock: int = None
+    weight: int = None
+
+    def with_name(self, name: str) -> RandomDisplayItemModel:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> RandomDisplayItemModel:
+        self.metadata = metadata
+        return self
+
+    def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> RandomDisplayItemModel:
+        self.consume_actions = consume_actions
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> RandomDisplayItemModel:
+        self.acquire_actions = acquire_actions
+        return self
+
+    def with_stock(self, stock: int) -> RandomDisplayItemModel:
+        self.stock = stock
+        return self
+
+    def with_weight(self, weight: int) -> RandomDisplayItemModel:
+        self.weight = weight
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomDisplayItemModel]:
+        if data is None:
+            return None
+        return RandomDisplayItemModel()\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_consume_actions([
+                ConsumeAction.from_dict(data.get('consumeActions')[i])
+                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+            ])\
+            .with_acquire_actions([
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+            ])\
+            .with_stock(data.get('stock'))\
+            .with_weight(data.get('weight'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "metadata": self.metadata,
+            "consumeActions": [
+                self.consume_actions[i].to_dict() if self.consume_actions[i] else None
+                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+            ],
+            "acquireActions": [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+            "stock": self.stock,
+            "weight": self.weight,
+        }
+
+
+class RandomDisplayItem(core.Gs2Model):
+    showcase_name: str = None
+    name: str = None
+    metadata: str = None
+    consume_actions: List[ConsumeAction] = None
+    acquire_actions: List[AcquireAction] = None
+    current_purchase_count: int = None
+    maximum_purchase_count: int = None
+
+    def with_showcase_name(self, showcase_name: str) -> RandomDisplayItem:
+        self.showcase_name = showcase_name
+        return self
+
+    def with_name(self, name: str) -> RandomDisplayItem:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> RandomDisplayItem:
+        self.metadata = metadata
+        return self
+
+    def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> RandomDisplayItem:
+        self.consume_actions = consume_actions
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> RandomDisplayItem:
+        self.acquire_actions = acquire_actions
+        return self
+
+    def with_current_purchase_count(self, current_purchase_count: int) -> RandomDisplayItem:
+        self.current_purchase_count = current_purchase_count
+        return self
+
+    def with_maximum_purchase_count(self, maximum_purchase_count: int) -> RandomDisplayItem:
+        self.maximum_purchase_count = maximum_purchase_count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomDisplayItem]:
+        if data is None:
+            return None
+        return RandomDisplayItem()\
+            .with_showcase_name(data.get('showcaseName'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_consume_actions([
+                ConsumeAction.from_dict(data.get('consumeActions')[i])
+                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+            ])\
+            .with_acquire_actions([
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+            ])\
+            .with_current_purchase_count(data.get('currentPurchaseCount'))\
+            .with_maximum_purchase_count(data.get('maximumPurchaseCount'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "showcaseName": self.showcase_name,
+            "name": self.name,
+            "metadata": self.metadata,
+            "consumeActions": [
+                self.consume_actions[i].to_dict() if self.consume_actions[i] else None
+                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+            ],
+            "acquireActions": [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+            "currentPurchaseCount": self.current_purchase_count,
+            "maximumPurchaseCount": self.maximum_purchase_count,
+        }
+
+
+class PurchaseCount(core.Gs2Model):
+    name: str = None
+    count: int = None
+
+    def with_name(self, name: str) -> PurchaseCount:
+        self.name = name
+        return self
+
+    def with_count(self, count: int) -> PurchaseCount:
+        self.count = count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PurchaseCount]:
+        if data is None:
+            return None
+        return PurchaseCount()\
+            .with_name(data.get('name'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "count": self.count,
+        }
+
+
+class RandomShowcase(core.Gs2Model):
+    random_showcase_id: str = None
+    name: str = None
+    metadata: str = None
+    maximum_number_of_choice: int = None
+    display_items: List[RandomDisplayItemModel] = None
+    base_timestamp: int = None
+    reset_interval_hours: int = None
+    sales_period_event_id: str = None
+
+    def with_random_showcase_id(self, random_showcase_id: str) -> RandomShowcase:
+        self.random_showcase_id = random_showcase_id
+        return self
+
+    def with_name(self, name: str) -> RandomShowcase:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> RandomShowcase:
+        self.metadata = metadata
+        return self
+
+    def with_maximum_number_of_choice(self, maximum_number_of_choice: int) -> RandomShowcase:
+        self.maximum_number_of_choice = maximum_number_of_choice
+        return self
+
+    def with_display_items(self, display_items: List[RandomDisplayItemModel]) -> RandomShowcase:
+        self.display_items = display_items
+        return self
+
+    def with_base_timestamp(self, base_timestamp: int) -> RandomShowcase:
+        self.base_timestamp = base_timestamp
+        return self
+
+    def with_reset_interval_hours(self, reset_interval_hours: int) -> RandomShowcase:
+        self.reset_interval_hours = reset_interval_hours
+        return self
+
+    def with_sales_period_event_id(self, sales_period_event_id: str) -> RandomShowcase:
+        self.sales_period_event_id = sales_period_event_id
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        showcase_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:showcase:{namespaceName}:random:showcase:{showcaseName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            showcaseName=showcase_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):showcase:(?P<namespaceName>.+):random:showcase:(?P<showcaseName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):showcase:(?P<namespaceName>.+):random:showcase:(?P<showcaseName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):showcase:(?P<namespaceName>.+):random:showcase:(?P<showcaseName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_showcase_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):showcase:(?P<namespaceName>.+):random:showcase:(?P<showcaseName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('showcase_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomShowcase]:
+        if data is None:
+            return None
+        return RandomShowcase()\
+            .with_random_showcase_id(data.get('randomShowcaseId'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_maximum_number_of_choice(data.get('maximumNumberOfChoice'))\
+            .with_display_items([
+                RandomDisplayItemModel.from_dict(data.get('displayItems')[i])
+                for i in range(len(data.get('displayItems')) if data.get('displayItems') else 0)
+            ])\
+            .with_base_timestamp(data.get('baseTimestamp'))\
+            .with_reset_interval_hours(data.get('resetIntervalHours'))\
+            .with_sales_period_event_id(data.get('salesPeriodEventId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "randomShowcaseId": self.random_showcase_id,
+            "name": self.name,
+            "metadata": self.metadata,
+            "maximumNumberOfChoice": self.maximum_number_of_choice,
+            "displayItems": [
+                self.display_items[i].to_dict() if self.display_items[i] else None
+                for i in range(len(self.display_items) if self.display_items else 0)
+            ],
+            "baseTimestamp": self.base_timestamp,
+            "resetIntervalHours": self.reset_interval_hours,
+            "salesPeriodEventId": self.sales_period_event_id,
+        }
+
+
+class RandomShowcaseMaster(core.Gs2Model):
+    showcase_id: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    maximum_number_of_choice: int = None
+    display_items: List[RandomDisplayItemModel] = None
+    base_timestamp: int = None
+    reset_interval_hours: int = None
+    sales_period_event_id: str = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_showcase_id(self, showcase_id: str) -> RandomShowcaseMaster:
+        self.showcase_id = showcase_id
+        return self
+
+    def with_name(self, name: str) -> RandomShowcaseMaster:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> RandomShowcaseMaster:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> RandomShowcaseMaster:
+        self.metadata = metadata
+        return self
+
+    def with_maximum_number_of_choice(self, maximum_number_of_choice: int) -> RandomShowcaseMaster:
+        self.maximum_number_of_choice = maximum_number_of_choice
+        return self
+
+    def with_display_items(self, display_items: List[RandomDisplayItemModel]) -> RandomShowcaseMaster:
+        self.display_items = display_items
+        return self
+
+    def with_base_timestamp(self, base_timestamp: int) -> RandomShowcaseMaster:
+        self.base_timestamp = base_timestamp
+        return self
+
+    def with_reset_interval_hours(self, reset_interval_hours: int) -> RandomShowcaseMaster:
+        self.reset_interval_hours = reset_interval_hours
+        return self
+
+    def with_sales_period_event_id(self, sales_period_event_id: str) -> RandomShowcaseMaster:
+        self.sales_period_event_id = sales_period_event_id
+        return self
+
+    def with_created_at(self, created_at: int) -> RandomShowcaseMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> RandomShowcaseMaster:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        showcase_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:showcase:{namespaceName}:random:showcase:{showcaseName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            showcaseName=showcase_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):showcase:(?P<namespaceName>.+):random:showcase:(?P<showcaseName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):showcase:(?P<namespaceName>.+):random:showcase:(?P<showcaseName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):showcase:(?P<namespaceName>.+):random:showcase:(?P<showcaseName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_showcase_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):showcase:(?P<namespaceName>.+):random:showcase:(?P<showcaseName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('showcase_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomShowcaseMaster]:
+        if data is None:
+            return None
+        return RandomShowcaseMaster()\
+            .with_showcase_id(data.get('showcaseId'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_maximum_number_of_choice(data.get('maximumNumberOfChoice'))\
+            .with_display_items([
+                RandomDisplayItemModel.from_dict(data.get('displayItems')[i])
+                for i in range(len(data.get('displayItems')) if data.get('displayItems') else 0)
+            ])\
+            .with_base_timestamp(data.get('baseTimestamp'))\
+            .with_reset_interval_hours(data.get('resetIntervalHours'))\
+            .with_sales_period_event_id(data.get('salesPeriodEventId'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "showcaseId": self.showcase_id,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "maximumNumberOfChoice": self.maximum_number_of_choice,
+            "displayItems": [
+                self.display_items[i].to_dict() if self.display_items[i] else None
+                for i in range(len(self.display_items) if self.display_items else 0)
+            ],
+            "baseTimestamp": self.base_timestamp,
+            "resetIntervalHours": self.reset_interval_hours,
+            "salesPeriodEventId": self.sales_period_event_id,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+        }
+
+
 class DisplayItemMaster(core.Gs2Model):
     display_item_id: str = None
     type: str = None
