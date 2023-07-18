@@ -2032,220 +2032,6 @@ class DeleteRandomShowcaseMasterRequest(core.Gs2Request):
         }
 
 
-class DescribeRandomShowcaseSalesItemsRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    showcase_name: str = None
-    access_token: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> DescribeRandomShowcaseSalesItemsRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_showcase_name(self, showcase_name: str) -> DescribeRandomShowcaseSalesItemsRequest:
-        self.showcase_name = showcase_name
-        return self
-
-    def with_access_token(self, access_token: str) -> DescribeRandomShowcaseSalesItemsRequest:
-        self.access_token = access_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeRandomShowcaseSalesItemsRequest]:
-        if data is None:
-            return None
-        return DescribeRandomShowcaseSalesItemsRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_showcase_name(data.get('showcaseName'))\
-            .with_access_token(data.get('accessToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "showcaseName": self.showcase_name,
-            "accessToken": self.access_token,
-        }
-
-
-class DescribeRandomShowcaseSalesItemsByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    showcase_name: str = None
-    user_id: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> DescribeRandomShowcaseSalesItemsByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_showcase_name(self, showcase_name: str) -> DescribeRandomShowcaseSalesItemsByUserIdRequest:
-        self.showcase_name = showcase_name
-        return self
-
-    def with_user_id(self, user_id: str) -> DescribeRandomShowcaseSalesItemsByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeRandomShowcaseSalesItemsByUserIdRequest]:
-        if data is None:
-            return None
-        return DescribeRandomShowcaseSalesItemsByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_showcase_name(data.get('showcaseName'))\
-            .with_user_id(data.get('userId'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "showcaseName": self.showcase_name,
-            "userId": self.user_id,
-        }
-
-
-class GetRandomShowcaseSalesItemRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    showcase_name: str = None
-    display_item_name: str = None
-    access_token: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> GetRandomShowcaseSalesItemRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_showcase_name(self, showcase_name: str) -> GetRandomShowcaseSalesItemRequest:
-        self.showcase_name = showcase_name
-        return self
-
-    def with_display_item_name(self, display_item_name: str) -> GetRandomShowcaseSalesItemRequest:
-        self.display_item_name = display_item_name
-        return self
-
-    def with_access_token(self, access_token: str) -> GetRandomShowcaseSalesItemRequest:
-        self.access_token = access_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetRandomShowcaseSalesItemRequest]:
-        if data is None:
-            return None
-        return GetRandomShowcaseSalesItemRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_showcase_name(data.get('showcaseName'))\
-            .with_display_item_name(data.get('displayItemName'))\
-            .with_access_token(data.get('accessToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "showcaseName": self.showcase_name,
-            "displayItemName": self.display_item_name,
-            "accessToken": self.access_token,
-        }
-
-
-class GetRandomShowcaseSalesItemByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    showcase_name: str = None
-    display_item_name: str = None
-    user_id: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> GetRandomShowcaseSalesItemByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_showcase_name(self, showcase_name: str) -> GetRandomShowcaseSalesItemByUserIdRequest:
-        self.showcase_name = showcase_name
-        return self
-
-    def with_display_item_name(self, display_item_name: str) -> GetRandomShowcaseSalesItemByUserIdRequest:
-        self.display_item_name = display_item_name
-        return self
-
-    def with_user_id(self, user_id: str) -> GetRandomShowcaseSalesItemByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetRandomShowcaseSalesItemByUserIdRequest]:
-        if data is None:
-            return None
-        return GetRandomShowcaseSalesItemByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_showcase_name(data.get('showcaseName'))\
-            .with_display_item_name(data.get('displayItemName'))\
-            .with_user_id(data.get('userId'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "showcaseName": self.showcase_name,
-            "displayItemName": self.display_item_name,
-            "userId": self.user_id,
-        }
-
-
 class IncrementPurchaseCountByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2453,6 +2239,220 @@ class ForceReDrawByUserIdByStampSheetRequest(core.Gs2Request):
         return {
             "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
+        }
+
+
+class DescribeRandomDisplayItemsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    showcase_name: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeRandomDisplayItemsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_showcase_name(self, showcase_name: str) -> DescribeRandomDisplayItemsRequest:
+        self.showcase_name = showcase_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeRandomDisplayItemsRequest:
+        self.access_token = access_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRandomDisplayItemsRequest]:
+        if data is None:
+            return None
+        return DescribeRandomDisplayItemsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_showcase_name(data.get('showcaseName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "showcaseName": self.showcase_name,
+            "accessToken": self.access_token,
+        }
+
+
+class DescribeRandomDisplayItemsByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    showcase_name: str = None
+    user_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeRandomDisplayItemsByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_showcase_name(self, showcase_name: str) -> DescribeRandomDisplayItemsByUserIdRequest:
+        self.showcase_name = showcase_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeRandomDisplayItemsByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRandomDisplayItemsByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeRandomDisplayItemsByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_showcase_name(data.get('showcaseName'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "showcaseName": self.showcase_name,
+            "userId": self.user_id,
+        }
+
+
+class GetRandomDisplayItemRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    showcase_name: str = None
+    display_item_name: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetRandomDisplayItemRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_showcase_name(self, showcase_name: str) -> GetRandomDisplayItemRequest:
+        self.showcase_name = showcase_name
+        return self
+
+    def with_display_item_name(self, display_item_name: str) -> GetRandomDisplayItemRequest:
+        self.display_item_name = display_item_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetRandomDisplayItemRequest:
+        self.access_token = access_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetRandomDisplayItemRequest]:
+        if data is None:
+            return None
+        return GetRandomDisplayItemRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_showcase_name(data.get('showcaseName'))\
+            .with_display_item_name(data.get('displayItemName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "showcaseName": self.showcase_name,
+            "displayItemName": self.display_item_name,
+            "accessToken": self.access_token,
+        }
+
+
+class GetRandomDisplayItemByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    showcase_name: str = None
+    display_item_name: str = None
+    user_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetRandomDisplayItemByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_showcase_name(self, showcase_name: str) -> GetRandomDisplayItemByUserIdRequest:
+        self.showcase_name = showcase_name
+        return self
+
+    def with_display_item_name(self, display_item_name: str) -> GetRandomDisplayItemByUserIdRequest:
+        self.display_item_name = display_item_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetRandomDisplayItemByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetRandomDisplayItemByUserIdRequest]:
+        if data is None:
+            return None
+        return GetRandomDisplayItemByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_showcase_name(data.get('showcaseName'))\
+            .with_display_item_name(data.get('displayItemName'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "showcaseName": self.showcase_name,
+            "displayItemName": self.display_item_name,
+            "userId": self.user_id,
         }
 
 

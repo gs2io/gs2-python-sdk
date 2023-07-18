@@ -2805,314 +2805,6 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_random_showcase_sales_items(
-        self,
-        request: DescribeRandomShowcaseSalesItemsRequest,
-        callback: Callable[[AsyncResult[DescribeRandomShowcaseSalesItemsResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="showcase",
-            component='randomShowcase',
-            function='describeRandomShowcaseSalesItems',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.showcase_name is not None:
-            body["showcaseName"] = request.showcase_name
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeRandomShowcaseSalesItemsResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_random_showcase_sales_items(
-        self,
-        request: DescribeRandomShowcaseSalesItemsRequest,
-    ) -> DescribeRandomShowcaseSalesItemsResult:
-        async_result = []
-        with timeout(30):
-            self._describe_random_showcase_sales_items(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_random_showcase_sales_items_async(
-        self,
-        request: DescribeRandomShowcaseSalesItemsRequest,
-    ) -> DescribeRandomShowcaseSalesItemsResult:
-        async_result = []
-        self._describe_random_showcase_sales_items(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _describe_random_showcase_sales_items_by_user_id(
-        self,
-        request: DescribeRandomShowcaseSalesItemsByUserIdRequest,
-        callback: Callable[[AsyncResult[DescribeRandomShowcaseSalesItemsByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="showcase",
-            component='randomShowcase',
-            function='describeRandomShowcaseSalesItemsByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.showcase_name is not None:
-            body["showcaseName"] = request.showcase_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeRandomShowcaseSalesItemsByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_random_showcase_sales_items_by_user_id(
-        self,
-        request: DescribeRandomShowcaseSalesItemsByUserIdRequest,
-    ) -> DescribeRandomShowcaseSalesItemsByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._describe_random_showcase_sales_items_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_random_showcase_sales_items_by_user_id_async(
-        self,
-        request: DescribeRandomShowcaseSalesItemsByUserIdRequest,
-    ) -> DescribeRandomShowcaseSalesItemsByUserIdResult:
-        async_result = []
-        self._describe_random_showcase_sales_items_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_random_showcase_sales_item(
-        self,
-        request: GetRandomShowcaseSalesItemRequest,
-        callback: Callable[[AsyncResult[GetRandomShowcaseSalesItemResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="showcase",
-            component='randomShowcase',
-            function='getRandomShowcaseSalesItem',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.showcase_name is not None:
-            body["showcaseName"] = request.showcase_name
-        if request.display_item_name is not None:
-            body["displayItemName"] = request.display_item_name
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=GetRandomShowcaseSalesItemResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def get_random_showcase_sales_item(
-        self,
-        request: GetRandomShowcaseSalesItemRequest,
-    ) -> GetRandomShowcaseSalesItemResult:
-        async_result = []
-        with timeout(30):
-            self._get_random_showcase_sales_item(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_random_showcase_sales_item_async(
-        self,
-        request: GetRandomShowcaseSalesItemRequest,
-    ) -> GetRandomShowcaseSalesItemResult:
-        async_result = []
-        self._get_random_showcase_sales_item(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_random_showcase_sales_item_by_user_id(
-        self,
-        request: GetRandomShowcaseSalesItemByUserIdRequest,
-        callback: Callable[[AsyncResult[GetRandomShowcaseSalesItemByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="showcase",
-            component='randomShowcase',
-            function='getRandomShowcaseSalesItemByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.showcase_name is not None:
-            body["showcaseName"] = request.showcase_name
-        if request.display_item_name is not None:
-            body["displayItemName"] = request.display_item_name
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=GetRandomShowcaseSalesItemByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def get_random_showcase_sales_item_by_user_id(
-        self,
-        request: GetRandomShowcaseSalesItemByUserIdRequest,
-    ) -> GetRandomShowcaseSalesItemByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._get_random_showcase_sales_item_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_random_showcase_sales_item_by_user_id_async(
-        self,
-        request: GetRandomShowcaseSalesItemByUserIdRequest,
-    ) -> GetRandomShowcaseSalesItemByUserIdResult:
-        async_result = []
-        self._get_random_showcase_sales_item_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _increment_purchase_count_by_user_id(
         self,
         request: IncrementPurchaseCountByUserIdRequest,
@@ -3404,6 +3096,314 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ForceReDrawByUserIdByStampSheetResult:
         async_result = []
         self._force_re_draw_by_user_id_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_random_display_items(
+        self,
+        request: DescribeRandomDisplayItemsRequest,
+        callback: Callable[[AsyncResult[DescribeRandomDisplayItemsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="showcase",
+            component='randomDisplayItem',
+            function='describeRandomDisplayItems',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.showcase_name is not None:
+            body["showcaseName"] = request.showcase_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeRandomDisplayItemsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_random_display_items(
+        self,
+        request: DescribeRandomDisplayItemsRequest,
+    ) -> DescribeRandomDisplayItemsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_random_display_items(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_random_display_items_async(
+        self,
+        request: DescribeRandomDisplayItemsRequest,
+    ) -> DescribeRandomDisplayItemsResult:
+        async_result = []
+        self._describe_random_display_items(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_random_display_items_by_user_id(
+        self,
+        request: DescribeRandomDisplayItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeRandomDisplayItemsByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="showcase",
+            component='randomDisplayItem',
+            function='describeRandomDisplayItemsByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.showcase_name is not None:
+            body["showcaseName"] = request.showcase_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeRandomDisplayItemsByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_random_display_items_by_user_id(
+        self,
+        request: DescribeRandomDisplayItemsByUserIdRequest,
+    ) -> DescribeRandomDisplayItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_random_display_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_random_display_items_by_user_id_async(
+        self,
+        request: DescribeRandomDisplayItemsByUserIdRequest,
+    ) -> DescribeRandomDisplayItemsByUserIdResult:
+        async_result = []
+        self._describe_random_display_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_random_display_item(
+        self,
+        request: GetRandomDisplayItemRequest,
+        callback: Callable[[AsyncResult[GetRandomDisplayItemResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="showcase",
+            component='randomDisplayItem',
+            function='getRandomDisplayItem',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.showcase_name is not None:
+            body["showcaseName"] = request.showcase_name
+        if request.display_item_name is not None:
+            body["displayItemName"] = request.display_item_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetRandomDisplayItemResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_random_display_item(
+        self,
+        request: GetRandomDisplayItemRequest,
+    ) -> GetRandomDisplayItemResult:
+        async_result = []
+        with timeout(30):
+            self._get_random_display_item(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_random_display_item_async(
+        self,
+        request: GetRandomDisplayItemRequest,
+    ) -> GetRandomDisplayItemResult:
+        async_result = []
+        self._get_random_display_item(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_random_display_item_by_user_id(
+        self,
+        request: GetRandomDisplayItemByUserIdRequest,
+        callback: Callable[[AsyncResult[GetRandomDisplayItemByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="showcase",
+            component='randomDisplayItem',
+            function='getRandomDisplayItemByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.showcase_name is not None:
+            body["showcaseName"] = request.showcase_name
+        if request.display_item_name is not None:
+            body["displayItemName"] = request.display_item_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetRandomDisplayItemByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_random_display_item_by_user_id(
+        self,
+        request: GetRandomDisplayItemByUserIdRequest,
+    ) -> GetRandomDisplayItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_random_display_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_random_display_item_by_user_id_async(
+        self,
+        request: GetRandomDisplayItemByUserIdRequest,
+    ) -> GetRandomDisplayItemByUserIdResult:
+        async_result = []
+        self._get_random_display_item_by_user_id(
             request,
             lambda result: async_result.append(result),
         )
