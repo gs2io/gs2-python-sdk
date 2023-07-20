@@ -7,6 +7,7 @@ from . import datastore
 from . import deploy
 from . import dictionary
 from . import distributor
+from . import enchant
 from . import enhance
 from . import exchange
 from . import experience
