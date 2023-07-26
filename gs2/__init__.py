@@ -37,4 +37,5 @@ from . import script
 from . import serial_key
 from . import showcase
 from . import stamina
+from . import state_machine
 from . import version

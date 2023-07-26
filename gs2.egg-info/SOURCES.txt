@@ -241,6 +241,12 @@ src/gs2/stamina/request.py
 src/gs2/stamina/rest.py
 src/gs2/stamina/result.py
 src/gs2/stamina/web_socket.py
+src/gs2/state_machine/__init__.py
+src/gs2/state_machine/model.py
+src/gs2/state_machine/request.py
+src/gs2/state_machine/rest.py
+src/gs2/state_machine/result.py
+src/gs2/state_machine/web_socket.py
 src/gs2/version/__init__.py
 src/gs2/version/model.py
 src/gs2/version/request.py
