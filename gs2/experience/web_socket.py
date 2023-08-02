@@ -115,6 +115,8 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.experience_cap_script_id is not None:
             body["experienceCapScriptId"] = request.experience_cap_script_id
         if request.change_experience_script is not None:
@@ -342,6 +344,8 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.experience_cap_script_id is not None:
             body["experienceCapScriptId"] = request.experience_cap_script_id
         if request.change_experience_script is not None:
@@ -585,6 +589,11 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["maxRankCap"] = request.max_rank_cap
         if request.rank_threshold_name is not None:
             body["rankThresholdName"] = request.rank_threshold_name
+        if request.acquire_action_rates is not None:
+            body["acquireActionRates"] = [
+                item.to_dict()
+                for item in request.acquire_action_rates
+            ]
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -743,6 +752,11 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["maxRankCap"] = request.max_rank_cap
         if request.rank_threshold_name is not None:
             body["rankThresholdName"] = request.rank_threshold_name
+        if request.acquire_action_rates is not None:
+            body["acquireActionRates"] = [
+                item.to_dict()
+                for item in request.acquire_action_rates
+            ]
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2770,6 +2784,165 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> SetRankCapByStampSheetResult:
         async_result = []
         self._set_rank_cap_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _multiply_acquire_actions_by_user_id(
+        self,
+        request: MultiplyAcquireActionsByUserIdRequest,
+        callback: Callable[[AsyncResult[MultiplyAcquireActionsByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='multiplyAcquireActionsByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.experience_name is not None:
+            body["experienceName"] = request.experience_name
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.rate_name is not None:
+            body["rateName"] = request.rate_name
+        if request.acquire_actions is not None:
+            body["acquireActions"] = [
+                item.to_dict()
+                for item in request.acquire_actions
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=MultiplyAcquireActionsByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def multiply_acquire_actions_by_user_id(
+        self,
+        request: MultiplyAcquireActionsByUserIdRequest,
+    ) -> MultiplyAcquireActionsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._multiply_acquire_actions_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def multiply_acquire_actions_by_user_id_async(
+        self,
+        request: MultiplyAcquireActionsByUserIdRequest,
+    ) -> MultiplyAcquireActionsByUserIdResult:
+        async_result = []
+        self._multiply_acquire_actions_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _multiply_acquire_actions_by_stamp_sheet(
+        self,
+        request: MultiplyAcquireActionsByStampSheetRequest,
+        callback: Callable[[AsyncResult[MultiplyAcquireActionsByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='multiplyAcquireActionsByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=MultiplyAcquireActionsByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def multiply_acquire_actions_by_stamp_sheet(
+        self,
+        request: MultiplyAcquireActionsByStampSheetRequest,
+    ) -> MultiplyAcquireActionsByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._multiply_acquire_actions_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def multiply_acquire_actions_by_stamp_sheet_async(
+        self,
+        request: MultiplyAcquireActionsByStampSheetRequest,
+    ) -> MultiplyAcquireActionsByStampSheetResult:
+        async_result = []
+        self._multiply_acquire_actions_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
         )

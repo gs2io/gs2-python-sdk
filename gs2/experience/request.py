@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     experience_cap_script_id: str = None
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
@@ -78,6 +79,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_experience_cap_script_id(self, experience_cap_script_id: str) -> CreateNamespaceRequest:
@@ -125,6 +130,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_experience_cap_script_id(data.get('experienceCapScriptId'))\
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
@@ -136,6 +142,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "experienceCapScriptId": self.experience_cap_script_id,
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,
@@ -222,6 +229,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     experience_cap_script_id: str = None
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
@@ -235,6 +243,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_experience_cap_script_id(self, experience_cap_script_id: str) -> UpdateNamespaceRequest:
@@ -282,6 +294,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_experience_cap_script_id(data.get('experienceCapScriptId'))\
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
@@ -293,6 +306,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "experienceCapScriptId": self.experience_cap_script_id,
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,
@@ -399,6 +413,7 @@ class CreateExperienceModelMasterRequest(core.Gs2Request):
     default_rank_cap: int = None
     max_rank_cap: int = None
     rank_threshold_name: str = None
+    acquire_action_rates: List[AcquireActionRate] = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateExperienceModelMasterRequest:
         self.namespace_name = namespace_name
@@ -432,6 +447,10 @@ class CreateExperienceModelMasterRequest(core.Gs2Request):
         self.rank_threshold_name = rank_threshold_name
         return self
 
+    def with_acquire_action_rates(self, acquire_action_rates: List[AcquireActionRate]) -> CreateExperienceModelMasterRequest:
+        self.acquire_action_rates = acquire_action_rates
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -458,7 +477,11 @@ class CreateExperienceModelMasterRequest(core.Gs2Request):
             .with_default_experience(data.get('defaultExperience'))\
             .with_default_rank_cap(data.get('defaultRankCap'))\
             .with_max_rank_cap(data.get('maxRankCap'))\
-            .with_rank_threshold_name(data.get('rankThresholdName'))
+            .with_rank_threshold_name(data.get('rankThresholdName'))\
+            .with_acquire_action_rates([
+                AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
+                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -470,6 +493,10 @@ class CreateExperienceModelMasterRequest(core.Gs2Request):
             "defaultRankCap": self.default_rank_cap,
             "maxRankCap": self.max_rank_cap,
             "rankThresholdName": self.rank_threshold_name,
+            "acquireActionRates": [
+                self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
+                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+            ],
         }
 
 
@@ -527,6 +554,7 @@ class UpdateExperienceModelMasterRequest(core.Gs2Request):
     default_rank_cap: int = None
     max_rank_cap: int = None
     rank_threshold_name: str = None
+    acquire_action_rates: List[AcquireActionRate] = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateExperienceModelMasterRequest:
         self.namespace_name = namespace_name
@@ -560,6 +588,10 @@ class UpdateExperienceModelMasterRequest(core.Gs2Request):
         self.rank_threshold_name = rank_threshold_name
         return self
 
+    def with_acquire_action_rates(self, acquire_action_rates: List[AcquireActionRate]) -> UpdateExperienceModelMasterRequest:
+        self.acquire_action_rates = acquire_action_rates
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -586,7 +618,11 @@ class UpdateExperienceModelMasterRequest(core.Gs2Request):
             .with_default_experience(data.get('defaultExperience'))\
             .with_default_rank_cap(data.get('defaultRankCap'))\
             .with_max_rank_cap(data.get('maxRankCap'))\
-            .with_rank_threshold_name(data.get('rankThresholdName'))
+            .with_rank_threshold_name(data.get('rankThresholdName'))\
+            .with_acquire_action_rates([
+                AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
+                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -598,6 +634,10 @@ class UpdateExperienceModelMasterRequest(core.Gs2Request):
             "defaultRankCap": self.default_rank_cap,
             "maxRankCap": self.max_rank_cap,
             "rankThresholdName": self.rank_threshold_name,
+            "acquireActionRates": [
+                self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
+                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+            ],
         }
 
 
@@ -1984,6 +2024,131 @@ class SetRankCapByStampSheetRequest(core.Gs2Request):
         if data is None:
             return None
         return SetRankCapByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    experience_name: str = None
+    property_id: str = None
+    rate_name: str = None
+    acquire_actions: List[AcquireAction] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> MultiplyAcquireActionsByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> MultiplyAcquireActionsByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_experience_name(self, experience_name: str) -> MultiplyAcquireActionsByUserIdRequest:
+        self.experience_name = experience_name
+        return self
+
+    def with_property_id(self, property_id: str) -> MultiplyAcquireActionsByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_rate_name(self, rate_name: str) -> MultiplyAcquireActionsByUserIdRequest:
+        self.rate_name = rate_name
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> MultiplyAcquireActionsByUserIdRequest:
+        self.acquire_actions = acquire_actions
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> MultiplyAcquireActionsByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[MultiplyAcquireActionsByUserIdRequest]:
+        if data is None:
+            return None
+        return MultiplyAcquireActionsByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_experience_name(data.get('experienceName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_rate_name(data.get('rateName'))\
+            .with_acquire_actions([
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "experienceName": self.experience_name,
+            "propertyId": self.property_id,
+            "rateName": self.rate_name,
+            "acquireActions": [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+        }
+
+
+class MultiplyAcquireActionsByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> MultiplyAcquireActionsByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> MultiplyAcquireActionsByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[MultiplyAcquireActionsByStampSheetRequest]:
+        if data is None:
+            return None
+        return MultiplyAcquireActionsByStampSheetRequest()\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_key_id(data.get('keyId'))
 

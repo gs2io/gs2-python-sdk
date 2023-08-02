@@ -19,6 +19,61 @@ from typing import *
 from gs2 import core
 
 
+class TransactionSetting(core.Gs2Model):
+    enable_auto_run: bool = None
+    distributor_namespace_id: str = None
+    key_id: str = None
+    queue_namespace_id: str = None
+
+    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
+        self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
+        self.distributor_namespace_id = distributor_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> TransactionSetting:
+        self.key_id = key_id
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TransactionSetting]:
+        if data is None:
+            return None
+        return TransactionSetting()\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "enableAutoRun": self.enable_auto_run,
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "keyId": self.key_id,
+            "queueNamespaceId": self.queue_namespace_id,
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -181,6 +236,47 @@ class GitHubCheckoutSetting(core.Gs2Model):
             "commitHash": self.commit_hash,
             "branchName": self.branch_name,
             "tagName": self.tag_name,
+        }
+
+
+class AcquireAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> AcquireAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> AcquireAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireAction]:
+        if data is None:
+            return None
+        return AcquireAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
         }
 
 
@@ -444,6 +540,53 @@ class CurrentExperienceMaster(core.Gs2Model):
         }
 
 
+class AcquireActionRate(core.Gs2Model):
+    name: str = None
+    rates: List[float] = None
+
+    def with_name(self, name: str) -> AcquireActionRate:
+        self.name = name
+        return self
+
+    def with_rates(self, rates: List[float]) -> AcquireActionRate:
+        self.rates = rates
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireActionRate]:
+        if data is None:
+            return None
+        return AcquireActionRate()\
+            .with_name(data.get('name'))\
+            .with_rates([
+                data.get('rates')[i]
+                for i in range(len(data.get('rates')) if data.get('rates') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "rates": [
+                self.rates[i]
+                for i in range(len(self.rates) if self.rates else 0)
+            ],
+        }
+
+
 class Threshold(core.Gs2Model):
     metadata: str = None
     values: List[int] = None
@@ -636,6 +779,7 @@ class ExperienceModel(core.Gs2Model):
     default_rank_cap: int = None
     max_rank_cap: int = None
     rank_threshold: Threshold = None
+    acquire_action_rates: List[AcquireActionRate] = None
 
     def with_experience_model_id(self, experience_model_id: str) -> ExperienceModel:
         self.experience_model_id = experience_model_id
@@ -663,6 +807,10 @@ class ExperienceModel(core.Gs2Model):
 
     def with_rank_threshold(self, rank_threshold: Threshold) -> ExperienceModel:
         self.rank_threshold = rank_threshold
+        return self
+
+    def with_acquire_action_rates(self, acquire_action_rates: List[AcquireActionRate]) -> ExperienceModel:
+        self.acquire_action_rates = acquire_action_rates
         return self
 
     @classmethod
@@ -745,7 +893,11 @@ class ExperienceModel(core.Gs2Model):
             .with_default_experience(data.get('defaultExperience'))\
             .with_default_rank_cap(data.get('defaultRankCap'))\
             .with_max_rank_cap(data.get('maxRankCap'))\
-            .with_rank_threshold(Threshold.from_dict(data.get('rankThreshold')))
+            .with_rank_threshold(Threshold.from_dict(data.get('rankThreshold')))\
+            .with_acquire_action_rates([
+                AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
+                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -756,6 +908,10 @@ class ExperienceModel(core.Gs2Model):
             "defaultRankCap": self.default_rank_cap,
             "maxRankCap": self.max_rank_cap,
             "rankThreshold": self.rank_threshold.to_dict() if self.rank_threshold else None,
+            "acquireActionRates": [
+                self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
+                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+            ],
         }
 
 
@@ -768,6 +924,7 @@ class ExperienceModelMaster(core.Gs2Model):
     default_rank_cap: int = None
     max_rank_cap: int = None
     rank_threshold_name: str = None
+    acquire_action_rates: List[AcquireActionRate] = None
     created_at: int = None
     updated_at: int = None
 
@@ -801,6 +958,10 @@ class ExperienceModelMaster(core.Gs2Model):
 
     def with_rank_threshold_name(self, rank_threshold_name: str) -> ExperienceModelMaster:
         self.rank_threshold_name = rank_threshold_name
+        return self
+
+    def with_acquire_action_rates(self, acquire_action_rates: List[AcquireActionRate]) -> ExperienceModelMaster:
+        self.acquire_action_rates = acquire_action_rates
         return self
 
     def with_created_at(self, created_at: int) -> ExperienceModelMaster:
@@ -893,6 +1054,10 @@ class ExperienceModelMaster(core.Gs2Model):
             .with_default_rank_cap(data.get('defaultRankCap'))\
             .with_max_rank_cap(data.get('maxRankCap'))\
             .with_rank_threshold_name(data.get('rankThresholdName'))\
+            .with_acquire_action_rates([
+                AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
+                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+            ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
 
@@ -906,6 +1071,10 @@ class ExperienceModelMaster(core.Gs2Model):
             "defaultRankCap": self.default_rank_cap,
             "maxRankCap": self.max_rank_cap,
             "rankThresholdName": self.rank_threshold_name,
+            "acquireActionRates": [
+                self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
+                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+            ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }
@@ -915,6 +1084,7 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     experience_cap_script_id: str = None
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
@@ -934,6 +1104,10 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_experience_cap_script_id(self, experience_cap_script_id: str) -> Namespace:
@@ -1033,6 +1207,7 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_experience_cap_script_id(data.get('experienceCapScriptId'))\
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
@@ -1047,6 +1222,7 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "experienceCapScriptId": self.experience_cap_script_id,
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,
