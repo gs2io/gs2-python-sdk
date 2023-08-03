@@ -2357,6 +2357,160 @@ class Gs2EnchantRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _set_balance_parameter_status_by_user_id(
+        self,
+        request: SetBalanceParameterStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[SetBalanceParameterStatusByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enchant',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/status/balance/{parameterName}/{propertyId}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            parameterName=request.parameter_name if request.parameter_name is not None and request.parameter_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.parameter_values is not None:
+            body["parameterValues"] = [
+                item.to_dict()
+                for item in request.parameter_values
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=SetBalanceParameterStatusByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_balance_parameter_status_by_user_id(
+        self,
+        request: SetBalanceParameterStatusByUserIdRequest,
+    ) -> SetBalanceParameterStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._set_balance_parameter_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_balance_parameter_status_by_user_id_async(
+        self,
+        request: SetBalanceParameterStatusByUserIdRequest,
+    ) -> SetBalanceParameterStatusByUserIdResult:
+        async_result = []
+        self._set_balance_parameter_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _set_balance_parameter_status_by_stamp_sheet(
+        self,
+        request: SetBalanceParameterStatusByStampSheetRequest,
+        callback: Callable[[AsyncResult[SetBalanceParameterStatusByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enchant',
+            region=self.session.region,
+        ) + "/stamp/balance/set"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SetBalanceParameterStatusByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_balance_parameter_status_by_stamp_sheet(
+        self,
+        request: SetBalanceParameterStatusByStampSheetRequest,
+    ) -> SetBalanceParameterStatusByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._set_balance_parameter_status_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_balance_parameter_status_by_stamp_sheet_async(
+        self,
+        request: SetBalanceParameterStatusByStampSheetRequest,
+    ) -> SetBalanceParameterStatusByStampSheetResult:
+        async_result = []
+        self._set_balance_parameter_status_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_rarity_parameter_statuses(
         self,
         request: DescribeRarityParameterStatusesRequest,
@@ -3266,6 +3420,160 @@ class Gs2EnchantRestClient(rest.AbstractGs2RestClient):
     ) -> VerifyRarityParameterStatusByStampTaskResult:
         async_result = []
         self._verify_rarity_parameter_status_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _set_rarity_parameter_status_by_user_id(
+        self,
+        request: SetRarityParameterStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[SetRarityParameterStatusByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enchant',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/status/rarity/{parameterName}/{propertyId}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            parameterName=request.parameter_name if request.parameter_name is not None and request.parameter_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.parameter_values is not None:
+            body["parameterValues"] = [
+                item.to_dict()
+                for item in request.parameter_values
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=SetRarityParameterStatusByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_rarity_parameter_status_by_user_id(
+        self,
+        request: SetRarityParameterStatusByUserIdRequest,
+    ) -> SetRarityParameterStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._set_rarity_parameter_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_rarity_parameter_status_by_user_id_async(
+        self,
+        request: SetRarityParameterStatusByUserIdRequest,
+    ) -> SetRarityParameterStatusByUserIdResult:
+        async_result = []
+        self._set_rarity_parameter_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _set_rarity_parameter_status_by_stamp_sheet(
+        self,
+        request: SetRarityParameterStatusByStampSheetRequest,
+        callback: Callable[[AsyncResult[SetRarityParameterStatusByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enchant',
+            region=self.session.region,
+        ) + "/stamp/rarity/parameter/set"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SetRarityParameterStatusByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_rarity_parameter_status_by_stamp_sheet(
+        self,
+        request: SetRarityParameterStatusByStampSheetRequest,
+    ) -> SetRarityParameterStatusByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._set_rarity_parameter_status_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_rarity_parameter_status_by_stamp_sheet_async(
+        self,
+        request: SetRarityParameterStatusByStampSheetRequest,
+    ) -> SetRarityParameterStatusByStampSheetResult:
+        async_result = []
+        self._set_rarity_parameter_status_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

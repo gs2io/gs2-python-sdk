@@ -1640,6 +1640,124 @@ class ReDrawBalanceParameterStatusByStampSheetRequest(core.Gs2Request):
         }
 
 
+class SetBalanceParameterStatusByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    parameter_name: str = None
+    property_id: str = None
+    parameter_values: List[BalanceParameterValue] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetBalanceParameterStatusByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SetBalanceParameterStatusByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_parameter_name(self, parameter_name: str) -> SetBalanceParameterStatusByUserIdRequest:
+        self.parameter_name = parameter_name
+        return self
+
+    def with_property_id(self, property_id: str) -> SetBalanceParameterStatusByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_parameter_values(self, parameter_values: List[BalanceParameterValue]) -> SetBalanceParameterStatusByUserIdRequest:
+        self.parameter_values = parameter_values
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetBalanceParameterStatusByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetBalanceParameterStatusByUserIdRequest]:
+        if data is None:
+            return None
+        return SetBalanceParameterStatusByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_parameter_name(data.get('parameterName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_parameter_values([
+                BalanceParameterValue.from_dict(data.get('parameterValues')[i])
+                for i in range(len(data.get('parameterValues')) if data.get('parameterValues') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "parameterName": self.parameter_name,
+            "propertyId": self.property_id,
+            "parameterValues": [
+                self.parameter_values[i].to_dict() if self.parameter_values[i] else None
+                for i in range(len(self.parameter_values) if self.parameter_values else 0)
+            ],
+        }
+
+
+class SetBalanceParameterStatusByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> SetBalanceParameterStatusByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> SetBalanceParameterStatusByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetBalanceParameterStatusByStampSheetRequest]:
+        if data is None:
+            return None
+        return SetBalanceParameterStatusByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
 class DescribeRarityParameterStatusesRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2379,5 +2497,123 @@ class VerifyRarityParameterStatusByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class SetRarityParameterStatusByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    parameter_name: str = None
+    property_id: str = None
+    parameter_values: List[RarityParameterValue] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetRarityParameterStatusByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SetRarityParameterStatusByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_parameter_name(self, parameter_name: str) -> SetRarityParameterStatusByUserIdRequest:
+        self.parameter_name = parameter_name
+        return self
+
+    def with_property_id(self, property_id: str) -> SetRarityParameterStatusByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_parameter_values(self, parameter_values: List[RarityParameterValue]) -> SetRarityParameterStatusByUserIdRequest:
+        self.parameter_values = parameter_values
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetRarityParameterStatusByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetRarityParameterStatusByUserIdRequest]:
+        if data is None:
+            return None
+        return SetRarityParameterStatusByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_parameter_name(data.get('parameterName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_parameter_values([
+                RarityParameterValue.from_dict(data.get('parameterValues')[i])
+                for i in range(len(data.get('parameterValues')) if data.get('parameterValues') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "parameterName": self.parameter_name,
+            "propertyId": self.property_id,
+            "parameterValues": [
+                self.parameter_values[i].to_dict() if self.parameter_values[i] else None
+                for i in range(len(self.parameter_values) if self.parameter_values else 0)
+            ],
+        }
+
+
+class SetRarityParameterStatusByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> SetRarityParameterStatusByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> SetRarityParameterStatusByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetRarityParameterStatusByStampSheetRequest]:
+        if data is None:
+            return None
+        return SetRarityParameterStatusByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }

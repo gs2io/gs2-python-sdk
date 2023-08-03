@@ -1148,6 +1148,74 @@ class ReDrawBalanceParameterStatusByStampSheetResult(core.Gs2Result):
         }
 
 
+class SetBalanceParameterStatusByUserIdResult(core.Gs2Result):
+    item: BalanceParameterStatus = None
+
+    def with_item(self, item: BalanceParameterStatus) -> SetBalanceParameterStatusByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetBalanceParameterStatusByUserIdResult]:
+        if data is None:
+            return None
+        return SetBalanceParameterStatusByUserIdResult()\
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class SetBalanceParameterStatusByStampSheetResult(core.Gs2Result):
+    item: BalanceParameterStatus = None
+
+    def with_item(self, item: BalanceParameterStatus) -> SetBalanceParameterStatusByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetBalanceParameterStatusByStampSheetResult]:
+        if data is None:
+            return None
+        return SetBalanceParameterStatusByStampSheetResult()\
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DescribeRarityParameterStatusesResult(core.Gs2Result):
     items: List[RarityParameterStatus] = None
     next_page_token: str = None
@@ -1586,4 +1654,72 @@ class VerifyRarityParameterStatusByStampTaskResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
+        }
+
+
+class SetRarityParameterStatusByUserIdResult(core.Gs2Result):
+    item: RarityParameterStatus = None
+
+    def with_item(self, item: RarityParameterStatus) -> SetRarityParameterStatusByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetRarityParameterStatusByUserIdResult]:
+        if data is None:
+            return None
+        return SetRarityParameterStatusByUserIdResult()\
+            .with_item(RarityParameterStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class SetRarityParameterStatusByStampSheetResult(core.Gs2Result):
+    item: RarityParameterStatus = None
+
+    def with_item(self, item: RarityParameterStatus) -> SetRarityParameterStatusByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetRarityParameterStatusByStampSheetResult]:
+        if data is None:
+            return None
+        return SetRarityParameterStatusByStampSheetResult()\
+            .with_item(RarityParameterStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
         }
