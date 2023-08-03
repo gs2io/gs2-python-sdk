@@ -3296,6 +3296,8 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.counter_name is not None:
             body["counterName"] = request.counter_name
+        if request.target_reset_type is not None:
+            body["targetResetType"] = request.target_reset_type
         if request.target_value is not None:
             body["targetValue"] = request.target_value
         if request.complete_acquire_actions is not None:
@@ -3459,6 +3461,8 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.counter_name is not None:
             body["counterName"] = request.counter_name
+        if request.target_reset_type is not None:
+            body["targetResetType"] = request.target_reset_type
         if request.target_value is not None:
             body["targetValue"] = request.target_value
         if request.complete_acquire_actions is not None:
