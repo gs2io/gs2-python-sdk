@@ -388,6 +388,47 @@ class CurrentRankingMaster(core.Gs2Model):
         }
 
 
+class Scope(core.Gs2Model):
+    name: str = None
+    target_days: int = None
+
+    def with_name(self, name: str) -> Scope:
+        self.name = name
+        return self
+
+    def with_target_days(self, target_days: int) -> Scope:
+        self.target_days = target_days
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Scope]:
+        if data is None:
+            return None
+        return Scope()\
+            .with_name(data.get('name'))\
+            .with_target_days(data.get('targetDays'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "targetDays": self.target_days,
+        }
+
+
 class Ranking(core.Gs2Model):
     rank: int = None
     index: int = None
@@ -800,6 +841,7 @@ class CategoryModelMaster(core.Gs2Model):
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
+    additional_scopes: List[Scope] = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
     ignore_user_ids: List[str] = None
@@ -857,6 +899,10 @@ class CategoryModelMaster(core.Gs2Model):
 
     def with_calculate_interval_minutes(self, calculate_interval_minutes: int) -> CategoryModelMaster:
         self.calculate_interval_minutes = calculate_interval_minutes
+        return self
+
+    def with_additional_scopes(self, additional_scopes: List[Scope]) -> CategoryModelMaster:
+        self.additional_scopes = additional_scopes
         return self
 
     def with_entry_period_event_id(self, entry_period_event_id: str) -> CategoryModelMaster:
@@ -970,6 +1016,10 @@ class CategoryModelMaster(core.Gs2Model):
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
+            .with_additional_scopes([
+                Scope.from_dict(data.get('additionalScopes')[i])
+                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+            ])\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_ignore_user_ids([
@@ -995,6 +1045,10 @@ class CategoryModelMaster(core.Gs2Model):
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
+            "additionalScopes": [
+                self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
+                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+            ],
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
             "ignoreUserIds": [
@@ -1020,6 +1074,7 @@ class CategoryModel(core.Gs2Model):
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
+    additional_scopes: List[Scope] = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
     ignore_user_ids: List[str] = None
@@ -1071,6 +1126,10 @@ class CategoryModel(core.Gs2Model):
 
     def with_calculate_interval_minutes(self, calculate_interval_minutes: int) -> CategoryModel:
         self.calculate_interval_minutes = calculate_interval_minutes
+        return self
+
+    def with_additional_scopes(self, additional_scopes: List[Scope]) -> CategoryModel:
+        self.additional_scopes = additional_scopes
         return self
 
     def with_entry_period_event_id(self, entry_period_event_id: str) -> CategoryModel:
@@ -1175,6 +1234,10 @@ class CategoryModel(core.Gs2Model):
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
+            .with_additional_scopes([
+                Scope.from_dict(data.get('additionalScopes')[i])
+                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+            ])\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_ignore_user_ids([
@@ -1197,6 +1260,10 @@ class CategoryModel(core.Gs2Model):
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
+            "additionalScopes": [
+                self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
+                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+            ],
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
             "ignoreUserIds": [

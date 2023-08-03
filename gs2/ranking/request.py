@@ -413,6 +413,7 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
+    additional_scopes: List[Scope] = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
     ignore_user_ids: List[str] = None
@@ -470,6 +471,10 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
         self.calculate_interval_minutes = calculate_interval_minutes
         return self
 
+    def with_additional_scopes(self, additional_scopes: List[Scope]) -> CreateCategoryModelMasterRequest:
+        self.additional_scopes = additional_scopes
+        return self
+
     def with_entry_period_event_id(self, entry_period_event_id: str) -> CreateCategoryModelMasterRequest:
         self.entry_period_event_id = entry_period_event_id
         return self
@@ -518,6 +523,10 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
+            .with_additional_scopes([
+                Scope.from_dict(data.get('additionalScopes')[i])
+                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+            ])\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_ignore_user_ids([
@@ -541,6 +550,10 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
+            "additionalScopes": [
+                self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
+                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+            ],
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
             "ignoreUserIds": [
@@ -610,6 +623,7 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
+    additional_scopes: List[Scope] = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
     ignore_user_ids: List[str] = None
@@ -667,6 +681,10 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
         self.calculate_interval_minutes = calculate_interval_minutes
         return self
 
+    def with_additional_scopes(self, additional_scopes: List[Scope]) -> UpdateCategoryModelMasterRequest:
+        self.additional_scopes = additional_scopes
+        return self
+
     def with_entry_period_event_id(self, entry_period_event_id: str) -> UpdateCategoryModelMasterRequest:
         self.entry_period_event_id = entry_period_event_id
         return self
@@ -715,6 +733,10 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
+            .with_additional_scopes([
+                Scope.from_dict(data.get('additionalScopes')[i])
+                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+            ])\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_ignore_user_ids([
@@ -738,6 +760,10 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
+            "additionalScopes": [
+                self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
+                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+            ],
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
             "ignoreUserIds": [
@@ -1191,6 +1217,7 @@ class DescribeRankingsRequest(core.Gs2Request):
     namespace_name: str = None
     category_name: str = None
     access_token: str = None
+    additional_scope_name: str = None
     start_index: int = None
     page_token: str = None
     limit: int = None
@@ -1205,6 +1232,10 @@ class DescribeRankingsRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DescribeRankingsRequest:
         self.access_token = access_token
+        return self
+
+    def with_additional_scope_name(self, additional_scope_name: str) -> DescribeRankingsRequest:
+        self.additional_scope_name = additional_scope_name
         return self
 
     def with_start_index(self, start_index: int) -> DescribeRankingsRequest:
@@ -1241,6 +1272,7 @@ class DescribeRankingsRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_category_name(data.get('categoryName'))\
             .with_access_token(data.get('accessToken'))\
+            .with_additional_scope_name(data.get('additionalScopeName'))\
             .with_start_index(data.get('startIndex'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
@@ -1250,6 +1282,7 @@ class DescribeRankingsRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "categoryName": self.category_name,
             "accessToken": self.access_token,
+            "additionalScopeName": self.additional_scope_name,
             "startIndex": self.start_index,
             "pageToken": self.page_token,
             "limit": self.limit,
@@ -1262,6 +1295,7 @@ class DescribeRankingssByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     category_name: str = None
     user_id: str = None
+    additional_scope_name: str = None
     start_index: int = None
     page_token: str = None
     limit: int = None
@@ -1276,6 +1310,10 @@ class DescribeRankingssByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DescribeRankingssByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_additional_scope_name(self, additional_scope_name: str) -> DescribeRankingssByUserIdRequest:
+        self.additional_scope_name = additional_scope_name
         return self
 
     def with_start_index(self, start_index: int) -> DescribeRankingssByUserIdRequest:
@@ -1312,6 +1350,7 @@ class DescribeRankingssByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_category_name(data.get('categoryName'))\
             .with_user_id(data.get('userId'))\
+            .with_additional_scope_name(data.get('additionalScopeName'))\
             .with_start_index(data.get('startIndex'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
@@ -1321,6 +1360,7 @@ class DescribeRankingssByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "categoryName": self.category_name,
             "userId": self.user_id,
+            "additionalScopeName": self.additional_scope_name,
             "startIndex": self.start_index,
             "pageToken": self.page_token,
             "limit": self.limit,
@@ -1332,6 +1372,7 @@ class DescribeNearRankingsRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     category_name: str = None
+    additional_scope_name: str = None
     score: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeNearRankingsRequest:
@@ -1340,6 +1381,10 @@ class DescribeNearRankingsRequest(core.Gs2Request):
 
     def with_category_name(self, category_name: str) -> DescribeNearRankingsRequest:
         self.category_name = category_name
+        return self
+
+    def with_additional_scope_name(self, additional_scope_name: str) -> DescribeNearRankingsRequest:
+        self.additional_scope_name = additional_scope_name
         return self
 
     def with_score(self, score: int) -> DescribeNearRankingsRequest:
@@ -1367,12 +1412,14 @@ class DescribeNearRankingsRequest(core.Gs2Request):
         return DescribeNearRankingsRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_category_name(data.get('categoryName'))\
+            .with_additional_scope_name(data.get('additionalScopeName'))\
             .with_score(data.get('score'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "categoryName": self.category_name,
+            "additionalScopeName": self.additional_scope_name,
             "score": self.score,
         }
 
@@ -1385,6 +1432,7 @@ class GetRankingRequest(core.Gs2Request):
     access_token: str = None
     scorer_user_id: str = None
     unique_id: str = None
+    additional_scope_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetRankingRequest:
         self.namespace_name = namespace_name
@@ -1404,6 +1452,10 @@ class GetRankingRequest(core.Gs2Request):
 
     def with_unique_id(self, unique_id: str) -> GetRankingRequest:
         self.unique_id = unique_id
+        return self
+
+    def with_additional_scope_name(self, additional_scope_name: str) -> GetRankingRequest:
+        self.additional_scope_name = additional_scope_name
         return self
 
     def get(self, key, default=None):
@@ -1429,7 +1481,8 @@ class GetRankingRequest(core.Gs2Request):
             .with_category_name(data.get('categoryName'))\
             .with_access_token(data.get('accessToken'))\
             .with_scorer_user_id(data.get('scorerUserId'))\
-            .with_unique_id(data.get('uniqueId'))
+            .with_unique_id(data.get('uniqueId'))\
+            .with_additional_scope_name(data.get('additionalScopeName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1438,6 +1491,7 @@ class GetRankingRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "scorerUserId": self.scorer_user_id,
             "uniqueId": self.unique_id,
+            "additionalScopeName": self.additional_scope_name,
         }
 
 
@@ -1449,6 +1503,7 @@ class GetRankingByUserIdRequest(core.Gs2Request):
     user_id: str = None
     scorer_user_id: str = None
     unique_id: str = None
+    additional_scope_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetRankingByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1468,6 +1523,10 @@ class GetRankingByUserIdRequest(core.Gs2Request):
 
     def with_unique_id(self, unique_id: str) -> GetRankingByUserIdRequest:
         self.unique_id = unique_id
+        return self
+
+    def with_additional_scope_name(self, additional_scope_name: str) -> GetRankingByUserIdRequest:
+        self.additional_scope_name = additional_scope_name
         return self
 
     def get(self, key, default=None):
@@ -1493,7 +1552,8 @@ class GetRankingByUserIdRequest(core.Gs2Request):
             .with_category_name(data.get('categoryName'))\
             .with_user_id(data.get('userId'))\
             .with_scorer_user_id(data.get('scorerUserId'))\
-            .with_unique_id(data.get('uniqueId'))
+            .with_unique_id(data.get('uniqueId'))\
+            .with_additional_scope_name(data.get('additionalScopeName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1502,6 +1562,7 @@ class GetRankingByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "scorerUserId": self.scorer_user_id,
             "uniqueId": self.unique_id,
+            "additionalScopeName": self.additional_scope_name,
         }
 
 
@@ -1648,6 +1709,7 @@ class CalcRankingRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     category_name: str = None
+    additional_scope_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CalcRankingRequest:
         self.namespace_name = namespace_name
@@ -1655,6 +1717,10 @@ class CalcRankingRequest(core.Gs2Request):
 
     def with_category_name(self, category_name: str) -> CalcRankingRequest:
         self.category_name = category_name
+        return self
+
+    def with_additional_scope_name(self, additional_scope_name: str) -> CalcRankingRequest:
+        self.additional_scope_name = additional_scope_name
         return self
 
     def get(self, key, default=None):
@@ -1677,12 +1743,14 @@ class CalcRankingRequest(core.Gs2Request):
             return None
         return CalcRankingRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_category_name(data.get('categoryName'))
+            .with_category_name(data.get('categoryName'))\
+            .with_additional_scope_name(data.get('additionalScopeName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "categoryName": self.category_name,
+            "additionalScopeName": self.additional_scope_name,
         }
 
 

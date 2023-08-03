@@ -716,6 +716,11 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
             body["calculateFixedTimingMinute"] = request.calculate_fixed_timing_minute
         if request.calculate_interval_minutes is not None:
             body["calculateIntervalMinutes"] = request.calculate_interval_minutes
+        if request.additional_scopes is not None:
+            body["additionalScopes"] = [
+                item.to_dict()
+                for item in request.additional_scopes
+            ]
         if request.entry_period_event_id is not None:
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
@@ -893,6 +898,11 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
             body["calculateFixedTimingMinute"] = request.calculate_fixed_timing_minute
         if request.calculate_interval_minutes is not None:
             body["calculateIntervalMinutes"] = request.calculate_interval_minutes
+        if request.additional_scopes is not None:
+            body["additionalScopes"] = [
+                item.to_dict()
+                for item in request.additional_scopes
+            ]
         if request.entry_period_event_id is not None:
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
@@ -1509,6 +1519,8 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.additional_scope_name is not None:
+            query_strings["additionalScopeName"] = request.additional_scope_name
         if request.start_index is not None:
             query_strings["startIndex"] = request.start_index
         if request.page_token is not None:
@@ -1590,6 +1602,8 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.additional_scope_name is not None:
+            query_strings["additionalScopeName"] = request.additional_scope_name
         if request.start_index is not None:
             query_strings["startIndex"] = request.start_index
         if request.page_token is not None:
@@ -1668,6 +1682,8 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.additional_scope_name is not None:
+            query_strings["additionalScopeName"] = request.additional_scope_name
         if request.score is not None:
             query_strings["score"] = request.score
 
@@ -1744,6 +1760,8 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.additional_scope_name is not None:
+            query_strings["additionalScopeName"] = request.additional_scope_name
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1821,6 +1839,8 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.additional_scope_name is not None:
+            query_strings["additionalScopeName"] = request.additional_scope_name
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2052,6 +2072,8 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.additional_scope_name is not None:
+            body["additionalScopeName"] = request.additional_scope_name
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

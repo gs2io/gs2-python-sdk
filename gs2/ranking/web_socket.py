@@ -719,6 +719,11 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["calculateFixedTimingMinute"] = request.calculate_fixed_timing_minute
         if request.calculate_interval_minutes is not None:
             body["calculateIntervalMinutes"] = request.calculate_interval_minutes
+        if request.additional_scopes is not None:
+            body["additionalScopes"] = [
+                item.to_dict()
+                for item in request.additional_scopes
+            ]
         if request.entry_period_event_id is not None:
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
@@ -898,6 +903,11 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["calculateFixedTimingMinute"] = request.calculate_fixed_timing_minute
         if request.calculate_interval_minutes is not None:
             body["calculateIntervalMinutes"] = request.calculate_interval_minutes
+        if request.additional_scopes is not None:
+            body["additionalScopes"] = [
+                item.to_dict()
+                for item in request.additional_scopes
+            ]
         if request.entry_period_event_id is not None:
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
@@ -1541,6 +1551,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["categoryName"] = request.category_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.additional_scope_name is not None:
+            body["additionalScopeName"] = request.additional_scope_name
         if request.start_index is not None:
             body["startIndex"] = request.start_index
         if request.page_token is not None:
@@ -1624,6 +1636,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["categoryName"] = request.category_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.additional_scope_name is not None:
+            body["additionalScopeName"] = request.additional_scope_name
         if request.start_index is not None:
             body["startIndex"] = request.start_index
         if request.page_token is not None:
@@ -1703,6 +1717,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.category_name is not None:
             body["categoryName"] = request.category_name
+        if request.additional_scope_name is not None:
+            body["additionalScopeName"] = request.additional_scope_name
         if request.score is not None:
             body["score"] = request.score
 
@@ -1784,6 +1800,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["scorerUserId"] = request.scorer_user_id
         if request.unique_id is not None:
             body["uniqueId"] = request.unique_id
+        if request.additional_scope_name is not None:
+            body["additionalScopeName"] = request.additional_scope_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1865,6 +1883,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["scorerUserId"] = request.scorer_user_id
         if request.unique_id is not None:
             body["uniqueId"] = request.unique_id
+        if request.additional_scope_name is not None:
+            body["additionalScopeName"] = request.additional_scope_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2102,6 +2122,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.category_name is not None:
             body["categoryName"] = request.category_name
+        if request.additional_scope_name is not None:
+            body["additionalScopeName"] = request.additional_scope_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
