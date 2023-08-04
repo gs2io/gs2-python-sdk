@@ -943,6 +943,7 @@ class CreateIncrementalRateModelMasterRequest(core.Gs2Request):
     coefficient_value: int = None
     calculate_script_id: str = None
     exchange_count_id: str = None
+    maximum_exchange_count: int = None
     acquire_actions: List[AcquireAction] = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateIncrementalRateModelMasterRequest:
@@ -985,6 +986,10 @@ class CreateIncrementalRateModelMasterRequest(core.Gs2Request):
         self.exchange_count_id = exchange_count_id
         return self
 
+    def with_maximum_exchange_count(self, maximum_exchange_count: int) -> CreateIncrementalRateModelMasterRequest:
+        self.maximum_exchange_count = maximum_exchange_count
+        return self
+
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> CreateIncrementalRateModelMasterRequest:
         self.acquire_actions = acquire_actions
         return self
@@ -1018,6 +1023,7 @@ class CreateIncrementalRateModelMasterRequest(core.Gs2Request):
             .with_coefficient_value(data.get('coefficientValue'))\
             .with_calculate_script_id(data.get('calculateScriptId'))\
             .with_exchange_count_id(data.get('exchangeCountId'))\
+            .with_maximum_exchange_count(data.get('maximumExchangeCount'))\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -1035,6 +1041,7 @@ class CreateIncrementalRateModelMasterRequest(core.Gs2Request):
             "coefficientValue": self.coefficient_value,
             "calculateScriptId": self.calculate_script_id,
             "exchangeCountId": self.exchange_count_id,
+            "maximumExchangeCount": self.maximum_exchange_count,
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
@@ -1098,6 +1105,7 @@ class UpdateIncrementalRateModelMasterRequest(core.Gs2Request):
     coefficient_value: int = None
     calculate_script_id: str = None
     exchange_count_id: str = None
+    maximum_exchange_count: int = None
     acquire_actions: List[AcquireAction] = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateIncrementalRateModelMasterRequest:
@@ -1140,6 +1148,10 @@ class UpdateIncrementalRateModelMasterRequest(core.Gs2Request):
         self.exchange_count_id = exchange_count_id
         return self
 
+    def with_maximum_exchange_count(self, maximum_exchange_count: int) -> UpdateIncrementalRateModelMasterRequest:
+        self.maximum_exchange_count = maximum_exchange_count
+        return self
+
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> UpdateIncrementalRateModelMasterRequest:
         self.acquire_actions = acquire_actions
         return self
@@ -1173,6 +1185,7 @@ class UpdateIncrementalRateModelMasterRequest(core.Gs2Request):
             .with_coefficient_value(data.get('coefficientValue'))\
             .with_calculate_script_id(data.get('calculateScriptId'))\
             .with_exchange_count_id(data.get('exchangeCountId'))\
+            .with_maximum_exchange_count(data.get('maximumExchangeCount'))\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -1190,6 +1203,7 @@ class UpdateIncrementalRateModelMasterRequest(core.Gs2Request):
             "coefficientValue": self.coefficient_value,
             "calculateScriptId": self.calculate_script_id,
             "exchangeCountId": self.exchange_count_id,
+            "maximumExchangeCount": self.maximum_exchange_count,
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)

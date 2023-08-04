@@ -1298,6 +1298,8 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["calculateScriptId"] = request.calculate_script_id
         if request.exchange_count_id is not None:
             body["exchangeCountId"] = request.exchange_count_id
+        if request.maximum_exchange_count is not None:
+            body["maximumExchangeCount"] = request.maximum_exchange_count
         if request.acquire_actions is not None:
             body["acquireActions"] = [
                 item.to_dict()
@@ -1465,6 +1467,8 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["calculateScriptId"] = request.calculate_script_id
         if request.exchange_count_id is not None:
             body["exchangeCountId"] = request.exchange_count_id
+        if request.maximum_exchange_count is not None:
+            body["maximumExchangeCount"] = request.maximum_exchange_count
         if request.acquire_actions is not None:
             body["acquireActions"] = [
                 item.to_dict()

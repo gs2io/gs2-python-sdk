@@ -593,6 +593,7 @@ class IncrementalRateModelMaster(core.Gs2Model):
     coefficient_value: int = None
     calculate_script_id: str = None
     exchange_count_id: str = None
+    maximum_exchange_count: int = None
     acquire_actions: List[AcquireAction] = None
     created_at: int = None
     updated_at: int = None
@@ -635,6 +636,10 @@ class IncrementalRateModelMaster(core.Gs2Model):
 
     def with_exchange_count_id(self, exchange_count_id: str) -> IncrementalRateModelMaster:
         self.exchange_count_id = exchange_count_id
+        return self
+
+    def with_maximum_exchange_count(self, maximum_exchange_count: int) -> IncrementalRateModelMaster:
+        self.maximum_exchange_count = maximum_exchange_count
         return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> IncrementalRateModelMaster:
@@ -733,6 +738,7 @@ class IncrementalRateModelMaster(core.Gs2Model):
             .with_coefficient_value(data.get('coefficientValue'))\
             .with_calculate_script_id(data.get('calculateScriptId'))\
             .with_exchange_count_id(data.get('exchangeCountId'))\
+            .with_maximum_exchange_count(data.get('maximumExchangeCount'))\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -752,6 +758,7 @@ class IncrementalRateModelMaster(core.Gs2Model):
             "coefficientValue": self.coefficient_value,
             "calculateScriptId": self.calculate_script_id,
             "exchangeCountId": self.exchange_count_id,
+            "maximumExchangeCount": self.maximum_exchange_count,
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
@@ -771,6 +778,7 @@ class IncrementalRateModel(core.Gs2Model):
     coefficient_value: int = None
     calculate_script_id: str = None
     exchange_count_id: str = None
+    maximum_exchange_count: int = None
     acquire_actions: List[AcquireAction] = None
 
     def with_incremental_rate_model_id(self, incremental_rate_model_id: str) -> IncrementalRateModel:
@@ -807,6 +815,10 @@ class IncrementalRateModel(core.Gs2Model):
 
     def with_exchange_count_id(self, exchange_count_id: str) -> IncrementalRateModel:
         self.exchange_count_id = exchange_count_id
+        return self
+
+    def with_maximum_exchange_count(self, maximum_exchange_count: int) -> IncrementalRateModel:
+        self.maximum_exchange_count = maximum_exchange_count
         return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> IncrementalRateModel:
@@ -896,6 +908,7 @@ class IncrementalRateModel(core.Gs2Model):
             .with_coefficient_value(data.get('coefficientValue'))\
             .with_calculate_script_id(data.get('calculateScriptId'))\
             .with_exchange_count_id(data.get('exchangeCountId'))\
+            .with_maximum_exchange_count(data.get('maximumExchangeCount'))\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -912,6 +925,7 @@ class IncrementalRateModel(core.Gs2Model):
             "coefficientValue": self.coefficient_value,
             "calculateScriptId": self.calculate_script_id,
             "exchangeCountId": self.exchange_count_id,
+            "maximumExchangeCount": self.maximum_exchange_count,
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
