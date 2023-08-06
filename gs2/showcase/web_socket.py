@@ -2240,7 +2240,7 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="showcase",
-            component='showcase',
+            component='displayItem',
             function='buy',
             request_id=request_id,
         )
@@ -2328,7 +2328,7 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="showcase",
-            component='showcase',
+            component='displayItem',
             function='buyByUserId',
             request_id=request_id,
         )
