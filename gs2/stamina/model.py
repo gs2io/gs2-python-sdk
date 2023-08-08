@@ -363,15 +363,10 @@ class Stamina(core.Gs2Model):
 
 
 class RecoverValueTable(core.Gs2Model):
-    recover_value_table_id: str = None
     name: str = None
     metadata: str = None
     experience_model_id: str = None
     values: List[int] = None
-
-    def with_recover_value_table_id(self, recover_value_table_id: str) -> RecoverValueTable:
-        self.recover_value_table_id = recover_value_table_id
-        return self
 
     def with_name(self, name: str) -> RecoverValueTable:
         self.name = name
@@ -388,61 +383,6 @@ class RecoverValueTable(core.Gs2Model):
     def with_values(self, values: List[int]) -> RecoverValueTable:
         self.values = values
         return self
-
-    @classmethod
-    def create_grn(
-        cls,
-        region,
-        owner_id,
-        namespace_name,
-        recover_value_table_name,
-    ):
-        return 'grn:gs2:{region}:{ownerId}:stamina:{namespaceName}:recoverValueTable:{recoverValueTableName}'.format(
-            region=region,
-            ownerId=owner_id,
-            namespaceName=namespace_name,
-            recoverValueTableName=recover_value_table_name,
-        )
-
-    @classmethod
-    def get_region_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):recoverValueTable:(?P<recoverValueTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('region')
-
-    @classmethod
-    def get_owner_id_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):recoverValueTable:(?P<recoverValueTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('owner_id')
-
-    @classmethod
-    def get_namespace_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):recoverValueTable:(?P<recoverValueTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('namespace_name')
-
-    @classmethod
-    def get_recover_value_table_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):recoverValueTable:(?P<recoverValueTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('recover_value_table_name')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -463,7 +403,6 @@ class RecoverValueTable(core.Gs2Model):
         if data is None:
             return None
         return RecoverValueTable()\
-            .with_recover_value_table_id(data.get('recoverValueTableId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
@@ -474,7 +413,6 @@ class RecoverValueTable(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "recoverValueTableId": self.recover_value_table_id,
             "name": self.name,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
@@ -486,15 +424,10 @@ class RecoverValueTable(core.Gs2Model):
 
 
 class RecoverIntervalTable(core.Gs2Model):
-    recover_interval_table_id: str = None
     name: str = None
     metadata: str = None
     experience_model_id: str = None
     values: List[int] = None
-
-    def with_recover_interval_table_id(self, recover_interval_table_id: str) -> RecoverIntervalTable:
-        self.recover_interval_table_id = recover_interval_table_id
-        return self
 
     def with_name(self, name: str) -> RecoverIntervalTable:
         self.name = name
@@ -511,61 +444,6 @@ class RecoverIntervalTable(core.Gs2Model):
     def with_values(self, values: List[int]) -> RecoverIntervalTable:
         self.values = values
         return self
-
-    @classmethod
-    def create_grn(
-        cls,
-        region,
-        owner_id,
-        namespace_name,
-        recover_interval_table_name,
-    ):
-        return 'grn:gs2:{region}:{ownerId}:stamina:{namespaceName}:recoverIntervalTable:{recoverIntervalTableName}'.format(
-            region=region,
-            ownerId=owner_id,
-            namespaceName=namespace_name,
-            recoverIntervalTableName=recover_interval_table_name,
-        )
-
-    @classmethod
-    def get_region_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):recoverIntervalTable:(?P<recoverIntervalTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('region')
-
-    @classmethod
-    def get_owner_id_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):recoverIntervalTable:(?P<recoverIntervalTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('owner_id')
-
-    @classmethod
-    def get_namespace_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):recoverIntervalTable:(?P<recoverIntervalTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('namespace_name')
-
-    @classmethod
-    def get_recover_interval_table_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):recoverIntervalTable:(?P<recoverIntervalTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('recover_interval_table_name')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -586,7 +464,6 @@ class RecoverIntervalTable(core.Gs2Model):
         if data is None:
             return None
         return RecoverIntervalTable()\
-            .with_recover_interval_table_id(data.get('recoverIntervalTableId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
@@ -597,7 +474,6 @@ class RecoverIntervalTable(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "recoverIntervalTableId": self.recover_interval_table_id,
             "name": self.name,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
@@ -609,15 +485,10 @@ class RecoverIntervalTable(core.Gs2Model):
 
 
 class MaxStaminaTable(core.Gs2Model):
-    max_stamina_table_id: str = None
     name: str = None
     metadata: str = None
     experience_model_id: str = None
     values: List[int] = None
-
-    def with_max_stamina_table_id(self, max_stamina_table_id: str) -> MaxStaminaTable:
-        self.max_stamina_table_id = max_stamina_table_id
-        return self
 
     def with_name(self, name: str) -> MaxStaminaTable:
         self.name = name
@@ -634,61 +505,6 @@ class MaxStaminaTable(core.Gs2Model):
     def with_values(self, values: List[int]) -> MaxStaminaTable:
         self.values = values
         return self
-
-    @classmethod
-    def create_grn(
-        cls,
-        region,
-        owner_id,
-        namespace_name,
-        max_stamina_table_name,
-    ):
-        return 'grn:gs2:{region}:{ownerId}:stamina:{namespaceName}:maxStaminaTable:{maxStaminaTableName}'.format(
-            region=region,
-            ownerId=owner_id,
-            namespaceName=namespace_name,
-            maxStaminaTableName=max_stamina_table_name,
-        )
-
-    @classmethod
-    def get_region_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):maxStaminaTable:(?P<maxStaminaTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('region')
-
-    @classmethod
-    def get_owner_id_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):maxStaminaTable:(?P<maxStaminaTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('owner_id')
-
-    @classmethod
-    def get_namespace_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):maxStaminaTable:(?P<maxStaminaTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('namespace_name')
-
-    @classmethod
-    def get_max_stamina_table_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):stamina:(?P<namespaceName>.+):maxStaminaTable:(?P<maxStaminaTableName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('max_stamina_table_name')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -709,7 +525,6 @@ class MaxStaminaTable(core.Gs2Model):
         if data is None:
             return None
         return MaxStaminaTable()\
-            .with_max_stamina_table_id(data.get('maxStaminaTableId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
@@ -720,7 +535,6 @@ class MaxStaminaTable(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "maxStaminaTableId": self.max_stamina_table_id,
             "name": self.name,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
