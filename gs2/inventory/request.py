@@ -1808,6 +1808,713 @@ class GetSimpleItemModelRequest(core.Gs2Request):
         }
 
 
+class DescribeBigInventoryModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeBigInventoryModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeBigInventoryModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeBigInventoryModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigInventoryModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribeBigInventoryModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateBigInventoryModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateBigInventoryModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name(self, name: str) -> CreateBigInventoryModelMasterRequest:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> CreateBigInventoryModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateBigInventoryModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateBigInventoryModelMasterRequest]:
+        if data is None:
+            return None
+        return CreateBigInventoryModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+        }
+
+
+class GetBigInventoryModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetBigInventoryModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> GetBigInventoryModelMasterRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigInventoryModelMasterRequest]:
+        if data is None:
+            return None
+        return GetBigInventoryModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+        }
+
+
+class UpdateBigInventoryModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    description: str = None
+    metadata: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateBigInventoryModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> UpdateBigInventoryModelMasterRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_description(self, description: str) -> UpdateBigInventoryModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateBigInventoryModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateBigInventoryModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateBigInventoryModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "description": self.description,
+            "metadata": self.metadata,
+        }
+
+
+class DeleteBigInventoryModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteBigInventoryModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> DeleteBigInventoryModelMasterRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteBigInventoryModelMasterRequest]:
+        if data is None:
+            return None
+        return DeleteBigInventoryModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+        }
+
+
+class DescribeBigInventoryModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeBigInventoryModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigInventoryModelsRequest]:
+        if data is None:
+            return None
+        return DescribeBigInventoryModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetBigInventoryModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetBigInventoryModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> GetBigInventoryModelRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigInventoryModelRequest]:
+        if data is None:
+            return None
+        return GetBigInventoryModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+        }
+
+
+class DescribeBigItemModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeBigItemModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> DescribeBigItemModelMastersRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeBigItemModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeBigItemModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigItemModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribeBigItemModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateBigItemModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateBigItemModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> CreateBigItemModelMasterRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_name(self, name: str) -> CreateBigItemModelMasterRequest:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> CreateBigItemModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateBigItemModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateBigItemModelMasterRequest]:
+        if data is None:
+            return None
+        return CreateBigItemModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+        }
+
+
+class GetBigItemModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    item_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetBigItemModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> GetBigItemModelMasterRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> GetBigItemModelMasterRequest:
+        self.item_name = item_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigItemModelMasterRequest]:
+        if data is None:
+            return None
+        return GetBigItemModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+        }
+
+
+class UpdateBigItemModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    item_name: str = None
+    description: str = None
+    metadata: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateBigItemModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> UpdateBigItemModelMasterRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> UpdateBigItemModelMasterRequest:
+        self.item_name = item_name
+        return self
+
+    def with_description(self, description: str) -> UpdateBigItemModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateBigItemModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateBigItemModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateBigItemModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+            "description": self.description,
+            "metadata": self.metadata,
+        }
+
+
+class DeleteBigItemModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    item_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteBigItemModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> DeleteBigItemModelMasterRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> DeleteBigItemModelMasterRequest:
+        self.item_name = item_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteBigItemModelMasterRequest]:
+        if data is None:
+            return None
+        return DeleteBigItemModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+        }
+
+
+class DescribeBigItemModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeBigItemModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> DescribeBigItemModelsRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigItemModelsRequest]:
+        if data is None:
+            return None
+        return DescribeBigItemModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+        }
+
+
+class GetBigItemModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    item_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetBigItemModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> GetBigItemModelRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> GetBigItemModelRequest:
+        self.item_name = item_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigItemModelRequest]:
+        if data is None:
+            return None
+        return GetBigItemModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+        }
+
+
 class ExportMasterRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -4814,6 +5521,603 @@ class ConsumeSimpleItemsByStampTaskRequest(core.Gs2Request):
         if data is None:
             return None
         return ConsumeSimpleItemsByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class DescribeBigItemsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    access_token: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeBigItemsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> DescribeBigItemsRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeBigItemsRequest:
+        self.access_token = access_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeBigItemsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeBigItemsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigItemsRequest]:
+        if data is None:
+            return None
+        return DescribeBigItemsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "accessToken": self.access_token,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeBigItemsByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    user_id: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeBigItemsByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> DescribeBigItemsByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeBigItemsByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeBigItemsByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeBigItemsByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigItemsByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeBigItemsByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "userId": self.user_id,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetBigItemRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    access_token: str = None
+    item_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetBigItemRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> GetBigItemRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetBigItemRequest:
+        self.access_token = access_token
+        return self
+
+    def with_item_name(self, item_name: str) -> GetBigItemRequest:
+        self.item_name = item_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigItemRequest]:
+        if data is None:
+            return None
+        return GetBigItemRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_item_name(data.get('itemName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "accessToken": self.access_token,
+            "itemName": self.item_name,
+        }
+
+
+class GetBigItemByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    user_id: str = None
+    item_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetBigItemByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> GetBigItemByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetBigItemByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_item_name(self, item_name: str) -> GetBigItemByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigItemByUserIdRequest]:
+        if data is None:
+            return None
+        return GetBigItemByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_item_name(data.get('itemName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "userId": self.user_id,
+            "itemName": self.item_name,
+        }
+
+
+class AcquireBigItemByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    user_id: str = None
+    item_name: str = None
+    acquire_count: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AcquireBigItemByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> AcquireBigItemByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AcquireBigItemByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_item_name(self, item_name: str) -> AcquireBigItemByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def with_acquire_count(self, acquire_count: str) -> AcquireBigItemByUserIdRequest:
+        self.acquire_count = acquire_count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcquireBigItemByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireBigItemByUserIdRequest]:
+        if data is None:
+            return None
+        return AcquireBigItemByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_item_name(data.get('itemName'))\
+            .with_acquire_count(data.get('acquireCount'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "userId": self.user_id,
+            "itemName": self.item_name,
+            "acquireCount": self.acquire_count,
+        }
+
+
+class ConsumeBigItemRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    access_token: str = None
+    item_name: str = None
+    consume_count: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ConsumeBigItemRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> ConsumeBigItemRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_access_token(self, access_token: str) -> ConsumeBigItemRequest:
+        self.access_token = access_token
+        return self
+
+    def with_item_name(self, item_name: str) -> ConsumeBigItemRequest:
+        self.item_name = item_name
+        return self
+
+    def with_consume_count(self, consume_count: str) -> ConsumeBigItemRequest:
+        self.consume_count = consume_count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ConsumeBigItemRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeBigItemRequest]:
+        if data is None:
+            return None
+        return ConsumeBigItemRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_item_name(data.get('itemName'))\
+            .with_consume_count(data.get('consumeCount'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "accessToken": self.access_token,
+            "itemName": self.item_name,
+            "consumeCount": self.consume_count,
+        }
+
+
+class ConsumeBigItemByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    user_id: str = None
+    item_name: str = None
+    consume_count: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ConsumeBigItemByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> ConsumeBigItemByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_user_id(self, user_id: str) -> ConsumeBigItemByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_item_name(self, item_name: str) -> ConsumeBigItemByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def with_consume_count(self, consume_count: str) -> ConsumeBigItemByUserIdRequest:
+        self.consume_count = consume_count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ConsumeBigItemByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeBigItemByUserIdRequest]:
+        if data is None:
+            return None
+        return ConsumeBigItemByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_item_name(data.get('itemName'))\
+            .with_consume_count(data.get('consumeCount'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "userId": self.user_id,
+            "itemName": self.item_name,
+            "consumeCount": self.consume_count,
+        }
+
+
+class DeleteBigItemByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    user_id: str = None
+    item_name: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteBigItemByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> DeleteBigItemByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DeleteBigItemByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_item_name(self, item_name: str) -> DeleteBigItemByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteBigItemByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteBigItemByUserIdRequest]:
+        if data is None:
+            return None
+        return DeleteBigItemByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_item_name(data.get('itemName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "userId": self.user_id,
+            "itemName": self.item_name,
+        }
+
+
+class AcquireBigItemByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> AcquireBigItemByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> AcquireBigItemByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireBigItemByStampSheetRequest]:
+        if data is None:
+            return None
+        return AcquireBigItemByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class ConsumeBigItemByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> ConsumeBigItemByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> ConsumeBigItemByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeBigItemByStampTaskRequest]:
+        if data is None:
+            return None
+        return ConsumeBigItemByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 

@@ -1262,6 +1262,520 @@ class GetSimpleItemModelResult(core.Gs2Result):
         }
 
 
+class DescribeBigInventoryModelMastersResult(core.Gs2Result):
+    items: List[BigInventoryModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[BigInventoryModelMaster]) -> DescribeBigInventoryModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeBigInventoryModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigInventoryModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeBigInventoryModelMastersResult()\
+            .with_items([
+                BigInventoryModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateBigInventoryModelMasterResult(core.Gs2Result):
+    item: BigInventoryModelMaster = None
+
+    def with_item(self, item: BigInventoryModelMaster) -> CreateBigInventoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateBigInventoryModelMasterResult]:
+        if data is None:
+            return None
+        return CreateBigInventoryModelMasterResult()\
+            .with_item(BigInventoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetBigInventoryModelMasterResult(core.Gs2Result):
+    item: BigInventoryModelMaster = None
+
+    def with_item(self, item: BigInventoryModelMaster) -> GetBigInventoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigInventoryModelMasterResult]:
+        if data is None:
+            return None
+        return GetBigInventoryModelMasterResult()\
+            .with_item(BigInventoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateBigInventoryModelMasterResult(core.Gs2Result):
+    item: BigInventoryModelMaster = None
+
+    def with_item(self, item: BigInventoryModelMaster) -> UpdateBigInventoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateBigInventoryModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateBigInventoryModelMasterResult()\
+            .with_item(BigInventoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteBigInventoryModelMasterResult(core.Gs2Result):
+    item: BigInventoryModelMaster = None
+
+    def with_item(self, item: BigInventoryModelMaster) -> DeleteBigInventoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteBigInventoryModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteBigInventoryModelMasterResult()\
+            .with_item(BigInventoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeBigInventoryModelsResult(core.Gs2Result):
+    items: List[BigInventoryModel] = None
+
+    def with_items(self, items: List[BigInventoryModel]) -> DescribeBigInventoryModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigInventoryModelsResult]:
+        if data is None:
+            return None
+        return DescribeBigInventoryModelsResult()\
+            .with_items([
+                BigInventoryModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetBigInventoryModelResult(core.Gs2Result):
+    item: BigInventoryModel = None
+
+    def with_item(self, item: BigInventoryModel) -> GetBigInventoryModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigInventoryModelResult]:
+        if data is None:
+            return None
+        return GetBigInventoryModelResult()\
+            .with_item(BigInventoryModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeBigItemModelMastersResult(core.Gs2Result):
+    items: List[BigItemModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[BigItemModelMaster]) -> DescribeBigItemModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeBigItemModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigItemModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeBigItemModelMastersResult()\
+            .with_items([
+                BigItemModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateBigItemModelMasterResult(core.Gs2Result):
+    item: BigItemModelMaster = None
+
+    def with_item(self, item: BigItemModelMaster) -> CreateBigItemModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateBigItemModelMasterResult]:
+        if data is None:
+            return None
+        return CreateBigItemModelMasterResult()\
+            .with_item(BigItemModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetBigItemModelMasterResult(core.Gs2Result):
+    item: BigItemModelMaster = None
+
+    def with_item(self, item: BigItemModelMaster) -> GetBigItemModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigItemModelMasterResult]:
+        if data is None:
+            return None
+        return GetBigItemModelMasterResult()\
+            .with_item(BigItemModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateBigItemModelMasterResult(core.Gs2Result):
+    item: BigItemModelMaster = None
+
+    def with_item(self, item: BigItemModelMaster) -> UpdateBigItemModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateBigItemModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateBigItemModelMasterResult()\
+            .with_item(BigItemModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteBigItemModelMasterResult(core.Gs2Result):
+    item: BigItemModelMaster = None
+
+    def with_item(self, item: BigItemModelMaster) -> DeleteBigItemModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteBigItemModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteBigItemModelMasterResult()\
+            .with_item(BigItemModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeBigItemModelsResult(core.Gs2Result):
+    items: List[BigItemModel] = None
+
+    def with_items(self, items: List[BigItemModel]) -> DescribeBigItemModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigItemModelsResult]:
+        if data is None:
+            return None
+        return DescribeBigItemModelsResult()\
+            .with_items([
+                BigItemModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetBigItemModelResult(core.Gs2Result):
+    item: BigItemModel = None
+
+    def with_item(self, item: BigItemModel) -> GetBigItemModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigItemModelResult]:
+        if data is None:
+            return None
+        return GetBigItemModelResult()\
+            .with_item(BigItemModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class ExportMasterResult(core.Gs2Result):
     item: CurrentItemModelMaster = None
 
@@ -3729,5 +4243,392 @@ class ConsumeSimpleItemsByStampTaskResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class DescribeBigItemsResult(core.Gs2Result):
+    items: List[BigItem] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[BigItem]) -> DescribeBigItemsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeBigItemsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigItemsResult]:
+        if data is None:
+            return None
+        return DescribeBigItemsResult()\
+            .with_items([
+                BigItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeBigItemsByUserIdResult(core.Gs2Result):
+    items: List[BigItem] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[BigItem]) -> DescribeBigItemsByUserIdResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeBigItemsByUserIdResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBigItemsByUserIdResult]:
+        if data is None:
+            return None
+        return DescribeBigItemsByUserIdResult()\
+            .with_items([
+                BigItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetBigItemResult(core.Gs2Result):
+    item: BigItem = None
+    item_model: BigItemModel = None
+
+    def with_item(self, item: BigItem) -> GetBigItemResult:
+        self.item = item
+        return self
+
+    def with_item_model(self, item_model: BigItemModel) -> GetBigItemResult:
+        self.item_model = item_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigItemResult]:
+        if data is None:
+            return None
+        return GetBigItemResult()\
+            .with_item(BigItem.from_dict(data.get('item')))\
+            .with_item_model(BigItemModel.from_dict(data.get('itemModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "itemModel": self.item_model.to_dict() if self.item_model else None,
+        }
+
+
+class GetBigItemByUserIdResult(core.Gs2Result):
+    item: BigItem = None
+    item_model: BigItemModel = None
+
+    def with_item(self, item: BigItem) -> GetBigItemByUserIdResult:
+        self.item = item
+        return self
+
+    def with_item_model(self, item_model: BigItemModel) -> GetBigItemByUserIdResult:
+        self.item_model = item_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBigItemByUserIdResult]:
+        if data is None:
+            return None
+        return GetBigItemByUserIdResult()\
+            .with_item(BigItem.from_dict(data.get('item')))\
+            .with_item_model(BigItemModel.from_dict(data.get('itemModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "itemModel": self.item_model.to_dict() if self.item_model else None,
+        }
+
+
+class AcquireBigItemByUserIdResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> AcquireBigItemByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireBigItemByUserIdResult]:
+        if data is None:
+            return None
+        return AcquireBigItemByUserIdResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ConsumeBigItemResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> ConsumeBigItemResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeBigItemResult]:
+        if data is None:
+            return None
+        return ConsumeBigItemResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ConsumeBigItemByUserIdResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> ConsumeBigItemByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeBigItemByUserIdResult]:
+        if data is None:
+            return None
+        return ConsumeBigItemByUserIdResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteBigItemByUserIdResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> DeleteBigItemByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteBigItemByUserIdResult]:
+        if data is None:
+            return None
+        return DeleteBigItemByUserIdResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class AcquireBigItemByStampSheetResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> AcquireBigItemByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireBigItemByStampSheetResult]:
+        if data is None:
+            return None
+        return AcquireBigItemByStampSheetResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ConsumeBigItemByStampTaskResult(core.Gs2Result):
+    item: BigItem = None
+    new_context_stack: str = None
+
+    def with_item(self, item: BigItem) -> ConsumeBigItemByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> ConsumeBigItemByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeBigItemByStampTaskResult]:
+        if data is None:
+            return None
+        return ConsumeBigItemByStampTaskResult()\
+            .with_item(BigItem.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }

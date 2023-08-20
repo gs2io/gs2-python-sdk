@@ -2597,6 +2597,1058 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_big_inventory_model_masters(
+        self,
+        request: DescribeBigInventoryModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeBigInventoryModelMastersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigInventoryModelMaster',
+            function='describeBigInventoryModelMasters',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeBigInventoryModelMastersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_big_inventory_model_masters(
+        self,
+        request: DescribeBigInventoryModelMastersRequest,
+    ) -> DescribeBigInventoryModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_inventory_model_masters(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_inventory_model_masters_async(
+        self,
+        request: DescribeBigInventoryModelMastersRequest,
+    ) -> DescribeBigInventoryModelMastersResult:
+        async_result = []
+        self._describe_big_inventory_model_masters(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_big_inventory_model_master(
+        self,
+        request: CreateBigInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateBigInventoryModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigInventoryModelMaster',
+            function='createBigInventoryModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateBigInventoryModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_big_inventory_model_master(
+        self,
+        request: CreateBigInventoryModelMasterRequest,
+    ) -> CreateBigInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_big_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_big_inventory_model_master_async(
+        self,
+        request: CreateBigInventoryModelMasterRequest,
+    ) -> CreateBigInventoryModelMasterResult:
+        async_result = []
+        self._create_big_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_inventory_model_master(
+        self,
+        request: GetBigInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[GetBigInventoryModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigInventoryModelMaster',
+            function='getBigInventoryModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBigInventoryModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_big_inventory_model_master(
+        self,
+        request: GetBigInventoryModelMasterRequest,
+    ) -> GetBigInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_inventory_model_master_async(
+        self,
+        request: GetBigInventoryModelMasterRequest,
+    ) -> GetBigInventoryModelMasterResult:
+        async_result = []
+        self._get_big_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_big_inventory_model_master(
+        self,
+        request: UpdateBigInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateBigInventoryModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigInventoryModelMaster',
+            function='updateBigInventoryModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateBigInventoryModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_big_inventory_model_master(
+        self,
+        request: UpdateBigInventoryModelMasterRequest,
+    ) -> UpdateBigInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_big_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_big_inventory_model_master_async(
+        self,
+        request: UpdateBigInventoryModelMasterRequest,
+    ) -> UpdateBigInventoryModelMasterResult:
+        async_result = []
+        self._update_big_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_big_inventory_model_master(
+        self,
+        request: DeleteBigInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteBigInventoryModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigInventoryModelMaster',
+            function='deleteBigInventoryModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteBigInventoryModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_big_inventory_model_master(
+        self,
+        request: DeleteBigInventoryModelMasterRequest,
+    ) -> DeleteBigInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_big_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_big_inventory_model_master_async(
+        self,
+        request: DeleteBigInventoryModelMasterRequest,
+    ) -> DeleteBigInventoryModelMasterResult:
+        async_result = []
+        self._delete_big_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_inventory_models(
+        self,
+        request: DescribeBigInventoryModelsRequest,
+        callback: Callable[[AsyncResult[DescribeBigInventoryModelsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigInventoryModel',
+            function='describeBigInventoryModels',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeBigInventoryModelsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_big_inventory_models(
+        self,
+        request: DescribeBigInventoryModelsRequest,
+    ) -> DescribeBigInventoryModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_inventory_models(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_inventory_models_async(
+        self,
+        request: DescribeBigInventoryModelsRequest,
+    ) -> DescribeBigInventoryModelsResult:
+        async_result = []
+        self._describe_big_inventory_models(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_inventory_model(
+        self,
+        request: GetBigInventoryModelRequest,
+        callback: Callable[[AsyncResult[GetBigInventoryModelResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigInventoryModel',
+            function='getBigInventoryModel',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBigInventoryModelResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_big_inventory_model(
+        self,
+        request: GetBigInventoryModelRequest,
+    ) -> GetBigInventoryModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_inventory_model(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_inventory_model_async(
+        self,
+        request: GetBigInventoryModelRequest,
+    ) -> GetBigInventoryModelResult:
+        async_result = []
+        self._get_big_inventory_model(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_item_model_masters(
+        self,
+        request: DescribeBigItemModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeBigItemModelMastersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItemModelMaster',
+            function='describeBigItemModelMasters',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeBigItemModelMastersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_big_item_model_masters(
+        self,
+        request: DescribeBigItemModelMastersRequest,
+    ) -> DescribeBigItemModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_item_model_masters(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_item_model_masters_async(
+        self,
+        request: DescribeBigItemModelMastersRequest,
+    ) -> DescribeBigItemModelMastersResult:
+        async_result = []
+        self._describe_big_item_model_masters(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_big_item_model_master(
+        self,
+        request: CreateBigItemModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateBigItemModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItemModelMaster',
+            function='createBigItemModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateBigItemModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_big_item_model_master(
+        self,
+        request: CreateBigItemModelMasterRequest,
+    ) -> CreateBigItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_big_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_big_item_model_master_async(
+        self,
+        request: CreateBigItemModelMasterRequest,
+    ) -> CreateBigItemModelMasterResult:
+        async_result = []
+        self._create_big_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_item_model_master(
+        self,
+        request: GetBigItemModelMasterRequest,
+        callback: Callable[[AsyncResult[GetBigItemModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItemModelMaster',
+            function='getBigItemModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBigItemModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_big_item_model_master(
+        self,
+        request: GetBigItemModelMasterRequest,
+    ) -> GetBigItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_item_model_master_async(
+        self,
+        request: GetBigItemModelMasterRequest,
+    ) -> GetBigItemModelMasterResult:
+        async_result = []
+        self._get_big_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_big_item_model_master(
+        self,
+        request: UpdateBigItemModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateBigItemModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItemModelMaster',
+            function='updateBigItemModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateBigItemModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_big_item_model_master(
+        self,
+        request: UpdateBigItemModelMasterRequest,
+    ) -> UpdateBigItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_big_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_big_item_model_master_async(
+        self,
+        request: UpdateBigItemModelMasterRequest,
+    ) -> UpdateBigItemModelMasterResult:
+        async_result = []
+        self._update_big_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_big_item_model_master(
+        self,
+        request: DeleteBigItemModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteBigItemModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItemModelMaster',
+            function='deleteBigItemModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteBigItemModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_big_item_model_master(
+        self,
+        request: DeleteBigItemModelMasterRequest,
+    ) -> DeleteBigItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_big_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_big_item_model_master_async(
+        self,
+        request: DeleteBigItemModelMasterRequest,
+    ) -> DeleteBigItemModelMasterResult:
+        async_result = []
+        self._delete_big_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_item_models(
+        self,
+        request: DescribeBigItemModelsRequest,
+        callback: Callable[[AsyncResult[DescribeBigItemModelsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItemModel',
+            function='describeBigItemModels',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeBigItemModelsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_big_item_models(
+        self,
+        request: DescribeBigItemModelsRequest,
+    ) -> DescribeBigItemModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_item_models(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_item_models_async(
+        self,
+        request: DescribeBigItemModelsRequest,
+    ) -> DescribeBigItemModelsResult:
+        async_result = []
+        self._describe_big_item_models(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_item_model(
+        self,
+        request: GetBigItemModelRequest,
+        callback: Callable[[AsyncResult[GetBigItemModelResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItemModel',
+            function='getBigItemModel',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBigItemModelResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_big_item_model(
+        self,
+        request: GetBigItemModelRequest,
+    ) -> GetBigItemModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_item_model(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_item_model_async(
+        self,
+        request: GetBigItemModelRequest,
+    ) -> GetBigItemModelResult:
+        async_result = []
+        self._get_big_item_model(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _export_master(
         self,
         request: ExportMasterRequest,
@@ -6525,6 +7577,792 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ConsumeSimpleItemsByStampTaskResult:
         async_result = []
         self._consume_simple_items_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_items(
+        self,
+        request: DescribeBigItemsRequest,
+        callback: Callable[[AsyncResult[DescribeBigItemsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='describeBigItems',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeBigItemsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_big_items(
+        self,
+        request: DescribeBigItemsRequest,
+    ) -> DescribeBigItemsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_items(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_items_async(
+        self,
+        request: DescribeBigItemsRequest,
+    ) -> DescribeBigItemsResult:
+        async_result = []
+        self._describe_big_items(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_items_by_user_id(
+        self,
+        request: DescribeBigItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeBigItemsByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='describeBigItemsByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeBigItemsByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_big_items_by_user_id(
+        self,
+        request: DescribeBigItemsByUserIdRequest,
+    ) -> DescribeBigItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_items_by_user_id_async(
+        self,
+        request: DescribeBigItemsByUserIdRequest,
+    ) -> DescribeBigItemsByUserIdResult:
+        async_result = []
+        self._describe_big_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_item(
+        self,
+        request: GetBigItemRequest,
+        callback: Callable[[AsyncResult[GetBigItemResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='getBigItem',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBigItemResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_big_item(
+        self,
+        request: GetBigItemRequest,
+    ) -> GetBigItemResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_item(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_item_async(
+        self,
+        request: GetBigItemRequest,
+    ) -> GetBigItemResult:
+        async_result = []
+        self._get_big_item(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_item_by_user_id(
+        self,
+        request: GetBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[GetBigItemByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='getBigItemByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBigItemByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_big_item_by_user_id(
+        self,
+        request: GetBigItemByUserIdRequest,
+    ) -> GetBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_item_by_user_id_async(
+        self,
+        request: GetBigItemByUserIdRequest,
+    ) -> GetBigItemByUserIdResult:
+        async_result = []
+        self._get_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _acquire_big_item_by_user_id(
+        self,
+        request: AcquireBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[AcquireBigItemByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='acquireBigItemByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.acquire_count is not None:
+            body["acquireCount"] = request.acquire_count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AcquireBigItemByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def acquire_big_item_by_user_id(
+        self,
+        request: AcquireBigItemByUserIdRequest,
+    ) -> AcquireBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._acquire_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def acquire_big_item_by_user_id_async(
+        self,
+        request: AcquireBigItemByUserIdRequest,
+    ) -> AcquireBigItemByUserIdResult:
+        async_result = []
+        self._acquire_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_big_item(
+        self,
+        request: ConsumeBigItemRequest,
+        callback: Callable[[AsyncResult[ConsumeBigItemResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='consumeBigItem',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.consume_count is not None:
+            body["consumeCount"] = request.consume_count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ConsumeBigItemResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def consume_big_item(
+        self,
+        request: ConsumeBigItemRequest,
+    ) -> ConsumeBigItemResult:
+        async_result = []
+        with timeout(30):
+            self._consume_big_item(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_big_item_async(
+        self,
+        request: ConsumeBigItemRequest,
+    ) -> ConsumeBigItemResult:
+        async_result = []
+        self._consume_big_item(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_big_item_by_user_id(
+        self,
+        request: ConsumeBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[ConsumeBigItemByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='consumeBigItemByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.consume_count is not None:
+            body["consumeCount"] = request.consume_count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ConsumeBigItemByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def consume_big_item_by_user_id(
+        self,
+        request: ConsumeBigItemByUserIdRequest,
+    ) -> ConsumeBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._consume_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_big_item_by_user_id_async(
+        self,
+        request: ConsumeBigItemByUserIdRequest,
+    ) -> ConsumeBigItemByUserIdResult:
+        async_result = []
+        self._consume_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_big_item_by_user_id(
+        self,
+        request: DeleteBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[DeleteBigItemByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='deleteBigItemByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteBigItemByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_big_item_by_user_id(
+        self,
+        request: DeleteBigItemByUserIdRequest,
+    ) -> DeleteBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_big_item_by_user_id_async(
+        self,
+        request: DeleteBigItemByUserIdRequest,
+    ) -> DeleteBigItemByUserIdResult:
+        async_result = []
+        self._delete_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _acquire_big_item_by_stamp_sheet(
+        self,
+        request: AcquireBigItemByStampSheetRequest,
+        callback: Callable[[AsyncResult[AcquireBigItemByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='acquireBigItemByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AcquireBigItemByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def acquire_big_item_by_stamp_sheet(
+        self,
+        request: AcquireBigItemByStampSheetRequest,
+    ) -> AcquireBigItemByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._acquire_big_item_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def acquire_big_item_by_stamp_sheet_async(
+        self,
+        request: AcquireBigItemByStampSheetRequest,
+    ) -> AcquireBigItemByStampSheetResult:
+        async_result = []
+        self._acquire_big_item_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_big_item_by_stamp_task(
+        self,
+        request: ConsumeBigItemByStampTaskRequest,
+        callback: Callable[[AsyncResult[ConsumeBigItemByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='consumeBigItemByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ConsumeBigItemByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def consume_big_item_by_stamp_task(
+        self,
+        request: ConsumeBigItemByStampTaskRequest,
+    ) -> ConsumeBigItemByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._consume_big_item_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_big_item_by_stamp_task_async(
+        self,
+        request: ConsumeBigItemByStampTaskRequest,
+    ) -> ConsumeBigItemByStampTaskResult:
+        async_result = []
+        self._consume_big_item_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

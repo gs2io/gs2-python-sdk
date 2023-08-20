@@ -2567,6 +2567,1043 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_big_inventory_model_masters(
+        self,
+        request: DescribeBigInventoryModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeBigInventoryModelMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeBigInventoryModelMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_big_inventory_model_masters(
+        self,
+        request: DescribeBigInventoryModelMastersRequest,
+    ) -> DescribeBigInventoryModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_inventory_model_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_inventory_model_masters_async(
+        self,
+        request: DescribeBigInventoryModelMastersRequest,
+    ) -> DescribeBigInventoryModelMastersResult:
+        async_result = []
+        self._describe_big_inventory_model_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_big_inventory_model_master(
+        self,
+        request: CreateBigInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateBigInventoryModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateBigInventoryModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_big_inventory_model_master(
+        self,
+        request: CreateBigInventoryModelMasterRequest,
+    ) -> CreateBigInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_big_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_big_inventory_model_master_async(
+        self,
+        request: CreateBigInventoryModelMasterRequest,
+    ) -> CreateBigInventoryModelMasterResult:
+        async_result = []
+        self._create_big_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_inventory_model_master(
+        self,
+        request: GetBigInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[GetBigInventoryModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetBigInventoryModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_big_inventory_model_master(
+        self,
+        request: GetBigInventoryModelMasterRequest,
+    ) -> GetBigInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_inventory_model_master_async(
+        self,
+        request: GetBigInventoryModelMasterRequest,
+    ) -> GetBigInventoryModelMasterResult:
+        async_result = []
+        self._get_big_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_big_inventory_model_master(
+        self,
+        request: UpdateBigInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateBigInventoryModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateBigInventoryModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_big_inventory_model_master(
+        self,
+        request: UpdateBigInventoryModelMasterRequest,
+    ) -> UpdateBigInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_big_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_big_inventory_model_master_async(
+        self,
+        request: UpdateBigInventoryModelMasterRequest,
+    ) -> UpdateBigInventoryModelMasterResult:
+        async_result = []
+        self._update_big_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_big_inventory_model_master(
+        self,
+        request: DeleteBigInventoryModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteBigInventoryModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteBigInventoryModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_big_inventory_model_master(
+        self,
+        request: DeleteBigInventoryModelMasterRequest,
+    ) -> DeleteBigInventoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_big_inventory_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_big_inventory_model_master_async(
+        self,
+        request: DeleteBigInventoryModelMasterRequest,
+    ) -> DeleteBigInventoryModelMasterResult:
+        async_result = []
+        self._delete_big_inventory_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_inventory_models(
+        self,
+        request: DescribeBigInventoryModelsRequest,
+        callback: Callable[[AsyncResult[DescribeBigInventoryModelsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/big/inventory".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeBigInventoryModelsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_big_inventory_models(
+        self,
+        request: DescribeBigInventoryModelsRequest,
+    ) -> DescribeBigInventoryModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_inventory_models(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_inventory_models_async(
+        self,
+        request: DescribeBigInventoryModelsRequest,
+    ) -> DescribeBigInventoryModelsResult:
+        async_result = []
+        self._describe_big_inventory_models(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_inventory_model(
+        self,
+        request: GetBigInventoryModelRequest,
+        callback: Callable[[AsyncResult[GetBigInventoryModelResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/big/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetBigInventoryModelResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_big_inventory_model(
+        self,
+        request: GetBigInventoryModelRequest,
+    ) -> GetBigInventoryModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_inventory_model(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_inventory_model_async(
+        self,
+        request: GetBigInventoryModelRequest,
+    ) -> GetBigInventoryModelResult:
+        async_result = []
+        self._get_big_inventory_model(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_item_model_masters(
+        self,
+        request: DescribeBigItemModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeBigItemModelMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeBigItemModelMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_big_item_model_masters(
+        self,
+        request: DescribeBigItemModelMastersRequest,
+    ) -> DescribeBigItemModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_item_model_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_item_model_masters_async(
+        self,
+        request: DescribeBigItemModelMastersRequest,
+    ) -> DescribeBigItemModelMastersResult:
+        async_result = []
+        self._describe_big_item_model_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_big_item_model_master(
+        self,
+        request: CreateBigItemModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateBigItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateBigItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_big_item_model_master(
+        self,
+        request: CreateBigItemModelMasterRequest,
+    ) -> CreateBigItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_big_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_big_item_model_master_async(
+        self,
+        request: CreateBigItemModelMasterRequest,
+    ) -> CreateBigItemModelMasterResult:
+        async_result = []
+        self._create_big_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_item_model_master(
+        self,
+        request: GetBigItemModelMasterRequest,
+        callback: Callable[[AsyncResult[GetBigItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetBigItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_big_item_model_master(
+        self,
+        request: GetBigItemModelMasterRequest,
+    ) -> GetBigItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_item_model_master_async(
+        self,
+        request: GetBigItemModelMasterRequest,
+    ) -> GetBigItemModelMasterResult:
+        async_result = []
+        self._get_big_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_big_item_model_master(
+        self,
+        request: UpdateBigItemModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateBigItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateBigItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_big_item_model_master(
+        self,
+        request: UpdateBigItemModelMasterRequest,
+    ) -> UpdateBigItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_big_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_big_item_model_master_async(
+        self,
+        request: UpdateBigItemModelMasterRequest,
+    ) -> UpdateBigItemModelMasterResult:
+        async_result = []
+        self._update_big_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_big_item_model_master(
+        self,
+        request: DeleteBigItemModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteBigItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/big/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteBigItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_big_item_model_master(
+        self,
+        request: DeleteBigItemModelMasterRequest,
+    ) -> DeleteBigItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_big_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_big_item_model_master_async(
+        self,
+        request: DeleteBigItemModelMasterRequest,
+    ) -> DeleteBigItemModelMasterResult:
+        async_result = []
+        self._delete_big_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_item_models(
+        self,
+        request: DescribeBigItemModelsRequest,
+        callback: Callable[[AsyncResult[DescribeBigItemModelsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/big/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeBigItemModelsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_big_item_models(
+        self,
+        request: DescribeBigItemModelsRequest,
+    ) -> DescribeBigItemModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_item_models(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_item_models_async(
+        self,
+        request: DescribeBigItemModelsRequest,
+    ) -> DescribeBigItemModelsResult:
+        async_result = []
+        self._describe_big_item_models(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_item_model(
+        self,
+        request: GetBigItemModelRequest,
+        callback: Callable[[AsyncResult[GetBigItemModelResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/big/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetBigItemModelResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_big_item_model(
+        self,
+        request: GetBigItemModelRequest,
+    ) -> GetBigItemModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_item_model(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_item_model_async(
+        self,
+        request: GetBigItemModelRequest,
+    ) -> GetBigItemModelResult:
+        async_result = []
+        self._get_big_item_model(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _export_master(
         self,
         request: ExportMasterRequest,
@@ -6367,6 +7404,767 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
     ) -> ConsumeSimpleItemsByStampTaskResult:
         async_result = []
         self._consume_simple_items_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_items(
+        self,
+        request: DescribeBigItemsRequest,
+        callback: Callable[[AsyncResult[DescribeBigItemsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/big/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeBigItemsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_big_items(
+        self,
+        request: DescribeBigItemsRequest,
+    ) -> DescribeBigItemsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_items(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_items_async(
+        self,
+        request: DescribeBigItemsRequest,
+    ) -> DescribeBigItemsResult:
+        async_result = []
+        self._describe_big_items(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_big_items_by_user_id(
+        self,
+        request: DescribeBigItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeBigItemsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeBigItemsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_big_items_by_user_id(
+        self,
+        request: DescribeBigItemsByUserIdRequest,
+    ) -> DescribeBigItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_big_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_big_items_by_user_id_async(
+        self,
+        request: DescribeBigItemsByUserIdRequest,
+    ) -> DescribeBigItemsByUserIdResult:
+        async_result = []
+        self._describe_big_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_item(
+        self,
+        request: GetBigItemRequest,
+        callback: Callable[[AsyncResult[GetBigItemResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/big/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetBigItemResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_big_item(
+        self,
+        request: GetBigItemRequest,
+    ) -> GetBigItemResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_item(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_item_async(
+        self,
+        request: GetBigItemRequest,
+    ) -> GetBigItemResult:
+        async_result = []
+        self._get_big_item(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_big_item_by_user_id(
+        self,
+        request: GetBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[GetBigItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetBigItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_big_item_by_user_id(
+        self,
+        request: GetBigItemByUserIdRequest,
+    ) -> GetBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_big_item_by_user_id_async(
+        self,
+        request: GetBigItemByUserIdRequest,
+    ) -> GetBigItemByUserIdResult:
+        async_result = []
+        self._get_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _acquire_big_item_by_user_id(
+        self,
+        request: AcquireBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[AcquireBigItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/{itemName}/acquire".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.acquire_count is not None:
+            body["acquireCount"] = request.acquire_count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AcquireBigItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def acquire_big_item_by_user_id(
+        self,
+        request: AcquireBigItemByUserIdRequest,
+    ) -> AcquireBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._acquire_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def acquire_big_item_by_user_id_async(
+        self,
+        request: AcquireBigItemByUserIdRequest,
+    ) -> AcquireBigItemByUserIdResult:
+        async_result = []
+        self._acquire_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_big_item(
+        self,
+        request: ConsumeBigItemRequest,
+        callback: Callable[[AsyncResult[ConsumeBigItemResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/big/inventory/{inventoryName}/{itemName}/consume".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.consume_count is not None:
+            body["consumeCount"] = request.consume_count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ConsumeBigItemResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def consume_big_item(
+        self,
+        request: ConsumeBigItemRequest,
+    ) -> ConsumeBigItemResult:
+        async_result = []
+        with timeout(30):
+            self._consume_big_item(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_big_item_async(
+        self,
+        request: ConsumeBigItemRequest,
+    ) -> ConsumeBigItemResult:
+        async_result = []
+        self._consume_big_item(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_big_item_by_user_id(
+        self,
+        request: ConsumeBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[ConsumeBigItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/{itemName}/consume".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.consume_count is not None:
+            body["consumeCount"] = request.consume_count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ConsumeBigItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def consume_big_item_by_user_id(
+        self,
+        request: ConsumeBigItemByUserIdRequest,
+    ) -> ConsumeBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._consume_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_big_item_by_user_id_async(
+        self,
+        request: ConsumeBigItemByUserIdRequest,
+    ) -> ConsumeBigItemByUserIdResult:
+        async_result = []
+        self._consume_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_big_item_by_user_id(
+        self,
+        request: DeleteBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[DeleteBigItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteBigItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_big_item_by_user_id(
+        self,
+        request: DeleteBigItemByUserIdRequest,
+    ) -> DeleteBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_big_item_by_user_id_async(
+        self,
+        request: DeleteBigItemByUserIdRequest,
+    ) -> DeleteBigItemByUserIdResult:
+        async_result = []
+        self._delete_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _acquire_big_item_by_stamp_sheet(
+        self,
+        request: AcquireBigItemByStampSheetRequest,
+        callback: Callable[[AsyncResult[AcquireBigItemByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/big/item/acquire"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AcquireBigItemByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def acquire_big_item_by_stamp_sheet(
+        self,
+        request: AcquireBigItemByStampSheetRequest,
+    ) -> AcquireBigItemByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._acquire_big_item_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def acquire_big_item_by_stamp_sheet_async(
+        self,
+        request: AcquireBigItemByStampSheetRequest,
+    ) -> AcquireBigItemByStampSheetResult:
+        async_result = []
+        self._acquire_big_item_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _consume_big_item_by_stamp_task(
+        self,
+        request: ConsumeBigItemByStampTaskRequest,
+        callback: Callable[[AsyncResult[ConsumeBigItemByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/big/item/consume"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ConsumeBigItemByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def consume_big_item_by_stamp_task(
+        self,
+        request: ConsumeBigItemByStampTaskRequest,
+    ) -> ConsumeBigItemByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._consume_big_item_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def consume_big_item_by_stamp_task_async(
+        self,
+        request: ConsumeBigItemByStampTaskRequest,
+    ) -> ConsumeBigItemByStampTaskResult:
+        async_result = []
+        self._consume_big_item_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
