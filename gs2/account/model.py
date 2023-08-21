@@ -113,6 +113,7 @@ class DataOwner(core.Gs2Model):
     user_id: str = None
     name: str = None
     created_at: int = None
+    revision: int = None
 
     def with_data_owner_id(self, data_owner_id: str) -> DataOwner:
         self.data_owner_id = data_owner_id
@@ -128,6 +129,10 @@ class DataOwner(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> DataOwner:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> DataOwner:
+        self.revision = revision
         return self
 
     @classmethod
@@ -219,7 +224,8 @@ class DataOwner(core.Gs2Model):
             .with_data_owner_id(data.get('dataOwnerId'))\
             .with_user_id(data.get('userId'))\
             .with_name(data.get('name'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -227,6 +233,7 @@ class DataOwner(core.Gs2Model):
             "userId": self.user_id,
             "name": self.name,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -237,6 +244,7 @@ class TakeOver(core.Gs2Model):
     user_identifier: str = None
     password: str = None
     created_at: int = None
+    revision: int = None
 
     def with_take_over_id(self, take_over_id: str) -> TakeOver:
         self.take_over_id = take_over_id
@@ -260,6 +268,10 @@ class TakeOver(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> TakeOver:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> TakeOver:
+        self.revision = revision
         return self
 
     @classmethod
@@ -353,7 +365,8 @@ class TakeOver(core.Gs2Model):
             .with_type(data.get('type'))\
             .with_user_identifier(data.get('userIdentifier'))\
             .with_password(data.get('password'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -363,6 +376,7 @@ class TakeOver(core.Gs2Model):
             "userIdentifier": self.user_identifier,
             "password": self.password,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -373,6 +387,7 @@ class Account(core.Gs2Model):
     time_offset: int = None
     banned: bool = None
     created_at: int = None
+    revision: int = None
 
     def with_account_id(self, account_id: str) -> Account:
         self.account_id = account_id
@@ -396,6 +411,10 @@ class Account(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Account:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> Account:
+        self.revision = revision
         return self
 
     @classmethod
@@ -477,7 +496,8 @@ class Account(core.Gs2Model):
             .with_password(data.get('password'))\
             .with_time_offset(data.get('timeOffset'))\
             .with_banned(data.get('banned'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -487,6 +507,7 @@ class Account(core.Gs2Model):
             "timeOffset": self.time_offset,
             "banned": self.banned,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -503,6 +524,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -550,6 +572,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -625,7 +651,8 @@ class Namespace(core.Gs2Model):
             .with_do_take_over_script(ScriptSetting.from_dict(data.get('doTakeOverScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -641,4 +668,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

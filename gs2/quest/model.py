@@ -679,6 +679,7 @@ class CompletedQuestList(core.Gs2Model):
     complete_quest_names: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_completed_quest_list_id(self, completed_quest_list_id: str) -> CompletedQuestList:
         self.completed_quest_list_id = completed_quest_list_id
@@ -702,6 +703,10 @@ class CompletedQuestList(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> CompletedQuestList:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> CompletedQuestList:
+        self.revision = revision
         return self
 
     @classmethod
@@ -798,7 +803,8 @@ class CompletedQuestList(core.Gs2Model):
                 for i in range(len(data.get('completeQuestNames')) if data.get('completeQuestNames') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -811,6 +817,7 @@ class CompletedQuestList(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -824,6 +831,7 @@ class Progress(core.Gs2Model):
     metadata: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_progress_id(self, progress_id: str) -> Progress:
         self.progress_id = progress_id
@@ -859,6 +867,10 @@ class Progress(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Progress:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Progress:
+        self.revision = revision
         return self
 
     @classmethod
@@ -946,7 +958,8 @@ class Progress(core.Gs2Model):
             ])\
             .with_metadata(data.get('metadata'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -962,6 +975,7 @@ class Progress(core.Gs2Model):
             "metadata": self.metadata,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1172,6 +1186,7 @@ class QuestModelMaster(core.Gs2Model):
     premise_quest_names: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_quest_model_id(self, quest_model_id: str) -> QuestModelMaster:
         self.quest_model_id = quest_model_id
@@ -1223,6 +1238,10 @@ class QuestModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> QuestModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> QuestModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1338,7 +1357,8 @@ class QuestModelMaster(core.Gs2Model):
                 for i in range(len(data.get('premiseQuestNames')) if data.get('premiseQuestNames') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1370,6 +1390,7 @@ class QuestModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1381,6 +1402,7 @@ class QuestGroupModelMaster(core.Gs2Model):
     challenge_period_event_id: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_quest_group_model_id(self, quest_group_model_id: str) -> QuestGroupModelMaster:
         self.quest_group_model_id = quest_group_model_id
@@ -1408,6 +1430,10 @@ class QuestGroupModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> QuestGroupModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> QuestGroupModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1490,7 +1516,8 @@ class QuestGroupModelMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1501,6 +1528,7 @@ class QuestGroupModelMaster(core.Gs2Model):
             "challengePeriodEventId": self.challenge_period_event_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1517,6 +1545,7 @@ class Namespace(core.Gs2Model):
     updated_at: int = None
     queue_namespace_id: str = None
     key_id: str = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1564,6 +1593,10 @@ class Namespace(core.Gs2Model):
 
     def with_key_id(self, key_id: str) -> Namespace:
         self.key_id = key_id
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1639,7 +1672,8 @@ class Namespace(core.Gs2Model):
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))
+            .with_key_id(data.get('keyId'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1655,4 +1689,5 @@ class Namespace(core.Gs2Model):
             "updatedAt": self.updated_at,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "revision": self.revision,
         }

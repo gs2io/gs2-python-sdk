@@ -686,6 +686,7 @@ class Subscribe(core.Gs2Model):
     target_user_ids: List[str] = None
     subscribed_user_ids: List[str] = None
     created_at: int = None
+    revision: int = None
 
     def with_subscribe_id(self, subscribe_id: str) -> Subscribe:
         self.subscribe_id = subscribe_id
@@ -709,6 +710,10 @@ class Subscribe(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Subscribe:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> Subscribe:
+        self.revision = revision
         return self
 
     @classmethod
@@ -808,7 +813,8 @@ class Subscribe(core.Gs2Model):
                 data.get('subscribedUserIds')[i]
                 for i in range(len(data.get('subscribedUserIds')) if data.get('subscribedUserIds') else 0)
             ])\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -824,6 +830,7 @@ class Subscribe(core.Gs2Model):
                 for i in range(len(self.subscribed_user_ids) if self.subscribed_user_ids else 0)
             ],
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -848,6 +855,7 @@ class CategoryModelMaster(core.Gs2Model):
     generation: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_category_model_id(self, category_model_id: str) -> CategoryModelMaster:
         self.category_model_id = category_model_id
@@ -927,6 +935,10 @@ class CategoryModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> CategoryModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> CategoryModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1028,7 +1040,8 @@ class CategoryModelMaster(core.Gs2Model):
             ])\
             .with_generation(data.get('generation'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1058,6 +1071,7 @@ class CategoryModelMaster(core.Gs2Model):
             "generation": self.generation,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1282,6 +1296,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1309,6 +1324,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1382,7 +1401,8 @@ class Namespace(core.Gs2Model):
             ])\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1396,4 +1416,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

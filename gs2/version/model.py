@@ -426,6 +426,7 @@ class AcceptVersion(core.Gs2Model):
     version: Version = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_accept_version_id(self, accept_version_id: str) -> AcceptVersion:
         self.accept_version_id = accept_version_id
@@ -449,6 +450,10 @@ class AcceptVersion(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> AcceptVersion:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> AcceptVersion:
+        self.revision = revision
         return self
 
     @classmethod
@@ -542,7 +547,8 @@ class AcceptVersion(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_version(Version.from_dict(data.get('version')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -552,6 +558,7 @@ class AcceptVersion(core.Gs2Model):
             "version": self.version.to_dict() if self.version else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -761,6 +768,7 @@ class VersionModelMaster(core.Gs2Model):
     signature_key_id: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_version_model_id(self, version_model_id: str) -> VersionModelMaster:
         self.version_model_id = version_model_id
@@ -808,6 +816,10 @@ class VersionModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> VersionModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> VersionModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -895,7 +907,8 @@ class VersionModelMaster(core.Gs2Model):
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -911,6 +924,7 @@ class VersionModelMaster(core.Gs2Model):
             "signatureKeyId": self.signature_key_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -924,6 +938,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -959,6 +974,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1031,7 +1050,8 @@ class Namespace(core.Gs2Model):
             .with_check_version_trigger_script_id(data.get('checkVersionTriggerScriptId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1044,4 +1064,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

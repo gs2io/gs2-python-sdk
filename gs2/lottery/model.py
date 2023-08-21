@@ -501,6 +501,7 @@ class PrizeLimit(core.Gs2Model):
     drawn_count: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_prize_limit_id(self, prize_limit_id: str) -> PrizeLimit:
         self.prize_limit_id = prize_limit_id
@@ -520,6 +521,10 @@ class PrizeLimit(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> PrizeLimit:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> PrizeLimit:
+        self.revision = revision
         return self
 
     @classmethod
@@ -612,7 +617,8 @@ class PrizeLimit(core.Gs2Model):
             .with_prize_id(data.get('prizeId'))\
             .with_drawn_count(data.get('drawnCount'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -621,6 +627,7 @@ class PrizeLimit(core.Gs2Model):
             "drawnCount": self.drawn_count,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1086,6 +1093,7 @@ class PrizeTableMaster(core.Gs2Model):
     prizes: List[Prize] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_prize_table_id(self, prize_table_id: str) -> PrizeTableMaster:
         self.prize_table_id = prize_table_id
@@ -1113,6 +1121,10 @@ class PrizeTableMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> PrizeTableMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> PrizeTableMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1198,7 +1210,8 @@ class PrizeTableMaster(core.Gs2Model):
                 for i in range(len(data.get('prizes')) if data.get('prizes') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1212,6 +1225,7 @@ class PrizeTableMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1226,6 +1240,7 @@ class LotteryModelMaster(core.Gs2Model):
     choice_prize_table_script_id: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_lottery_model_id(self, lottery_model_id: str) -> LotteryModelMaster:
         self.lottery_model_id = lottery_model_id
@@ -1265,6 +1280,10 @@ class LotteryModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> LotteryModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> LotteryModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1350,7 +1369,8 @@ class LotteryModelMaster(core.Gs2Model):
             .with_prize_table_name(data.get('prizeTableName'))\
             .with_choice_prize_table_script_id(data.get('choicePrizeTableScriptId'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1364,6 +1384,7 @@ class LotteryModelMaster(core.Gs2Model):
             "choicePrizeTableScriptId": self.choice_prize_table_script_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1379,6 +1400,7 @@ class Namespace(core.Gs2Model):
     updated_at: int = None
     queue_namespace_id: str = None
     key_id: str = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1422,6 +1444,10 @@ class Namespace(core.Gs2Model):
 
     def with_key_id(self, key_id: str) -> Namespace:
         self.key_id = key_id
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1496,7 +1522,8 @@ class Namespace(core.Gs2Model):
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))
+            .with_key_id(data.get('keyId'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1511,4 +1538,5 @@ class Namespace(core.Gs2Model):
             "updatedAt": self.updated_at,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "revision": self.revision,
         }

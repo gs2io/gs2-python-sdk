@@ -59,6 +59,7 @@ class FirebaseToken(core.Gs2Model):
     token: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_firebase_token_id(self, firebase_token_id: str) -> FirebaseToken:
         self.firebase_token_id = firebase_token_id
@@ -78,6 +79,10 @@ class FirebaseToken(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> FirebaseToken:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> FirebaseToken:
+        self.revision = revision
         return self
 
     @classmethod
@@ -158,7 +163,8 @@ class FirebaseToken(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_token(data.get('token'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -167,6 +173,7 @@ class FirebaseToken(core.Gs2Model):
             "token": self.token,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -177,6 +184,7 @@ class WebSocketSession(core.Gs2Model):
     user_id: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_web_socket_session_id(self, web_socket_session_id: str) -> WebSocketSession:
         self.web_socket_session_id = web_socket_session_id
@@ -200,6 +208,10 @@ class WebSocketSession(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> WebSocketSession:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> WebSocketSession:
+        self.revision = revision
         return self
 
     @classmethod
@@ -293,7 +305,8 @@ class WebSocketSession(core.Gs2Model):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -303,6 +316,7 @@ class WebSocketSession(core.Gs2Model):
             "userId": self.user_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -314,6 +328,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -341,6 +356,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -411,7 +430,8 @@ class Namespace(core.Gs2Model):
             .with_firebase_secret(data.get('firebaseSecret'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -422,4 +442,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

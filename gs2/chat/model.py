@@ -203,6 +203,7 @@ class Subscribe(core.Gs2Model):
     room_name: str = None
     notification_types: List[NotificationType] = None
     created_at: int = None
+    revision: int = None
 
     def with_subscribe_id(self, subscribe_id: str) -> Subscribe:
         self.subscribe_id = subscribe_id
@@ -222,6 +223,10 @@ class Subscribe(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Subscribe:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> Subscribe:
+        self.revision = revision
         return self
 
     @classmethod
@@ -317,7 +322,8 @@ class Subscribe(core.Gs2Model):
                 NotificationType.from_dict(data.get('notificationTypes')[i])
                 for i in range(len(data.get('notificationTypes')) if data.get('notificationTypes') else 0)
             ])\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -329,6 +335,7 @@ class Subscribe(core.Gs2Model):
                 for i in range(len(self.notification_types) if self.notification_types else 0)
             ],
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -340,6 +347,7 @@ class Message(core.Gs2Model):
     category: int = None
     metadata: str = None
     created_at: int = None
+    revision: int = None
 
     def with_message_id(self, message_id: str) -> Message:
         self.message_id = message_id
@@ -367,6 +375,10 @@ class Message(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Message:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> Message:
+        self.revision = revision
         return self
 
     @classmethod
@@ -461,7 +473,8 @@ class Message(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_category(data.get('category'))\
             .with_metadata(data.get('metadata'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -472,6 +485,7 @@ class Message(core.Gs2Model):
             "category": self.category,
             "metadata": self.metadata,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -484,6 +498,7 @@ class Room(core.Gs2Model):
     white_list_user_ids: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_room_id(self, room_id: str) -> Room:
         self.room_id = room_id
@@ -515,6 +530,10 @@ class Room(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Room:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Room:
+        self.revision = revision
         return self
 
     @classmethod
@@ -601,7 +620,8 @@ class Room(core.Gs2Model):
                 for i in range(len(data.get('whiteListUserIds')) if data.get('whiteListUserIds') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -616,6 +636,7 @@ class Room(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -633,6 +654,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -684,6 +706,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -760,7 +786,8 @@ class Namespace(core.Gs2Model):
             .with_post_notification(NotificationSetting.from_dict(data.get('postNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -777,4 +804,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

@@ -370,6 +370,7 @@ class ReceiveStatus(core.Gs2Model):
     last_received_at: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_receive_status_id(self, receive_status_id: str) -> ReceiveStatus:
         self.receive_status_id = receive_status_id
@@ -397,6 +398,10 @@ class ReceiveStatus(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> ReceiveStatus:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> ReceiveStatus:
+        self.revision = revision
         return self
 
     @classmethod
@@ -494,7 +499,8 @@ class ReceiveStatus(core.Gs2Model):
             ])\
             .with_last_received_at(data.get('lastReceivedAt'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -508,6 +514,7 @@ class ReceiveStatus(core.Gs2Model):
             "lastReceivedAt": self.last_received_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -813,6 +820,7 @@ class BonusModelMaster(core.Gs2Model):
     missed_receive_relief_consume_actions: List[ConsumeAction] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_bonus_model_id(self, bonus_model_id: str) -> BonusModelMaster:
         self.bonus_model_id = bonus_model_id
@@ -864,6 +872,10 @@ class BonusModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> BonusModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> BonusModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -958,7 +970,8 @@ class BonusModelMaster(core.Gs2Model):
                 for i in range(len(data.get('missedReceiveReliefConsumeActions')) if data.get('missedReceiveReliefConsumeActions') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -981,6 +994,7 @@ class BonusModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -993,6 +1007,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1024,6 +1039,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1095,7 +1114,8 @@ class Namespace(core.Gs2Model):
             .with_receive_script(ScriptSetting.from_dict(data.get('receiveScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1107,4 +1127,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

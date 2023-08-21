@@ -728,6 +728,7 @@ class RandomShowcaseMaster(core.Gs2Model):
     sales_period_event_id: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_showcase_id(self, showcase_id: str) -> RandomShowcaseMaster:
         self.showcase_id = showcase_id
@@ -771,6 +772,10 @@ class RandomShowcaseMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> RandomShowcaseMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> RandomShowcaseMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -860,7 +865,8 @@ class RandomShowcaseMaster(core.Gs2Model):
             .with_reset_interval_hours(data.get('resetIntervalHours'))\
             .with_sales_period_event_id(data.get('salesPeriodEventId'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -878,6 +884,7 @@ class RandomShowcaseMaster(core.Gs2Model):
             "salesPeriodEventId": self.sales_period_event_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -887,6 +894,7 @@ class DisplayItemMaster(core.Gs2Model):
     sales_item_name: str = None
     sales_item_group_name: str = None
     sales_period_event_id: str = None
+    revision: int = None
 
     def with_display_item_id(self, display_item_id: str) -> DisplayItemMaster:
         self.display_item_id = display_item_id
@@ -906,6 +914,10 @@ class DisplayItemMaster(core.Gs2Model):
 
     def with_sales_period_event_id(self, sales_period_event_id: str) -> DisplayItemMaster:
         self.sales_period_event_id = sales_period_event_id
+        return self
+
+    def with_revision(self, revision: int) -> DisplayItemMaster:
+        self.revision = revision
         return self
 
     def get(self, key, default=None):
@@ -931,7 +943,8 @@ class DisplayItemMaster(core.Gs2Model):
             .with_type(data.get('type'))\
             .with_sales_item_name(data.get('salesItemName'))\
             .with_sales_item_group_name(data.get('salesItemGroupName'))\
-            .with_sales_period_event_id(data.get('salesPeriodEventId'))
+            .with_sales_period_event_id(data.get('salesPeriodEventId'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -940,6 +953,7 @@ class DisplayItemMaster(core.Gs2Model):
             "salesItemName": self.sales_item_name,
             "salesItemGroupName": self.sales_item_group_name,
             "salesPeriodEventId": self.sales_period_event_id,
+            "revision": self.revision,
         }
 
 
@@ -1349,6 +1363,7 @@ class ShowcaseMaster(core.Gs2Model):
     display_items: List[DisplayItemMaster] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_showcase_id(self, showcase_id: str) -> ShowcaseMaster:
         self.showcase_id = showcase_id
@@ -1380,6 +1395,10 @@ class ShowcaseMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> ShowcaseMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> ShowcaseMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1466,7 +1485,8 @@ class ShowcaseMaster(core.Gs2Model):
                 for i in range(len(data.get('displayItems')) if data.get('displayItems') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1481,6 +1501,7 @@ class ShowcaseMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1492,6 +1513,7 @@ class SalesItemGroupMaster(core.Gs2Model):
     sales_item_names: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_sales_item_group_id(self, sales_item_group_id: str) -> SalesItemGroupMaster:
         self.sales_item_group_id = sales_item_group_id
@@ -1519,6 +1541,10 @@ class SalesItemGroupMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> SalesItemGroupMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> SalesItemGroupMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1604,7 +1630,8 @@ class SalesItemGroupMaster(core.Gs2Model):
                 for i in range(len(data.get('salesItemNames')) if data.get('salesItemNames') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1618,6 +1645,7 @@ class SalesItemGroupMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1630,6 +1658,7 @@ class SalesItemMaster(core.Gs2Model):
     acquire_actions: List[AcquireAction] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_sales_item_id(self, sales_item_id: str) -> SalesItemMaster:
         self.sales_item_id = sales_item_id
@@ -1661,6 +1690,10 @@ class SalesItemMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> SalesItemMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> SalesItemMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1750,7 +1783,8 @@ class SalesItemMaster(core.Gs2Model):
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1768,6 +1802,7 @@ class SalesItemMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1782,6 +1817,7 @@ class Namespace(core.Gs2Model):
     updated_at: int = None
     queue_namespace_id: str = None
     key_id: str = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1821,6 +1857,10 @@ class Namespace(core.Gs2Model):
 
     def with_key_id(self, key_id: str) -> Namespace:
         self.key_id = key_id
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1894,7 +1934,8 @@ class Namespace(core.Gs2Model):
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))
+            .with_key_id(data.get('keyId'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1908,4 +1949,5 @@ class Namespace(core.Gs2Model):
             "updatedAt": self.updated_at,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "revision": self.revision,
         }

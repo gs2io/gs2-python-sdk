@@ -74,6 +74,7 @@ class Vote(core.Gs2Model):
     written_ballots: List[WrittenBallot] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_vote_id(self, vote_id: str) -> Vote:
         self.vote_id = vote_id
@@ -97,6 +98,10 @@ class Vote(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Vote:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Vote:
+        self.revision = revision
         return self
 
     @classmethod
@@ -193,7 +198,8 @@ class Vote(core.Gs2Model):
                 for i in range(len(data.get('writtenBallots')) if data.get('writtenBallots') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -206,6 +212,7 @@ class Vote(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -400,6 +407,7 @@ class Rating(core.Gs2Model):
     rate_value: float = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_rating_id(self, rating_id: str) -> Rating:
         self.rating_id = rating_id
@@ -423,6 +431,10 @@ class Rating(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Rating:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Rating:
+        self.revision = revision
         return self
 
     @classmethod
@@ -516,7 +528,8 @@ class Rating(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_rate_value(data.get('rateValue'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -526,6 +539,7 @@ class Rating(core.Gs2Model):
             "rateValue": self.rate_value,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1175,6 +1189,7 @@ class RatingModelMaster(core.Gs2Model):
     volatility: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_rating_model_id(self, rating_model_id: str) -> RatingModelMaster:
         self.rating_model_id = rating_model_id
@@ -1206,6 +1221,10 @@ class RatingModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> RatingModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> RatingModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1289,7 +1308,8 @@ class RatingModelMaster(core.Gs2Model):
             .with_initial_value(data.get('initialValue'))\
             .with_volatility(data.get('volatility'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1301,6 +1321,7 @@ class RatingModelMaster(core.Gs2Model):
             "volatility": self.volatility,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1314,6 +1335,7 @@ class Gathering(core.Gs2Model):
     expires_at: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_gathering_id(self, gathering_id: str) -> Gathering:
         self.gathering_id = gathering_id
@@ -1349,6 +1371,10 @@ class Gathering(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Gathering:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Gathering:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1442,7 +1468,8 @@ class Gathering(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_expires_at(data.get('expiresAt'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1464,6 +1491,7 @@ class Gathering(core.Gs2Model):
             "expiresAt": self.expires_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1486,6 +1514,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1557,6 +1586,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1638,7 +1671,8 @@ class Namespace(core.Gs2Model):
             .with_change_rating_notification(NotificationSetting.from_dict(data.get('changeRatingNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1660,4 +1694,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

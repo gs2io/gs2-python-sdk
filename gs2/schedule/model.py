@@ -461,6 +461,7 @@ class Trigger(core.Gs2Model):
     user_id: str = None
     created_at: int = None
     expires_at: int = None
+    revision: int = None
 
     def with_trigger_id(self, trigger_id: str) -> Trigger:
         self.trigger_id = trigger_id
@@ -480,6 +481,10 @@ class Trigger(core.Gs2Model):
 
     def with_expires_at(self, expires_at: int) -> Trigger:
         self.expires_at = expires_at
+        return self
+
+    def with_revision(self, revision: int) -> Trigger:
+        self.revision = revision
         return self
 
     @classmethod
@@ -572,7 +577,8 @@ class Trigger(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_user_id(data.get('userId'))\
             .with_created_at(data.get('createdAt'))\
-            .with_expires_at(data.get('expiresAt'))
+            .with_expires_at(data.get('expiresAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -581,6 +587,7 @@ class Trigger(core.Gs2Model):
             "userId": self.user_id,
             "createdAt": self.created_at,
             "expiresAt": self.expires_at,
+            "revision": self.revision,
         }
 
 
@@ -602,6 +609,7 @@ class EventMaster(core.Gs2Model):
     relative_trigger_name: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_event_id(self, event_id: str) -> EventMaster:
         self.event_id = event_id
@@ -669,6 +677,10 @@ class EventMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> EventMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> EventMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -761,7 +773,8 @@ class EventMaster(core.Gs2Model):
             .with_repeat_end_hour(data.get('repeatEndHour'))\
             .with_relative_trigger_name(data.get('relativeTriggerName'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -782,6 +795,7 @@ class EventMaster(core.Gs2Model):
             "relativeTriggerName": self.relative_trigger_name,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -792,6 +806,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -815,6 +830,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -884,7 +903,8 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -894,4 +914,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

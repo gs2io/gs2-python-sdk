@@ -197,6 +197,7 @@ class Stamina(core.Gs2Model):
     last_recovered_at: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_stamina_id(self, stamina_id: str) -> Stamina:
         self.stamina_id = stamina_id
@@ -244,6 +245,10 @@ class Stamina(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Stamina:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Stamina:
+        self.revision = revision
         return self
 
     @classmethod
@@ -343,7 +348,8 @@ class Stamina(core.Gs2Model):
             .with_next_recover_at(data.get('nextRecoverAt'))\
             .with_last_recovered_at(data.get('lastRecoveredAt'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -359,6 +365,7 @@ class Stamina(core.Gs2Model):
             "lastRecoveredAt": self.last_recovered_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -797,6 +804,7 @@ class RecoverValueTableMaster(core.Gs2Model):
     values: List[int] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_recover_value_table_id(self, recover_value_table_id: str) -> RecoverValueTableMaster:
         self.recover_value_table_id = recover_value_table_id
@@ -828,6 +836,10 @@ class RecoverValueTableMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> RecoverValueTableMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> RecoverValueTableMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -914,7 +926,8 @@ class RecoverValueTableMaster(core.Gs2Model):
                 for i in range(len(data.get('values')) if data.get('values') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -929,6 +942,7 @@ class RecoverValueTableMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -941,6 +955,7 @@ class RecoverIntervalTableMaster(core.Gs2Model):
     values: List[int] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_recover_interval_table_id(self, recover_interval_table_id: str) -> RecoverIntervalTableMaster:
         self.recover_interval_table_id = recover_interval_table_id
@@ -972,6 +987,10 @@ class RecoverIntervalTableMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> RecoverIntervalTableMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> RecoverIntervalTableMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1058,7 +1077,8 @@ class RecoverIntervalTableMaster(core.Gs2Model):
                 for i in range(len(data.get('values')) if data.get('values') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1073,6 +1093,7 @@ class RecoverIntervalTableMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1085,6 +1106,7 @@ class MaxStaminaTableMaster(core.Gs2Model):
     values: List[int] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_max_stamina_table_id(self, max_stamina_table_id: str) -> MaxStaminaTableMaster:
         self.max_stamina_table_id = max_stamina_table_id
@@ -1116,6 +1138,10 @@ class MaxStaminaTableMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> MaxStaminaTableMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> MaxStaminaTableMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1202,7 +1228,8 @@ class MaxStaminaTableMaster(core.Gs2Model):
                 for i in range(len(data.get('values')) if data.get('values') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1217,6 +1244,7 @@ class MaxStaminaTableMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1235,6 +1263,7 @@ class StaminaModelMaster(core.Gs2Model):
     recover_value_table_name: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_stamina_model_id(self, stamina_model_id: str) -> StaminaModelMaster:
         self.stamina_model_id = stamina_model_id
@@ -1290,6 +1319,10 @@ class StaminaModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> StaminaModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> StaminaModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1379,7 +1412,8 @@ class StaminaModelMaster(core.Gs2Model):
             .with_recover_interval_table_name(data.get('recoverIntervalTableName'))\
             .with_recover_value_table_name(data.get('recoverValueTableName'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1397,6 +1431,7 @@ class StaminaModelMaster(core.Gs2Model):
             "recoverValueTableName": self.recover_value_table_name,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1408,6 +1443,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1435,6 +1471,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1505,7 +1545,8 @@ class Namespace(core.Gs2Model):
             .with_overflow_trigger_script(ScriptSetting.from_dict(data.get('overflowTriggerScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1516,4 +1557,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

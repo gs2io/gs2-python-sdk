@@ -534,6 +534,7 @@ class PropertyForm(core.Gs2Model):
     slots: List[Slot] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_form_id(self, form_id: str) -> PropertyForm:
         self.form_id = form_id
@@ -561,6 +562,10 @@ class PropertyForm(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> PropertyForm:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> PropertyForm:
+        self.revision = revision
         return self
 
     @classmethod
@@ -670,7 +675,8 @@ class PropertyForm(core.Gs2Model):
                 for i in range(len(data.get('slots')) if data.get('slots') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -684,6 +690,7 @@ class PropertyForm(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -694,6 +701,7 @@ class Form(core.Gs2Model):
     slots: List[Slot] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_form_id(self, form_id: str) -> Form:
         self.form_id = form_id
@@ -717,6 +725,10 @@ class Form(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Form:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Form:
+        self.revision = revision
         return self
 
     @classmethod
@@ -825,7 +837,8 @@ class Form(core.Gs2Model):
                 for i in range(len(data.get('slots')) if data.get('slots') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -838,6 +851,7 @@ class Form(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -848,6 +862,7 @@ class Mold(core.Gs2Model):
     capacity: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_mold_id(self, mold_id: str) -> Mold:
         self.mold_id = mold_id
@@ -871,6 +886,10 @@ class Mold(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Mold:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Mold:
+        self.revision = revision
         return self
 
     @classmethod
@@ -964,7 +983,8 @@ class Mold(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_capacity(data.get('capacity'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -974,6 +994,7 @@ class Mold(core.Gs2Model):
             "capacity": self.capacity,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1071,6 +1092,7 @@ class MoldModelMaster(core.Gs2Model):
     form_model_name: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_mold_model_id(self, mold_model_id: str) -> MoldModelMaster:
         self.mold_model_id = mold_model_id
@@ -1106,6 +1128,10 @@ class MoldModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> MoldModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> MoldModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1190,7 +1216,8 @@ class MoldModelMaster(core.Gs2Model):
             .with_max_capacity(data.get('maxCapacity'))\
             .with_form_model_name(data.get('formModelName'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1203,6 +1230,7 @@ class MoldModelMaster(core.Gs2Model):
             "formModelName": self.form_model_name,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1338,6 +1366,7 @@ class FormModelMaster(core.Gs2Model):
     slots: List[SlotModel] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_form_model_id(self, form_model_id: str) -> FormModelMaster:
         self.form_model_id = form_model_id
@@ -1365,6 +1394,10 @@ class FormModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> FormModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> FormModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1450,7 +1483,8 @@ class FormModelMaster(core.Gs2Model):
                 for i in range(len(data.get('slots')) if data.get('slots') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1464,6 +1498,7 @@ class FormModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1593,6 +1628,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1628,6 +1664,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1700,7 +1740,8 @@ class Namespace(core.Gs2Model):
             .with_update_form_script(ScriptSetting.from_dict(data.get('updateFormScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1713,4 +1754,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

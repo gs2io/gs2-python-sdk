@@ -57,6 +57,7 @@ class AttachSecurityPolicy(core.Gs2Model):
     user_id: str = None
     security_policy_ids: List[str] = None
     attached_at: int = None
+    revision: int = None
 
     def with_user_id(self, user_id: str) -> AttachSecurityPolicy:
         self.user_id = user_id
@@ -68,6 +69,10 @@ class AttachSecurityPolicy(core.Gs2Model):
 
     def with_attached_at(self, attached_at: int) -> AttachSecurityPolicy:
         self.attached_at = attached_at
+        return self
+
+    def with_revision(self, revision: int) -> AttachSecurityPolicy:
+        self.revision = revision
         return self
 
     @classmethod
@@ -125,7 +130,8 @@ class AttachSecurityPolicy(core.Gs2Model):
                 data.get('securityPolicyIds')[i]
                 for i in range(len(data.get('securityPolicyIds')) if data.get('securityPolicyIds') else 0)
             ])\
-            .with_attached_at(data.get('attachedAt'))
+            .with_attached_at(data.get('attachedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -135,6 +141,7 @@ class AttachSecurityPolicy(core.Gs2Model):
                 for i in range(len(self.security_policy_ids) if self.security_policy_ids else 0)
             ],
             "attachedAt": self.attached_at,
+            "revision": self.revision,
         }
 
 
@@ -143,6 +150,7 @@ class Password(core.Gs2Model):
     user_id: str = None
     user_name: str = None
     created_at: int = None
+    revision: int = None
 
     def with_password_id(self, password_id: str) -> Password:
         self.password_id = password_id
@@ -158,6 +166,10 @@ class Password(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Password:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> Password:
+        self.revision = revision
         return self
 
     @classmethod
@@ -213,7 +225,8 @@ class Password(core.Gs2Model):
             .with_password_id(data.get('passwordId'))\
             .with_user_id(data.get('userId'))\
             .with_user_name(data.get('userName'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -221,6 +234,7 @@ class Password(core.Gs2Model):
             "userId": self.user_id,
             "userName": self.user_name,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -229,6 +243,7 @@ class Identifier(core.Gs2Model):
     user_name: str = None
     client_secret: str = None
     created_at: int = None
+    revision: int = None
 
     def with_client_id(self, client_id: str) -> Identifier:
         self.client_id = client_id
@@ -244,6 +259,10 @@ class Identifier(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Identifier:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> Identifier:
+        self.revision = revision
         return self
 
     @classmethod
@@ -275,7 +294,8 @@ class Identifier(core.Gs2Model):
             .with_client_id(data.get('clientId'))\
             .with_user_name(data.get('userName'))\
             .with_client_secret(data.get('clientSecret'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -283,6 +303,7 @@ class Identifier(core.Gs2Model):
             "userName": self.user_name,
             "clientSecret": self.client_secret,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -392,6 +413,7 @@ class User(core.Gs2Model):
     description: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_user_id(self, user_id: str) -> User:
         self.user_id = user_id
@@ -411,6 +433,10 @@ class User(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> User:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> User:
+        self.revision = revision
         return self
 
     @classmethod
@@ -467,7 +493,8 @@ class User(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -476,4 +503,5 @@ class User(core.Gs2Model):
             "description": self.description,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

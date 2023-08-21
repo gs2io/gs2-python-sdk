@@ -291,6 +291,7 @@ class Status(core.Gs2Model):
     next_rank_up_experience_value: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_status_id(self, status_id: str) -> Status:
         self.status_id = status_id
@@ -330,6 +331,10 @@ class Status(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Status:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Status:
+        self.revision = revision
         return self
 
     @classmethod
@@ -439,7 +444,8 @@ class Status(core.Gs2Model):
             .with_rank_cap_value(data.get('rankCapValue'))\
             .with_next_rank_up_experience_value(data.get('nextRankUpExperienceValue'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -453,6 +459,7 @@ class Status(core.Gs2Model):
             "nextRankUpExperienceValue": self.next_rank_up_experience_value,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -642,6 +649,7 @@ class ThresholdMaster(core.Gs2Model):
     values: List[int] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_threshold_id(self, threshold_id: str) -> ThresholdMaster:
         self.threshold_id = threshold_id
@@ -669,6 +677,10 @@ class ThresholdMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> ThresholdMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> ThresholdMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -754,7 +766,8 @@ class ThresholdMaster(core.Gs2Model):
                 for i in range(len(data.get('values')) if data.get('values') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -768,6 +781,7 @@ class ThresholdMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -927,6 +941,7 @@ class ExperienceModelMaster(core.Gs2Model):
     acquire_action_rates: List[AcquireActionRate] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_experience_model_id(self, experience_model_id: str) -> ExperienceModelMaster:
         self.experience_model_id = experience_model_id
@@ -970,6 +985,10 @@ class ExperienceModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> ExperienceModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> ExperienceModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1059,7 +1078,8 @@ class ExperienceModelMaster(core.Gs2Model):
                 for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1077,6 +1097,7 @@ class ExperienceModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1093,6 +1114,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1140,6 +1162,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1215,7 +1241,8 @@ class Namespace(core.Gs2Model):
             .with_overflow_experience_script(ScriptSetting.from_dict(data.get('overflowExperienceScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1231,4 +1258,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

@@ -60,6 +60,7 @@ class GitHubApiKey(core.Gs2Model):
     encryption_key_name: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_api_key_id(self, api_key_id: str) -> GitHubApiKey:
         self.api_key_id = api_key_id
@@ -83,6 +84,10 @@ class GitHubApiKey(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> GitHubApiKey:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> GitHubApiKey:
+        self.revision = revision
         return self
 
     @classmethod
@@ -164,7 +169,8 @@ class GitHubApiKey(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_encryption_key_name(data.get('encryptionKeyName'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -174,6 +180,7 @@ class GitHubApiKey(core.Gs2Model):
             "encryptionKeyName": self.encryption_key_name,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -183,6 +190,7 @@ class Key(core.Gs2Model):
     description: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_key_id(self, key_id: str) -> Key:
         self.key_id = key_id
@@ -202,6 +210,10 @@ class Key(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Key:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Key:
+        self.revision = revision
         return self
 
     @classmethod
@@ -282,7 +294,8 @@ class Key(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -291,6 +304,7 @@ class Key(core.Gs2Model):
             "description": self.description,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -301,6 +315,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -324,6 +339,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -393,7 +412,8 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -403,4 +423,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

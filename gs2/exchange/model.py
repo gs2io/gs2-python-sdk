@@ -369,6 +369,7 @@ class Await(core.Gs2Model):
     name: str = None
     count: int = None
     exchanged_at: int = None
+    revision: int = None
 
     def with_await_id(self, await_id: str) -> Await:
         self.await_id = await_id
@@ -392,6 +393,10 @@ class Await(core.Gs2Model):
 
     def with_exchanged_at(self, exchanged_at: int) -> Await:
         self.exchanged_at = exchanged_at
+        return self
+
+    def with_revision(self, revision: int) -> Await:
+        self.revision = revision
         return self
 
     @classmethod
@@ -485,7 +490,8 @@ class Await(core.Gs2Model):
             .with_rate_name(data.get('rateName'))\
             .with_name(data.get('name'))\
             .with_count(data.get('count'))\
-            .with_exchanged_at(data.get('exchangedAt'))
+            .with_exchanged_at(data.get('exchangedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -495,6 +501,7 @@ class Await(core.Gs2Model):
             "name": self.name,
             "count": self.count,
             "exchangedAt": self.exchanged_at,
+            "revision": self.revision,
         }
 
 
@@ -597,6 +604,7 @@ class IncrementalRateModelMaster(core.Gs2Model):
     acquire_actions: List[AcquireAction] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_incremental_rate_model_id(self, incremental_rate_model_id: str) -> IncrementalRateModelMaster:
         self.incremental_rate_model_id = incremental_rate_model_id
@@ -652,6 +660,10 @@ class IncrementalRateModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> IncrementalRateModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> IncrementalRateModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -744,7 +756,8 @@ class IncrementalRateModelMaster(core.Gs2Model):
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -765,6 +778,7 @@ class IncrementalRateModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -946,6 +960,7 @@ class RateModelMaster(core.Gs2Model):
     acquire_actions: List[AcquireAction] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_rate_model_id(self, rate_model_id: str) -> RateModelMaster:
         self.rate_model_id = rate_model_id
@@ -993,6 +1008,10 @@ class RateModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> RateModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> RateModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1089,7 +1108,8 @@ class RateModelMaster(core.Gs2Model):
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1114,6 +1134,7 @@ class RateModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1293,6 +1314,7 @@ class Namespace(core.Gs2Model):
     updated_at: int = None
     queue_namespace_id: str = None
     key_id: str = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1340,6 +1362,10 @@ class Namespace(core.Gs2Model):
 
     def with_key_id(self, key_id: str) -> Namespace:
         self.key_id = key_id
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1415,7 +1441,8 @@ class Namespace(core.Gs2Model):
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))
+            .with_key_id(data.get('keyId'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1431,4 +1458,5 @@ class Namespace(core.Gs2Model):
             "updatedAt": self.updated_at,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "revision": self.revision,
         }

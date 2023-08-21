@@ -310,6 +310,7 @@ class StampSheetResult(core.Gs2Model):
     sheet_result: str = None
     next_transaction_id: str = None
     created_at: int = None
+    revision: int = None
 
     def with_stamp_sheet_result_id(self, stamp_sheet_result_id: str) -> StampSheetResult:
         self.stamp_sheet_result_id = stamp_sheet_result_id
@@ -345,6 +346,10 @@ class StampSheetResult(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> StampSheetResult:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> StampSheetResult:
+        self.revision = revision
         return self
 
     @classmethod
@@ -447,7 +452,8 @@ class StampSheetResult(core.Gs2Model):
             ])\
             .with_sheet_result(data.get('sheetResult'))\
             .with_next_transaction_id(data.get('nextTransactionId'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -466,6 +472,7 @@ class StampSheetResult(core.Gs2Model):
             "sheetResult": self.sheet_result,
             "nextTransactionId": self.next_transaction_id,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -685,6 +692,7 @@ class DistributorModelMaster(core.Gs2Model):
     white_list_target_ids: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_distributor_model_id(self, distributor_model_id: str) -> DistributorModelMaster:
         self.distributor_model_id = distributor_model_id
@@ -716,6 +724,10 @@ class DistributorModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> DistributorModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> DistributorModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -802,7 +814,8 @@ class DistributorModelMaster(core.Gs2Model):
                 for i in range(len(data.get('whiteListTargetIds')) if data.get('whiteListTargetIds') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -817,6 +830,7 @@ class DistributorModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -829,6 +843,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -860,6 +875,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -931,7 +950,8 @@ class Namespace(core.Gs2Model):
             .with_auto_run_stamp_sheet_notification(NotificationSetting.from_dict(data.get('autoRunStampSheetNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -943,4 +963,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

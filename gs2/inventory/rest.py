@@ -7731,7 +7731,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/{itemName}/acquire".format(
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}/acquire".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
@@ -7809,7 +7809,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/big/inventory/{inventoryName}/{itemName}/consume".format(
+        ) + "/{namespaceName}/user/me/big/inventory/{inventoryName}/item/{itemName}/consume".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
             itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
@@ -7888,7 +7888,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/{itemName}/consume".format(
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}/consume".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
@@ -7966,7 +7966,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}".format(
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',

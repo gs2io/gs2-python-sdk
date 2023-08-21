@@ -162,6 +162,7 @@ class Receipt(core.Gs2Model):
     total: int = None
     contents_id: str = None
     created_at: int = None
+    revision: int = None
 
     def with_receipt_id(self, receipt_id: str) -> Receipt:
         self.receipt_id = receipt_id
@@ -209,6 +210,10 @@ class Receipt(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Receipt:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> Receipt:
+        self.revision = revision
         return self
 
     @classmethod
@@ -308,7 +313,8 @@ class Receipt(core.Gs2Model):
             .with_free(data.get('free'))\
             .with_total(data.get('total'))\
             .with_contents_id(data.get('contentsId'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -324,6 +330,7 @@ class Receipt(core.Gs2Model):
             "total": self.total,
             "contentsId": self.contents_id,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -336,6 +343,7 @@ class Wallet(core.Gs2Model):
     detail: List[WalletDetail] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_wallet_id(self, wallet_id: str) -> Wallet:
         self.wallet_id = wallet_id
@@ -367,6 +375,10 @@ class Wallet(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Wallet:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Wallet:
+        self.revision = revision
         return self
 
     @classmethod
@@ -465,7 +477,8 @@ class Wallet(core.Gs2Model):
                 for i in range(len(data.get('detail')) if data.get('detail') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -480,6 +493,7 @@ class Wallet(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -500,6 +514,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -563,6 +578,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -642,7 +661,8 @@ class Namespace(core.Gs2Model):
             .with_balance(data.get('balance'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -662,4 +682,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

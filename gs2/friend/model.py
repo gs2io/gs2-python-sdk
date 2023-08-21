@@ -464,6 +464,7 @@ class BlackList(core.Gs2Model):
     target_user_ids: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_black_list_id(self, black_list_id: str) -> BlackList:
         self.black_list_id = black_list_id
@@ -483,6 +484,10 @@ class BlackList(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> BlackList:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> BlackList:
+        self.revision = revision
         return self
 
     @classmethod
@@ -566,7 +571,8 @@ class BlackList(core.Gs2Model):
                 for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -578,6 +584,7 @@ class BlackList(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -587,6 +594,7 @@ class Inbox(core.Gs2Model):
     from_user_ids: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_inbox_id(self, inbox_id: str) -> Inbox:
         self.inbox_id = inbox_id
@@ -606,6 +614,10 @@ class Inbox(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Inbox:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Inbox:
+        self.revision = revision
         return self
 
     @classmethod
@@ -689,7 +701,8 @@ class Inbox(core.Gs2Model):
                 for i in range(len(data.get('fromUserIds')) if data.get('fromUserIds') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -701,6 +714,7 @@ class Inbox(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -710,6 +724,7 @@ class SendBox(core.Gs2Model):
     target_user_ids: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_send_box_id(self, send_box_id: str) -> SendBox:
         self.send_box_id = send_box_id
@@ -729,6 +744,10 @@ class SendBox(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> SendBox:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> SendBox:
+        self.revision = revision
         return self
 
     @classmethod
@@ -812,7 +831,8 @@ class SendBox(core.Gs2Model):
                 for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -824,6 +844,7 @@ class SendBox(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -833,6 +854,7 @@ class Friend(core.Gs2Model):
     target_user_ids: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_friend_id(self, friend_id: str) -> Friend:
         self.friend_id = friend_id
@@ -852,6 +874,10 @@ class Friend(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Friend:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Friend:
+        self.revision = revision
         return self
 
     @classmethod
@@ -935,7 +961,8 @@ class Friend(core.Gs2Model):
                 for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -947,6 +974,7 @@ class Friend(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -956,6 +984,7 @@ class Follow(core.Gs2Model):
     target_user_ids: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_follow_id(self, follow_id: str) -> Follow:
         self.follow_id = follow_id
@@ -975,6 +1004,10 @@ class Follow(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Follow:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Follow:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1058,7 +1091,8 @@ class Follow(core.Gs2Model):
                 for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1070,6 +1104,7 @@ class Follow(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1081,6 +1116,7 @@ class Profile(core.Gs2Model):
     friend_profile: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_profile_id(self, profile_id: str) -> Profile:
         self.profile_id = profile_id
@@ -1108,6 +1144,10 @@ class Profile(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Profile:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Profile:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1190,7 +1230,8 @@ class Profile(core.Gs2Model):
             .with_follower_profile(data.get('followerProfile'))\
             .with_friend_profile(data.get('friendProfile'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1201,6 +1242,7 @@ class Profile(core.Gs2Model):
             "friendProfile": self.friend_profile,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1222,6 +1264,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1289,6 +1332,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1369,7 +1416,8 @@ class Namespace(core.Gs2Model):
             .with_accept_request_notification(NotificationSetting.from_dict(data.get('acceptRequestNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1390,4 +1438,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

@@ -221,6 +221,7 @@ class CampaignModelMaster(core.Gs2Model):
     enable_campaign_code: bool = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_campaign_id(self, campaign_id: str) -> CampaignModelMaster:
         self.campaign_id = campaign_id
@@ -248,6 +249,10 @@ class CampaignModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> CampaignModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> CampaignModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -330,7 +335,8 @@ class CampaignModelMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_enable_campaign_code(data.get('enableCampaignCode'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -341,6 +347,7 @@ class CampaignModelMaster(core.Gs2Model):
             "enableCampaignCode": self.enable_campaign_code,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -464,6 +471,7 @@ class SerialKey(core.Gs2Model):
     created_at: int = None
     used_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_serial_key_id(self, serial_key_id: str) -> SerialKey:
         self.serial_key_id = serial_key_id
@@ -499,6 +507,10 @@ class SerialKey(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> SerialKey:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> SerialKey:
+        self.revision = revision
         return self
 
     @classmethod
@@ -583,7 +595,8 @@ class SerialKey(core.Gs2Model):
             .with_used_user_id(data.get('usedUserId'))\
             .with_created_at(data.get('createdAt'))\
             .with_used_at(data.get('usedAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -596,6 +609,7 @@ class SerialKey(core.Gs2Model):
             "createdAt": self.created_at,
             "usedAt": self.used_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -607,6 +621,7 @@ class IssueJob(core.Gs2Model):
     issue_request_count: int = None
     status: str = None
     created_at: int = None
+    revision: int = None
 
     def with_issue_job_id(self, issue_job_id: str) -> IssueJob:
         self.issue_job_id = issue_job_id
@@ -634,6 +649,10 @@ class IssueJob(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> IssueJob:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> IssueJob:
+        self.revision = revision
         return self
 
     @classmethod
@@ -728,7 +747,8 @@ class IssueJob(core.Gs2Model):
             .with_issued_count(data.get('issuedCount'))\
             .with_issue_request_count(data.get('issueRequestCount'))\
             .with_status(data.get('status'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -739,6 +759,7 @@ class IssueJob(core.Gs2Model):
             "issueRequestCount": self.issue_request_count,
             "status": self.status,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -749,6 +770,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -772,6 +794,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -841,7 +867,8 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -851,4 +878,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

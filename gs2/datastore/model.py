@@ -59,6 +59,7 @@ class DataObjectHistory(core.Gs2Model):
     generation: str = None
     content_length: int = None
     created_at: int = None
+    revision: int = None
 
     def with_data_object_history_id(self, data_object_history_id: str) -> DataObjectHistory:
         self.data_object_history_id = data_object_history_id
@@ -78,6 +79,10 @@ class DataObjectHistory(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> DataObjectHistory:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> DataObjectHistory:
+        self.revision = revision
         return self
 
     @classmethod
@@ -182,7 +187,8 @@ class DataObjectHistory(core.Gs2Model):
             .with_data_object_name(data.get('dataObjectName'))\
             .with_generation(data.get('generation'))\
             .with_content_length(data.get('contentLength'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -191,6 +197,7 @@ class DataObjectHistory(core.Gs2Model):
             "generation": self.generation,
             "contentLength": self.content_length,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 
@@ -205,6 +212,7 @@ class DataObject(core.Gs2Model):
     previous_generation: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_data_object_id(self, data_object_id: str) -> DataObject:
         self.data_object_id = data_object_id
@@ -244,6 +252,10 @@ class DataObject(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> DataObject:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> DataObject:
+        self.revision = revision
         return self
 
     @classmethod
@@ -344,7 +356,8 @@ class DataObject(core.Gs2Model):
             .with_generation(data.get('generation'))\
             .with_previous_generation(data.get('previousGeneration'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -361,6 +374,7 @@ class DataObject(core.Gs2Model):
             "previousGeneration": self.previous_generation,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -427,6 +441,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -454,6 +469,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -524,7 +543,8 @@ class Namespace(core.Gs2Model):
             .with_done_upload_script(ScriptSetting.from_dict(data.get('doneUploadScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -535,4 +555,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

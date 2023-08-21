@@ -253,6 +253,7 @@ class Event(core.Gs2Model):
     type: str = None
     message: str = None
     event_at: int = None
+    revision: int = None
 
     def with_event_id(self, event_id: str) -> Event:
         self.event_id = event_id
@@ -276,6 +277,10 @@ class Event(core.Gs2Model):
 
     def with_event_at(self, event_at: int) -> Event:
         self.event_at = event_at
+        return self
+
+    def with_revision(self, revision: int) -> Event:
+        self.revision = revision
         return self
 
     @classmethod
@@ -357,7 +362,8 @@ class Event(core.Gs2Model):
             .with_resource_name(data.get('resourceName'))\
             .with_type(data.get('type'))\
             .with_message(data.get('message'))\
-            .with_event_at(data.get('eventAt'))
+            .with_event_at(data.get('eventAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -367,6 +373,7 @@ class Event(core.Gs2Model):
             "type": self.type,
             "message": self.message,
             "eventAt": self.event_at,
+            "revision": self.revision,
         }
 
 
@@ -549,6 +556,7 @@ class Stack(core.Gs2Model):
     status: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_stack_id(self, stack_id: str) -> Stack:
         self.stack_id = stack_id
@@ -576,6 +584,10 @@ class Stack(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Stack:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Stack:
+        self.revision = revision
         return self
 
     @classmethod
@@ -646,7 +658,8 @@ class Stack(core.Gs2Model):
             .with_template(data.get('template'))\
             .with_status(data.get('status'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -657,4 +670,5 @@ class Stack(core.Gs2Model):
             "status": self.status,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

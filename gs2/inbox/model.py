@@ -423,6 +423,7 @@ class Received(core.Gs2Model):
     received_global_message_names: List[str] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_received_id(self, received_id: str) -> Received:
         self.received_id = received_id
@@ -442,6 +443,10 @@ class Received(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Received:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Received:
+        self.revision = revision
         return self
 
     @classmethod
@@ -525,7 +530,8 @@ class Received(core.Gs2Model):
                 for i in range(len(data.get('receivedGlobalMessageNames')) if data.get('receivedGlobalMessageNames') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -537,6 +543,7 @@ class Received(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -678,6 +685,7 @@ class GlobalMessageMaster(core.Gs2Model):
     expires_time_span: TimeSpan = None
     created_at: int = None
     expires_at: int = None
+    revision: int = None
 
     def with_global_message_id(self, global_message_id: str) -> GlobalMessageMaster:
         self.global_message_id = global_message_id
@@ -705,6 +713,10 @@ class GlobalMessageMaster(core.Gs2Model):
 
     def with_expires_at(self, expires_at: int) -> GlobalMessageMaster:
         self.expires_at = expires_at
+        return self
+
+    def with_revision(self, revision: int) -> GlobalMessageMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -790,7 +802,8 @@ class GlobalMessageMaster(core.Gs2Model):
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_created_at(data.get('createdAt'))\
-            .with_expires_at(data.get('expiresAt'))
+            .with_expires_at(data.get('expiresAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -804,6 +817,7 @@ class GlobalMessageMaster(core.Gs2Model):
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "createdAt": self.created_at,
             "expiresAt": self.expires_at,
+            "revision": self.revision,
         }
 
 
@@ -901,6 +915,7 @@ class Message(core.Gs2Model):
     received_at: int = None
     read_at: int = None
     expires_at: int = None
+    revision: int = None
 
     def with_message_id(self, message_id: str) -> Message:
         self.message_id = message_id
@@ -936,6 +951,10 @@ class Message(core.Gs2Model):
 
     def with_expires_at(self, expires_at: int) -> Message:
         self.expires_at = expires_at
+        return self
+
+    def with_revision(self, revision: int) -> Message:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1035,7 +1054,8 @@ class Message(core.Gs2Model):
             ])\
             .with_received_at(data.get('receivedAt'))\
             .with_read_at(data.get('readAt'))\
-            .with_expires_at(data.get('expiresAt'))
+            .with_expires_at(data.get('expiresAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1051,6 +1071,7 @@ class Message(core.Gs2Model):
             "receivedAt": self.received_at,
             "readAt": self.read_at,
             "expiresAt": self.expires_at,
+            "revision": self.revision,
         }
 
 
@@ -1069,6 +1090,7 @@ class Namespace(core.Gs2Model):
     updated_at: int = None
     queue_namespace_id: str = None
     key_id: str = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1124,6 +1146,10 @@ class Namespace(core.Gs2Model):
 
     def with_key_id(self, key_id: str) -> Namespace:
         self.key_id = key_id
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1201,7 +1227,8 @@ class Namespace(core.Gs2Model):
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))
+            .with_key_id(data.get('keyId'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1219,4 +1246,5 @@ class Namespace(core.Gs2Model):
             "updatedAt": self.updated_at,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "revision": self.revision,
         }

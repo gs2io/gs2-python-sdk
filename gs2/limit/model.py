@@ -355,6 +355,7 @@ class LimitModelMaster(core.Gs2Model):
     reset_hour: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_limit_model_id(self, limit_model_id: str) -> LimitModelMaster:
         self.limit_model_id = limit_model_id
@@ -394,6 +395,10 @@ class LimitModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> LimitModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> LimitModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -479,7 +484,8 @@ class LimitModelMaster(core.Gs2Model):
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
             .with_reset_hour(data.get('resetHour'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -493,6 +499,7 @@ class LimitModelMaster(core.Gs2Model):
             "resetHour": self.reset_hour,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -505,6 +512,7 @@ class Counter(core.Gs2Model):
     next_reset_at: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_counter_id(self, counter_id: str) -> Counter:
         self.counter_id = counter_id
@@ -536,6 +544,10 @@ class Counter(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Counter:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Counter:
+        self.revision = revision
         return self
 
     @classmethod
@@ -643,7 +655,8 @@ class Counter(core.Gs2Model):
             .with_count(data.get('count'))\
             .with_next_reset_at(data.get('nextResetAt'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -655,6 +668,7 @@ class Counter(core.Gs2Model):
             "nextResetAt": self.next_reset_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -665,6 +679,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -688,6 +703,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -757,7 +776,8 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -767,4 +787,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

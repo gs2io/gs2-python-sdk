@@ -334,6 +334,7 @@ class MissionTaskModelMaster(core.Gs2Model):
     premise_mission_task_name: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_mission_task_id(self, mission_task_id: str) -> MissionTaskModelMaster:
         self.mission_task_id = mission_task_id
@@ -381,6 +382,10 @@ class MissionTaskModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> MissionTaskModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> MissionTaskModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -483,7 +488,8 @@ class MissionTaskModelMaster(core.Gs2Model):
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_premise_mission_task_name(data.get('premiseMissionTaskName'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -502,6 +508,7 @@ class MissionTaskModelMaster(core.Gs2Model):
             "premiseMissionTaskName": self.premise_mission_task_name,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1088,6 +1095,7 @@ class Counter(core.Gs2Model):
     values: List[ScopedValue] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_counter_id(self, counter_id: str) -> Counter:
         self.counter_id = counter_id
@@ -1111,6 +1119,10 @@ class Counter(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Counter:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Counter:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1207,7 +1219,8 @@ class Counter(core.Gs2Model):
                 for i in range(len(data.get('values')) if data.get('values') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1220,6 +1233,7 @@ class Counter(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1237,6 +1251,7 @@ class Namespace(core.Gs2Model):
     updated_at: int = None
     queue_namespace_id: str = None
     key_id: str = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1288,6 +1303,10 @@ class Namespace(core.Gs2Model):
 
     def with_key_id(self, key_id: str) -> Namespace:
         self.key_id = key_id
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1364,7 +1383,8 @@ class Namespace(core.Gs2Model):
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
-            .with_key_id(data.get('keyId'))
+            .with_key_id(data.get('keyId'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1381,6 +1401,7 @@ class Namespace(core.Gs2Model):
             "updatedAt": self.updated_at,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
+            "revision": self.revision,
         }
 
 
@@ -1396,6 +1417,7 @@ class MissionGroupModelMaster(core.Gs2Model):
     complete_notification_namespace_id: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_mission_group_id(self, mission_group_id: str) -> MissionGroupModelMaster:
         self.mission_group_id = mission_group_id
@@ -1439,6 +1461,10 @@ class MissionGroupModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> MissionGroupModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> MissionGroupModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1525,7 +1551,8 @@ class MissionGroupModelMaster(core.Gs2Model):
             .with_reset_hour(data.get('resetHour'))\
             .with_complete_notification_namespace_id(data.get('completeNotificationNamespaceId'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1540,6 +1567,7 @@ class MissionGroupModelMaster(core.Gs2Model):
             "completeNotificationNamespaceId": self.complete_notification_namespace_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1607,6 +1635,7 @@ class CounterModelMaster(core.Gs2Model):
     challenge_period_event_id: str = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_counter_id(self, counter_id: str) -> CounterModelMaster:
         self.counter_id = counter_id
@@ -1638,6 +1667,10 @@ class CounterModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> CounterModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> CounterModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1724,7 +1757,8 @@ class CounterModelMaster(core.Gs2Model):
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1739,6 +1773,7 @@ class CounterModelMaster(core.Gs2Model):
             "challengePeriodEventId": self.challenge_period_event_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1799,6 +1834,7 @@ class Complete(core.Gs2Model):
     next_reset_at: int = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_complete_id(self, complete_id: str) -> Complete:
         self.complete_id = complete_id
@@ -1830,6 +1866,10 @@ class Complete(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Complete:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Complete:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1931,7 +1971,8 @@ class Complete(core.Gs2Model):
             ])\
             .with_next_reset_at(data.get('nextResetAt'))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1949,4 +1990,5 @@ class Complete(core.Gs2Model):
             "nextResetAt": self.next_reset_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }

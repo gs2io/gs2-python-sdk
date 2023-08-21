@@ -521,6 +521,7 @@ class RarityParameterStatus(core.Gs2Model):
     parameter_values: List[RarityParameterValue] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_rarity_parameter_status_id(self, rarity_parameter_status_id: str) -> RarityParameterStatus:
         self.rarity_parameter_status_id = rarity_parameter_status_id
@@ -548,6 +549,10 @@ class RarityParameterStatus(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> RarityParameterStatus:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> RarityParameterStatus:
+        self.revision = revision
         return self
 
     @classmethod
@@ -657,7 +662,8 @@ class RarityParameterStatus(core.Gs2Model):
                 for i in range(len(data.get('parameterValues')) if data.get('parameterValues') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -671,6 +677,7 @@ class RarityParameterStatus(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -682,6 +689,7 @@ class BalanceParameterStatus(core.Gs2Model):
     parameter_values: List[BalanceParameterValue] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_balance_parameter_status_id(self, balance_parameter_status_id: str) -> BalanceParameterStatus:
         self.balance_parameter_status_id = balance_parameter_status_id
@@ -709,6 +717,10 @@ class BalanceParameterStatus(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> BalanceParameterStatus:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> BalanceParameterStatus:
+        self.revision = revision
         return self
 
     @classmethod
@@ -818,7 +830,8 @@ class BalanceParameterStatus(core.Gs2Model):
                 for i in range(len(data.get('parameterValues')) if data.get('parameterValues') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -832,6 +845,7 @@ class BalanceParameterStatus(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -929,6 +943,7 @@ class RarityParameterModelMaster(core.Gs2Model):
     parameters: List[RarityParameterValueModel] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_rarity_parameter_model_id(self, rarity_parameter_model_id: str) -> RarityParameterModelMaster:
         self.rarity_parameter_model_id = rarity_parameter_model_id
@@ -964,6 +979,10 @@ class RarityParameterModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> RarityParameterModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> RarityParameterModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1054,7 +1073,8 @@ class RarityParameterModelMaster(core.Gs2Model):
                 for i in range(len(data.get('parameters')) if data.get('parameters') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1073,6 +1093,7 @@ class RarityParameterModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1222,6 +1243,7 @@ class BalanceParameterModelMaster(core.Gs2Model):
     parameters: List[BalanceParameterValueModel] = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_balance_parameter_model_id(self, balance_parameter_model_id: str) -> BalanceParameterModelMaster:
         self.balance_parameter_model_id = balance_parameter_model_id
@@ -1257,6 +1279,10 @@ class BalanceParameterModelMaster(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> BalanceParameterModelMaster:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> BalanceParameterModelMaster:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1344,7 +1370,8 @@ class BalanceParameterModelMaster(core.Gs2Model):
                 for i in range(len(data.get('parameters')) if data.get('parameters') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1360,6 +1387,7 @@ class BalanceParameterModelMaster(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -1501,6 +1529,7 @@ class Namespace(core.Gs2Model):
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    revision: int = None
 
     def with_namespace_id(self, namespace_id: str) -> Namespace:
         self.namespace_id = namespace_id
@@ -1528,6 +1557,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> Namespace:
+        self.revision = revision
         return self
 
     @classmethod
@@ -1598,7 +1631,8 @@ class Namespace(core.Gs2Model):
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1609,4 +1643,5 @@ class Namespace(core.Gs2Model):
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
