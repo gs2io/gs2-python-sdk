@@ -74,7 +74,6 @@ class Vote(core.Gs2Model):
     written_ballots: List[WrittenBallot] = None
     created_at: int = None
     updated_at: int = None
-    revision: int = None
 
     def with_vote_id(self, vote_id: str) -> Vote:
         self.vote_id = vote_id
@@ -98,10 +97,6 @@ class Vote(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Vote:
         self.updated_at = updated_at
-        return self
-
-    def with_revision(self, revision: int) -> Vote:
-        self.revision = revision
         return self
 
     @classmethod
@@ -198,8 +193,7 @@ class Vote(core.Gs2Model):
                 for i in range(len(data.get('writtenBallots')) if data.get('writtenBallots') else 0)
             ])\
             .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))\
-            .with_revision(data.get('revision'))
+            .with_updated_at(data.get('updatedAt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -212,7 +206,6 @@ class Vote(core.Gs2Model):
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
-            "revision": self.revision,
         }
 
 
