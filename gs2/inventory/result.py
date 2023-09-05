@@ -2110,9 +2110,14 @@ class AddCapacityByUserIdResult(core.Gs2Result):
 
 class SetCapacityByUserIdResult(core.Gs2Result):
     item: Inventory = None
+    old: Inventory = None
 
     def with_item(self, item: Inventory) -> SetCapacityByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Inventory) -> SetCapacityByUserIdResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -2134,11 +2139,13 @@ class SetCapacityByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return SetCapacityByUserIdResult()\
-            .with_item(Inventory.from_dict(data.get('item')))
+            .with_item(Inventory.from_dict(data.get('item')))\
+            .with_old(Inventory.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 

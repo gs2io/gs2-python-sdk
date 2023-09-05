@@ -1243,6 +1243,47 @@ class MarkReceivedByUserIdResult(core.Gs2Result):
         }
 
 
+class UnmarkReceivedByUserIdResult(core.Gs2Result):
+    item: ReceiveStatus = None
+    bonus_model: BonusModel = None
+
+    def with_item(self, item: ReceiveStatus) -> UnmarkReceivedByUserIdResult:
+        self.item = item
+        return self
+
+    def with_bonus_model(self, bonus_model: BonusModel) -> UnmarkReceivedByUserIdResult:
+        self.bonus_model = bonus_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnmarkReceivedByUserIdResult]:
+        if data is None:
+            return None
+        return UnmarkReceivedByUserIdResult()\
+            .with_item(ReceiveStatus.from_dict(data.get('item')))\
+            .with_bonus_model(BonusModel.from_dict(data.get('bonusModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "bonusModel": self.bonus_model.to_dict() if self.bonus_model else None,
+        }
+
+
 class MarkReceivedByStampTaskResult(core.Gs2Result):
     item: ReceiveStatus = None
     bonus_model: BonusModel = None
@@ -1288,4 +1329,45 @@ class MarkReceivedByStampTaskResult(core.Gs2Result):
             "item": self.item.to_dict() if self.item else None,
             "bonusModel": self.bonus_model.to_dict() if self.bonus_model else None,
             "newContextStack": self.new_context_stack,
+        }
+
+
+class UnmarkReceivedByStampSheetResult(core.Gs2Result):
+    item: ReceiveStatus = None
+    bonus_model: BonusModel = None
+
+    def with_item(self, item: ReceiveStatus) -> UnmarkReceivedByStampSheetResult:
+        self.item = item
+        return self
+
+    def with_bonus_model(self, bonus_model: BonusModel) -> UnmarkReceivedByStampSheetResult:
+        self.bonus_model = bonus_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnmarkReceivedByStampSheetResult]:
+        if data is None:
+            return None
+        return UnmarkReceivedByStampSheetResult()\
+            .with_item(ReceiveStatus.from_dict(data.get('item')))\
+            .with_bonus_model(BonusModel.from_dict(data.get('bonusModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "bonusModel": self.bonus_model.to_dict() if self.bonus_model else None,
         }

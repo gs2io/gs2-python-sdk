@@ -1603,6 +1603,86 @@ class Gs2DictionaryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _delete_entries_by_user_id(
+        self,
+        request: DeleteEntriesByUserIdRequest,
+        callback: Callable[[AsyncResult[DeleteEntriesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='entry',
+            function='deleteEntriesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.entry_model_names is not None:
+            body["entryModelNames"] = [
+                item
+                for item in request.entry_model_names
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteEntriesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_entries_by_user_id(
+        self,
+        request: DeleteEntriesByUserIdRequest,
+    ) -> DeleteEntriesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_entries_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_entries_by_user_id_async(
+        self,
+        request: DeleteEntriesByUserIdRequest,
+    ) -> DeleteEntriesByUserIdResult:
+        async_result = []
+        self._delete_entries_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _add_entries_by_stamp_sheet(
         self,
         request: AddEntriesByStampSheetRequest,
@@ -1663,6 +1743,79 @@ class Gs2DictionaryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> AddEntriesByStampSheetResult:
         async_result = []
         self._add_entries_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_entries_by_stamp_task(
+        self,
+        request: DeleteEntriesByStampTaskRequest,
+        callback: Callable[[AsyncResult[DeleteEntriesByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='entry',
+            function='deleteEntriesByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteEntriesByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_entries_by_stamp_task(
+        self,
+        request: DeleteEntriesByStampTaskRequest,
+    ) -> DeleteEntriesByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._delete_entries_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_entries_by_stamp_task_async(
+        self,
+        request: DeleteEntriesByStampTaskRequest,
+    ) -> DeleteEntriesByStampTaskResult:
+        async_result = []
+        self._delete_entries_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

@@ -255,6 +255,40 @@ class ReceiveByUserIdResult(core.Gs2Result):
         }
 
 
+class RevertReceiveByUserIdResult(core.Gs2Result):
+    item: Complete = None
+
+    def with_item(self, item: Complete) -> RevertReceiveByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertReceiveByUserIdResult]:
+        if data is None:
+            return None
+        return RevertReceiveByUserIdResult()\
+            .with_item(Complete.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class GetCompleteResult(core.Gs2Result):
     item: Complete = None
 
@@ -395,6 +429,40 @@ class ReceiveByStampTaskResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
+        }
+
+
+class RevertReceiveByStampSheetResult(core.Gs2Result):
+    item: Complete = None
+
+    def with_item(self, item: Complete) -> RevertReceiveByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertReceiveByStampSheetResult]:
+        if data is None:
+            return None
+        return RevertReceiveByStampSheetResult()\
+            .with_item(Complete.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -1109,6 +1177,40 @@ class IncreaseCounterByUserIdResult(core.Gs2Result):
         }
 
 
+class DecreaseCounterByUserIdResult(core.Gs2Result):
+    item: Counter = None
+
+    def with_item(self, item: Counter) -> DecreaseCounterByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseCounterByUserIdResult]:
+        if data is None:
+            return None
+        return DecreaseCounterByUserIdResult()\
+            .with_item(Counter.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class GetCounterResult(core.Gs2Result):
     item: Counter = None
 
@@ -1242,6 +1344,47 @@ class IncreaseByStampSheetResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DecreaseByStampTaskResult(core.Gs2Result):
+    item: Counter = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Counter) -> DecreaseByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> DecreaseByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseByStampTaskResult]:
+        if data is None:
+            return None
+        return DecreaseByStampTaskResult()\
+            .with_item(Counter.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
         }
 
 

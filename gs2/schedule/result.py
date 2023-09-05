@@ -715,6 +715,47 @@ class DeleteTriggerByUserIdResult(core.Gs2Result):
         }
 
 
+class DeleteTriggerByStampTaskResult(core.Gs2Result):
+    item: Trigger = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Trigger) -> DeleteTriggerByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> DeleteTriggerByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteTriggerByStampTaskResult]:
+        if data is None:
+            return None
+        return DeleteTriggerByStampTaskResult()\
+            .with_item(Trigger.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class DescribeEventsResult(core.Gs2Result):
     items: List[Event] = None
 

@@ -1627,6 +1627,68 @@ class MarkReceivedByUserIdRequest(core.Gs2Request):
         }
 
 
+class UnmarkReceivedByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    bonus_model_name: str = None
+    user_id: str = None
+    step_number: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UnmarkReceivedByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_bonus_model_name(self, bonus_model_name: str) -> UnmarkReceivedByUserIdRequest:
+        self.bonus_model_name = bonus_model_name
+        return self
+
+    def with_user_id(self, user_id: str) -> UnmarkReceivedByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_step_number(self, step_number: int) -> UnmarkReceivedByUserIdRequest:
+        self.step_number = step_number
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnmarkReceivedByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnmarkReceivedByUserIdRequest]:
+        if data is None:
+            return None
+        return UnmarkReceivedByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_bonus_model_name(data.get('bonusModelName'))\
+            .with_user_id(data.get('userId'))\
+            .with_step_number(data.get('stepNumber'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "bonusModelName": self.bonus_model_name,
+            "userId": self.user_id,
+            "stepNumber": self.step_number,
+        }
+
+
 class MarkReceivedByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1666,5 +1728,48 @@ class MarkReceivedByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class UnmarkReceivedByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> UnmarkReceivedByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> UnmarkReceivedByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnmarkReceivedByStampSheetRequest]:
+        if data is None:
+            return None
+        return UnmarkReceivedByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }

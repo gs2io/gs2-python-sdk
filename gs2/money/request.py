@@ -1077,6 +1077,61 @@ class RecordReceiptRequest(core.Gs2Request):
         }
 
 
+class RevertRecordReceiptRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    receipt: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RevertRecordReceiptRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> RevertRecordReceiptRequest:
+        self.user_id = user_id
+        return self
+
+    def with_receipt(self, receipt: str) -> RevertRecordReceiptRequest:
+        self.receipt = receipt
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RevertRecordReceiptRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertRecordReceiptRequest]:
+        if data is None:
+            return None
+        return RevertRecordReceiptRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_receipt(data.get('receipt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "receipt": self.receipt,
+        }
+
+
 class RecordReceiptByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1116,5 +1171,48 @@ class RecordReceiptByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class RevertRecordReceiptByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> RevertRecordReceiptByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> RevertRecordReceiptByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertRecordReceiptByStampSheetRequest]:
+        if data is None:
+            return None
+        return RevertRecordReceiptByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }

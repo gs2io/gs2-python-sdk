@@ -343,6 +343,68 @@ class ReceiveByUserIdRequest(core.Gs2Request):
         }
 
 
+class RevertReceiveByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    mission_group_name: str = None
+    mission_task_name: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RevertReceiveByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_mission_group_name(self, mission_group_name: str) -> RevertReceiveByUserIdRequest:
+        self.mission_group_name = mission_group_name
+        return self
+
+    def with_mission_task_name(self, mission_task_name: str) -> RevertReceiveByUserIdRequest:
+        self.mission_task_name = mission_task_name
+        return self
+
+    def with_user_id(self, user_id: str) -> RevertReceiveByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RevertReceiveByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertReceiveByUserIdRequest]:
+        if data is None:
+            return None
+        return RevertReceiveByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_mission_group_name(data.get('missionGroupName'))\
+            .with_mission_task_name(data.get('missionTaskName'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "missionGroupName": self.mission_group_name,
+            "missionTaskName": self.mission_task_name,
+            "userId": self.user_id,
+        }
+
+
 class GetCompleteRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -537,6 +599,49 @@ class ReceiveByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class RevertReceiveByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> RevertReceiveByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> RevertReceiveByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertReceiveByStampSheetRequest]:
+        if data is None:
+            return None
+        return RevertReceiveByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }
 
@@ -1676,6 +1781,68 @@ class IncreaseCounterByUserIdRequest(core.Gs2Request):
         }
 
 
+class DecreaseCounterByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    counter_name: str = None
+    user_id: str = None
+    value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DecreaseCounterByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_counter_name(self, counter_name: str) -> DecreaseCounterByUserIdRequest:
+        self.counter_name = counter_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DecreaseCounterByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_value(self, value: int) -> DecreaseCounterByUserIdRequest:
+        self.value = value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DecreaseCounterByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseCounterByUserIdRequest]:
+        if data is None:
+            return None
+        return DecreaseCounterByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_user_id(data.get('userId'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "counterName": self.counter_name,
+            "userId": self.user_id,
+            "value": self.value,
+        }
+
+
 class GetCounterRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1870,6 +2037,49 @@ class IncreaseByStampSheetRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class DecreaseByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> DecreaseByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> DecreaseByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseByStampTaskRequest]:
+        if data is None:
+            return None
+        return DecreaseByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
             "keyId": self.key_id,
         }
 

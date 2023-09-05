@@ -2283,6 +2283,85 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _sub_mold_capacity_by_user_id(
+        self,
+        request: SubMoldCapacityByUserIdRequest,
+        callback: Callable[[AsyncResult[SubMoldCapacityByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='mold',
+            function='subMoldCapacityByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.mold_name is not None:
+            body["moldName"] = request.mold_name
+        if request.capacity is not None:
+            body["capacity"] = request.capacity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SubMoldCapacityByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def sub_mold_capacity_by_user_id(
+        self,
+        request: SubMoldCapacityByUserIdRequest,
+    ) -> SubMoldCapacityByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._sub_mold_capacity_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_mold_capacity_by_user_id_async(
+        self,
+        request: SubMoldCapacityByUserIdRequest,
+    ) -> SubMoldCapacityByUserIdResult:
+        async_result = []
+        self._sub_mold_capacity_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_mold(
         self,
         request: DeleteMoldRequest,
@@ -2499,6 +2578,79 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> AddCapacityByStampSheetResult:
         async_result = []
         self._add_capacity_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _sub_capacity_by_stamp_task(
+        self,
+        request: SubCapacityByStampTaskRequest,
+        callback: Callable[[AsyncResult[SubCapacityByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='mold',
+            function='subCapacityByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SubCapacityByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def sub_capacity_by_stamp_task(
+        self,
+        request: SubCapacityByStampTaskRequest,
+    ) -> SubCapacityByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._sub_capacity_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_capacity_by_stamp_task_async(
+        self,
+        request: SubCapacityByStampTaskRequest,
+    ) -> SubCapacityByStampTaskResult:
+        async_result = []
+        self._sub_capacity_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

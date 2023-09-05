@@ -1082,9 +1082,14 @@ class DeleteBalanceParameterStatusByUserIdResult(core.Gs2Result):
 
 class ReDrawBalanceParameterStatusByUserIdResult(core.Gs2Result):
     item: BalanceParameterStatus = None
+    old: BalanceParameterStatus = None
 
     def with_item(self, item: BalanceParameterStatus) -> ReDrawBalanceParameterStatusByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: BalanceParameterStatus) -> ReDrawBalanceParameterStatusByUserIdResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1106,19 +1111,26 @@ class ReDrawBalanceParameterStatusByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ReDrawBalanceParameterStatusByUserIdResult()\
-            .with_item(BalanceParameterStatus.from_dict(data.get('item')))
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))\
+            .with_old(BalanceParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
 class ReDrawBalanceParameterStatusByStampSheetResult(core.Gs2Result):
     item: BalanceParameterStatus = None
+    old: BalanceParameterStatus = None
 
     def with_item(self, item: BalanceParameterStatus) -> ReDrawBalanceParameterStatusByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: BalanceParameterStatus) -> ReDrawBalanceParameterStatusByStampSheetResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1140,19 +1152,26 @@ class ReDrawBalanceParameterStatusByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return ReDrawBalanceParameterStatusByStampSheetResult()\
-            .with_item(BalanceParameterStatus.from_dict(data.get('item')))
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))\
+            .with_old(BalanceParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
 class SetBalanceParameterStatusByUserIdResult(core.Gs2Result):
     item: BalanceParameterStatus = None
+    old: BalanceParameterStatus = None
 
     def with_item(self, item: BalanceParameterStatus) -> SetBalanceParameterStatusByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: BalanceParameterStatus) -> SetBalanceParameterStatusByUserIdResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1174,19 +1193,26 @@ class SetBalanceParameterStatusByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return SetBalanceParameterStatusByUserIdResult()\
-            .with_item(BalanceParameterStatus.from_dict(data.get('item')))
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))\
+            .with_old(BalanceParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
 class SetBalanceParameterStatusByStampSheetResult(core.Gs2Result):
     item: BalanceParameterStatus = None
+    old: BalanceParameterStatus = None
 
     def with_item(self, item: BalanceParameterStatus) -> SetBalanceParameterStatusByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: BalanceParameterStatus) -> SetBalanceParameterStatusByStampSheetResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1208,11 +1234,13 @@ class SetBalanceParameterStatusByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return SetBalanceParameterStatusByStampSheetResult()\
-            .with_item(BalanceParameterStatus.from_dict(data.get('item')))
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))\
+            .with_old(BalanceParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
@@ -1414,9 +1442,14 @@ class DeleteRarityParameterStatusByUserIdResult(core.Gs2Result):
 
 class ReDrawRarityParameterStatusByUserIdResult(core.Gs2Result):
     item: RarityParameterStatus = None
+    old: RarityParameterStatus = None
 
     def with_item(self, item: RarityParameterStatus) -> ReDrawRarityParameterStatusByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: RarityParameterStatus) -> ReDrawRarityParameterStatusByUserIdResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1438,19 +1471,26 @@ class ReDrawRarityParameterStatusByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ReDrawRarityParameterStatusByUserIdResult()\
-            .with_item(RarityParameterStatus.from_dict(data.get('item')))
+            .with_item(RarityParameterStatus.from_dict(data.get('item')))\
+            .with_old(RarityParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
 class ReDrawRarityParameterStatusByStampSheetResult(core.Gs2Result):
     item: RarityParameterStatus = None
+    old: RarityParameterStatus = None
 
     def with_item(self, item: RarityParameterStatus) -> ReDrawRarityParameterStatusByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: RarityParameterStatus) -> ReDrawRarityParameterStatusByStampSheetResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1472,19 +1512,26 @@ class ReDrawRarityParameterStatusByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return ReDrawRarityParameterStatusByStampSheetResult()\
-            .with_item(RarityParameterStatus.from_dict(data.get('item')))
+            .with_item(RarityParameterStatus.from_dict(data.get('item')))\
+            .with_old(RarityParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
 class AddRarityParameterStatusByUserIdResult(core.Gs2Result):
     item: RarityParameterStatus = None
+    old: RarityParameterStatus = None
 
     def with_item(self, item: RarityParameterStatus) -> AddRarityParameterStatusByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: RarityParameterStatus) -> AddRarityParameterStatusByUserIdResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1506,19 +1553,26 @@ class AddRarityParameterStatusByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return AddRarityParameterStatusByUserIdResult()\
-            .with_item(RarityParameterStatus.from_dict(data.get('item')))
+            .with_item(RarityParameterStatus.from_dict(data.get('item')))\
+            .with_old(RarityParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
 class AddRarityParameterStatusByStampSheetResult(core.Gs2Result):
     item: RarityParameterStatus = None
+    old: RarityParameterStatus = None
 
     def with_item(self, item: RarityParameterStatus) -> AddRarityParameterStatusByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: RarityParameterStatus) -> AddRarityParameterStatusByStampSheetResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1540,11 +1594,13 @@ class AddRarityParameterStatusByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return AddRarityParameterStatusByStampSheetResult()\
-            .with_item(RarityParameterStatus.from_dict(data.get('item')))
+            .with_item(RarityParameterStatus.from_dict(data.get('item')))\
+            .with_old(RarityParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
@@ -1659,9 +1715,14 @@ class VerifyRarityParameterStatusByStampTaskResult(core.Gs2Result):
 
 class SetRarityParameterStatusByUserIdResult(core.Gs2Result):
     item: RarityParameterStatus = None
+    old: RarityParameterStatus = None
 
     def with_item(self, item: RarityParameterStatus) -> SetRarityParameterStatusByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: RarityParameterStatus) -> SetRarityParameterStatusByUserIdResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1683,19 +1744,26 @@ class SetRarityParameterStatusByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return SetRarityParameterStatusByUserIdResult()\
-            .with_item(RarityParameterStatus.from_dict(data.get('item')))
+            .with_item(RarityParameterStatus.from_dict(data.get('item')))\
+            .with_old(RarityParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
 class SetRarityParameterStatusByStampSheetResult(core.Gs2Result):
     item: RarityParameterStatus = None
+    old: RarityParameterStatus = None
 
     def with_item(self, item: RarityParameterStatus) -> SetRarityParameterStatusByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: RarityParameterStatus) -> SetRarityParameterStatusByStampSheetResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1717,9 +1785,11 @@ class SetRarityParameterStatusByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return SetRarityParameterStatusByStampSheetResult()\
-            .with_item(RarityParameterStatus.from_dict(data.get('item')))
+            .with_item(RarityParameterStatus.from_dict(data.get('item')))\
+            .with_old(RarityParameterStatus.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }

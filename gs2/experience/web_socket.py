@@ -2256,6 +2256,87 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _sub_experience_by_user_id(
+        self,
+        request: SubExperienceByUserIdRequest,
+        callback: Callable[[AsyncResult[SubExperienceByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='subExperienceByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.experience_name is not None:
+            body["experienceName"] = request.experience_name
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.experience_value is not None:
+            body["experienceValue"] = request.experience_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SubExperienceByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def sub_experience_by_user_id(
+        self,
+        request: SubExperienceByUserIdRequest,
+    ) -> SubExperienceByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._sub_experience_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_experience_by_user_id_async(
+        self,
+        request: SubExperienceByUserIdRequest,
+    ) -> SubExperienceByUserIdResult:
+        async_result = []
+        self._sub_experience_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _set_experience_by_user_id(
         self,
         request: SetExperienceByUserIdRequest,
@@ -2405,6 +2486,87 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> AddRankCapByUserIdResult:
         async_result = []
         self._add_rank_cap_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _sub_rank_cap_by_user_id(
+        self,
+        request: SubRankCapByUserIdRequest,
+        callback: Callable[[AsyncResult[SubRankCapByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='subRankCapByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.experience_name is not None:
+            body["experienceName"] = request.experience_name
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.rank_cap_value is not None:
+            body["rankCapValue"] = request.rank_cap_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SubRankCapByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def sub_rank_cap_by_user_id(
+        self,
+        request: SubRankCapByUserIdRequest,
+    ) -> SubRankCapByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._sub_rank_cap_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_rank_cap_by_user_id_async(
+        self,
+        request: SubRankCapByUserIdRequest,
+    ) -> SubRankCapByUserIdResult:
+        async_result = []
+        self._sub_rank_cap_by_user_id(
             request,
             lambda result: async_result.append(result),
         )
@@ -2651,6 +2813,79 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _sub_experience_by_stamp_task(
+        self,
+        request: SubExperienceByStampTaskRequest,
+        callback: Callable[[AsyncResult[SubExperienceByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='subExperienceByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SubExperienceByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def sub_experience_by_stamp_task(
+        self,
+        request: SubExperienceByStampTaskRequest,
+    ) -> SubExperienceByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._sub_experience_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_experience_by_stamp_task_async(
+        self,
+        request: SubExperienceByStampTaskRequest,
+    ) -> SubExperienceByStampTaskResult:
+        async_result = []
+        self._sub_experience_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _add_rank_cap_by_stamp_sheet(
         self,
         request: AddRankCapByStampSheetRequest,
@@ -2711,6 +2946,79 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> AddRankCapByStampSheetResult:
         async_result = []
         self._add_rank_cap_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _sub_rank_cap_by_stamp_task(
+        self,
+        request: SubRankCapByStampTaskRequest,
+        callback: Callable[[AsyncResult[SubRankCapByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='subRankCapByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SubRankCapByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def sub_rank_cap_by_stamp_task(
+        self,
+        request: SubRankCapByStampTaskRequest,
+    ) -> SubRankCapByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._sub_rank_cap_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_rank_cap_by_stamp_task_async(
+        self,
+        request: SubRankCapByStampTaskRequest,
+    ) -> SubRankCapByStampTaskResult:
+        async_result = []
+        self._sub_rank_cap_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

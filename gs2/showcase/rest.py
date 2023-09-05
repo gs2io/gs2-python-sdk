@@ -2856,6 +2856,84 @@ class Gs2ShowcaseRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _decrement_purchase_count_by_user_id(
+        self,
+        request: DecrementPurchaseCountByUserIdRequest,
+        callback: Callable[[AsyncResult[DecrementPurchaseCountByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/{namespaceName}/random/showcase/user/{userId}/status/{showcaseName}/{displayItemName}/purchase/count/decrease".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            showcaseName=request.showcase_name if request.showcase_name is not None and request.showcase_name != '' else 'null',
+            displayItemName=request.display_item_name if request.display_item_name is not None and request.display_item_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DecrementPurchaseCountByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def decrement_purchase_count_by_user_id(
+        self,
+        request: DecrementPurchaseCountByUserIdRequest,
+    ) -> DecrementPurchaseCountByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._decrement_purchase_count_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrement_purchase_count_by_user_id_async(
+        self,
+        request: DecrementPurchaseCountByUserIdRequest,
+    ) -> DecrementPurchaseCountByUserIdResult:
+        async_result = []
+        self._decrement_purchase_count_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _increment_purchase_count_by_stamp_task(
         self,
         request: IncrementPurchaseCountByStampTaskRequest,
@@ -2915,6 +2993,79 @@ class Gs2ShowcaseRestClient(rest.AbstractGs2RestClient):
     ) -> IncrementPurchaseCountByStampTaskResult:
         async_result = []
         self._increment_purchase_count_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _decrement_purchase_count_by_stamp_sheet(
+        self,
+        request: DecrementPurchaseCountByStampSheetRequest,
+        callback: Callable[[AsyncResult[DecrementPurchaseCountByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='showcase',
+            region=self.session.region,
+        ) + "/stamp/random/showcase/status/purchase/count/decrease"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DecrementPurchaseCountByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def decrement_purchase_count_by_stamp_sheet(
+        self,
+        request: DecrementPurchaseCountByStampSheetRequest,
+    ) -> DecrementPurchaseCountByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._decrement_purchase_count_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrement_purchase_count_by_stamp_sheet_async(
+        self,
+        request: DecrementPurchaseCountByStampSheetRequest,
+    ) -> DecrementPurchaseCountByStampSheetResult:
+        async_result = []
+        self._decrement_purchase_count_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

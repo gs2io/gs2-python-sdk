@@ -2229,6 +2229,84 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _sub_experience_by_user_id(
+        self,
+        request: SubExperienceByUserIdRequest,
+        callback: Callable[[AsyncResult[SubExperienceByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='experience',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}/sub".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            experienceName=request.experience_name if request.experience_name is not None and request.experience_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.experience_value is not None:
+            body["experienceValue"] = request.experience_value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SubExperienceByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def sub_experience_by_user_id(
+        self,
+        request: SubExperienceByUserIdRequest,
+    ) -> SubExperienceByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._sub_experience_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_experience_by_user_id_async(
+        self,
+        request: SubExperienceByUserIdRequest,
+    ) -> SubExperienceByUserIdResult:
+        async_result = []
+        self._sub_experience_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _set_experience_by_user_id(
         self,
         request: SetExperienceByUserIdRequest,
@@ -2371,6 +2449,84 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
     ) -> AddRankCapByUserIdResult:
         async_result = []
         self._add_rank_cap_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _sub_rank_cap_by_user_id(
+        self,
+        request: SubRankCapByUserIdRequest,
+        callback: Callable[[AsyncResult[SubRankCapByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='experience',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}/cap/sub".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            experienceName=request.experience_name if request.experience_name is not None and request.experience_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.rank_cap_value is not None:
+            body["rankCapValue"] = request.rank_cap_value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SubRankCapByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def sub_rank_cap_by_user_id(
+        self,
+        request: SubRankCapByUserIdRequest,
+    ) -> SubRankCapByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._sub_rank_cap_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_rank_cap_by_user_id_async(
+        self,
+        request: SubRankCapByUserIdRequest,
+    ) -> SubRankCapByUserIdResult:
+        async_result = []
+        self._sub_rank_cap_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -2612,6 +2768,79 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _sub_experience_by_stamp_task(
+        self,
+        request: SubExperienceByStampTaskRequest,
+        callback: Callable[[AsyncResult[SubExperienceByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='experience',
+            region=self.session.region,
+        ) + "/stamp/experience/sub"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SubExperienceByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def sub_experience_by_stamp_task(
+        self,
+        request: SubExperienceByStampTaskRequest,
+    ) -> SubExperienceByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._sub_experience_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_experience_by_stamp_task_async(
+        self,
+        request: SubExperienceByStampTaskRequest,
+    ) -> SubExperienceByStampTaskResult:
+        async_result = []
+        self._sub_experience_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _add_rank_cap_by_stamp_sheet(
         self,
         request: AddRankCapByStampSheetRequest,
@@ -2671,6 +2900,79 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
     ) -> AddRankCapByStampSheetResult:
         async_result = []
         self._add_rank_cap_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _sub_rank_cap_by_stamp_task(
+        self,
+        request: SubRankCapByStampTaskRequest,
+        callback: Callable[[AsyncResult[SubRankCapByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='experience',
+            region=self.session.region,
+        ) + "/stamp/rankCap/sub"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SubRankCapByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def sub_rank_cap_by_stamp_task(
+        self,
+        request: SubRankCapByStampTaskRequest,
+    ) -> SubRankCapByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._sub_rank_cap_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_rank_cap_by_stamp_task_async(
+        self,
+        request: SubRankCapByStampTaskRequest,
+    ) -> SubRankCapByStampTaskResult:
+        async_result = []
+        self._sub_rank_cap_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

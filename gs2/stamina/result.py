@@ -1564,12 +1564,58 @@ class RaiseMaxValueByUserIdResult(core.Gs2Result):
         }
 
 
+class DecreaseMaxValueByUserIdResult(core.Gs2Result):
+    item: Stamina = None
+    stamina_model: StaminaModel = None
+
+    def with_item(self, item: Stamina) -> DecreaseMaxValueByUserIdResult:
+        self.item = item
+        return self
+
+    def with_stamina_model(self, stamina_model: StaminaModel) -> DecreaseMaxValueByUserIdResult:
+        self.stamina_model = stamina_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaxValueByUserIdResult]:
+        if data is None:
+            return None
+        return DecreaseMaxValueByUserIdResult()\
+            .with_item(Stamina.from_dict(data.get('item')))\
+            .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
+        }
+
+
 class SetMaxValueByUserIdResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetMaxValueByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetMaxValueByUserIdResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetMaxValueByUserIdResult:
@@ -1596,21 +1642,28 @@ class SetMaxValueByUserIdResult(core.Gs2Result):
             return None
         return SetMaxValueByUserIdResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 
 
 class SetRecoverIntervalByUserIdResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetRecoverIntervalByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetRecoverIntervalByUserIdResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetRecoverIntervalByUserIdResult:
@@ -1637,21 +1690,28 @@ class SetRecoverIntervalByUserIdResult(core.Gs2Result):
             return None
         return SetRecoverIntervalByUserIdResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 
 
 class SetRecoverValueByUserIdResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetRecoverValueByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetRecoverValueByUserIdResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetRecoverValueByUserIdResult:
@@ -1678,21 +1738,28 @@ class SetRecoverValueByUserIdResult(core.Gs2Result):
             return None
         return SetRecoverValueByUserIdResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 
 
 class SetMaxValueByStatusResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetMaxValueByStatusResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetMaxValueByStatusResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetMaxValueByStatusResult:
@@ -1719,21 +1786,28 @@ class SetMaxValueByStatusResult(core.Gs2Result):
             return None
         return SetMaxValueByStatusResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 
 
 class SetRecoverIntervalByStatusResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetRecoverIntervalByStatusResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetRecoverIntervalByStatusResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetRecoverIntervalByStatusResult:
@@ -1760,21 +1834,28 @@ class SetRecoverIntervalByStatusResult(core.Gs2Result):
             return None
         return SetRecoverIntervalByStatusResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 
 
 class SetRecoverValueByStatusResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetRecoverValueByStatusResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetRecoverValueByStatusResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetRecoverValueByStatusResult:
@@ -1801,11 +1882,13 @@ class SetRecoverValueByStatusResult(core.Gs2Result):
             return None
         return SetRecoverValueByStatusResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 
@@ -1933,12 +2016,65 @@ class RaiseMaxValueByStampSheetResult(core.Gs2Result):
         }
 
 
+class DecreaseMaxValueByStampTaskResult(core.Gs2Result):
+    item: Stamina = None
+    stamina_model: StaminaModel = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Stamina) -> DecreaseMaxValueByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_stamina_model(self, stamina_model: StaminaModel) -> DecreaseMaxValueByStampTaskResult:
+        self.stamina_model = stamina_model
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> DecreaseMaxValueByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaxValueByStampTaskResult]:
+        if data is None:
+            return None
+        return DecreaseMaxValueByStampTaskResult()\
+            .with_item(Stamina.from_dict(data.get('item')))\
+            .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class SetMaxValueByStampSheetResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetMaxValueByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetMaxValueByStampSheetResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetMaxValueByStampSheetResult:
@@ -1965,21 +2101,28 @@ class SetMaxValueByStampSheetResult(core.Gs2Result):
             return None
         return SetMaxValueByStampSheetResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 
 
 class SetRecoverIntervalByStampSheetResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetRecoverIntervalByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetRecoverIntervalByStampSheetResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetRecoverIntervalByStampSheetResult:
@@ -2006,21 +2149,28 @@ class SetRecoverIntervalByStampSheetResult(core.Gs2Result):
             return None
         return SetRecoverIntervalByStampSheetResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 
 
 class SetRecoverValueByStampSheetResult(core.Gs2Result):
     item: Stamina = None
+    old: Stamina = None
     stamina_model: StaminaModel = None
 
     def with_item(self, item: Stamina) -> SetRecoverValueByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Stamina) -> SetRecoverValueByStampSheetResult:
+        self.old = old
         return self
 
     def with_stamina_model(self, stamina_model: StaminaModel) -> SetRecoverValueByStampSheetResult:
@@ -2047,11 +2197,13 @@ class SetRecoverValueByStampSheetResult(core.Gs2Result):
             return None
         return SetRecoverValueByStampSheetResult()\
             .with_item(Stamina.from_dict(data.get('item')))\
+            .with_old(Stamina.from_dict(data.get('old')))\
             .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
         }
 

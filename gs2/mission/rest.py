@@ -413,6 +413,82 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _revert_receive_by_user_id(
+        self,
+        request: RevertReceiveByUserIdRequest,
+        callback: Callable[[AsyncResult[RevertReceiveByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/complete/group/{missionGroupName}/task/{missionTaskName}/revert".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            missionGroupName=request.mission_group_name if request.mission_group_name is not None and request.mission_group_name != '' else 'null',
+            missionTaskName=request.mission_task_name if request.mission_task_name is not None and request.mission_task_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RevertReceiveByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def revert_receive_by_user_id(
+        self,
+        request: RevertReceiveByUserIdRequest,
+    ) -> RevertReceiveByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._revert_receive_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def revert_receive_by_user_id_async(
+        self,
+        request: RevertReceiveByUserIdRequest,
+    ) -> RevertReceiveByUserIdResult:
+        async_result = []
+        self._revert_receive_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_complete(
         self,
         request: GetCompleteRequest,
@@ -694,6 +770,79 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
     ) -> ReceiveByStampTaskResult:
         async_result = []
         self._receive_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _revert_receive_by_stamp_sheet(
+        self,
+        request: RevertReceiveByStampSheetRequest,
+        callback: Callable[[AsyncResult[RevertReceiveByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/stamp/revert"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RevertReceiveByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def revert_receive_by_stamp_sheet(
+        self,
+        request: RevertReceiveByStampSheetRequest,
+    ) -> RevertReceiveByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._revert_receive_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def revert_receive_by_stamp_sheet_async(
+        self,
+        request: RevertReceiveByStampSheetRequest,
+    ) -> RevertReceiveByStampSheetResult:
+        async_result = []
+        self._revert_receive_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -2180,6 +2329,83 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _decrease_counter_by_user_id(
+        self,
+        request: DecreaseCounterByUserIdRequest,
+        callback: Callable[[AsyncResult[DecreaseCounterByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/counter/{counterName}/decrease".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            counterName=request.counter_name if request.counter_name is not None and request.counter_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DecreaseCounterByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def decrease_counter_by_user_id(
+        self,
+        request: DecreaseCounterByUserIdRequest,
+    ) -> DecreaseCounterByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_counter_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_counter_by_user_id_async(
+        self,
+        request: DecreaseCounterByUserIdRequest,
+    ) -> DecreaseCounterByUserIdResult:
+        async_result = []
+        self._decrease_counter_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_counter(
         self,
         request: GetCounterRequest,
@@ -2461,6 +2687,79 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
     ) -> IncreaseByStampSheetResult:
         async_result = []
         self._increase_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _decrease_by_stamp_task(
+        self,
+        request: DecreaseByStampTaskRequest,
+        callback: Callable[[AsyncResult[DecreaseByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/stamp/decrease"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DecreaseByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def decrease_by_stamp_task(
+        self,
+        request: DecreaseByStampTaskRequest,
+    ) -> DecreaseByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_by_stamp_task_async(
+        self,
+        request: DecreaseByStampTaskRequest,
+    ) -> DecreaseByStampTaskResult:
+        async_result = []
+        self._decrease_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

@@ -426,6 +426,85 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _revert_receive_by_user_id(
+        self,
+        request: RevertReceiveByUserIdRequest,
+        callback: Callable[[AsyncResult[RevertReceiveByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='complete',
+            function='revertReceiveByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.mission_group_name is not None:
+            body["missionGroupName"] = request.mission_group_name
+        if request.mission_task_name is not None:
+            body["missionTaskName"] = request.mission_task_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=RevertReceiveByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def revert_receive_by_user_id(
+        self,
+        request: RevertReceiveByUserIdRequest,
+    ) -> RevertReceiveByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._revert_receive_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def revert_receive_by_user_id_async(
+        self,
+        request: RevertReceiveByUserIdRequest,
+    ) -> RevertReceiveByUserIdResult:
+        async_result = []
+        self._revert_receive_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_complete(
         self,
         request: GetCompleteRequest,
@@ -715,6 +794,79 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ReceiveByStampTaskResult:
         async_result = []
         self._receive_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _revert_receive_by_stamp_sheet(
+        self,
+        request: RevertReceiveByStampSheetRequest,
+        callback: Callable[[AsyncResult[RevertReceiveByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='complete',
+            function='revertReceiveByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=RevertReceiveByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def revert_receive_by_stamp_sheet(
+        self,
+        request: RevertReceiveByStampSheetRequest,
+    ) -> RevertReceiveByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._revert_receive_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def revert_receive_by_stamp_sheet_async(
+        self,
+        request: RevertReceiveByStampSheetRequest,
+    ) -> RevertReceiveByStampSheetResult:
+        async_result = []
+        self._revert_receive_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
         )
@@ -2211,6 +2363,85 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _decrease_counter_by_user_id(
+        self,
+        request: DecreaseCounterByUserIdRequest,
+        callback: Callable[[AsyncResult[DecreaseCounterByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='counter',
+            function='decreaseCounterByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.counter_name is not None:
+            body["counterName"] = request.counter_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.value is not None:
+            body["value"] = request.value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DecreaseCounterByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def decrease_counter_by_user_id(
+        self,
+        request: DecreaseCounterByUserIdRequest,
+    ) -> DecreaseCounterByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_counter_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_counter_by_user_id_async(
+        self,
+        request: DecreaseCounterByUserIdRequest,
+    ) -> DecreaseCounterByUserIdResult:
+        async_result = []
+        self._decrease_counter_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_counter(
         self,
         request: GetCounterRequest,
@@ -2500,6 +2731,79 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> IncreaseByStampSheetResult:
         async_result = []
         self._increase_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _decrease_by_stamp_task(
+        self,
+        request: DecreaseByStampTaskRequest,
+        callback: Callable[[AsyncResult[DecreaseByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='counter',
+            function='decreaseByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DecreaseByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def decrease_by_stamp_task(
+        self,
+        request: DecreaseByStampTaskRequest,
+    ) -> DecreaseByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_by_stamp_task_async(
+        self,
+        request: DecreaseByStampTaskRequest,
+    ) -> DecreaseByStampTaskResult:
+        async_result = []
+        self._decrease_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

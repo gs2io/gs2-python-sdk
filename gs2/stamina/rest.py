@@ -3146,6 +3146,83 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _decrease_max_value_by_user_id(
+        self,
+        request: DecreaseMaxValueByUserIdRequest,
+        callback: Callable[[AsyncResult[DecreaseMaxValueByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/stamina/{staminaName}/decrease".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.decrease_value is not None:
+            body["decreaseValue"] = request.decrease_value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DecreaseMaxValueByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def decrease_max_value_by_user_id(
+        self,
+        request: DecreaseMaxValueByUserIdRequest,
+    ) -> DecreaseMaxValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_max_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_max_value_by_user_id_async(
+        self,
+        request: DecreaseMaxValueByUserIdRequest,
+    ) -> DecreaseMaxValueByUserIdResult:
+        async_result = []
+        self._decrease_max_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _set_max_value_by_user_id(
         self,
         request: SetMaxValueByUserIdRequest,
@@ -3830,6 +3907,79 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
     ) -> RaiseMaxValueByStampSheetResult:
         async_result = []
         self._raise_max_value_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _decrease_max_value_by_stamp_task(
+        self,
+        request: DecreaseMaxValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[DecreaseMaxValueByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/stamina/decrease"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DecreaseMaxValueByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def decrease_max_value_by_stamp_task(
+        self,
+        request: DecreaseMaxValueByStampTaskRequest,
+    ) -> DecreaseMaxValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_max_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_max_value_by_stamp_task_async(
+        self,
+        request: DecreaseMaxValueByStampTaskRequest,
+    ) -> DecreaseMaxValueByStampTaskResult:
+        async_result = []
+        self._decrease_max_value_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

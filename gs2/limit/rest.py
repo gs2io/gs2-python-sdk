@@ -924,6 +924,84 @@ class Gs2LimitRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _count_down_by_user_id(
+        self,
+        request: CountDownByUserIdRequest,
+        callback: Callable[[AsyncResult[CountDownByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='limit',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/counter/{limitName}/{counterName}/decrease".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            limitName=request.limit_name if request.limit_name is not None and request.limit_name != '' else 'null',
+            counterName=request.counter_name if request.counter_name is not None and request.counter_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count_down_value is not None:
+            body["countDownValue"] = request.count_down_value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CountDownByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def count_down_by_user_id(
+        self,
+        request: CountDownByUserIdRequest,
+    ) -> CountDownByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._count_down_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def count_down_by_user_id_async(
+        self,
+        request: CountDownByUserIdRequest,
+    ) -> CountDownByUserIdResult:
+        async_result = []
+        self._count_down_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_counter_by_user_id(
         self,
         request: DeleteCounterByUserIdRequest,
@@ -1059,6 +1137,79 @@ class Gs2LimitRestClient(rest.AbstractGs2RestClient):
     ) -> CountUpByStampTaskResult:
         async_result = []
         self._count_up_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _count_down_by_stamp_sheet(
+        self,
+        request: CountDownByStampSheetRequest,
+        callback: Callable[[AsyncResult[CountDownByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='limit',
+            region=self.session.region,
+        ) + "/stamp/counter/decrease"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CountDownByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def count_down_by_stamp_sheet(
+        self,
+        request: CountDownByStampSheetRequest,
+    ) -> CountDownByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._count_down_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def count_down_by_stamp_sheet_async(
+        self,
+        request: CountDownByStampSheetRequest,
+    ) -> CountDownByStampSheetResult:
+        async_result = []
+        self._count_down_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

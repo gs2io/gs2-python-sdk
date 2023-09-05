@@ -699,6 +699,61 @@ class UseByUserIdRequest(core.Gs2Request):
         }
 
 
+class RevertUseByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    code: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RevertUseByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> RevertUseByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_code(self, code: str) -> RevertUseByUserIdRequest:
+        self.code = code
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RevertUseByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertUseByUserIdRequest]:
+        if data is None:
+            return None
+        return RevertUseByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_code(data.get('code'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "code": self.code,
+        }
+
+
 class UseByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -738,6 +793,49 @@ class UseByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class RevertUseByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> RevertUseByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> RevertUseByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertUseByStampSheetRequest]:
+        if data is None:
+            return None
+        return RevertUseByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }
 

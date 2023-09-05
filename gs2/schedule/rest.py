@@ -1476,6 +1476,79 @@ class Gs2ScheduleRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _delete_trigger_by_stamp_task(
+        self,
+        request: DeleteTriggerByStampTaskRequest,
+        callback: Callable[[AsyncResult[DeleteTriggerByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='schedule',
+            region=self.session.region,
+        ) + "/stamp/trigger/delete"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DeleteTriggerByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_trigger_by_stamp_task(
+        self,
+        request: DeleteTriggerByStampTaskRequest,
+    ) -> DeleteTriggerByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._delete_trigger_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_trigger_by_stamp_task_async(
+        self,
+        request: DeleteTriggerByStampTaskRequest,
+    ) -> DeleteTriggerByStampTaskResult:
+        async_result = []
+        self._delete_trigger_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_events(
         self,
         request: DescribeEventsRequest,

@@ -1407,6 +1407,82 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _revert_record_receipt(
+        self,
+        request: RevertRecordReceiptRequest,
+        callback: Callable[[AsyncResult[RevertRecordReceiptResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/receipt/revert".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.receipt is not None:
+            body["receipt"] = request.receipt
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RevertRecordReceiptResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def revert_record_receipt(
+        self,
+        request: RevertRecordReceiptRequest,
+    ) -> RevertRecordReceiptResult:
+        async_result = []
+        with timeout(30):
+            self._revert_record_receipt(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def revert_record_receipt_async(
+        self,
+        request: RevertRecordReceiptRequest,
+    ) -> RevertRecordReceiptResult:
+        async_result = []
+        self._revert_record_receipt(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _record_receipt_by_stamp_task(
         self,
         request: RecordReceiptByStampTaskRequest,
@@ -1466,6 +1542,79 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
     ) -> RecordReceiptByStampTaskResult:
         async_result = []
         self._record_receipt_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _revert_record_receipt_by_stamp_sheet(
+        self,
+        request: RevertRecordReceiptByStampSheetRequest,
+        callback: Callable[[AsyncResult[RevertRecordReceiptByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money',
+            region=self.session.region,
+        ) + "/stamp/receipt/record/revert"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RevertRecordReceiptByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def revert_record_receipt_by_stamp_sheet(
+        self,
+        request: RevertRecordReceiptByStampSheetRequest,
+    ) -> RevertRecordReceiptByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._revert_record_receipt_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def revert_record_receipt_by_stamp_sheet_async(
+        self,
+        request: RevertRecordReceiptByStampSheetRequest,
+    ) -> RevertRecordReceiptByStampSheetResult:
+        async_result = []
+        self._revert_record_receipt_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

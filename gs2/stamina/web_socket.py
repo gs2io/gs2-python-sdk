@@ -3178,6 +3178,85 @@ class Gs2StaminaWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _decrease_max_value_by_user_id(
+        self,
+        request: DecreaseMaxValueByUserIdRequest,
+        callback: Callable[[AsyncResult[DecreaseMaxValueByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='decreaseMaxValueByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.decrease_value is not None:
+            body["decreaseValue"] = request.decrease_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DecreaseMaxValueByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def decrease_max_value_by_user_id(
+        self,
+        request: DecreaseMaxValueByUserIdRequest,
+    ) -> DecreaseMaxValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_max_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_max_value_by_user_id_async(
+        self,
+        request: DecreaseMaxValueByUserIdRequest,
+    ) -> DecreaseMaxValueByUserIdResult:
+        async_result = []
+        self._decrease_max_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _set_max_value_by_user_id(
         self,
         request: SetMaxValueByUserIdRequest,
@@ -3880,6 +3959,79 @@ class Gs2StaminaWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> RaiseMaxValueByStampSheetResult:
         async_result = []
         self._raise_max_value_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _decrease_max_value_by_stamp_task(
+        self,
+        request: DecreaseMaxValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[DecreaseMaxValueByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='decreaseMaxValueByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DecreaseMaxValueByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def decrease_max_value_by_stamp_task(
+        self,
+        request: DecreaseMaxValueByStampTaskRequest,
+    ) -> DecreaseMaxValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_max_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_max_value_by_stamp_task_async(
+        self,
+        request: DecreaseMaxValueByStampTaskRequest,
+    ) -> DecreaseMaxValueByStampTaskResult:
+        async_result = []
+        self._decrease_max_value_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

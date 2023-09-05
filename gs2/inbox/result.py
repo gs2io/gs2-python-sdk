@@ -845,6 +845,47 @@ class OpenByStampTaskResult(core.Gs2Result):
         }
 
 
+class DeleteMessageByStampTaskResult(core.Gs2Result):
+    item: Message = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Message) -> DeleteMessageByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> DeleteMessageByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteMessageByStampTaskResult]:
+        if data is None:
+            return None
+        return DeleteMessageByStampTaskResult()\
+            .with_item(Message.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class ExportMasterResult(core.Gs2Result):
     item: CurrentMessageMaster = None
 

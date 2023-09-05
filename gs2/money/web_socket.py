@@ -1425,6 +1425,83 @@ class Gs2MoneyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _revert_record_receipt(
+        self,
+        request: RevertRecordReceiptRequest,
+        callback: Callable[[AsyncResult[RevertRecordReceiptResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money",
+            component='receipt',
+            function='revertRecordReceipt',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.receipt is not None:
+            body["receipt"] = request.receipt
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=RevertRecordReceiptResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def revert_record_receipt(
+        self,
+        request: RevertRecordReceiptRequest,
+    ) -> RevertRecordReceiptResult:
+        async_result = []
+        with timeout(30):
+            self._revert_record_receipt(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def revert_record_receipt_async(
+        self,
+        request: RevertRecordReceiptRequest,
+    ) -> RevertRecordReceiptResult:
+        async_result = []
+        self._revert_record_receipt(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _record_receipt_by_stamp_task(
         self,
         request: RecordReceiptByStampTaskRequest,
@@ -1485,6 +1562,79 @@ class Gs2MoneyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> RecordReceiptByStampTaskResult:
         async_result = []
         self._record_receipt_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _revert_record_receipt_by_stamp_sheet(
+        self,
+        request: RevertRecordReceiptByStampSheetRequest,
+        callback: Callable[[AsyncResult[RevertRecordReceiptByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money",
+            component='receipt',
+            function='revertRecordReceiptByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=RevertRecordReceiptByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def revert_record_receipt_by_stamp_sheet(
+        self,
+        request: RevertRecordReceiptByStampSheetRequest,
+    ) -> RevertRecordReceiptByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._revert_record_receipt_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def revert_record_receipt_by_stamp_sheet_async(
+        self,
+        request: RevertRecordReceiptByStampSheetRequest,
+    ) -> RevertRecordReceiptByStampSheetResult:
+        async_result = []
+        self._revert_record_receipt_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
         )

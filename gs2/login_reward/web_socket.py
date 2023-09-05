@@ -2266,6 +2266,85 @@ class Gs2LoginRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _unmark_received_by_user_id(
+        self,
+        request: UnmarkReceivedByUserIdRequest,
+        callback: Callable[[AsyncResult[UnmarkReceivedByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="loginReward",
+            component='receiveStatus',
+            function='unmarkReceivedByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.bonus_model_name is not None:
+            body["bonusModelName"] = request.bonus_model_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.step_number is not None:
+            body["stepNumber"] = request.step_number
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UnmarkReceivedByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def unmark_received_by_user_id(
+        self,
+        request: UnmarkReceivedByUserIdRequest,
+    ) -> UnmarkReceivedByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._unmark_received_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def unmark_received_by_user_id_async(
+        self,
+        request: UnmarkReceivedByUserIdRequest,
+    ) -> UnmarkReceivedByUserIdResult:
+        async_result = []
+        self._unmark_received_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _mark_received_by_stamp_task(
         self,
         request: MarkReceivedByStampTaskRequest,
@@ -2326,6 +2405,79 @@ class Gs2LoginRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> MarkReceivedByStampTaskResult:
         async_result = []
         self._mark_received_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _unmark_received_by_stamp_sheet(
+        self,
+        request: UnmarkReceivedByStampSheetRequest,
+        callback: Callable[[AsyncResult[UnmarkReceivedByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="loginReward",
+            component='receiveStatus',
+            function='unmarkReceivedByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UnmarkReceivedByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def unmark_received_by_stamp_sheet(
+        self,
+        request: UnmarkReceivedByStampSheetRequest,
+    ) -> UnmarkReceivedByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._unmark_received_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def unmark_received_by_stamp_sheet_async(
+        self,
+        request: UnmarkReceivedByStampSheetRequest,
+    ) -> UnmarkReceivedByStampSheetResult:
+        async_result = []
+        self._unmark_received_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
         )

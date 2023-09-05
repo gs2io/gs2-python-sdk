@@ -1062,10 +1062,15 @@ class GetMoldByUserIdResult(core.Gs2Result):
 
 class SetMoldCapacityByUserIdResult(core.Gs2Result):
     item: Mold = None
+    old: Mold = None
     mold_model: MoldModel = None
 
     def with_item(self, item: Mold) -> SetMoldCapacityByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Mold) -> SetMoldCapacityByUserIdResult:
+        self.old = old
         return self
 
     def with_mold_model(self, mold_model: MoldModel) -> SetMoldCapacityByUserIdResult:
@@ -1092,11 +1097,13 @@ class SetMoldCapacityByUserIdResult(core.Gs2Result):
             return None
         return SetMoldCapacityByUserIdResult()\
             .with_item(Mold.from_dict(data.get('item')))\
+            .with_old(Mold.from_dict(data.get('old')))\
             .with_mold_model(MoldModel.from_dict(data.get('moldModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "moldModel": self.mold_model.to_dict() if self.mold_model else None,
         }
 
@@ -1132,6 +1139,47 @@ class AddMoldCapacityByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return AddMoldCapacityByUserIdResult()\
+            .with_item(Mold.from_dict(data.get('item')))\
+            .with_mold_model(MoldModel.from_dict(data.get('moldModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "moldModel": self.mold_model.to_dict() if self.mold_model else None,
+        }
+
+
+class SubMoldCapacityByUserIdResult(core.Gs2Result):
+    item: Mold = None
+    mold_model: MoldModel = None
+
+    def with_item(self, item: Mold) -> SubMoldCapacityByUserIdResult:
+        self.item = item
+        return self
+
+    def with_mold_model(self, mold_model: MoldModel) -> SubMoldCapacityByUserIdResult:
+        self.mold_model = mold_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubMoldCapacityByUserIdResult]:
+        if data is None:
+            return None
+        return SubMoldCapacityByUserIdResult()\
             .with_item(Mold.from_dict(data.get('item')))\
             .with_mold_model(MoldModel.from_dict(data.get('moldModel')))
 
@@ -1251,12 +1299,65 @@ class AddCapacityByStampSheetResult(core.Gs2Result):
         }
 
 
+class SubCapacityByStampTaskResult(core.Gs2Result):
+    item: Mold = None
+    mold_model: MoldModel = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Mold) -> SubCapacityByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_mold_model(self, mold_model: MoldModel) -> SubCapacityByStampTaskResult:
+        self.mold_model = mold_model
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> SubCapacityByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubCapacityByStampTaskResult]:
+        if data is None:
+            return None
+        return SubCapacityByStampTaskResult()\
+            .with_item(Mold.from_dict(data.get('item')))\
+            .with_mold_model(MoldModel.from_dict(data.get('moldModel')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "moldModel": self.mold_model.to_dict() if self.mold_model else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class SetCapacityByStampSheetResult(core.Gs2Result):
     item: Mold = None
+    old: Mold = None
     mold_model: MoldModel = None
 
     def with_item(self, item: Mold) -> SetCapacityByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Mold) -> SetCapacityByStampSheetResult:
+        self.old = old
         return self
 
     def with_mold_model(self, mold_model: MoldModel) -> SetCapacityByStampSheetResult:
@@ -1283,11 +1384,13 @@ class SetCapacityByStampSheetResult(core.Gs2Result):
             return None
         return SetCapacityByStampSheetResult()\
             .with_item(Mold.from_dict(data.get('item')))\
+            .with_old(Mold.from_dict(data.get('old')))\
             .with_mold_model(MoldModel.from_dict(data.get('moldModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
             "moldModel": self.mold_model.to_dict() if self.mold_model else None,
         }
 

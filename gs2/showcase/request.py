@@ -2101,6 +2101,75 @@ class IncrementPurchaseCountByUserIdRequest(core.Gs2Request):
         }
 
 
+class DecrementPurchaseCountByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    showcase_name: str = None
+    display_item_name: str = None
+    user_id: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DecrementPurchaseCountByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_showcase_name(self, showcase_name: str) -> DecrementPurchaseCountByUserIdRequest:
+        self.showcase_name = showcase_name
+        return self
+
+    def with_display_item_name(self, display_item_name: str) -> DecrementPurchaseCountByUserIdRequest:
+        self.display_item_name = display_item_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DecrementPurchaseCountByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_count(self, count: int) -> DecrementPurchaseCountByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DecrementPurchaseCountByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecrementPurchaseCountByUserIdRequest]:
+        if data is None:
+            return None
+        return DecrementPurchaseCountByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_showcase_name(data.get('showcaseName'))\
+            .with_display_item_name(data.get('displayItemName'))\
+            .with_user_id(data.get('userId'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "showcaseName": self.showcase_name,
+            "displayItemName": self.display_item_name,
+            "userId": self.user_id,
+            "count": self.count,
+        }
+
+
 class IncrementPurchaseCountByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2140,6 +2209,49 @@ class IncrementPurchaseCountByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class DecrementPurchaseCountByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> DecrementPurchaseCountByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> DecrementPurchaseCountByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecrementPurchaseCountByStampSheetRequest]:
+        if data is None:
+            return None
+        return DecrementPurchaseCountByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }
 

@@ -1003,6 +1003,79 @@ class Gs2JobQueueWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _delete_by_stamp_task(
+        self,
+        request: DeleteByStampTaskRequest,
+        callback: Callable[[AsyncResult[DeleteByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="jobQueue",
+            component='job',
+            function='deleteByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_by_stamp_task(
+        self,
+        request: DeleteByStampTaskRequest,
+    ) -> DeleteByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._delete_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_by_stamp_task_async(
+        self,
+        request: DeleteByStampTaskRequest,
+    ) -> DeleteByStampTaskResult:
+        async_result = []
+        self._delete_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_job_result(
         self,
         request: GetJobResultRequest,

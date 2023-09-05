@@ -539,6 +539,47 @@ class PushByStampSheetResult(core.Gs2Result):
         }
 
 
+class DeleteByStampTaskResult(core.Gs2Result):
+    item: Job = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Job) -> DeleteByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> DeleteByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteByStampTaskResult]:
+        if data is None:
+            return None
+        return DeleteByStampTaskResult()\
+            .with_item(Job.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class GetJobResultResult(core.Gs2Result):
     item: JobResult = None
 

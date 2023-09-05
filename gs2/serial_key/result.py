@@ -553,6 +553,47 @@ class UseByUserIdResult(core.Gs2Result):
         }
 
 
+class RevertUseByUserIdResult(core.Gs2Result):
+    item: SerialKey = None
+    campaign_model: CampaignModel = None
+
+    def with_item(self, item: SerialKey) -> RevertUseByUserIdResult:
+        self.item = item
+        return self
+
+    def with_campaign_model(self, campaign_model: CampaignModel) -> RevertUseByUserIdResult:
+        self.campaign_model = campaign_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertUseByUserIdResult]:
+        if data is None:
+            return None
+        return RevertUseByUserIdResult()\
+            .with_item(SerialKey.from_dict(data.get('item')))\
+            .with_campaign_model(CampaignModel.from_dict(data.get('campaignModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "campaignModel": self.campaign_model.to_dict() if self.campaign_model else None,
+        }
+
+
 class UseByStampTaskResult(core.Gs2Result):
     item: SerialKey = None
     campaign_model: CampaignModel = None
@@ -598,6 +639,47 @@ class UseByStampTaskResult(core.Gs2Result):
             "item": self.item.to_dict() if self.item else None,
             "campaignModel": self.campaign_model.to_dict() if self.campaign_model else None,
             "newContextStack": self.new_context_stack,
+        }
+
+
+class RevertUseByStampSheetResult(core.Gs2Result):
+    item: SerialKey = None
+    campaign_model: CampaignModel = None
+
+    def with_item(self, item: SerialKey) -> RevertUseByStampSheetResult:
+        self.item = item
+        return self
+
+    def with_campaign_model(self, campaign_model: CampaignModel) -> RevertUseByStampSheetResult:
+        self.campaign_model = campaign_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RevertUseByStampSheetResult]:
+        if data is None:
+            return None
+        return RevertUseByStampSheetResult()\
+            .with_item(SerialKey.from_dict(data.get('item')))\
+            .with_campaign_model(CampaignModel.from_dict(data.get('campaignModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "campaignModel": self.campaign_model.to_dict() if self.campaign_model else None,
         }
 
 

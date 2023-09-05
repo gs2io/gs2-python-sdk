@@ -2296,6 +2296,68 @@ class RaiseMaxValueByUserIdRequest(core.Gs2Request):
         }
 
 
+class DecreaseMaxValueByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    stamina_name: str = None
+    user_id: str = None
+    decrease_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DecreaseMaxValueByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> DecreaseMaxValueByUserIdRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DecreaseMaxValueByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_decrease_value(self, decrease_value: int) -> DecreaseMaxValueByUserIdRequest:
+        self.decrease_value = decrease_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DecreaseMaxValueByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaxValueByUserIdRequest]:
+        if data is None:
+            return None
+        return DecreaseMaxValueByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_user_id(data.get('userId'))\
+            .with_decrease_value(data.get('decreaseValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "staminaName": self.stamina_name,
+            "userId": self.user_id,
+            "decreaseValue": self.decrease_value,
+        }
+
+
 class SetMaxValueByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2847,6 +2909,49 @@ class RaiseMaxValueByStampSheetRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class DecreaseMaxValueByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> DecreaseMaxValueByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> DecreaseMaxValueByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaxValueByStampTaskRequest]:
+        if data is None:
+            return None
+        return DecreaseMaxValueByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
             "keyId": self.key_id,
         }
 

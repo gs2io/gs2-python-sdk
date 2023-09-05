@@ -1659,6 +1659,79 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _delete_message_by_stamp_task(
+        self,
+        request: DeleteMessageByStampTaskRequest,
+        callback: Callable[[AsyncResult[DeleteMessageByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inbox",
+            component='message',
+            function='deleteMessageByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteMessageByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_message_by_stamp_task(
+        self,
+        request: DeleteMessageByStampTaskRequest,
+    ) -> DeleteMessageByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._delete_message_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_message_by_stamp_task_async(
+        self,
+        request: DeleteMessageByStampTaskRequest,
+    ) -> DeleteMessageByStampTaskResult:
+        async_result = []
+        self._delete_message_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _export_master(
         self,
         request: ExportMasterRequest,

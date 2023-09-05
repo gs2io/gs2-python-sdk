@@ -1532,6 +1532,68 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
         }
 
 
+class SubMoldCapacityByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    mold_name: str = None
+    capacity: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SubMoldCapacityByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SubMoldCapacityByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_mold_name(self, mold_name: str) -> SubMoldCapacityByUserIdRequest:
+        self.mold_name = mold_name
+        return self
+
+    def with_capacity(self, capacity: int) -> SubMoldCapacityByUserIdRequest:
+        self.capacity = capacity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SubMoldCapacityByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubMoldCapacityByUserIdRequest]:
+        if data is None:
+            return None
+        return SubMoldCapacityByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_mold_name(data.get('moldName'))\
+            .with_capacity(data.get('capacity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "moldName": self.mold_name,
+            "capacity": self.capacity,
+        }
+
+
 class DeleteMoldRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1681,6 +1743,49 @@ class AddCapacityByStampSheetRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class SubCapacityByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> SubCapacityByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> SubCapacityByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubCapacityByStampTaskRequest]:
+        if data is None:
+            return None
+        return SubCapacityByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
             "keyId": self.key_id,
         }
 

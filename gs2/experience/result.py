@@ -1102,11 +1102,50 @@ class AddExperienceByUserIdResult(core.Gs2Result):
         }
 
 
+class SubExperienceByUserIdResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> SubExperienceByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubExperienceByUserIdResult]:
+        if data is None:
+            return None
+        return SubExperienceByUserIdResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class SetExperienceByUserIdResult(core.Gs2Result):
     item: Status = None
+    old: Status = None
 
     def with_item(self, item: Status) -> SetExperienceByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Status) -> SetExperienceByUserIdResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1128,11 +1167,13 @@ class SetExperienceByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return SetExperienceByUserIdResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_old(Status.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
@@ -1170,11 +1211,50 @@ class AddRankCapByUserIdResult(core.Gs2Result):
         }
 
 
+class SubRankCapByUserIdResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> SubRankCapByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubRankCapByUserIdResult]:
+        if data is None:
+            return None
+        return SubRankCapByUserIdResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class SetRankCapByUserIdResult(core.Gs2Result):
     item: Status = None
+    old: Status = None
 
     def with_item(self, item: Status) -> SetRankCapByUserIdResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Status) -> SetRankCapByUserIdResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1196,11 +1276,13 @@ class SetRankCapByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return SetRankCapByUserIdResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_old(Status.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
@@ -1272,6 +1354,47 @@ class AddExperienceByStampSheetResult(core.Gs2Result):
         }
 
 
+class SubExperienceByStampTaskResult(core.Gs2Result):
+    item: Status = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Status) -> SubExperienceByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> SubExperienceByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubExperienceByStampTaskResult]:
+        if data is None:
+            return None
+        return SubExperienceByStampTaskResult()\
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class AddRankCapByStampSheetResult(core.Gs2Result):
     item: Status = None
 
@@ -1306,11 +1429,57 @@ class AddRankCapByStampSheetResult(core.Gs2Result):
         }
 
 
+class SubRankCapByStampTaskResult(core.Gs2Result):
+    item: Status = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Status) -> SubRankCapByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> SubRankCapByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubRankCapByStampTaskResult]:
+        if data is None:
+            return None
+        return SubRankCapByStampTaskResult()\
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class SetRankCapByStampSheetResult(core.Gs2Result):
     item: Status = None
+    old: Status = None
 
     def with_item(self, item: Status) -> SetRankCapByStampSheetResult:
         self.item = item
+        return self
+
+    def with_old(self, old: Status) -> SetRankCapByStampSheetResult:
+        self.old = old
         return self
 
     def get(self, key, default=None):
@@ -1332,11 +1501,13 @@ class SetRankCapByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return SetRankCapByStampSheetResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_old(Status.from_dict(data.get('old')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
         }
 
 
