@@ -425,6 +425,7 @@ class BigInventory(core.Gs2Model):
     inventory_id: str = None
     inventory_name: str = None
     user_id: str = None
+    big_items: List[BigItem] = None
     created_at: int = None
     updated_at: int = None
 
@@ -438,6 +439,10 @@ class BigInventory(core.Gs2Model):
 
     def with_user_id(self, user_id: str) -> BigInventory:
         self.user_id = user_id
+        return self
+
+    def with_big_items(self, big_items: List[BigItem]) -> BigInventory:
+        self.big_items = big_items
         return self
 
     def with_created_at(self, created_at: int) -> BigInventory:
@@ -537,6 +542,10 @@ class BigInventory(core.Gs2Model):
             .with_inventory_id(data.get('inventoryId'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_user_id(data.get('userId'))\
+            .with_big_items([
+                BigItem.from_dict(data.get('bigItems')[i])
+                for i in range(len(data.get('bigItems')) if data.get('bigItems') else 0)
+            ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
 
@@ -545,6 +554,10 @@ class BigInventory(core.Gs2Model):
             "inventoryId": self.inventory_id,
             "inventoryName": self.inventory_name,
             "userId": self.user_id,
+            "bigItems": [
+                self.big_items[i].to_dict() if self.big_items[i] else None
+                for i in range(len(self.big_items) if self.big_items else 0)
+            ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }
