@@ -469,77 +469,6 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_form_models(
-        self,
-        request: DescribeFormModelsRequest,
-        callback: Callable[[AsyncResult[DescribeFormModelsResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="formation",
-            component='formModel',
-            function='describeFormModels',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeFormModelsResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_form_models(
-        self,
-        request: DescribeFormModelsRequest,
-    ) -> DescribeFormModelsResult:
-        async_result = []
-        with timeout(30):
-            self._describe_form_models(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_form_models_async(
-        self,
-        request: DescribeFormModelsRequest,
-    ) -> DescribeFormModelsResult:
-        async_result = []
-        self._describe_form_models(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _get_form_model(
         self,
         request: GetFormModelRequest,
@@ -559,6 +488,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.form_model_name is not None:
             body["formModelName"] = request.form_model_name
 
@@ -1088,8 +1019,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1319,8 +1250,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1392,8 +1323,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.description is not None:
             body["description"] = request.description
         if request.metadata is not None:
@@ -1475,8 +1406,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1516,6 +1447,535 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteMoldModelMasterResult:
         async_result = []
         self._delete_mold_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_property_form_models(
+        self,
+        request: DescribePropertyFormModelsRequest,
+        callback: Callable[[AsyncResult[DescribePropertyFormModelsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='propertyFormModel',
+            function='describePropertyFormModels',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribePropertyFormModelsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_property_form_models(
+        self,
+        request: DescribePropertyFormModelsRequest,
+    ) -> DescribePropertyFormModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_property_form_models(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_property_form_models_async(
+        self,
+        request: DescribePropertyFormModelsRequest,
+    ) -> DescribePropertyFormModelsResult:
+        async_result = []
+        self._describe_property_form_models(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_property_form_model(
+        self,
+        request: GetPropertyFormModelRequest,
+        callback: Callable[[AsyncResult[GetPropertyFormModelResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='propertyFormModel',
+            function='getPropertyFormModel',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetPropertyFormModelResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_property_form_model(
+        self,
+        request: GetPropertyFormModelRequest,
+    ) -> GetPropertyFormModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_property_form_model(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_property_form_model_async(
+        self,
+        request: GetPropertyFormModelRequest,
+    ) -> GetPropertyFormModelResult:
+        async_result = []
+        self._get_property_form_model(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_property_form_model_masters(
+        self,
+        request: DescribePropertyFormModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribePropertyFormModelMastersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='propertyFormModelMaster',
+            function='describePropertyFormModelMasters',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribePropertyFormModelMastersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_property_form_model_masters(
+        self,
+        request: DescribePropertyFormModelMastersRequest,
+    ) -> DescribePropertyFormModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_property_form_model_masters(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_property_form_model_masters_async(
+        self,
+        request: DescribePropertyFormModelMastersRequest,
+    ) -> DescribePropertyFormModelMastersResult:
+        async_result = []
+        self._describe_property_form_model_masters(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_property_form_model_master(
+        self,
+        request: CreatePropertyFormModelMasterRequest,
+        callback: Callable[[AsyncResult[CreatePropertyFormModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='propertyFormModelMaster',
+            function='createPropertyFormModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.slots is not None:
+            body["slots"] = [
+                item.to_dict()
+                for item in request.slots
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreatePropertyFormModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_property_form_model_master(
+        self,
+        request: CreatePropertyFormModelMasterRequest,
+    ) -> CreatePropertyFormModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_property_form_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_property_form_model_master_async(
+        self,
+        request: CreatePropertyFormModelMasterRequest,
+    ) -> CreatePropertyFormModelMasterResult:
+        async_result = []
+        self._create_property_form_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_property_form_model_master(
+        self,
+        request: GetPropertyFormModelMasterRequest,
+        callback: Callable[[AsyncResult[GetPropertyFormModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='propertyFormModelMaster',
+            function='getPropertyFormModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetPropertyFormModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_property_form_model_master(
+        self,
+        request: GetPropertyFormModelMasterRequest,
+    ) -> GetPropertyFormModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_property_form_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_property_form_model_master_async(
+        self,
+        request: GetPropertyFormModelMasterRequest,
+    ) -> GetPropertyFormModelMasterResult:
+        async_result = []
+        self._get_property_form_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_property_form_model_master(
+        self,
+        request: UpdatePropertyFormModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdatePropertyFormModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='propertyFormModelMaster',
+            function='updatePropertyFormModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.slots is not None:
+            body["slots"] = [
+                item.to_dict()
+                for item in request.slots
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdatePropertyFormModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_property_form_model_master(
+        self,
+        request: UpdatePropertyFormModelMasterRequest,
+    ) -> UpdatePropertyFormModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_property_form_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_property_form_model_master_async(
+        self,
+        request: UpdatePropertyFormModelMasterRequest,
+    ) -> UpdatePropertyFormModelMasterResult:
+        async_result = []
+        self._update_property_form_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_property_form_model_master(
+        self,
+        request: DeletePropertyFormModelMasterRequest,
+        callback: Callable[[AsyncResult[DeletePropertyFormModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='propertyFormModelMaster',
+            function='deletePropertyFormModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeletePropertyFormModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_property_form_model_master(
+        self,
+        request: DeletePropertyFormModelMasterRequest,
+    ) -> DeletePropertyFormModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_property_form_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_property_form_model_master_async(
+        self,
+        request: DeletePropertyFormModelMasterRequest,
+    ) -> DeletePropertyFormModelMasterResult:
+        async_result = []
+        self._delete_property_form_model_master(
             request,
             lambda result: async_result.append(result),
         )
@@ -1994,8 +2454,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2071,8 +2531,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2146,8 +2606,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.capacity is not None:
             body["capacity"] = request.capacity
 
@@ -2225,8 +2685,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.capacity is not None:
             body["capacity"] = request.capacity
 
@@ -2304,8 +2764,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.capacity is not None:
             body["capacity"] = request.capacity
 
@@ -2383,8 +2843,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2462,8 +2922,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2756,8 +3216,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
         if request.page_token is not None:
@@ -2837,8 +3297,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.user_id is not None:
             body["userId"] = request.user_id
         if request.page_token is not None:
@@ -2918,8 +3378,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
 
@@ -2997,8 +3457,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
 
@@ -3074,8 +3534,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
         if request.key_id is not None:
@@ -3155,8 +3615,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
         if request.key_id is not None:
@@ -3234,8 +3694,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
         if request.slots is not None:
@@ -3318,8 +3778,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
         if request.slots is not None:
@@ -3406,8 +3866,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
         if request.acquire_action is not None:
@@ -3492,8 +3952,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
 
@@ -3573,8 +4033,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.mold_name is not None:
-            body["moldName"] = request.mold_name
+        if request.mold_model_name is not None:
+            body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
 
@@ -3725,8 +4185,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
@@ -3806,8 +4266,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
@@ -3885,8 +4345,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
 
@@ -3964,8 +4424,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
 
@@ -4041,8 +4501,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
         if request.key_id is not None:
@@ -4122,8 +4582,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
         if request.key_id is not None:
@@ -4201,8 +4661,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
         if request.slots is not None:
@@ -4285,8 +4745,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
         if request.slots is not None:
@@ -4373,8 +4833,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
         if request.acquire_action is not None:
@@ -4459,8 +4919,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
 
@@ -4540,8 +5000,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
 

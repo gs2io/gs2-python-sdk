@@ -310,50 +310,19 @@ class DeleteNamespaceRequest(core.Gs2Request):
         }
 
 
-class DescribeFormModelsRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> DescribeFormModelsRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeFormModelsRequest]:
-        if data is None:
-            return None
-        return DescribeFormModelsRequest()\
-            .with_namespace_name(data.get('namespaceName'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-        }
-
-
 class GetFormModelRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    mold_model_name: str = None
     form_model_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFormModelRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_mold_model_name(self, mold_model_name: str) -> GetFormModelRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_form_model_name(self, form_model_name: str) -> GetFormModelRequest:
@@ -380,11 +349,13 @@ class GetFormModelRequest(core.Gs2Request):
             return None
         return GetFormModelRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_form_model_name(data.get('formModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "moldModelName": self.mold_model_name,
             "formModelName": self.form_model_name,
         }
 
@@ -705,14 +676,14 @@ class GetMoldModelRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    mold_name: str = None
+    mold_model_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMoldModelRequest:
         self.namespace_name = namespace_name
         return self
 
-    def with_mold_name(self, mold_name: str) -> GetMoldModelRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> GetMoldModelRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def get(self, key, default=None):
@@ -735,12 +706,12 @@ class GetMoldModelRequest(core.Gs2Request):
             return None
         return GetMoldModelRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_mold_name(data.get('moldName'))
+            .with_mold_model_name(data.get('moldModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
         }
 
 
@@ -876,14 +847,14 @@ class GetMoldModelMasterRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    mold_name: str = None
+    mold_model_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMoldModelMasterRequest:
         self.namespace_name = namespace_name
         return self
 
-    def with_mold_name(self, mold_name: str) -> GetMoldModelMasterRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> GetMoldModelMasterRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def get(self, key, default=None):
@@ -906,12 +877,12 @@ class GetMoldModelMasterRequest(core.Gs2Request):
             return None
         return GetMoldModelMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_mold_name(data.get('moldName'))
+            .with_mold_model_name(data.get('moldModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
         }
 
 
@@ -919,7 +890,7 @@ class UpdateMoldModelMasterRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     description: str = None
     metadata: str = None
     form_model_name: str = None
@@ -930,8 +901,8 @@ class UpdateMoldModelMasterRequest(core.Gs2Request):
         self.namespace_name = namespace_name
         return self
 
-    def with_mold_name(self, mold_name: str) -> UpdateMoldModelMasterRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> UpdateMoldModelMasterRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_description(self, description: str) -> UpdateMoldModelMasterRequest:
@@ -974,7 +945,7 @@ class UpdateMoldModelMasterRequest(core.Gs2Request):
             return None
         return UpdateMoldModelMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_form_model_name(data.get('formModelName'))\
@@ -984,7 +955,7 @@ class UpdateMoldModelMasterRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "description": self.description,
             "metadata": self.metadata,
             "formModelName": self.form_model_name,
@@ -997,14 +968,14 @@ class DeleteMoldModelMasterRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    mold_name: str = None
+    mold_model_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMoldModelMasterRequest:
         self.namespace_name = namespace_name
         return self
 
-    def with_mold_name(self, mold_name: str) -> DeleteMoldModelMasterRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> DeleteMoldModelMasterRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def get(self, key, default=None):
@@ -1027,12 +998,367 @@ class DeleteMoldModelMasterRequest(core.Gs2Request):
             return None
         return DeleteMoldModelMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_mold_name(data.get('moldName'))
+            .with_mold_model_name(data.get('moldModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
+        }
+
+
+class DescribePropertyFormModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribePropertyFormModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePropertyFormModelsRequest]:
+        if data is None:
+            return None
+        return DescribePropertyFormModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetPropertyFormModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    property_form_model_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPropertyFormModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_property_form_model_name(self, property_form_model_name: str) -> GetPropertyFormModelRequest:
+        self.property_form_model_name = property_form_model_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPropertyFormModelRequest]:
+        if data is None:
+            return None
+        return GetPropertyFormModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "propertyFormModelName": self.property_form_model_name,
+        }
+
+
+class DescribePropertyFormModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribePropertyFormModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribePropertyFormModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribePropertyFormModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePropertyFormModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribePropertyFormModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreatePropertyFormModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    slots: List[SlotModel] = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreatePropertyFormModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name(self, name: str) -> CreatePropertyFormModelMasterRequest:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> CreatePropertyFormModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> CreatePropertyFormModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_slots(self, slots: List[SlotModel]) -> CreatePropertyFormModelMasterRequest:
+        self.slots = slots
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreatePropertyFormModelMasterRequest]:
+        if data is None:
+            return None
+        return CreatePropertyFormModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_slots([
+                SlotModel.from_dict(data.get('slots')[i])
+                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "slots": [
+                self.slots[i].to_dict() if self.slots[i] else None
+                for i in range(len(self.slots) if self.slots else 0)
+            ],
+        }
+
+
+class GetPropertyFormModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    property_form_model_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPropertyFormModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_property_form_model_name(self, property_form_model_name: str) -> GetPropertyFormModelMasterRequest:
+        self.property_form_model_name = property_form_model_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPropertyFormModelMasterRequest]:
+        if data is None:
+            return None
+        return GetPropertyFormModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "propertyFormModelName": self.property_form_model_name,
+        }
+
+
+class UpdatePropertyFormModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    property_form_model_name: str = None
+    description: str = None
+    metadata: str = None
+    slots: List[SlotModel] = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdatePropertyFormModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_property_form_model_name(self, property_form_model_name: str) -> UpdatePropertyFormModelMasterRequest:
+        self.property_form_model_name = property_form_model_name
+        return self
+
+    def with_description(self, description: str) -> UpdatePropertyFormModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdatePropertyFormModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_slots(self, slots: List[SlotModel]) -> UpdatePropertyFormModelMasterRequest:
+        self.slots = slots
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdatePropertyFormModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdatePropertyFormModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_slots([
+                SlotModel.from_dict(data.get('slots')[i])
+                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "propertyFormModelName": self.property_form_model_name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "slots": [
+                self.slots[i].to_dict() if self.slots[i] else None
+                for i in range(len(self.slots) if self.slots else 0)
+            ],
+        }
+
+
+class DeletePropertyFormModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    property_form_model_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeletePropertyFormModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_property_form_model_name(self, property_form_model_name: str) -> DeletePropertyFormModelMasterRequest:
+        self.property_form_model_name = property_form_model_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePropertyFormModelMasterRequest]:
+        if data is None:
+            return None
+        return DeletePropertyFormModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "propertyFormModelName": self.property_form_model_name,
         }
 
 
@@ -1313,7 +1639,7 @@ class GetMoldRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    mold_name: str = None
+    mold_model_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMoldRequest:
         self.namespace_name = namespace_name
@@ -1323,8 +1649,8 @@ class GetMoldRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_mold_name(self, mold_name: str) -> GetMoldRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> GetMoldRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def get(self, key, default=None):
@@ -1348,13 +1674,13 @@ class GetMoldRequest(core.Gs2Request):
         return GetMoldRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_mold_name(data.get('moldName'))
+            .with_mold_model_name(data.get('moldModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
         }
 
 
@@ -1363,7 +1689,7 @@ class GetMoldByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMoldByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1373,8 +1699,8 @@ class GetMoldByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> GetMoldByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> GetMoldByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def get(self, key, default=None):
@@ -1398,13 +1724,13 @@ class GetMoldByUserIdRequest(core.Gs2Request):
         return GetMoldByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))
+            .with_mold_model_name(data.get('moldModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
         }
 
 
@@ -1413,7 +1739,7 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     capacity: int = None
     duplication_avoider: str = None
 
@@ -1425,8 +1751,8 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> SetMoldCapacityByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> SetMoldCapacityByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_capacity(self, capacity: int) -> SetMoldCapacityByUserIdRequest:
@@ -1458,14 +1784,14 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
         return SetMoldCapacityByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_capacity(data.get('capacity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "capacity": self.capacity,
         }
 
@@ -1475,7 +1801,7 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     capacity: int = None
     duplication_avoider: str = None
 
@@ -1487,8 +1813,8 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> AddMoldCapacityByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> AddMoldCapacityByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_capacity(self, capacity: int) -> AddMoldCapacityByUserIdRequest:
@@ -1520,14 +1846,14 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
         return AddMoldCapacityByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_capacity(data.get('capacity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "capacity": self.capacity,
         }
 
@@ -1537,7 +1863,7 @@ class SubMoldCapacityByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     capacity: int = None
     duplication_avoider: str = None
 
@@ -1549,8 +1875,8 @@ class SubMoldCapacityByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> SubMoldCapacityByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> SubMoldCapacityByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_capacity(self, capacity: int) -> SubMoldCapacityByUserIdRequest:
@@ -1582,14 +1908,14 @@ class SubMoldCapacityByUserIdRequest(core.Gs2Request):
         return SubMoldCapacityByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_capacity(data.get('capacity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "capacity": self.capacity,
         }
 
@@ -1599,7 +1925,7 @@ class DeleteMoldRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMoldRequest:
@@ -1610,8 +1936,8 @@ class DeleteMoldRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_mold_name(self, mold_name: str) -> DeleteMoldRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> DeleteMoldRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMoldRequest:
@@ -1639,13 +1965,13 @@ class DeleteMoldRequest(core.Gs2Request):
         return DeleteMoldRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_mold_name(data.get('moldName'))
+            .with_mold_model_name(data.get('moldModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
         }
 
 
@@ -1654,7 +1980,7 @@ class DeleteMoldByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMoldByUserIdRequest:
@@ -1665,8 +1991,8 @@ class DeleteMoldByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> DeleteMoldByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> DeleteMoldByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMoldByUserIdRequest:
@@ -1694,13 +2020,13 @@ class DeleteMoldByUserIdRequest(core.Gs2Request):
         return DeleteMoldByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))
+            .with_mold_model_name(data.get('moldModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
         }
 
 
@@ -1837,7 +2163,7 @@ class DescribeFormsRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     access_token: str = None
     page_token: str = None
     limit: int = None
@@ -1846,8 +2172,8 @@ class DescribeFormsRequest(core.Gs2Request):
         self.namespace_name = namespace_name
         return self
 
-    def with_mold_name(self, mold_name: str) -> DescribeFormsRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> DescribeFormsRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_access_token(self, access_token: str) -> DescribeFormsRequest:
@@ -1882,7 +2208,7 @@ class DescribeFormsRequest(core.Gs2Request):
             return None
         return DescribeFormsRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_access_token(data.get('accessToken'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
@@ -1890,7 +2216,7 @@ class DescribeFormsRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "accessToken": self.access_token,
             "pageToken": self.page_token,
             "limit": self.limit,
@@ -1901,7 +2227,7 @@ class DescribeFormsByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     user_id: str = None
     page_token: str = None
     limit: int = None
@@ -1910,8 +2236,8 @@ class DescribeFormsByUserIdRequest(core.Gs2Request):
         self.namespace_name = namespace_name
         return self
 
-    def with_mold_name(self, mold_name: str) -> DescribeFormsByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> DescribeFormsByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_user_id(self, user_id: str) -> DescribeFormsByUserIdRequest:
@@ -1946,7 +2272,7 @@ class DescribeFormsByUserIdRequest(core.Gs2Request):
             return None
         return DescribeFormsByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_user_id(data.get('userId'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
@@ -1954,7 +2280,7 @@ class DescribeFormsByUserIdRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "userId": self.user_id,
             "pageToken": self.page_token,
             "limit": self.limit,
@@ -1966,7 +2292,7 @@ class GetFormRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFormRequest:
@@ -1977,8 +2303,8 @@ class GetFormRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_mold_name(self, mold_name: str) -> GetFormRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> GetFormRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> GetFormRequest:
@@ -2006,14 +2332,14 @@ class GetFormRequest(core.Gs2Request):
         return GetFormRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
         }
 
@@ -2023,7 +2349,7 @@ class GetFormByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFormByUserIdRequest:
@@ -2034,8 +2360,8 @@ class GetFormByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> GetFormByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> GetFormByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> GetFormByUserIdRequest:
@@ -2063,14 +2389,14 @@ class GetFormByUserIdRequest(core.Gs2Request):
         return GetFormByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
         }
 
@@ -2080,7 +2406,7 @@ class GetFormWithSignatureRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
     key_id: str = None
 
@@ -2092,8 +2418,8 @@ class GetFormWithSignatureRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_mold_name(self, mold_name: str) -> GetFormWithSignatureRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> GetFormWithSignatureRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> GetFormWithSignatureRequest:
@@ -2125,7 +2451,7 @@ class GetFormWithSignatureRequest(core.Gs2Request):
         return GetFormWithSignatureRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
             .with_key_id(data.get('keyId'))
 
@@ -2133,7 +2459,7 @@ class GetFormWithSignatureRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
             "keyId": self.key_id,
         }
@@ -2144,7 +2470,7 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
     key_id: str = None
 
@@ -2156,8 +2482,8 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> GetFormWithSignatureByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> GetFormWithSignatureByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> GetFormWithSignatureByUserIdRequest:
@@ -2189,7 +2515,7 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
         return GetFormWithSignatureByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
             .with_key_id(data.get('keyId'))
 
@@ -2197,7 +2523,7 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
             "keyId": self.key_id,
         }
@@ -2208,7 +2534,7 @@ class SetFormByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
     slots: List[Slot] = None
     duplication_avoider: str = None
@@ -2221,8 +2547,8 @@ class SetFormByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> SetFormByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> SetFormByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> SetFormByUserIdRequest:
@@ -2258,7 +2584,7 @@ class SetFormByUserIdRequest(core.Gs2Request):
         return SetFormByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
             .with_slots([
                 Slot.from_dict(data.get('slots')[i])
@@ -2269,7 +2595,7 @@ class SetFormByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
             "slots": [
                 self.slots[i].to_dict() if self.slots[i] else None
@@ -2283,7 +2609,7 @@ class SetFormWithSignatureRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
     slots: List[SlotWithSignature] = None
     key_id: str = None
@@ -2297,8 +2623,8 @@ class SetFormWithSignatureRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_mold_name(self, mold_name: str) -> SetFormWithSignatureRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> SetFormWithSignatureRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> SetFormWithSignatureRequest:
@@ -2338,7 +2664,7 @@ class SetFormWithSignatureRequest(core.Gs2Request):
         return SetFormWithSignatureRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
             .with_slots([
                 SlotWithSignature.from_dict(data.get('slots')[i])
@@ -2350,7 +2676,7 @@ class SetFormWithSignatureRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
             "slots": [
                 self.slots[i].to_dict() if self.slots[i] else None
@@ -2365,7 +2691,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
     acquire_action: AcquireAction = None
     config: List[AcquireActionConfig] = None
@@ -2379,8 +2705,8 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> AcquireActionsToFormPropertiesRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> AcquireActionsToFormPropertiesRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> AcquireActionsToFormPropertiesRequest:
@@ -2420,7 +2746,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
         return AcquireActionsToFormPropertiesRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
             .with_acquire_action(AcquireAction.from_dict(data.get('acquireAction')))\
             .with_config([
@@ -2432,7 +2758,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
             "acquireAction": self.acquire_action.to_dict() if self.acquire_action else None,
             "config": [
@@ -2447,7 +2773,7 @@ class DeleteFormRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
     duplication_avoider: str = None
 
@@ -2459,8 +2785,8 @@ class DeleteFormRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_mold_name(self, mold_name: str) -> DeleteFormRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> DeleteFormRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> DeleteFormRequest:
@@ -2492,14 +2818,14 @@ class DeleteFormRequest(core.Gs2Request):
         return DeleteFormRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
         }
 
@@ -2509,7 +2835,7 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    mold_name: str = None
+    mold_model_name: str = None
     index: int = None
     duplication_avoider: str = None
 
@@ -2521,8 +2847,8 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_mold_name(self, mold_name: str) -> DeleteFormByUserIdRequest:
-        self.mold_name = mold_name
+    def with_mold_model_name(self, mold_model_name: str) -> DeleteFormByUserIdRequest:
+        self.mold_model_name = mold_model_name
         return self
 
     def with_index(self, index: int) -> DeleteFormByUserIdRequest:
@@ -2554,14 +2880,14 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
         return DeleteFormByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_name(data.get('moldName'))\
+            .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "moldName": self.mold_name,
+            "moldModelName": self.mold_model_name,
             "index": self.index,
         }
 
@@ -2614,7 +2940,7 @@ class DescribePropertyFormsRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     page_token: str = None
     limit: int = None
 
@@ -2626,8 +2952,8 @@ class DescribePropertyFormsRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> DescribePropertyFormsRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> DescribePropertyFormsRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_page_token(self, page_token: str) -> DescribePropertyFormsRequest:
@@ -2659,7 +2985,7 @@ class DescribePropertyFormsRequest(core.Gs2Request):
         return DescribePropertyFormsRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -2667,7 +2993,7 @@ class DescribePropertyFormsRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -2678,7 +3004,7 @@ class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     page_token: str = None
     limit: int = None
 
@@ -2690,8 +3016,8 @@ class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> DescribePropertyFormsByUserIdRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> DescribePropertyFormsByUserIdRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_page_token(self, page_token: str) -> DescribePropertyFormsByUserIdRequest:
@@ -2723,7 +3049,7 @@ class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
         return DescribePropertyFormsByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -2731,7 +3057,7 @@ class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -2742,7 +3068,7 @@ class GetPropertyFormRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetPropertyFormRequest:
@@ -2753,8 +3079,8 @@ class GetPropertyFormRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> GetPropertyFormRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> GetPropertyFormRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> GetPropertyFormRequest:
@@ -2782,14 +3108,14 @@ class GetPropertyFormRequest(core.Gs2Request):
         return GetPropertyFormRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
         }
 
@@ -2799,7 +3125,7 @@ class GetPropertyFormByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetPropertyFormByUserIdRequest:
@@ -2810,8 +3136,8 @@ class GetPropertyFormByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> GetPropertyFormByUserIdRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> GetPropertyFormByUserIdRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> GetPropertyFormByUserIdRequest:
@@ -2839,14 +3165,14 @@ class GetPropertyFormByUserIdRequest(core.Gs2Request):
         return GetPropertyFormByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
         }
 
@@ -2856,7 +3182,7 @@ class GetPropertyFormWithSignatureRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
     key_id: str = None
 
@@ -2868,8 +3194,8 @@ class GetPropertyFormWithSignatureRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> GetPropertyFormWithSignatureRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> GetPropertyFormWithSignatureRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> GetPropertyFormWithSignatureRequest:
@@ -2901,7 +3227,7 @@ class GetPropertyFormWithSignatureRequest(core.Gs2Request):
         return GetPropertyFormWithSignatureRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
             .with_key_id(data.get('keyId'))
 
@@ -2909,7 +3235,7 @@ class GetPropertyFormWithSignatureRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
             "keyId": self.key_id,
         }
@@ -2920,7 +3246,7 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
     key_id: str = None
 
@@ -2932,8 +3258,8 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> GetPropertyFormWithSignatureByUserIdRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> GetPropertyFormWithSignatureByUserIdRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> GetPropertyFormWithSignatureByUserIdRequest:
@@ -2965,7 +3291,7 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
         return GetPropertyFormWithSignatureByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
             .with_key_id(data.get('keyId'))
 
@@ -2973,7 +3299,7 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
             "keyId": self.key_id,
         }
@@ -2984,7 +3310,7 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
     slots: List[Slot] = None
     duplication_avoider: str = None
@@ -2997,8 +3323,8 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> SetPropertyFormByUserIdRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> SetPropertyFormByUserIdRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> SetPropertyFormByUserIdRequest:
@@ -3034,7 +3360,7 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
         return SetPropertyFormByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
             .with_slots([
                 Slot.from_dict(data.get('slots')[i])
@@ -3045,7 +3371,7 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
             "slots": [
                 self.slots[i].to_dict() if self.slots[i] else None
@@ -3059,7 +3385,7 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
     slots: List[SlotWithSignature] = None
     key_id: str = None
@@ -3073,8 +3399,8 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> SetPropertyFormWithSignatureRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> SetPropertyFormWithSignatureRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> SetPropertyFormWithSignatureRequest:
@@ -3114,7 +3440,7 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
         return SetPropertyFormWithSignatureRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
             .with_slots([
                 SlotWithSignature.from_dict(data.get('slots')[i])
@@ -3126,7 +3452,7 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
             "slots": [
                 self.slots[i].to_dict() if self.slots[i] else None
@@ -3141,7 +3467,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
     acquire_action: AcquireAction = None
     config: List[AcquireActionConfig] = None
@@ -3155,8 +3481,8 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> AcquireActionsToPropertyFormPropertiesRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> AcquireActionsToPropertyFormPropertiesRequest:
@@ -3196,7 +3522,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
         return AcquireActionsToPropertyFormPropertiesRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
             .with_acquire_action(AcquireAction.from_dict(data.get('acquireAction')))\
             .with_config([
@@ -3208,7 +3534,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
             "acquireAction": self.acquire_action.to_dict() if self.acquire_action else None,
             "config": [
@@ -3223,7 +3549,7 @@ class DeletePropertyFormRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
     duplication_avoider: str = None
 
@@ -3235,8 +3561,8 @@ class DeletePropertyFormRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> DeletePropertyFormRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> DeletePropertyFormRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> DeletePropertyFormRequest:
@@ -3268,14 +3594,14 @@ class DeletePropertyFormRequest(core.Gs2Request):
         return DeletePropertyFormRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
         }
 
@@ -3285,7 +3611,7 @@ class DeletePropertyFormByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    form_model_name: str = None
+    property_form_model_name: str = None
     property_id: str = None
     duplication_avoider: str = None
 
@@ -3297,8 +3623,8 @@ class DeletePropertyFormByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_form_model_name(self, form_model_name: str) -> DeletePropertyFormByUserIdRequest:
-        self.form_model_name = form_model_name
+    def with_property_form_model_name(self, property_form_model_name: str) -> DeletePropertyFormByUserIdRequest:
+        self.property_form_model_name = property_form_model_name
         return self
 
     def with_property_id(self, property_id: str) -> DeletePropertyFormByUserIdRequest:
@@ -3330,14 +3656,14 @@ class DeletePropertyFormByUserIdRequest(core.Gs2Request):
         return DeletePropertyFormByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_form_model_name(data.get('formModelName'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "formModelName": self.form_model_name,
+            "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
         }
 

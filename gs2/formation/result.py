@@ -234,46 +234,6 @@ class DeleteNamespaceResult(core.Gs2Result):
         }
 
 
-class DescribeFormModelsResult(core.Gs2Result):
-    items: List[FormModel] = None
-
-    def with_items(self, items: List[FormModel]) -> DescribeFormModelsResult:
-        self.items = items
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeFormModelsResult]:
-        if data is None:
-            return None
-        return DescribeFormModelsResult()\
-            .with_items([
-                FormModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
-            ],
-        }
-
-
 class GetFormModelResult(core.Gs2Result):
     item: FormModel = None
 
@@ -741,6 +701,263 @@ class DeleteMoldModelMasterResult(core.Gs2Result):
             return None
         return DeleteMoldModelMasterResult()\
             .with_item(MoldModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribePropertyFormModelsResult(core.Gs2Result):
+    items: List[PropertyFormModel] = None
+
+    def with_items(self, items: List[PropertyFormModel]) -> DescribePropertyFormModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePropertyFormModelsResult]:
+        if data is None:
+            return None
+        return DescribePropertyFormModelsResult()\
+            .with_items([
+                PropertyFormModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetPropertyFormModelResult(core.Gs2Result):
+    item: PropertyFormModel = None
+
+    def with_item(self, item: PropertyFormModel) -> GetPropertyFormModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPropertyFormModelResult]:
+        if data is None:
+            return None
+        return GetPropertyFormModelResult()\
+            .with_item(PropertyFormModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribePropertyFormModelMastersResult(core.Gs2Result):
+    items: List[PropertyFormModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[PropertyFormModelMaster]) -> DescribePropertyFormModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribePropertyFormModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePropertyFormModelMastersResult]:
+        if data is None:
+            return None
+        return DescribePropertyFormModelMastersResult()\
+            .with_items([
+                PropertyFormModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreatePropertyFormModelMasterResult(core.Gs2Result):
+    item: PropertyFormModelMaster = None
+
+    def with_item(self, item: PropertyFormModelMaster) -> CreatePropertyFormModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreatePropertyFormModelMasterResult]:
+        if data is None:
+            return None
+        return CreatePropertyFormModelMasterResult()\
+            .with_item(PropertyFormModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetPropertyFormModelMasterResult(core.Gs2Result):
+    item: PropertyFormModelMaster = None
+
+    def with_item(self, item: PropertyFormModelMaster) -> GetPropertyFormModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPropertyFormModelMasterResult]:
+        if data is None:
+            return None
+        return GetPropertyFormModelMasterResult()\
+            .with_item(PropertyFormModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdatePropertyFormModelMasterResult(core.Gs2Result):
+    item: PropertyFormModelMaster = None
+
+    def with_item(self, item: PropertyFormModelMaster) -> UpdatePropertyFormModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdatePropertyFormModelMasterResult]:
+        if data is None:
+            return None
+        return UpdatePropertyFormModelMasterResult()\
+            .with_item(PropertyFormModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeletePropertyFormModelMasterResult(core.Gs2Result):
+    item: PropertyFormModelMaster = None
+
+    def with_item(self, item: PropertyFormModelMaster) -> DeletePropertyFormModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePropertyFormModelMasterResult]:
+        if data is None:
+            return None
+        return DeletePropertyFormModelMasterResult()\
+            .with_item(PropertyFormModelMaster.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2191,14 +2408,14 @@ class DescribePropertyFormsByUserIdResult(core.Gs2Result):
 
 class GetPropertyFormResult(core.Gs2Result):
     item: PropertyForm = None
-    form_model: FormModel = None
+    property_form_model: PropertyFormModel = None
 
     def with_item(self, item: PropertyForm) -> GetPropertyFormResult:
         self.item = item
         return self
 
-    def with_form_model(self, form_model: FormModel) -> GetPropertyFormResult:
-        self.form_model = form_model
+    def with_property_form_model(self, property_form_model: PropertyFormModel) -> GetPropertyFormResult:
+        self.property_form_model = property_form_model
         return self
 
     def get(self, key, default=None):
@@ -2221,25 +2438,25 @@ class GetPropertyFormResult(core.Gs2Result):
             return None
         return GetPropertyFormResult()\
             .with_item(PropertyForm.from_dict(data.get('item')))\
-            .with_form_model(FormModel.from_dict(data.get('formModel')))
+            .with_property_form_model(PropertyFormModel.from_dict(data.get('propertyFormModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "formModel": self.form_model.to_dict() if self.form_model else None,
+            "propertyFormModel": self.property_form_model.to_dict() if self.property_form_model else None,
         }
 
 
 class GetPropertyFormByUserIdResult(core.Gs2Result):
     item: PropertyForm = None
-    form_model: FormModel = None
+    property_form_model: PropertyFormModel = None
 
     def with_item(self, item: PropertyForm) -> GetPropertyFormByUserIdResult:
         self.item = item
         return self
 
-    def with_form_model(self, form_model: FormModel) -> GetPropertyFormByUserIdResult:
-        self.form_model = form_model
+    def with_property_form_model(self, property_form_model: PropertyFormModel) -> GetPropertyFormByUserIdResult:
+        self.property_form_model = property_form_model
         return self
 
     def get(self, key, default=None):
@@ -2262,12 +2479,12 @@ class GetPropertyFormByUserIdResult(core.Gs2Result):
             return None
         return GetPropertyFormByUserIdResult()\
             .with_item(PropertyForm.from_dict(data.get('item')))\
-            .with_form_model(FormModel.from_dict(data.get('formModel')))
+            .with_property_form_model(PropertyFormModel.from_dict(data.get('propertyFormModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "formModel": self.form_model.to_dict() if self.form_model else None,
+            "propertyFormModel": self.property_form_model.to_dict() if self.property_form_model else None,
         }
 
 
@@ -2275,7 +2492,7 @@ class GetPropertyFormWithSignatureResult(core.Gs2Result):
     item: PropertyForm = None
     body: str = None
     signature: str = None
-    form_model: FormModel = None
+    property_form_model: PropertyFormModel = None
 
     def with_item(self, item: PropertyForm) -> GetPropertyFormWithSignatureResult:
         self.item = item
@@ -2289,8 +2506,8 @@ class GetPropertyFormWithSignatureResult(core.Gs2Result):
         self.signature = signature
         return self
 
-    def with_form_model(self, form_model: FormModel) -> GetPropertyFormWithSignatureResult:
-        self.form_model = form_model
+    def with_property_form_model(self, property_form_model: PropertyFormModel) -> GetPropertyFormWithSignatureResult:
+        self.property_form_model = property_form_model
         return self
 
     def get(self, key, default=None):
@@ -2315,14 +2532,14 @@ class GetPropertyFormWithSignatureResult(core.Gs2Result):
             .with_item(PropertyForm.from_dict(data.get('item')))\
             .with_body(data.get('body'))\
             .with_signature(data.get('signature'))\
-            .with_form_model(FormModel.from_dict(data.get('formModel')))
+            .with_property_form_model(PropertyFormModel.from_dict(data.get('propertyFormModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "body": self.body,
             "signature": self.signature,
-            "formModel": self.form_model.to_dict() if self.form_model else None,
+            "propertyFormModel": self.property_form_model.to_dict() if self.property_form_model else None,
         }
 
 
@@ -2330,7 +2547,7 @@ class GetPropertyFormWithSignatureByUserIdResult(core.Gs2Result):
     item: PropertyForm = None
     body: str = None
     signature: str = None
-    form_model: FormModel = None
+    property_form_model: PropertyFormModel = None
 
     def with_item(self, item: PropertyForm) -> GetPropertyFormWithSignatureByUserIdResult:
         self.item = item
@@ -2344,8 +2561,8 @@ class GetPropertyFormWithSignatureByUserIdResult(core.Gs2Result):
         self.signature = signature
         return self
 
-    def with_form_model(self, form_model: FormModel) -> GetPropertyFormWithSignatureByUserIdResult:
-        self.form_model = form_model
+    def with_property_form_model(self, property_form_model: PropertyFormModel) -> GetPropertyFormWithSignatureByUserIdResult:
+        self.property_form_model = property_form_model
         return self
 
     def get(self, key, default=None):
@@ -2370,27 +2587,27 @@ class GetPropertyFormWithSignatureByUserIdResult(core.Gs2Result):
             .with_item(PropertyForm.from_dict(data.get('item')))\
             .with_body(data.get('body'))\
             .with_signature(data.get('signature'))\
-            .with_form_model(FormModel.from_dict(data.get('formModel')))
+            .with_property_form_model(PropertyFormModel.from_dict(data.get('propertyFormModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "body": self.body,
             "signature": self.signature,
-            "formModel": self.form_model.to_dict() if self.form_model else None,
+            "propertyFormModel": self.property_form_model.to_dict() if self.property_form_model else None,
         }
 
 
 class SetPropertyFormByUserIdResult(core.Gs2Result):
     item: PropertyForm = None
-    form_model: FormModel = None
+    property_form_model: PropertyFormModel = None
 
     def with_item(self, item: PropertyForm) -> SetPropertyFormByUserIdResult:
         self.item = item
         return self
 
-    def with_form_model(self, form_model: FormModel) -> SetPropertyFormByUserIdResult:
-        self.form_model = form_model
+    def with_property_form_model(self, property_form_model: PropertyFormModel) -> SetPropertyFormByUserIdResult:
+        self.property_form_model = property_form_model
         return self
 
     def get(self, key, default=None):
@@ -2413,25 +2630,25 @@ class SetPropertyFormByUserIdResult(core.Gs2Result):
             return None
         return SetPropertyFormByUserIdResult()\
             .with_item(PropertyForm.from_dict(data.get('item')))\
-            .with_form_model(FormModel.from_dict(data.get('formModel')))
+            .with_property_form_model(PropertyFormModel.from_dict(data.get('propertyFormModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "formModel": self.form_model.to_dict() if self.form_model else None,
+            "propertyFormModel": self.property_form_model.to_dict() if self.property_form_model else None,
         }
 
 
 class SetPropertyFormWithSignatureResult(core.Gs2Result):
     item: PropertyForm = None
-    form_model: FormModel = None
+    proeprty_form_model: PropertyFormModel = None
 
     def with_item(self, item: PropertyForm) -> SetPropertyFormWithSignatureResult:
         self.item = item
         return self
 
-    def with_form_model(self, form_model: FormModel) -> SetPropertyFormWithSignatureResult:
-        self.form_model = form_model
+    def with_proeprty_form_model(self, proeprty_form_model: PropertyFormModel) -> SetPropertyFormWithSignatureResult:
+        self.proeprty_form_model = proeprty_form_model
         return self
 
     def get(self, key, default=None):
@@ -2454,12 +2671,12 @@ class SetPropertyFormWithSignatureResult(core.Gs2Result):
             return None
         return SetPropertyFormWithSignatureResult()\
             .with_item(PropertyForm.from_dict(data.get('item')))\
-            .with_form_model(FormModel.from_dict(data.get('formModel')))
+            .with_proeprty_form_model(PropertyFormModel.from_dict(data.get('proeprtyFormModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "formModel": self.form_model.to_dict() if self.form_model else None,
+            "proeprtyFormModel": self.proeprty_form_model.to_dict() if self.proeprty_form_model else None,
         }
 
 
@@ -2527,14 +2744,14 @@ class AcquireActionsToPropertyFormPropertiesResult(core.Gs2Result):
 
 class DeletePropertyFormResult(core.Gs2Result):
     item: PropertyForm = None
-    form_model: FormModel = None
+    property_form_model: PropertyFormModel = None
 
     def with_item(self, item: PropertyForm) -> DeletePropertyFormResult:
         self.item = item
         return self
 
-    def with_form_model(self, form_model: FormModel) -> DeletePropertyFormResult:
-        self.form_model = form_model
+    def with_property_form_model(self, property_form_model: PropertyFormModel) -> DeletePropertyFormResult:
+        self.property_form_model = property_form_model
         return self
 
     def get(self, key, default=None):
@@ -2557,25 +2774,25 @@ class DeletePropertyFormResult(core.Gs2Result):
             return None
         return DeletePropertyFormResult()\
             .with_item(PropertyForm.from_dict(data.get('item')))\
-            .with_form_model(FormModel.from_dict(data.get('formModel')))
+            .with_property_form_model(PropertyFormModel.from_dict(data.get('propertyFormModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "formModel": self.form_model.to_dict() if self.form_model else None,
+            "propertyFormModel": self.property_form_model.to_dict() if self.property_form_model else None,
         }
 
 
 class DeletePropertyFormByUserIdResult(core.Gs2Result):
     item: PropertyForm = None
-    form_model: FormModel = None
+    property_form_model: PropertyFormModel = None
 
     def with_item(self, item: PropertyForm) -> DeletePropertyFormByUserIdResult:
         self.item = item
         return self
 
-    def with_form_model(self, form_model: FormModel) -> DeletePropertyFormByUserIdResult:
-        self.form_model = form_model
+    def with_property_form_model(self, property_form_model: PropertyFormModel) -> DeletePropertyFormByUserIdResult:
+        self.property_form_model = property_form_model
         return self
 
     def get(self, key, default=None):
@@ -2598,12 +2815,12 @@ class DeletePropertyFormByUserIdResult(core.Gs2Result):
             return None
         return DeletePropertyFormByUserIdResult()\
             .with_item(PropertyForm.from_dict(data.get('item')))\
-            .with_form_model(FormModel.from_dict(data.get('formModel')))
+            .with_property_form_model(PropertyFormModel.from_dict(data.get('propertyFormModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "formModel": self.form_model.to_dict() if self.form_model else None,
+            "propertyFormModel": self.property_form_model.to_dict() if self.property_form_model else None,
         }
 
 
