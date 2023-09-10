@@ -385,6 +385,7 @@ class DescribeMessagesRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
+    is_read: bool = None
     page_token: str = None
     limit: int = None
 
@@ -394,6 +395,10 @@ class DescribeMessagesRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DescribeMessagesRequest:
         self.access_token = access_token
+        return self
+
+    def with_is_read(self, is_read: bool) -> DescribeMessagesRequest:
+        self.is_read = is_read
         return self
 
     def with_page_token(self, page_token: str) -> DescribeMessagesRequest:
@@ -425,6 +430,7 @@ class DescribeMessagesRequest(core.Gs2Request):
         return DescribeMessagesRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
+            .with_is_read(data.get('isRead'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -432,6 +438,7 @@ class DescribeMessagesRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
+            "isRead": self.is_read,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -442,6 +449,7 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    is_read: bool = None
     page_token: str = None
     limit: int = None
 
@@ -451,6 +459,10 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DescribeMessagesByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_is_read(self, is_read: bool) -> DescribeMessagesByUserIdRequest:
+        self.is_read = is_read
         return self
 
     def with_page_token(self, page_token: str) -> DescribeMessagesByUserIdRequest:
@@ -482,6 +494,7 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
         return DescribeMessagesByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_is_read(data.get('isRead'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -489,6 +502,7 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "isRead": self.is_read,
             "pageToken": self.page_token,
             "limit": self.limit,
         }

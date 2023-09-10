@@ -510,6 +510,8 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.is_read is not None:
+            body["isRead"] = request.is_read
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
@@ -589,6 +591,8 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.is_read is not None:
+            body["isRead"] = request.is_read
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:

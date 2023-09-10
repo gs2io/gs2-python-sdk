@@ -506,6 +506,8 @@ class Gs2InboxRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.is_read is not None:
+            query_strings["isRead"] = request.is_read
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -585,6 +587,8 @@ class Gs2InboxRestClient(rest.AbstractGs2RestClient):
         }
         if request.user_id is not None:
             query_strings["userId"] = request.user_id
+        if request.is_read is not None:
+            query_strings["isRead"] = request.is_read
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
