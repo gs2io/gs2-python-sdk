@@ -235,6 +235,12 @@ src/gs2/showcase/request.py
 src/gs2/showcase/rest.py
 src/gs2/showcase/result.py
 src/gs2/showcase/web_socket.py
+src/gs2/skill_tree/__init__.py
+src/gs2/skill_tree/model.py
+src/gs2/skill_tree/request.py
+src/gs2/skill_tree/rest.py
+src/gs2/skill_tree/result.py
+src/gs2/skill_tree/web_socket.py
 src/gs2/stamina/__init__.py
 src/gs2/stamina/model.py
 src/gs2/stamina/request.py
