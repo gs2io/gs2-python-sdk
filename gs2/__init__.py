@@ -1,6 +1,7 @@
 from .core import *
 
 from . import account
+from . import ad_reward
 from . import auth
 from . import chat
 from . import datastore

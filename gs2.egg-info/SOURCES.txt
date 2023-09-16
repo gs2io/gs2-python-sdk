@@ -11,6 +11,12 @@ src/gs2/account/request.py
 src/gs2/account/rest.py
 src/gs2/account/result.py
 src/gs2/account/web_socket.py
+src/gs2/ad_reward/__init__.py
+src/gs2/ad_reward/model.py
+src/gs2/ad_reward/request.py
+src/gs2/ad_reward/rest.py
+src/gs2/ad_reward/result.py
+src/gs2/ad_reward/web_socket.py
 src/gs2/auth/__init__.py
 src/gs2/auth/model.py
 src/gs2/auth/request.py
