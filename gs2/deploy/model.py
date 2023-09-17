@@ -19,47 +19,6 @@ from typing import *
 from gs2 import core
 
 
-class OutputField(core.Gs2Model):
-    name: str = None
-    field_name: str = None
-
-    def with_name(self, name: str) -> OutputField:
-        self.name = name
-        return self
-
-    def with_field_name(self, field_name: str) -> OutputField:
-        self.field_name = field_name
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[OutputField]:
-        if data is None:
-            return None
-        return OutputField()\
-            .with_name(data.get('name'))\
-            .with_field_name(data.get('fieldName'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "name": self.name,
-            "fieldName": self.field_name,
-        }
-
-
 class GitHubCheckoutSetting(core.Gs2Model):
     api_key_id: str = None
     repository_name: str = None
@@ -133,6 +92,95 @@ class GitHubCheckoutSetting(core.Gs2Model):
             "commitHash": self.commit_hash,
             "branchName": self.branch_name,
             "tagName": self.tag_name,
+        }
+
+
+class ChangeSet(core.Gs2Model):
+    resource_name: str = None
+    resource_type: str = None
+    operation: str = None
+
+    def with_resource_name(self, resource_name: str) -> ChangeSet:
+        self.resource_name = resource_name
+        return self
+
+    def with_resource_type(self, resource_type: str) -> ChangeSet:
+        self.resource_type = resource_type
+        return self
+
+    def with_operation(self, operation: str) -> ChangeSet:
+        self.operation = operation
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ChangeSet]:
+        if data is None:
+            return None
+        return ChangeSet()\
+            .with_resource_name(data.get('resourceName'))\
+            .with_resource_type(data.get('resourceType'))\
+            .with_operation(data.get('operation'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "resourceName": self.resource_name,
+            "resourceType": self.resource_type,
+            "operation": self.operation,
+        }
+
+
+class OutputField(core.Gs2Model):
+    name: str = None
+    field_name: str = None
+
+    def with_name(self, name: str) -> OutputField:
+        self.name = name
+        return self
+
+    def with_field_name(self, field_name: str) -> OutputField:
+        self.field_name = field_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[OutputField]:
+        if data is None:
+            return None
+        return OutputField()\
+            .with_name(data.get('name'))\
+            .with_field_name(data.get('fieldName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "fieldName": self.field_name,
         }
 
 

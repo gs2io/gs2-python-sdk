@@ -318,6 +318,49 @@ class UpdateStackRequest(core.Gs2Request):
         }
 
 
+class ChangeSetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stack_name: str = None
+    template: str = None
+
+    def with_stack_name(self, stack_name: str) -> ChangeSetRequest:
+        self.stack_name = stack_name
+        return self
+
+    def with_template(self, template: str) -> ChangeSetRequest:
+        self.template = template
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ChangeSetRequest]:
+        if data is None:
+            return None
+        return ChangeSetRequest()\
+            .with_stack_name(data.get('stackName'))\
+            .with_template(data.get('template'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stackName": self.stack_name,
+            "template": self.template,
+        }
+
+
 class UpdateStackFromGitHubRequest(core.Gs2Request):
 
     context_stack: str = None

@@ -532,6 +532,79 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _change_set(
+        self,
+        request: ChangeSetRequest,
+        callback: Callable[[AsyncResult[ChangeSetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='deploy',
+            region=self.session.region,
+        ) + "/stack/{stackName}".format(
+            stackName=request.stack_name if request.stack_name is not None and request.stack_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.template is not None:
+            body["template"] = request.template
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ChangeSetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def change_set(
+        self,
+        request: ChangeSetRequest,
+    ) -> ChangeSetResult:
+        async_result = []
+        with timeout(30):
+            self._change_set(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def change_set_async(
+        self,
+        request: ChangeSetRequest,
+    ) -> ChangeSetResult:
+        async_result = []
+        self._change_set(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _update_stack_from_git_hub(
         self,
         request: UpdateStackFromGitHubRequest,
