@@ -367,10 +367,12 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
     name: str = None
     description: str = None
     metadata: str = None
+    scope: str = None
+    type: str = None
+    current_version: Version = None
     warning_version: Version = None
     error_version: Version = None
-    scope: str = None
-    current_version: Version = None
+    schedule_versions: List[ScheduleVersion] = None
     need_signature: bool = None
     signature_key_id: str = None
 
@@ -390,6 +392,18 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
         self.metadata = metadata
         return self
 
+    def with_scope(self, scope: str) -> CreateVersionModelMasterRequest:
+        self.scope = scope
+        return self
+
+    def with_type(self, type: str) -> CreateVersionModelMasterRequest:
+        self.type = type
+        return self
+
+    def with_current_version(self, current_version: Version) -> CreateVersionModelMasterRequest:
+        self.current_version = current_version
+        return self
+
     def with_warning_version(self, warning_version: Version) -> CreateVersionModelMasterRequest:
         self.warning_version = warning_version
         return self
@@ -398,12 +412,8 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
         self.error_version = error_version
         return self
 
-    def with_scope(self, scope: str) -> CreateVersionModelMasterRequest:
-        self.scope = scope
-        return self
-
-    def with_current_version(self, current_version: Version) -> CreateVersionModelMasterRequest:
-        self.current_version = current_version
+    def with_schedule_versions(self, schedule_versions: List[ScheduleVersion]) -> CreateVersionModelMasterRequest:
+        self.schedule_versions = schedule_versions
         return self
 
     def with_need_signature(self, need_signature: bool) -> CreateVersionModelMasterRequest:
@@ -437,10 +447,15 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_scope(data.get('scope'))\
+            .with_type(data.get('type'))\
+            .with_current_version(Version.from_dict(data.get('currentVersion')))\
             .with_warning_version(Version.from_dict(data.get('warningVersion')))\
             .with_error_version(Version.from_dict(data.get('errorVersion')))\
-            .with_scope(data.get('scope'))\
-            .with_current_version(Version.from_dict(data.get('currentVersion')))\
+            .with_schedule_versions([
+                ScheduleVersion.from_dict(data.get('scheduleVersions')[i])
+                for i in range(len(data.get('scheduleVersions')) if data.get('scheduleVersions') else 0)
+            ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))
 
@@ -450,10 +465,15 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
+            "scope": self.scope,
+            "type": self.type,
+            "currentVersion": self.current_version.to_dict() if self.current_version else None,
             "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
-            "scope": self.scope,
-            "currentVersion": self.current_version.to_dict() if self.current_version else None,
+            "scheduleVersions": [
+                self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
+                for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
+            ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
         }
@@ -509,10 +529,12 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
     version_name: str = None
     description: str = None
     metadata: str = None
+    scope: str = None
+    type: str = None
+    current_version: Version = None
     warning_version: Version = None
     error_version: Version = None
-    scope: str = None
-    current_version: Version = None
+    schedule_versions: List[ScheduleVersion] = None
     need_signature: bool = None
     signature_key_id: str = None
 
@@ -532,6 +554,18 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
         self.metadata = metadata
         return self
 
+    def with_scope(self, scope: str) -> UpdateVersionModelMasterRequest:
+        self.scope = scope
+        return self
+
+    def with_type(self, type: str) -> UpdateVersionModelMasterRequest:
+        self.type = type
+        return self
+
+    def with_current_version(self, current_version: Version) -> UpdateVersionModelMasterRequest:
+        self.current_version = current_version
+        return self
+
     def with_warning_version(self, warning_version: Version) -> UpdateVersionModelMasterRequest:
         self.warning_version = warning_version
         return self
@@ -540,12 +574,8 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
         self.error_version = error_version
         return self
 
-    def with_scope(self, scope: str) -> UpdateVersionModelMasterRequest:
-        self.scope = scope
-        return self
-
-    def with_current_version(self, current_version: Version) -> UpdateVersionModelMasterRequest:
-        self.current_version = current_version
+    def with_schedule_versions(self, schedule_versions: List[ScheduleVersion]) -> UpdateVersionModelMasterRequest:
+        self.schedule_versions = schedule_versions
         return self
 
     def with_need_signature(self, need_signature: bool) -> UpdateVersionModelMasterRequest:
@@ -579,10 +609,15 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
             .with_version_name(data.get('versionName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_scope(data.get('scope'))\
+            .with_type(data.get('type'))\
+            .with_current_version(Version.from_dict(data.get('currentVersion')))\
             .with_warning_version(Version.from_dict(data.get('warningVersion')))\
             .with_error_version(Version.from_dict(data.get('errorVersion')))\
-            .with_scope(data.get('scope'))\
-            .with_current_version(Version.from_dict(data.get('currentVersion')))\
+            .with_schedule_versions([
+                ScheduleVersion.from_dict(data.get('scheduleVersions')[i])
+                for i in range(len(data.get('scheduleVersions')) if data.get('scheduleVersions') else 0)
+            ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))
 
@@ -592,10 +627,15 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
             "versionName": self.version_name,
             "description": self.description,
             "metadata": self.metadata,
+            "scope": self.scope,
+            "type": self.type,
+            "currentVersion": self.current_version.to_dict() if self.current_version else None,
             "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
-            "scope": self.scope,
-            "currentVersion": self.current_version.to_dict() if self.current_version else None,
+            "scheduleVersions": [
+                self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
+                for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
+            ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
         }

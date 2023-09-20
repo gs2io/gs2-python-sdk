@@ -567,14 +567,21 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.scope is not None:
+            body["scope"] = request.scope
+        if request.type is not None:
+            body["type"] = request.type
+        if request.current_version is not None:
+            body["currentVersion"] = request.current_version.to_dict()
         if request.warning_version is not None:
             body["warningVersion"] = request.warning_version.to_dict()
         if request.error_version is not None:
             body["errorVersion"] = request.error_version.to_dict()
-        if request.scope is not None:
-            body["scope"] = request.scope
-        if request.current_version is not None:
-            body["currentVersion"] = request.current_version.to_dict()
+        if request.schedule_versions is not None:
+            body["scheduleVersions"] = [
+                item.to_dict()
+                for item in request.schedule_versions
+            ]
         if request.need_signature is not None:
             body["needSignature"] = request.need_signature
         if request.signature_key_id is not None:
@@ -727,14 +734,21 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.scope is not None:
+            body["scope"] = request.scope
+        if request.type is not None:
+            body["type"] = request.type
+        if request.current_version is not None:
+            body["currentVersion"] = request.current_version.to_dict()
         if request.warning_version is not None:
             body["warningVersion"] = request.warning_version.to_dict()
         if request.error_version is not None:
             body["errorVersion"] = request.error_version.to_dict()
-        if request.scope is not None:
-            body["scope"] = request.scope
-        if request.current_version is not None:
-            body["currentVersion"] = request.current_version.to_dict()
+        if request.schedule_versions is not None:
+            body["scheduleVersions"] = [
+                item.to_dict()
+                for item in request.schedule_versions
+            ]
         if request.need_signature is not None:
             body["needSignature"] = request.need_signature
         if request.signature_key_id is not None:

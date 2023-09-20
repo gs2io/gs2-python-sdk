@@ -19,6 +19,109 @@ from typing import *
 from gs2 import core
 
 
+class ScheduleVersion(core.Gs2Model):
+    current_version: Version = None
+    warning_version: Version = None
+    error_version: Version = None
+    schedule_event_id: str = None
+
+    def with_current_version(self, current_version: Version) -> ScheduleVersion:
+        self.current_version = current_version
+        return self
+
+    def with_warning_version(self, warning_version: Version) -> ScheduleVersion:
+        self.warning_version = warning_version
+        return self
+
+    def with_error_version(self, error_version: Version) -> ScheduleVersion:
+        self.error_version = error_version
+        return self
+
+    def with_schedule_event_id(self, schedule_event_id: str) -> ScheduleVersion:
+        self.schedule_event_id = schedule_event_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ScheduleVersion]:
+        if data is None:
+            return None
+        return ScheduleVersion()\
+            .with_current_version(Version.from_dict(data.get('currentVersion')))\
+            .with_warning_version(Version.from_dict(data.get('warningVersion')))\
+            .with_error_version(Version.from_dict(data.get('errorVersion')))\
+            .with_schedule_event_id(data.get('scheduleEventId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "currentVersion": self.current_version.to_dict() if self.current_version else None,
+            "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
+            "errorVersion": self.error_version.to_dict() if self.error_version else None,
+            "scheduleEventId": self.schedule_event_id,
+        }
+
+
+class Version(core.Gs2Model):
+    major: int = None
+    minor: int = None
+    micro: int = None
+
+    def with_major(self, major: int) -> Version:
+        self.major = major
+        return self
+
+    def with_minor(self, minor: int) -> Version:
+        self.minor = minor
+        return self
+
+    def with_micro(self, micro: int) -> Version:
+        self.micro = micro
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Version]:
+        if data is None:
+            return None
+        return Version()\
+            .with_major(data.get('major'))\
+            .with_minor(data.get('minor'))\
+            .with_micro(data.get('micro'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "major": self.major,
+            "minor": self.minor,
+            "micro": self.micro,
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -325,16 +428,12 @@ class SignTargetVersion(core.Gs2Model):
 
 class TargetVersion(core.Gs2Model):
     version_name: str = None
-    version: Version = None
     body: str = None
     signature: str = None
+    version: Version = None
 
     def with_version_name(self, version_name: str) -> TargetVersion:
         self.version_name = version_name
-        return self
-
-    def with_version(self, version: Version) -> TargetVersion:
-        self.version = version
         return self
 
     def with_body(self, body: str) -> TargetVersion:
@@ -343,6 +442,10 @@ class TargetVersion(core.Gs2Model):
 
     def with_signature(self, signature: str) -> TargetVersion:
         self.signature = signature
+        return self
+
+    def with_version(self, version: Version) -> TargetVersion:
+        self.version = version
         return self
 
     def get(self, key, default=None):
@@ -365,16 +468,16 @@ class TargetVersion(core.Gs2Model):
             return None
         return TargetVersion()\
             .with_version_name(data.get('versionName'))\
-            .with_version(Version.from_dict(data.get('version')))\
             .with_body(data.get('body'))\
-            .with_signature(data.get('signature'))
+            .with_signature(data.get('signature'))\
+            .with_version(Version.from_dict(data.get('version')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "versionName": self.version_name,
-            "version": self.version.to_dict() if self.version else None,
             "body": self.body,
             "signature": self.signature,
+            "version": self.version.to_dict() if self.version else None,
         }
 
 
@@ -566,10 +669,12 @@ class VersionModel(core.Gs2Model):
     version_model_id: str = None
     name: str = None
     metadata: str = None
+    scope: str = None
+    type: str = None
+    current_version: Version = None
     warning_version: Version = None
     error_version: Version = None
-    scope: str = None
-    current_version: Version = None
+    schedule_versions: List[ScheduleVersion] = None
     need_signature: bool = None
     signature_key_id: str = None
 
@@ -585,6 +690,18 @@ class VersionModel(core.Gs2Model):
         self.metadata = metadata
         return self
 
+    def with_scope(self, scope: str) -> VersionModel:
+        self.scope = scope
+        return self
+
+    def with_type(self, type: str) -> VersionModel:
+        self.type = type
+        return self
+
+    def with_current_version(self, current_version: Version) -> VersionModel:
+        self.current_version = current_version
+        return self
+
     def with_warning_version(self, warning_version: Version) -> VersionModel:
         self.warning_version = warning_version
         return self
@@ -593,12 +710,8 @@ class VersionModel(core.Gs2Model):
         self.error_version = error_version
         return self
 
-    def with_scope(self, scope: str) -> VersionModel:
-        self.scope = scope
-        return self
-
-    def with_current_version(self, current_version: Version) -> VersionModel:
-        self.current_version = current_version
+    def with_schedule_versions(self, schedule_versions: List[ScheduleVersion]) -> VersionModel:
+        self.schedule_versions = schedule_versions
         return self
 
     def with_need_signature(self, need_signature: bool) -> VersionModel:
@@ -686,10 +799,15 @@ class VersionModel(core.Gs2Model):
             .with_version_model_id(data.get('versionModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
+            .with_scope(data.get('scope'))\
+            .with_type(data.get('type'))\
+            .with_current_version(Version.from_dict(data.get('currentVersion')))\
             .with_warning_version(Version.from_dict(data.get('warningVersion')))\
             .with_error_version(Version.from_dict(data.get('errorVersion')))\
-            .with_scope(data.get('scope'))\
-            .with_current_version(Version.from_dict(data.get('currentVersion')))\
+            .with_schedule_versions([
+                ScheduleVersion.from_dict(data.get('scheduleVersions')[i])
+                for i in range(len(data.get('scheduleVersions')) if data.get('scheduleVersions') else 0)
+            ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))
 
@@ -698,60 +816,17 @@ class VersionModel(core.Gs2Model):
             "versionModelId": self.version_model_id,
             "name": self.name,
             "metadata": self.metadata,
+            "scope": self.scope,
+            "type": self.type,
+            "currentVersion": self.current_version.to_dict() if self.current_version else None,
             "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
-            "scope": self.scope,
-            "currentVersion": self.current_version.to_dict() if self.current_version else None,
+            "scheduleVersions": [
+                self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
+                for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
+            ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
-        }
-
-
-class Version(core.Gs2Model):
-    major: int = None
-    minor: int = None
-    micro: int = None
-
-    def with_major(self, major: int) -> Version:
-        self.major = major
-        return self
-
-    def with_minor(self, minor: int) -> Version:
-        self.minor = minor
-        return self
-
-    def with_micro(self, micro: int) -> Version:
-        self.micro = micro
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[Version]:
-        if data is None:
-            return None
-        return Version()\
-            .with_major(data.get('major'))\
-            .with_minor(data.get('minor'))\
-            .with_micro(data.get('micro'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "major": self.major,
-            "minor": self.minor,
-            "micro": self.micro,
         }
 
 
@@ -760,10 +835,12 @@ class VersionModelMaster(core.Gs2Model):
     name: str = None
     description: str = None
     metadata: str = None
+    scope: str = None
+    type: str = None
+    current_version: Version = None
     warning_version: Version = None
     error_version: Version = None
-    scope: str = None
-    current_version: Version = None
+    schedule_versions: List[ScheduleVersion] = None
     need_signature: bool = None
     signature_key_id: str = None
     created_at: int = None
@@ -786,6 +863,18 @@ class VersionModelMaster(core.Gs2Model):
         self.metadata = metadata
         return self
 
+    def with_scope(self, scope: str) -> VersionModelMaster:
+        self.scope = scope
+        return self
+
+    def with_type(self, type: str) -> VersionModelMaster:
+        self.type = type
+        return self
+
+    def with_current_version(self, current_version: Version) -> VersionModelMaster:
+        self.current_version = current_version
+        return self
+
     def with_warning_version(self, warning_version: Version) -> VersionModelMaster:
         self.warning_version = warning_version
         return self
@@ -794,12 +883,8 @@ class VersionModelMaster(core.Gs2Model):
         self.error_version = error_version
         return self
 
-    def with_scope(self, scope: str) -> VersionModelMaster:
-        self.scope = scope
-        return self
-
-    def with_current_version(self, current_version: Version) -> VersionModelMaster:
-        self.current_version = current_version
+    def with_schedule_versions(self, schedule_versions: List[ScheduleVersion]) -> VersionModelMaster:
+        self.schedule_versions = schedule_versions
         return self
 
     def with_need_signature(self, need_signature: bool) -> VersionModelMaster:
@@ -900,10 +985,15 @@ class VersionModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_scope(data.get('scope'))\
+            .with_type(data.get('type'))\
+            .with_current_version(Version.from_dict(data.get('currentVersion')))\
             .with_warning_version(Version.from_dict(data.get('warningVersion')))\
             .with_error_version(Version.from_dict(data.get('errorVersion')))\
-            .with_scope(data.get('scope'))\
-            .with_current_version(Version.from_dict(data.get('currentVersion')))\
+            .with_schedule_versions([
+                ScheduleVersion.from_dict(data.get('scheduleVersions')[i])
+                for i in range(len(data.get('scheduleVersions')) if data.get('scheduleVersions') else 0)
+            ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))\
             .with_created_at(data.get('createdAt'))\
@@ -916,10 +1006,15 @@ class VersionModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
+            "scope": self.scope,
+            "type": self.type,
+            "currentVersion": self.current_version.to_dict() if self.current_version else None,
             "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
-            "scope": self.scope,
-            "currentVersion": self.current_version.to_dict() if self.current_version else None,
+            "scheduleVersions": [
+                self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
+                for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
+            ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
             "createdAt": self.created_at,
