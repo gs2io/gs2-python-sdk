@@ -383,6 +383,74 @@ class UpdateBannedResult(core.Gs2Result):
         }
 
 
+class AddBanResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> AddBanResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddBanResult]:
+        if data is None:
+            return None
+        return AddBanResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class RemoveBanResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> RemoveBanResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RemoveBanResult]:
+        if data is None:
+            return None
+        return RemoveBanResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class GetAccountResult(core.Gs2Result):
     item: Account = None
 
@@ -453,11 +521,16 @@ class DeleteAccountResult(core.Gs2Result):
 
 class AuthenticationResult(core.Gs2Result):
     item: Account = None
+    ban_statuses: List[BanStatus] = None
     body: str = None
     signature: str = None
 
     def with_item(self, item: Account) -> AuthenticationResult:
         self.item = item
+        return self
+
+    def with_ban_statuses(self, ban_statuses: List[BanStatus]) -> AuthenticationResult:
+        self.ban_statuses = ban_statuses
         return self
 
     def with_body(self, body: str) -> AuthenticationResult:
@@ -488,12 +561,20 @@ class AuthenticationResult(core.Gs2Result):
             return None
         return AuthenticationResult()\
             .with_item(Account.from_dict(data.get('item')))\
+            .with_ban_statuses([
+                BanStatus.from_dict(data.get('banStatuses')[i])
+                for i in range(len(data.get('banStatuses')) if data.get('banStatuses') else 0)
+            ])\
             .with_body(data.get('body'))\
             .with_signature(data.get('signature'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "banStatuses": [
+                self.ban_statuses[i].to_dict() if self.ban_statuses[i] else None
+                for i in range(len(self.ban_statuses) if self.ban_statuses else 0)
+            ],
             "body": self.body,
             "signature": self.signature,
         }

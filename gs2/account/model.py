@@ -108,6 +108,54 @@ class ScriptSetting(core.Gs2Model):
         }
 
 
+class BanStatus(core.Gs2Model):
+    name: str = None
+    reason: str = None
+    release_timestamp: int = None
+
+    def with_name(self, name: str) -> BanStatus:
+        self.name = name
+        return self
+
+    def with_reason(self, reason: str) -> BanStatus:
+        self.reason = reason
+        return self
+
+    def with_release_timestamp(self, release_timestamp: int) -> BanStatus:
+        self.release_timestamp = release_timestamp
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BanStatus]:
+        if data is None:
+            return None
+        return BanStatus()\
+            .with_name(data.get('name'))\
+            .with_reason(data.get('reason'))\
+            .with_release_timestamp(data.get('releaseTimestamp'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "reason": self.reason,
+            "releaseTimestamp": self.release_timestamp,
+        }
+
+
 class DataOwner(core.Gs2Model):
     data_owner_id: str = None
     user_id: str = None
@@ -385,6 +433,7 @@ class Account(core.Gs2Model):
     user_id: str = None
     password: str = None
     time_offset: int = None
+    ban_statuses: List[BanStatus] = None
     banned: bool = None
     created_at: int = None
     revision: int = None
@@ -403,6 +452,10 @@ class Account(core.Gs2Model):
 
     def with_time_offset(self, time_offset: int) -> Account:
         self.time_offset = time_offset
+        return self
+
+    def with_ban_statuses(self, ban_statuses: List[BanStatus]) -> Account:
+        self.ban_statuses = ban_statuses
         return self
 
     def with_banned(self, banned: bool) -> Account:
@@ -495,6 +548,10 @@ class Account(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_password(data.get('password'))\
             .with_time_offset(data.get('timeOffset'))\
+            .with_ban_statuses([
+                BanStatus.from_dict(data.get('banStatuses')[i])
+                for i in range(len(data.get('banStatuses')) if data.get('banStatuses') else 0)
+            ])\
             .with_banned(data.get('banned'))\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
@@ -505,6 +562,10 @@ class Account(core.Gs2Model):
             "userId": self.user_id,
             "password": self.password,
             "timeOffset": self.time_offset,
+            "banStatuses": [
+                self.ban_statuses[i].to_dict() if self.ban_statuses[i] else None
+                for i in range(len(self.ban_statuses) if self.ban_statuses else 0)
+            ],
             "banned": self.banned,
             "createdAt": self.created_at,
             "revision": self.revision,

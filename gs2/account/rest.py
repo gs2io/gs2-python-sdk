@@ -777,6 +777,157 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _add_ban(
+        self,
+        request: AddBanRequest,
+        callback: Callable[[AsyncResult[AddBanResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/ban".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.ban_status is not None:
+            body["banStatus"] = request.ban_status.to_dict()
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AddBanResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def add_ban(
+        self,
+        request: AddBanRequest,
+    ) -> AddBanResult:
+        async_result = []
+        with timeout(30):
+            self._add_ban(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def add_ban_async(
+        self,
+        request: AddBanRequest,
+    ) -> AddBanResult:
+        async_result = []
+        self._add_ban(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _remove_ban(
+        self,
+        request: RemoveBanRequest,
+        callback: Callable[[AsyncResult[RemoveBanResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/ban/{banName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            banStatusName=request.ban_status_name if request.ban_status_name is not None and request.ban_status_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=RemoveBanResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def remove_ban(
+        self,
+        request: RemoveBanRequest,
+    ) -> RemoveBanResult:
+        async_result = []
+        with timeout(30):
+            self._remove_ban(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def remove_ban_async(
+        self,
+        request: RemoveBanRequest,
+    ) -> RemoveBanResult:
+        async_result = []
+        self._remove_ban(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_account(
         self,
         request: GetAccountRequest,

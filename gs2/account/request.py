@@ -541,6 +541,116 @@ class UpdateBannedRequest(core.Gs2Request):
         }
 
 
+class AddBanRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    ban_status: BanStatus = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AddBanRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AddBanRequest:
+        self.user_id = user_id
+        return self
+
+    def with_ban_status(self, ban_status: BanStatus) -> AddBanRequest:
+        self.ban_status = ban_status
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddBanRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddBanRequest]:
+        if data is None:
+            return None
+        return AddBanRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_ban_status(BanStatus.from_dict(data.get('banStatus')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "banStatus": self.ban_status.to_dict() if self.ban_status else None,
+        }
+
+
+class RemoveBanRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    ban_status_name: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RemoveBanRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> RemoveBanRequest:
+        self.user_id = user_id
+        return self
+
+    def with_ban_status_name(self, ban_status_name: str) -> RemoveBanRequest:
+        self.ban_status_name = ban_status_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RemoveBanRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RemoveBanRequest]:
+        if data is None:
+            return None
+        return RemoveBanRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_ban_status_name(data.get('banStatusName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "banStatusName": self.ban_status_name,
+        }
+
+
 class GetAccountRequest(core.Gs2Request):
 
     context_stack: str = None
