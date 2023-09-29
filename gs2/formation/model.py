@@ -1791,14 +1791,12 @@ class FormModel(core.Gs2Model):
         owner_id,
         namespace_name,
         mold_model_name,
-        form_model_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:formation:{namespaceName}:model:mold:{moldModelName}:model:form:{formModelName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:formation:{namespaceName}:model:mold:{moldModelName}:form'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
             moldModelName=mold_model_name,
-            formModelName=form_model_name,
         )
 
     @classmethod
@@ -1806,7 +1804,7 @@ class FormModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):model:form:(?P<formModelName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):form', grn)
         if match is None:
             return None
         return match.group('region')
@@ -1816,7 +1814,7 @@ class FormModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):model:form:(?P<formModelName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):form', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -1826,7 +1824,7 @@ class FormModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):model:form:(?P<formModelName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):form', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -1836,20 +1834,10 @@ class FormModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):model:form:(?P<formModelName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):form', grn)
         if match is None:
             return None
         return match.group('mold_model_name')
-
-    @classmethod
-    def get_form_model_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):formation:(?P<namespaceName>.+):model:mold:(?P<moldModelName>.+):model:form:(?P<formModelName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('form_model_name')
 
     def get(self, key, default=None):
         items = self.to_dict()

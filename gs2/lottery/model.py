@@ -395,9 +395,14 @@ class BoxItems(core.Gs2Model):
 
 
 class BoxItem(core.Gs2Model):
+    prize_id: str = None
     acquire_actions: List[AcquireAction] = None
     remaining: int = None
     initial: int = None
+
+    def with_prize_id(self, prize_id: str) -> BoxItem:
+        self.prize_id = prize_id
+        return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> BoxItem:
         self.acquire_actions = acquire_actions
@@ -430,6 +435,7 @@ class BoxItem(core.Gs2Model):
         if data is None:
             return None
         return BoxItem()\
+            .with_prize_id(data.get('prizeId'))\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -439,6 +445,7 @@ class BoxItem(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "prizeId": self.prize_id,
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
