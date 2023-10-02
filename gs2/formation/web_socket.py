@@ -490,8 +490,6 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.mold_model_name is not None:
             body["moldModelName"] = request.mold_model_name
-        if request.form_model_name is not None:
-            body["formModelName"] = request.form_model_name
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

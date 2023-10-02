@@ -478,10 +478,9 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
-        ) + "/{namespaceName}/model/{moldModelName}/form/{formModelName}".format(
+        ) + "/{namespaceName}/model/{moldModelName}/form".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             moldModelName=request.mold_model_name if request.mold_model_name is not None and request.mold_model_name != '' else 'null',
-            formModelName=request.form_model_name if request.form_model_name is not None and request.form_model_name != '' else 'null',
         )
 
         headers = self._create_authorized_headers()

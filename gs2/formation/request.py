@@ -315,7 +315,6 @@ class GetFormModelRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     mold_model_name: str = None
-    form_model_name: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFormModelRequest:
         self.namespace_name = namespace_name
@@ -323,10 +322,6 @@ class GetFormModelRequest(core.Gs2Request):
 
     def with_mold_model_name(self, mold_model_name: str) -> GetFormModelRequest:
         self.mold_model_name = mold_model_name
-        return self
-
-    def with_form_model_name(self, form_model_name: str) -> GetFormModelRequest:
-        self.form_model_name = form_model_name
         return self
 
     def get(self, key, default=None):
@@ -349,14 +344,12 @@ class GetFormModelRequest(core.Gs2Request):
             return None
         return GetFormModelRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_mold_model_name(data.get('moldModelName'))\
-            .with_form_model_name(data.get('formModelName'))
+            .with_mold_model_name(data.get('moldModelName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "moldModelName": self.mold_model_name,
-            "formModelName": self.form_model_name,
         }
 
 
