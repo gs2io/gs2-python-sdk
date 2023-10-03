@@ -1603,6 +1603,166 @@ class Gs2DictionaryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_entry(
+        self,
+        request: VerifyEntryRequest,
+        callback: Callable[[AsyncResult[VerifyEntryResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='entry',
+            function='verifyEntry',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.entry_model_name is not None:
+            body["entryModelName"] = request.entry_model_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyEntryResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_entry(
+        self,
+        request: VerifyEntryRequest,
+    ) -> VerifyEntryResult:
+        async_result = []
+        with timeout(30):
+            self._verify_entry(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_entry_async(
+        self,
+        request: VerifyEntryRequest,
+    ) -> VerifyEntryResult:
+        async_result = []
+        self._verify_entry(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_entry_by_user_id(
+        self,
+        request: VerifyEntryByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyEntryByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='entry',
+            function='verifyEntryByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.entry_model_name is not None:
+            body["entryModelName"] = request.entry_model_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyEntryByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_entry_by_user_id(
+        self,
+        request: VerifyEntryByUserIdRequest,
+    ) -> VerifyEntryByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_entry_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_entry_by_user_id_async(
+        self,
+        request: VerifyEntryByUserIdRequest,
+    ) -> VerifyEntryByUserIdResult:
+        async_result = []
+        self._verify_entry_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_entries_by_user_id(
         self,
         request: DeleteEntriesByUserIdRequest,
@@ -1816,6 +1976,79 @@ class Gs2DictionaryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteEntriesByStampTaskResult:
         async_result = []
         self._delete_entries_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_entry_by_stamp_task(
+        self,
+        request: VerifyEntryByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyEntryByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='entry',
+            function='verifyEntryByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyEntryByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_entry_by_stamp_task(
+        self,
+        request: VerifyEntryByStampTaskRequest,
+    ) -> VerifyEntryByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_entry_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_entry_by_stamp_task_async(
+        self,
+        request: VerifyEntryByStampTaskRequest,
+    ) -> VerifyEntryByStampTaskResult:
+        async_result = []
+        self._verify_entry_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

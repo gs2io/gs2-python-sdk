@@ -1320,6 +1320,114 @@ class DeleteStatusByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyRankResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankResult]:
+        if data is None:
+            return None
+        return VerifyRankResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class VerifyRankByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyRankByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class VerifyRankCapResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankCapResult]:
+        if data is None:
+            return None
+        return VerifyRankCapResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class VerifyRankCapByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankCapByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyRankCapByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class AddExperienceByStampSheetResult(core.Gs2Result):
     item: Status = None
 
@@ -1644,4 +1752,72 @@ class MultiplyAcquireActionsByStampSheetResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
+class VerifyRankByStampTaskResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyRankByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyRankByStampTaskResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class VerifyRankCapByStampTaskResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyRankCapByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankCapByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyRankCapByStampTaskResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newContextStack": self.new_context_stack,
         }

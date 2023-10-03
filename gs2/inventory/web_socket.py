@@ -5446,6 +5446,178 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_item_set(
+        self,
+        request: VerifyItemSetRequest,
+        callback: Callable[[AsyncResult[VerifyItemSetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='itemSet',
+            function='verifyItemSet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.item_set_name is not None:
+            body["itemSetName"] = request.item_set_name
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyItemSetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_item_set(
+        self,
+        request: VerifyItemSetRequest,
+    ) -> VerifyItemSetResult:
+        async_result = []
+        with timeout(30):
+            self._verify_item_set(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_item_set_async(
+        self,
+        request: VerifyItemSetRequest,
+    ) -> VerifyItemSetResult:
+        async_result = []
+        self._verify_item_set(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_item_set_by_user_id(
+        self,
+        request: VerifyItemSetByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyItemSetByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='itemSet',
+            function='verifyItemSetByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.item_set_name is not None:
+            body["itemSetName"] = request.item_set_name
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyItemSetByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_item_set_by_user_id(
+        self,
+        request: VerifyItemSetByUserIdRequest,
+    ) -> VerifyItemSetByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_item_set_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_item_set_by_user_id_async(
+        self,
+        request: VerifyItemSetByUserIdRequest,
+    ) -> VerifyItemSetByUserIdResult:
+        async_result = []
+        self._verify_item_set_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _acquire_item_set_by_stamp_sheet(
         self,
         request: AcquireItemSetByStampSheetRequest,
@@ -5579,6 +5751,79 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ConsumeItemSetByStampTaskResult:
         async_result = []
         self._consume_item_set_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_item_set_by_stamp_task(
+        self,
+        request: VerifyItemSetByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyItemSetByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='itemSet',
+            function='verifyItemSetByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyItemSetByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_item_set_by_stamp_task(
+        self,
+        request: VerifyItemSetByStampTaskRequest,
+    ) -> VerifyItemSetByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_item_set_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_item_set_by_stamp_task_async(
+        self,
+        request: VerifyItemSetByStampTaskRequest,
+    ) -> VerifyItemSetByStampTaskResult:
+        async_result = []
+        self._verify_item_set_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )
@@ -7444,6 +7689,174 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_simple_item(
+        self,
+        request: VerifySimpleItemRequest,
+        callback: Callable[[AsyncResult[VerifySimpleItemResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='simpleItem',
+            function='verifySimpleItem',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifySimpleItemResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_simple_item(
+        self,
+        request: VerifySimpleItemRequest,
+    ) -> VerifySimpleItemResult:
+        async_result = []
+        with timeout(30):
+            self._verify_simple_item(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_simple_item_async(
+        self,
+        request: VerifySimpleItemRequest,
+    ) -> VerifySimpleItemResult:
+        async_result = []
+        self._verify_simple_item(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_simple_item_by_user_id(
+        self,
+        request: VerifySimpleItemByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifySimpleItemByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='simpleItem',
+            function='verifySimpleItemByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifySimpleItemByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_simple_item_by_user_id(
+        self,
+        request: VerifySimpleItemByUserIdRequest,
+    ) -> VerifySimpleItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_simple_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_simple_item_by_user_id_async(
+        self,
+        request: VerifySimpleItemByUserIdRequest,
+    ) -> VerifySimpleItemByUserIdResult:
+        async_result = []
+        self._verify_simple_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _acquire_simple_items_by_stamp_sheet(
         self,
         request: AcquireSimpleItemsByStampSheetRequest,
@@ -7577,6 +7990,79 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ConsumeSimpleItemsByStampTaskResult:
         async_result = []
         self._consume_simple_items_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_simple_item_by_stamp_task(
+        self,
+        request: VerifySimpleItemByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifySimpleItemByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='simpleItem',
+            function='verifySimpleItemByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifySimpleItemByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_simple_item_by_stamp_task(
+        self,
+        request: VerifySimpleItemByStampTaskRequest,
+    ) -> VerifySimpleItemByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_simple_item_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_simple_item_by_stamp_task_async(
+        self,
+        request: VerifySimpleItemByStampTaskRequest,
+    ) -> VerifySimpleItemByStampTaskResult:
+        async_result = []
+        self._verify_simple_item_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )
@@ -8230,6 +8716,174 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_big_item(
+        self,
+        request: VerifyBigItemRequest,
+        callback: Callable[[AsyncResult[VerifyBigItemResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='verifyBigItem',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyBigItemResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_big_item(
+        self,
+        request: VerifyBigItemRequest,
+    ) -> VerifyBigItemResult:
+        async_result = []
+        with timeout(30):
+            self._verify_big_item(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_big_item_async(
+        self,
+        request: VerifyBigItemRequest,
+    ) -> VerifyBigItemResult:
+        async_result = []
+        self._verify_big_item(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_big_item_by_user_id(
+        self,
+        request: VerifyBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyBigItemByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='verifyBigItemByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.item_name is not None:
+            body["itemName"] = request.item_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyBigItemByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_big_item_by_user_id(
+        self,
+        request: VerifyBigItemByUserIdRequest,
+    ) -> VerifyBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_big_item_by_user_id_async(
+        self,
+        request: VerifyBigItemByUserIdRequest,
+    ) -> VerifyBigItemByUserIdResult:
+        async_result = []
+        self._verify_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _acquire_big_item_by_stamp_sheet(
         self,
         request: AcquireBigItemByStampSheetRequest,
@@ -8363,6 +9017,79 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ConsumeBigItemByStampTaskResult:
         async_result = []
         self._consume_big_item_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_big_item_by_stamp_task(
+        self,
+        request: VerifyBigItemByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyBigItemByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='bigItem',
+            function='verifyBigItemByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyBigItemByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_big_item_by_stamp_task(
+        self,
+        request: VerifyBigItemByStampTaskRequest,
+    ) -> VerifyBigItemByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_big_item_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_big_item_by_stamp_task_async(
+        self,
+        request: VerifyBigItemByStampTaskRequest,
+    ) -> VerifyBigItemByStampTaskResult:
+        async_result = []
+        self._verify_big_item_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

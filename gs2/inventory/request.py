@@ -3861,6 +3861,172 @@ class DeleteItemSetByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyItemSetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    inventory_name: str = None
+    item_name: str = None
+    verify_type: str = None
+    item_set_name: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyItemSetRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyItemSetRequest:
+        self.access_token = access_token
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> VerifyItemSetRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> VerifyItemSetRequest:
+        self.item_name = item_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyItemSetRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_item_set_name(self, item_set_name: str) -> VerifyItemSetRequest:
+        self.item_set_name = item_set_name
+        return self
+
+    def with_count(self, count: int) -> VerifyItemSetRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyItemSetRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyItemSetRequest]:
+        if data is None:
+            return None
+        return VerifyItemSetRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_item_set_name(data.get('itemSetName'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+            "verifyType": self.verify_type,
+            "itemSetName": self.item_set_name,
+            "count": self.count,
+        }
+
+
+class VerifyItemSetByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    inventory_name: str = None
+    item_name: str = None
+    verify_type: str = None
+    item_set_name: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyItemSetByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyItemSetByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> VerifyItemSetByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> VerifyItemSetByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyItemSetByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_item_set_name(self, item_set_name: str) -> VerifyItemSetByUserIdRequest:
+        self.item_set_name = item_set_name
+        return self
+
+    def with_count(self, count: int) -> VerifyItemSetByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyItemSetByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyItemSetByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyItemSetByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_item_set_name(data.get('itemSetName'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+            "verifyType": self.verify_type,
+            "itemSetName": self.item_set_name,
+            "count": self.count,
+        }
+
+
 class AcquireItemSetByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -3937,6 +4103,49 @@ class ConsumeItemSetByStampTaskRequest(core.Gs2Request):
         if data is None:
             return None
         return ConsumeItemSetByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyItemSetByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyItemSetByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyItemSetByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyItemSetByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyItemSetByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 
@@ -5445,6 +5654,158 @@ class DeleteSimpleItemsByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifySimpleItemRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    inventory_name: str = None
+    item_name: str = None
+    verify_type: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifySimpleItemRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifySimpleItemRequest:
+        self.access_token = access_token
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> VerifySimpleItemRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> VerifySimpleItemRequest:
+        self.item_name = item_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifySimpleItemRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_count(self, count: int) -> VerifySimpleItemRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifySimpleItemRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySimpleItemRequest]:
+        if data is None:
+            return None
+        return VerifySimpleItemRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+            "verifyType": self.verify_type,
+            "count": self.count,
+        }
+
+
+class VerifySimpleItemByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    inventory_name: str = None
+    item_name: str = None
+    verify_type: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifySimpleItemByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifySimpleItemByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> VerifySimpleItemByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> VerifySimpleItemByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifySimpleItemByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_count(self, count: int) -> VerifySimpleItemByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifySimpleItemByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySimpleItemByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifySimpleItemByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+            "verifyType": self.verify_type,
+            "count": self.count,
+        }
+
+
 class AcquireSimpleItemsByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -5521,6 +5882,49 @@ class ConsumeSimpleItemsByStampTaskRequest(core.Gs2Request):
         if data is None:
             return None
         return ConsumeSimpleItemsByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifySimpleItemByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifySimpleItemByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifySimpleItemByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySimpleItemByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifySimpleItemByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 
@@ -6042,6 +6446,158 @@ class DeleteBigItemByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyBigItemRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    inventory_name: str = None
+    item_name: str = None
+    verify_type: str = None
+    count: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyBigItemRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyBigItemRequest:
+        self.access_token = access_token
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> VerifyBigItemRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> VerifyBigItemRequest:
+        self.item_name = item_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyBigItemRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_count(self, count: str) -> VerifyBigItemRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyBigItemRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBigItemRequest]:
+        if data is None:
+            return None
+        return VerifyBigItemRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+            "verifyType": self.verify_type,
+            "count": self.count,
+        }
+
+
+class VerifyBigItemByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    inventory_name: str = None
+    item_name: str = None
+    verify_type: str = None
+    count: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyBigItemByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyBigItemByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> VerifyBigItemByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> VerifyBigItemByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyBigItemByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_count(self, count: str) -> VerifyBigItemByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyBigItemByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBigItemByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyBigItemByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+            "verifyType": self.verify_type,
+            "count": self.count,
+        }
+
+
 class AcquireBigItemByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -6118,6 +6674,49 @@ class ConsumeBigItemByStampTaskRequest(core.Gs2Request):
         if data is None:
             return None
         return ConsumeBigItemByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyBigItemByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyBigItemByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyBigItemByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBigItemByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyBigItemByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 

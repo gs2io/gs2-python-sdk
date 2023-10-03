@@ -2740,6 +2740,342 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_rank(
+        self,
+        request: VerifyRankRequest,
+        callback: Callable[[AsyncResult[VerifyRankResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='verifyRank',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.experience_name is not None:
+            body["experienceName"] = request.experience_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.rank_value is not None:
+            body["rankValue"] = request.rank_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRankResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rank(
+        self,
+        request: VerifyRankRequest,
+    ) -> VerifyRankResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rank(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rank_async(
+        self,
+        request: VerifyRankRequest,
+    ) -> VerifyRankResult:
+        async_result = []
+        self._verify_rank(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_rank_by_user_id(
+        self,
+        request: VerifyRankByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyRankByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='verifyRankByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.experience_name is not None:
+            body["experienceName"] = request.experience_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.rank_value is not None:
+            body["rankValue"] = request.rank_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRankByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rank_by_user_id(
+        self,
+        request: VerifyRankByUserIdRequest,
+    ) -> VerifyRankByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rank_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rank_by_user_id_async(
+        self,
+        request: VerifyRankByUserIdRequest,
+    ) -> VerifyRankByUserIdResult:
+        async_result = []
+        self._verify_rank_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_rank_cap(
+        self,
+        request: VerifyRankCapRequest,
+        callback: Callable[[AsyncResult[VerifyRankCapResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='verifyRankCap',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.experience_name is not None:
+            body["experienceName"] = request.experience_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.rank_cap_value is not None:
+            body["rankCapValue"] = request.rank_cap_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRankCapResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rank_cap(
+        self,
+        request: VerifyRankCapRequest,
+    ) -> VerifyRankCapResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rank_cap(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rank_cap_async(
+        self,
+        request: VerifyRankCapRequest,
+    ) -> VerifyRankCapResult:
+        async_result = []
+        self._verify_rank_cap(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_rank_cap_by_user_id(
+        self,
+        request: VerifyRankCapByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyRankCapByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='verifyRankCapByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.experience_name is not None:
+            body["experienceName"] = request.experience_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.rank_cap_value is not None:
+            body["rankCapValue"] = request.rank_cap_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRankCapByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rank_cap_by_user_id(
+        self,
+        request: VerifyRankCapByUserIdRequest,
+    ) -> VerifyRankCapByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rank_cap_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rank_cap_by_user_id_async(
+        self,
+        request: VerifyRankCapByUserIdRequest,
+    ) -> VerifyRankCapByUserIdResult:
+        async_result = []
+        self._verify_rank_cap_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _add_experience_by_stamp_sheet(
         self,
         request: AddExperienceByStampSheetRequest,
@@ -3251,6 +3587,152 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> MultiplyAcquireActionsByStampSheetResult:
         async_result = []
         self._multiply_acquire_actions_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_rank_by_stamp_task(
+        self,
+        request: VerifyRankByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyRankByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='verifyRankByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRankByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rank_by_stamp_task(
+        self,
+        request: VerifyRankByStampTaskRequest,
+    ) -> VerifyRankByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rank_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rank_by_stamp_task_async(
+        self,
+        request: VerifyRankByStampTaskRequest,
+    ) -> VerifyRankByStampTaskResult:
+        async_result = []
+        self._verify_rank_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_rank_cap_by_stamp_task(
+        self,
+        request: VerifyRankCapByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyRankCapByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="experience",
+            component='status',
+            function='verifyRankCapByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRankCapByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rank_cap_by_stamp_task(
+        self,
+        request: VerifyRankCapByStampTaskRequest,
+    ) -> VerifyRankCapByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rank_cap_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rank_cap_by_stamp_task_async(
+        self,
+        request: VerifyRankCapByStampTaskRequest,
+    ) -> VerifyRankCapByStampTaskResult:
+        async_result = []
+        self._verify_rank_cap_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

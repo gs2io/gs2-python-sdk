@@ -2043,6 +2043,310 @@ class DeleteStatusByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyRankRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    experience_name: str = None
+    verify_type: str = None
+    property_id: str = None
+    rank_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyRankRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyRankRequest:
+        self.access_token = access_token
+        return self
+
+    def with_experience_name(self, experience_name: str) -> VerifyRankRequest:
+        self.experience_name = experience_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyRankRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_property_id(self, property_id: str) -> VerifyRankRequest:
+        self.property_id = property_id
+        return self
+
+    def with_rank_value(self, rank_value: int) -> VerifyRankRequest:
+        self.rank_value = rank_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRankRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankRequest]:
+        if data is None:
+            return None
+        return VerifyRankRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_experience_name(data.get('experienceName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_rank_value(data.get('rankValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "experienceName": self.experience_name,
+            "verifyType": self.verify_type,
+            "propertyId": self.property_id,
+            "rankValue": self.rank_value,
+        }
+
+
+class VerifyRankByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    experience_name: str = None
+    verify_type: str = None
+    property_id: str = None
+    rank_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyRankByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyRankByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_experience_name(self, experience_name: str) -> VerifyRankByUserIdRequest:
+        self.experience_name = experience_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyRankByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_property_id(self, property_id: str) -> VerifyRankByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_rank_value(self, rank_value: int) -> VerifyRankByUserIdRequest:
+        self.rank_value = rank_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRankByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyRankByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_experience_name(data.get('experienceName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_rank_value(data.get('rankValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "experienceName": self.experience_name,
+            "verifyType": self.verify_type,
+            "propertyId": self.property_id,
+            "rankValue": self.rank_value,
+        }
+
+
+class VerifyRankCapRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    experience_name: str = None
+    verify_type: str = None
+    property_id: str = None
+    rank_cap_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyRankCapRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyRankCapRequest:
+        self.access_token = access_token
+        return self
+
+    def with_experience_name(self, experience_name: str) -> VerifyRankCapRequest:
+        self.experience_name = experience_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyRankCapRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_property_id(self, property_id: str) -> VerifyRankCapRequest:
+        self.property_id = property_id
+        return self
+
+    def with_rank_cap_value(self, rank_cap_value: int) -> VerifyRankCapRequest:
+        self.rank_cap_value = rank_cap_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRankCapRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankCapRequest]:
+        if data is None:
+            return None
+        return VerifyRankCapRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_experience_name(data.get('experienceName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_rank_cap_value(data.get('rankCapValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "experienceName": self.experience_name,
+            "verifyType": self.verify_type,
+            "propertyId": self.property_id,
+            "rankCapValue": self.rank_cap_value,
+        }
+
+
+class VerifyRankCapByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    experience_name: str = None
+    verify_type: str = None
+    property_id: str = None
+    rank_cap_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyRankCapByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyRankCapByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_experience_name(self, experience_name: str) -> VerifyRankCapByUserIdRequest:
+        self.experience_name = experience_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyRankCapByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_property_id(self, property_id: str) -> VerifyRankCapByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_rank_cap_value(self, rank_cap_value: int) -> VerifyRankCapByUserIdRequest:
+        self.rank_cap_value = rank_cap_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRankCapByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankCapByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyRankCapByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_experience_name(data.get('experienceName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_rank_cap_value(data.get('rankCapValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "experienceName": self.experience_name,
+            "verifyType": self.verify_type,
+            "propertyId": self.property_id,
+            "rankCapValue": self.rank_cap_value,
+        }
+
+
 class AddExperienceByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2379,5 +2683,91 @@ class MultiplyAcquireActionsByStampSheetRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyRankByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyRankByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyRankByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyRankByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyRankCapByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyRankCapByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyRankCapByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRankCapByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyRankCapByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
             "keyId": self.key_id,
         }

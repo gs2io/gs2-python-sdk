@@ -793,6 +793,158 @@ class DeleteCounterByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyCounterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    limit_name: str = None
+    counter_name: str = None
+    verify_type: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyCounterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyCounterRequest:
+        self.access_token = access_token
+        return self
+
+    def with_limit_name(self, limit_name: str) -> VerifyCounterRequest:
+        self.limit_name = limit_name
+        return self
+
+    def with_counter_name(self, counter_name: str) -> VerifyCounterRequest:
+        self.counter_name = counter_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyCounterRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_count(self, count: int) -> VerifyCounterRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCounterRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCounterRequest]:
+        if data is None:
+            return None
+        return VerifyCounterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_limit_name(data.get('limitName'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "limitName": self.limit_name,
+            "counterName": self.counter_name,
+            "verifyType": self.verify_type,
+            "count": self.count,
+        }
+
+
+class VerifyCounterByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    limit_name: str = None
+    counter_name: str = None
+    verify_type: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyCounterByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyCounterByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_limit_name(self, limit_name: str) -> VerifyCounterByUserIdRequest:
+        self.limit_name = limit_name
+        return self
+
+    def with_counter_name(self, counter_name: str) -> VerifyCounterByUserIdRequest:
+        self.counter_name = counter_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyCounterByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_count(self, count: int) -> VerifyCounterByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCounterByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCounterByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyCounterByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_limit_name(data.get('limitName'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "limitName": self.limit_name,
+            "counterName": self.counter_name,
+            "verifyType": self.verify_type,
+            "count": self.count,
+        }
+
+
 class CountUpByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -918,6 +1070,49 @@ class DeleteByStampSheetRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyCounterByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyCounterByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyCounterByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCounterByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyCounterByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
             "keyId": self.key_id,
         }
 

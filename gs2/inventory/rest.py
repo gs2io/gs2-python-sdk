@@ -5355,6 +5355,169 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_item_set(
+        self,
+        request: VerifyItemSetRequest,
+        callback: Callable[[AsyncResult[VerifyItemSetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.item_set_name is not None:
+            body["itemSetName"] = request.item_set_name
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyItemSetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_item_set(
+        self,
+        request: VerifyItemSetRequest,
+    ) -> VerifyItemSetResult:
+        async_result = []
+        with timeout(30):
+            self._verify_item_set(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_item_set_async(
+        self,
+        request: VerifyItemSetRequest,
+    ) -> VerifyItemSetResult:
+        async_result = []
+        self._verify_item_set(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_item_set_by_user_id(
+        self,
+        request: VerifyItemSetByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyItemSetByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.item_set_name is not None:
+            body["itemSetName"] = request.item_set_name
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyItemSetByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_item_set_by_user_id(
+        self,
+        request: VerifyItemSetByUserIdRequest,
+    ) -> VerifyItemSetByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_item_set_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_item_set_by_user_id_async(
+        self,
+        request: VerifyItemSetByUserIdRequest,
+    ) -> VerifyItemSetByUserIdResult:
+        async_result = []
+        self._verify_item_set_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _acquire_item_set_by_stamp_sheet(
         self,
         request: AcquireItemSetByStampSheetRequest,
@@ -5487,6 +5650,79 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
     ) -> ConsumeItemSetByStampTaskResult:
         async_result = []
         self._consume_item_set_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_item_set_by_stamp_task(
+        self,
+        request: VerifyItemSetByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyItemSetByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/item/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyItemSetByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_item_set_by_stamp_task(
+        self,
+        request: VerifyItemSetByStampTaskRequest,
+    ) -> VerifyItemSetByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_item_set_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_item_set_by_stamp_task_async(
+        self,
+        request: VerifyItemSetByStampTaskRequest,
+    ) -> VerifyItemSetByStampTaskResult:
+        async_result = []
+        self._verify_item_set_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -7272,6 +7508,165 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_simple_item(
+        self,
+        request: VerifySimpleItemRequest,
+        callback: Callable[[AsyncResult[VerifySimpleItemResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/simple/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifySimpleItemResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_simple_item(
+        self,
+        request: VerifySimpleItemRequest,
+    ) -> VerifySimpleItemResult:
+        async_result = []
+        with timeout(30):
+            self._verify_simple_item(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_simple_item_async(
+        self,
+        request: VerifySimpleItemRequest,
+    ) -> VerifySimpleItemResult:
+        async_result = []
+        self._verify_simple_item(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_simple_item_by_user_id(
+        self,
+        request: VerifySimpleItemByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifySimpleItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifySimpleItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_simple_item_by_user_id(
+        self,
+        request: VerifySimpleItemByUserIdRequest,
+    ) -> VerifySimpleItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_simple_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_simple_item_by_user_id_async(
+        self,
+        request: VerifySimpleItemByUserIdRequest,
+    ) -> VerifySimpleItemByUserIdResult:
+        async_result = []
+        self._verify_simple_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _acquire_simple_items_by_stamp_sheet(
         self,
         request: AcquireSimpleItemsByStampSheetRequest,
@@ -7404,6 +7799,79 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
     ) -> ConsumeSimpleItemsByStampTaskResult:
         async_result = []
         self._consume_simple_items_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_simple_item_by_stamp_task(
+        self,
+        request: VerifySimpleItemByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifySimpleItemByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/simple/item/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifySimpleItemByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_simple_item_by_stamp_task(
+        self,
+        request: VerifySimpleItemByStampTaskRequest,
+    ) -> VerifySimpleItemByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_simple_item_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_simple_item_by_stamp_task_async(
+        self,
+        request: VerifySimpleItemByStampTaskRequest,
+    ) -> VerifySimpleItemByStampTaskResult:
+        async_result = []
+        self._verify_simple_item_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -8033,6 +8501,165 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_big_item(
+        self,
+        request: VerifyBigItemRequest,
+        callback: Callable[[AsyncResult[VerifyBigItemResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/big/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyBigItemResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_big_item(
+        self,
+        request: VerifyBigItemRequest,
+    ) -> VerifyBigItemResult:
+        async_result = []
+        with timeout(30):
+            self._verify_big_item(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_big_item_async(
+        self,
+        request: VerifyBigItemRequest,
+    ) -> VerifyBigItemResult:
+        async_result = []
+        self._verify_big_item(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_big_item_by_user_id(
+        self,
+        request: VerifyBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyBigItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyBigItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_big_item_by_user_id(
+        self,
+        request: VerifyBigItemByUserIdRequest,
+    ) -> VerifyBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_big_item_by_user_id_async(
+        self,
+        request: VerifyBigItemByUserIdRequest,
+    ) -> VerifyBigItemByUserIdResult:
+        async_result = []
+        self._verify_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _acquire_big_item_by_stamp_sheet(
         self,
         request: AcquireBigItemByStampSheetRequest,
@@ -8165,6 +8792,79 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
     ) -> ConsumeBigItemByStampTaskResult:
         async_result = []
         self._consume_big_item_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_big_item_by_stamp_task(
+        self,
+        request: VerifyBigItemByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyBigItemByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/big/item/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyBigItemByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_big_item_by_stamp_task(
+        self,
+        request: VerifyBigItemByStampTaskRequest,
+    ) -> VerifyBigItemByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_big_item_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_big_item_by_stamp_task_async(
+        self,
+        request: VerifyBigItemByStampTaskRequest,
+    ) -> VerifyBigItemByStampTaskResult:
+        async_result = []
+        self._verify_big_item_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
