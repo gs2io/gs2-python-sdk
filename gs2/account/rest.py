@@ -862,7 +862,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
-        ) + "/{namespaceName}/account/{userId}/ban/{banName}".format(
+        ) + "/{namespaceName}/account/{userId}/ban/{banStatusName}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
             banStatusName=request.ban_status_name if request.ban_status_name is not None and request.ban_status_name != '' else 'null',
@@ -1911,6 +1911,81 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
     ) -> DeleteTakeOverByUserIdentifierResult:
         async_result = []
         self._delete_take_over_by_user_identifier(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_take_over_by_user_id(
+        self,
+        request: DeleteTakeOverByUserIdRequest,
+        callback: Callable[[AsyncResult[DeleteTakeOverByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/takeover/type/{type}/takeover".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteTakeOverByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_take_over_by_user_id(
+        self,
+        request: DeleteTakeOverByUserIdRequest,
+    ) -> DeleteTakeOverByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_take_over_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_take_over_by_user_id_async(
+        self,
+        request: DeleteTakeOverByUserIdRequest,
+    ) -> DeleteTakeOverByUserIdResult:
+        async_result = []
+        self._delete_take_over_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

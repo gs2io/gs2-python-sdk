@@ -1411,6 +1411,61 @@ class DeleteTakeOverByUserIdentifierRequest(core.Gs2Request):
         }
 
 
+class DeleteTakeOverByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    type: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteTakeOverByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DeleteTakeOverByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_type(self, type: int) -> DeleteTakeOverByUserIdRequest:
+        self.type = type
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteTakeOverByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteTakeOverByUserIdRequest]:
+        if data is None:
+            return None
+        return DeleteTakeOverByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_type(data.get('type'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "type": self.type,
+        }
+
+
 class DoTakeOverRequest(core.Gs2Request):
 
     context_stack: str = None
