@@ -457,6 +457,298 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _dump_user_data_by_user_id(
+        self,
+        request: DumpUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="schedule",
+            component='namespace',
+            function='dumpUserDataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DumpUserDataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def dump_user_data_by_user_id(
+        self,
+        request: DumpUserDataByUserIdRequest,
+    ) -> DumpUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._dump_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def dump_user_data_by_user_id_async(
+        self,
+        request: DumpUserDataByUserIdRequest,
+    ) -> DumpUserDataByUserIdResult:
+        async_result = []
+        self._dump_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _check_dump_user_data_by_user_id(
+        self,
+        request: CheckDumpUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="schedule",
+            component='namespace',
+            function='checkDumpUserDataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CheckDumpUserDataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def check_dump_user_data_by_user_id(
+        self,
+        request: CheckDumpUserDataByUserIdRequest,
+    ) -> CheckDumpUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._check_dump_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def check_dump_user_data_by_user_id_async(
+        self,
+        request: CheckDumpUserDataByUserIdRequest,
+    ) -> CheckDumpUserDataByUserIdResult:
+        async_result = []
+        self._check_dump_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _clean_user_data_by_user_id(
+        self,
+        request: CleanUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="schedule",
+            component='namespace',
+            function='cleanUserDataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CleanUserDataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def clean_user_data_by_user_id(
+        self,
+        request: CleanUserDataByUserIdRequest,
+    ) -> CleanUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._clean_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def clean_user_data_by_user_id_async(
+        self,
+        request: CleanUserDataByUserIdRequest,
+    ) -> CleanUserDataByUserIdResult:
+        async_result = []
+        self._clean_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _check_clean_user_data_by_user_id(
+        self,
+        request: CheckCleanUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="schedule",
+            component='namespace',
+            function='checkCleanUserDataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CheckCleanUserDataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def check_clean_user_data_by_user_id(
+        self,
+        request: CheckCleanUserDataByUserIdRequest,
+    ) -> CheckCleanUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._check_clean_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def check_clean_user_data_by_user_id_async(
+        self,
+        request: CheckCleanUserDataByUserIdRequest,
+    ) -> CheckCleanUserDataByUserIdResult:
+        async_result = []
+        self._check_clean_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_event_masters(
         self,
         request: DescribeEventMastersRequest,

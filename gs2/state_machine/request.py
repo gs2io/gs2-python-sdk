@@ -324,6 +324,170 @@ class DeleteNamespaceRequest(core.Gs2Request):
         }
 
 
+class DumpUserDataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_user_id(self, user_id: str) -> DumpUserDataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DumpUserDataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DumpUserDataByUserIdRequest]:
+        if data is None:
+            return None
+        return DumpUserDataByUserIdRequest()\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+        }
+
+
+class CheckDumpUserDataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_user_id(self, user_id: str) -> CheckDumpUserDataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CheckDumpUserDataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CheckDumpUserDataByUserIdRequest]:
+        if data is None:
+            return None
+        return CheckDumpUserDataByUserIdRequest()\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+        }
+
+
+class CleanUserDataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_user_id(self, user_id: str) -> CleanUserDataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CleanUserDataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CleanUserDataByUserIdRequest]:
+        if data is None:
+            return None
+        return CleanUserDataByUserIdRequest()\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+        }
+
+
+class CheckCleanUserDataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_user_id(self, user_id: str) -> CheckCleanUserDataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CheckCleanUserDataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CheckCleanUserDataByUserIdRequest]:
+        if data is None:
+            return None
+        return CheckCleanUserDataByUserIdRequest()\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+        }
+
+
 class DescribeStateMachineMastersRequest(core.Gs2Request):
 
     context_stack: str = None

@@ -234,6 +234,121 @@ class DeleteNamespaceResult(core.Gs2Result):
         }
 
 
+class DumpUserDataByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DumpUserDataByUserIdResult]:
+        if data is None:
+            return None
+        return DumpUserDataByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class CheckDumpUserDataByUserIdResult(core.Gs2Result):
+    url: str = None
+
+    def with_url(self, url: str) -> CheckDumpUserDataByUserIdResult:
+        self.url = url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CheckDumpUserDataByUserIdResult]:
+        if data is None:
+            return None
+        return CheckDumpUserDataByUserIdResult()\
+            .with_url(data.get('url'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "url": self.url,
+        }
+
+
+class CleanUserDataByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CleanUserDataByUserIdResult]:
+        if data is None:
+            return None
+        return CleanUserDataByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class CheckCleanUserDataByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CheckCleanUserDataByUserIdResult]:
+        if data is None:
+            return None
+        return CheckCleanUserDataByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class GetPointResult(core.Gs2Result):
     item: Point = None
 

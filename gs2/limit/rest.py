@@ -457,6 +457,298 @@ class Gs2LimitRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _dump_user_data_by_user_id(
+        self,
+        request: DumpUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='limit',
+            region=self.session.region,
+        ) + "/system/user/{userId}/dump".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DumpUserDataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def dump_user_data_by_user_id(
+        self,
+        request: DumpUserDataByUserIdRequest,
+    ) -> DumpUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._dump_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def dump_user_data_by_user_id_async(
+        self,
+        request: DumpUserDataByUserIdRequest,
+    ) -> DumpUserDataByUserIdResult:
+        async_result = []
+        self._dump_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _check_dump_user_data_by_user_id(
+        self,
+        request: CheckDumpUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='limit',
+            region=self.session.region,
+        ) + "/system/user/{userId}/dump".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=CheckDumpUserDataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def check_dump_user_data_by_user_id(
+        self,
+        request: CheckDumpUserDataByUserIdRequest,
+    ) -> CheckDumpUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._check_dump_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def check_dump_user_data_by_user_id_async(
+        self,
+        request: CheckDumpUserDataByUserIdRequest,
+    ) -> CheckDumpUserDataByUserIdResult:
+        async_result = []
+        self._check_dump_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _clean_user_data_by_user_id(
+        self,
+        request: CleanUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='limit',
+            region=self.session.region,
+        ) + "/system/user/{userId}/clean".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CleanUserDataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def clean_user_data_by_user_id(
+        self,
+        request: CleanUserDataByUserIdRequest,
+    ) -> CleanUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._clean_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def clean_user_data_by_user_id_async(
+        self,
+        request: CleanUserDataByUserIdRequest,
+    ) -> CleanUserDataByUserIdResult:
+        async_result = []
+        self._clean_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _check_clean_user_data_by_user_id(
+        self,
+        request: CheckCleanUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='limit',
+            region=self.session.region,
+        ) + "/system/user/{userId}/clean".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=CheckCleanUserDataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def check_clean_user_data_by_user_id(
+        self,
+        request: CheckCleanUserDataByUserIdRequest,
+    ) -> CheckCleanUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._check_clean_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def check_clean_user_data_by_user_id_async(
+        self,
+        request: CheckCleanUserDataByUserIdRequest,
+    ) -> CheckCleanUserDataByUserIdResult:
+        async_result = []
+        self._check_clean_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_counters(
         self,
         request: DescribeCountersRequest,
