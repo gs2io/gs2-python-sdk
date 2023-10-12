@@ -3230,6 +3230,187 @@ class DeleteInventoryByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyInventoryCurrentMaxCapacityRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    inventory_name: str = None
+    verify_type: str = None
+    current_inventory_max_capacity: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyInventoryCurrentMaxCapacityRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyInventoryCurrentMaxCapacityRequest:
+        self.access_token = access_token
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> VerifyInventoryCurrentMaxCapacityRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyInventoryCurrentMaxCapacityRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_current_inventory_max_capacity(self, current_inventory_max_capacity: int) -> VerifyInventoryCurrentMaxCapacityRequest:
+        self.current_inventory_max_capacity = current_inventory_max_capacity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyInventoryCurrentMaxCapacityRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyInventoryCurrentMaxCapacityRequest]:
+        if data is None:
+            return None
+        return VerifyInventoryCurrentMaxCapacityRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_current_inventory_max_capacity(data.get('currentInventoryMaxCapacity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "inventoryName": self.inventory_name,
+            "verifyType": self.verify_type,
+            "currentInventoryMaxCapacity": self.current_inventory_max_capacity,
+        }
+
+
+class VerifyInventoryCurrentMaxCapacityByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    inventory_name: str = None
+    verify_type: str = None
+    current_inventory_max_capacity: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_current_inventory_max_capacity(self, current_inventory_max_capacity: int) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
+        self.current_inventory_max_capacity = current_inventory_max_capacity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyInventoryCurrentMaxCapacityByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyInventoryCurrentMaxCapacityByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_current_inventory_max_capacity(data.get('currentInventoryMaxCapacity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "inventoryName": self.inventory_name,
+            "verifyType": self.verify_type,
+            "currentInventoryMaxCapacity": self.current_inventory_max_capacity,
+        }
+
+
+class VerifyInventoryCurrentMaxCapacityByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyInventoryCurrentMaxCapacityByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyInventoryCurrentMaxCapacityByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyInventoryCurrentMaxCapacityByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyInventoryCurrentMaxCapacityByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
 class AddCapacityByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None

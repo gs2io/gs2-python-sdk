@@ -4772,6 +4772,243 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_inventory_current_max_capacity(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityRequest,
+        callback: Callable[[AsyncResult[VerifyInventoryCurrentMaxCapacityResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='inventory',
+            function='verifyInventoryCurrentMaxCapacity',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.current_inventory_max_capacity is not None:
+            body["currentInventoryMaxCapacity"] = request.current_inventory_max_capacity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyInventoryCurrentMaxCapacityResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_inventory_current_max_capacity(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityRequest,
+    ) -> VerifyInventoryCurrentMaxCapacityResult:
+        async_result = []
+        with timeout(30):
+            self._verify_inventory_current_max_capacity(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_inventory_current_max_capacity_async(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityRequest,
+    ) -> VerifyInventoryCurrentMaxCapacityResult:
+        async_result = []
+        self._verify_inventory_current_max_capacity(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_inventory_current_max_capacity_by_user_id(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyInventoryCurrentMaxCapacityByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='inventory',
+            function='verifyInventoryCurrentMaxCapacityByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.inventory_name is not None:
+            body["inventoryName"] = request.inventory_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.current_inventory_max_capacity is not None:
+            body["currentInventoryMaxCapacity"] = request.current_inventory_max_capacity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyInventoryCurrentMaxCapacityByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_inventory_current_max_capacity_by_user_id(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityByUserIdRequest,
+    ) -> VerifyInventoryCurrentMaxCapacityByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_inventory_current_max_capacity_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_inventory_current_max_capacity_by_user_id_async(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityByUserIdRequest,
+    ) -> VerifyInventoryCurrentMaxCapacityByUserIdResult:
+        async_result = []
+        self._verify_inventory_current_max_capacity_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_inventory_current_max_capacity_by_stamp_task(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyInventoryCurrentMaxCapacityByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='inventory',
+            function='verifyInventoryCurrentMaxCapacityByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyInventoryCurrentMaxCapacityByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_inventory_current_max_capacity_by_stamp_task(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityByStampTaskRequest,
+    ) -> VerifyInventoryCurrentMaxCapacityByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_inventory_current_max_capacity_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_inventory_current_max_capacity_by_stamp_task_async(
+        self,
+        request: VerifyInventoryCurrentMaxCapacityByStampTaskRequest,
+    ) -> VerifyInventoryCurrentMaxCapacityByStampTaskResult:
+        async_result = []
+        self._verify_inventory_current_max_capacity_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _add_capacity_by_stamp_sheet(
         self,
         request: AddCapacityByStampSheetRequest,
