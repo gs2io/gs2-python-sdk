@@ -349,6 +349,108 @@ class CheckCleanUserDataByUserIdResult(core.Gs2Result):
         }
 
 
+class PrepareImportUserDataByUserIdResult(core.Gs2Result):
+    upload_token: str = None
+    upload_url: str = None
+
+    def with_upload_token(self, upload_token: str) -> PrepareImportUserDataByUserIdResult:
+        self.upload_token = upload_token
+        return self
+
+    def with_upload_url(self, upload_url: str) -> PrepareImportUserDataByUserIdResult:
+        self.upload_url = upload_url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PrepareImportUserDataByUserIdResult]:
+        if data is None:
+            return None
+        return PrepareImportUserDataByUserIdResult()\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_upload_url(data.get('uploadUrl'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uploadToken": self.upload_token,
+            "uploadUrl": self.upload_url,
+        }
+
+
+class ImportUserDataByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ImportUserDataByUserIdResult]:
+        if data is None:
+            return None
+        return ImportUserDataByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class CheckImportUserDataByUserIdResult(core.Gs2Result):
+    url: str = None
+
+    def with_url(self, url: str) -> CheckImportUserDataByUserIdResult:
+        self.url = url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CheckImportUserDataByUserIdResult]:
+        if data is None:
+            return None
+        return CheckImportUserDataByUserIdResult()\
+            .with_url(data.get('url'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "url": self.url,
+        }
+
+
 class DescribeBonusModelMastersResult(core.Gs2Result):
     items: List[BonusModelMaster] = None
     next_page_token: str = None

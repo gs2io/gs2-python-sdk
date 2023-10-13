@@ -749,6 +749,229 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _prepare_import_user_data_by_user_id(
+        self,
+        request: PrepareImportUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking",
+            component='namespace',
+            function='prepareImportUserDataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PrepareImportUserDataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def prepare_import_user_data_by_user_id(
+        self,
+        request: PrepareImportUserDataByUserIdRequest,
+    ) -> PrepareImportUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._prepare_import_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def prepare_import_user_data_by_user_id_async(
+        self,
+        request: PrepareImportUserDataByUserIdRequest,
+    ) -> PrepareImportUserDataByUserIdResult:
+        async_result = []
+        self._prepare_import_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _import_user_data_by_user_id(
+        self,
+        request: ImportUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking",
+            component='namespace',
+            function='importUserDataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ImportUserDataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def import_user_data_by_user_id(
+        self,
+        request: ImportUserDataByUserIdRequest,
+    ) -> ImportUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._import_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def import_user_data_by_user_id_async(
+        self,
+        request: ImportUserDataByUserIdRequest,
+    ) -> ImportUserDataByUserIdResult:
+        async_result = []
+        self._import_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _check_import_user_data_by_user_id(
+        self,
+        request: CheckImportUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking",
+            component='namespace',
+            function='checkImportUserDataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CheckImportUserDataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def check_import_user_data_by_user_id(
+        self,
+        request: CheckImportUserDataByUserIdRequest,
+    ) -> CheckImportUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._check_import_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def check_import_user_data_by_user_id_async(
+        self,
+        request: CheckImportUserDataByUserIdRequest,
+    ) -> CheckImportUserDataByUserIdResult:
+        async_result = []
+        self._check_import_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_category_models(
         self,
         request: DescribeCategoryModelsRequest,

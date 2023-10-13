@@ -797,6 +797,227 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _prepare_import_user_data_by_user_id(
+        self,
+        request: PrepareImportUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/system/user/{userId}/import/prepare".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PrepareImportUserDataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def prepare_import_user_data_by_user_id(
+        self,
+        request: PrepareImportUserDataByUserIdRequest,
+    ) -> PrepareImportUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._prepare_import_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def prepare_import_user_data_by_user_id_async(
+        self,
+        request: PrepareImportUserDataByUserIdRequest,
+    ) -> PrepareImportUserDataByUserIdResult:
+        async_result = []
+        self._prepare_import_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _import_user_data_by_user_id(
+        self,
+        request: ImportUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/system/user/{userId}/import".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ImportUserDataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def import_user_data_by_user_id(
+        self,
+        request: ImportUserDataByUserIdRequest,
+    ) -> ImportUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._import_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def import_user_data_by_user_id_async(
+        self,
+        request: ImportUserDataByUserIdRequest,
+    ) -> ImportUserDataByUserIdResult:
+        async_result = []
+        self._import_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _check_import_user_data_by_user_id(
+        self,
+        request: CheckImportUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/system/user/{userId}/import".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=CheckImportUserDataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def check_import_user_data_by_user_id(
+        self,
+        request: CheckImportUserDataByUserIdRequest,
+    ) -> CheckImportUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._check_import_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def check_import_user_data_by_user_id_async(
+        self,
+        request: CheckImportUserDataByUserIdRequest,
+    ) -> CheckImportUserDataByUserIdResult:
+        async_result = []
+        self._check_import_user_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_gatherings(
         self,
         request: DescribeGatheringsRequest,

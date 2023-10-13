@@ -509,6 +509,143 @@ class CheckCleanUserDataByUserIdRequest(core.Gs2Request):
         }
 
 
+class PrepareImportUserDataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_user_id(self, user_id: str) -> PrepareImportUserDataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PrepareImportUserDataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PrepareImportUserDataByUserIdRequest]:
+        if data is None:
+            return None
+        return PrepareImportUserDataByUserIdRequest()\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+        }
+
+
+class ImportUserDataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    upload_token: str = None
+    duplication_avoider: str = None
+
+    def with_user_id(self, user_id: str) -> ImportUserDataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_upload_token(self, upload_token: str) -> ImportUserDataByUserIdRequest:
+        self.upload_token = upload_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ImportUserDataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ImportUserDataByUserIdRequest]:
+        if data is None:
+            return None
+        return ImportUserDataByUserIdRequest()\
+            .with_user_id(data.get('userId'))\
+            .with_upload_token(data.get('uploadToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "uploadToken": self.upload_token,
+        }
+
+
+class CheckImportUserDataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    upload_token: str = None
+    duplication_avoider: str = None
+
+    def with_user_id(self, user_id: str) -> CheckImportUserDataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_upload_token(self, upload_token: str) -> CheckImportUserDataByUserIdRequest:
+        self.upload_token = upload_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CheckImportUserDataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CheckImportUserDataByUserIdRequest]:
+        if data is None:
+            return None
+        return CheckImportUserDataByUserIdRequest()\
+            .with_user_id(data.get('userId'))\
+            .with_upload_token(data.get('uploadToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "uploadToken": self.upload_token,
+        }
+
+
 class DescribeAccountsRequest(core.Gs2Request):
 
     context_stack: str = None
