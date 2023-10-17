@@ -514,7 +514,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
-        ) + "/system/user/{userId}/dump".format(
+        ) + "/system/dump/user/{userId}".format(
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
         )
 
@@ -587,7 +587,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
-        ) + "/system/user/{userId}/dump".format(
+        ) + "/system/dump/user/{userId}".format(
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
         )
 
@@ -660,7 +660,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
-        ) + "/system/user/{userId}/clean".format(
+        ) + "/system/clean/user/{userId}".format(
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
         )
 
@@ -733,7 +733,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
-        ) + "/system/user/{userId}/clean".format(
+        ) + "/system/clean/user/{userId}".format(
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
         )
 
@@ -806,7 +806,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
-        ) + "/system/user/{userId}/import/prepare".format(
+        ) + "/system/import/user/{userId}/prepare".format(
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
         )
 
@@ -879,7 +879,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
-        ) + "/system/user/{userId}/import".format(
+        ) + "/system/import/user/{userId}".format(
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
         )
 
@@ -954,8 +954,9 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
-        ) + "/system/user/{userId}/import".format(
+        ) + "/system/import/user/{userId}/{uploadToken}".format(
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            uploadToken=request.upload_token if request.upload_token is not None and request.upload_token != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
