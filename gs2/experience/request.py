@@ -66,7 +66,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
-    experience_cap_script_id: str = None
+    rank_cap_script_id: str = None
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
     change_rank_cap_script: ScriptSetting = None
@@ -85,8 +85,8 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.transaction_setting = transaction_setting
         return self
 
-    def with_experience_cap_script_id(self, experience_cap_script_id: str) -> CreateNamespaceRequest:
-        self.experience_cap_script_id = experience_cap_script_id
+    def with_rank_cap_script_id(self, rank_cap_script_id: str) -> CreateNamespaceRequest:
+        self.rank_cap_script_id = rank_cap_script_id
         return self
 
     def with_change_experience_script(self, change_experience_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -131,7 +131,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
-            .with_experience_cap_script_id(data.get('experienceCapScriptId'))\
+            .with_rank_cap_script_id(data.get('rankCapScriptId'))\
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
             .with_change_rank_cap_script(ScriptSetting.from_dict(data.get('changeRankCapScript')))\
@@ -143,7 +143,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
-            "experienceCapScriptId": self.experience_cap_script_id,
+            "rankCapScriptId": self.rank_cap_script_id,
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,
             "changeRankCapScript": self.change_rank_cap_script.to_dict() if self.change_rank_cap_script else None,
@@ -230,7 +230,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
-    experience_cap_script_id: str = None
+    rank_cap_script_id: str = None
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
     change_rank_cap_script: ScriptSetting = None
@@ -249,8 +249,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.transaction_setting = transaction_setting
         return self
 
-    def with_experience_cap_script_id(self, experience_cap_script_id: str) -> UpdateNamespaceRequest:
-        self.experience_cap_script_id = experience_cap_script_id
+    def with_rank_cap_script_id(self, rank_cap_script_id: str) -> UpdateNamespaceRequest:
+        self.rank_cap_script_id = rank_cap_script_id
         return self
 
     def with_change_experience_script(self, change_experience_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -295,7 +295,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
-            .with_experience_cap_script_id(data.get('experienceCapScriptId'))\
+            .with_rank_cap_script_id(data.get('rankCapScriptId'))\
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
             .with_change_rank_cap_script(ScriptSetting.from_dict(data.get('changeRankCapScript')))\
@@ -307,7 +307,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
-            "experienceCapScriptId": self.experience_cap_script_id,
+            "rankCapScriptId": self.rank_cap_script_id,
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,
             "changeRankCapScript": self.change_rank_cap_script.to_dict() if self.change_rank_cap_script else None,

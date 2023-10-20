@@ -115,8 +115,8 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
-        if request.experience_cap_script_id is not None:
-            body["experienceCapScriptId"] = request.experience_cap_script_id
+        if request.rank_cap_script_id is not None:
+            body["rankCapScriptId"] = request.rank_cap_script_id
         if request.change_experience_script is not None:
             body["changeExperienceScript"] = request.change_experience_script.to_dict()
         if request.change_rank_script is not None:
@@ -344,8 +344,8 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
-        if request.experience_cap_script_id is not None:
-            body["experienceCapScriptId"] = request.experience_cap_script_id
+        if request.rank_cap_script_id is not None:
+            body["rankCapScriptId"] = request.rank_cap_script_id
         if request.change_experience_script is not None:
             body["changeExperienceScript"] = request.change_experience_script.to_dict()
         if request.change_rank_script is not None:
