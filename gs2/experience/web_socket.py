@@ -126,7 +126,7 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if request.change_rank_cap_script is not None:
             body["changeRankCapScript"] = request.change_rank_cap_script.to_dict()
         if request.overflow_experience_script is not None:
-            body["overflowExperienceScript"] = request.overflow_experience_script.to_dict()
+            body["overflowExperienceScript"] = request.overflow_experience_script
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -355,7 +355,7 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if request.change_rank_cap_script is not None:
             body["changeRankCapScript"] = request.change_rank_cap_script.to_dict()
         if request.overflow_experience_script is not None:
-            body["overflowExperienceScript"] = request.overflow_experience_script.to_dict()
+            body["overflowExperienceScript"] = request.overflow_experience_script
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

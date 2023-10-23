@@ -70,7 +70,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
     change_rank_cap_script: ScriptSetting = None
-    overflow_experience_script: ScriptSetting = None
+    overflow_experience_script: str = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -101,7 +101,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.change_rank_cap_script = change_rank_cap_script
         return self
 
-    def with_overflow_experience_script(self, overflow_experience_script: ScriptSetting) -> CreateNamespaceRequest:
+    def with_overflow_experience_script(self, overflow_experience_script: str) -> CreateNamespaceRequest:
         self.overflow_experience_script = overflow_experience_script
         return self
 
@@ -135,7 +135,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
             .with_change_rank_cap_script(ScriptSetting.from_dict(data.get('changeRankCapScript')))\
-            .with_overflow_experience_script(ScriptSetting.from_dict(data.get('overflowExperienceScript')))\
+            .with_overflow_experience_script(data.get('overflowExperienceScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -147,7 +147,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,
             "changeRankCapScript": self.change_rank_cap_script.to_dict() if self.change_rank_cap_script else None,
-            "overflowExperienceScript": self.overflow_experience_script.to_dict() if self.overflow_experience_script else None,
+            "overflowExperienceScript": self.overflow_experience_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -234,7 +234,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
     change_rank_cap_script: ScriptSetting = None
-    overflow_experience_script: ScriptSetting = None
+    overflow_experience_script: str = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -265,7 +265,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.change_rank_cap_script = change_rank_cap_script
         return self
 
-    def with_overflow_experience_script(self, overflow_experience_script: ScriptSetting) -> UpdateNamespaceRequest:
+    def with_overflow_experience_script(self, overflow_experience_script: str) -> UpdateNamespaceRequest:
         self.overflow_experience_script = overflow_experience_script
         return self
 
@@ -299,7 +299,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
             .with_change_rank_cap_script(ScriptSetting.from_dict(data.get('changeRankCapScript')))\
-            .with_overflow_experience_script(ScriptSetting.from_dict(data.get('overflowExperienceScript')))\
+            .with_overflow_experience_script(data.get('overflowExperienceScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -311,7 +311,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,
             "changeRankCapScript": self.change_rank_cap_script.to_dict() if self.change_rank_cap_script else None,
-            "overflowExperienceScript": self.overflow_experience_script.to_dict() if self.overflow_experience_script else None,
+            "overflowExperienceScript": self.overflow_experience_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
