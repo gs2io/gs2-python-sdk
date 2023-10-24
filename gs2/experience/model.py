@@ -549,14 +549,24 @@ class CurrentExperienceMaster(core.Gs2Model):
 
 class AcquireActionRate(core.Gs2Model):
     name: str = None
+    mode: str = None
     rates: List[float] = None
+    big_rates: List[str] = None
 
     def with_name(self, name: str) -> AcquireActionRate:
         self.name = name
         return self
 
+    def with_mode(self, mode: str) -> AcquireActionRate:
+        self.mode = mode
+        return self
+
     def with_rates(self, rates: List[float]) -> AcquireActionRate:
         self.rates = rates
+        return self
+
+    def with_big_rates(self, big_rates: List[str]) -> AcquireActionRate:
+        self.big_rates = big_rates
         return self
 
     def get(self, key, default=None):
@@ -579,17 +589,27 @@ class AcquireActionRate(core.Gs2Model):
             return None
         return AcquireActionRate()\
             .with_name(data.get('name'))\
+            .with_mode(data.get('mode'))\
             .with_rates([
                 data.get('rates')[i]
                 for i in range(len(data.get('rates')) if data.get('rates') else 0)
+            ])\
+            .with_big_rates([
+                data.get('bigRates')[i]
+                for i in range(len(data.get('bigRates')) if data.get('bigRates') else 0)
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
+            "mode": self.mode,
             "rates": [
                 self.rates[i]
                 for i in range(len(self.rates) if self.rates else 0)
+            ],
+            "bigRates": [
+                self.big_rates[i]
+                for i in range(len(self.big_rates) if self.big_rates else 0)
             ],
         }
 
