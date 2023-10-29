@@ -488,6 +488,7 @@ class DeleteScriptResult(core.Gs2Result):
 class InvokeScriptResult(core.Gs2Result):
     code: int = None
     result: str = None
+    transaction: str = None
     execute_time: int = None
     charged: int = None
     output: List[str] = None
@@ -498,6 +499,10 @@ class InvokeScriptResult(core.Gs2Result):
 
     def with_result(self, result: str) -> InvokeScriptResult:
         self.result = result
+        return self
+
+    def with_transaction(self, transaction: str) -> InvokeScriptResult:
+        self.transaction = transaction
         return self
 
     def with_execute_time(self, execute_time: int) -> InvokeScriptResult:
@@ -533,6 +538,7 @@ class InvokeScriptResult(core.Gs2Result):
         return InvokeScriptResult()\
             .with_code(data.get('code'))\
             .with_result(data.get('result'))\
+            .with_transaction(data.get('transaction'))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
             .with_output([
@@ -544,6 +550,7 @@ class InvokeScriptResult(core.Gs2Result):
         return {
             "code": self.code,
             "result": self.result,
+            "transaction": self.transaction,
             "executeTime": self.execute_time,
             "charged": self.charged,
             "output": [
@@ -556,6 +563,7 @@ class InvokeScriptResult(core.Gs2Result):
 class DebugInvokeResult(core.Gs2Result):
     code: int = None
     result: str = None
+    transaction: str = None
     execute_time: int = None
     charged: int = None
     output: List[str] = None
@@ -566,6 +574,10 @@ class DebugInvokeResult(core.Gs2Result):
 
     def with_result(self, result: str) -> DebugInvokeResult:
         self.result = result
+        return self
+
+    def with_transaction(self, transaction: str) -> DebugInvokeResult:
+        self.transaction = transaction
         return self
 
     def with_execute_time(self, execute_time: int) -> DebugInvokeResult:
@@ -601,6 +613,7 @@ class DebugInvokeResult(core.Gs2Result):
         return DebugInvokeResult()\
             .with_code(data.get('code'))\
             .with_result(data.get('result'))\
+            .with_transaction(data.get('transaction'))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
             .with_output([
@@ -612,6 +625,7 @@ class DebugInvokeResult(core.Gs2Result):
         return {
             "code": self.code,
             "result": self.result,
+            "transaction": self.transaction,
             "executeTime": self.execute_time,
             "charged": self.charged,
             "output": [
