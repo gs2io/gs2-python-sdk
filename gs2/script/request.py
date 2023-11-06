@@ -638,6 +638,7 @@ class InvokeScriptRequest(core.Gs2Request):
     script_id: str = None
     user_id: str = None
     args: str = None
+    random_status: RandomStatus = None
 
     def with_script_id(self, script_id: str) -> InvokeScriptRequest:
         self.script_id = script_id
@@ -649,6 +650,10 @@ class InvokeScriptRequest(core.Gs2Request):
 
     def with_args(self, args: str) -> InvokeScriptRequest:
         self.args = args
+        return self
+
+    def with_random_status(self, random_status: RandomStatus) -> InvokeScriptRequest:
+        self.random_status = random_status
         return self
 
     def get(self, key, default=None):
@@ -672,13 +677,15 @@ class InvokeScriptRequest(core.Gs2Request):
         return InvokeScriptRequest()\
             .with_script_id(data.get('scriptId'))\
             .with_user_id(data.get('userId'))\
-            .with_args(data.get('args'))
+            .with_args(data.get('args'))\
+            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "scriptId": self.script_id,
             "userId": self.user_id,
             "args": self.args,
+            "randomStatus": self.random_status.to_dict() if self.random_status else None,
         }
 
 
@@ -687,6 +694,7 @@ class DebugInvokeRequest(core.Gs2Request):
     context_stack: str = None
     script: str = None
     args: str = None
+    random_status: RandomStatus = None
 
     def with_script(self, script: str) -> DebugInvokeRequest:
         self.script = script
@@ -694,6 +702,10 @@ class DebugInvokeRequest(core.Gs2Request):
 
     def with_args(self, args: str) -> DebugInvokeRequest:
         self.args = args
+        return self
+
+    def with_random_status(self, random_status: RandomStatus) -> DebugInvokeRequest:
+        self.random_status = random_status
         return self
 
     def get(self, key, default=None):
@@ -716,10 +728,12 @@ class DebugInvokeRequest(core.Gs2Request):
             return None
         return DebugInvokeRequest()\
             .with_script(data.get('script'))\
-            .with_args(data.get('args'))
+            .with_args(data.get('args'))\
+            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "script": self.script,
             "args": self.args,
+            "randomStatus": self.random_status.to_dict() if self.random_status else None,
         }

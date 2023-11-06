@@ -19,6 +19,94 @@ from typing import *
 from gs2 import core
 
 
+class RandomUsed(core.Gs2Model):
+    category: int = None
+    used: int = None
+
+    def with_category(self, category: int) -> RandomUsed:
+        self.category = category
+        return self
+
+    def with_used(self, used: int) -> RandomUsed:
+        self.used = used
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomUsed]:
+        if data is None:
+            return None
+        return RandomUsed()\
+            .with_category(data.get('category'))\
+            .with_used(data.get('used'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "category": self.category,
+            "used": self.used,
+        }
+
+
+class RandomStatus(core.Gs2Model):
+    seed: int = None
+    used: List[RandomUsed] = None
+
+    def with_seed(self, seed: int) -> RandomStatus:
+        self.seed = seed
+        return self
+
+    def with_used(self, used: List[RandomUsed]) -> RandomStatus:
+        self.used = used
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomStatus]:
+        if data is None:
+            return None
+        return RandomStatus()\
+            .with_seed(data.get('seed'))\
+            .with_used([
+                RandomUsed.from_dict(data.get('used')[i])
+                for i in range(len(data.get('used')) if data.get('used') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "seed": self.seed,
+            "used": [
+                self.used[i].to_dict() if self.used[i] else None
+                for i in range(len(self.used) if self.used else 0)
+            ],
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 

@@ -1003,6 +1003,8 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
             body["userId"] = request.user_id
         if request.args is not None:
             body["args"] = request.args
+        if request.random_status is not None:
+            body["randomStatus"] = request.random_status.to_dict()
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1076,6 +1078,8 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
             body["script"] = request.script
         if request.args is not None:
             body["args"] = request.args
+        if request.random_status is not None:
+            body["randomStatus"] = request.random_status.to_dict()
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

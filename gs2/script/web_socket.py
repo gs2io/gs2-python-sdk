@@ -1009,6 +1009,8 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.args is not None:
             body["args"] = request.args
+        if request.random_status is not None:
+            body["randomStatus"] = request.random_status.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1082,6 +1084,8 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["script"] = request.script
         if request.args is not None:
             body["args"] = request.args
+        if request.random_status is not None:
+            body["randomStatus"] = request.random_status.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

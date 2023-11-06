@@ -489,6 +489,7 @@ class InvokeScriptResult(core.Gs2Result):
     code: int = None
     result: str = None
     transaction: str = None
+    random_status: RandomStatus = None
     execute_time: int = None
     charged: int = None
     output: List[str] = None
@@ -503,6 +504,10 @@ class InvokeScriptResult(core.Gs2Result):
 
     def with_transaction(self, transaction: str) -> InvokeScriptResult:
         self.transaction = transaction
+        return self
+
+    def with_random_status(self, random_status: RandomStatus) -> InvokeScriptResult:
+        self.random_status = random_status
         return self
 
     def with_execute_time(self, execute_time: int) -> InvokeScriptResult:
@@ -539,6 +544,7 @@ class InvokeScriptResult(core.Gs2Result):
             .with_code(data.get('code'))\
             .with_result(data.get('result'))\
             .with_transaction(data.get('transaction'))\
+            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
             .with_output([
@@ -551,6 +557,7 @@ class InvokeScriptResult(core.Gs2Result):
             "code": self.code,
             "result": self.result,
             "transaction": self.transaction,
+            "randomStatus": self.random_status.to_dict() if self.random_status else None,
             "executeTime": self.execute_time,
             "charged": self.charged,
             "output": [
@@ -564,6 +571,7 @@ class DebugInvokeResult(core.Gs2Result):
     code: int = None
     result: str = None
     transaction: str = None
+    random_status: RandomStatus = None
     execute_time: int = None
     charged: int = None
     output: List[str] = None
@@ -578,6 +586,10 @@ class DebugInvokeResult(core.Gs2Result):
 
     def with_transaction(self, transaction: str) -> DebugInvokeResult:
         self.transaction = transaction
+        return self
+
+    def with_random_status(self, random_status: RandomStatus) -> DebugInvokeResult:
+        self.random_status = random_status
         return self
 
     def with_execute_time(self, execute_time: int) -> DebugInvokeResult:
@@ -614,6 +626,7 @@ class DebugInvokeResult(core.Gs2Result):
             .with_code(data.get('code'))\
             .with_result(data.get('result'))\
             .with_transaction(data.get('transaction'))\
+            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
             .with_output([
@@ -626,6 +639,7 @@ class DebugInvokeResult(core.Gs2Result):
             "code": self.code,
             "result": self.result,
             "transaction": self.transaction,
+            "randomStatus": self.random_status.to_dict() if self.random_status else None,
             "executeTime": self.execute_time,
             "charged": self.charged,
             "output": [
