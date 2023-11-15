@@ -65,7 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
-    overflow_trigger_script: ScriptSetting = None
+    overflow_trigger_script: str = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -76,7 +76,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.description = description
         return self
 
-    def with_overflow_trigger_script(self, overflow_trigger_script: ScriptSetting) -> CreateNamespaceRequest:
+    def with_overflow_trigger_script(self, overflow_trigger_script: str) -> CreateNamespaceRequest:
         self.overflow_trigger_script = overflow_trigger_script
         return self
 
@@ -105,14 +105,14 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_overflow_trigger_script(ScriptSetting.from_dict(data.get('overflowTriggerScript')))\
+            .with_overflow_trigger_script(data.get('overflowTriggerScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
             "description": self.description,
-            "overflowTriggerScript": self.overflow_trigger_script.to_dict() if self.overflow_trigger_script else None,
+            "overflowTriggerScript": self.overflow_trigger_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -194,7 +194,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
-    overflow_trigger_script: ScriptSetting = None
+    overflow_trigger_script: str = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -205,7 +205,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.description = description
         return self
 
-    def with_overflow_trigger_script(self, overflow_trigger_script: ScriptSetting) -> UpdateNamespaceRequest:
+    def with_overflow_trigger_script(self, overflow_trigger_script: str) -> UpdateNamespaceRequest:
         self.overflow_trigger_script = overflow_trigger_script
         return self
 
@@ -234,14 +234,14 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
-            .with_overflow_trigger_script(ScriptSetting.from_dict(data.get('overflowTriggerScript')))\
+            .with_overflow_trigger_script(data.get('overflowTriggerScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
-            "overflowTriggerScript": self.overflow_trigger_script.to_dict() if self.overflow_trigger_script else None,
+            "overflowTriggerScript": self.overflow_trigger_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

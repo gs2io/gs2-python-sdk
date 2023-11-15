@@ -1439,7 +1439,7 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
-    overflow_trigger_script: ScriptSetting = None
+    overflow_trigger_script: str = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1457,7 +1457,7 @@ class Namespace(core.Gs2Model):
         self.description = description
         return self
 
-    def with_overflow_trigger_script(self, overflow_trigger_script: ScriptSetting) -> Namespace:
+    def with_overflow_trigger_script(self, overflow_trigger_script: str) -> Namespace:
         self.overflow_trigger_script = overflow_trigger_script
         return self
 
@@ -1542,7 +1542,7 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_overflow_trigger_script(ScriptSetting.from_dict(data.get('overflowTriggerScript')))\
+            .with_overflow_trigger_script(data.get('overflowTriggerScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1553,7 +1553,7 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
-            "overflowTriggerScript": self.overflow_trigger_script.to_dict() if self.overflow_trigger_script else None,
+            "overflowTriggerScript": self.overflow_trigger_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

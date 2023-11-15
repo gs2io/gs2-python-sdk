@@ -66,7 +66,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     entry_script: ScriptSetting = None
-    duplicate_entry_script: ScriptSetting = None
+    duplicate_entry_script: str = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -81,7 +81,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.entry_script = entry_script
         return self
 
-    def with_duplicate_entry_script(self, duplicate_entry_script: ScriptSetting) -> CreateNamespaceRequest:
+    def with_duplicate_entry_script(self, duplicate_entry_script: str) -> CreateNamespaceRequest:
         self.duplicate_entry_script = duplicate_entry_script
         return self
 
@@ -111,7 +111,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_entry_script(ScriptSetting.from_dict(data.get('entryScript')))\
-            .with_duplicate_entry_script(ScriptSetting.from_dict(data.get('duplicateEntryScript')))\
+            .with_duplicate_entry_script(data.get('duplicateEntryScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -119,7 +119,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "entryScript": self.entry_script.to_dict() if self.entry_script else None,
-            "duplicateEntryScript": self.duplicate_entry_script.to_dict() if self.duplicate_entry_script else None,
+            "duplicateEntryScript": self.duplicate_entry_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -202,7 +202,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     entry_script: ScriptSetting = None
-    duplicate_entry_script: ScriptSetting = None
+    duplicate_entry_script: str = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -217,7 +217,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.entry_script = entry_script
         return self
 
-    def with_duplicate_entry_script(self, duplicate_entry_script: ScriptSetting) -> UpdateNamespaceRequest:
+    def with_duplicate_entry_script(self, duplicate_entry_script: str) -> UpdateNamespaceRequest:
         self.duplicate_entry_script = duplicate_entry_script
         return self
 
@@ -247,7 +247,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_entry_script(ScriptSetting.from_dict(data.get('entryScript')))\
-            .with_duplicate_entry_script(ScriptSetting.from_dict(data.get('duplicateEntryScript')))\
+            .with_duplicate_entry_script(data.get('duplicateEntryScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -255,7 +255,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "entryScript": self.entry_script.to_dict() if self.entry_script else None,
-            "duplicateEntryScript": self.duplicate_entry_script.to_dict() if self.duplicate_entry_script else None,
+            "duplicateEntryScript": self.duplicate_entry_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

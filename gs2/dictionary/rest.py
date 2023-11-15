@@ -116,7 +116,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         if request.entry_script is not None:
             body["entryScript"] = request.entry_script.to_dict()
         if request.duplicate_entry_script is not None:
-            body["duplicateEntryScript"] = request.duplicate_entry_script.to_dict()
+            body["duplicateEntryScript"] = request.duplicate_entry_script
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -337,7 +337,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         if request.entry_script is not None:
             body["entryScript"] = request.entry_script.to_dict()
         if request.duplicate_entry_script is not None:
-            body["duplicateEntryScript"] = request.duplicate_entry_script.to_dict()
+            body["duplicateEntryScript"] = request.duplicate_entry_script
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

@@ -677,7 +677,7 @@ class Namespace(core.Gs2Model):
     name: str = None
     description: str = None
     entry_script: ScriptSetting = None
-    duplicate_entry_script: ScriptSetting = None
+    duplicate_entry_script: str = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -699,7 +699,7 @@ class Namespace(core.Gs2Model):
         self.entry_script = entry_script
         return self
 
-    def with_duplicate_entry_script(self, duplicate_entry_script: ScriptSetting) -> Namespace:
+    def with_duplicate_entry_script(self, duplicate_entry_script: str) -> Namespace:
         self.duplicate_entry_script = duplicate_entry_script
         return self
 
@@ -785,7 +785,7 @@ class Namespace(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_entry_script(ScriptSetting.from_dict(data.get('entryScript')))\
-            .with_duplicate_entry_script(ScriptSetting.from_dict(data.get('duplicateEntryScript')))\
+            .with_duplicate_entry_script(data.get('duplicateEntryScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -797,7 +797,7 @@ class Namespace(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "entryScript": self.entry_script.to_dict() if self.entry_script else None,
-            "duplicateEntryScript": self.duplicate_entry_script.to_dict() if self.duplicate_entry_script else None,
+            "duplicateEntryScript": self.duplicate_entry_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
