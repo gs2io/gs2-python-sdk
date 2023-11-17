@@ -181,68 +181,6 @@ class AdMob(core.Gs2Model):
         }
 
 
-class History(core.Gs2Model):
-    provider: str = None
-    transaction_id: str = None
-    created_at: int = None
-    revision: int = None
-
-    def with_provider(self, provider: str) -> History:
-        self.provider = provider
-        return self
-
-    def with_transaction_id(self, transaction_id: str) -> History:
-        self.transaction_id = transaction_id
-        return self
-
-    def with_created_at(self, created_at: int) -> History:
-        self.created_at = created_at
-        return self
-
-    def with_revision(self, revision: int) -> History:
-        self.revision = revision
-        return self
-
-    @classmethod
-    def create_grn(
-        cls,
-    ):
-        return ''.format(
-        )
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[History]:
-        if data is None:
-            return None
-        return History()\
-            .with_provider(data.get('provider'))\
-            .with_transaction_id(data.get('transactionId'))\
-            .with_created_at(data.get('createdAt'))\
-            .with_revision(data.get('revision'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "provider": self.provider,
-            "transactionId": self.transaction_id,
-            "createdAt": self.created_at,
-            "revision": self.revision,
-        }
-
-
 class Point(core.Gs2Model):
     point_id: str = None
     user_id: str = None
