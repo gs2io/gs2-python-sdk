@@ -314,7 +314,6 @@ class Entry(core.Gs2Model):
     user_id: str = None
     name: str = None
     acquired_at: int = None
-    revision: int = None
 
     def with_entry_id(self, entry_id: str) -> Entry:
         self.entry_id = entry_id
@@ -330,10 +329,6 @@ class Entry(core.Gs2Model):
 
     def with_acquired_at(self, acquired_at: int) -> Entry:
         self.acquired_at = acquired_at
-        return self
-
-    def with_revision(self, revision: int) -> Entry:
-        self.revision = revision
         return self
 
     @classmethod
@@ -425,8 +420,7 @@ class Entry(core.Gs2Model):
             .with_entry_id(data.get('entryId'))\
             .with_user_id(data.get('userId'))\
             .with_name(data.get('name'))\
-            .with_acquired_at(data.get('acquiredAt'))\
-            .with_revision(data.get('revision'))
+            .with_acquired_at(data.get('acquiredAt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -434,7 +428,6 @@ class Entry(core.Gs2Model):
             "userId": self.user_id,
             "name": self.name,
             "acquiredAt": self.acquired_at,
-            "revision": self.revision,
         }
 
 
