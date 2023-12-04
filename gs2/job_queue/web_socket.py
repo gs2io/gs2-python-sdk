@@ -1614,6 +1614,8 @@ class Gs2JobQueueWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["accessToken"] = request.access_token
         if request.job_name is not None:
             body["jobName"] = request.job_name
+        if request.try_number is not None:
+            body["tryNumber"] = request.try_number
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1691,6 +1693,8 @@ class Gs2JobQueueWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.job_name is not None:
             body["jobName"] = request.job_name
+        if request.try_number is not None:
+            body["tryNumber"] = request.try_number
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

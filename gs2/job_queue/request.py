@@ -1022,6 +1022,7 @@ class GetJobResultRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     job_name: str = None
+    try_number: int = None
 
     def with_namespace_name(self, namespace_name: str) -> GetJobResultRequest:
         self.namespace_name = namespace_name
@@ -1033,6 +1034,10 @@ class GetJobResultRequest(core.Gs2Request):
 
     def with_job_name(self, job_name: str) -> GetJobResultRequest:
         self.job_name = job_name
+        return self
+
+    def with_try_number(self, try_number: int) -> GetJobResultRequest:
+        self.try_number = try_number
         return self
 
     def get(self, key, default=None):
@@ -1056,13 +1061,15 @@ class GetJobResultRequest(core.Gs2Request):
         return GetJobResultRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_job_name(data.get('jobName'))
+            .with_job_name(data.get('jobName'))\
+            .with_try_number(data.get('tryNumber'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "jobName": self.job_name,
+            "tryNumber": self.try_number,
         }
 
 
@@ -1072,6 +1079,7 @@ class GetJobResultByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     job_name: str = None
+    try_number: int = None
 
     def with_namespace_name(self, namespace_name: str) -> GetJobResultByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1083,6 +1091,10 @@ class GetJobResultByUserIdRequest(core.Gs2Request):
 
     def with_job_name(self, job_name: str) -> GetJobResultByUserIdRequest:
         self.job_name = job_name
+        return self
+
+    def with_try_number(self, try_number: int) -> GetJobResultByUserIdRequest:
+        self.try_number = try_number
         return self
 
     def get(self, key, default=None):
@@ -1106,13 +1118,15 @@ class GetJobResultByUserIdRequest(core.Gs2Request):
         return GetJobResultByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_job_name(data.get('jobName'))
+            .with_job_name(data.get('jobName'))\
+            .with_try_number(data.get('tryNumber'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "jobName": self.job_name,
+            "tryNumber": self.try_number,
         }
 
 

@@ -1599,6 +1599,8 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.try_number is not None:
+            query_strings["tryNumber"] = request.try_number
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1674,6 +1676,8 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.try_number is not None:
+            query_strings["tryNumber"] = request.try_number
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
