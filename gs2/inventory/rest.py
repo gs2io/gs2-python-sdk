@@ -8177,6 +8177,86 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _set_simple_items_by_user_id(
+        self,
+        request: SetSimpleItemsByUserIdRequest,
+        callback: Callable[[AsyncResult[SetSimpleItemsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.counts is not None:
+            body["counts"] = [
+                item.to_dict()
+                for item in request.counts
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=SetSimpleItemsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_simple_items_by_user_id(
+        self,
+        request: SetSimpleItemsByUserIdRequest,
+    ) -> SetSimpleItemsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._set_simple_items_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_simple_items_by_user_id_async(
+        self,
+        request: SetSimpleItemsByUserIdRequest,
+    ) -> SetSimpleItemsByUserIdResult:
+        async_result = []
+        self._set_simple_items_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_simple_items_by_user_id(
         self,
         request: DeleteSimpleItemsByUserIdRequest,
@@ -8543,6 +8623,79 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
     ) -> ConsumeSimpleItemsByStampTaskResult:
         async_result = []
         self._consume_simple_items_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _set_simple_items_by_stamp_sheet(
+        self,
+        request: SetSimpleItemsByStampSheetRequest,
+        callback: Callable[[AsyncResult[SetSimpleItemsByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/simple/item/set"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SetSimpleItemsByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_simple_items_by_stamp_sheet(
+        self,
+        request: SetSimpleItemsByStampSheetRequest,
+    ) -> SetSimpleItemsByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._set_simple_items_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_simple_items_by_stamp_sheet_async(
+        self,
+        request: SetSimpleItemsByStampSheetRequest,
+    ) -> SetSimpleItemsByStampSheetResult:
+        async_result = []
+        self._set_simple_items_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -9169,6 +9322,84 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _set_big_item_by_user_id(
+        self,
+        request: SetBigItemByUserIdRequest,
+        callback: Callable[[AsyncResult[SetBigItemByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            inventoryName=request.inventory_name if request.inventory_name is not None and request.inventory_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            itemName=request.item_name if request.item_name is not None and request.item_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=SetBigItemByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_big_item_by_user_id(
+        self,
+        request: SetBigItemByUserIdRequest,
+    ) -> SetBigItemByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._set_big_item_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_big_item_by_user_id_async(
+        self,
+        request: SetBigItemByUserIdRequest,
+    ) -> SetBigItemByUserIdResult:
+        async_result = []
+        self._set_big_item_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_big_item_by_user_id(
         self,
         request: DeleteBigItemByUserIdRequest,
@@ -9536,6 +9767,79 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
     ) -> ConsumeBigItemByStampTaskResult:
         async_result = []
         self._consume_big_item_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _set_big_item_by_stamp_sheet(
+        self,
+        request: SetBigItemByStampSheetRequest,
+        callback: Callable[[AsyncResult[SetBigItemByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/stamp/big/item/set"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SetBigItemByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_big_item_by_stamp_sheet(
+        self,
+        request: SetBigItemByStampSheetRequest,
+    ) -> SetBigItemByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._set_big_item_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_big_item_by_stamp_sheet_async(
+        self,
+        request: SetBigItemByStampSheetRequest,
+    ) -> SetBigItemByStampSheetResult:
+        async_result = []
+        self._set_big_item_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

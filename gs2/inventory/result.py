@@ -4533,6 +4533,46 @@ class ConsumeSimpleItemsByUserIdResult(core.Gs2Result):
         }
 
 
+class SetSimpleItemsByUserIdResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+
+    def with_items(self, items: List[SimpleItem]) -> SetSimpleItemsByUserIdResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetSimpleItemsByUserIdResult]:
+        if data is None:
+            return None
+        return SetSimpleItemsByUserIdResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
 class DeleteSimpleItemsByUserIdResult(core.Gs2Result):
 
     def get(self, key, default=None):
@@ -4698,6 +4738,46 @@ class ConsumeSimpleItemsByStampTaskResult(core.Gs2Result):
                 for i in range(len(self.items) if self.items else 0)
             ],
             "newContextStack": self.new_context_stack,
+        }
+
+
+class SetSimpleItemsByStampSheetResult(core.Gs2Result):
+    items: List[SimpleItem] = None
+
+    def with_items(self, items: List[SimpleItem]) -> SetSimpleItemsByStampSheetResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetSimpleItemsByStampSheetResult]:
+        if data is None:
+            return None
+        return SetSimpleItemsByStampSheetResult()\
+            .with_items([
+                SimpleItem.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
         }
 
 
@@ -5013,6 +5093,40 @@ class ConsumeBigItemByUserIdResult(core.Gs2Result):
         }
 
 
+class SetBigItemByUserIdResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> SetBigItemByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetBigItemByUserIdResult]:
+        if data is None:
+            return None
+        return SetBigItemByUserIdResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteBigItemByUserIdResult(core.Gs2Result):
     item: BigItem = None
 
@@ -5173,6 +5287,40 @@ class ConsumeBigItemByStampTaskResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
+        }
+
+
+class SetBigItemByStampSheetResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> SetBigItemByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetBigItemByStampSheetResult]:
+        if data is None:
+            return None
+        return SetBigItemByStampSheetResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 

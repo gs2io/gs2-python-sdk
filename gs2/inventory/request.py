@@ -6081,6 +6081,74 @@ class ConsumeSimpleItemsByUserIdRequest(core.Gs2Request):
         }
 
 
+class SetSimpleItemsByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    user_id: str = None
+    counts: List[HeldCount] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetSimpleItemsByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> SetSimpleItemsByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SetSimpleItemsByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_counts(self, counts: List[HeldCount]) -> SetSimpleItemsByUserIdRequest:
+        self.counts = counts
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetSimpleItemsByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetSimpleItemsByUserIdRequest]:
+        if data is None:
+            return None
+        return SetSimpleItemsByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_counts([
+                HeldCount.from_dict(data.get('counts')[i])
+                for i in range(len(data.get('counts')) if data.get('counts') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "userId": self.user_id,
+            "counts": [
+                self.counts[i].to_dict() if self.counts[i] else None
+                for i in range(len(self.counts) if self.counts else 0)
+            ],
+        }
+
+
 class DeleteSimpleItemsByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -6370,6 +6438,49 @@ class ConsumeSimpleItemsByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class SetSimpleItemsByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> SetSimpleItemsByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> SetSimpleItemsByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetSimpleItemsByStampSheetRequest]:
+        if data is None:
+            return None
+        return SetSimpleItemsByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }
 
@@ -6866,6 +6977,75 @@ class ConsumeBigItemByUserIdRequest(core.Gs2Request):
         }
 
 
+class SetBigItemByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    user_id: str = None
+    item_name: str = None
+    count: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetBigItemByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> SetBigItemByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SetBigItemByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_item_name(self, item_name: str) -> SetBigItemByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def with_count(self, count: str) -> SetBigItemByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetBigItemByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetBigItemByUserIdRequest]:
+        if data is None:
+            return None
+        return SetBigItemByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_user_id(data.get('userId'))\
+            .with_item_name(data.get('itemName'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "userId": self.user_id,
+            "itemName": self.item_name,
+            "count": self.count,
+        }
+
+
 class DeleteBigItemByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -7162,6 +7342,49 @@ class ConsumeBigItemByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class SetBigItemByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> SetBigItemByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> SetBigItemByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetBigItemByStampSheetRequest]:
+        if data is None:
+            return None
+        return SetBigItemByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }
 

@@ -19,6 +19,47 @@ from typing import *
 from gs2 import core
 
 
+class HeldCount(core.Gs2Model):
+    item_name: str = None
+    count: int = None
+
+    def with_item_name(self, item_name: str) -> HeldCount:
+        self.item_name = item_name
+        return self
+
+    def with_count(self, count: int) -> HeldCount:
+        self.count = count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[HeldCount]:
+        if data is None:
+            return None
+        return HeldCount()\
+            .with_item_name(data.get('itemName'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "itemName": self.item_name,
+            "count": self.count,
+        }
+
+
 class ConsumeCount(core.Gs2Model):
     item_name: str = None
     count: int = None
