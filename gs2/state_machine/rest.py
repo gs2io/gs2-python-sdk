@@ -113,6 +113,10 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.support_speculative_execution is not None:
+            body["supportSpeculativeExecution"] = request.support_speculative_execution
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.start_script is not None:
             body["startScript"] = request.start_script.to_dict()
         if request.pass_script is not None:
@@ -338,6 +342,10 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         }
         if request.description is not None:
             body["description"] = request.description
+        if request.support_speculative_execution is not None:
+            body["supportSpeculativeExecution"] = request.support_speculative_execution
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.start_script is not None:
             body["startScript"] = request.start_script.to_dict()
         if request.pass_script is not None:
@@ -1605,6 +1613,8 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         }
         if request.args is not None:
             body["args"] = request.args
+        if request.enable_speculative_execution is not None:
+            body["enableSpeculativeExecution"] = request.enable_speculative_execution
         if request.ttl is not None:
             body["ttl"] = request.ttl
 
@@ -1881,6 +1891,167 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
     ) -> EmitByUserIdResult:
         async_result = []
         self._emit_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _report(
+        self,
+        request: ReportRequest,
+        callback: Callable[[AsyncResult[ReportResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='state-machine',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/status/{statusName}/report".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            statusName=request.status_name if request.status_name is not None and request.status_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.events is not None:
+            body["events"] = [
+                item.to_dict()
+                for item in request.events
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ReportResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def report(
+        self,
+        request: ReportRequest,
+    ) -> ReportResult:
+        async_result = []
+        with timeout(30):
+            self._report(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def report_async(
+        self,
+        request: ReportRequest,
+    ) -> ReportResult:
+        async_result = []
+        self._report(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _report_by_user_id(
+        self,
+        request: ReportByUserIdRequest,
+        callback: Callable[[AsyncResult[ReportByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='state-machine',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/status/{statusName}/report".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            statusName=request.status_name if request.status_name is not None and request.status_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.events is not None:
+            body["events"] = [
+                item.to_dict()
+                for item in request.events
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ReportByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def report_by_user_id(
+        self,
+        request: ReportByUserIdRequest,
+    ) -> ReportByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._report_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def report_by_user_id_async(
+        self,
+        request: ReportByUserIdRequest,
+    ) -> ReportByUserIdResult:
+        async_result = []
+        self._report_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

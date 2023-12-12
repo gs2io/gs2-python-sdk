@@ -898,6 +898,74 @@ class EmitByUserIdResult(core.Gs2Result):
         }
 
 
+class ReportResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> ReportResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ReportResult]:
+        if data is None:
+            return None
+        return ReportResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ReportByUserIdResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> ReportByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ReportByUserIdResult]:
+        if data is None:
+            return None
+        return ReportByUserIdResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteStatusByUserIdResult(core.Gs2Result):
     item: Status = None
 

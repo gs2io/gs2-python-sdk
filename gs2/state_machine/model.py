@@ -108,6 +108,293 @@ class LogSetting(core.Gs2Model):
         }
 
 
+class RandomUsed(core.Gs2Model):
+    category: int = None
+    used: int = None
+
+    def with_category(self, category: int) -> RandomUsed:
+        self.category = category
+        return self
+
+    def with_used(self, used: int) -> RandomUsed:
+        self.used = used
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomUsed]:
+        if data is None:
+            return None
+        return RandomUsed()\
+            .with_category(data.get('category'))\
+            .with_used(data.get('used'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "category": self.category,
+            "used": self.used,
+        }
+
+
+class RandomStatus(core.Gs2Model):
+    seed: int = None
+    used: List[RandomUsed] = None
+
+    def with_seed(self, seed: int) -> RandomStatus:
+        self.seed = seed
+        return self
+
+    def with_used(self, used: List[RandomUsed]) -> RandomStatus:
+        self.used = used
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomStatus]:
+        if data is None:
+            return None
+        return RandomStatus()\
+            .with_seed(data.get('seed'))\
+            .with_used([
+                RandomUsed.from_dict(data.get('used')[i])
+                for i in range(len(data.get('used')) if data.get('used') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "seed": self.seed,
+            "used": [
+                self.used[i].to_dict() if self.used[i] else None
+                for i in range(len(self.used) if self.used else 0)
+            ],
+        }
+
+
+class EmitEvent(core.Gs2Model):
+    event: str = None
+    parameters: str = None
+    timestamp: int = None
+
+    def with_event(self, event: str) -> EmitEvent:
+        self.event = event
+        return self
+
+    def with_parameters(self, parameters: str) -> EmitEvent:
+        self.parameters = parameters
+        return self
+
+    def with_timestamp(self, timestamp: int) -> EmitEvent:
+        self.timestamp = timestamp
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EmitEvent]:
+        if data is None:
+            return None
+        return EmitEvent()\
+            .with_event(data.get('event'))\
+            .with_parameters(data.get('parameters'))\
+            .with_timestamp(data.get('timestamp'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "event": self.event,
+            "parameters": self.parameters,
+            "timestamp": self.timestamp,
+        }
+
+
+class ChangeStateEvent(core.Gs2Model):
+    task_name: str = None
+    hash: str = None
+    timestamp: int = None
+
+    def with_task_name(self, task_name: str) -> ChangeStateEvent:
+        self.task_name = task_name
+        return self
+
+    def with_hash(self, hash: str) -> ChangeStateEvent:
+        self.hash = hash
+        return self
+
+    def with_timestamp(self, timestamp: int) -> ChangeStateEvent:
+        self.timestamp = timestamp
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ChangeStateEvent]:
+        if data is None:
+            return None
+        return ChangeStateEvent()\
+            .with_task_name(data.get('taskName'))\
+            .with_hash(data.get('hash'))\
+            .with_timestamp(data.get('timestamp'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "taskName": self.task_name,
+            "hash": self.hash,
+            "timestamp": self.timestamp,
+        }
+
+
+class Event(core.Gs2Model):
+    event_type: str = None
+    change_state_event: ChangeStateEvent = None
+    emit_event: EmitEvent = None
+
+    def with_event_type(self, event_type: str) -> Event:
+        self.event_type = event_type
+        return self
+
+    def with_change_state_event(self, change_state_event: ChangeStateEvent) -> Event:
+        self.change_state_event = change_state_event
+        return self
+
+    def with_emit_event(self, emit_event: EmitEvent) -> Event:
+        self.emit_event = emit_event
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Event]:
+        if data is None:
+            return None
+        return Event()\
+            .with_event_type(data.get('eventType'))\
+            .with_change_state_event(ChangeStateEvent.from_dict(data.get('changeStateEvent')))\
+            .with_emit_event(EmitEvent.from_dict(data.get('emitEvent')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "eventType": self.event_type,
+            "changeStateEvent": self.change_state_event.to_dict() if self.change_state_event else None,
+            "emitEvent": self.emit_event.to_dict() if self.emit_event else None,
+        }
+
+
+class TransactionSetting(core.Gs2Model):
+    enable_auto_run: bool = None
+    distributor_namespace_id: str = None
+    key_id: str = None
+    queue_namespace_id: str = None
+
+    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
+        self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
+        self.distributor_namespace_id = distributor_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> TransactionSetting:
+        self.key_id = key_id
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TransactionSetting]:
+        if data is None:
+            return None
+        return TransactionSetting()\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "enableAutoRun": self.enable_auto_run,
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "keyId": self.key_id,
+            "queueNamespaceId": self.queue_namespace_id,
+        }
+
+
 class Variable(core.Gs2Model):
     state_machine_name: str = None
     value: str = None
@@ -195,6 +482,9 @@ class Status(core.Gs2Model):
     user_id: str = None
     name: str = None
     state_machine_version: int = None
+    enable_speculative_execution: str = None
+    state_machine_definition: str = None
+    random_status: RandomStatus = None
     stacks: List[StackEntry] = None
     variables: List[Variable] = None
     status: str = None
@@ -217,6 +507,18 @@ class Status(core.Gs2Model):
 
     def with_state_machine_version(self, state_machine_version: int) -> Status:
         self.state_machine_version = state_machine_version
+        return self
+
+    def with_enable_speculative_execution(self, enable_speculative_execution: str) -> Status:
+        self.enable_speculative_execution = enable_speculative_execution
+        return self
+
+    def with_state_machine_definition(self, state_machine_definition: str) -> Status:
+        self.state_machine_definition = state_machine_definition
+        return self
+
+    def with_random_status(self, random_status: RandomStatus) -> Status:
+        self.random_status = random_status
         return self
 
     def with_stacks(self, stacks: List[StackEntry]) -> Status:
@@ -337,6 +639,9 @@ class Status(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_name(data.get('name'))\
             .with_state_machine_version(data.get('stateMachineVersion'))\
+            .with_enable_speculative_execution(data.get('enableSpeculativeExecution'))\
+            .with_state_machine_definition(data.get('stateMachineDefinition'))\
+            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
             .with_stacks([
                 StackEntry.from_dict(data.get('stacks')[i])
                 for i in range(len(data.get('stacks')) if data.get('stacks') else 0)
@@ -357,6 +662,9 @@ class Status(core.Gs2Model):
             "userId": self.user_id,
             "name": self.name,
             "stateMachineVersion": self.state_machine_version,
+            "enableSpeculativeExecution": self.enable_speculative_execution,
+            "stateMachineDefinition": self.state_machine_definition,
+            "randomStatus": self.random_status.to_dict() if self.random_status else None,
             "stacks": [
                 self.stacks[i].to_dict() if self.stacks[i] else None
                 for i in range(len(self.stacks) if self.stacks else 0)
@@ -508,6 +816,8 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    support_speculative_execution: str = None
+    transaction_setting: TransactionSetting = None
     start_script: ScriptSetting = None
     pass_script: ScriptSetting = None
     error_script: ScriptSetting = None
@@ -527,6 +837,14 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_support_speculative_execution(self, support_speculative_execution: str) -> Namespace:
+        self.support_speculative_execution = support_speculative_execution
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_start_script(self, start_script: ScriptSetting) -> Namespace:
@@ -626,6 +944,8 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_support_speculative_execution(data.get('supportSpeculativeExecution'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_start_script(ScriptSetting.from_dict(data.get('startScript')))\
             .with_pass_script(ScriptSetting.from_dict(data.get('passScript')))\
             .with_error_script(ScriptSetting.from_dict(data.get('errorScript')))\
@@ -640,6 +960,8 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "supportSpeculativeExecution": self.support_speculative_execution,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "startScript": self.start_script.to_dict() if self.start_script else None,
             "passScript": self.pass_script.to_dict() if self.pass_script else None,
             "errorScript": self.error_script.to_dict() if self.error_script else None,

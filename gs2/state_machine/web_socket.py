@@ -115,6 +115,10 @@ class Gs2StateMachineWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.support_speculative_execution is not None:
+            body["supportSpeculativeExecution"] = request.support_speculative_execution
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.start_script is not None:
             body["startScript"] = request.start_script.to_dict()
         if request.pass_script is not None:
@@ -340,6 +344,10 @@ class Gs2StateMachineWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.support_speculative_execution is not None:
+            body["supportSpeculativeExecution"] = request.support_speculative_execution
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.start_script is not None:
             body["startScript"] = request.start_script.to_dict()
         if request.pass_script is not None:
@@ -1619,6 +1627,8 @@ class Gs2StateMachineWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.args is not None:
             body["args"] = request.args
+        if request.enable_speculative_execution is not None:
+            body["enableSpeculativeExecution"] = request.enable_speculative_execution
         if request.ttl is not None:
             body["ttl"] = request.ttl
 
@@ -1899,6 +1909,172 @@ class Gs2StateMachineWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> EmitByUserIdResult:
         async_result = []
         self._emit_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _report(
+        self,
+        request: ReportRequest,
+        callback: Callable[[AsyncResult[ReportResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stateMachine",
+            component='status',
+            function='report',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.status_name is not None:
+            body["statusName"] = request.status_name
+        if request.events is not None:
+            body["events"] = [
+                item.to_dict()
+                for item in request.events
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ReportResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def report(
+        self,
+        request: ReportRequest,
+    ) -> ReportResult:
+        async_result = []
+        with timeout(30):
+            self._report(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def report_async(
+        self,
+        request: ReportRequest,
+    ) -> ReportResult:
+        async_result = []
+        self._report(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _report_by_user_id(
+        self,
+        request: ReportByUserIdRequest,
+        callback: Callable[[AsyncResult[ReportByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stateMachine",
+            component='status',
+            function='reportByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.status_name is not None:
+            body["statusName"] = request.status_name
+        if request.events is not None:
+            body["events"] = [
+                item.to_dict()
+                for item in request.events
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ReportByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def report_by_user_id(
+        self,
+        request: ReportByUserIdRequest,
+    ) -> ReportByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._report_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def report_by_user_id_async(
+        self,
+        request: ReportByUserIdRequest,
+    ) -> ReportByUserIdResult:
+        async_result = []
+        self._report_by_user_id(
             request,
             lambda result: async_result.append(result),
         )

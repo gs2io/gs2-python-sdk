@@ -65,6 +65,8 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    support_speculative_execution: str = None
+    transaction_setting: TransactionSetting = None
     start_script: ScriptSetting = None
     pass_script: ScriptSetting = None
     error_script: ScriptSetting = None
@@ -77,6 +79,14 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_support_speculative_execution(self, support_speculative_execution: str) -> CreateNamespaceRequest:
+        self.support_speculative_execution = support_speculative_execution
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_start_script(self, start_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -120,6 +130,8 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_support_speculative_execution(data.get('supportSpeculativeExecution'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_start_script(ScriptSetting.from_dict(data.get('startScript')))\
             .with_pass_script(ScriptSetting.from_dict(data.get('passScript')))\
             .with_error_script(ScriptSetting.from_dict(data.get('errorScript')))\
@@ -130,6 +142,8 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
+            "supportSpeculativeExecution": self.support_speculative_execution,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "startScript": self.start_script.to_dict() if self.start_script else None,
             "passScript": self.pass_script.to_dict() if self.pass_script else None,
             "errorScript": self.error_script.to_dict() if self.error_script else None,
@@ -215,6 +229,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    support_speculative_execution: str = None
+    transaction_setting: TransactionSetting = None
     start_script: ScriptSetting = None
     pass_script: ScriptSetting = None
     error_script: ScriptSetting = None
@@ -227,6 +243,14 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_support_speculative_execution(self, support_speculative_execution: str) -> UpdateNamespaceRequest:
+        self.support_speculative_execution = support_speculative_execution
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_start_script(self, start_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -270,6 +294,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_support_speculative_execution(data.get('supportSpeculativeExecution'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_start_script(ScriptSetting.from_dict(data.get('startScript')))\
             .with_pass_script(ScriptSetting.from_dict(data.get('passScript')))\
             .with_error_script(ScriptSetting.from_dict(data.get('errorScript')))\
@@ -280,6 +306,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "supportSpeculativeExecution": self.support_speculative_execution,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "startScript": self.start_script.to_dict() if self.start_script else None,
             "passScript": self.pass_script.to_dict() if self.pass_script else None,
             "errorScript": self.error_script.to_dict() if self.error_script else None,
@@ -1045,6 +1073,7 @@ class StartStateMachineByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     args: str = None
+    enable_speculative_execution: str = None
     ttl: int = None
     duplication_avoider: str = None
 
@@ -1058,6 +1087,10 @@ class StartStateMachineByUserIdRequest(core.Gs2Request):
 
     def with_args(self, args: str) -> StartStateMachineByUserIdRequest:
         self.args = args
+        return self
+
+    def with_enable_speculative_execution(self, enable_speculative_execution: str) -> StartStateMachineByUserIdRequest:
+        self.enable_speculative_execution = enable_speculative_execution
         return self
 
     def with_ttl(self, ttl: int) -> StartStateMachineByUserIdRequest:
@@ -1090,6 +1123,7 @@ class StartStateMachineByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_args(data.get('args'))\
+            .with_enable_speculative_execution(data.get('enableSpeculativeExecution'))\
             .with_ttl(data.get('ttl'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1097,6 +1131,7 @@ class StartStateMachineByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "args": self.args,
+            "enableSpeculativeExecution": self.enable_speculative_execution,
             "ttl": self.ttl,
         }
 
@@ -1279,6 +1314,142 @@ class EmitByUserIdRequest(core.Gs2Request):
             "statusName": self.status_name,
             "eventName": self.event_name,
             "args": self.args,
+        }
+
+
+class ReportRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    status_name: str = None
+    events: List[Event] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ReportRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> ReportRequest:
+        self.access_token = access_token
+        return self
+
+    def with_status_name(self, status_name: str) -> ReportRequest:
+        self.status_name = status_name
+        return self
+
+    def with_events(self, events: List[Event]) -> ReportRequest:
+        self.events = events
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ReportRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ReportRequest]:
+        if data is None:
+            return None
+        return ReportRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_status_name(data.get('statusName'))\
+            .with_events([
+                Event.from_dict(data.get('events')[i])
+                for i in range(len(data.get('events')) if data.get('events') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "statusName": self.status_name,
+            "events": [
+                self.events[i].to_dict() if self.events[i] else None
+                for i in range(len(self.events) if self.events else 0)
+            ],
+        }
+
+
+class ReportByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    status_name: str = None
+    events: List[Event] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ReportByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> ReportByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_status_name(self, status_name: str) -> ReportByUserIdRequest:
+        self.status_name = status_name
+        return self
+
+    def with_events(self, events: List[Event]) -> ReportByUserIdRequest:
+        self.events = events
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ReportByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ReportByUserIdRequest]:
+        if data is None:
+            return None
+        return ReportByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_status_name(data.get('statusName'))\
+            .with_events([
+                Event.from_dict(data.get('events')[i])
+                for i in range(len(data.get('events')) if data.get('events') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "statusName": self.status_name,
+            "events": [
+                self.events[i].to_dict() if self.events[i] else None
+                for i in range(len(self.events) if self.events else 0)
+            ],
         }
 
 
