@@ -1073,7 +1073,6 @@ class StartStateMachineByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     args: str = None
-    enable_speculative_execution: str = None
     ttl: int = None
     duplication_avoider: str = None
 
@@ -1087,10 +1086,6 @@ class StartStateMachineByUserIdRequest(core.Gs2Request):
 
     def with_args(self, args: str) -> StartStateMachineByUserIdRequest:
         self.args = args
-        return self
-
-    def with_enable_speculative_execution(self, enable_speculative_execution: str) -> StartStateMachineByUserIdRequest:
-        self.enable_speculative_execution = enable_speculative_execution
         return self
 
     def with_ttl(self, ttl: int) -> StartStateMachineByUserIdRequest:
@@ -1123,7 +1118,6 @@ class StartStateMachineByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_args(data.get('args'))\
-            .with_enable_speculative_execution(data.get('enableSpeculativeExecution'))\
             .with_ttl(data.get('ttl'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1131,7 +1125,6 @@ class StartStateMachineByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "args": self.args,
-            "enableSpeculativeExecution": self.enable_speculative_execution,
             "ttl": self.ttl,
         }
 

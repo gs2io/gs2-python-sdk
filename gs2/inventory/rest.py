@@ -7415,7 +7415,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
-        ) + "/stamp/item/verify"
+        ) + "/stamp/item/reference/verify"
 
         headers = self._create_authorized_headers()
         body = {

@@ -1627,8 +1627,6 @@ class Gs2StateMachineWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.args is not None:
             body["args"] = request.args
-        if request.enable_speculative_execution is not None:
-            body["enableSpeculativeExecution"] = request.enable_speculative_execution
         if request.ttl is not None:
             body["ttl"] = request.ttl
 
