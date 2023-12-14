@@ -19,94 +19,6 @@ from typing import *
 from gs2 import core
 
 
-class RandomUsed(core.Gs2Model):
-    category: int = None
-    used: int = None
-
-    def with_category(self, category: int) -> RandomUsed:
-        self.category = category
-        return self
-
-    def with_used(self, used: int) -> RandomUsed:
-        self.used = used
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[RandomUsed]:
-        if data is None:
-            return None
-        return RandomUsed()\
-            .with_category(data.get('category'))\
-            .with_used(data.get('used'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "category": self.category,
-            "used": self.used,
-        }
-
-
-class RandomStatus(core.Gs2Model):
-    seed: int = None
-    used: List[RandomUsed] = None
-
-    def with_seed(self, seed: int) -> RandomStatus:
-        self.seed = seed
-        return self
-
-    def with_used(self, used: List[RandomUsed]) -> RandomStatus:
-        self.used = used
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[RandomStatus]:
-        if data is None:
-            return None
-        return RandomStatus()\
-            .with_seed(data.get('seed'))\
-            .with_used([
-                RandomUsed.from_dict(data.get('used')[i])
-                for i in range(len(data.get('used')) if data.get('used') else 0)
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "seed": self.seed,
-            "used": [
-                self.used[i].to_dict() if self.used[i] else None
-                for i in range(len(self.used) if self.used else 0)
-            ],
-        }
-
-
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -214,6 +126,229 @@ class GitHubCheckoutSetting(core.Gs2Model):
             "commitHash": self.commit_hash,
             "branchName": self.branch_name,
             "tagName": self.tag_name,
+        }
+
+
+class Transaction(core.Gs2Model):
+    consume_actions: List[ConsumeAction] = None
+    acquire_actions: List[AcquireAction] = None
+
+    def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> Transaction:
+        self.consume_actions = consume_actions
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> Transaction:
+        self.acquire_actions = acquire_actions
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Transaction]:
+        if data is None:
+            return None
+        return Transaction()\
+            .with_consume_actions([
+                ConsumeAction.from_dict(data.get('consumeActions')[i])
+                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+            ])\
+            .with_acquire_actions([
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "consumeActions": [
+                self.consume_actions[i].to_dict() if self.consume_actions[i] else None
+                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+            ],
+            "acquireActions": [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+        }
+
+
+class ConsumeAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> ConsumeAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> ConsumeAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeAction]:
+        if data is None:
+            return None
+        return ConsumeAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
+class AcquireAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> AcquireAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> AcquireAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireAction]:
+        if data is None:
+            return None
+        return AcquireAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
+class RandomUsed(core.Gs2Model):
+    category: int = None
+    used: int = None
+
+    def with_category(self, category: int) -> RandomUsed:
+        self.category = category
+        return self
+
+    def with_used(self, used: int) -> RandomUsed:
+        self.used = used
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomUsed]:
+        if data is None:
+            return None
+        return RandomUsed()\
+            .with_category(data.get('category'))\
+            .with_used(data.get('used'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "category": self.category,
+            "used": self.used,
+        }
+
+
+class RandomStatus(core.Gs2Model):
+    seed: int = None
+    used: List[RandomUsed] = None
+
+    def with_seed(self, seed: int) -> RandomStatus:
+        self.seed = seed
+        return self
+
+    def with_used(self, used: List[RandomUsed]) -> RandomStatus:
+        self.used = used
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RandomStatus]:
+        if data is None:
+            return None
+        return RandomStatus()\
+            .with_seed(data.get('seed'))\
+            .with_used([
+                RandomUsed.from_dict(data.get('used')[i])
+                for i in range(len(data.get('used')) if data.get('used') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "seed": self.seed,
+            "used": [
+                self.used[i].to_dict() if self.used[i] else None
+                for i in range(len(self.used) if self.used else 0)
+            ],
         }
 
 
