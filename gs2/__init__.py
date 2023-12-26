@@ -15,6 +15,7 @@ from . import experience
 from . import formation
 from . import friend
 from . import gateway
+from . import grade
 from . import identifier
 from . import idle
 from . import inbox

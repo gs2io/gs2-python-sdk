@@ -103,6 +103,12 @@ src/gs2/gateway/request.py
 src/gs2/gateway/rest.py
 src/gs2/gateway/result.py
 src/gs2/gateway/web_socket.py
+src/gs2/grade/__init__.py
+src/gs2/grade/model.py
+src/gs2/grade/request.py
+src/gs2/grade/rest.py
+src/gs2/grade/result.py
+src/gs2/grade/web_socket.py
 src/gs2/identifier/__init__.py
 src/gs2/identifier/model.py
 src/gs2/identifier/request.py
