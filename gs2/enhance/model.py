@@ -280,6 +280,47 @@ class Config(core.Gs2Model):
         }
 
 
+class UnleashRateEntryModel(core.Gs2Model):
+    grade_value: int = None
+    need_count: int = None
+
+    def with_grade_value(self, grade_value: int) -> UnleashRateEntryModel:
+        self.grade_value = grade_value
+        return self
+
+    def with_need_count(self, need_count: int) -> UnleashRateEntryModel:
+        self.need_count = need_count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashRateEntryModel]:
+        if data is None:
+            return None
+        return UnleashRateEntryModel()\
+            .with_grade_value(data.get('gradeValue'))\
+            .with_need_count(data.get('needCount'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "gradeValue": self.grade_value,
+            "needCount": self.need_count,
+        }
+
+
 class Material(core.Gs2Model):
     material_item_set_id: str = None
     count: int = None
@@ -595,6 +636,301 @@ class Progress(core.Gs2Model):
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
+        }
+
+
+class UnleashRateModelMaster(core.Gs2Model):
+    unleash_rate_model_id: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    target_inventory_model_id: str = None
+    grade_model_id: str = None
+    grade_entries: List[UnleashRateEntryModel] = None
+    created_at: int = None
+    updated_at: int = None
+    revision: int = None
+
+    def with_unleash_rate_model_id(self, unleash_rate_model_id: str) -> UnleashRateModelMaster:
+        self.unleash_rate_model_id = unleash_rate_model_id
+        return self
+
+    def with_name(self, name: str) -> UnleashRateModelMaster:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> UnleashRateModelMaster:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UnleashRateModelMaster:
+        self.metadata = metadata
+        return self
+
+    def with_target_inventory_model_id(self, target_inventory_model_id: str) -> UnleashRateModelMaster:
+        self.target_inventory_model_id = target_inventory_model_id
+        return self
+
+    def with_grade_model_id(self, grade_model_id: str) -> UnleashRateModelMaster:
+        self.grade_model_id = grade_model_id
+        return self
+
+    def with_grade_entries(self, grade_entries: List[UnleashRateEntryModel]) -> UnleashRateModelMaster:
+        self.grade_entries = grade_entries
+        return self
+
+    def with_created_at(self, created_at: int) -> UnleashRateModelMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> UnleashRateModelMaster:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> UnleashRateModelMaster:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        rate_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:enhance:{namespaceName}:unleashRateModelMaster:{rateName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            rateName=rate_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):unleashRateModelMaster:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):unleashRateModelMaster:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):unleashRateModelMaster:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_rate_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):unleashRateModelMaster:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('rate_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashRateModelMaster]:
+        if data is None:
+            return None
+        return UnleashRateModelMaster()\
+            .with_unleash_rate_model_id(data.get('unleashRateModelId'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
+            .with_grade_model_id(data.get('gradeModelId'))\
+            .with_grade_entries([
+                UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
+                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+            ])\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "unleashRateModelId": self.unleash_rate_model_id,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "targetInventoryModelId": self.target_inventory_model_id,
+            "gradeModelId": self.grade_model_id,
+            "gradeEntries": [
+                self.grade_entries[i].to_dict() if self.grade_entries[i] else None
+                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+            ],
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+        }
+
+
+class UnleashRateModel(core.Gs2Model):
+    unleash_rate_model_id: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    target_inventory_model_id: str = None
+    grade_model_id: str = None
+    grade_entries: List[UnleashRateEntryModel] = None
+
+    def with_unleash_rate_model_id(self, unleash_rate_model_id: str) -> UnleashRateModel:
+        self.unleash_rate_model_id = unleash_rate_model_id
+        return self
+
+    def with_name(self, name: str) -> UnleashRateModel:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> UnleashRateModel:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UnleashRateModel:
+        self.metadata = metadata
+        return self
+
+    def with_target_inventory_model_id(self, target_inventory_model_id: str) -> UnleashRateModel:
+        self.target_inventory_model_id = target_inventory_model_id
+        return self
+
+    def with_grade_model_id(self, grade_model_id: str) -> UnleashRateModel:
+        self.grade_model_id = grade_model_id
+        return self
+
+    def with_grade_entries(self, grade_entries: List[UnleashRateEntryModel]) -> UnleashRateModel:
+        self.grade_entries = grade_entries
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        rate_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:enhance:{namespaceName}:unleashRateModel:{rateName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            rateName=rate_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):unleashRateModel:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):unleashRateModel:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):unleashRateModel:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_rate_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):enhance:(?P<namespaceName>.+):unleashRateModel:(?P<rateName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('rate_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashRateModel]:
+        if data is None:
+            return None
+        return UnleashRateModel()\
+            .with_unleash_rate_model_id(data.get('unleashRateModelId'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
+            .with_grade_model_id(data.get('gradeModelId'))\
+            .with_grade_entries([
+                UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
+                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "unleashRateModelId": self.unleash_rate_model_id,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "targetInventoryModelId": self.target_inventory_model_id,
+            "gradeModelId": self.grade_model_id,
+            "gradeEntries": [
+                self.grade_entries[i].to_dict() if self.grade_entries[i] else None
+                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+            ],
         }
 
 

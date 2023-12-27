@@ -1542,6 +1542,539 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_unleash_rate_models(
+        self,
+        request: DescribeUnleashRateModelsRequest,
+        callback: Callable[[AsyncResult[DescribeUnleashRateModelsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/unleash/model".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeUnleashRateModelsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_unleash_rate_models(
+        self,
+        request: DescribeUnleashRateModelsRequest,
+    ) -> DescribeUnleashRateModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_unleash_rate_models(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_unleash_rate_models_async(
+        self,
+        request: DescribeUnleashRateModelsRequest,
+    ) -> DescribeUnleashRateModelsResult:
+        async_result = []
+        self._describe_unleash_rate_models(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_unleash_rate_model(
+        self,
+        request: GetUnleashRateModelRequest,
+        callback: Callable[[AsyncResult[GetUnleashRateModelResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/unleash/model/{rateName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetUnleashRateModelResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_unleash_rate_model(
+        self,
+        request: GetUnleashRateModelRequest,
+    ) -> GetUnleashRateModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_unleash_rate_model(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_unleash_rate_model_async(
+        self,
+        request: GetUnleashRateModelRequest,
+    ) -> GetUnleashRateModelResult:
+        async_result = []
+        self._get_unleash_rate_model(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_unleash_rate_model_masters(
+        self,
+        request: DescribeUnleashRateModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeUnleashRateModelMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/unleash/model".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeUnleashRateModelMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_unleash_rate_model_masters(
+        self,
+        request: DescribeUnleashRateModelMastersRequest,
+    ) -> DescribeUnleashRateModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_unleash_rate_model_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_unleash_rate_model_masters_async(
+        self,
+        request: DescribeUnleashRateModelMastersRequest,
+    ) -> DescribeUnleashRateModelMastersResult:
+        async_result = []
+        self._describe_unleash_rate_model_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_unleash_rate_model_master(
+        self,
+        request: CreateUnleashRateModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateUnleashRateModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/unleash/model".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.target_inventory_model_id is not None:
+            body["targetInventoryModelId"] = request.target_inventory_model_id
+        if request.grade_model_id is not None:
+            body["gradeModelId"] = request.grade_model_id
+        if request.grade_entries is not None:
+            body["gradeEntries"] = [
+                item.to_dict()
+                for item in request.grade_entries
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateUnleashRateModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_unleash_rate_model_master(
+        self,
+        request: CreateUnleashRateModelMasterRequest,
+    ) -> CreateUnleashRateModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_unleash_rate_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_unleash_rate_model_master_async(
+        self,
+        request: CreateUnleashRateModelMasterRequest,
+    ) -> CreateUnleashRateModelMasterResult:
+        async_result = []
+        self._create_unleash_rate_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_unleash_rate_model_master(
+        self,
+        request: GetUnleashRateModelMasterRequest,
+        callback: Callable[[AsyncResult[GetUnleashRateModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/unleash/model/{rateName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetUnleashRateModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_unleash_rate_model_master(
+        self,
+        request: GetUnleashRateModelMasterRequest,
+    ) -> GetUnleashRateModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_unleash_rate_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_unleash_rate_model_master_async(
+        self,
+        request: GetUnleashRateModelMasterRequest,
+    ) -> GetUnleashRateModelMasterResult:
+        async_result = []
+        self._get_unleash_rate_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_unleash_rate_model_master(
+        self,
+        request: UpdateUnleashRateModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateUnleashRateModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/unleash/model/{rateName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.target_inventory_model_id is not None:
+            body["targetInventoryModelId"] = request.target_inventory_model_id
+        if request.grade_model_id is not None:
+            body["gradeModelId"] = request.grade_model_id
+        if request.grade_entries is not None:
+            body["gradeEntries"] = [
+                item.to_dict()
+                for item in request.grade_entries
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateUnleashRateModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_unleash_rate_model_master(
+        self,
+        request: UpdateUnleashRateModelMasterRequest,
+    ) -> UpdateUnleashRateModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_unleash_rate_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_unleash_rate_model_master_async(
+        self,
+        request: UpdateUnleashRateModelMasterRequest,
+    ) -> UpdateUnleashRateModelMasterResult:
+        async_result = []
+        self._update_unleash_rate_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_unleash_rate_model_master(
+        self,
+        request: DeleteUnleashRateModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteUnleashRateModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/unleash/model/{rateName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteUnleashRateModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_unleash_rate_model_master(
+        self,
+        request: DeleteUnleashRateModelMasterRequest,
+    ) -> DeleteUnleashRateModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_unleash_rate_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_unleash_rate_model_master_async(
+        self,
+        request: DeleteUnleashRateModelMasterRequest,
+    ) -> DeleteUnleashRateModelMasterResult:
+        async_result = []
+        self._delete_unleash_rate_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _direct_enhance(
         self,
         request: DirectEnhanceRequest,
@@ -1776,6 +2309,254 @@ class Gs2EnhanceRestClient(rest.AbstractGs2RestClient):
     ) -> DirectEnhanceByStampSheetResult:
         async_result = []
         self._direct_enhance_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _unleash(
+        self,
+        request: UnleashRequest,
+        callback: Callable[[AsyncResult[UnleashResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/unleash/{rateName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.target_item_set_id is not None:
+            body["targetItemSetId"] = request.target_item_set_id
+        if request.materials is not None:
+            body["materials"] = [
+                item
+                for item in request.materials
+            ]
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=UnleashResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def unleash(
+        self,
+        request: UnleashRequest,
+    ) -> UnleashResult:
+        async_result = []
+        with timeout(30):
+            self._unleash(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def unleash_async(
+        self,
+        request: UnleashRequest,
+    ) -> UnleashResult:
+        async_result = []
+        self._unleash(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _unleash_by_user_id(
+        self,
+        request: UnleashByUserIdRequest,
+        callback: Callable[[AsyncResult[UnleashByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/unleash/{rateName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rateName=request.rate_name if request.rate_name is not None and request.rate_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.target_item_set_id is not None:
+            body["targetItemSetId"] = request.target_item_set_id
+        if request.materials is not None:
+            body["materials"] = [
+                item
+                for item in request.materials
+            ]
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=UnleashByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def unleash_by_user_id(
+        self,
+        request: UnleashByUserIdRequest,
+    ) -> UnleashByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._unleash_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def unleash_by_user_id_async(
+        self,
+        request: UnleashByUserIdRequest,
+    ) -> UnleashByUserIdResult:
+        async_result = []
+        self._unleash_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _unleash_by_stamp_sheet(
+        self,
+        request: UnleashByStampSheetRequest,
+        callback: Callable[[AsyncResult[UnleashByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enhance',
+            region=self.session.region,
+        ) + "/stamp/unleash"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=UnleashByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def unleash_by_stamp_sheet(
+        self,
+        request: UnleashByStampSheetRequest,
+    ) -> UnleashByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._unleash_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def unleash_by_stamp_sheet_async(
+        self,
+        request: UnleashByStampSheetRequest,
+    ) -> UnleashByStampSheetResult:
+        async_result = []
+        self._unleash_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

@@ -708,6 +708,263 @@ class DeleteRateModelMasterResult(core.Gs2Result):
         }
 
 
+class DescribeUnleashRateModelsResult(core.Gs2Result):
+    items: List[UnleashRateModel] = None
+
+    def with_items(self, items: List[UnleashRateModel]) -> DescribeUnleashRateModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUnleashRateModelsResult]:
+        if data is None:
+            return None
+        return DescribeUnleashRateModelsResult()\
+            .with_items([
+                UnleashRateModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetUnleashRateModelResult(core.Gs2Result):
+    item: UnleashRateModel = None
+
+    def with_item(self, item: UnleashRateModel) -> GetUnleashRateModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetUnleashRateModelResult]:
+        if data is None:
+            return None
+        return GetUnleashRateModelResult()\
+            .with_item(UnleashRateModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeUnleashRateModelMastersResult(core.Gs2Result):
+    items: List[UnleashRateModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[UnleashRateModelMaster]) -> DescribeUnleashRateModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeUnleashRateModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUnleashRateModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeUnleashRateModelMastersResult()\
+            .with_items([
+                UnleashRateModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateUnleashRateModelMasterResult(core.Gs2Result):
+    item: UnleashRateModelMaster = None
+
+    def with_item(self, item: UnleashRateModelMaster) -> CreateUnleashRateModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateUnleashRateModelMasterResult]:
+        if data is None:
+            return None
+        return CreateUnleashRateModelMasterResult()\
+            .with_item(UnleashRateModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetUnleashRateModelMasterResult(core.Gs2Result):
+    item: UnleashRateModelMaster = None
+
+    def with_item(self, item: UnleashRateModelMaster) -> GetUnleashRateModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetUnleashRateModelMasterResult]:
+        if data is None:
+            return None
+        return GetUnleashRateModelMasterResult()\
+            .with_item(UnleashRateModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateUnleashRateModelMasterResult(core.Gs2Result):
+    item: UnleashRateModelMaster = None
+
+    def with_item(self, item: UnleashRateModelMaster) -> UpdateUnleashRateModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateUnleashRateModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateUnleashRateModelMasterResult()\
+            .with_item(UnleashRateModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteUnleashRateModelMasterResult(core.Gs2Result):
+    item: UnleashRateModelMaster = None
+
+    def with_item(self, item: UnleashRateModelMaster) -> DeleteUnleashRateModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteUnleashRateModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteUnleashRateModelMasterResult()\
+            .with_item(UnleashRateModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DirectEnhanceResult(core.Gs2Result):
     item: RateModel = None
     transaction_id: str = None
@@ -933,6 +1190,192 @@ class DirectEnhanceByStampSheetResult(core.Gs2Result):
             "autoRunStampSheet": self.auto_run_stamp_sheet,
             "acquireExperience": self.acquire_experience,
             "bonusRate": self.bonus_rate,
+        }
+
+
+class UnleashResult(core.Gs2Result):
+    item: UnleashRateModel = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_item(self, item: UnleashRateModel) -> UnleashResult:
+        self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> UnleashResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> UnleashResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> UnleashResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> UnleashResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashResult]:
+        if data is None:
+            return None
+        return UnleashResult()\
+            .with_item(UnleashRateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
+class UnleashByUserIdResult(core.Gs2Result):
+    item: UnleashRateModel = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_item(self, item: UnleashRateModel) -> UnleashByUserIdResult:
+        self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> UnleashByUserIdResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> UnleashByUserIdResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> UnleashByUserIdResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> UnleashByUserIdResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashByUserIdResult]:
+        if data is None:
+            return None
+        return UnleashByUserIdResult()\
+            .with_item(UnleashRateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
+class UnleashByStampSheetResult(core.Gs2Result):
+    item: UnleashRateModel = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_item(self, item: UnleashRateModel) -> UnleashByStampSheetResult:
+        self.item = item
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> UnleashByStampSheetResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> UnleashByStampSheetResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> UnleashByStampSheetResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> UnleashByStampSheetResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashByStampSheetResult]:
+        if data is None:
+            return None
+        return UnleashByStampSheetResult()\
+            .with_item(UnleashRateModel.from_dict(data.get('item')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 

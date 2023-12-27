@@ -1076,6 +1076,389 @@ class DeleteRateModelMasterRequest(core.Gs2Request):
         }
 
 
+class DescribeUnleashRateModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeUnleashRateModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUnleashRateModelsRequest]:
+        if data is None:
+            return None
+        return DescribeUnleashRateModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetUnleashRateModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetUnleashRateModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> GetUnleashRateModelRequest:
+        self.rate_name = rate_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetUnleashRateModelRequest]:
+        if data is None:
+            return None
+        return GetUnleashRateModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+        }
+
+
+class DescribeUnleashRateModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeUnleashRateModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeUnleashRateModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeUnleashRateModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUnleashRateModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribeUnleashRateModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateUnleashRateModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    target_inventory_model_id: str = None
+    grade_model_id: str = None
+    grade_entries: List[UnleashRateEntryModel] = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateUnleashRateModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name(self, name: str) -> CreateUnleashRateModelMasterRequest:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> CreateUnleashRateModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateUnleashRateModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_target_inventory_model_id(self, target_inventory_model_id: str) -> CreateUnleashRateModelMasterRequest:
+        self.target_inventory_model_id = target_inventory_model_id
+        return self
+
+    def with_grade_model_id(self, grade_model_id: str) -> CreateUnleashRateModelMasterRequest:
+        self.grade_model_id = grade_model_id
+        return self
+
+    def with_grade_entries(self, grade_entries: List[UnleashRateEntryModel]) -> CreateUnleashRateModelMasterRequest:
+        self.grade_entries = grade_entries
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateUnleashRateModelMasterRequest]:
+        if data is None:
+            return None
+        return CreateUnleashRateModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
+            .with_grade_model_id(data.get('gradeModelId'))\
+            .with_grade_entries([
+                UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
+                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "targetInventoryModelId": self.target_inventory_model_id,
+            "gradeModelId": self.grade_model_id,
+            "gradeEntries": [
+                self.grade_entries[i].to_dict() if self.grade_entries[i] else None
+                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+            ],
+        }
+
+
+class GetUnleashRateModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetUnleashRateModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> GetUnleashRateModelMasterRequest:
+        self.rate_name = rate_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetUnleashRateModelMasterRequest]:
+        if data is None:
+            return None
+        return GetUnleashRateModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+        }
+
+
+class UpdateUnleashRateModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+    description: str = None
+    metadata: str = None
+    target_inventory_model_id: str = None
+    grade_model_id: str = None
+    grade_entries: List[UnleashRateEntryModel] = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateUnleashRateModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> UpdateUnleashRateModelMasterRequest:
+        self.rate_name = rate_name
+        return self
+
+    def with_description(self, description: str) -> UpdateUnleashRateModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateUnleashRateModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_target_inventory_model_id(self, target_inventory_model_id: str) -> UpdateUnleashRateModelMasterRequest:
+        self.target_inventory_model_id = target_inventory_model_id
+        return self
+
+    def with_grade_model_id(self, grade_model_id: str) -> UpdateUnleashRateModelMasterRequest:
+        self.grade_model_id = grade_model_id
+        return self
+
+    def with_grade_entries(self, grade_entries: List[UnleashRateEntryModel]) -> UpdateUnleashRateModelMasterRequest:
+        self.grade_entries = grade_entries
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateUnleashRateModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateUnleashRateModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
+            .with_grade_model_id(data.get('gradeModelId'))\
+            .with_grade_entries([
+                UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
+                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "targetInventoryModelId": self.target_inventory_model_id,
+            "gradeModelId": self.grade_model_id,
+            "gradeEntries": [
+                self.grade_entries[i].to_dict() if self.grade_entries[i] else None
+                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+            ],
+        }
+
+
+class DeleteUnleashRateModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteUnleashRateModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> DeleteUnleashRateModelMasterRequest:
+        self.rate_name = rate_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteUnleashRateModelMasterRequest]:
+        if data is None:
+            return None
+        return DeleteUnleashRateModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+        }
+
+
 class DirectEnhanceRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1285,6 +1668,225 @@ class DirectEnhanceByStampSheetRequest(core.Gs2Request):
         if data is None:
             return None
         return DirectEnhanceByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class UnleashRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+    access_token: str = None
+    target_item_set_id: str = None
+    materials: List[str] = None
+    config: List[Config] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UnleashRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> UnleashRequest:
+        self.rate_name = rate_name
+        return self
+
+    def with_access_token(self, access_token: str) -> UnleashRequest:
+        self.access_token = access_token
+        return self
+
+    def with_target_item_set_id(self, target_item_set_id: str) -> UnleashRequest:
+        self.target_item_set_id = target_item_set_id
+        return self
+
+    def with_materials(self, materials: List[str]) -> UnleashRequest:
+        self.materials = materials
+        return self
+
+    def with_config(self, config: List[Config]) -> UnleashRequest:
+        self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnleashRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashRequest]:
+        if data is None:
+            return None
+        return UnleashRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_target_item_set_id(data.get('targetItemSetId'))\
+            .with_materials([
+                data.get('materials')[i]
+                for i in range(len(data.get('materials')) if data.get('materials') else 0)
+            ])\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+            "accessToken": self.access_token,
+            "targetItemSetId": self.target_item_set_id,
+            "materials": [
+                self.materials[i]
+                for i in range(len(self.materials) if self.materials else 0)
+            ],
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+        }
+
+
+class UnleashByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    rate_name: str = None
+    user_id: str = None
+    target_item_set_id: str = None
+    materials: List[str] = None
+    config: List[Config] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UnleashByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_rate_name(self, rate_name: str) -> UnleashByUserIdRequest:
+        self.rate_name = rate_name
+        return self
+
+    def with_user_id(self, user_id: str) -> UnleashByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_target_item_set_id(self, target_item_set_id: str) -> UnleashByUserIdRequest:
+        self.target_item_set_id = target_item_set_id
+        return self
+
+    def with_materials(self, materials: List[str]) -> UnleashByUserIdRequest:
+        self.materials = materials
+        return self
+
+    def with_config(self, config: List[Config]) -> UnleashByUserIdRequest:
+        self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UnleashByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashByUserIdRequest]:
+        if data is None:
+            return None
+        return UnleashByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_rate_name(data.get('rateName'))\
+            .with_user_id(data.get('userId'))\
+            .with_target_item_set_id(data.get('targetItemSetId'))\
+            .with_materials([
+                data.get('materials')[i]
+                for i in range(len(data.get('materials')) if data.get('materials') else 0)
+            ])\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "rateName": self.rate_name,
+            "userId": self.user_id,
+            "targetItemSetId": self.target_item_set_id,
+            "materials": [
+                self.materials[i]
+                for i in range(len(self.materials) if self.materials else 0)
+            ],
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+        }
+
+
+class UnleashByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> UnleashByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> UnleashByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashByStampSheetRequest]:
+        if data is None:
+            return None
+        return UnleashByStampSheetRequest()\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_key_id(data.get('keyId'))
 
