@@ -872,9 +872,19 @@ class GetStatusByUserIdResult(core.Gs2Result):
 
 class AddGradeByUserIdResult(core.Gs2Result):
     item: Status = None
+    experience_namespace_name: str = None
+    experience_status: Status = None
 
     def with_item(self, item: Status) -> AddGradeByUserIdResult:
         self.item = item
+        return self
+
+    def with_experience_namespace_name(self, experience_namespace_name: str) -> AddGradeByUserIdResult:
+        self.experience_namespace_name = experience_namespace_name
+        return self
+
+    def with_experience_status(self, experience_status: Status) -> AddGradeByUserIdResult:
+        self.experience_status = experience_status
         return self
 
     def get(self, key, default=None):
@@ -896,19 +906,33 @@ class AddGradeByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return AddGradeByUserIdResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_experience_namespace_name(data.get('experienceNamespaceName'))\
+            .with_experience_status(Status.from_dict(data.get('experienceStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "experienceNamespaceName": self.experience_namespace_name,
+            "experienceStatus": self.experience_status.to_dict() if self.experience_status else None,
         }
 
 
 class SubGradeByUserIdResult(core.Gs2Result):
     item: Status = None
+    experience_namespace_name: str = None
+    experience_status: Status = None
 
     def with_item(self, item: Status) -> SubGradeByUserIdResult:
         self.item = item
+        return self
+
+    def with_experience_namespace_name(self, experience_namespace_name: str) -> SubGradeByUserIdResult:
+        self.experience_namespace_name = experience_namespace_name
+        return self
+
+    def with_experience_status(self, experience_status: Status) -> SubGradeByUserIdResult:
+        self.experience_status = experience_status
         return self
 
     def get(self, key, default=None):
@@ -930,17 +954,23 @@ class SubGradeByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return SubGradeByUserIdResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_experience_namespace_name(data.get('experienceNamespaceName'))\
+            .with_experience_status(Status.from_dict(data.get('experienceStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "experienceNamespaceName": self.experience_namespace_name,
+            "experienceStatus": self.experience_status.to_dict() if self.experience_status else None,
         }
 
 
 class SetGradeByUserIdResult(core.Gs2Result):
     item: Status = None
     old: Status = None
+    experience_namespace_name: str = None
+    experience_status: Status = None
 
     def with_item(self, item: Status) -> SetGradeByUserIdResult:
         self.item = item
@@ -948,6 +978,14 @@ class SetGradeByUserIdResult(core.Gs2Result):
 
     def with_old(self, old: Status) -> SetGradeByUserIdResult:
         self.old = old
+        return self
+
+    def with_experience_namespace_name(self, experience_namespace_name: str) -> SetGradeByUserIdResult:
+        self.experience_namespace_name = experience_namespace_name
+        return self
+
+    def with_experience_status(self, experience_status: Status) -> SetGradeByUserIdResult:
+        self.experience_status = experience_status
         return self
 
     def get(self, key, default=None):
@@ -970,20 +1008,34 @@ class SetGradeByUserIdResult(core.Gs2Result):
             return None
         return SetGradeByUserIdResult()\
             .with_item(Status.from_dict(data.get('item')))\
-            .with_old(Status.from_dict(data.get('old')))
+            .with_old(Status.from_dict(data.get('old')))\
+            .with_experience_namespace_name(data.get('experienceNamespaceName'))\
+            .with_experience_status(Status.from_dict(data.get('experienceStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "old": self.old.to_dict() if self.old else None,
+            "experienceNamespaceName": self.experience_namespace_name,
+            "experienceStatus": self.experience_status.to_dict() if self.experience_status else None,
         }
 
 
 class ApplyRankCapResult(core.Gs2Result):
     item: Status = None
+    experience_namespace_name: str = None
+    experience_status: Status = None
 
     def with_item(self, item: Status) -> ApplyRankCapResult:
         self.item = item
+        return self
+
+    def with_experience_namespace_name(self, experience_namespace_name: str) -> ApplyRankCapResult:
+        self.experience_namespace_name = experience_namespace_name
+        return self
+
+    def with_experience_status(self, experience_status: Status) -> ApplyRankCapResult:
+        self.experience_status = experience_status
         return self
 
     def get(self, key, default=None):
@@ -1005,19 +1057,33 @@ class ApplyRankCapResult(core.Gs2Result):
         if data is None:
             return None
         return ApplyRankCapResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_experience_namespace_name(data.get('experienceNamespaceName'))\
+            .with_experience_status(Status.from_dict(data.get('experienceStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "experienceNamespaceName": self.experience_namespace_name,
+            "experienceStatus": self.experience_status.to_dict() if self.experience_status else None,
         }
 
 
 class ApplyRankCapByUserIdResult(core.Gs2Result):
     item: Status = None
+    experience_namespace_name: str = None
+    experience_status: Status = None
 
     def with_item(self, item: Status) -> ApplyRankCapByUserIdResult:
         self.item = item
+        return self
+
+    def with_experience_namespace_name(self, experience_namespace_name: str) -> ApplyRankCapByUserIdResult:
+        self.experience_namespace_name = experience_namespace_name
+        return self
+
+    def with_experience_status(self, experience_status: Status) -> ApplyRankCapByUserIdResult:
+        self.experience_status = experience_status
         return self
 
     def get(self, key, default=None):
@@ -1039,11 +1105,15 @@ class ApplyRankCapByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ApplyRankCapByUserIdResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_experience_namespace_name(data.get('experienceNamespaceName'))\
+            .with_experience_status(Status.from_dict(data.get('experienceStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "experienceNamespaceName": self.experience_namespace_name,
+            "experienceStatus": self.experience_status.to_dict() if self.experience_status else None,
         }
 
 
@@ -1191,9 +1261,19 @@ class VerifyGradeUpMaterialByUserIdResult(core.Gs2Result):
 
 class AddGradeByStampSheetResult(core.Gs2Result):
     item: Status = None
+    experience_namespace_name: str = None
+    experience_status: Status = None
 
     def with_item(self, item: Status) -> AddGradeByStampSheetResult:
         self.item = item
+        return self
+
+    def with_experience_namespace_name(self, experience_namespace_name: str) -> AddGradeByStampSheetResult:
+        self.experience_namespace_name = experience_namespace_name
+        return self
+
+    def with_experience_status(self, experience_status: Status) -> AddGradeByStampSheetResult:
+        self.experience_status = experience_status
         return self
 
     def get(self, key, default=None):
@@ -1215,19 +1295,33 @@ class AddGradeByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return AddGradeByStampSheetResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_experience_namespace_name(data.get('experienceNamespaceName'))\
+            .with_experience_status(Status.from_dict(data.get('experienceStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "experienceNamespaceName": self.experience_namespace_name,
+            "experienceStatus": self.experience_status.to_dict() if self.experience_status else None,
         }
 
 
 class ApplyRankCapByStampSheetResult(core.Gs2Result):
     item: Status = None
+    experience_namespace_name: str = None
+    experience_status: Status = None
 
     def with_item(self, item: Status) -> ApplyRankCapByStampSheetResult:
         self.item = item
+        return self
+
+    def with_experience_namespace_name(self, experience_namespace_name: str) -> ApplyRankCapByStampSheetResult:
+        self.experience_namespace_name = experience_namespace_name
+        return self
+
+    def with_experience_status(self, experience_status: Status) -> ApplyRankCapByStampSheetResult:
+        self.experience_status = experience_status
         return self
 
     def get(self, key, default=None):
@@ -1249,17 +1343,23 @@ class ApplyRankCapByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return ApplyRankCapByStampSheetResult()\
-            .with_item(Status.from_dict(data.get('item')))
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_experience_namespace_name(data.get('experienceNamespaceName'))\
+            .with_experience_status(Status.from_dict(data.get('experienceStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "experienceNamespaceName": self.experience_namespace_name,
+            "experienceStatus": self.experience_status.to_dict() if self.experience_status else None,
         }
 
 
 class SubGradeByStampTaskResult(core.Gs2Result):
     item: Status = None
     new_context_stack: str = None
+    experience_namespace_name: str = None
+    experience_status: Status = None
 
     def with_item(self, item: Status) -> SubGradeByStampTaskResult:
         self.item = item
@@ -1267,6 +1367,14 @@ class SubGradeByStampTaskResult(core.Gs2Result):
 
     def with_new_context_stack(self, new_context_stack: str) -> SubGradeByStampTaskResult:
         self.new_context_stack = new_context_stack
+        return self
+
+    def with_experience_namespace_name(self, experience_namespace_name: str) -> SubGradeByStampTaskResult:
+        self.experience_namespace_name = experience_namespace_name
+        return self
+
+    def with_experience_status(self, experience_status: Status) -> SubGradeByStampTaskResult:
+        self.experience_status = experience_status
         return self
 
     def get(self, key, default=None):
@@ -1289,12 +1397,16 @@ class SubGradeByStampTaskResult(core.Gs2Result):
             return None
         return SubGradeByStampTaskResult()\
             .with_item(Status.from_dict(data.get('item')))\
-            .with_new_context_stack(data.get('newContextStack'))
+            .with_new_context_stack(data.get('newContextStack'))\
+            .with_experience_namespace_name(data.get('experienceNamespaceName'))\
+            .with_experience_status(Status.from_dict(data.get('experienceStatus')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
+            "experienceNamespaceName": self.experience_namespace_name,
+            "experienceStatus": self.experience_status.to_dict() if self.experience_status else None,
         }
 
 
