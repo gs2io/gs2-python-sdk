@@ -3593,3 +3593,76 @@ class Gs2LotteryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _reset_by_stamp_sheet(
+        self,
+        request: ResetByStampSheetRequest,
+        callback: Callable[[AsyncResult[ResetByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="lottery",
+            component='boxItems',
+            function='resetByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ResetByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_by_stamp_sheet(
+        self,
+        request: ResetByStampSheetRequest,
+    ) -> ResetByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._reset_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_by_stamp_sheet_async(
+        self,
+        request: ResetByStampSheetRequest,
+    ) -> ResetByStampSheetResult:
+        async_result = []
+        self._reset_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

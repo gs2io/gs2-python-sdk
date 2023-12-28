@@ -1787,3 +1787,30 @@ class ResetBoxByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
         }
+
+
+class ResetByStampSheetResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetByStampSheetResult]:
+        if data is None:
+            return None
+        return ResetByStampSheetResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
