@@ -4122,6 +4122,82 @@ class AcquireItemSetByUserIdRequest(core.Gs2Request):
         }
 
 
+class AcquireItemSetWithGradeByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    inventory_name: str = None
+    item_name: str = None
+    user_id: str = None
+    grade_model_id: str = None
+    grade_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AcquireItemSetWithGradeByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_inventory_name(self, inventory_name: str) -> AcquireItemSetWithGradeByUserIdRequest:
+        self.inventory_name = inventory_name
+        return self
+
+    def with_item_name(self, item_name: str) -> AcquireItemSetWithGradeByUserIdRequest:
+        self.item_name = item_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AcquireItemSetWithGradeByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_grade_model_id(self, grade_model_id: str) -> AcquireItemSetWithGradeByUserIdRequest:
+        self.grade_model_id = grade_model_id
+        return self
+
+    def with_grade_value(self, grade_value: int) -> AcquireItemSetWithGradeByUserIdRequest:
+        self.grade_value = grade_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AcquireItemSetWithGradeByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireItemSetWithGradeByUserIdRequest]:
+        if data is None:
+            return None
+        return AcquireItemSetWithGradeByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_inventory_name(data.get('inventoryName'))\
+            .with_item_name(data.get('itemName'))\
+            .with_user_id(data.get('userId'))\
+            .with_grade_model_id(data.get('gradeModelId'))\
+            .with_grade_value(data.get('gradeValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "inventoryName": self.inventory_name,
+            "itemName": self.item_name,
+            "userId": self.user_id,
+            "gradeModelId": self.grade_model_id,
+            "gradeValue": self.grade_value,
+        }
+
+
 class ConsumeItemSetRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -4542,6 +4618,49 @@ class AcquireItemSetByStampSheetRequest(core.Gs2Request):
         if data is None:
             return None
         return AcquireItemSetByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class AcquireItemSetWithGradeByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> AcquireItemSetWithGradeByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> AcquireItemSetWithGradeByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireItemSetWithGradeByStampSheetRequest]:
+        if data is None:
+            return None
+        return AcquireItemSetWithGradeByStampSheetRequest()\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_key_id(data.get('keyId'))
 

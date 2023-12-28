@@ -2955,6 +2955,68 @@ class AcquireItemSetByUserIdResult(core.Gs2Result):
         }
 
 
+class AcquireItemSetWithGradeByUserIdResult(core.Gs2Result):
+    item: ItemSet = None
+    status: Status = None
+    item_model: ItemModel = None
+    inventory: Inventory = None
+    overflow_count: int = None
+
+    def with_item(self, item: ItemSet) -> AcquireItemSetWithGradeByUserIdResult:
+        self.item = item
+        return self
+
+    def with_status(self, status: Status) -> AcquireItemSetWithGradeByUserIdResult:
+        self.status = status
+        return self
+
+    def with_item_model(self, item_model: ItemModel) -> AcquireItemSetWithGradeByUserIdResult:
+        self.item_model = item_model
+        return self
+
+    def with_inventory(self, inventory: Inventory) -> AcquireItemSetWithGradeByUserIdResult:
+        self.inventory = inventory
+        return self
+
+    def with_overflow_count(self, overflow_count: int) -> AcquireItemSetWithGradeByUserIdResult:
+        self.overflow_count = overflow_count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireItemSetWithGradeByUserIdResult]:
+        if data is None:
+            return None
+        return AcquireItemSetWithGradeByUserIdResult()\
+            .with_item(ItemSet.from_dict(data.get('item')))\
+            .with_status(Status.from_dict(data.get('status')))\
+            .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
+            .with_inventory(Inventory.from_dict(data.get('inventory')))\
+            .with_overflow_count(data.get('overflowCount'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "status": self.status.to_dict() if self.status else None,
+            "itemModel": self.item_model.to_dict() if self.item_model else None,
+            "inventory": self.inventory.to_dict() if self.inventory else None,
+            "overflowCount": self.overflow_count,
+        }
+
+
 class ConsumeItemSetResult(core.Gs2Result):
     items: List[ItemSet] = None
     item_model: ItemModel = None
@@ -3226,6 +3288,68 @@ class AcquireItemSetByStampSheetResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "itemModel": self.item_model.to_dict() if self.item_model else None,
+            "inventory": self.inventory.to_dict() if self.inventory else None,
+            "overflowCount": self.overflow_count,
+        }
+
+
+class AcquireItemSetWithGradeByStampSheetResult(core.Gs2Result):
+    item: ItemSet = None
+    status: Status = None
+    item_model: ItemModel = None
+    inventory: Inventory = None
+    overflow_count: int = None
+
+    def with_item(self, item: ItemSet) -> AcquireItemSetWithGradeByStampSheetResult:
+        self.item = item
+        return self
+
+    def with_status(self, status: Status) -> AcquireItemSetWithGradeByStampSheetResult:
+        self.status = status
+        return self
+
+    def with_item_model(self, item_model: ItemModel) -> AcquireItemSetWithGradeByStampSheetResult:
+        self.item_model = item_model
+        return self
+
+    def with_inventory(self, inventory: Inventory) -> AcquireItemSetWithGradeByStampSheetResult:
+        self.inventory = inventory
+        return self
+
+    def with_overflow_count(self, overflow_count: int) -> AcquireItemSetWithGradeByStampSheetResult:
+        self.overflow_count = overflow_count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireItemSetWithGradeByStampSheetResult]:
+        if data is None:
+            return None
+        return AcquireItemSetWithGradeByStampSheetResult()\
+            .with_item(ItemSet.from_dict(data.get('item')))\
+            .with_status(Status.from_dict(data.get('status')))\
+            .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
+            .with_inventory(Inventory.from_dict(data.get('inventory')))\
+            .with_overflow_count(data.get('overflowCount'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "status": self.status.to_dict() if self.status else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
             "overflowCount": self.overflow_count,
