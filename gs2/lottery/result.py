@@ -1750,6 +1750,11 @@ class GetBoxByUserIdResult(core.Gs2Result):
 
 
 class ResetBoxResult(core.Gs2Result):
+    item: BoxItems = None
+
+    def with_item(self, item: BoxItems) -> ResetBoxResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1770,13 +1775,20 @@ class ResetBoxResult(core.Gs2Result):
         if data is None:
             return None
         return ResetBoxResult()\
+            .with_item(BoxItems.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class ResetBoxByUserIdResult(core.Gs2Result):
+    item: BoxItems = None
+
+    def with_item(self, item: BoxItems) -> ResetBoxByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1797,13 +1809,20 @@ class ResetBoxByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ResetBoxByUserIdResult()\
+            .with_item(BoxItems.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class ResetByStampSheetResult(core.Gs2Result):
+    item: BoxItems = None
+
+    def with_item(self, item: BoxItems) -> ResetByStampSheetResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1824,7 +1843,9 @@ class ResetByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return ResetByStampSheetResult()\
+            .with_item(BoxItems.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
