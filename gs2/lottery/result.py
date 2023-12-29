@@ -967,6 +967,7 @@ class GetPrizeTableResult(core.Gs2Result):
 
 class DrawByUserIdResult(core.Gs2Result):
     items: List[DrawnPrize] = None
+    box_items: BoxItems = None
     transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
@@ -974,6 +975,10 @@ class DrawByUserIdResult(core.Gs2Result):
 
     def with_items(self, items: List[DrawnPrize]) -> DrawByUserIdResult:
         self.items = items
+        return self
+
+    def with_box_items(self, box_items: BoxItems) -> DrawByUserIdResult:
+        self.box_items = box_items
         return self
 
     def with_transaction_id(self, transaction_id: str) -> DrawByUserIdResult:
@@ -1015,6 +1020,7 @@ class DrawByUserIdResult(core.Gs2Result):
                 DrawnPrize.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
+            .with_box_items(BoxItems.from_dict(data.get('boxItems')))\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
@@ -1026,6 +1032,7 @@ class DrawByUserIdResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "boxItems": self.box_items.to_dict() if self.box_items else None,
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
@@ -1183,6 +1190,7 @@ class DrawWithRandomSeedByUserIdResult(core.Gs2Result):
 
 class DrawByStampSheetResult(core.Gs2Result):
     items: List[DrawnPrize] = None
+    box_items: BoxItems = None
     transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
@@ -1190,6 +1198,10 @@ class DrawByStampSheetResult(core.Gs2Result):
 
     def with_items(self, items: List[DrawnPrize]) -> DrawByStampSheetResult:
         self.items = items
+        return self
+
+    def with_box_items(self, box_items: BoxItems) -> DrawByStampSheetResult:
+        self.box_items = box_items
         return self
 
     def with_transaction_id(self, transaction_id: str) -> DrawByStampSheetResult:
@@ -1231,6 +1243,7 @@ class DrawByStampSheetResult(core.Gs2Result):
                 DrawnPrize.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
+            .with_box_items(BoxItems.from_dict(data.get('boxItems')))\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
@@ -1242,6 +1255,7 @@ class DrawByStampSheetResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "boxItems": self.box_items.to_dict() if self.box_items else None,
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
