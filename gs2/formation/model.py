@@ -280,53 +280,6 @@ class Config(core.Gs2Model):
         }
 
 
-class AcquireActionConfig(core.Gs2Model):
-    name: str = None
-    config: List[Config] = None
-
-    def with_name(self, name: str) -> AcquireActionConfig:
-        self.name = name
-        return self
-
-    def with_config(self, config: List[Config]) -> AcquireActionConfig:
-        self.config = config
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[AcquireActionConfig]:
-        if data is None:
-            return None
-        return AcquireActionConfig()\
-            .with_name(data.get('name'))\
-            .with_config([
-                Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "name": self.name,
-            "config": [
-                self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
-            ],
-        }
-
-
 class AcquireAction(core.Gs2Model):
     action: str = None
     request: str = None

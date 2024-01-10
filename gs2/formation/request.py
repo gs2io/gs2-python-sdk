@@ -2988,7 +2988,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
     mold_model_name: str = None
     index: int = None
     acquire_action: AcquireAction = None
-    config: List[AcquireActionConfig] = None
+    config: List[Config] = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireActionsToFormPropertiesRequest:
@@ -3011,7 +3011,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
         self.acquire_action = acquire_action
         return self
 
-    def with_config(self, config: List[AcquireActionConfig]) -> AcquireActionsToFormPropertiesRequest:
+    def with_config(self, config: List[Config]) -> AcquireActionsToFormPropertiesRequest:
         self.config = config
         return self
 
@@ -3044,7 +3044,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
             .with_index(data.get('index'))\
             .with_acquire_action(AcquireAction.from_dict(data.get('acquireAction')))\
             .with_config([
-                AcquireActionConfig.from_dict(data.get('config')[i])
+                Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
             ])
 
@@ -3764,7 +3764,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
     property_form_model_name: str = None
     property_id: str = None
     acquire_action: AcquireAction = None
-    config: List[AcquireActionConfig] = None
+    config: List[Config] = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireActionsToPropertyFormPropertiesRequest:
@@ -3787,7 +3787,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
         self.acquire_action = acquire_action
         return self
 
-    def with_config(self, config: List[AcquireActionConfig]) -> AcquireActionsToPropertyFormPropertiesRequest:
+    def with_config(self, config: List[Config]) -> AcquireActionsToPropertyFormPropertiesRequest:
         self.config = config
         return self
 
@@ -3820,7 +3820,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
             .with_property_id(data.get('propertyId'))\
             .with_acquire_action(AcquireAction.from_dict(data.get('acquireAction')))\
             .with_config([
-                AcquireActionConfig.from_dict(data.get('config')[i])
+                Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
             ])
 
