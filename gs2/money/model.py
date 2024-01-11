@@ -341,6 +341,7 @@ class Wallet(core.Gs2Model):
     paid: int = None
     free: int = None
     detail: List[WalletDetail] = None
+    share_free: bool = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -367,6 +368,10 @@ class Wallet(core.Gs2Model):
 
     def with_detail(self, detail: List[WalletDetail]) -> Wallet:
         self.detail = detail
+        return self
+
+    def with_share_free(self, share_free: bool) -> Wallet:
+        self.share_free = share_free
         return self
 
     def with_created_at(self, created_at: int) -> Wallet:
@@ -476,6 +481,7 @@ class Wallet(core.Gs2Model):
                 WalletDetail.from_dict(data.get('detail')[i])
                 for i in range(len(data.get('detail')) if data.get('detail') else 0)
             ])\
+            .with_share_free(data.get('shareFree'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -491,6 +497,7 @@ class Wallet(core.Gs2Model):
                 self.detail[i].to_dict() if self.detail[i] else None
                 for i in range(len(self.detail) if self.detail else 0)
             ],
+            "shareFree": self.share_free,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
