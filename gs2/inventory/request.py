@@ -68,6 +68,8 @@ class CreateNamespaceRequest(core.Gs2Request):
     acquire_script: ScriptSetting = None
     overflow_script: ScriptSetting = None
     consume_script: ScriptSetting = None
+    simple_item_acquire_script: ScriptSetting = None
+    simple_item_consume_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -88,6 +90,14 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_consume_script(self, consume_script: ScriptSetting) -> CreateNamespaceRequest:
         self.consume_script = consume_script
+        return self
+
+    def with_simple_item_acquire_script(self, simple_item_acquire_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.simple_item_acquire_script = simple_item_acquire_script
+        return self
+
+    def with_simple_item_consume_script(self, simple_item_consume_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.simple_item_consume_script = simple_item_consume_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -118,6 +128,8 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_acquire_script(ScriptSetting.from_dict(data.get('acquireScript')))\
             .with_overflow_script(ScriptSetting.from_dict(data.get('overflowScript')))\
             .with_consume_script(ScriptSetting.from_dict(data.get('consumeScript')))\
+            .with_simple_item_acquire_script(ScriptSetting.from_dict(data.get('simpleItemAcquireScript')))\
+            .with_simple_item_consume_script(ScriptSetting.from_dict(data.get('simpleItemConsumeScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -127,6 +139,8 @@ class CreateNamespaceRequest(core.Gs2Request):
             "acquireScript": self.acquire_script.to_dict() if self.acquire_script else None,
             "overflowScript": self.overflow_script.to_dict() if self.overflow_script else None,
             "consumeScript": self.consume_script.to_dict() if self.consume_script else None,
+            "simpleItemAcquireScript": self.simple_item_acquire_script.to_dict() if self.simple_item_acquire_script else None,
+            "simpleItemConsumeScript": self.simple_item_consume_script.to_dict() if self.simple_item_consume_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -211,6 +225,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
     acquire_script: ScriptSetting = None
     overflow_script: ScriptSetting = None
     consume_script: ScriptSetting = None
+    simple_item_acquire_script: ScriptSetting = None
+    simple_item_consume_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -231,6 +247,14 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_consume_script(self, consume_script: ScriptSetting) -> UpdateNamespaceRequest:
         self.consume_script = consume_script
+        return self
+
+    def with_simple_item_acquire_script(self, simple_item_acquire_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.simple_item_acquire_script = simple_item_acquire_script
+        return self
+
+    def with_simple_item_consume_script(self, simple_item_consume_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.simple_item_consume_script = simple_item_consume_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -261,6 +285,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_acquire_script(ScriptSetting.from_dict(data.get('acquireScript')))\
             .with_overflow_script(ScriptSetting.from_dict(data.get('overflowScript')))\
             .with_consume_script(ScriptSetting.from_dict(data.get('consumeScript')))\
+            .with_simple_item_acquire_script(ScriptSetting.from_dict(data.get('simpleItemAcquireScript')))\
+            .with_simple_item_consume_script(ScriptSetting.from_dict(data.get('simpleItemConsumeScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -270,6 +296,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "acquireScript": self.acquire_script.to_dict() if self.acquire_script else None,
             "overflowScript": self.overflow_script.to_dict() if self.overflow_script else None,
             "consumeScript": self.consume_script.to_dict() if self.consume_script else None,
+            "simpleItemAcquireScript": self.simple_item_acquire_script.to_dict() if self.simple_item_acquire_script else None,
+            "simpleItemConsumeScript": self.simple_item_consume_script.to_dict() if self.simple_item_consume_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
