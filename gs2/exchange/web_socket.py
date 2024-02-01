@@ -3065,6 +3065,11 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["rateName"] = request.rate_name
         if request.count is not None:
             body["count"] = request.count
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

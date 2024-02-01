@@ -368,6 +368,7 @@ class Await(core.Gs2Model):
     rate_name: str = None
     name: str = None
     count: int = None
+    config: List[Config] = None
     exchanged_at: int = None
     revision: int = None
 
@@ -389,6 +390,10 @@ class Await(core.Gs2Model):
 
     def with_count(self, count: int) -> Await:
         self.count = count
+        return self
+
+    def with_config(self, config: List[Config]) -> Await:
+        self.config = config
         return self
 
     def with_exchanged_at(self, exchanged_at: int) -> Await:
@@ -490,6 +495,10 @@ class Await(core.Gs2Model):
             .with_rate_name(data.get('rateName'))\
             .with_name(data.get('name'))\
             .with_count(data.get('count'))\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])\
             .with_exchanged_at(data.get('exchangedAt'))\
             .with_revision(data.get('revision'))
 
@@ -500,6 +509,10 @@ class Await(core.Gs2Model):
             "rateName": self.rate_name,
             "name": self.name,
             "count": self.count,
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
             "exchangedAt": self.exchanged_at,
             "revision": self.revision,
         }

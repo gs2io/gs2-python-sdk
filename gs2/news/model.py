@@ -141,6 +141,13 @@ class SetCookieRequestEntry(core.Gs2Model):
         self.value = value
         return self
 
+    @classmethod
+    def create_grn(
+        cls,
+    ):
+        return ''.format(
+        )
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():

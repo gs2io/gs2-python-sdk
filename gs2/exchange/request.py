@@ -2211,6 +2211,7 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
     user_id: str = None
     rate_name: str = None
     count: int = None
+    config: List[Config] = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateAwaitByUserIdRequest:
@@ -2227,6 +2228,10 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> CreateAwaitByUserIdRequest:
         self.count = count
+        return self
+
+    def with_config(self, config: List[Config]) -> CreateAwaitByUserIdRequest:
+        self.config = config
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CreateAwaitByUserIdRequest:
@@ -2255,7 +2260,11 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_rate_name(data.get('rateName'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2263,6 +2272,10 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "rateName": self.rate_name,
             "count": self.count,
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
         }
 
 

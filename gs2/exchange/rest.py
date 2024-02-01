@@ -3040,6 +3040,11 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         }
         if request.count is not None:
             body["count"] = request.count
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
