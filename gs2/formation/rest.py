@@ -119,6 +119,8 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
             body["updateMoldScript"] = request.update_mold_script.to_dict()
         if request.update_form_script is not None:
             body["updateFormScript"] = request.update_form_script.to_dict()
+        if request.update_property_form_script is not None:
+            body["updatePropertyFormScript"] = request.update_property_form_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -342,6 +344,8 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
             body["updateMoldScript"] = request.update_mold_script.to_dict()
         if request.update_form_script is not None:
             body["updateFormScript"] = request.update_form_script.to_dict()
+        if request.update_property_form_script is not None:
+            body["updatePropertyFormScript"] = request.update_property_form_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
