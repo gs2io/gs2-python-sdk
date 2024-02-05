@@ -2313,6 +2313,85 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _set_maximum_idle_minutes_by_user_id(
+        self,
+        request: SetMaximumIdleMinutesByUserIdRequest,
+        callback: Callable[[AsyncResult[SetMaximumIdleMinutesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="idle",
+            component='status',
+            function='setMaximumIdleMinutesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.category_name is not None:
+            body["categoryName"] = request.category_name
+        if request.maximum_idle_minutes is not None:
+            body["maximumIdleMinutes"] = request.maximum_idle_minutes
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SetMaximumIdleMinutesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def set_maximum_idle_minutes_by_user_id(
+        self,
+        request: SetMaximumIdleMinutesByUserIdRequest,
+    ) -> SetMaximumIdleMinutesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._set_maximum_idle_minutes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_maximum_idle_minutes_by_user_id_async(
+        self,
+        request: SetMaximumIdleMinutesByUserIdRequest,
+    ) -> SetMaximumIdleMinutesByUserIdResult:
+        async_result = []
+        self._set_maximum_idle_minutes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _increase_maximum_idle_minutes_by_stamp_sheet(
         self,
         request: IncreaseMaximumIdleMinutesByStampSheetRequest,
@@ -2446,6 +2525,79 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DecreaseMaximumIdleMinutesByStampTaskResult:
         async_result = []
         self._decrease_maximum_idle_minutes_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _set_maximum_idle_minutes_by_stamp_sheet(
+        self,
+        request: SetMaximumIdleMinutesByStampSheetRequest,
+        callback: Callable[[AsyncResult[SetMaximumIdleMinutesByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="idle",
+            component='status',
+            function='setMaximumIdleMinutesByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SetMaximumIdleMinutesByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def set_maximum_idle_minutes_by_stamp_sheet(
+        self,
+        request: SetMaximumIdleMinutesByStampSheetRequest,
+    ) -> SetMaximumIdleMinutesByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._set_maximum_idle_minutes_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_maximum_idle_minutes_by_stamp_sheet_async(
+        self,
+        request: SetMaximumIdleMinutesByStampSheetRequest,
+    ) -> SetMaximumIdleMinutesByStampSheetResult:
+        async_result = []
+        self._set_maximum_idle_minutes_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
         )

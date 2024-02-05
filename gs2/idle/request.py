@@ -1592,6 +1592,68 @@ class DecreaseMaximumIdleMinutesByUserIdRequest(core.Gs2Request):
         }
 
 
+class SetMaximumIdleMinutesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    category_name: str = None
+    maximum_idle_minutes: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetMaximumIdleMinutesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SetMaximumIdleMinutesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_category_name(self, category_name: str) -> SetMaximumIdleMinutesByUserIdRequest:
+        self.category_name = category_name
+        return self
+
+    def with_maximum_idle_minutes(self, maximum_idle_minutes: int) -> SetMaximumIdleMinutesByUserIdRequest:
+        self.maximum_idle_minutes = maximum_idle_minutes
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetMaximumIdleMinutesByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetMaximumIdleMinutesByUserIdRequest]:
+        if data is None:
+            return None
+        return SetMaximumIdleMinutesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_category_name(data.get('categoryName'))\
+            .with_maximum_idle_minutes(data.get('maximumIdleMinutes'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "categoryName": self.category_name,
+            "maximumIdleMinutes": self.maximum_idle_minutes,
+        }
+
+
 class IncreaseMaximumIdleMinutesByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1674,6 +1736,49 @@ class DecreaseMaximumIdleMinutesByStampTaskRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class SetMaximumIdleMinutesByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> SetMaximumIdleMinutesByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> SetMaximumIdleMinutesByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetMaximumIdleMinutesByStampSheetRequest]:
+        if data is None:
+            return None
+        return SetMaximumIdleMinutesByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
             "keyId": self.key_id,
         }
 

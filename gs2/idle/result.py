@@ -1168,6 +1168,47 @@ class DecreaseMaximumIdleMinutesByUserIdResult(core.Gs2Result):
         }
 
 
+class SetMaximumIdleMinutesByUserIdResult(core.Gs2Result):
+    item: Status = None
+    old: Status = None
+
+    def with_item(self, item: Status) -> SetMaximumIdleMinutesByUserIdResult:
+        self.item = item
+        return self
+
+    def with_old(self, old: Status) -> SetMaximumIdleMinutesByUserIdResult:
+        self.old = old
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetMaximumIdleMinutesByUserIdResult]:
+        if data is None:
+            return None
+        return SetMaximumIdleMinutesByUserIdResult()\
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_old(Status.from_dict(data.get('old')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
+        }
+
+
 class IncreaseMaximumIdleMinutesByStampSheetResult(core.Gs2Result):
     item: Status = None
 
@@ -1240,6 +1281,40 @@ class DecreaseMaximumIdleMinutesByStampTaskResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
+        }
+
+
+class SetMaximumIdleMinutesByStampSheetResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> SetMaximumIdleMinutesByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetMaximumIdleMinutesByStampSheetResult]:
+        if data is None:
+            return None
+        return SetMaximumIdleMinutesByStampSheetResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 

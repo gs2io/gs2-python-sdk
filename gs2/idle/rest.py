@@ -2286,6 +2286,83 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _set_maximum_idle_minutes_by_user_id(
+        self,
+        request: SetMaximumIdleMinutesByUserIdRequest,
+        callback: Callable[[AsyncResult[SetMaximumIdleMinutesByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='idle',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/status/model/{categoryName}/maximumIdle".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            categoryName=request.category_name if request.category_name is not None and request.category_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.maximum_idle_minutes is not None:
+            body["maximumIdleMinutes"] = request.maximum_idle_minutes
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=SetMaximumIdleMinutesByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_maximum_idle_minutes_by_user_id(
+        self,
+        request: SetMaximumIdleMinutesByUserIdRequest,
+    ) -> SetMaximumIdleMinutesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._set_maximum_idle_minutes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_maximum_idle_minutes_by_user_id_async(
+        self,
+        request: SetMaximumIdleMinutesByUserIdRequest,
+    ) -> SetMaximumIdleMinutesByUserIdResult:
+        async_result = []
+        self._set_maximum_idle_minutes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _increase_maximum_idle_minutes_by_stamp_sheet(
         self,
         request: IncreaseMaximumIdleMinutesByStampSheetRequest,
@@ -2418,6 +2495,79 @@ class Gs2IdleRestClient(rest.AbstractGs2RestClient):
     ) -> DecreaseMaximumIdleMinutesByStampTaskResult:
         async_result = []
         self._decrease_maximum_idle_minutes_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _set_maximum_idle_minutes_by_stamp_sheet(
+        self,
+        request: SetMaximumIdleMinutesByStampSheetRequest,
+        callback: Callable[[AsyncResult[SetMaximumIdleMinutesByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='idle',
+            region=self.session.region,
+        ) + "/stamp/status/maximumIdleMinutes/set"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SetMaximumIdleMinutesByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_maximum_idle_minutes_by_stamp_sheet(
+        self,
+        request: SetMaximumIdleMinutesByStampSheetRequest,
+    ) -> SetMaximumIdleMinutesByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._set_maximum_idle_minutes_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_maximum_idle_minutes_by_stamp_sheet_async(
+        self,
+        request: SetMaximumIdleMinutesByStampSheetRequest,
+    ) -> SetMaximumIdleMinutesByStampSheetResult:
+        async_result = []
+        self._set_maximum_idle_minutes_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
