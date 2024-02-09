@@ -966,6 +966,7 @@ class PredictionByUserIdResult(core.Gs2Result):
 
 class ReceiveResult(core.Gs2Result):
     items: List[AcquireAction] = None
+    status: Status = None
     transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
@@ -973,6 +974,10 @@ class ReceiveResult(core.Gs2Result):
 
     def with_items(self, items: List[AcquireAction]) -> ReceiveResult:
         self.items = items
+        return self
+
+    def with_status(self, status: Status) -> ReceiveResult:
+        self.status = status
         return self
 
     def with_transaction_id(self, transaction_id: str) -> ReceiveResult:
@@ -1014,6 +1019,7 @@ class ReceiveResult(core.Gs2Result):
                 AcquireAction.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
+            .with_status(Status.from_dict(data.get('status')))\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
@@ -1025,6 +1031,7 @@ class ReceiveResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "status": self.status.to_dict() if self.status else None,
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
@@ -1034,6 +1041,7 @@ class ReceiveResult(core.Gs2Result):
 
 class ReceiveByUserIdResult(core.Gs2Result):
     items: List[AcquireAction] = None
+    status: Status = None
     transaction_id: str = None
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
@@ -1041,6 +1049,10 @@ class ReceiveByUserIdResult(core.Gs2Result):
 
     def with_items(self, items: List[AcquireAction]) -> ReceiveByUserIdResult:
         self.items = items
+        return self
+
+    def with_status(self, status: Status) -> ReceiveByUserIdResult:
+        self.status = status
         return self
 
     def with_transaction_id(self, transaction_id: str) -> ReceiveByUserIdResult:
@@ -1082,6 +1094,7 @@ class ReceiveByUserIdResult(core.Gs2Result):
                 AcquireAction.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')) if data.get('items') else 0)
             ])\
+            .with_status(Status.from_dict(data.get('status')))\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
@@ -1093,6 +1106,7 @@ class ReceiveByUserIdResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
+            "status": self.status.to_dict() if self.status else None,
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
