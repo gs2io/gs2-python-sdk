@@ -306,7 +306,9 @@ class StampSheetResult(core.Gs2Model):
     transaction_id: str = None
     task_requests: List[ConsumeAction] = None
     sheet_request: AcquireAction = None
+    task_result_codes: List[int] = None
     task_results: List[str] = None
+    sheet_result_code: int = None
     sheet_result: str = None
     next_transaction_id: str = None
     created_at: int = None
@@ -332,8 +334,16 @@ class StampSheetResult(core.Gs2Model):
         self.sheet_request = sheet_request
         return self
 
+    def with_task_result_codes(self, task_result_codes: List[int]) -> StampSheetResult:
+        self.task_result_codes = task_result_codes
+        return self
+
     def with_task_results(self, task_results: List[str]) -> StampSheetResult:
         self.task_results = task_results
+        return self
+
+    def with_sheet_result_code(self, sheet_result_code: int) -> StampSheetResult:
+        self.sheet_result_code = sheet_result_code
         return self
 
     def with_sheet_result(self, sheet_result: str) -> StampSheetResult:
@@ -446,10 +456,15 @@ class StampSheetResult(core.Gs2Model):
                 for i in range(len(data.get('taskRequests')) if data.get('taskRequests') else 0)
             ])\
             .with_sheet_request(AcquireAction.from_dict(data.get('sheetRequest')))\
+            .with_task_result_codes([
+                data.get('taskResultCodes')[i]
+                for i in range(len(data.get('taskResultCodes')) if data.get('taskResultCodes') else 0)
+            ])\
             .with_task_results([
                 data.get('taskResults')[i]
                 for i in range(len(data.get('taskResults')) if data.get('taskResults') else 0)
             ])\
+            .with_sheet_result_code(data.get('sheetResultCode'))\
             .with_sheet_result(data.get('sheetResult'))\
             .with_next_transaction_id(data.get('nextTransactionId'))\
             .with_created_at(data.get('createdAt'))\
@@ -465,10 +480,15 @@ class StampSheetResult(core.Gs2Model):
                 for i in range(len(self.task_requests) if self.task_requests else 0)
             ],
             "sheetRequest": self.sheet_request.to_dict() if self.sheet_request else None,
+            "taskResultCodes": [
+                self.task_result_codes[i]
+                for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
+            ],
             "taskResults": [
                 self.task_results[i]
                 for i in range(len(self.task_results) if self.task_results else 0)
             ],
+            "sheetResultCode": self.sheet_result_code,
             "sheetResult": self.sheet_result,
             "nextTransactionId": self.next_transaction_id,
             "createdAt": self.created_at,

@@ -718,10 +718,15 @@ class DistributeWithoutOverflowProcessResult(core.Gs2Result):
 
 class RunStampTaskResult(core.Gs2Result):
     context_stack: str = None
+    status_code: int = None
     result: str = None
 
     def with_context_stack(self, context_stack: str) -> RunStampTaskResult:
         self.context_stack = context_stack
+        return self
+
+    def with_status_code(self, status_code: int) -> RunStampTaskResult:
+        self.status_code = status_code
         return self
 
     def with_result(self, result: str) -> RunStampTaskResult:
@@ -748,17 +753,24 @@ class RunStampTaskResult(core.Gs2Result):
             return None
         return RunStampTaskResult()\
             .with_context_stack(data.get('contextStack'))\
+            .with_status_code(data.get('statusCode'))\
             .with_result(data.get('result'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "contextStack": self.context_stack,
+            "statusCode": self.status_code,
             "result": self.result,
         }
 
 
 class RunStampSheetResult(core.Gs2Result):
+    status_code: int = None
     result: str = None
+
+    def with_status_code(self, status_code: int) -> RunStampSheetResult:
+        self.status_code = status_code
+        return self
 
     def with_result(self, result: str) -> RunStampSheetResult:
         self.result = result
@@ -783,20 +795,32 @@ class RunStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return RunStampSheetResult()\
+            .with_status_code(data.get('statusCode'))\
             .with_result(data.get('result'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "statusCode": self.status_code,
             "result": self.result,
         }
 
 
 class RunStampSheetExpressResult(core.Gs2Result):
+    task_result_codes: List[int] = None
     task_results: List[str] = None
+    sheet_result_code: int = None
     sheet_result: str = None
+
+    def with_task_result_codes(self, task_result_codes: List[int]) -> RunStampSheetExpressResult:
+        self.task_result_codes = task_result_codes
+        return self
 
     def with_task_results(self, task_results: List[str]) -> RunStampSheetExpressResult:
         self.task_results = task_results
+        return self
+
+    def with_sheet_result_code(self, sheet_result_code: int) -> RunStampSheetExpressResult:
+        self.sheet_result_code = sheet_result_code
         return self
 
     def with_sheet_result(self, sheet_result: str) -> RunStampSheetExpressResult:
@@ -822,28 +846,43 @@ class RunStampSheetExpressResult(core.Gs2Result):
         if data is None:
             return None
         return RunStampSheetExpressResult()\
+            .with_task_result_codes([
+                data.get('taskResultCodes')[i]
+                for i in range(len(data.get('taskResultCodes')) if data.get('taskResultCodes') else 0)
+            ])\
             .with_task_results([
                 data.get('taskResults')[i]
                 for i in range(len(data.get('taskResults')) if data.get('taskResults') else 0)
             ])\
+            .with_sheet_result_code(data.get('sheetResultCode'))\
             .with_sheet_result(data.get('sheetResult'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "taskResultCodes": [
+                self.task_result_codes[i]
+                for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
+            ],
             "taskResults": [
                 self.task_results[i]
                 for i in range(len(self.task_results) if self.task_results else 0)
             ],
+            "sheetResultCode": self.sheet_result_code,
             "sheetResult": self.sheet_result,
         }
 
 
 class RunStampTaskWithoutNamespaceResult(core.Gs2Result):
     context_stack: str = None
+    status_code: int = None
     result: str = None
 
     def with_context_stack(self, context_stack: str) -> RunStampTaskWithoutNamespaceResult:
         self.context_stack = context_stack
+        return self
+
+    def with_status_code(self, status_code: int) -> RunStampTaskWithoutNamespaceResult:
+        self.status_code = status_code
         return self
 
     def with_result(self, result: str) -> RunStampTaskWithoutNamespaceResult:
@@ -870,17 +909,24 @@ class RunStampTaskWithoutNamespaceResult(core.Gs2Result):
             return None
         return RunStampTaskWithoutNamespaceResult()\
             .with_context_stack(data.get('contextStack'))\
+            .with_status_code(data.get('statusCode'))\
             .with_result(data.get('result'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "contextStack": self.context_stack,
+            "statusCode": self.status_code,
             "result": self.result,
         }
 
 
 class RunStampSheetWithoutNamespaceResult(core.Gs2Result):
+    status_code: int = None
     result: str = None
+
+    def with_status_code(self, status_code: int) -> RunStampSheetWithoutNamespaceResult:
+        self.status_code = status_code
+        return self
 
     def with_result(self, result: str) -> RunStampSheetWithoutNamespaceResult:
         self.result = result
@@ -905,20 +951,32 @@ class RunStampSheetWithoutNamespaceResult(core.Gs2Result):
         if data is None:
             return None
         return RunStampSheetWithoutNamespaceResult()\
+            .with_status_code(data.get('statusCode'))\
             .with_result(data.get('result'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "statusCode": self.status_code,
             "result": self.result,
         }
 
 
 class RunStampSheetExpressWithoutNamespaceResult(core.Gs2Result):
+    task_result_codes: List[int] = None
     task_results: List[str] = None
+    sheet_result_code: int = None
     sheet_result: str = None
+
+    def with_task_result_codes(self, task_result_codes: List[int]) -> RunStampSheetExpressWithoutNamespaceResult:
+        self.task_result_codes = task_result_codes
+        return self
 
     def with_task_results(self, task_results: List[str]) -> RunStampSheetExpressWithoutNamespaceResult:
         self.task_results = task_results
+        return self
+
+    def with_sheet_result_code(self, sheet_result_code: int) -> RunStampSheetExpressWithoutNamespaceResult:
+        self.sheet_result_code = sheet_result_code
         return self
 
     def with_sheet_result(self, sheet_result: str) -> RunStampSheetExpressWithoutNamespaceResult:
@@ -944,18 +1002,28 @@ class RunStampSheetExpressWithoutNamespaceResult(core.Gs2Result):
         if data is None:
             return None
         return RunStampSheetExpressWithoutNamespaceResult()\
+            .with_task_result_codes([
+                data.get('taskResultCodes')[i]
+                for i in range(len(data.get('taskResultCodes')) if data.get('taskResultCodes') else 0)
+            ])\
             .with_task_results([
                 data.get('taskResults')[i]
                 for i in range(len(data.get('taskResults')) if data.get('taskResults') else 0)
             ])\
+            .with_sheet_result_code(data.get('sheetResultCode'))\
             .with_sheet_result(data.get('sheetResult'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "taskResultCodes": [
+                self.task_result_codes[i]
+                for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
+            ],
             "taskResults": [
                 self.task_results[i]
                 for i in range(len(self.task_results) if self.task_results else 0)
             ],
+            "sheetResultCode": self.sheet_result_code,
             "sheetResult": self.sheet_result,
         }
 
