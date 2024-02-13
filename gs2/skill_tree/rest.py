@@ -1531,9 +1531,10 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/status/node/release/mark".format(
+        ) + "/{namespaceName}/user/{userId}/status/{propertyId}/node/release/mark".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1610,8 +1611,9 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/status/node/release".format(
+        ) + "/{namespaceName}/user/me/status/{propertyId}/node/release".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1695,9 +1697,10 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/status/node/release".format(
+        ) + "/{namespaceName}/user/{userId}/status/{propertyId}/node/release".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1779,9 +1782,10 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/status/node/restrain/mark".format(
+        ) + "/{namespaceName}/user/{userId}/status/{propertyId}/node/restrain/mark".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1858,8 +1862,9 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/status/node/restrain".format(
+        ) + "/{namespaceName}/user/me/status/{propertyId}/node/restrain".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -1943,9 +1948,10 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/status/node/restrain".format(
+        ) + "/{namespaceName}/user/{userId}/status/{propertyId}/node/restrain".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -2018,6 +2024,159 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_statuses(
+        self,
+        request: DescribeStatusesRequest,
+        callback: Callable[[AsyncResult[DescribeStatusesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='skill-tree',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/status".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeStatusesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_statuses(
+        self,
+        request: DescribeStatusesRequest,
+    ) -> DescribeStatusesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_statuses(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_statuses_async(
+        self,
+        request: DescribeStatusesRequest,
+    ) -> DescribeStatusesResult:
+        async_result = []
+        self._describe_statuses(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_statuses_by_user_id(
+        self,
+        request: DescribeStatusesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeStatusesByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='skill-tree',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/status/".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeStatusesByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_statuses_by_user_id(
+        self,
+        request: DescribeStatusesByUserIdRequest,
+    ) -> DescribeStatusesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_statuses_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_statuses_by_user_id_async(
+        self,
+        request: DescribeStatusesByUserIdRequest,
+    ) -> DescribeStatusesByUserIdResult:
+        async_result = []
+        self._describe_statuses_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_status(
         self,
         request: GetStatusRequest,
@@ -2027,8 +2186,9 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/status".format(
+        ) + "/{namespaceName}/user/me/status/{propertyId}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -2100,9 +2260,10 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/status".format(
+        ) + "/{namespaceName}/user/{userId}/status/{propertyId}".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -2172,8 +2333,9 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/status/reset".format(
+        ) + "/{namespaceName}/user/me/status/{propertyId}/reset".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -2252,9 +2414,10 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='skill-tree',
             region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/status/reset".format(
+        ) + "/{namespaceName}/user/{userId}/status/{propertyId}/reset".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()

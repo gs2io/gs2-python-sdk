@@ -1548,6 +1548,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
         if request.node_model_names is not None:
             body["nodeModelNames"] = [
                 item
@@ -1628,6 +1630,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
         if request.node_model_names is not None:
             body["nodeModelNames"] = [
                 item
@@ -1715,6 +1719,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
         if request.node_model_names is not None:
             body["nodeModelNames"] = [
                 item
@@ -1800,6 +1806,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
         if request.node_model_names is not None:
             body["nodeModelNames"] = [
                 item
@@ -1880,6 +1888,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
         if request.node_model_names is not None:
             body["nodeModelNames"] = [
                 item
@@ -1967,6 +1977,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
         if request.node_model_names is not None:
             body["nodeModelNames"] = [
                 item
@@ -2031,6 +2043,162 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_statuses(
+        self,
+        request: DescribeStatusesRequest,
+        callback: Callable[[AsyncResult[DescribeStatusesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="skillTree",
+            component='status',
+            function='describeStatuses',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeStatusesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_statuses(
+        self,
+        request: DescribeStatusesRequest,
+    ) -> DescribeStatusesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_statuses(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_statuses_async(
+        self,
+        request: DescribeStatusesRequest,
+    ) -> DescribeStatusesResult:
+        async_result = []
+        self._describe_statuses(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_statuses_by_user_id(
+        self,
+        request: DescribeStatusesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeStatusesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="skillTree",
+            component='status',
+            function='describeStatusesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeStatusesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_statuses_by_user_id(
+        self,
+        request: DescribeStatusesByUserIdRequest,
+    ) -> DescribeStatusesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_statuses_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_statuses_by_user_id_async(
+        self,
+        request: DescribeStatusesByUserIdRequest,
+    ) -> DescribeStatusesByUserIdResult:
+        async_result = []
+        self._describe_statuses_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_status(
         self,
         request: GetStatusRequest,
@@ -2052,6 +2220,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2127,6 +2297,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2200,6 +2372,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
@@ -2282,6 +2456,8 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
         if request.config is not None:
             body["config"] = [
                 item.to_dict()

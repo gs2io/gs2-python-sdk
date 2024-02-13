@@ -1011,6 +1011,7 @@ class MarkReleaseByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    property_id: str = None
     node_model_names: List[str] = None
     duplication_avoider: str = None
 
@@ -1020,6 +1021,10 @@ class MarkReleaseByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> MarkReleaseByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_property_id(self, property_id: str) -> MarkReleaseByUserIdRequest:
+        self.property_id = property_id
         return self
 
     def with_node_model_names(self, node_model_names: List[str]) -> MarkReleaseByUserIdRequest:
@@ -1051,6 +1056,7 @@ class MarkReleaseByUserIdRequest(core.Gs2Request):
         return MarkReleaseByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_property_id(data.get('propertyId'))\
             .with_node_model_names([
                 data.get('nodeModelNames')[i]
                 for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
@@ -1060,6 +1066,7 @@ class MarkReleaseByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "propertyId": self.property_id,
             "nodeModelNames": [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
@@ -1072,6 +1079,7 @@ class ReleaseRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
+    property_id: str = None
     node_model_names: List[str] = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1082,6 +1090,10 @@ class ReleaseRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> ReleaseRequest:
         self.access_token = access_token
+        return self
+
+    def with_property_id(self, property_id: str) -> ReleaseRequest:
+        self.property_id = property_id
         return self
 
     def with_node_model_names(self, node_model_names: List[str]) -> ReleaseRequest:
@@ -1117,6 +1129,7 @@ class ReleaseRequest(core.Gs2Request):
         return ReleaseRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
+            .with_property_id(data.get('propertyId'))\
             .with_node_model_names([
                 data.get('nodeModelNames')[i]
                 for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
@@ -1130,6 +1143,7 @@ class ReleaseRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
+            "propertyId": self.property_id,
             "nodeModelNames": [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
@@ -1146,6 +1160,7 @@ class ReleaseByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    property_id: str = None
     node_model_names: List[str] = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1156,6 +1171,10 @@ class ReleaseByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> ReleaseByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_property_id(self, property_id: str) -> ReleaseByUserIdRequest:
+        self.property_id = property_id
         return self
 
     def with_node_model_names(self, node_model_names: List[str]) -> ReleaseByUserIdRequest:
@@ -1191,6 +1210,7 @@ class ReleaseByUserIdRequest(core.Gs2Request):
         return ReleaseByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_property_id(data.get('propertyId'))\
             .with_node_model_names([
                 data.get('nodeModelNames')[i]
                 for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
@@ -1204,6 +1224,7 @@ class ReleaseByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "propertyId": self.property_id,
             "nodeModelNames": [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
@@ -1220,6 +1241,7 @@ class MarkRestrainByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    property_id: str = None
     node_model_names: List[str] = None
     duplication_avoider: str = None
 
@@ -1229,6 +1251,10 @@ class MarkRestrainByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> MarkRestrainByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_property_id(self, property_id: str) -> MarkRestrainByUserIdRequest:
+        self.property_id = property_id
         return self
 
     def with_node_model_names(self, node_model_names: List[str]) -> MarkRestrainByUserIdRequest:
@@ -1260,6 +1286,7 @@ class MarkRestrainByUserIdRequest(core.Gs2Request):
         return MarkRestrainByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_property_id(data.get('propertyId'))\
             .with_node_model_names([
                 data.get('nodeModelNames')[i]
                 for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
@@ -1269,6 +1296,7 @@ class MarkRestrainByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "propertyId": self.property_id,
             "nodeModelNames": [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
@@ -1281,6 +1309,7 @@ class RestrainRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
+    property_id: str = None
     node_model_names: List[str] = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1291,6 +1320,10 @@ class RestrainRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> RestrainRequest:
         self.access_token = access_token
+        return self
+
+    def with_property_id(self, property_id: str) -> RestrainRequest:
+        self.property_id = property_id
         return self
 
     def with_node_model_names(self, node_model_names: List[str]) -> RestrainRequest:
@@ -1326,6 +1359,7 @@ class RestrainRequest(core.Gs2Request):
         return RestrainRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
+            .with_property_id(data.get('propertyId'))\
             .with_node_model_names([
                 data.get('nodeModelNames')[i]
                 for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
@@ -1339,6 +1373,7 @@ class RestrainRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
+            "propertyId": self.property_id,
             "nodeModelNames": [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
@@ -1355,6 +1390,7 @@ class RestrainByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    property_id: str = None
     node_model_names: List[str] = None
     config: List[Config] = None
     duplication_avoider: str = None
@@ -1365,6 +1401,10 @@ class RestrainByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> RestrainByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_property_id(self, property_id: str) -> RestrainByUserIdRequest:
+        self.property_id = property_id
         return self
 
     def with_node_model_names(self, node_model_names: List[str]) -> RestrainByUserIdRequest:
@@ -1400,6 +1440,7 @@ class RestrainByUserIdRequest(core.Gs2Request):
         return RestrainByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_property_id(data.get('propertyId'))\
             .with_node_model_names([
                 data.get('nodeModelNames')[i]
                 for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
@@ -1413,6 +1454,7 @@ class RestrainByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "propertyId": self.property_id,
             "nodeModelNames": [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
@@ -1424,11 +1466,126 @@ class RestrainByUserIdRequest(core.Gs2Request):
         }
 
 
+class DescribeStatusesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeStatusesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeStatusesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeStatusesRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeStatusesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeStatusesRequest]:
+        if data is None:
+            return None
+        return DescribeStatusesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeStatusesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeStatusesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeStatusesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeStatusesByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeStatusesByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeStatusesByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeStatusesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
 class GetStatusRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
+    property_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetStatusRequest:
         self.namespace_name = namespace_name
@@ -1436,6 +1593,10 @@ class GetStatusRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> GetStatusRequest:
         self.access_token = access_token
+        return self
+
+    def with_property_id(self, property_id: str) -> GetStatusRequest:
+        self.property_id = property_id
         return self
 
     def get(self, key, default=None):
@@ -1458,12 +1619,14 @@ class GetStatusRequest(core.Gs2Request):
             return None
         return GetStatusRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_access_token(data.get('accessToken'))
+            .with_access_token(data.get('accessToken'))\
+            .with_property_id(data.get('propertyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
+            "propertyId": self.property_id,
         }
 
 
@@ -1472,6 +1635,7 @@ class GetStatusByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    property_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetStatusByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1479,6 +1643,10 @@ class GetStatusByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> GetStatusByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_property_id(self, property_id: str) -> GetStatusByUserIdRequest:
+        self.property_id = property_id
         return self
 
     def get(self, key, default=None):
@@ -1501,12 +1669,14 @@ class GetStatusByUserIdRequest(core.Gs2Request):
             return None
         return GetStatusByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_property_id(data.get('propertyId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "propertyId": self.property_id,
         }
 
 
@@ -1515,6 +1685,7 @@ class ResetRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
+    property_id: str = None
     config: List[Config] = None
     duplication_avoider: str = None
 
@@ -1524,6 +1695,10 @@ class ResetRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> ResetRequest:
         self.access_token = access_token
+        return self
+
+    def with_property_id(self, property_id: str) -> ResetRequest:
+        self.property_id = property_id
         return self
 
     def with_config(self, config: List[Config]) -> ResetRequest:
@@ -1555,6 +1730,7 @@ class ResetRequest(core.Gs2Request):
         return ResetRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
+            .with_property_id(data.get('propertyId'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
@@ -1564,6 +1740,7 @@ class ResetRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
+            "propertyId": self.property_id,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
@@ -1576,6 +1753,7 @@ class ResetByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    property_id: str = None
     config: List[Config] = None
     duplication_avoider: str = None
 
@@ -1585,6 +1763,10 @@ class ResetByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> ResetByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_property_id(self, property_id: str) -> ResetByUserIdRequest:
+        self.property_id = property_id
         return self
 
     def with_config(self, config: List[Config]) -> ResetByUserIdRequest:
@@ -1616,6 +1798,7 @@ class ResetByUserIdRequest(core.Gs2Request):
         return ResetByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_property_id(data.get('propertyId'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
@@ -1625,6 +1808,7 @@ class ResetByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "propertyId": self.property_id,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)

@@ -449,6 +449,7 @@ class CurrentTreeMaster(core.Gs2Model):
 class Status(core.Gs2Model):
     status_id: str = None
     user_id: str = None
+    property_id: str = None
     released_node_names: List[str] = None
     created_at: int = None
     updated_at: int = None
@@ -460,6 +461,10 @@ class Status(core.Gs2Model):
 
     def with_user_id(self, user_id: str) -> Status:
         self.user_id = user_id
+        return self
+
+    def with_property_id(self, property_id: str) -> Status:
+        self.property_id = property_id
         return self
 
     def with_released_node_names(self, released_node_names: List[str]) -> Status:
@@ -485,12 +490,14 @@ class Status(core.Gs2Model):
         owner_id,
         namespace_name,
         user_id,
+        property_id,
     ):
-        return 'grn:gs2:{region}:{ownerId}:skillTree:{namespaceName}:user:{userId}:status'.format(
+        return 'grn:gs2:{region}:{ownerId}:skillTree:{namespaceName}:user:{userId}:status:{propertyId}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
             userId=user_id,
+            propertyId=property_id,
         )
 
     @classmethod
@@ -498,7 +505,7 @@ class Status(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status:(?P<propertyId>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -508,7 +515,7 @@ class Status(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status:(?P<propertyId>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -518,7 +525,7 @@ class Status(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status:(?P<propertyId>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -528,10 +535,20 @@ class Status(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status:(?P<propertyId>.+)', grn)
         if match is None:
             return None
         return match.group('user_id')
+
+    @classmethod
+    def get_property_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):skillTree:(?P<namespaceName>.+):user:(?P<userId>.+):status:(?P<propertyId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('property_id')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -554,6 +571,7 @@ class Status(core.Gs2Model):
         return Status()\
             .with_status_id(data.get('statusId'))\
             .with_user_id(data.get('userId'))\
+            .with_property_id(data.get('propertyId'))\
             .with_released_node_names([
                 data.get('releasedNodeNames')[i]
                 for i in range(len(data.get('releasedNodeNames')) if data.get('releasedNodeNames') else 0)
@@ -566,6 +584,7 @@ class Status(core.Gs2Model):
         return {
             "statusId": self.status_id,
             "userId": self.user_id,
+            "propertyId": self.property_id,
             "releasedNodeNames": [
                 self.released_node_names[i]
                 for i in range(len(self.released_node_names) if self.released_node_names else 0)
