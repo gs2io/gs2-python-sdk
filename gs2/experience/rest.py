@@ -2687,6 +2687,8 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
         }
         if request.experience_value is not None:
             body["experienceValue"] = request.experience_value
+        if request.truncate_experience_when_rank_up is not None:
+            body["truncateExperienceWhenRankUp"] = request.truncate_experience_when_rank_up
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

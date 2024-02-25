@@ -1876,6 +1876,7 @@ class AddExperienceByUserIdRequest(core.Gs2Request):
     experience_name: str = None
     property_id: str = None
     experience_value: int = None
+    truncate_experience_when_rank_up: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddExperienceByUserIdRequest:
@@ -1896,6 +1897,10 @@ class AddExperienceByUserIdRequest(core.Gs2Request):
 
     def with_experience_value(self, experience_value: int) -> AddExperienceByUserIdRequest:
         self.experience_value = experience_value
+        return self
+
+    def with_truncate_experience_when_rank_up(self, truncate_experience_when_rank_up: bool) -> AddExperienceByUserIdRequest:
+        self.truncate_experience_when_rank_up = truncate_experience_when_rank_up
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> AddExperienceByUserIdRequest:
@@ -1925,7 +1930,8 @@ class AddExperienceByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_experience_name(data.get('experienceName'))\
             .with_property_id(data.get('propertyId'))\
-            .with_experience_value(data.get('experienceValue'))
+            .with_experience_value(data.get('experienceValue'))\
+            .with_truncate_experience_when_rank_up(data.get('truncateExperienceWhenRankUp'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1934,6 +1940,7 @@ class AddExperienceByUserIdRequest(core.Gs2Request):
             "experienceName": self.experience_name,
             "propertyId": self.property_id,
             "experienceValue": self.experience_value,
+            "truncateExperienceWhenRankUp": self.truncate_experience_when_rank_up,
         }
 
 

@@ -157,6 +157,103 @@ class Insight(core.Gs2Model):
         }
 
 
+class AccessLogWithTelemetry(core.Gs2Model):
+    timestamp: int = None
+    source_request_id: str = None
+    request_id: str = None
+    duration: int = None
+    service: str = None
+    method: str = None
+    user_id: str = None
+    request: str = None
+    result: str = None
+    status: str = None
+
+    def with_timestamp(self, timestamp: int) -> AccessLogWithTelemetry:
+        self.timestamp = timestamp
+        return self
+
+    def with_source_request_id(self, source_request_id: str) -> AccessLogWithTelemetry:
+        self.source_request_id = source_request_id
+        return self
+
+    def with_request_id(self, request_id: str) -> AccessLogWithTelemetry:
+        self.request_id = request_id
+        return self
+
+    def with_duration(self, duration: int) -> AccessLogWithTelemetry:
+        self.duration = duration
+        return self
+
+    def with_service(self, service: str) -> AccessLogWithTelemetry:
+        self.service = service
+        return self
+
+    def with_method(self, method: str) -> AccessLogWithTelemetry:
+        self.method = method
+        return self
+
+    def with_user_id(self, user_id: str) -> AccessLogWithTelemetry:
+        self.user_id = user_id
+        return self
+
+    def with_request(self, request: str) -> AccessLogWithTelemetry:
+        self.request = request
+        return self
+
+    def with_result(self, result: str) -> AccessLogWithTelemetry:
+        self.result = result
+        return self
+
+    def with_status(self, status: str) -> AccessLogWithTelemetry:
+        self.status = status
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AccessLogWithTelemetry]:
+        if data is None:
+            return None
+        return AccessLogWithTelemetry()\
+            .with_timestamp(data.get('timestamp'))\
+            .with_source_request_id(data.get('sourceRequestId'))\
+            .with_request_id(data.get('requestId'))\
+            .with_duration(data.get('duration'))\
+            .with_service(data.get('service'))\
+            .with_method(data.get('method'))\
+            .with_user_id(data.get('userId'))\
+            .with_request(data.get('request'))\
+            .with_result(data.get('result'))\
+            .with_status(data.get('status'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "timestamp": self.timestamp,
+            "sourceRequestId": self.source_request_id,
+            "requestId": self.request_id,
+            "duration": self.duration,
+            "service": self.service,
+            "method": self.method,
+            "userId": self.user_id,
+            "request": self.request,
+            "result": self.result,
+            "status": self.status,
+        }
+
+
 class ExecuteStampTaskLogCount(core.Gs2Model):
     service: str = None
     method: str = None

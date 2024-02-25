@@ -2717,6 +2717,8 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyId"] = request.property_id
         if request.experience_value is not None:
             body["experienceValue"] = request.experience_value
+        if request.truncate_experience_when_rank_up is not None:
+            body["truncateExperienceWhenRankUp"] = request.truncate_experience_when_rank_up
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

@@ -722,6 +722,67 @@ class CountExecuteStampTaskLogResult(core.Gs2Result):
         }
 
 
+class QueryAccessLogWithTelemetryResult(core.Gs2Result):
+    items: List[AccessLogWithTelemetry] = None
+    next_page_token: str = None
+    total_count: int = None
+    scan_size: int = None
+
+    def with_items(self, items: List[AccessLogWithTelemetry]) -> QueryAccessLogWithTelemetryResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> QueryAccessLogWithTelemetryResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def with_total_count(self, total_count: int) -> QueryAccessLogWithTelemetryResult:
+        self.total_count = total_count
+        return self
+
+    def with_scan_size(self, scan_size: int) -> QueryAccessLogWithTelemetryResult:
+        self.scan_size = scan_size
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryAccessLogWithTelemetryResult]:
+        if data is None:
+            return None
+        return QueryAccessLogWithTelemetryResult()\
+            .with_items([
+                AccessLogWithTelemetry.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))\
+            .with_total_count(data.get('totalCount'))\
+            .with_scan_size(data.get('scanSize'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+            "totalCount": self.total_count,
+            "scanSize": self.scan_size,
+        }
+
+
 class PutLogResult(core.Gs2Result):
 
     def get(self, key, default=None):

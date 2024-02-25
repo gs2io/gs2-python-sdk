@@ -1201,6 +1201,91 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _query_access_log_with_telemetry(
+        self,
+        request: QueryAccessLogWithTelemetryRequest,
+        callback: Callable[[AsyncResult[QueryAccessLogWithTelemetryResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='log',
+            region=self.session.region,
+        ) + "/{namespaceName}/log/access/telemetry".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.user_id is not None:
+            query_strings["userId"] = request.user_id
+        if request.begin is not None:
+            query_strings["begin"] = request.begin
+        if request.end is not None:
+            query_strings["end"] = request.end
+        if request.long_term is not None:
+            query_strings["longTerm"] = request.long_term
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=QueryAccessLogWithTelemetryResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def query_access_log_with_telemetry(
+        self,
+        request: QueryAccessLogWithTelemetryRequest,
+    ) -> QueryAccessLogWithTelemetryResult:
+        async_result = []
+        with timeout(30):
+            self._query_access_log_with_telemetry(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def query_access_log_with_telemetry_async(
+        self,
+        request: QueryAccessLogWithTelemetryRequest,
+    ) -> QueryAccessLogWithTelemetryResult:
+        async_result = []
+        self._query_access_log_with_telemetry(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _put_log(
         self,
         request: PutLogRequest,

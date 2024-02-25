@@ -1164,6 +1164,89 @@ class CountExecuteStampTaskLogRequest(core.Gs2Request):
         }
 
 
+class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    begin: int = None
+    end: int = None
+    long_term: bool = None
+    page_token: str = None
+    limit: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> QueryAccessLogWithTelemetryRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> QueryAccessLogWithTelemetryRequest:
+        self.user_id = user_id
+        return self
+
+    def with_begin(self, begin: int) -> QueryAccessLogWithTelemetryRequest:
+        self.begin = begin
+        return self
+
+    def with_end(self, end: int) -> QueryAccessLogWithTelemetryRequest:
+        self.end = end
+        return self
+
+    def with_long_term(self, long_term: bool) -> QueryAccessLogWithTelemetryRequest:
+        self.long_term = long_term
+        return self
+
+    def with_page_token(self, page_token: str) -> QueryAccessLogWithTelemetryRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> QueryAccessLogWithTelemetryRequest:
+        self.limit = limit
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> QueryAccessLogWithTelemetryRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryAccessLogWithTelemetryRequest]:
+        if data is None:
+            return None
+        return QueryAccessLogWithTelemetryRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_begin(data.get('begin'))\
+            .with_end(data.get('end'))\
+            .with_long_term(data.get('longTerm'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "begin": self.begin,
+            "end": self.end,
+            "longTerm": self.long_term,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
 class PutLogRequest(core.Gs2Request):
 
     context_stack: str = None
