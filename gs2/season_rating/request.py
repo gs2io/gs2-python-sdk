@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -73,6 +74,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -100,12 +105,14 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -187,6 +194,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -195,6 +203,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -222,12 +234,14 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -814,6 +828,7 @@ class CreateSeasonModelMasterRequest(core.Gs2Request):
     metadata: str = None
     tiers: List[TierModel] = None
     experience_model_id: str = None
+    challenge_period_event_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateSeasonModelMasterRequest:
         self.namespace_name = namespace_name
@@ -837,6 +852,10 @@ class CreateSeasonModelMasterRequest(core.Gs2Request):
 
     def with_experience_model_id(self, experience_model_id: str) -> CreateSeasonModelMasterRequest:
         self.experience_model_id = experience_model_id
+        return self
+
+    def with_challenge_period_event_id(self, challenge_period_event_id: str) -> CreateSeasonModelMasterRequest:
+        self.challenge_period_event_id = challenge_period_event_id
         return self
 
     def get(self, key, default=None):
@@ -866,7 +885,8 @@ class CreateSeasonModelMasterRequest(core.Gs2Request):
                 TierModel.from_dict(data.get('tiers')[i])
                 for i in range(len(data.get('tiers')) if data.get('tiers') else 0)
             ])\
-            .with_experience_model_id(data.get('experienceModelId'))
+            .with_experience_model_id(data.get('experienceModelId'))\
+            .with_challenge_period_event_id(data.get('challengePeriodEventId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -879,6 +899,7 @@ class CreateSeasonModelMasterRequest(core.Gs2Request):
                 for i in range(len(self.tiers) if self.tiers else 0)
             ],
             "experienceModelId": self.experience_model_id,
+            "challengePeriodEventId": self.challenge_period_event_id,
         }
 
 
@@ -934,6 +955,7 @@ class UpdateSeasonModelMasterRequest(core.Gs2Request):
     metadata: str = None
     tiers: List[TierModel] = None
     experience_model_id: str = None
+    challenge_period_event_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateSeasonModelMasterRequest:
         self.namespace_name = namespace_name
@@ -957,6 +979,10 @@ class UpdateSeasonModelMasterRequest(core.Gs2Request):
 
     def with_experience_model_id(self, experience_model_id: str) -> UpdateSeasonModelMasterRequest:
         self.experience_model_id = experience_model_id
+        return self
+
+    def with_challenge_period_event_id(self, challenge_period_event_id: str) -> UpdateSeasonModelMasterRequest:
+        self.challenge_period_event_id = challenge_period_event_id
         return self
 
     def get(self, key, default=None):
@@ -986,7 +1012,8 @@ class UpdateSeasonModelMasterRequest(core.Gs2Request):
                 TierModel.from_dict(data.get('tiers')[i])
                 for i in range(len(data.get('tiers')) if data.get('tiers') else 0)
             ])\
-            .with_experience_model_id(data.get('experienceModelId'))
+            .with_experience_model_id(data.get('experienceModelId'))\
+            .with_challenge_period_event_id(data.get('challengePeriodEventId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -999,6 +1026,7 @@ class UpdateSeasonModelMasterRequest(core.Gs2Request):
                 for i in range(len(self.tiers) if self.tiers else 0)
             ],
             "experienceModelId": self.experience_model_id,
+            "challengePeriodEventId": self.challenge_period_event_id,
         }
 
 

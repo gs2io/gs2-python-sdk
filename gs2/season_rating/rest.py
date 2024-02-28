@@ -113,6 +113,8 @@ class Gs2SeasonRatingRestClient(rest.AbstractGs2RestClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -330,6 +332,8 @@ class Gs2SeasonRatingRestClient(rest.AbstractGs2RestClient):
         }
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -1370,6 +1374,8 @@ class Gs2SeasonRatingRestClient(rest.AbstractGs2RestClient):
             ]
         if request.experience_model_id is not None:
             body["experienceModelId"] = request.experience_model_id
+        if request.challenge_period_event_id is not None:
+            body["challengePeriodEventId"] = request.challenge_period_event_id
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1525,6 +1531,8 @@ class Gs2SeasonRatingRestClient(rest.AbstractGs2RestClient):
             ]
         if request.experience_model_id is not None:
             body["experienceModelId"] = request.experience_model_id
+        if request.challenge_period_event_id is not None:
+            body["challengePeriodEventId"] = request.challenge_period_event_id
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

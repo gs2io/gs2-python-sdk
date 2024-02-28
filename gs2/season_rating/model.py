@@ -518,21 +518,11 @@ class ScriptSetting(core.Gs2Model):
 
 
 class TransactionSetting(core.Gs2Model):
-    enable_auto_run: bool = None
     distributor_namespace_id: str = None
-    key_id: str = None
     queue_namespace_id: str = None
-
-    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
-        self.enable_auto_run = enable_auto_run
-        return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
         self.distributor_namespace_id = distributor_namespace_id
-        return self
-
-    def with_key_id(self, key_id: str) -> TransactionSetting:
-        self.key_id = key_id
         return self
 
     def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
@@ -558,16 +548,12 @@ class TransactionSetting(core.Gs2Model):
         if data is None:
             return None
         return TransactionSetting()\
-            .with_enable_auto_run(data.get('enableAutoRun'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
-            .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "enableAutoRun": self.enable_auto_run,
             "distributorNamespaceId": self.distributor_namespace_id,
-            "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
         }
 
@@ -724,6 +710,7 @@ class SeasonModel(core.Gs2Model):
     metadata: str = None
     tiers: List[TierModel] = None
     experience_model_id: str = None
+    challenge_period_event_id: str = None
 
     def with_season_model_id(self, season_model_id: str) -> SeasonModel:
         self.season_model_id = season_model_id
@@ -743,6 +730,10 @@ class SeasonModel(core.Gs2Model):
 
     def with_experience_model_id(self, experience_model_id: str) -> SeasonModel:
         self.experience_model_id = experience_model_id
+        return self
+
+    def with_challenge_period_event_id(self, challenge_period_event_id: str) -> SeasonModel:
+        self.challenge_period_event_id = challenge_period_event_id
         return self
 
     @classmethod
@@ -826,7 +817,8 @@ class SeasonModel(core.Gs2Model):
                 TierModel.from_dict(data.get('tiers')[i])
                 for i in range(len(data.get('tiers')) if data.get('tiers') else 0)
             ])\
-            .with_experience_model_id(data.get('experienceModelId'))
+            .with_experience_model_id(data.get('experienceModelId'))\
+            .with_challenge_period_event_id(data.get('challengePeriodEventId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -838,6 +830,7 @@ class SeasonModel(core.Gs2Model):
                 for i in range(len(self.tiers) if self.tiers else 0)
             ],
             "experienceModelId": self.experience_model_id,
+            "challengePeriodEventId": self.challenge_period_event_id,
         }
 
 
@@ -848,6 +841,7 @@ class SeasonModelMaster(core.Gs2Model):
     description: str = None
     tiers: List[TierModel] = None
     experience_model_id: str = None
+    challenge_period_event_id: str = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -874,6 +868,10 @@ class SeasonModelMaster(core.Gs2Model):
 
     def with_experience_model_id(self, experience_model_id: str) -> SeasonModelMaster:
         self.experience_model_id = experience_model_id
+        return self
+
+    def with_challenge_period_event_id(self, challenge_period_event_id: str) -> SeasonModelMaster:
+        self.challenge_period_event_id = challenge_period_event_id
         return self
 
     def with_created_at(self, created_at: int) -> SeasonModelMaster:
@@ -971,6 +969,7 @@ class SeasonModelMaster(core.Gs2Model):
                 for i in range(len(data.get('tiers')) if data.get('tiers') else 0)
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
+            .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -986,6 +985,7 @@ class SeasonModelMaster(core.Gs2Model):
                 for i in range(len(self.tiers) if self.tiers else 0)
             ],
             "experienceModelId": self.experience_model_id,
+            "challengePeriodEventId": self.challenge_period_event_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -1106,6 +1106,7 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1121,6 +1122,10 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1204,6 +1209,7 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1214,6 +1220,7 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
