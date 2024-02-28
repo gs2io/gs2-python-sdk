@@ -127,6 +127,12 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             body["completeMatchmakingTriggerRealtimeNamespaceId"] = request.complete_matchmaking_trigger_realtime_namespace_id
         if request.complete_matchmaking_trigger_script_id is not None:
             body["completeMatchmakingTriggerScriptId"] = request.complete_matchmaking_trigger_script_id
+        if request.enable_collaborate_season_rating is not None:
+            body["enableCollaborateSeasonRating"] = request.enable_collaborate_season_rating
+        if request.collaborate_season_rating_namespace_id is not None:
+            body["collaborateSeasonRatingNamespaceId"] = request.collaborate_season_rating_namespace_id
+        if request.collaborate_season_rating_ttl is not None:
+            body["collaborateSeasonRatingTtl"] = request.collaborate_season_rating_ttl
         if request.change_rating_script is not None:
             body["changeRatingScript"] = request.change_rating_script.to_dict()
         if request.join_notification is not None:
@@ -368,6 +374,12 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             body["completeMatchmakingTriggerRealtimeNamespaceId"] = request.complete_matchmaking_trigger_realtime_namespace_id
         if request.complete_matchmaking_trigger_script_id is not None:
             body["completeMatchmakingTriggerScriptId"] = request.complete_matchmaking_trigger_script_id
+        if request.enable_collaborate_season_rating is not None:
+            body["enableCollaborateSeasonRating"] = request.enable_collaborate_season_rating
+        if request.collaborate_season_rating_namespace_id is not None:
+            body["collaborateSeasonRatingNamespaceId"] = request.collaborate_season_rating_namespace_id
+        if request.collaborate_season_rating_ttl is not None:
+            body["collaborateSeasonRatingTtl"] = request.collaborate_season_rating_ttl
         if request.change_rating_script is not None:
             body["changeRatingScript"] = request.change_rating_script.to_dict()
         if request.join_notification is not None:

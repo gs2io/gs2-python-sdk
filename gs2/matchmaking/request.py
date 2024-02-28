@@ -72,6 +72,9 @@ class CreateNamespaceRequest(core.Gs2Request):
     complete_matchmaking_trigger_type: str = None
     complete_matchmaking_trigger_realtime_namespace_id: str = None
     complete_matchmaking_trigger_script_id: str = None
+    enable_collaborate_season_rating: str = None
+    collaborate_season_rating_namespace_id: str = None
+    collaborate_season_rating_ttl: int = None
     change_rating_script: ScriptSetting = None
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
@@ -113,6 +116,18 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_complete_matchmaking_trigger_script_id(self, complete_matchmaking_trigger_script_id: str) -> CreateNamespaceRequest:
         self.complete_matchmaking_trigger_script_id = complete_matchmaking_trigger_script_id
+        return self
+
+    def with_enable_collaborate_season_rating(self, enable_collaborate_season_rating: str) -> CreateNamespaceRequest:
+        self.enable_collaborate_season_rating = enable_collaborate_season_rating
+        return self
+
+    def with_collaborate_season_rating_namespace_id(self, collaborate_season_rating_namespace_id: str) -> CreateNamespaceRequest:
+        self.collaborate_season_rating_namespace_id = collaborate_season_rating_namespace_id
+        return self
+
+    def with_collaborate_season_rating_ttl(self, collaborate_season_rating_ttl: int) -> CreateNamespaceRequest:
+        self.collaborate_season_rating_ttl = collaborate_season_rating_ttl
         return self
 
     def with_change_rating_script(self, change_rating_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -167,6 +182,9 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_complete_matchmaking_trigger_type(data.get('completeMatchmakingTriggerType'))\
             .with_complete_matchmaking_trigger_realtime_namespace_id(data.get('completeMatchmakingTriggerRealtimeNamespaceId'))\
             .with_complete_matchmaking_trigger_script_id(data.get('completeMatchmakingTriggerScriptId'))\
+            .with_enable_collaborate_season_rating(data.get('enableCollaborateSeasonRating'))\
+            .with_collaborate_season_rating_namespace_id(data.get('collaborateSeasonRatingNamespaceId'))\
+            .with_collaborate_season_rating_ttl(data.get('collaborateSeasonRatingTtl'))\
             .with_change_rating_script(ScriptSetting.from_dict(data.get('changeRatingScript')))\
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
@@ -185,6 +203,9 @@ class CreateNamespaceRequest(core.Gs2Request):
             "completeMatchmakingTriggerType": self.complete_matchmaking_trigger_type,
             "completeMatchmakingTriggerRealtimeNamespaceId": self.complete_matchmaking_trigger_realtime_namespace_id,
             "completeMatchmakingTriggerScriptId": self.complete_matchmaking_trigger_script_id,
+            "enableCollaborateSeasonRating": self.enable_collaborate_season_rating,
+            "collaborateSeasonRatingNamespaceId": self.collaborate_season_rating_namespace_id,
+            "collaborateSeasonRatingTtl": self.collaborate_season_rating_ttl,
             "changeRatingScript": self.change_rating_script.to_dict() if self.change_rating_script else None,
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
@@ -278,6 +299,9 @@ class UpdateNamespaceRequest(core.Gs2Request):
     complete_matchmaking_trigger_type: str = None
     complete_matchmaking_trigger_realtime_namespace_id: str = None
     complete_matchmaking_trigger_script_id: str = None
+    enable_collaborate_season_rating: str = None
+    collaborate_season_rating_namespace_id: str = None
+    collaborate_season_rating_ttl: int = None
     change_rating_script: ScriptSetting = None
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
@@ -319,6 +343,18 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_complete_matchmaking_trigger_script_id(self, complete_matchmaking_trigger_script_id: str) -> UpdateNamespaceRequest:
         self.complete_matchmaking_trigger_script_id = complete_matchmaking_trigger_script_id
+        return self
+
+    def with_enable_collaborate_season_rating(self, enable_collaborate_season_rating: str) -> UpdateNamespaceRequest:
+        self.enable_collaborate_season_rating = enable_collaborate_season_rating
+        return self
+
+    def with_collaborate_season_rating_namespace_id(self, collaborate_season_rating_namespace_id: str) -> UpdateNamespaceRequest:
+        self.collaborate_season_rating_namespace_id = collaborate_season_rating_namespace_id
+        return self
+
+    def with_collaborate_season_rating_ttl(self, collaborate_season_rating_ttl: int) -> UpdateNamespaceRequest:
+        self.collaborate_season_rating_ttl = collaborate_season_rating_ttl
         return self
 
     def with_change_rating_script(self, change_rating_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -373,6 +409,9 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_complete_matchmaking_trigger_type(data.get('completeMatchmakingTriggerType'))\
             .with_complete_matchmaking_trigger_realtime_namespace_id(data.get('completeMatchmakingTriggerRealtimeNamespaceId'))\
             .with_complete_matchmaking_trigger_script_id(data.get('completeMatchmakingTriggerScriptId'))\
+            .with_enable_collaborate_season_rating(data.get('enableCollaborateSeasonRating'))\
+            .with_collaborate_season_rating_namespace_id(data.get('collaborateSeasonRatingNamespaceId'))\
+            .with_collaborate_season_rating_ttl(data.get('collaborateSeasonRatingTtl'))\
             .with_change_rating_script(ScriptSetting.from_dict(data.get('changeRatingScript')))\
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
@@ -391,6 +430,9 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "completeMatchmakingTriggerType": self.complete_matchmaking_trigger_type,
             "completeMatchmakingTriggerRealtimeNamespaceId": self.complete_matchmaking_trigger_realtime_namespace_id,
             "completeMatchmakingTriggerScriptId": self.complete_matchmaking_trigger_script_id,
+            "enableCollaborateSeasonRating": self.enable_collaborate_season_rating,
+            "collaborateSeasonRatingNamespaceId": self.collaborate_season_rating_namespace_id,
+            "collaborateSeasonRatingTtl": self.collaborate_season_rating_ttl,
             "changeRatingScript": self.change_rating_script.to_dict() if self.change_rating_script else None,
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
