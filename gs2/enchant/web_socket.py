@@ -3790,6 +3790,8 @@ class Gs2EnchantWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["parameterValueName"] = request.parameter_value_name
         if request.parameter_count is not None:
             body["parameterCount"] = request.parameter_count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3877,6 +3879,8 @@ class Gs2EnchantWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["parameterValueName"] = request.parameter_value_name
         if request.parameter_count is not None:
             body["parameterCount"] = request.parameter_count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

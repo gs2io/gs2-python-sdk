@@ -1103,6 +1103,7 @@ class VerifyCounterRequest(core.Gs2Request):
     counter_name: str = None
     verify_type: str = None
     count: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyCounterRequest:
@@ -1127,6 +1128,10 @@ class VerifyCounterRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> VerifyCounterRequest:
         self.count = count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyCounterRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCounterRequest:
@@ -1157,7 +1162,8 @@ class VerifyCounterRequest(core.Gs2Request):
             .with_limit_name(data.get('limitName'))\
             .with_counter_name(data.get('counterName'))\
             .with_verify_type(data.get('verifyType'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1167,6 +1173,7 @@ class VerifyCounterRequest(core.Gs2Request):
             "counterName": self.counter_name,
             "verifyType": self.verify_type,
             "count": self.count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -1179,6 +1186,7 @@ class VerifyCounterByUserIdRequest(core.Gs2Request):
     counter_name: str = None
     verify_type: str = None
     count: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyCounterByUserIdRequest:
@@ -1203,6 +1211,10 @@ class VerifyCounterByUserIdRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> VerifyCounterByUserIdRequest:
         self.count = count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyCounterByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCounterByUserIdRequest:
@@ -1233,7 +1245,8 @@ class VerifyCounterByUserIdRequest(core.Gs2Request):
             .with_limit_name(data.get('limitName'))\
             .with_counter_name(data.get('counterName'))\
             .with_verify_type(data.get('verifyType'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1243,6 +1256,7 @@ class VerifyCounterByUserIdRequest(core.Gs2Request):
             "counterName": self.counter_name,
             "verifyType": self.verify_type,
             "count": self.count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 

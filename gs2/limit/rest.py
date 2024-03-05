@@ -1614,6 +1614,8 @@ class Gs2LimitRestClient(rest.AbstractGs2RestClient):
         }
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1695,6 +1697,8 @@ class Gs2LimitRestClient(rest.AbstractGs2RestClient):
         }
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

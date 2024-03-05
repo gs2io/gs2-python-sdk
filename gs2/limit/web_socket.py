@@ -1645,6 +1645,8 @@ class Gs2LimitWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["verifyType"] = request.verify_type
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1730,6 +1732,8 @@ class Gs2LimitWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["verifyType"] = request.verify_type
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

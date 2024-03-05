@@ -3286,6 +3286,8 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyId"] = request.property_id
         if request.rank_value is not None:
             body["rankValue"] = request.rank_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3371,6 +3373,8 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyId"] = request.property_id
         if request.rank_value is not None:
             body["rankValue"] = request.rank_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3454,6 +3458,8 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyId"] = request.property_id
         if request.rank_cap_value is not None:
             body["rankCapValue"] = request.rank_cap_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3539,6 +3545,8 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyId"] = request.property_id
         if request.rank_cap_value is not None:
             body["rankCapValue"] = request.rank_cap_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

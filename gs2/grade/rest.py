@@ -2320,6 +2320,8 @@ class Gs2GradeRestClient(rest.AbstractGs2RestClient):
             body["propertyId"] = request.property_id
         if request.grade_value is not None:
             body["gradeValue"] = request.grade_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2402,6 +2404,8 @@ class Gs2GradeRestClient(rest.AbstractGs2RestClient):
             body["propertyId"] = request.property_id
         if request.grade_value is not None:
             body["gradeValue"] = request.grade_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

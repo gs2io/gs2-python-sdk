@@ -3403,6 +3403,7 @@ class VerifyInventoryCurrentMaxCapacityRequest(core.Gs2Request):
     inventory_name: str = None
     verify_type: str = None
     current_inventory_max_capacity: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyInventoryCurrentMaxCapacityRequest:
@@ -3423,6 +3424,10 @@ class VerifyInventoryCurrentMaxCapacityRequest(core.Gs2Request):
 
     def with_current_inventory_max_capacity(self, current_inventory_max_capacity: int) -> VerifyInventoryCurrentMaxCapacityRequest:
         self.current_inventory_max_capacity = current_inventory_max_capacity
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyInventoryCurrentMaxCapacityRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyInventoryCurrentMaxCapacityRequest:
@@ -3452,7 +3457,8 @@ class VerifyInventoryCurrentMaxCapacityRequest(core.Gs2Request):
             .with_access_token(data.get('accessToken'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_verify_type(data.get('verifyType'))\
-            .with_current_inventory_max_capacity(data.get('currentInventoryMaxCapacity'))
+            .with_current_inventory_max_capacity(data.get('currentInventoryMaxCapacity'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3461,6 +3467,7 @@ class VerifyInventoryCurrentMaxCapacityRequest(core.Gs2Request):
             "inventoryName": self.inventory_name,
             "verifyType": self.verify_type,
             "currentInventoryMaxCapacity": self.current_inventory_max_capacity,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -3472,6 +3479,7 @@ class VerifyInventoryCurrentMaxCapacityByUserIdRequest(core.Gs2Request):
     inventory_name: str = None
     verify_type: str = None
     current_inventory_max_capacity: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
@@ -3492,6 +3500,10 @@ class VerifyInventoryCurrentMaxCapacityByUserIdRequest(core.Gs2Request):
 
     def with_current_inventory_max_capacity(self, current_inventory_max_capacity: int) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
         self.current_inventory_max_capacity = current_inventory_max_capacity
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyInventoryCurrentMaxCapacityByUserIdRequest:
@@ -3521,7 +3533,8 @@ class VerifyInventoryCurrentMaxCapacityByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_verify_type(data.get('verifyType'))\
-            .with_current_inventory_max_capacity(data.get('currentInventoryMaxCapacity'))
+            .with_current_inventory_max_capacity(data.get('currentInventoryMaxCapacity'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3530,6 +3543,7 @@ class VerifyInventoryCurrentMaxCapacityByUserIdRequest(core.Gs2Request):
             "inventoryName": self.inventory_name,
             "verifyType": self.verify_type,
             "currentInventoryMaxCapacity": self.current_inventory_max_capacity,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -4457,6 +4471,7 @@ class VerifyItemSetRequest(core.Gs2Request):
     verify_type: str = None
     item_set_name: str = None
     count: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyItemSetRequest:
@@ -4485,6 +4500,10 @@ class VerifyItemSetRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> VerifyItemSetRequest:
         self.count = count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyItemSetRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyItemSetRequest:
@@ -4516,7 +4535,8 @@ class VerifyItemSetRequest(core.Gs2Request):
             .with_item_name(data.get('itemName'))\
             .with_verify_type(data.get('verifyType'))\
             .with_item_set_name(data.get('itemSetName'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -4527,6 +4547,7 @@ class VerifyItemSetRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "itemSetName": self.item_set_name,
             "count": self.count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -4540,6 +4561,7 @@ class VerifyItemSetByUserIdRequest(core.Gs2Request):
     verify_type: str = None
     item_set_name: str = None
     count: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyItemSetByUserIdRequest:
@@ -4568,6 +4590,10 @@ class VerifyItemSetByUserIdRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> VerifyItemSetByUserIdRequest:
         self.count = count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyItemSetByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyItemSetByUserIdRequest:
@@ -4599,7 +4625,8 @@ class VerifyItemSetByUserIdRequest(core.Gs2Request):
             .with_item_name(data.get('itemName'))\
             .with_verify_type(data.get('verifyType'))\
             .with_item_set_name(data.get('itemSetName'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -4610,6 +4637,7 @@ class VerifyItemSetByUserIdRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "itemSetName": self.item_set_name,
             "count": self.count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -6360,6 +6388,7 @@ class VerifySimpleItemRequest(core.Gs2Request):
     item_name: str = None
     verify_type: str = None
     count: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifySimpleItemRequest:
@@ -6384,6 +6413,10 @@ class VerifySimpleItemRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> VerifySimpleItemRequest:
         self.count = count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifySimpleItemRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifySimpleItemRequest:
@@ -6414,7 +6447,8 @@ class VerifySimpleItemRequest(core.Gs2Request):
             .with_inventory_name(data.get('inventoryName'))\
             .with_item_name(data.get('itemName'))\
             .with_verify_type(data.get('verifyType'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -6424,6 +6458,7 @@ class VerifySimpleItemRequest(core.Gs2Request):
             "itemName": self.item_name,
             "verifyType": self.verify_type,
             "count": self.count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -6436,6 +6471,7 @@ class VerifySimpleItemByUserIdRequest(core.Gs2Request):
     item_name: str = None
     verify_type: str = None
     count: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifySimpleItemByUserIdRequest:
@@ -6460,6 +6496,10 @@ class VerifySimpleItemByUserIdRequest(core.Gs2Request):
 
     def with_count(self, count: int) -> VerifySimpleItemByUserIdRequest:
         self.count = count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifySimpleItemByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifySimpleItemByUserIdRequest:
@@ -6490,7 +6530,8 @@ class VerifySimpleItemByUserIdRequest(core.Gs2Request):
             .with_inventory_name(data.get('inventoryName'))\
             .with_item_name(data.get('itemName'))\
             .with_verify_type(data.get('verifyType'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -6500,6 +6541,7 @@ class VerifySimpleItemByUserIdRequest(core.Gs2Request):
             "itemName": self.item_name,
             "verifyType": self.verify_type,
             "count": self.count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -7264,6 +7306,7 @@ class VerifyBigItemRequest(core.Gs2Request):
     item_name: str = None
     verify_type: str = None
     count: str = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyBigItemRequest:
@@ -7288,6 +7331,10 @@ class VerifyBigItemRequest(core.Gs2Request):
 
     def with_count(self, count: str) -> VerifyBigItemRequest:
         self.count = count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyBigItemRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyBigItemRequest:
@@ -7318,7 +7365,8 @@ class VerifyBigItemRequest(core.Gs2Request):
             .with_inventory_name(data.get('inventoryName'))\
             .with_item_name(data.get('itemName'))\
             .with_verify_type(data.get('verifyType'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -7328,6 +7376,7 @@ class VerifyBigItemRequest(core.Gs2Request):
             "itemName": self.item_name,
             "verifyType": self.verify_type,
             "count": self.count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -7340,6 +7389,7 @@ class VerifyBigItemByUserIdRequest(core.Gs2Request):
     item_name: str = None
     verify_type: str = None
     count: str = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyBigItemByUserIdRequest:
@@ -7364,6 +7414,10 @@ class VerifyBigItemByUserIdRequest(core.Gs2Request):
 
     def with_count(self, count: str) -> VerifyBigItemByUserIdRequest:
         self.count = count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyBigItemByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyBigItemByUserIdRequest:
@@ -7394,7 +7448,8 @@ class VerifyBigItemByUserIdRequest(core.Gs2Request):
             .with_inventory_name(data.get('inventoryName'))\
             .with_item_name(data.get('itemName'))\
             .with_verify_type(data.get('verifyType'))\
-            .with_count(data.get('count'))
+            .with_count(data.get('count'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -7404,6 +7459,7 @@ class VerifyBigItemByUserIdRequest(core.Gs2Request):
             "itemName": self.item_name,
             "verifyType": self.verify_type,
             "count": self.count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 

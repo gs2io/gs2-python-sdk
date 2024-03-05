@@ -2603,6 +2603,7 @@ class VerifyRarityParameterStatusRequest(core.Gs2Request):
     verify_type: str = None
     parameter_value_name: str = None
     parameter_count: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyRarityParameterStatusRequest:
@@ -2631,6 +2632,10 @@ class VerifyRarityParameterStatusRequest(core.Gs2Request):
 
     def with_parameter_count(self, parameter_count: int) -> VerifyRarityParameterStatusRequest:
         self.parameter_count = parameter_count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyRarityParameterStatusRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRarityParameterStatusRequest:
@@ -2662,7 +2667,8 @@ class VerifyRarityParameterStatusRequest(core.Gs2Request):
             .with_property_id(data.get('propertyId'))\
             .with_verify_type(data.get('verifyType'))\
             .with_parameter_value_name(data.get('parameterValueName'))\
-            .with_parameter_count(data.get('parameterCount'))
+            .with_parameter_count(data.get('parameterCount'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2673,6 +2679,7 @@ class VerifyRarityParameterStatusRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "parameterValueName": self.parameter_value_name,
             "parameterCount": self.parameter_count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -2686,6 +2693,7 @@ class VerifyRarityParameterStatusByUserIdRequest(core.Gs2Request):
     verify_type: str = None
     parameter_value_name: str = None
     parameter_count: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyRarityParameterStatusByUserIdRequest:
@@ -2714,6 +2722,10 @@ class VerifyRarityParameterStatusByUserIdRequest(core.Gs2Request):
 
     def with_parameter_count(self, parameter_count: int) -> VerifyRarityParameterStatusByUserIdRequest:
         self.parameter_count = parameter_count
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyRarityParameterStatusByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRarityParameterStatusByUserIdRequest:
@@ -2745,7 +2757,8 @@ class VerifyRarityParameterStatusByUserIdRequest(core.Gs2Request):
             .with_property_id(data.get('propertyId'))\
             .with_verify_type(data.get('verifyType'))\
             .with_parameter_value_name(data.get('parameterValueName'))\
-            .with_parameter_count(data.get('parameterCount'))
+            .with_parameter_count(data.get('parameterCount'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2756,6 +2769,7 @@ class VerifyRarityParameterStatusByUserIdRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "parameterValueName": self.parameter_value_name,
             "parameterCount": self.parameter_count,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 

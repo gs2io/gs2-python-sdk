@@ -5030,6 +5030,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["verifyType"] = request.verify_type
         if request.current_inventory_max_capacity is not None:
             body["currentInventoryMaxCapacity"] = request.current_inventory_max_capacity
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5113,6 +5115,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["verifyType"] = request.verify_type
         if request.current_inventory_max_capacity is not None:
             body["currentInventoryMaxCapacity"] = request.current_inventory_max_capacity
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -6320,6 +6324,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemSetName"] = request.item_set_name
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -6407,6 +6413,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemSetName"] = request.item_set_name
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8716,6 +8724,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["verifyType"] = request.verify_type
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8801,6 +8811,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["verifyType"] = request.verify_type
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9897,6 +9909,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["verifyType"] = request.verify_type
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9982,6 +9996,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["verifyType"] = request.verify_type
         if request.count is not None:
             body["count"] = request.count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

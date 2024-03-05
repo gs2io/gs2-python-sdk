@@ -3736,6 +3736,8 @@ class Gs2EnchantRestClient(rest.AbstractGs2RestClient):
             body["parameterValueName"] = request.parameter_value_name
         if request.parameter_count is not None:
             body["parameterCount"] = request.parameter_count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3819,6 +3821,8 @@ class Gs2EnchantRestClient(rest.AbstractGs2RestClient):
             body["parameterValueName"] = request.parameter_value_name
         if request.parameter_count is not None:
             body["parameterCount"] = request.parameter_count
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

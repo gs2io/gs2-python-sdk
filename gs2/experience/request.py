@@ -2360,6 +2360,7 @@ class VerifyRankRequest(core.Gs2Request):
     verify_type: str = None
     property_id: str = None
     rank_value: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyRankRequest:
@@ -2384,6 +2385,10 @@ class VerifyRankRequest(core.Gs2Request):
 
     def with_rank_value(self, rank_value: int) -> VerifyRankRequest:
         self.rank_value = rank_value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyRankRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRankRequest:
@@ -2414,7 +2419,8 @@ class VerifyRankRequest(core.Gs2Request):
             .with_experience_name(data.get('experienceName'))\
             .with_verify_type(data.get('verifyType'))\
             .with_property_id(data.get('propertyId'))\
-            .with_rank_value(data.get('rankValue'))
+            .with_rank_value(data.get('rankValue'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2424,6 +2430,7 @@ class VerifyRankRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "propertyId": self.property_id,
             "rankValue": self.rank_value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -2436,6 +2443,7 @@ class VerifyRankByUserIdRequest(core.Gs2Request):
     verify_type: str = None
     property_id: str = None
     rank_value: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyRankByUserIdRequest:
@@ -2460,6 +2468,10 @@ class VerifyRankByUserIdRequest(core.Gs2Request):
 
     def with_rank_value(self, rank_value: int) -> VerifyRankByUserIdRequest:
         self.rank_value = rank_value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyRankByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRankByUserIdRequest:
@@ -2490,7 +2502,8 @@ class VerifyRankByUserIdRequest(core.Gs2Request):
             .with_experience_name(data.get('experienceName'))\
             .with_verify_type(data.get('verifyType'))\
             .with_property_id(data.get('propertyId'))\
-            .with_rank_value(data.get('rankValue'))
+            .with_rank_value(data.get('rankValue'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2500,6 +2513,7 @@ class VerifyRankByUserIdRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "propertyId": self.property_id,
             "rankValue": self.rank_value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -2512,6 +2526,7 @@ class VerifyRankCapRequest(core.Gs2Request):
     verify_type: str = None
     property_id: str = None
     rank_cap_value: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyRankCapRequest:
@@ -2536,6 +2551,10 @@ class VerifyRankCapRequest(core.Gs2Request):
 
     def with_rank_cap_value(self, rank_cap_value: int) -> VerifyRankCapRequest:
         self.rank_cap_value = rank_cap_value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyRankCapRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRankCapRequest:
@@ -2566,7 +2585,8 @@ class VerifyRankCapRequest(core.Gs2Request):
             .with_experience_name(data.get('experienceName'))\
             .with_verify_type(data.get('verifyType'))\
             .with_property_id(data.get('propertyId'))\
-            .with_rank_cap_value(data.get('rankCapValue'))
+            .with_rank_cap_value(data.get('rankCapValue'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2576,6 +2596,7 @@ class VerifyRankCapRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "propertyId": self.property_id,
             "rankCapValue": self.rank_cap_value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -2588,6 +2609,7 @@ class VerifyRankCapByUserIdRequest(core.Gs2Request):
     verify_type: str = None
     property_id: str = None
     rank_cap_value: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyRankCapByUserIdRequest:
@@ -2612,6 +2634,10 @@ class VerifyRankCapByUserIdRequest(core.Gs2Request):
 
     def with_rank_cap_value(self, rank_cap_value: int) -> VerifyRankCapByUserIdRequest:
         self.rank_cap_value = rank_cap_value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyRankCapByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRankCapByUserIdRequest:
@@ -2642,7 +2668,8 @@ class VerifyRankCapByUserIdRequest(core.Gs2Request):
             .with_experience_name(data.get('experienceName'))\
             .with_verify_type(data.get('verifyType'))\
             .with_property_id(data.get('propertyId'))\
-            .with_rank_cap_value(data.get('rankCapValue'))
+            .with_rank_cap_value(data.get('rankCapValue'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2652,6 +2679,7 @@ class VerifyRankCapByUserIdRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "propertyId": self.property_id,
             "rankCapValue": self.rank_cap_value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 

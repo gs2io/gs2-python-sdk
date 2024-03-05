@@ -2360,6 +2360,8 @@ class Gs2GradeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyId"] = request.property_id
         if request.grade_value is not None:
             body["gradeValue"] = request.grade_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2445,6 +2447,8 @@ class Gs2GradeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyId"] = request.property_id
         if request.grade_value is not None:
             body["gradeValue"] = request.grade_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

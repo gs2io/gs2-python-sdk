@@ -1662,6 +1662,7 @@ class VerifyGradeRequest(core.Gs2Request):
     verify_type: str = None
     property_id: str = None
     grade_value: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyGradeRequest:
@@ -1686,6 +1687,10 @@ class VerifyGradeRequest(core.Gs2Request):
 
     def with_grade_value(self, grade_value: int) -> VerifyGradeRequest:
         self.grade_value = grade_value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyGradeRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyGradeRequest:
@@ -1716,7 +1721,8 @@ class VerifyGradeRequest(core.Gs2Request):
             .with_grade_name(data.get('gradeName'))\
             .with_verify_type(data.get('verifyType'))\
             .with_property_id(data.get('propertyId'))\
-            .with_grade_value(data.get('gradeValue'))
+            .with_grade_value(data.get('gradeValue'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1726,6 +1732,7 @@ class VerifyGradeRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "propertyId": self.property_id,
             "gradeValue": self.grade_value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 
@@ -1738,6 +1745,7 @@ class VerifyGradeByUserIdRequest(core.Gs2Request):
     verify_type: str = None
     property_id: str = None
     grade_value: int = None
+    multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyGradeByUserIdRequest:
@@ -1762,6 +1770,10 @@ class VerifyGradeByUserIdRequest(core.Gs2Request):
 
     def with_grade_value(self, grade_value: int) -> VerifyGradeByUserIdRequest:
         self.grade_value = grade_value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyGradeByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyGradeByUserIdRequest:
@@ -1792,7 +1804,8 @@ class VerifyGradeByUserIdRequest(core.Gs2Request):
             .with_grade_name(data.get('gradeName'))\
             .with_verify_type(data.get('verifyType'))\
             .with_property_id(data.get('propertyId'))\
-            .with_grade_value(data.get('gradeValue'))
+            .with_grade_value(data.get('gradeValue'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1802,6 +1815,7 @@ class VerifyGradeByUserIdRequest(core.Gs2Request):
             "verifyType": self.verify_type,
             "propertyId": self.property_id,
             "gradeValue": self.grade_value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
 
 

@@ -3234,6 +3234,8 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
             body["propertyId"] = request.property_id
         if request.rank_value is not None:
             body["rankValue"] = request.rank_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3316,6 +3318,8 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
             body["propertyId"] = request.property_id
         if request.rank_value is not None:
             body["rankValue"] = request.rank_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3395,6 +3399,8 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
             body["propertyId"] = request.property_id
         if request.rank_cap_value is not None:
             body["rankCapValue"] = request.rank_cap_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3477,6 +3483,8 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
             body["propertyId"] = request.property_id
         if request.rank_cap_value is not None:
             body["rankCapValue"] = request.rank_cap_value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
