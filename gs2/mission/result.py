@@ -1362,9 +1362,14 @@ class DescribeCountersByUserIdResult(core.Gs2Result):
 
 class IncreaseCounterByUserIdResult(core.Gs2Result):
     item: Counter = None
+    changed_completes: List[Complete] = None
 
     def with_item(self, item: Counter) -> IncreaseCounterByUserIdResult:
         self.item = item
+        return self
+
+    def with_changed_completes(self, changed_completes: List[Complete]) -> IncreaseCounterByUserIdResult:
+        self.changed_completes = changed_completes
         return self
 
     def get(self, key, default=None):
@@ -1386,11 +1391,19 @@ class IncreaseCounterByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return IncreaseCounterByUserIdResult()\
-            .with_item(Counter.from_dict(data.get('item')))
+            .with_item(Counter.from_dict(data.get('item')))\
+            .with_changed_completes([
+                Complete.from_dict(data.get('changedCompletes')[i])
+                for i in range(len(data.get('changedCompletes')) if data.get('changedCompletes') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "changedCompletes": [
+                self.changed_completes[i].to_dict() if self.changed_completes[i] else None
+                for i in range(len(self.changed_completes) if self.changed_completes else 0)
+            ],
         }
 
 
@@ -1532,9 +1545,14 @@ class DeleteCounterByUserIdResult(core.Gs2Result):
 
 class IncreaseByStampSheetResult(core.Gs2Result):
     item: Counter = None
+    changed_completes: List[Complete] = None
 
     def with_item(self, item: Counter) -> IncreaseByStampSheetResult:
         self.item = item
+        return self
+
+    def with_changed_completes(self, changed_completes: List[Complete]) -> IncreaseByStampSheetResult:
+        self.changed_completes = changed_completes
         return self
 
     def get(self, key, default=None):
@@ -1556,11 +1574,19 @@ class IncreaseByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return IncreaseByStampSheetResult()\
-            .with_item(Counter.from_dict(data.get('item')))
+            .with_item(Counter.from_dict(data.get('item')))\
+            .with_changed_completes([
+                Complete.from_dict(data.get('changedCompletes')[i])
+                for i in range(len(data.get('changedCompletes')) if data.get('changedCompletes') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "changedCompletes": [
+                self.changed_completes[i].to_dict() if self.changed_completes[i] else None
+                for i in range(len(self.changed_completes) if self.changed_completes else 0)
+            ],
         }
 
 
