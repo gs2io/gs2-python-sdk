@@ -496,6 +496,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -569,6 +571,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -642,6 +646,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -715,6 +721,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -788,6 +796,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -863,6 +873,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.upload_token is not None:
             body["uploadToken"] = request.upload_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -938,6 +950,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.upload_token is not None:
             body["uploadToken"] = request.upload_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4564,6 +4578,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4716,6 +4732,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["inventoryName"] = request.inventory_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4793,6 +4811,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.add_capacity_value is not None:
             body["addCapacityValue"] = request.add_capacity_value
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4872,6 +4892,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.new_capacity_value is not None:
             body["newCapacityValue"] = request.new_capacity_value
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4949,6 +4971,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["inventoryName"] = request.inventory_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5117,6 +5141,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["currentInventoryMaxCapacity"] = request.current_inventory_max_capacity
         if request.multiply_value_specifying_quantity is not None:
             body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5498,6 +5524,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5658,6 +5686,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemName"] = request.item_name
         if request.item_set_name is not None:
             body["itemSetName"] = request.item_set_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5822,6 +5852,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemSetName"] = request.item_set_name
         if request.key_id is not None:
             body["keyId"] = request.key_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5907,6 +5939,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["createNewItemSet"] = request.create_new_item_set
         if request.item_set_name is not None:
             body["itemSetName"] = request.item_set_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5990,6 +6024,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["gradeModelId"] = request.grade_model_id
         if request.grade_value is not None:
             body["gradeValue"] = request.grade_value
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -6158,6 +6194,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["consumeCount"] = request.consume_count
         if request.item_set_name is not None:
             body["itemSetName"] = request.item_set_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -6239,6 +6277,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemName"] = request.item_name
         if request.item_set_name is not None:
             body["itemSetName"] = request.item_set_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -6415,6 +6455,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["count"] = request.count
         if request.multiply_value_specifying_quantity is not None:
             body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -6869,6 +6911,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemName"] = request.item_name
         if request.item_set_name is not None:
             body["itemSetName"] = request.item_set_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -7033,6 +7077,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemSetName"] = request.item_set_name
         if request.reference_of is not None:
             body["referenceOf"] = request.reference_of
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -7203,6 +7249,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["referenceOf"] = request.reference_of
         if request.verify_type is not None:
             body["verifyType"] = request.verify_type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -7371,6 +7419,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemSetName"] = request.item_set_name
         if request.reference_of is not None:
             body["referenceOf"] = request.reference_of
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -7539,6 +7589,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemSetName"] = request.item_set_name
         if request.reference_of is not None:
             body["referenceOf"] = request.reference_of
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -7920,6 +7972,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8076,6 +8130,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.item_name is not None:
             body["itemName"] = request.item_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8236,6 +8292,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemName"] = request.item_name
         if request.key_id is not None:
             body["keyId"] = request.key_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8316,6 +8374,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.acquire_counts
             ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8482,6 +8542,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.consume_counts
             ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8564,6 +8626,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.counts
             ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8641,6 +8705,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["inventoryName"] = request.inventory_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -8813,6 +8879,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["count"] = request.count
         if request.multiply_value_specifying_quantity is not None:
             body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9267,6 +9335,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9423,6 +9493,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.item_name is not None:
             body["itemName"] = request.item_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9502,6 +9574,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemName"] = request.item_name
         if request.acquire_count is not None:
             body["acquireCount"] = request.acquire_count
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9666,6 +9740,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemName"] = request.item_name
         if request.consume_count is not None:
             body["consumeCount"] = request.consume_count
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9747,6 +9823,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["itemName"] = request.item_name
         if request.count is not None:
             body["count"] = request.count
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9826,6 +9904,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.item_name is not None:
             body["itemName"] = request.item_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -9998,6 +10078,8 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["count"] = request.count
         if request.multiply_value_specifying_quantity is not None:
             body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

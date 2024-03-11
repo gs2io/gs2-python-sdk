@@ -1915,6 +1915,8 @@ class Gs2MegaFieldWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["vector"] = request.vector.to_dict()
         if request.r is not None:
             body["r"] = request.r
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2427,6 +2429,8 @@ class Gs2MegaFieldWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.scopes
             ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

@@ -480,6 +480,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -553,6 +555,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -626,6 +630,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -699,6 +705,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -772,6 +780,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -847,6 +857,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.upload_token is not None:
             body["uploadToken"] = request.upload_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -922,6 +934,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.upload_token is not None:
             body["uploadToken"] = request.upload_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1080,6 +1094,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1234,6 +1250,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.allow_concurrent_access is not None:
             body["allowConcurrentAccess"] = request.allow_concurrent_access
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1317,6 +1335,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["enableTransferMobileNotification"] = request.enable_transfer_mobile_notification
         if request.sound is not None:
             body["sound"] = request.sound
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1392,6 +1412,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1619,6 +1641,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.token is not None:
             body["token"] = request.token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1769,6 +1793,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1919,6 +1945,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2000,6 +2028,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["payload"] = request.payload
         if request.sound is not None:
             body["sound"] = request.sound
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

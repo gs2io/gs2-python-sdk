@@ -476,6 +476,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -549,6 +551,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -622,6 +626,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -695,6 +701,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -768,6 +776,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -843,6 +853,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.upload_token is not None:
             body["uploadToken"] = request.upload_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -918,6 +930,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.upload_token is not None:
             body["uploadToken"] = request.upload_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1665,6 +1679,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.target_user_id is not None:
             body["targetUserId"] = request.target_user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1831,6 +1847,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1991,6 +2009,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["scorerUserId"] = request.scorer_user_id
         if request.unique_id is not None:
             body["uniqueId"] = request.unique_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2159,6 +2179,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2400,6 +2422,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["uniqueId"] = request.unique_id
         if request.additional_scope_name is not None:
             body["additionalScopeName"] = request.additional_scope_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2562,6 +2586,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["score"] = request.score
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3083,6 +3109,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.target_user_id is not None:
             body["targetUserId"] = request.target_user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3241,6 +3269,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.target_user_id is not None:
             body["targetUserId"] = request.target_user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3395,6 +3425,8 @@ class Gs2RankingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["categoryName"] = request.category_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

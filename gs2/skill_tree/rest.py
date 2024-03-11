@@ -491,6 +491,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -564,6 +566,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
@@ -637,6 +641,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -710,6 +716,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
@@ -783,6 +791,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -858,6 +868,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -932,6 +944,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
@@ -1551,6 +1565,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -1722,6 +1738,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -1802,6 +1820,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -1973,6 +1993,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -2126,6 +2148,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
@@ -2273,6 +2297,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
@@ -2429,6 +2455,8 @@ class Gs2SkillTreeRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.duplication_avoider:
             headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
             method='DELETE',

@@ -638,6 +638,7 @@ class DescribeNewsByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeNewsByUserIdRequest:
         self.namespace_name = namespace_name
@@ -645,6 +646,10 @@ class DescribeNewsByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DescribeNewsByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeNewsByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -667,12 +672,14 @@ class DescribeNewsByUserIdRequest(core.Gs2Request):
             return None
         return DescribeNewsByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -724,6 +731,7 @@ class WantGrantByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> WantGrantByUserIdRequest:
         self.namespace_name = namespace_name
@@ -731,6 +739,10 @@ class WantGrantByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> WantGrantByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> WantGrantByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -753,10 +765,12 @@ class WantGrantByUserIdRequest(core.Gs2Request):
             return None
         return WantGrantByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }

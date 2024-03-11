@@ -492,6 +492,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -565,6 +567,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -638,6 +642,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -711,6 +717,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -784,6 +792,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -859,6 +869,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.upload_token is not None:
             body["uploadToken"] = request.upload_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -934,6 +946,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.upload_token is not None:
             body["uploadToken"] = request.upload_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2898,6 +2912,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3050,6 +3066,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.mold_model_name is not None:
             body["moldModelName"] = request.mold_model_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3127,6 +3145,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["moldModelName"] = request.mold_model_name
         if request.capacity is not None:
             body["capacity"] = request.capacity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3206,6 +3226,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["moldModelName"] = request.mold_model_name
         if request.capacity is not None:
             body["capacity"] = request.capacity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3285,6 +3307,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["moldModelName"] = request.mold_model_name
         if request.capacity is not None:
             body["capacity"] = request.capacity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3441,6 +3465,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.mold_model_name is not None:
             body["moldModelName"] = request.mold_model_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3822,6 +3848,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3978,6 +4006,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4138,6 +4168,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["index"] = request.index
         if request.key_id is not None:
             body["keyId"] = request.key_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4220,6 +4252,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.slots
             ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4394,6 +4428,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.config
             ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4554,6 +4590,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["moldModelName"] = request.mold_model_name
         if request.index is not None:
             body["index"] = request.index
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -4862,6 +4900,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5018,6 +5058,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5178,6 +5220,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyId"] = request.property_id
         if request.key_id is not None:
             body["keyId"] = request.key_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5260,6 +5304,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.slots
             ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5434,6 +5480,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.config
             ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5594,6 +5642,8 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["propertyFormModelName"] = request.property_form_model_name
         if request.property_id is not None:
             body["propertyId"] = request.property_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

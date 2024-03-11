@@ -22,6 +22,7 @@ class LoginRequest(core.Gs2Request):
     context_stack: str = None
     user_id: str = None
     time_offset: int = None
+    time_offset_token: str = None
 
     def with_user_id(self, user_id: str) -> LoginRequest:
         self.user_id = user_id
@@ -29,6 +30,10 @@ class LoginRequest(core.Gs2Request):
 
     def with_time_offset(self, time_offset: int) -> LoginRequest:
         self.time_offset = time_offset
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> LoginRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -51,12 +56,14 @@ class LoginRequest(core.Gs2Request):
             return None
         return LoginRequest()\
             .with_user_id(data.get('userId'))\
-            .with_time_offset(data.get('timeOffset'))
+            .with_time_offset(data.get('timeOffset'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "timeOffset": self.time_offset,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -107,4 +114,54 @@ class LoginBySignatureRequest(core.Gs2Request):
             "keyId": self.key_id,
             "body": self.body,
             "signature": self.signature,
+        }
+
+
+class IssueTimeOffsetTokenByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    time_offset: int = None
+    time_offset_token: str = None
+
+    def with_user_id(self, user_id: str) -> IssueTimeOffsetTokenByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset(self, time_offset: int) -> IssueTimeOffsetTokenByUserIdRequest:
+        self.time_offset = time_offset
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> IssueTimeOffsetTokenByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IssueTimeOffsetTokenByUserIdRequest]:
+        if data is None:
+            return None
+        return IssueTimeOffsetTokenByUserIdRequest()\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset(data.get('timeOffset'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "timeOffset": self.time_offset,
+            "timeOffsetToken": self.time_offset_token,
         }

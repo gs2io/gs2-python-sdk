@@ -378,6 +378,7 @@ class QueryAccessLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryAccessLogRequest:
@@ -416,6 +417,10 @@ class QueryAccessLogRequest(core.Gs2Request):
         self.limit = limit
         return self
 
+    def with_time_offset_token(self, time_offset_token: str) -> QueryAccessLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
     def with_duplication_avoider(self, duplication_avoider: str) -> QueryAccessLogRequest:
         self.duplication_avoider = duplication_avoider
         return self
@@ -447,7 +452,8 @@ class QueryAccessLogRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -460,6 +466,7 @@ class QueryAccessLogRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -475,6 +482,7 @@ class CountAccessLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CountAccessLogRequest:
         self.namespace_name = namespace_name
@@ -512,6 +520,10 @@ class CountAccessLogRequest(core.Gs2Request):
         self.limit = limit
         return self
 
+    def with_time_offset_token(self, time_offset_token: str) -> CountAccessLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -539,7 +551,8 @@ class CountAccessLogRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -552,6 +565,7 @@ class CountAccessLogRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -568,6 +582,7 @@ class QueryIssueStampSheetLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryIssueStampSheetLogRequest:
@@ -610,6 +625,10 @@ class QueryIssueStampSheetLogRequest(core.Gs2Request):
         self.limit = limit
         return self
 
+    def with_time_offset_token(self, time_offset_token: str) -> QueryIssueStampSheetLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
     def with_duplication_avoider(self, duplication_avoider: str) -> QueryIssueStampSheetLogRequest:
         self.duplication_avoider = duplication_avoider
         return self
@@ -642,7 +661,8 @@ class QueryIssueStampSheetLogRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -656,6 +676,7 @@ class QueryIssueStampSheetLogRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -672,6 +693,7 @@ class CountIssueStampSheetLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CountIssueStampSheetLogRequest:
         self.namespace_name = namespace_name
@@ -713,6 +735,10 @@ class CountIssueStampSheetLogRequest(core.Gs2Request):
         self.limit = limit
         return self
 
+    def with_time_offset_token(self, time_offset_token: str) -> CountIssueStampSheetLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -741,7 +767,8 @@ class CountIssueStampSheetLogRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -755,6 +782,7 @@ class CountIssueStampSheetLogRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -771,6 +799,7 @@ class QueryExecuteStampSheetLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryExecuteStampSheetLogRequest:
@@ -813,6 +842,10 @@ class QueryExecuteStampSheetLogRequest(core.Gs2Request):
         self.limit = limit
         return self
 
+    def with_time_offset_token(self, time_offset_token: str) -> QueryExecuteStampSheetLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
     def with_duplication_avoider(self, duplication_avoider: str) -> QueryExecuteStampSheetLogRequest:
         self.duplication_avoider = duplication_avoider
         return self
@@ -845,7 +878,8 @@ class QueryExecuteStampSheetLogRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -859,6 +893,7 @@ class QueryExecuteStampSheetLogRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -875,6 +910,7 @@ class CountExecuteStampSheetLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CountExecuteStampSheetLogRequest:
         self.namespace_name = namespace_name
@@ -916,6 +952,10 @@ class CountExecuteStampSheetLogRequest(core.Gs2Request):
         self.limit = limit
         return self
 
+    def with_time_offset_token(self, time_offset_token: str) -> CountExecuteStampSheetLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -944,7 +984,8 @@ class CountExecuteStampSheetLogRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -958,6 +999,7 @@ class CountExecuteStampSheetLogRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -974,6 +1016,7 @@ class QueryExecuteStampTaskLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryExecuteStampTaskLogRequest:
@@ -1016,6 +1059,10 @@ class QueryExecuteStampTaskLogRequest(core.Gs2Request):
         self.limit = limit
         return self
 
+    def with_time_offset_token(self, time_offset_token: str) -> QueryExecuteStampTaskLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
     def with_duplication_avoider(self, duplication_avoider: str) -> QueryExecuteStampTaskLogRequest:
         self.duplication_avoider = duplication_avoider
         return self
@@ -1048,7 +1095,8 @@ class QueryExecuteStampTaskLogRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1062,6 +1110,7 @@ class QueryExecuteStampTaskLogRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1078,6 +1127,7 @@ class CountExecuteStampTaskLogRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CountExecuteStampTaskLogRequest:
         self.namespace_name = namespace_name
@@ -1119,6 +1169,10 @@ class CountExecuteStampTaskLogRequest(core.Gs2Request):
         self.limit = limit
         return self
 
+    def with_time_offset_token(self, time_offset_token: str) -> CountExecuteStampTaskLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1147,7 +1201,8 @@ class CountExecuteStampTaskLogRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1161,6 +1216,7 @@ class CountExecuteStampTaskLogRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1174,6 +1230,7 @@ class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
     long_term: bool = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryAccessLogWithTelemetryRequest:
@@ -1202,6 +1259,10 @@ class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> QueryAccessLogWithTelemetryRequest:
         self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> QueryAccessLogWithTelemetryRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> QueryAccessLogWithTelemetryRequest:
@@ -1233,7 +1294,8 @@ class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
             .with_end(data.get('end'))\
             .with_long_term(data.get('longTerm'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1244,6 +1306,7 @@ class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
             "longTerm": self.long_term,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 

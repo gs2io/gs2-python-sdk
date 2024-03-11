@@ -1311,6 +1311,8 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.distribute_resource is not None:
             body["distributeResource"] = request.distribute_resource.to_dict()
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1384,6 +1386,8 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.distribute_resource is not None:
             body["distributeResource"] = request.distribute_resource.to_dict()
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1980,6 +1984,8 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.transaction_id is not None:
             body["transactionId"] = request.transaction_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

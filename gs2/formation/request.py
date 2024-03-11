@@ -328,10 +328,15 @@ class DumpUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> DumpUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DumpUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DumpUserDataByUserIdRequest:
@@ -357,11 +362,13 @@ class DumpUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return DumpUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -369,10 +376,15 @@ class CheckDumpUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CheckDumpUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CheckDumpUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CheckDumpUserDataByUserIdRequest:
@@ -398,11 +410,13 @@ class CheckDumpUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return CheckDumpUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -410,10 +424,15 @@ class CleanUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CleanUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CleanUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CleanUserDataByUserIdRequest:
@@ -439,11 +458,13 @@ class CleanUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return CleanUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -451,10 +472,15 @@ class CheckCleanUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CheckCleanUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CheckCleanUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CheckCleanUserDataByUserIdRequest:
@@ -480,11 +506,13 @@ class CheckCleanUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return CheckCleanUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -492,10 +520,15 @@ class PrepareImportUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> PrepareImportUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> PrepareImportUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> PrepareImportUserDataByUserIdRequest:
@@ -521,11 +554,13 @@ class PrepareImportUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return PrepareImportUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -534,6 +569,7 @@ class ImportUserDataByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     user_id: str = None
     upload_token: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> ImportUserDataByUserIdRequest:
@@ -542,6 +578,10 @@ class ImportUserDataByUserIdRequest(core.Gs2Request):
 
     def with_upload_token(self, upload_token: str) -> ImportUserDataByUserIdRequest:
         self.upload_token = upload_token
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> ImportUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> ImportUserDataByUserIdRequest:
@@ -568,12 +608,14 @@ class ImportUserDataByUserIdRequest(core.Gs2Request):
             return None
         return ImportUserDataByUserIdRequest()\
             .with_user_id(data.get('userId'))\
-            .with_upload_token(data.get('uploadToken'))
+            .with_upload_token(data.get('uploadToken'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "uploadToken": self.upload_token,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -582,6 +624,7 @@ class CheckImportUserDataByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     user_id: str = None
     upload_token: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CheckImportUserDataByUserIdRequest:
@@ -590,6 +633,10 @@ class CheckImportUserDataByUserIdRequest(core.Gs2Request):
 
     def with_upload_token(self, upload_token: str) -> CheckImportUserDataByUserIdRequest:
         self.upload_token = upload_token
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CheckImportUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CheckImportUserDataByUserIdRequest:
@@ -616,12 +663,14 @@ class CheckImportUserDataByUserIdRequest(core.Gs2Request):
             return None
         return CheckImportUserDataByUserIdRequest()\
             .with_user_id(data.get('userId'))\
-            .with_upload_token(data.get('uploadToken'))
+            .with_upload_token(data.get('uploadToken'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "uploadToken": self.upload_token,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1892,6 +1941,7 @@ class DescribeMoldsByUserIdRequest(core.Gs2Request):
     user_id: str = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeMoldsByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1907,6 +1957,10 @@ class DescribeMoldsByUserIdRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> DescribeMoldsByUserIdRequest:
         self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeMoldsByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -1931,7 +1985,8 @@ class DescribeMoldsByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1939,6 +1994,7 @@ class DescribeMoldsByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1998,6 +2054,7 @@ class GetMoldByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     mold_model_name: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMoldByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2009,6 +2066,10 @@ class GetMoldByUserIdRequest(core.Gs2Request):
 
     def with_mold_model_name(self, mold_model_name: str) -> GetMoldByUserIdRequest:
         self.mold_model_name = mold_model_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetMoldByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -2032,13 +2093,15 @@ class GetMoldByUserIdRequest(core.Gs2Request):
         return GetMoldByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_model_name(data.get('moldModelName'))
+            .with_mold_model_name(data.get('moldModelName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "moldModelName": self.mold_model_name,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -2049,6 +2112,7 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
     user_id: str = None
     mold_model_name: str = None
     capacity: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetMoldCapacityByUserIdRequest:
@@ -2065,6 +2129,10 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
 
     def with_capacity(self, capacity: int) -> SetMoldCapacityByUserIdRequest:
         self.capacity = capacity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> SetMoldCapacityByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> SetMoldCapacityByUserIdRequest:
@@ -2093,7 +2161,8 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_mold_model_name(data.get('moldModelName'))\
-            .with_capacity(data.get('capacity'))
+            .with_capacity(data.get('capacity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2101,6 +2170,7 @@ class SetMoldCapacityByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "moldModelName": self.mold_model_name,
             "capacity": self.capacity,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -2111,6 +2181,7 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
     user_id: str = None
     mold_model_name: str = None
     capacity: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AddMoldCapacityByUserIdRequest:
@@ -2127,6 +2198,10 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
 
     def with_capacity(self, capacity: int) -> AddMoldCapacityByUserIdRequest:
         self.capacity = capacity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> AddMoldCapacityByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> AddMoldCapacityByUserIdRequest:
@@ -2155,7 +2230,8 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_mold_model_name(data.get('moldModelName'))\
-            .with_capacity(data.get('capacity'))
+            .with_capacity(data.get('capacity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2163,6 +2239,7 @@ class AddMoldCapacityByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "moldModelName": self.mold_model_name,
             "capacity": self.capacity,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -2173,6 +2250,7 @@ class SubMoldCapacityByUserIdRequest(core.Gs2Request):
     user_id: str = None
     mold_model_name: str = None
     capacity: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SubMoldCapacityByUserIdRequest:
@@ -2189,6 +2267,10 @@ class SubMoldCapacityByUserIdRequest(core.Gs2Request):
 
     def with_capacity(self, capacity: int) -> SubMoldCapacityByUserIdRequest:
         self.capacity = capacity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> SubMoldCapacityByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> SubMoldCapacityByUserIdRequest:
@@ -2217,7 +2299,8 @@ class SubMoldCapacityByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_mold_model_name(data.get('moldModelName'))\
-            .with_capacity(data.get('capacity'))
+            .with_capacity(data.get('capacity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2225,6 +2308,7 @@ class SubMoldCapacityByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "moldModelName": self.mold_model_name,
             "capacity": self.capacity,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -2289,6 +2373,7 @@ class DeleteMoldByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     mold_model_name: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMoldByUserIdRequest:
@@ -2301,6 +2386,10 @@ class DeleteMoldByUserIdRequest(core.Gs2Request):
 
     def with_mold_model_name(self, mold_model_name: str) -> DeleteMoldByUserIdRequest:
         self.mold_model_name = mold_model_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DeleteMoldByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMoldByUserIdRequest:
@@ -2328,13 +2417,15 @@ class DeleteMoldByUserIdRequest(core.Gs2Request):
         return DeleteMoldByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_mold_model_name(data.get('moldModelName'))
+            .with_mold_model_name(data.get('moldModelName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "moldModelName": self.mold_model_name,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -2539,6 +2630,7 @@ class DescribeFormsByUserIdRequest(core.Gs2Request):
     user_id: str = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeFormsByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2558,6 +2650,10 @@ class DescribeFormsByUserIdRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> DescribeFormsByUserIdRequest:
         self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeFormsByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -2583,7 +2679,8 @@ class DescribeFormsByUserIdRequest(core.Gs2Request):
             .with_mold_model_name(data.get('moldModelName'))\
             .with_user_id(data.get('userId'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2592,6 +2689,7 @@ class DescribeFormsByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -2659,6 +2757,7 @@ class GetFormByUserIdRequest(core.Gs2Request):
     user_id: str = None
     mold_model_name: str = None
     index: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFormByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2674,6 +2773,10 @@ class GetFormByUserIdRequest(core.Gs2Request):
 
     def with_index(self, index: int) -> GetFormByUserIdRequest:
         self.index = index
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetFormByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -2698,7 +2801,8 @@ class GetFormByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_mold_model_name(data.get('moldModelName'))\
-            .with_index(data.get('index'))
+            .with_index(data.get('index'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2706,6 +2810,7 @@ class GetFormByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "moldModelName": self.mold_model_name,
             "index": self.index,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -2781,6 +2886,7 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
     mold_model_name: str = None
     index: int = None
     key_id: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetFormWithSignatureByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2800,6 +2906,10 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
 
     def with_key_id(self, key_id: str) -> GetFormWithSignatureByUserIdRequest:
         self.key_id = key_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetFormWithSignatureByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -2825,7 +2935,8 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
-            .with_key_id(data.get('keyId'))
+            .with_key_id(data.get('keyId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2834,6 +2945,7 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
             "moldModelName": self.mold_model_name,
             "index": self.index,
             "keyId": self.key_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -2845,6 +2957,7 @@ class SetFormByUserIdRequest(core.Gs2Request):
     mold_model_name: str = None
     index: int = None
     slots: List[Slot] = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetFormByUserIdRequest:
@@ -2865,6 +2978,10 @@ class SetFormByUserIdRequest(core.Gs2Request):
 
     def with_slots(self, slots: List[Slot]) -> SetFormByUserIdRequest:
         self.slots = slots
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> SetFormByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> SetFormByUserIdRequest:
@@ -2897,7 +3014,8 @@ class SetFormByUserIdRequest(core.Gs2Request):
             .with_slots([
                 Slot.from_dict(data.get('slots')[i])
                 for i in range(len(data.get('slots')) if data.get('slots') else 0)
-            ])
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2909,6 +3027,7 @@ class SetFormByUserIdRequest(core.Gs2Request):
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -3003,6 +3122,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
     index: int = None
     acquire_action: AcquireAction = None
     config: List[Config] = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireActionsToFormPropertiesRequest:
@@ -3027,6 +3147,10 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> AcquireActionsToFormPropertiesRequest:
         self.config = config
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> AcquireActionsToFormPropertiesRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> AcquireActionsToFormPropertiesRequest:
@@ -3060,7 +3184,8 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
-            ])
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3073,6 +3198,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -3145,6 +3271,7 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
     user_id: str = None
     mold_model_name: str = None
     index: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteFormByUserIdRequest:
@@ -3161,6 +3288,10 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
 
     def with_index(self, index: int) -> DeleteFormByUserIdRequest:
         self.index = index
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DeleteFormByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteFormByUserIdRequest:
@@ -3189,7 +3320,8 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_mold_model_name(data.get('moldModelName'))\
-            .with_index(data.get('index'))
+            .with_index(data.get('index'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3197,6 +3329,7 @@ class DeleteFormByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "moldModelName": self.mold_model_name,
             "index": self.index,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -3358,6 +3491,7 @@ class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
     property_form_model_name: str = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribePropertyFormsByUserIdRequest:
         self.namespace_name = namespace_name
@@ -3377,6 +3511,10 @@ class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> DescribePropertyFormsByUserIdRequest:
         self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribePropertyFormsByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -3402,7 +3540,8 @@ class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3411,6 +3550,7 @@ class DescribePropertyFormsByUserIdRequest(core.Gs2Request):
             "propertyFormModelName": self.property_form_model_name,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -3478,6 +3618,7 @@ class GetPropertyFormByUserIdRequest(core.Gs2Request):
     user_id: str = None
     property_form_model_name: str = None
     property_id: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetPropertyFormByUserIdRequest:
         self.namespace_name = namespace_name
@@ -3493,6 +3634,10 @@ class GetPropertyFormByUserIdRequest(core.Gs2Request):
 
     def with_property_id(self, property_id: str) -> GetPropertyFormByUserIdRequest:
         self.property_id = property_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetPropertyFormByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -3517,7 +3662,8 @@ class GetPropertyFormByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_property_form_model_name(data.get('propertyFormModelName'))\
-            .with_property_id(data.get('propertyId'))
+            .with_property_id(data.get('propertyId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3525,6 +3671,7 @@ class GetPropertyFormByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -3600,6 +3747,7 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
     property_form_model_name: str = None
     property_id: str = None
     key_id: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetPropertyFormWithSignatureByUserIdRequest:
         self.namespace_name = namespace_name
@@ -3619,6 +3767,10 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
 
     def with_key_id(self, key_id: str) -> GetPropertyFormWithSignatureByUserIdRequest:
         self.key_id = key_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetPropertyFormWithSignatureByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -3644,7 +3796,8 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
-            .with_key_id(data.get('keyId'))
+            .with_key_id(data.get('keyId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3653,6 +3806,7 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
             "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
             "keyId": self.key_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -3664,6 +3818,7 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
     property_form_model_name: str = None
     property_id: str = None
     slots: List[Slot] = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetPropertyFormByUserIdRequest:
@@ -3684,6 +3839,10 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
 
     def with_slots(self, slots: List[Slot]) -> SetPropertyFormByUserIdRequest:
         self.slots = slots
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> SetPropertyFormByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> SetPropertyFormByUserIdRequest:
@@ -3716,7 +3875,8 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
             .with_slots([
                 Slot.from_dict(data.get('slots')[i])
                 for i in range(len(data.get('slots')) if data.get('slots') else 0)
-            ])
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3728,6 +3888,7 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -3822,6 +3983,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
     property_id: str = None
     acquire_action: AcquireAction = None
     config: List[Config] = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcquireActionsToPropertyFormPropertiesRequest:
@@ -3846,6 +4008,10 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> AcquireActionsToPropertyFormPropertiesRequest:
         self.config = config
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> AcquireActionsToPropertyFormPropertiesRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> AcquireActionsToPropertyFormPropertiesRequest:
@@ -3879,7 +4045,8 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
-            ])
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3892,6 +4059,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -3964,6 +4132,7 @@ class DeletePropertyFormByUserIdRequest(core.Gs2Request):
     user_id: str = None
     property_form_model_name: str = None
     property_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeletePropertyFormByUserIdRequest:
@@ -3980,6 +4149,10 @@ class DeletePropertyFormByUserIdRequest(core.Gs2Request):
 
     def with_property_id(self, property_id: str) -> DeletePropertyFormByUserIdRequest:
         self.property_id = property_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DeletePropertyFormByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeletePropertyFormByUserIdRequest:
@@ -4008,7 +4181,8 @@ class DeletePropertyFormByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_property_form_model_name(data.get('propertyFormModelName'))\
-            .with_property_id(data.get('propertyId'))
+            .with_property_id(data.get('propertyId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -4016,6 +4190,7 @@ class DeletePropertyFormByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 

@@ -653,6 +653,7 @@ class InvokeScriptRequest(core.Gs2Request):
     user_id: str = None
     args: str = None
     random_status: RandomStatus = None
+    time_offset_token: str = None
 
     def with_script_id(self, script_id: str) -> InvokeScriptRequest:
         self.script_id = script_id
@@ -668,6 +669,10 @@ class InvokeScriptRequest(core.Gs2Request):
 
     def with_random_status(self, random_status: RandomStatus) -> InvokeScriptRequest:
         self.random_status = random_status
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> InvokeScriptRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -692,7 +697,8 @@ class InvokeScriptRequest(core.Gs2Request):
             .with_script_id(data.get('scriptId'))\
             .with_user_id(data.get('userId'))\
             .with_args(data.get('args'))\
-            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))
+            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -700,6 +706,7 @@ class InvokeScriptRequest(core.Gs2Request):
             "userId": self.user_id,
             "args": self.args,
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 

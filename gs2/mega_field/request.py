@@ -1226,6 +1226,7 @@ class PutPositionByUserIdRequest(core.Gs2Request):
     position: Position = None
     vector: Vector = None
     r: float = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PutPositionByUserIdRequest:
@@ -1254,6 +1255,10 @@ class PutPositionByUserIdRequest(core.Gs2Request):
 
     def with_r(self, r: float) -> PutPositionByUserIdRequest:
         self.r = r
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> PutPositionByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> PutPositionByUserIdRequest:
@@ -1285,7 +1290,8 @@ class PutPositionByUserIdRequest(core.Gs2Request):
             .with_layer_model_name(data.get('layerModelName'))\
             .with_position(Position.from_dict(data.get('position')))\
             .with_vector(Vector.from_dict(data.get('vector')))\
-            .with_r(data.get('r'))
+            .with_r(data.get('r'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1296,6 +1302,7 @@ class PutPositionByUserIdRequest(core.Gs2Request):
             "position": self.position.to_dict() if self.position else None,
             "vector": self.vector.to_dict() if self.vector else None,
             "r": self.r,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1692,6 +1699,7 @@ class ActionByUserIdRequest(core.Gs2Request):
     layer_model_name: str = None
     position: MyPosition = None
     scopes: List[Scope] = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ActionByUserIdRequest:
@@ -1716,6 +1724,10 @@ class ActionByUserIdRequest(core.Gs2Request):
 
     def with_scopes(self, scopes: List[Scope]) -> ActionByUserIdRequest:
         self.scopes = scopes
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> ActionByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> ActionByUserIdRequest:
@@ -1749,7 +1761,8 @@ class ActionByUserIdRequest(core.Gs2Request):
             .with_scopes([
                 Scope.from_dict(data.get('scopes')[i])
                 for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
-            ])
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1762,4 +1775,5 @@ class ActionByUserIdRequest(core.Gs2Request):
                 self.scopes[i].to_dict() if self.scopes[i] else None
                 for i in range(len(self.scopes) if self.scopes else 0)
             ],
+            "timeOffsetToken": self.time_offset_token,
         }

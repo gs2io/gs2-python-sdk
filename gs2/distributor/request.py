@@ -830,6 +830,7 @@ class DistributeRequest(core.Gs2Request):
     distributor_name: str = None
     user_id: str = None
     distribute_resource: DistributeResource = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DistributeRequest:
         self.namespace_name = namespace_name
@@ -845,6 +846,10 @@ class DistributeRequest(core.Gs2Request):
 
     def with_distribute_resource(self, distribute_resource: DistributeResource) -> DistributeRequest:
         self.distribute_resource = distribute_resource
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DistributeRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -869,7 +874,8 @@ class DistributeRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_distributor_name(data.get('distributorName'))\
             .with_user_id(data.get('userId'))\
-            .with_distribute_resource(DistributeResource.from_dict(data.get('distributeResource')))
+            .with_distribute_resource(DistributeResource.from_dict(data.get('distributeResource')))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -877,6 +883,7 @@ class DistributeRequest(core.Gs2Request):
             "distributorName": self.distributor_name,
             "userId": self.user_id,
             "distributeResource": self.distribute_resource.to_dict() if self.distribute_resource else None,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -885,6 +892,7 @@ class DistributeWithoutOverflowProcessRequest(core.Gs2Request):
     context_stack: str = None
     user_id: str = None
     distribute_resource: DistributeResource = None
+    time_offset_token: str = None
 
     def with_user_id(self, user_id: str) -> DistributeWithoutOverflowProcessRequest:
         self.user_id = user_id
@@ -892,6 +900,10 @@ class DistributeWithoutOverflowProcessRequest(core.Gs2Request):
 
     def with_distribute_resource(self, distribute_resource: DistributeResource) -> DistributeWithoutOverflowProcessRequest:
         self.distribute_resource = distribute_resource
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DistributeWithoutOverflowProcessRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -914,12 +926,14 @@ class DistributeWithoutOverflowProcessRequest(core.Gs2Request):
             return None
         return DistributeWithoutOverflowProcessRequest()\
             .with_user_id(data.get('userId'))\
-            .with_distribute_resource(DistributeResource.from_dict(data.get('distributeResource')))
+            .with_distribute_resource(DistributeResource.from_dict(data.get('distributeResource')))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "distributeResource": self.distribute_resource.to_dict() if self.distribute_resource else None,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1258,6 +1272,7 @@ class GetStampSheetResultByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     transaction_id: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetStampSheetResultByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1269,6 +1284,10 @@ class GetStampSheetResultByUserIdRequest(core.Gs2Request):
 
     def with_transaction_id(self, transaction_id: str) -> GetStampSheetResultByUserIdRequest:
         self.transaction_id = transaction_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetStampSheetResultByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -1292,11 +1311,13 @@ class GetStampSheetResultByUserIdRequest(core.Gs2Request):
         return GetStampSheetResultByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_transaction_id(data.get('transactionId'))
+            .with_transaction_id(data.get('transactionId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "transactionId": self.transaction_id,
+            "timeOffsetToken": self.time_offset_token,
         }

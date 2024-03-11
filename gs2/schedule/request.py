@@ -272,10 +272,15 @@ class DumpUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> DumpUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DumpUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DumpUserDataByUserIdRequest:
@@ -301,11 +306,13 @@ class DumpUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return DumpUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -313,10 +320,15 @@ class CheckDumpUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CheckDumpUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CheckDumpUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CheckDumpUserDataByUserIdRequest:
@@ -342,11 +354,13 @@ class CheckDumpUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return CheckDumpUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -354,10 +368,15 @@ class CleanUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CleanUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CleanUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CleanUserDataByUserIdRequest:
@@ -383,11 +402,13 @@ class CleanUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return CleanUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -395,10 +416,15 @@ class CheckCleanUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CheckCleanUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CheckCleanUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CheckCleanUserDataByUserIdRequest:
@@ -424,11 +450,13 @@ class CheckCleanUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return CheckCleanUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -436,10 +464,15 @@ class PrepareImportUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> PrepareImportUserDataByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> PrepareImportUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> PrepareImportUserDataByUserIdRequest:
@@ -465,11 +498,13 @@ class PrepareImportUserDataByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return PrepareImportUserDataByUserIdRequest()\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -478,6 +513,7 @@ class ImportUserDataByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     user_id: str = None
     upload_token: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> ImportUserDataByUserIdRequest:
@@ -486,6 +522,10 @@ class ImportUserDataByUserIdRequest(core.Gs2Request):
 
     def with_upload_token(self, upload_token: str) -> ImportUserDataByUserIdRequest:
         self.upload_token = upload_token
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> ImportUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> ImportUserDataByUserIdRequest:
@@ -512,12 +552,14 @@ class ImportUserDataByUserIdRequest(core.Gs2Request):
             return None
         return ImportUserDataByUserIdRequest()\
             .with_user_id(data.get('userId'))\
-            .with_upload_token(data.get('uploadToken'))
+            .with_upload_token(data.get('uploadToken'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "uploadToken": self.upload_token,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -526,6 +568,7 @@ class CheckImportUserDataByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     user_id: str = None
     upload_token: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CheckImportUserDataByUserIdRequest:
@@ -534,6 +577,10 @@ class CheckImportUserDataByUserIdRequest(core.Gs2Request):
 
     def with_upload_token(self, upload_token: str) -> CheckImportUserDataByUserIdRequest:
         self.upload_token = upload_token
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CheckImportUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> CheckImportUserDataByUserIdRequest:
@@ -560,12 +607,14 @@ class CheckImportUserDataByUserIdRequest(core.Gs2Request):
             return None
         return CheckImportUserDataByUserIdRequest()\
             .with_user_id(data.get('userId'))\
-            .with_upload_token(data.get('uploadToken'))
+            .with_upload_token(data.get('uploadToken'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "uploadToken": self.upload_token,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1037,6 +1086,7 @@ class DescribeTriggersByUserIdRequest(core.Gs2Request):
     user_id: str = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeTriggersByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1052,6 +1102,10 @@ class DescribeTriggersByUserIdRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> DescribeTriggersByUserIdRequest:
         self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeTriggersByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -1076,7 +1130,8 @@ class DescribeTriggersByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1084,6 +1139,7 @@ class DescribeTriggersByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1143,6 +1199,7 @@ class GetTriggerByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     trigger_name: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetTriggerByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1154,6 +1211,10 @@ class GetTriggerByUserIdRequest(core.Gs2Request):
 
     def with_trigger_name(self, trigger_name: str) -> GetTriggerByUserIdRequest:
         self.trigger_name = trigger_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetTriggerByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -1177,13 +1238,15 @@ class GetTriggerByUserIdRequest(core.Gs2Request):
         return GetTriggerByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_trigger_name(data.get('triggerName'))
+            .with_trigger_name(data.get('triggerName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "triggerName": self.trigger_name,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1195,6 +1258,7 @@ class TriggerByUserIdRequest(core.Gs2Request):
     user_id: str = None
     trigger_strategy: str = None
     ttl: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> TriggerByUserIdRequest:
@@ -1215,6 +1279,10 @@ class TriggerByUserIdRequest(core.Gs2Request):
 
     def with_ttl(self, ttl: int) -> TriggerByUserIdRequest:
         self.ttl = ttl
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> TriggerByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> TriggerByUserIdRequest:
@@ -1244,7 +1312,8 @@ class TriggerByUserIdRequest(core.Gs2Request):
             .with_trigger_name(data.get('triggerName'))\
             .with_user_id(data.get('userId'))\
             .with_trigger_strategy(data.get('triggerStrategy'))\
-            .with_ttl(data.get('ttl'))
+            .with_ttl(data.get('ttl'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1253,6 +1322,7 @@ class TriggerByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "triggerStrategy": self.trigger_strategy,
             "ttl": self.ttl,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1360,6 +1430,7 @@ class DeleteTriggerByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     trigger_name: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteTriggerByUserIdRequest:
@@ -1372,6 +1443,10 @@ class DeleteTriggerByUserIdRequest(core.Gs2Request):
 
     def with_trigger_name(self, trigger_name: str) -> DeleteTriggerByUserIdRequest:
         self.trigger_name = trigger_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DeleteTriggerByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteTriggerByUserIdRequest:
@@ -1399,13 +1474,15 @@ class DeleteTriggerByUserIdRequest(core.Gs2Request):
         return DeleteTriggerByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_trigger_name(data.get('triggerName'))
+            .with_trigger_name(data.get('triggerName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "triggerName": self.trigger_name,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1500,6 +1577,7 @@ class DescribeEventsByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeEventsByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1507,6 +1585,10 @@ class DescribeEventsByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DescribeEventsByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeEventsByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -1529,12 +1611,14 @@ class DescribeEventsByUserIdRequest(core.Gs2Request):
             return None
         return DescribeEventsByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_user_id(data.get('userId'))
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1638,6 +1722,7 @@ class GetEventByUserIdRequest(core.Gs2Request):
     event_name: str = None
     user_id: str = None
     is_in_schedule: bool = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetEventByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1653,6 +1738,10 @@ class GetEventByUserIdRequest(core.Gs2Request):
 
     def with_is_in_schedule(self, is_in_schedule: bool) -> GetEventByUserIdRequest:
         self.is_in_schedule = is_in_schedule
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetEventByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -1677,7 +1766,8 @@ class GetEventByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_event_name(data.get('eventName'))\
             .with_user_id(data.get('userId'))\
-            .with_is_in_schedule(data.get('isInSchedule'))
+            .with_is_in_schedule(data.get('isInSchedule'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1685,6 +1775,7 @@ class GetEventByUserIdRequest(core.Gs2Request):
             "eventName": self.event_name,
             "userId": self.user_id,
             "isInSchedule": self.is_in_schedule,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -1800,6 +1891,7 @@ class VerifyEventByUserIdRequest(core.Gs2Request):
     user_id: str = None
     event_name: str = None
     verify_type: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> VerifyEventByUserIdRequest:
@@ -1816,6 +1908,10 @@ class VerifyEventByUserIdRequest(core.Gs2Request):
 
     def with_verify_type(self, verify_type: str) -> VerifyEventByUserIdRequest:
         self.verify_type = verify_type
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyEventByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> VerifyEventByUserIdRequest:
@@ -1844,7 +1940,8 @@ class VerifyEventByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_event_name(data.get('eventName'))\
-            .with_verify_type(data.get('verifyType'))
+            .with_verify_type(data.get('verifyType'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1852,6 +1949,7 @@ class VerifyEventByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "eventName": self.event_name,
             "verifyType": self.verify_type,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 

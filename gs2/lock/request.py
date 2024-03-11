@@ -332,6 +332,7 @@ class DescribeMutexesByUserIdRequest(core.Gs2Request):
     user_id: str = None
     page_token: str = None
     limit: int = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeMutexesByUserIdRequest:
         self.namespace_name = namespace_name
@@ -347,6 +348,10 @@ class DescribeMutexesByUserIdRequest(core.Gs2Request):
 
     def with_limit(self, limit: int) -> DescribeMutexesByUserIdRequest:
         self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeMutexesByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -371,7 +376,8 @@ class DescribeMutexesByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -379,6 +385,7 @@ class DescribeMutexesByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "pageToken": self.page_token,
             "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -459,6 +466,7 @@ class LockByUserIdRequest(core.Gs2Request):
     user_id: str = None
     transaction_id: str = None
     ttl: int = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> LockByUserIdRequest:
@@ -479,6 +487,10 @@ class LockByUserIdRequest(core.Gs2Request):
 
     def with_ttl(self, ttl: int) -> LockByUserIdRequest:
         self.ttl = ttl
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> LockByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> LockByUserIdRequest:
@@ -508,7 +520,8 @@ class LockByUserIdRequest(core.Gs2Request):
             .with_property_id(data.get('propertyId'))\
             .with_user_id(data.get('userId'))\
             .with_transaction_id(data.get('transactionId'))\
-            .with_ttl(data.get('ttl'))
+            .with_ttl(data.get('ttl'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -517,6 +530,7 @@ class LockByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "transactionId": self.transaction_id,
             "ttl": self.ttl,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -589,6 +603,7 @@ class UnlockByUserIdRequest(core.Gs2Request):
     property_id: str = None
     user_id: str = None
     transaction_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UnlockByUserIdRequest:
@@ -605,6 +620,10 @@ class UnlockByUserIdRequest(core.Gs2Request):
 
     def with_transaction_id(self, transaction_id: str) -> UnlockByUserIdRequest:
         self.transaction_id = transaction_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> UnlockByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> UnlockByUserIdRequest:
@@ -633,7 +652,8 @@ class UnlockByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_property_id(data.get('propertyId'))\
             .with_user_id(data.get('userId'))\
-            .with_transaction_id(data.get('transactionId'))
+            .with_transaction_id(data.get('transactionId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -641,6 +661,7 @@ class UnlockByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "userId": self.user_id,
             "transactionId": self.transaction_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -700,6 +721,7 @@ class GetMutexByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     property_id: str = None
+    time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetMutexByUserIdRequest:
         self.namespace_name = namespace_name
@@ -711,6 +733,10 @@ class GetMutexByUserIdRequest(core.Gs2Request):
 
     def with_property_id(self, property_id: str) -> GetMutexByUserIdRequest:
         self.property_id = property_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetMutexByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def get(self, key, default=None):
@@ -734,13 +760,15 @@ class GetMutexByUserIdRequest(core.Gs2Request):
         return GetMutexByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_property_id(data.get('propertyId'))
+            .with_property_id(data.get('propertyId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "propertyId": self.property_id,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -750,6 +778,7 @@ class DeleteMutexByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     property_id: str = None
+    time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteMutexByUserIdRequest:
@@ -762,6 +791,10 @@ class DeleteMutexByUserIdRequest(core.Gs2Request):
 
     def with_property_id(self, property_id: str) -> DeleteMutexByUserIdRequest:
         self.property_id = property_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DeleteMutexByUserIdRequest:
+        self.time_offset_token = time_offset_token
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteMutexByUserIdRequest:
@@ -789,11 +822,13 @@ class DeleteMutexByUserIdRequest(core.Gs2Request):
         return DeleteMutexByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_property_id(data.get('propertyId'))
+            .with_property_id(data.get('propertyId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "propertyId": self.property_id,
+            "timeOffsetToken": self.time_offset_token,
         }
