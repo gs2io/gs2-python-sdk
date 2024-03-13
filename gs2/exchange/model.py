@@ -1322,6 +1322,7 @@ class Namespace(core.Gs2Model):
     enable_await_exchange: bool = None
     transaction_setting: TransactionSetting = None
     exchange_script: ScriptSetting = None
+    incremental_exchange_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1355,6 +1356,10 @@ class Namespace(core.Gs2Model):
 
     def with_exchange_script(self, exchange_script: ScriptSetting) -> Namespace:
         self.exchange_script = exchange_script
+        return self
+
+    def with_incremental_exchange_script(self, incremental_exchange_script: ScriptSetting) -> Namespace:
+        self.incremental_exchange_script = incremental_exchange_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1450,6 +1455,7 @@ class Namespace(core.Gs2Model):
             .with_enable_await_exchange(data.get('enableAwaitExchange'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
+            .with_incremental_exchange_script(ScriptSetting.from_dict(data.get('incrementalExchangeScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1466,6 +1472,7 @@ class Namespace(core.Gs2Model):
             "enableAwaitExchange": self.enable_await_exchange,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
+            "incrementalExchangeScript": self.incremental_exchange_script.to_dict() if self.incremental_exchange_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
