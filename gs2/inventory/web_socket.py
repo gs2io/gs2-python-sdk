@@ -125,6 +125,10 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["simpleItemAcquireScript"] = request.simple_item_acquire_script.to_dict()
         if request.simple_item_consume_script is not None:
             body["simpleItemConsumeScript"] = request.simple_item_consume_script.to_dict()
+        if request.big_item_acquire_script is not None:
+            body["bigItemAcquireScript"] = request.big_item_acquire_script.to_dict()
+        if request.big_item_consume_script is not None:
+            body["bigItemConsumeScript"] = request.big_item_consume_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -352,6 +356,10 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["simpleItemAcquireScript"] = request.simple_item_acquire_script.to_dict()
         if request.simple_item_consume_script is not None:
             body["simpleItemConsumeScript"] = request.simple_item_consume_script.to_dict()
+        if request.big_item_acquire_script is not None:
+            body["bigItemAcquireScript"] = request.big_item_acquire_script.to_dict()
+        if request.big_item_consume_script is not None:
+            body["bigItemConsumeScript"] = request.big_item_consume_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

@@ -3076,6 +3076,8 @@ class Namespace(core.Gs2Model):
     consume_script: ScriptSetting = None
     simple_item_acquire_script: ScriptSetting = None
     simple_item_consume_script: ScriptSetting = None
+    big_item_acquire_script: ScriptSetting = None
+    big_item_consume_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -3111,6 +3113,14 @@ class Namespace(core.Gs2Model):
 
     def with_simple_item_consume_script(self, simple_item_consume_script: ScriptSetting) -> Namespace:
         self.simple_item_consume_script = simple_item_consume_script
+        return self
+
+    def with_big_item_acquire_script(self, big_item_acquire_script: ScriptSetting) -> Namespace:
+        self.big_item_acquire_script = big_item_acquire_script
+        return self
+
+    def with_big_item_consume_script(self, big_item_consume_script: ScriptSetting) -> Namespace:
+        self.big_item_consume_script = big_item_consume_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -3199,6 +3209,8 @@ class Namespace(core.Gs2Model):
             .with_consume_script(ScriptSetting.from_dict(data.get('consumeScript')))\
             .with_simple_item_acquire_script(ScriptSetting.from_dict(data.get('simpleItemAcquireScript')))\
             .with_simple_item_consume_script(ScriptSetting.from_dict(data.get('simpleItemConsumeScript')))\
+            .with_big_item_acquire_script(ScriptSetting.from_dict(data.get('bigItemAcquireScript')))\
+            .with_big_item_consume_script(ScriptSetting.from_dict(data.get('bigItemConsumeScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -3214,6 +3226,8 @@ class Namespace(core.Gs2Model):
             "consumeScript": self.consume_script.to_dict() if self.consume_script else None,
             "simpleItemAcquireScript": self.simple_item_acquire_script.to_dict() if self.simple_item_acquire_script else None,
             "simpleItemConsumeScript": self.simple_item_consume_script.to_dict() if self.simple_item_consume_script else None,
+            "bigItemAcquireScript": self.big_item_acquire_script.to_dict() if self.big_item_acquire_script else None,
+            "bigItemConsumeScript": self.big_item_consume_script.to_dict() if self.big_item_consume_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
