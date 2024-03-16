@@ -828,6 +828,7 @@ class Progress(core.Gs2Model):
     quest_model_id: str = None
     random_seed: int = None
     rewards: List[Reward] = None
+    failed_rewards: List[Reward] = None
     metadata: str = None
     created_at: int = None
     updated_at: int = None
@@ -855,6 +856,10 @@ class Progress(core.Gs2Model):
 
     def with_rewards(self, rewards: List[Reward]) -> Progress:
         self.rewards = rewards
+        return self
+
+    def with_failed_rewards(self, failed_rewards: List[Reward]) -> Progress:
+        self.failed_rewards = failed_rewards
         return self
 
     def with_metadata(self, metadata: str) -> Progress:
@@ -956,6 +961,10 @@ class Progress(core.Gs2Model):
                 Reward.from_dict(data.get('rewards')[i])
                 for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
             ])\
+            .with_failed_rewards([
+                Reward.from_dict(data.get('failedRewards')[i])
+                for i in range(len(data.get('failedRewards')) if data.get('failedRewards') else 0)
+            ])\
             .with_metadata(data.get('metadata'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -971,6 +980,10 @@ class Progress(core.Gs2Model):
             "rewards": [
                 self.rewards[i].to_dict() if self.rewards[i] else None
                 for i in range(len(self.rewards) if self.rewards else 0)
+            ],
+            "failedRewards": [
+                self.failed_rewards[i].to_dict() if self.failed_rewards[i] else None
+                for i in range(len(self.failed_rewards) if self.failed_rewards else 0)
             ],
             "metadata": self.metadata,
             "createdAt": self.created_at,
