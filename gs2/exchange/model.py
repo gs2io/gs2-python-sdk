@@ -368,7 +368,9 @@ class Await(core.Gs2Model):
     rate_name: str = None
     name: str = None
     count: int = None
+    skip_seconds: int = None
     config: List[Config] = None
+    acquirable_at: int = None
     exchanged_at: int = None
     revision: int = None
 
@@ -392,8 +394,16 @@ class Await(core.Gs2Model):
         self.count = count
         return self
 
+    def with_skip_seconds(self, skip_seconds: int) -> Await:
+        self.skip_seconds = skip_seconds
+        return self
+
     def with_config(self, config: List[Config]) -> Await:
         self.config = config
+        return self
+
+    def with_acquirable_at(self, acquirable_at: int) -> Await:
+        self.acquirable_at = acquirable_at
         return self
 
     def with_exchanged_at(self, exchanged_at: int) -> Await:
@@ -495,10 +505,12 @@ class Await(core.Gs2Model):
             .with_rate_name(data.get('rateName'))\
             .with_name(data.get('name'))\
             .with_count(data.get('count'))\
+            .with_skip_seconds(data.get('skipSeconds'))\
             .with_config([
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')) if data.get('config') else 0)
             ])\
+            .with_acquirable_at(data.get('acquirableAt'))\
             .with_exchanged_at(data.get('exchangedAt'))\
             .with_revision(data.get('revision'))
 
@@ -509,10 +521,12 @@ class Await(core.Gs2Model):
             "rateName": self.rate_name,
             "name": self.name,
             "count": self.count,
+            "skipSeconds": self.skip_seconds,
             "config": [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
+            "acquirableAt": self.acquirable_at,
             "exchangedAt": self.exchanged_at,
             "revision": self.revision,
         }
@@ -968,8 +982,6 @@ class RateModelMaster(core.Gs2Model):
     consume_actions: List[ConsumeAction] = None
     timing_type: str = None
     lock_time: int = None
-    enable_skip: bool = None
-    skip_consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
     created_at: int = None
     updated_at: int = None
@@ -1001,14 +1013,6 @@ class RateModelMaster(core.Gs2Model):
 
     def with_lock_time(self, lock_time: int) -> RateModelMaster:
         self.lock_time = lock_time
-        return self
-
-    def with_enable_skip(self, enable_skip: bool) -> RateModelMaster:
-        self.enable_skip = enable_skip
-        return self
-
-    def with_skip_consume_actions(self, skip_consume_actions: List[ConsumeAction]) -> RateModelMaster:
-        self.skip_consume_actions = skip_consume_actions
         return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> RateModelMaster:
@@ -1111,11 +1115,6 @@ class RateModelMaster(core.Gs2Model):
             ])\
             .with_timing_type(data.get('timingType'))\
             .with_lock_time(data.get('lockTime'))\
-            .with_enable_skip(data.get('enableSkip'))\
-            .with_skip_consume_actions([
-                ConsumeAction.from_dict(data.get('skipConsumeActions')[i])
-                for i in range(len(data.get('skipConsumeActions')) if data.get('skipConsumeActions') else 0)
-            ])\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -1136,11 +1135,6 @@ class RateModelMaster(core.Gs2Model):
             ],
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
-            "enableSkip": self.enable_skip,
-            "skipConsumeActions": [
-                self.skip_consume_actions[i].to_dict() if self.skip_consume_actions[i] else None
-                for i in range(len(self.skip_consume_actions) if self.skip_consume_actions else 0)
-            ],
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
@@ -1158,8 +1152,6 @@ class RateModel(core.Gs2Model):
     consume_actions: List[ConsumeAction] = None
     timing_type: str = None
     lock_time: int = None
-    enable_skip: bool = None
-    skip_consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
 
     def with_rate_model_id(self, rate_model_id: str) -> RateModel:
@@ -1184,14 +1176,6 @@ class RateModel(core.Gs2Model):
 
     def with_lock_time(self, lock_time: int) -> RateModel:
         self.lock_time = lock_time
-        return self
-
-    def with_enable_skip(self, enable_skip: bool) -> RateModel:
-        self.enable_skip = enable_skip
-        return self
-
-    def with_skip_consume_actions(self, skip_consume_actions: List[ConsumeAction]) -> RateModel:
-        self.skip_consume_actions = skip_consume_actions
         return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> RateModel:
@@ -1281,11 +1265,6 @@ class RateModel(core.Gs2Model):
             ])\
             .with_timing_type(data.get('timingType'))\
             .with_lock_time(data.get('lockTime'))\
-            .with_enable_skip(data.get('enableSkip'))\
-            .with_skip_consume_actions([
-                ConsumeAction.from_dict(data.get('skipConsumeActions')[i])
-                for i in range(len(data.get('skipConsumeActions')) if data.get('skipConsumeActions') else 0)
-            ])\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -1302,11 +1281,6 @@ class RateModel(core.Gs2Model):
             ],
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
-            "enableSkip": self.enable_skip,
-            "skipConsumeActions": [
-                self.skip_consume_actions[i].to_dict() if self.skip_consume_actions[i] else None
-                for i in range(len(self.skip_consume_actions) if self.skip_consume_actions else 0)
-            ],
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)

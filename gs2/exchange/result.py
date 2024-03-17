@@ -1543,14 +1543,9 @@ class UpdateCurrentRateMasterFromGitHubResult(core.Gs2Result):
 
 class CreateAwaitByUserIdResult(core.Gs2Result):
     item: Await = None
-    unlock_at: int = None
 
     def with_item(self, item: Await) -> CreateAwaitByUserIdResult:
         self.item = item
-        return self
-
-    def with_unlock_at(self, unlock_at: int) -> CreateAwaitByUserIdResult:
-        self.unlock_at = unlock_at
         return self
 
     def get(self, key, default=None):
@@ -1572,13 +1567,11 @@ class CreateAwaitByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return CreateAwaitByUserIdResult()\
-            .with_item(Await.from_dict(data.get('item')))\
-            .with_unlock_at(data.get('unlockAt'))
+            .with_item(Await.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "unlockAt": self.unlock_at,
         }
 
 
@@ -1930,93 +1923,11 @@ class AcquireForceByUserIdResult(core.Gs2Result):
         }
 
 
-class SkipResult(core.Gs2Result):
-    item: Await = None
-    transaction_id: str = None
-    stamp_sheet: str = None
-    stamp_sheet_encryption_key_id: str = None
-    auto_run_stamp_sheet: bool = None
-
-    def with_item(self, item: Await) -> SkipResult:
-        self.item = item
-        return self
-
-    def with_transaction_id(self, transaction_id: str) -> SkipResult:
-        self.transaction_id = transaction_id
-        return self
-
-    def with_stamp_sheet(self, stamp_sheet: str) -> SkipResult:
-        self.stamp_sheet = stamp_sheet
-        return self
-
-    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> SkipResult:
-        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
-        return self
-
-    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> SkipResult:
-        self.auto_run_stamp_sheet = auto_run_stamp_sheet
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[SkipResult]:
-        if data is None:
-            return None
-        return SkipResult()\
-            .with_item(Await.from_dict(data.get('item')))\
-            .with_transaction_id(data.get('transactionId'))\
-            .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-            "transactionId": self.transaction_id,
-            "stampSheet": self.stamp_sheet,
-            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
-            "autoRunStampSheet": self.auto_run_stamp_sheet,
-        }
-
-
 class SkipByUserIdResult(core.Gs2Result):
     item: Await = None
-    transaction_id: str = None
-    stamp_sheet: str = None
-    stamp_sheet_encryption_key_id: str = None
-    auto_run_stamp_sheet: bool = None
 
     def with_item(self, item: Await) -> SkipByUserIdResult:
         self.item = item
-        return self
-
-    def with_transaction_id(self, transaction_id: str) -> SkipByUserIdResult:
-        self.transaction_id = transaction_id
-        return self
-
-    def with_stamp_sheet(self, stamp_sheet: str) -> SkipByUserIdResult:
-        self.stamp_sheet = stamp_sheet
-        return self
-
-    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> SkipByUserIdResult:
-        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
-        return self
-
-    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> SkipByUserIdResult:
-        self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
     def get(self, key, default=None):
@@ -2038,19 +1949,11 @@ class SkipByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return SkipByUserIdResult()\
-            .with_item(Await.from_dict(data.get('item')))\
-            .with_transaction_id(data.get('transactionId'))\
-            .with_stamp_sheet(data.get('stampSheet'))\
-            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_item(Await.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "transactionId": self.transaction_id,
-            "stampSheet": self.stamp_sheet,
-            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
-            "autoRunStampSheet": self.auto_run_stamp_sheet,
         }
 
 
@@ -2124,14 +2027,9 @@ class DeleteAwaitByUserIdResult(core.Gs2Result):
 
 class CreateAwaitByStampSheetResult(core.Gs2Result):
     item: Await = None
-    unlock_at: int = None
 
     def with_item(self, item: Await) -> CreateAwaitByStampSheetResult:
         self.item = item
-        return self
-
-    def with_unlock_at(self, unlock_at: int) -> CreateAwaitByStampSheetResult:
-        self.unlock_at = unlock_at
         return self
 
     def get(self, key, default=None):
@@ -2153,13 +2051,45 @@ class CreateAwaitByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return CreateAwaitByStampSheetResult()\
-            .with_item(Await.from_dict(data.get('item')))\
-            .with_unlock_at(data.get('unlockAt'))
+            .with_item(Await.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "unlockAt": self.unlock_at,
+        }
+
+
+class SkipByStampSheetResult(core.Gs2Result):
+    item: Await = None
+
+    def with_item(self, item: Await) -> SkipByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SkipByStampSheetResult]:
+        if data is None:
+            return None
+        return SkipByStampSheetResult()\
+            .with_item(Await.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 

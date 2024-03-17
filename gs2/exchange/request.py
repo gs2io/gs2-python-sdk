@@ -854,8 +854,6 @@ class CreateRateModelMasterRequest(core.Gs2Request):
     metadata: str = None
     timing_type: str = None
     lock_time: int = None
-    enable_skip: bool = None
-    skip_consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
     consume_actions: List[ConsumeAction] = None
 
@@ -881,14 +879,6 @@ class CreateRateModelMasterRequest(core.Gs2Request):
 
     def with_lock_time(self, lock_time: int) -> CreateRateModelMasterRequest:
         self.lock_time = lock_time
-        return self
-
-    def with_enable_skip(self, enable_skip: bool) -> CreateRateModelMasterRequest:
-        self.enable_skip = enable_skip
-        return self
-
-    def with_skip_consume_actions(self, skip_consume_actions: List[ConsumeAction]) -> CreateRateModelMasterRequest:
-        self.skip_consume_actions = skip_consume_actions
         return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> CreateRateModelMasterRequest:
@@ -924,11 +914,6 @@ class CreateRateModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_timing_type(data.get('timingType'))\
             .with_lock_time(data.get('lockTime'))\
-            .with_enable_skip(data.get('enableSkip'))\
-            .with_skip_consume_actions([
-                ConsumeAction.from_dict(data.get('skipConsumeActions')[i])
-                for i in range(len(data.get('skipConsumeActions')) if data.get('skipConsumeActions') else 0)
-            ])\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -946,11 +931,6 @@ class CreateRateModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
-            "enableSkip": self.enable_skip,
-            "skipConsumeActions": [
-                self.skip_consume_actions[i].to_dict() if self.skip_consume_actions[i] else None
-                for i in range(len(self.skip_consume_actions) if self.skip_consume_actions else 0)
-            ],
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
@@ -1014,8 +994,6 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
     metadata: str = None
     timing_type: str = None
     lock_time: int = None
-    enable_skip: bool = None
-    skip_consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
     consume_actions: List[ConsumeAction] = None
 
@@ -1041,14 +1019,6 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
 
     def with_lock_time(self, lock_time: int) -> UpdateRateModelMasterRequest:
         self.lock_time = lock_time
-        return self
-
-    def with_enable_skip(self, enable_skip: bool) -> UpdateRateModelMasterRequest:
-        self.enable_skip = enable_skip
-        return self
-
-    def with_skip_consume_actions(self, skip_consume_actions: List[ConsumeAction]) -> UpdateRateModelMasterRequest:
-        self.skip_consume_actions = skip_consume_actions
         return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> UpdateRateModelMasterRequest:
@@ -1084,11 +1054,6 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_timing_type(data.get('timingType'))\
             .with_lock_time(data.get('lockTime'))\
-            .with_enable_skip(data.get('enableSkip'))\
-            .with_skip_consume_actions([
-                ConsumeAction.from_dict(data.get('skipConsumeActions')[i])
-                for i in range(len(data.get('skipConsumeActions')) if data.get('skipConsumeActions') else 0)
-            ])\
             .with_acquire_actions([
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
@@ -1106,11 +1071,6 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
-            "enableSkip": self.enable_skip,
-            "skipConsumeActions": [
-                self.skip_consume_actions[i].to_dict() if self.skip_consume_actions[i] else None
-                for i in range(len(self.skip_consume_actions) if self.skip_consume_actions else 0)
-            ],
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
@@ -2830,81 +2790,15 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
         }
 
 
-class SkipRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    access_token: str = None
-    await_name: str = None
-    config: List[Config] = None
-    duplication_avoider: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> SkipRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_access_token(self, access_token: str) -> SkipRequest:
-        self.access_token = access_token
-        return self
-
-    def with_await_name(self, await_name: str) -> SkipRequest:
-        self.await_name = await_name
-        return self
-
-    def with_config(self, config: List[Config]) -> SkipRequest:
-        self.config = config
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> SkipRequest:
-        self.duplication_avoider = duplication_avoider
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[SkipRequest]:
-        if data is None:
-            return None
-        return SkipRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_access_token(data.get('accessToken'))\
-            .with_await_name(data.get('awaitName'))\
-            .with_config([
-                Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "accessToken": self.access_token,
-            "awaitName": self.await_name,
-            "config": [
-                self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
-            ],
-        }
-
-
 class SkipByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
     await_name: str = None
-    config: List[Config] = None
+    skip_type: str = None
+    minutes: int = None
+    rate: float = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -2920,8 +2814,16 @@ class SkipByUserIdRequest(core.Gs2Request):
         self.await_name = await_name
         return self
 
-    def with_config(self, config: List[Config]) -> SkipByUserIdRequest:
-        self.config = config
+    def with_skip_type(self, skip_type: str) -> SkipByUserIdRequest:
+        self.skip_type = skip_type
+        return self
+
+    def with_minutes(self, minutes: int) -> SkipByUserIdRequest:
+        self.minutes = minutes
+        return self
+
+    def with_rate(self, rate: float) -> SkipByUserIdRequest:
+        self.rate = rate
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> SkipByUserIdRequest:
@@ -2954,10 +2856,9 @@ class SkipByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_await_name(data.get('awaitName'))\
-            .with_config([
-                Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
-            ])\
+            .with_skip_type(data.get('skipType'))\
+            .with_minutes(data.get('minutes'))\
+            .with_rate(data.get('rate'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2965,10 +2866,9 @@ class SkipByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "awaitName": self.await_name,
-            "config": [
-                self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
-            ],
+            "skipType": self.skip_type,
+            "minutes": self.minutes,
+            "rate": self.rate,
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -3123,6 +3023,49 @@ class CreateAwaitByStampSheetRequest(core.Gs2Request):
         if data is None:
             return None
         return CreateAwaitByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class SkipByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> SkipByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> SkipByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SkipByStampSheetRequest]:
+        if data is None:
+            return None
+        return SkipByStampSheetRequest()\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_key_id(data.get('keyId'))
 

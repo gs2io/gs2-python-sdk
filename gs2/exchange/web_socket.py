@@ -1262,13 +1262,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["timingType"] = request.timing_type
         if request.lock_time is not None:
             body["lockTime"] = request.lock_time
-        if request.enable_skip is not None:
-            body["enableSkip"] = request.enable_skip
-        if request.skip_consume_actions is not None:
-            body["skipConsumeActions"] = [
-                item.to_dict()
-                for item in request.skip_consume_actions
-            ]
         if request.acquire_actions is not None:
             body["acquireActions"] = [
                 item.to_dict()
@@ -1433,13 +1426,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["timingType"] = request.timing_type
         if request.lock_time is not None:
             body["lockTime"] = request.lock_time
-        if request.enable_skip is not None:
-            body["enableSkip"] = request.enable_skip
-        if request.skip_consume_actions is not None:
-            body["skipConsumeActions"] = [
-                item.to_dict()
-                for item in request.skip_consume_actions
-            ]
         if request.acquire_actions is not None:
             body["acquireActions"] = [
                 item.to_dict()
@@ -3718,90 +3704,6 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _skip(
-        self,
-        request: SkipRequest,
-        callback: Callable[[AsyncResult[SkipResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="exchange",
-            component='await',
-            function='skip',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.namespace_name is not None:
-            body["namespaceName"] = request.namespace_name
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
-        if request.await_name is not None:
-            body["awaitName"] = request.await_name
-        if request.config is not None:
-            body["config"] = [
-                item.to_dict()
-                for item in request.config
-            ]
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=SkipResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def skip(
-        self,
-        request: SkipRequest,
-    ) -> SkipResult:
-        async_result = []
-        with timeout(30):
-            self._skip(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def skip_async(
-        self,
-        request: SkipRequest,
-    ) -> SkipResult:
-        async_result = []
-        self._skip(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _skip_by_user_id(
         self,
         request: SkipByUserIdRequest,
@@ -3825,11 +3727,12 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.await_name is not None:
             body["awaitName"] = request.await_name
-        if request.config is not None:
-            body["config"] = [
-                item.to_dict()
-                for item in request.config
-            ]
+        if request.skip_type is not None:
+            body["skipType"] = request.skip_type
+        if request.minutes is not None:
+            body["minutes"] = request.minutes
+        if request.rate is not None:
+            body["rate"] = request.rate
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
@@ -4104,6 +4007,79 @@ class Gs2ExchangeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> CreateAwaitByStampSheetResult:
         async_result = []
         self._create_await_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _skip_by_stamp_sheet(
+        self,
+        request: SkipByStampSheetRequest,
+        callback: Callable[[AsyncResult[SkipByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="exchange",
+            component='await',
+            function='skipByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SkipByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def skip_by_stamp_sheet(
+        self,
+        request: SkipByStampSheetRequest,
+    ) -> SkipByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._skip_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def skip_by_stamp_sheet_async(
+        self,
+        request: SkipByStampSheetRequest,
+    ) -> SkipByStampSheetResult:
+        async_result = []
+        self._skip_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
         )

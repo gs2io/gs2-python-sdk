@@ -1258,13 +1258,6 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
             body["timingType"] = request.timing_type
         if request.lock_time is not None:
             body["lockTime"] = request.lock_time
-        if request.enable_skip is not None:
-            body["enableSkip"] = request.enable_skip
-        if request.skip_consume_actions is not None:
-            body["skipConsumeActions"] = [
-                item.to_dict()
-                for item in request.skip_consume_actions
-            ]
         if request.acquire_actions is not None:
             body["acquireActions"] = [
                 item.to_dict()
@@ -1427,13 +1420,6 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
             body["timingType"] = request.timing_type
         if request.lock_time is not None:
             body["lockTime"] = request.lock_time
-        if request.enable_skip is not None:
-            body["enableSkip"] = request.enable_skip
-        if request.skip_consume_actions is not None:
-            body["skipConsumeActions"] = [
-                item.to_dict()
-                for item in request.skip_consume_actions
-            ]
         if request.acquire_actions is not None:
             body["acquireActions"] = [
                 item.to_dict()
@@ -3680,87 +3666,6 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _skip(
-        self,
-        request: SkipRequest,
-        callback: Callable[[AsyncResult[SkipResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='exchange',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/me/exchange/await/{awaitName}/skip".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            awaitName=request.await_name if request.await_name is not None and request.await_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.config is not None:
-            body["config"] = [
-                item.to_dict()
-                for item in request.config
-            ]
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.access_token:
-            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=SkipResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def skip(
-        self,
-        request: SkipRequest,
-    ) -> SkipResult:
-        async_result = []
-        with timeout(30):
-            self._skip(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def skip_async(
-        self,
-        request: SkipRequest,
-    ) -> SkipResult:
-        async_result = []
-        self._skip(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _skip_by_user_id(
         self,
         request: SkipByUserIdRequest,
@@ -3780,11 +3685,12 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
-        if request.config is not None:
-            body["config"] = [
-                item.to_dict()
-                for item in request.config
-            ]
+        if request.skip_type is not None:
+            body["skipType"] = request.skip_type
+        if request.minutes is not None:
+            body["minutes"] = request.minutes
+        if request.rate is not None:
+            body["rate"] = request.rate
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -4055,6 +3961,79 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
     ) -> CreateAwaitByStampSheetResult:
         async_result = []
         self._create_await_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _skip_by_stamp_sheet(
+        self,
+        request: SkipByStampSheetRequest,
+        callback: Callable[[AsyncResult[SkipByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='exchange',
+            region=self.session.region,
+        ) + "/stamp/await/skip"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SkipByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def skip_by_stamp_sheet(
+        self,
+        request: SkipByStampSheetRequest,
+    ) -> SkipByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._skip_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def skip_by_stamp_sheet_async(
+        self,
+        request: SkipByStampSheetRequest,
+    ) -> SkipByStampSheetResult:
+        async_result = []
+        self._skip_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
