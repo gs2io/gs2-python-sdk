@@ -859,6 +859,74 @@ class CancelMatchmakingByUserIdResult(core.Gs2Result):
         }
 
 
+class EarlyCompleteResult(core.Gs2Result):
+    item: Gathering = None
+
+    def with_item(self, item: Gathering) -> EarlyCompleteResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EarlyCompleteResult]:
+        if data is None:
+            return None
+        return EarlyCompleteResult()\
+            .with_item(Gathering.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class EarlyCompleteByUserIdResult(core.Gs2Result):
+    item: Gathering = None
+
+    def with_item(self, item: Gathering) -> EarlyCompleteByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EarlyCompleteByUserIdResult]:
+        if data is None:
+            return None
+        return EarlyCompleteByUserIdResult()\
+            .with_item(Gathering.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteGatheringResult(core.Gs2Result):
     item: Gathering = None
 
