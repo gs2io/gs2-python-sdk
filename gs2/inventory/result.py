@@ -3574,12 +3574,12 @@ class DescribeReferenceOfByUserIdResult(core.Gs2Result):
 
 
 class GetReferenceOfResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> GetReferenceOfResult:
+    def with_item(self, item: str) -> GetReferenceOfResult:
         self.item = item
         return self
 
@@ -3614,20 +3614,14 @@ class GetReferenceOfResult(core.Gs2Result):
         if data is None:
             return None
         return GetReferenceOfResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3635,12 +3629,12 @@ class GetReferenceOfResult(core.Gs2Result):
 
 
 class GetReferenceOfByUserIdResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> GetReferenceOfByUserIdResult:
+    def with_item(self, item: str) -> GetReferenceOfByUserIdResult:
         self.item = item
         return self
 
@@ -3675,20 +3669,14 @@ class GetReferenceOfByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return GetReferenceOfByUserIdResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3696,12 +3684,12 @@ class GetReferenceOfByUserIdResult(core.Gs2Result):
 
 
 class VerifyReferenceOfResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> VerifyReferenceOfResult:
+    def with_item(self, item: str) -> VerifyReferenceOfResult:
         self.item = item
         return self
 
@@ -3736,20 +3724,14 @@ class VerifyReferenceOfResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyReferenceOfResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3757,12 +3739,12 @@ class VerifyReferenceOfResult(core.Gs2Result):
 
 
 class VerifyReferenceOfByUserIdResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> VerifyReferenceOfByUserIdResult:
+    def with_item(self, item: str) -> VerifyReferenceOfByUserIdResult:
         self.item = item
         return self
 
@@ -3797,20 +3779,14 @@ class VerifyReferenceOfByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyReferenceOfByUserIdResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3818,12 +3794,12 @@ class VerifyReferenceOfByUserIdResult(core.Gs2Result):
 
 
 class AddReferenceOfResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> AddReferenceOfResult:
+    def with_item(self, item: str) -> AddReferenceOfResult:
         self.item = item
         return self
 
@@ -3858,20 +3834,14 @@ class AddReferenceOfResult(core.Gs2Result):
         if data is None:
             return None
         return AddReferenceOfResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3879,12 +3849,12 @@ class AddReferenceOfResult(core.Gs2Result):
 
 
 class AddReferenceOfByUserIdResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> AddReferenceOfByUserIdResult:
+    def with_item(self, item: str) -> AddReferenceOfByUserIdResult:
         self.item = item
         return self
 
@@ -3919,20 +3889,14 @@ class AddReferenceOfByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return AddReferenceOfByUserIdResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3940,12 +3904,12 @@ class AddReferenceOfByUserIdResult(core.Gs2Result):
 
 
 class DeleteReferenceOfResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> DeleteReferenceOfResult:
+    def with_item(self, item: str) -> DeleteReferenceOfResult:
         self.item = item
         return self
 
@@ -3980,20 +3944,14 @@ class DeleteReferenceOfResult(core.Gs2Result):
         if data is None:
             return None
         return DeleteReferenceOfResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -4001,12 +3959,12 @@ class DeleteReferenceOfResult(core.Gs2Result):
 
 
 class DeleteReferenceOfByUserIdResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> DeleteReferenceOfByUserIdResult:
+    def with_item(self, item: str) -> DeleteReferenceOfByUserIdResult:
         self.item = item
         return self
 
@@ -4041,20 +3999,14 @@ class DeleteReferenceOfByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DeleteReferenceOfByUserIdResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -4062,12 +4014,12 @@ class DeleteReferenceOfByUserIdResult(core.Gs2Result):
 
 
 class AddReferenceOfItemSetByStampSheetResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> AddReferenceOfItemSetByStampSheetResult:
+    def with_item(self, item: str) -> AddReferenceOfItemSetByStampSheetResult:
         self.item = item
         return self
 
@@ -4102,20 +4054,14 @@ class AddReferenceOfItemSetByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return AddReferenceOfItemSetByStampSheetResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -4123,12 +4069,12 @@ class AddReferenceOfItemSetByStampSheetResult(core.Gs2Result):
 
 
 class DeleteReferenceOfItemSetByStampSheetResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
 
-    def with_item(self, item: List[str]) -> DeleteReferenceOfItemSetByStampSheetResult:
+    def with_item(self, item: str) -> DeleteReferenceOfItemSetByStampSheetResult:
         self.item = item
         return self
 
@@ -4163,20 +4109,14 @@ class DeleteReferenceOfItemSetByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return DeleteReferenceOfItemSetByStampSheetResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -4184,13 +4124,13 @@ class DeleteReferenceOfItemSetByStampSheetResult(core.Gs2Result):
 
 
 class VerifyReferenceOfByStampTaskResult(core.Gs2Result):
-    item: List[str] = None
+    item: str = None
     item_set: ItemSet = None
     item_model: ItemModel = None
     inventory: Inventory = None
     new_context_stack: str = None
 
-    def with_item(self, item: List[str]) -> VerifyReferenceOfByStampTaskResult:
+    def with_item(self, item: str) -> VerifyReferenceOfByStampTaskResult:
         self.item = item
         return self
 
@@ -4229,10 +4169,7 @@ class VerifyReferenceOfByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyReferenceOfByStampTaskResult()\
-            .with_item([
-                data.get('item')[i]
-                for i in range(len(data.get('item')) if data.get('item') else 0)
-            ])\
+            .with_item(data.get('item'))\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))\
@@ -4240,10 +4177,7 @@ class VerifyReferenceOfByStampTaskResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
-                self.item[i]
-                for i in range(len(self.item) if self.item else 0)
-            ],
+            "item": self.item,
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,

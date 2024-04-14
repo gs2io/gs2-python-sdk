@@ -381,7 +381,7 @@ class CampaignModel(core.Gs2Model):
         namespace_name,
         campaign_model_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:serialKey:{namespaceName}:master:campaign:{campaignModelName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:serialKey:{namespaceName}:model:campaign:{campaignModelName}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
@@ -393,7 +393,7 @@ class CampaignModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -403,7 +403,7 @@ class CampaignModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -413,7 +413,7 @@ class CampaignModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -423,7 +423,7 @@ class CampaignModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+)', grn)
         if match is None:
             return None
         return match.group('campaign_model_name')
@@ -664,7 +664,7 @@ class IssueJob(core.Gs2Model):
         campaign_model_name,
         issue_job_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:serialKey:{namespaceName}:master:campaign:{campaignModelName}:issue:job:{issueJobName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:serialKey:{namespaceName}:model:campaign:{campaignModelName}:issue:job:{issueJobName}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
@@ -677,7 +677,7 @@ class IssueJob(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -687,7 +687,7 @@ class IssueJob(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -697,7 +697,7 @@ class IssueJob(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -707,7 +707,7 @@ class IssueJob(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
         if match is None:
             return None
         return match.group('campaign_model_name')
@@ -717,7 +717,7 @@ class IssueJob(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):master:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):serialKey:(?P<namespaceName>.+):model:campaign:(?P<campaignModelName>.+):issue:job:(?P<issueJobName>.+)', grn)
         if match is None:
             return None
         return match.group('issue_job_name')
