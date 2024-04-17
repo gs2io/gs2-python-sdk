@@ -23,6 +23,12 @@ src/gs2/auth/request.py
 src/gs2/auth/rest.py
 src/gs2/auth/result.py
 src/gs2/auth/web_socket.py
+src/gs2/buff/__init__.py
+src/gs2/buff/model.py
+src/gs2/buff/request.py
+src/gs2/buff/rest.py
+src/gs2/buff/result.py
+src/gs2/buff/web_socket.py
 src/gs2/chat/__init__.py
 src/gs2/chat/model.py
 src/gs2/chat/request.py
