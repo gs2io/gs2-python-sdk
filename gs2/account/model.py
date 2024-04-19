@@ -435,6 +435,7 @@ class Account(core.Gs2Model):
     time_offset: int = None
     ban_statuses: List[BanStatus] = None
     banned: bool = None
+    last_authenticated_at: int = None
     created_at: int = None
     revision: int = None
 
@@ -460,6 +461,10 @@ class Account(core.Gs2Model):
 
     def with_banned(self, banned: bool) -> Account:
         self.banned = banned
+        return self
+
+    def with_last_authenticated_at(self, last_authenticated_at: int) -> Account:
+        self.last_authenticated_at = last_authenticated_at
         return self
 
     def with_created_at(self, created_at: int) -> Account:
@@ -553,6 +558,7 @@ class Account(core.Gs2Model):
                 for i in range(len(data.get('banStatuses')) if data.get('banStatuses') else 0)
             ])\
             .with_banned(data.get('banned'))\
+            .with_last_authenticated_at(data.get('lastAuthenticatedAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
@@ -567,6 +573,7 @@ class Account(core.Gs2Model):
                 for i in range(len(self.ban_statuses) if self.ban_statuses else 0)
             ],
             "banned": self.banned,
+            "lastAuthenticatedAt": self.last_authenticated_at,
             "createdAt": self.created_at,
             "revision": self.revision,
         }
