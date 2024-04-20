@@ -1407,11 +1407,70 @@ class IncreaseCounterByUserIdResult(core.Gs2Result):
         }
 
 
+class SetCounterByUserIdResult(core.Gs2Result):
+    item: Counter = None
+    old: Counter = None
+    changed_completes: List[Complete] = None
+
+    def with_item(self, item: Counter) -> SetCounterByUserIdResult:
+        self.item = item
+        return self
+
+    def with_old(self, old: Counter) -> SetCounterByUserIdResult:
+        self.old = old
+        return self
+
+    def with_changed_completes(self, changed_completes: List[Complete]) -> SetCounterByUserIdResult:
+        self.changed_completes = changed_completes
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetCounterByUserIdResult]:
+        if data is None:
+            return None
+        return SetCounterByUserIdResult()\
+            .with_item(Counter.from_dict(data.get('item')))\
+            .with_old(Counter.from_dict(data.get('old')))\
+            .with_changed_completes([
+                Complete.from_dict(data.get('changedCompletes')[i])
+                for i in range(len(data.get('changedCompletes')) if data.get('changedCompletes') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
+            "changedCompletes": [
+                self.changed_completes[i].to_dict() if self.changed_completes[i] else None
+                for i in range(len(self.changed_completes) if self.changed_completes else 0)
+            ],
+        }
+
+
 class DecreaseCounterByUserIdResult(core.Gs2Result):
     item: Counter = None
+    changed_completes: List[Complete] = None
 
     def with_item(self, item: Counter) -> DecreaseCounterByUserIdResult:
         self.item = item
+        return self
+
+    def with_changed_completes(self, changed_completes: List[Complete]) -> DecreaseCounterByUserIdResult:
+        self.changed_completes = changed_completes
         return self
 
     def get(self, key, default=None):
@@ -1433,11 +1492,19 @@ class DecreaseCounterByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DecreaseCounterByUserIdResult()\
-            .with_item(Counter.from_dict(data.get('item')))
+            .with_item(Counter.from_dict(data.get('item')))\
+            .with_changed_completes([
+                Complete.from_dict(data.get('changedCompletes')[i])
+                for i in range(len(data.get('changedCompletes')) if data.get('changedCompletes') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "changedCompletes": [
+                self.changed_completes[i].to_dict() if self.changed_completes[i] else None
+                for i in range(len(self.changed_completes) if self.changed_completes else 0)
+            ],
         }
 
 
@@ -1590,12 +1657,71 @@ class IncreaseByStampSheetResult(core.Gs2Result):
         }
 
 
+class SetByStampSheetResult(core.Gs2Result):
+    item: Counter = None
+    old: Counter = None
+    changed_completes: List[Complete] = None
+
+    def with_item(self, item: Counter) -> SetByStampSheetResult:
+        self.item = item
+        return self
+
+    def with_old(self, old: Counter) -> SetByStampSheetResult:
+        self.old = old
+        return self
+
+    def with_changed_completes(self, changed_completes: List[Complete]) -> SetByStampSheetResult:
+        self.changed_completes = changed_completes
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetByStampSheetResult]:
+        if data is None:
+            return None
+        return SetByStampSheetResult()\
+            .with_item(Counter.from_dict(data.get('item')))\
+            .with_old(Counter.from_dict(data.get('old')))\
+            .with_changed_completes([
+                Complete.from_dict(data.get('changedCompletes')[i])
+                for i in range(len(data.get('changedCompletes')) if data.get('changedCompletes') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "old": self.old.to_dict() if self.old else None,
+            "changedCompletes": [
+                self.changed_completes[i].to_dict() if self.changed_completes[i] else None
+                for i in range(len(self.changed_completes) if self.changed_completes else 0)
+            ],
+        }
+
+
 class DecreaseByStampTaskResult(core.Gs2Result):
     item: Counter = None
+    changed_completes: List[Complete] = None
     new_context_stack: str = None
 
     def with_item(self, item: Counter) -> DecreaseByStampTaskResult:
         self.item = item
+        return self
+
+    def with_changed_completes(self, changed_completes: List[Complete]) -> DecreaseByStampTaskResult:
+        self.changed_completes = changed_completes
         return self
 
     def with_new_context_stack(self, new_context_stack: str) -> DecreaseByStampTaskResult:
@@ -1622,11 +1748,19 @@ class DecreaseByStampTaskResult(core.Gs2Result):
             return None
         return DecreaseByStampTaskResult()\
             .with_item(Counter.from_dict(data.get('item')))\
+            .with_changed_completes([
+                Complete.from_dict(data.get('changedCompletes')[i])
+                for i in range(len(data.get('changedCompletes')) if data.get('changedCompletes') else 0)
+            ])\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "changedCompletes": [
+                self.changed_completes[i].to_dict() if self.changed_completes[i] else None
+                for i in range(len(self.changed_completes) if self.changed_completes else 0)
+            ],
             "newContextStack": self.new_context_stack,
         }
 

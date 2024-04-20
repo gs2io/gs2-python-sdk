@@ -2187,6 +2187,81 @@ class IncreaseCounterByUserIdRequest(core.Gs2Request):
         }
 
 
+class SetCounterByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    counter_name: str = None
+    user_id: str = None
+    values: List[ScopedValue] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetCounterByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_counter_name(self, counter_name: str) -> SetCounterByUserIdRequest:
+        self.counter_name = counter_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SetCounterByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_values(self, values: List[ScopedValue]) -> SetCounterByUserIdRequest:
+        self.values = values
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> SetCounterByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetCounterByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetCounterByUserIdRequest]:
+        if data is None:
+            return None
+        return SetCounterByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_user_id(data.get('userId'))\
+            .with_values([
+                ScopedValue.from_dict(data.get('values')[i])
+                for i in range(len(data.get('values')) if data.get('values') else 0)
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "counterName": self.counter_name,
+            "userId": self.user_id,
+            "values": [
+                self.values[i].to_dict() if self.values[i] else None
+                for i in range(len(self.values) if self.values else 0)
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DecreaseCounterByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2458,6 +2533,49 @@ class IncreaseByStampSheetRequest(core.Gs2Request):
         if data is None:
             return None
         return IncreaseByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class SetByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> SetByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> SetByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetByStampSheetRequest]:
+        if data is None:
+            return None
+        return SetByStampSheetRequest()\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_key_id(data.get('keyId'))
 
