@@ -1736,6 +1736,8 @@ class Gs2VersionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["versionName"] = request.version_name
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.version is not None:
+            body["version"] = request.version.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1815,6 +1817,8 @@ class Gs2VersionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["versionName"] = request.version_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.version is not None:
+            body["version"] = request.version.to_dict()
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

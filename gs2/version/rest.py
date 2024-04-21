@@ -1725,6 +1725,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         }
         if request.version_name is not None:
             body["versionName"] = request.version_name
+        if request.version is not None:
+            body["version"] = request.version.to_dict()
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1803,6 +1805,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         }
         if request.version_name is not None:
             body["versionName"] = request.version_name
+        if request.version is not None:
+            body["version"] = request.version.to_dict()
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

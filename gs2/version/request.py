@@ -1240,6 +1240,7 @@ class AcceptRequest(core.Gs2Request):
     namespace_name: str = None
     version_name: str = None
     access_token: str = None
+    version: Version = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AcceptRequest:
@@ -1252,6 +1253,10 @@ class AcceptRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> AcceptRequest:
         self.access_token = access_token
+        return self
+
+    def with_version(self, version: Version) -> AcceptRequest:
+        self.version = version
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> AcceptRequest:
@@ -1279,13 +1284,15 @@ class AcceptRequest(core.Gs2Request):
         return AcceptRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_version_name(data.get('versionName'))\
-            .with_access_token(data.get('accessToken'))
+            .with_access_token(data.get('accessToken'))\
+            .with_version(Version.from_dict(data.get('version')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "versionName": self.version_name,
             "accessToken": self.access_token,
+            "version": self.version.to_dict() if self.version else None,
         }
 
 
@@ -1295,6 +1302,7 @@ class AcceptByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     version_name: str = None
     user_id: str = None
+    version: Version = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1308,6 +1316,10 @@ class AcceptByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> AcceptByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_version(self, version: Version) -> AcceptByUserIdRequest:
+        self.version = version
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> AcceptByUserIdRequest:
@@ -1340,6 +1352,7 @@ class AcceptByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_version_name(data.get('versionName'))\
             .with_user_id(data.get('userId'))\
+            .with_version(Version.from_dict(data.get('version')))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1347,6 +1360,7 @@ class AcceptByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "versionName": self.version_name,
             "userId": self.user_id,
+            "version": self.version.to_dict() if self.version else None,
             "timeOffsetToken": self.time_offset_token,
         }
 
