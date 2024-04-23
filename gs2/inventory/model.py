@@ -916,8 +916,9 @@ class ReferenceOf(core.Gs2Model):
         inventory_name,
         item_name,
         item_set_name,
+        reference_of_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:inventory:{namespaceName}:user:{userId}:inventory:{inventoryName}:item:{itemName}:itemSet:{itemSetName}:referenceOf'.format(
+        return 'grn:gs2:{region}:{ownerId}:inventory:{namespaceName}:user:{userId}:inventory:{inventoryName}:item:{itemName}:itemSet:{itemSetName}:referenceOf:{referenceOfName}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
@@ -925,6 +926,7 @@ class ReferenceOf(core.Gs2Model):
             inventoryName=inventory_name,
             itemName=item_name,
             itemSetName=item_set_name,
+            referenceOfName=reference_of_name,
         )
 
     @classmethod
@@ -932,7 +934,7 @@ class ReferenceOf(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf:(?P<referenceOfName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -942,7 +944,7 @@ class ReferenceOf(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf:(?P<referenceOfName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -952,7 +954,7 @@ class ReferenceOf(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf:(?P<referenceOfName>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -962,7 +964,7 @@ class ReferenceOf(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf:(?P<referenceOfName>.+)', grn)
         if match is None:
             return None
         return match.group('user_id')
@@ -972,7 +974,7 @@ class ReferenceOf(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf:(?P<referenceOfName>.+)', grn)
         if match is None:
             return None
         return match.group('inventory_name')
@@ -982,7 +984,7 @@ class ReferenceOf(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf:(?P<referenceOfName>.+)', grn)
         if match is None:
             return None
         return match.group('item_name')
@@ -992,10 +994,20 @@ class ReferenceOf(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf:(?P<referenceOfName>.+)', grn)
         if match is None:
             return None
         return match.group('item_set_name')
+
+    @classmethod
+    def get_reference_of_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):inventory:(?P<namespaceName>.+):user:(?P<userId>.+):inventory:(?P<inventoryName>.+):item:(?P<itemName>.+):itemSet:(?P<itemSetName>.+):referenceOf:(?P<referenceOfName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('reference_of_name')
 
     def get(self, key, default=None):
         items = self.to_dict()
