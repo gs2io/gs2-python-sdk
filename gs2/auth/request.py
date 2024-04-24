@@ -117,6 +117,70 @@ class LoginBySignatureRequest(core.Gs2Request):
         }
 
 
+class FederationRequest(core.Gs2Request):
+
+    context_stack: str = None
+    original_user_id: str = None
+    user_id: str = None
+    policy_document: str = None
+    time_offset: int = None
+    time_offset_token: str = None
+
+    def with_original_user_id(self, original_user_id: str) -> FederationRequest:
+        self.original_user_id = original_user_id
+        return self
+
+    def with_user_id(self, user_id: str) -> FederationRequest:
+        self.user_id = user_id
+        return self
+
+    def with_policy_document(self, policy_document: str) -> FederationRequest:
+        self.policy_document = policy_document
+        return self
+
+    def with_time_offset(self, time_offset: int) -> FederationRequest:
+        self.time_offset = time_offset
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> FederationRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FederationRequest]:
+        if data is None:
+            return None
+        return FederationRequest()\
+            .with_original_user_id(data.get('originalUserId'))\
+            .with_user_id(data.get('userId'))\
+            .with_policy_document(data.get('policyDocument'))\
+            .with_time_offset(data.get('timeOffset'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "originalUserId": self.original_user_id,
+            "userId": self.user_id,
+            "policyDocument": self.policy_document,
+            "timeOffset": self.time_offset,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class IssueTimeOffsetTokenByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

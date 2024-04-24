@@ -113,6 +113,54 @@ class LoginBySignatureResult(core.Gs2Result):
         }
 
 
+class FederationResult(core.Gs2Result):
+    token: str = None
+    user_id: str = None
+    expire: int = None
+
+    def with_token(self, token: str) -> FederationResult:
+        self.token = token
+        return self
+
+    def with_user_id(self, user_id: str) -> FederationResult:
+        self.user_id = user_id
+        return self
+
+    def with_expire(self, expire: int) -> FederationResult:
+        self.expire = expire
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FederationResult]:
+        if data is None:
+            return None
+        return FederationResult()\
+            .with_token(data.get('token'))\
+            .with_user_id(data.get('userId'))\
+            .with_expire(data.get('expire'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "token": self.token,
+            "userId": self.user_id,
+            "expire": self.expire,
+        }
+
+
 class IssueTimeOffsetTokenByUserIdResult(core.Gs2Result):
     token: str = None
     user_id: str = None

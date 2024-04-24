@@ -171,6 +171,85 @@ class Gs2AuthRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _federation(
+        self,
+        request: FederationRequest,
+        callback: Callable[[AsyncResult[FederationResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='auth',
+            region=self.session.region,
+        ) + "/federation"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.original_user_id is not None:
+            body["originalUserId"] = request.original_user_id
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.policy_document is not None:
+            body["policyDocument"] = request.policy_document
+        if request.time_offset is not None:
+            body["timeOffset"] = request.time_offset
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=FederationResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def federation(
+        self,
+        request: FederationRequest,
+    ) -> FederationResult:
+        async_result = []
+        with timeout(30):
+            self._federation(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def federation_async(
+        self,
+        request: FederationRequest,
+    ) -> FederationResult:
+        async_result = []
+        self._federation(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _issue_time_offset_token_by_user_id(
         self,
         request: IssueTimeOffsetTokenByUserIdRequest,

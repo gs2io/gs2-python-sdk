@@ -22,6 +22,7 @@ from gs2 import core
 class AccessToken(core.Gs2Model):
     token: str = None
     user_id: str = None
+    federation_from_user_id: str = None
     expire: int = None
     time_offset: int = None
 
@@ -31,6 +32,10 @@ class AccessToken(core.Gs2Model):
 
     def with_user_id(self, user_id: str) -> AccessToken:
         self.user_id = user_id
+        return self
+
+    def with_federation_from_user_id(self, federation_from_user_id: str) -> AccessToken:
+        self.federation_from_user_id = federation_from_user_id
         return self
 
     def with_expire(self, expire: int) -> AccessToken:
@@ -62,6 +67,7 @@ class AccessToken(core.Gs2Model):
         return AccessToken()\
             .with_token(data.get('token'))\
             .with_user_id(data.get('userId'))\
+            .with_federation_from_user_id(data.get('federationFromUserId'))\
             .with_expire(data.get('expire'))\
             .with_time_offset(data.get('timeOffset'))
 
@@ -69,6 +75,7 @@ class AccessToken(core.Gs2Model):
         return {
             "token": self.token,
             "userId": self.user_id,
+            "federationFromUserId": self.federation_from_user_id,
             "expire": self.expire,
             "timeOffset": self.time_offset,
         }
