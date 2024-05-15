@@ -43,6 +43,7 @@ class Gs2Exception(IOError):
                             RequestError(
                                 component=str(error.get('component')),
                                 message=str(error.get('message')),
+                                code=str(error.get('code')),
                             )
                         )
                     except ValueError:

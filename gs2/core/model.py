@@ -234,9 +234,11 @@ class RequestError:
             self,
             component: str,
             message: str,
+            code: str = None,
     ):
         self._component = component
         self._message = message
+        self._code = code
 
     @property
     def component(self) -> str:
@@ -246,11 +248,17 @@ class RequestError:
     def message(self) -> str:
         return self._message
 
+    @property
+    def code(self) -> str:
+        return self._code
+
     def __getitem__(self, key):
         if key == 'component':
             return self.component
         if key == 'message':
             return self.message
+        if key == 'code':
+            return self.code
         return super(object, self).__getitem__(key)
 
     def get(self, key, default=None):
@@ -258,6 +266,8 @@ class RequestError:
             return self.component
         if key == 'message':
             return self.message
+        if key == 'code':
+            return self.code
         try:
             return super(object, self).__getitem__(key)
         except ValueError:
