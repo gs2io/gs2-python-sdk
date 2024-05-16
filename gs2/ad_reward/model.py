@@ -101,6 +101,47 @@ class NotificationSetting(core.Gs2Model):
         }
 
 
+class AppLovinMax(core.Gs2Model):
+    allow_ad_unit_id: str = None
+    event_key: str = None
+
+    def with_allow_ad_unit_id(self, allow_ad_unit_id: str) -> AppLovinMax:
+        self.allow_ad_unit_id = allow_ad_unit_id
+        return self
+
+    def with_event_key(self, event_key: str) -> AppLovinMax:
+        self.event_key = event_key
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AppLovinMax]:
+        if data is None:
+            return None
+        return AppLovinMax()\
+            .with_allow_ad_unit_id(data.get('allowAdUnitId'))\
+            .with_event_key(data.get('eventKey'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "allowAdUnitId": self.allow_ad_unit_id,
+            "eventKey": self.event_key,
+        }
+
+
 class UnityAd(core.Gs2Model):
     keys: List[str] = None
 
@@ -311,6 +352,7 @@ class Namespace(core.Gs2Model):
     description: str = None
     admob: AdMob = None
     unity_ad: UnityAd = None
+    app_lovin_maxes: List[AppLovinMax] = None
     change_point_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
@@ -335,6 +377,10 @@ class Namespace(core.Gs2Model):
 
     def with_unity_ad(self, unity_ad: UnityAd) -> Namespace:
         self.unity_ad = unity_ad
+        return self
+
+    def with_app_lovin_maxes(self, app_lovin_maxes: List[AppLovinMax]) -> Namespace:
+        self.app_lovin_maxes = app_lovin_maxes
         return self
 
     def with_change_point_notification(self, change_point_notification: NotificationSetting) -> Namespace:
@@ -424,6 +470,10 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_admob(AdMob.from_dict(data.get('admob')))\
             .with_unity_ad(UnityAd.from_dict(data.get('unityAd')))\
+            .with_app_lovin_maxes([
+                AppLovinMax.from_dict(data.get('appLovinMaxes')[i])
+                for i in range(len(data.get('appLovinMaxes')) if data.get('appLovinMaxes') else 0)
+            ])\
             .with_change_point_notification(NotificationSetting.from_dict(data.get('changePointNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
@@ -437,6 +487,10 @@ class Namespace(core.Gs2Model):
             "description": self.description,
             "admob": self.admob.to_dict() if self.admob else None,
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
+            "appLovinMaxes": [
+                self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
+                for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
+            ],
             "changePointNotification": self.change_point_notification.to_dict() if self.change_point_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,

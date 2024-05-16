@@ -115,6 +115,11 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
             body["admob"] = request.admob.to_dict()
         if request.unity_ad is not None:
             body["unityAd"] = request.unity_ad.to_dict()
+        if request.app_lovin_maxes is not None:
+            body["appLovinMaxes"] = [
+                item.to_dict()
+                for item in request.app_lovin_maxes
+            ]
         if request.description is not None:
             body["description"] = request.description
         if request.change_point_notification is not None:
@@ -340,6 +345,11 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
             body["admob"] = request.admob.to_dict()
         if request.unity_ad is not None:
             body["unityAd"] = request.unity_ad.to_dict()
+        if request.app_lovin_maxes is not None:
+            body["appLovinMaxes"] = [
+                item.to_dict()
+                for item in request.app_lovin_maxes
+            ]
         if request.change_point_notification is not None:
             body["changePointNotification"] = request.change_point_notification.to_dict()
         if request.log_setting is not None:

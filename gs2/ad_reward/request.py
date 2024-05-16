@@ -66,6 +66,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     admob: AdMob = None
     unity_ad: UnityAd = None
+    app_lovin_maxes: List[AppLovinMax] = None
     description: str = None
     change_point_notification: NotificationSetting = None
     log_setting: LogSetting = None
@@ -80,6 +81,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_unity_ad(self, unity_ad: UnityAd) -> CreateNamespaceRequest:
         self.unity_ad = unity_ad
+        return self
+
+    def with_app_lovin_maxes(self, app_lovin_maxes: List[AppLovinMax]) -> CreateNamespaceRequest:
+        self.app_lovin_maxes = app_lovin_maxes
         return self
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
@@ -116,6 +121,10 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_admob(AdMob.from_dict(data.get('admob')))\
             .with_unity_ad(UnityAd.from_dict(data.get('unityAd')))\
+            .with_app_lovin_maxes([
+                AppLovinMax.from_dict(data.get('appLovinMaxes')[i])
+                for i in range(len(data.get('appLovinMaxes')) if data.get('appLovinMaxes') else 0)
+            ])\
             .with_description(data.get('description'))\
             .with_change_point_notification(NotificationSetting.from_dict(data.get('changePointNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
@@ -125,6 +134,10 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "admob": self.admob.to_dict() if self.admob else None,
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
+            "appLovinMaxes": [
+                self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
+                for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
+            ],
             "description": self.description,
             "changePointNotification": self.change_point_notification.to_dict() if self.change_point_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
@@ -210,6 +223,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     description: str = None
     admob: AdMob = None
     unity_ad: UnityAd = None
+    app_lovin_maxes: List[AppLovinMax] = None
     change_point_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
@@ -227,6 +241,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_unity_ad(self, unity_ad: UnityAd) -> UpdateNamespaceRequest:
         self.unity_ad = unity_ad
+        return self
+
+    def with_app_lovin_maxes(self, app_lovin_maxes: List[AppLovinMax]) -> UpdateNamespaceRequest:
+        self.app_lovin_maxes = app_lovin_maxes
         return self
 
     def with_change_point_notification(self, change_point_notification: NotificationSetting) -> UpdateNamespaceRequest:
@@ -260,6 +278,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_admob(AdMob.from_dict(data.get('admob')))\
             .with_unity_ad(UnityAd.from_dict(data.get('unityAd')))\
+            .with_app_lovin_maxes([
+                AppLovinMax.from_dict(data.get('appLovinMaxes')[i])
+                for i in range(len(data.get('appLovinMaxes')) if data.get('appLovinMaxes') else 0)
+            ])\
             .with_change_point_notification(NotificationSetting.from_dict(data.get('changePointNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
@@ -269,6 +291,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "admob": self.admob.to_dict() if self.admob else None,
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
+            "appLovinMaxes": [
+                self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
+                for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
+            ],
             "changePointNotification": self.change_point_notification.to_dict() if self.change_point_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
