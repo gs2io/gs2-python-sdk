@@ -66,6 +66,8 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     enable_rating: bool = None
+    enable_disconnect_detection: str = None
+    disconnect_detection_timeout_seconds: int = None
     create_gathering_trigger_type: str = None
     create_gathering_trigger_realtime_namespace_id: str = None
     create_gathering_trigger_script_id: str = None
@@ -92,6 +94,14 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_enable_rating(self, enable_rating: bool) -> CreateNamespaceRequest:
         self.enable_rating = enable_rating
+        return self
+
+    def with_enable_disconnect_detection(self, enable_disconnect_detection: str) -> CreateNamespaceRequest:
+        self.enable_disconnect_detection = enable_disconnect_detection
+        return self
+
+    def with_disconnect_detection_timeout_seconds(self, disconnect_detection_timeout_seconds: int) -> CreateNamespaceRequest:
+        self.disconnect_detection_timeout_seconds = disconnect_detection_timeout_seconds
         return self
 
     def with_create_gathering_trigger_type(self, create_gathering_trigger_type: str) -> CreateNamespaceRequest:
@@ -176,6 +186,8 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_enable_rating(data.get('enableRating'))\
+            .with_enable_disconnect_detection(data.get('enableDisconnectDetection'))\
+            .with_disconnect_detection_timeout_seconds(data.get('disconnectDetectionTimeoutSeconds'))\
             .with_create_gathering_trigger_type(data.get('createGatheringTriggerType'))\
             .with_create_gathering_trigger_realtime_namespace_id(data.get('createGatheringTriggerRealtimeNamespaceId'))\
             .with_create_gathering_trigger_script_id(data.get('createGatheringTriggerScriptId'))\
@@ -197,6 +209,8 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "enableRating": self.enable_rating,
+            "enableDisconnectDetection": self.enable_disconnect_detection,
+            "disconnectDetectionTimeoutSeconds": self.disconnect_detection_timeout_seconds,
             "createGatheringTriggerType": self.create_gathering_trigger_type,
             "createGatheringTriggerRealtimeNamespaceId": self.create_gathering_trigger_realtime_namespace_id,
             "createGatheringTriggerScriptId": self.create_gathering_trigger_script_id,
@@ -293,6 +307,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     enable_rating: bool = None
+    enable_disconnect_detection: str = None
+    disconnect_detection_timeout_seconds: int = None
     create_gathering_trigger_type: str = None
     create_gathering_trigger_realtime_namespace_id: str = None
     create_gathering_trigger_script_id: str = None
@@ -319,6 +335,14 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_enable_rating(self, enable_rating: bool) -> UpdateNamespaceRequest:
         self.enable_rating = enable_rating
+        return self
+
+    def with_enable_disconnect_detection(self, enable_disconnect_detection: str) -> UpdateNamespaceRequest:
+        self.enable_disconnect_detection = enable_disconnect_detection
+        return self
+
+    def with_disconnect_detection_timeout_seconds(self, disconnect_detection_timeout_seconds: int) -> UpdateNamespaceRequest:
+        self.disconnect_detection_timeout_seconds = disconnect_detection_timeout_seconds
         return self
 
     def with_create_gathering_trigger_type(self, create_gathering_trigger_type: str) -> UpdateNamespaceRequest:
@@ -403,6 +427,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_enable_rating(data.get('enableRating'))\
+            .with_enable_disconnect_detection(data.get('enableDisconnectDetection'))\
+            .with_disconnect_detection_timeout_seconds(data.get('disconnectDetectionTimeoutSeconds'))\
             .with_create_gathering_trigger_type(data.get('createGatheringTriggerType'))\
             .with_create_gathering_trigger_realtime_namespace_id(data.get('createGatheringTriggerRealtimeNamespaceId'))\
             .with_create_gathering_trigger_script_id(data.get('createGatheringTriggerScriptId'))\
@@ -424,6 +450,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "enableRating": self.enable_rating,
+            "enableDisconnectDetection": self.enable_disconnect_detection,
+            "disconnectDetectionTimeoutSeconds": self.disconnect_detection_timeout_seconds,
             "createGatheringTriggerType": self.create_gathering_trigger_type,
             "createGatheringTriggerRealtimeNamespaceId": self.create_gathering_trigger_realtime_namespace_id,
             "createGatheringTriggerScriptId": self.create_gathering_trigger_script_id,
@@ -1421,6 +1449,123 @@ class DoMatchmakingByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "player": self.player.to_dict() if self.player else None,
             "matchmakingContextToken": self.matchmaking_context_token,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class PingRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    gathering_name: str = None
+    access_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PingRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_gathering_name(self, gathering_name: str) -> PingRequest:
+        self.gathering_name = gathering_name
+        return self
+
+    def with_access_token(self, access_token: str) -> PingRequest:
+        self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PingRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PingRequest]:
+        if data is None:
+            return None
+        return PingRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_gathering_name(data.get('gatheringName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "gatheringName": self.gathering_name,
+            "accessToken": self.access_token,
+        }
+
+
+class PingByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    gathering_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PingByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_gathering_name(self, gathering_name: str) -> PingByUserIdRequest:
+        self.gathering_name = gathering_name
+        return self
+
+    def with_user_id(self, user_id: str) -> PingByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> PingByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PingByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PingByUserIdRequest]:
+        if data is None:
+            return None
+        return PingByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_gathering_name(data.get('gatheringName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "gatheringName": self.gathering_name,
+            "userId": self.user_id,
             "timeOffsetToken": self.time_offset_token,
         }
 

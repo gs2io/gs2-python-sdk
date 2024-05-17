@@ -757,6 +757,74 @@ class DoMatchmakingByUserIdResult(core.Gs2Result):
         }
 
 
+class PingResult(core.Gs2Result):
+    item: Gathering = None
+
+    def with_item(self, item: Gathering) -> PingResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PingResult]:
+        if data is None:
+            return None
+        return PingResult()\
+            .with_item(Gathering.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class PingByUserIdResult(core.Gs2Result):
+    item: Gathering = None
+
+    def with_item(self, item: Gathering) -> PingByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PingByUserIdResult]:
+        if data is None:
+            return None
+        return PingByUserIdResult()\
+            .with_item(Gathering.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class GetGatheringResult(core.Gs2Result):
     item: Gathering = None
 

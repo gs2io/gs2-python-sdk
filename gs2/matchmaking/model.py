@@ -541,6 +541,7 @@ class Player(core.Gs2Model):
     attributes: List[Attribute] = None
     role_name: str = None
     deny_user_ids: List[str] = None
+    created_at: int = None
 
     def with_user_id(self, user_id: str) -> Player:
         self.user_id = user_id
@@ -556,6 +557,10 @@ class Player(core.Gs2Model):
 
     def with_deny_user_ids(self, deny_user_ids: List[str]) -> Player:
         self.deny_user_ids = deny_user_ids
+        return self
+
+    def with_created_at(self, created_at: int) -> Player:
+        self.created_at = created_at
         return self
 
     def get(self, key, default=None):
@@ -586,7 +591,8 @@ class Player(core.Gs2Model):
             .with_deny_user_ids([
                 data.get('denyUserIds')[i]
                 for i in range(len(data.get('denyUserIds')) if data.get('denyUserIds') else 0)
-            ])
+            ])\
+            .with_created_at(data.get('createdAt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -600,6 +606,7 @@ class Player(core.Gs2Model):
                 self.deny_user_ids[i]
                 for i in range(len(self.deny_user_ids) if self.deny_user_ids else 0)
             ],
+            "createdAt": self.created_at,
         }
 
 
@@ -1493,6 +1500,8 @@ class Namespace(core.Gs2Model):
     name: str = None
     description: str = None
     enable_rating: bool = None
+    enable_disconnect_detection: str = None
+    disconnect_detection_timeout_seconds: int = None
     create_gathering_trigger_type: str = None
     create_gathering_trigger_realtime_namespace_id: str = None
     create_gathering_trigger_script_id: str = None
@@ -1526,6 +1535,14 @@ class Namespace(core.Gs2Model):
 
     def with_enable_rating(self, enable_rating: bool) -> Namespace:
         self.enable_rating = enable_rating
+        return self
+
+    def with_enable_disconnect_detection(self, enable_disconnect_detection: str) -> Namespace:
+        self.enable_disconnect_detection = enable_disconnect_detection
+        return self
+
+    def with_disconnect_detection_timeout_seconds(self, disconnect_detection_timeout_seconds: int) -> Namespace:
+        self.disconnect_detection_timeout_seconds = disconnect_detection_timeout_seconds
         return self
 
     def with_create_gathering_trigger_type(self, create_gathering_trigger_type: str) -> Namespace:
@@ -1666,6 +1683,8 @@ class Namespace(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_enable_rating(data.get('enableRating'))\
+            .with_enable_disconnect_detection(data.get('enableDisconnectDetection'))\
+            .with_disconnect_detection_timeout_seconds(data.get('disconnectDetectionTimeoutSeconds'))\
             .with_create_gathering_trigger_type(data.get('createGatheringTriggerType'))\
             .with_create_gathering_trigger_realtime_namespace_id(data.get('createGatheringTriggerRealtimeNamespaceId'))\
             .with_create_gathering_trigger_script_id(data.get('createGatheringTriggerScriptId'))\
@@ -1691,6 +1710,8 @@ class Namespace(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "enableRating": self.enable_rating,
+            "enableDisconnectDetection": self.enable_disconnect_detection,
+            "disconnectDetectionTimeoutSeconds": self.disconnect_detection_timeout_seconds,
             "createGatheringTriggerType": self.create_gathering_trigger_type,
             "createGatheringTriggerRealtimeNamespaceId": self.create_gathering_trigger_realtime_namespace_id,
             "createGatheringTriggerScriptId": self.create_gathering_trigger_script_id,

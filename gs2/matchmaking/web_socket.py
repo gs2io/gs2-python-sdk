@@ -117,6 +117,10 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.enable_rating is not None:
             body["enableRating"] = request.enable_rating
+        if request.enable_disconnect_detection is not None:
+            body["enableDisconnectDetection"] = request.enable_disconnect_detection
+        if request.disconnect_detection_timeout_seconds is not None:
+            body["disconnectDetectionTimeoutSeconds"] = request.disconnect_detection_timeout_seconds
         if request.create_gathering_trigger_type is not None:
             body["createGatheringTriggerType"] = request.create_gathering_trigger_type
         if request.create_gathering_trigger_realtime_namespace_id is not None:
@@ -364,6 +368,10 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.enable_rating is not None:
             body["enableRating"] = request.enable_rating
+        if request.enable_disconnect_detection is not None:
+            body["enableDisconnectDetection"] = request.enable_disconnect_detection
+        if request.disconnect_detection_timeout_seconds is not None:
+            body["disconnectDetectionTimeoutSeconds"] = request.disconnect_detection_timeout_seconds
         if request.create_gathering_trigger_type is not None:
             body["createGatheringTriggerType"] = request.create_gathering_trigger_type
         if request.create_gathering_trigger_realtime_namespace_id is not None:
@@ -1709,6 +1717,164 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DoMatchmakingByUserIdResult:
         async_result = []
         self._do_matchmaking_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _ping(
+        self,
+        request: PingRequest,
+        callback: Callable[[AsyncResult[PingResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='gathering',
+            function='ping',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.gathering_name is not None:
+            body["gatheringName"] = request.gathering_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PingResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def ping(
+        self,
+        request: PingRequest,
+    ) -> PingResult:
+        async_result = []
+        with timeout(30):
+            self._ping(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def ping_async(
+        self,
+        request: PingRequest,
+    ) -> PingResult:
+        async_result = []
+        self._ping(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _ping_by_user_id(
+        self,
+        request: PingByUserIdRequest,
+        callback: Callable[[AsyncResult[PingByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='gathering',
+            function='pingByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.gathering_name is not None:
+            body["gatheringName"] = request.gathering_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PingByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def ping_by_user_id(
+        self,
+        request: PingByUserIdRequest,
+    ) -> PingByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._ping_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def ping_by_user_id_async(
+        self,
+        request: PingByUserIdRequest,
+    ) -> PingByUserIdResult:
+        async_result = []
+        self._ping_by_user_id(
             request,
             lambda result: async_result.append(result),
         )

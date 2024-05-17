@@ -115,6 +115,10 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.enable_rating is not None:
             body["enableRating"] = request.enable_rating
+        if request.enable_disconnect_detection is not None:
+            body["enableDisconnectDetection"] = request.enable_disconnect_detection
+        if request.disconnect_detection_timeout_seconds is not None:
+            body["disconnectDetectionTimeoutSeconds"] = request.disconnect_detection_timeout_seconds
         if request.create_gathering_trigger_type is not None:
             body["createGatheringTriggerType"] = request.create_gathering_trigger_type
         if request.create_gathering_trigger_realtime_namespace_id is not None:
@@ -362,6 +366,10 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.enable_rating is not None:
             body["enableRating"] = request.enable_rating
+        if request.enable_disconnect_detection is not None:
+            body["enableDisconnectDetection"] = request.enable_disconnect_detection
+        if request.disconnect_detection_timeout_seconds is not None:
+            body["disconnectDetectionTimeoutSeconds"] = request.disconnect_detection_timeout_seconds
         if request.create_gathering_trigger_type is not None:
             body["createGatheringTriggerType"] = request.create_gathering_trigger_type
         if request.create_gathering_trigger_realtime_namespace_id is not None:
@@ -1696,6 +1704,159 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
     ) -> DoMatchmakingByUserIdResult:
         async_result = []
         self._do_matchmaking_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _ping(
+        self,
+        request: PingRequest,
+        callback: Callable[[AsyncResult[PingResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/gathering/{gatheringName}/ping".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            gatheringName=request.gathering_name if request.gathering_name is not None and request.gathering_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PingResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def ping(
+        self,
+        request: PingRequest,
+    ) -> PingResult:
+        async_result = []
+        with timeout(30):
+            self._ping(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def ping_async(
+        self,
+        request: PingRequest,
+    ) -> PingResult:
+        async_result = []
+        self._ping(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _ping_by_user_id(
+        self,
+        request: PingByUserIdRequest,
+        callback: Callable[[AsyncResult[PingByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/gathering/{gatheringName}/user/{userId}/ping".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            gatheringName=request.gathering_name if request.gathering_name is not None and request.gathering_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PingByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def ping_by_user_id(
+        self,
+        request: PingByUserIdRequest,
+    ) -> PingByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._ping_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def ping_by_user_id_async(
+        self,
+        request: PingByUserIdRequest,
+    ) -> PingByUserIdResult:
+        async_result = []
+        self._ping_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
