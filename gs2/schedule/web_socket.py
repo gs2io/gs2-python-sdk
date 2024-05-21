@@ -1108,6 +1108,8 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["repeatEndHour"] = request.repeat_end_hour
         if request.relative_trigger_name is not None:
             body["relativeTriggerName"] = request.relative_trigger_name
+        if request.repeat_setting is not None:
+            body["repeatSetting"] = request.repeat_setting.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1280,6 +1282,8 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["repeatEndHour"] = request.repeat_end_hour
         if request.relative_trigger_name is not None:
             body["relativeTriggerName"] = request.relative_trigger_name
+        if request.repeat_setting is not None:
+            body["repeatSetting"] = request.repeat_setting.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

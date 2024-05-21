@@ -686,6 +686,7 @@ class CreateEventMasterRequest(core.Gs2Request):
     repeat_begin_hour: int = None
     repeat_end_hour: int = None
     relative_trigger_name: str = None
+    repeat_setting: RepeatSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateEventMasterRequest:
         self.namespace_name = namespace_name
@@ -747,6 +748,10 @@ class CreateEventMasterRequest(core.Gs2Request):
         self.relative_trigger_name = relative_trigger_name
         return self
 
+    def with_repeat_setting(self, repeat_setting: RepeatSetting) -> CreateEventMasterRequest:
+        self.repeat_setting = repeat_setting
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -780,7 +785,8 @@ class CreateEventMasterRequest(core.Gs2Request):
             .with_repeat_end_day_of_week(data.get('repeatEndDayOfWeek'))\
             .with_repeat_begin_hour(data.get('repeatBeginHour'))\
             .with_repeat_end_hour(data.get('repeatEndHour'))\
-            .with_relative_trigger_name(data.get('relativeTriggerName'))
+            .with_relative_trigger_name(data.get('relativeTriggerName'))\
+            .with_repeat_setting(RepeatSetting.from_dict(data.get('repeatSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -799,6 +805,7 @@ class CreateEventMasterRequest(core.Gs2Request):
             "repeatBeginHour": self.repeat_begin_hour,
             "repeatEndHour": self.repeat_end_hour,
             "relativeTriggerName": self.relative_trigger_name,
+            "repeatSetting": self.repeat_setting.to_dict() if self.repeat_setting else None,
         }
 
 
@@ -863,6 +870,7 @@ class UpdateEventMasterRequest(core.Gs2Request):
     repeat_begin_hour: int = None
     repeat_end_hour: int = None
     relative_trigger_name: str = None
+    repeat_setting: RepeatSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateEventMasterRequest:
         self.namespace_name = namespace_name
@@ -924,6 +932,10 @@ class UpdateEventMasterRequest(core.Gs2Request):
         self.relative_trigger_name = relative_trigger_name
         return self
 
+    def with_repeat_setting(self, repeat_setting: RepeatSetting) -> UpdateEventMasterRequest:
+        self.repeat_setting = repeat_setting
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -957,7 +969,8 @@ class UpdateEventMasterRequest(core.Gs2Request):
             .with_repeat_end_day_of_week(data.get('repeatEndDayOfWeek'))\
             .with_repeat_begin_hour(data.get('repeatBeginHour'))\
             .with_repeat_end_hour(data.get('repeatEndHour'))\
-            .with_relative_trigger_name(data.get('relativeTriggerName'))
+            .with_relative_trigger_name(data.get('relativeTriggerName'))\
+            .with_repeat_setting(RepeatSetting.from_dict(data.get('repeatSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -976,6 +989,7 @@ class UpdateEventMasterRequest(core.Gs2Request):
             "repeatBeginHour": self.repeat_begin_hour,
             "repeatEndHour": self.repeat_end_hour,
             "relativeTriggerName": self.relative_trigger_name,
+            "repeatSetting": self.repeat_setting.to_dict() if self.repeat_setting else None,
         }
 
 

@@ -19,68 +19,6 @@ from typing import *
 from gs2 import core
 
 
-class RepeatSchedule(core.Gs2Model):
-    repeat_count: int = None
-    current_repeat_start_at: int = None
-    current_repeat_end_at: int = None
-    last_repeat_end_at: int = None
-    next_repeat_start_at: int = None
-
-    def with_repeat_count(self, repeat_count: int) -> RepeatSchedule:
-        self.repeat_count = repeat_count
-        return self
-
-    def with_current_repeat_start_at(self, current_repeat_start_at: int) -> RepeatSchedule:
-        self.current_repeat_start_at = current_repeat_start_at
-        return self
-
-    def with_current_repeat_end_at(self, current_repeat_end_at: int) -> RepeatSchedule:
-        self.current_repeat_end_at = current_repeat_end_at
-        return self
-
-    def with_last_repeat_end_at(self, last_repeat_end_at: int) -> RepeatSchedule:
-        self.last_repeat_end_at = last_repeat_end_at
-        return self
-
-    def with_next_repeat_start_at(self, next_repeat_start_at: int) -> RepeatSchedule:
-        self.next_repeat_start_at = next_repeat_start_at
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[RepeatSchedule]:
-        if data is None:
-            return None
-        return RepeatSchedule()\
-            .with_repeat_count(data.get('repeatCount'))\
-            .with_current_repeat_start_at(data.get('currentRepeatStartAt'))\
-            .with_current_repeat_end_at(data.get('currentRepeatEndAt'))\
-            .with_last_repeat_end_at(data.get('lastRepeatEndAt'))\
-            .with_next_repeat_start_at(data.get('nextRepeatStartAt'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "repeatCount": self.repeat_count,
-            "currentRepeatStartAt": self.current_repeat_start_at,
-            "currentRepeatEndAt": self.current_repeat_end_at,
-            "lastRepeatEndAt": self.last_repeat_end_at,
-            "nextRepeatStartAt": self.next_repeat_start_at,
-        }
-
-
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -275,21 +213,160 @@ class CurrentEventMaster(core.Gs2Model):
         }
 
 
+class RepeatSchedule(core.Gs2Model):
+    repeat_count: int = None
+    current_repeat_start_at: int = None
+    current_repeat_end_at: int = None
+    last_repeat_end_at: int = None
+    next_repeat_start_at: int = None
+
+    def with_repeat_count(self, repeat_count: int) -> RepeatSchedule:
+        self.repeat_count = repeat_count
+        return self
+
+    def with_current_repeat_start_at(self, current_repeat_start_at: int) -> RepeatSchedule:
+        self.current_repeat_start_at = current_repeat_start_at
+        return self
+
+    def with_current_repeat_end_at(self, current_repeat_end_at: int) -> RepeatSchedule:
+        self.current_repeat_end_at = current_repeat_end_at
+        return self
+
+    def with_last_repeat_end_at(self, last_repeat_end_at: int) -> RepeatSchedule:
+        self.last_repeat_end_at = last_repeat_end_at
+        return self
+
+    def with_next_repeat_start_at(self, next_repeat_start_at: int) -> RepeatSchedule:
+        self.next_repeat_start_at = next_repeat_start_at
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RepeatSchedule]:
+        if data is None:
+            return None
+        return RepeatSchedule()\
+            .with_repeat_count(data.get('repeatCount'))\
+            .with_current_repeat_start_at(data.get('currentRepeatStartAt'))\
+            .with_current_repeat_end_at(data.get('currentRepeatEndAt'))\
+            .with_last_repeat_end_at(data.get('lastRepeatEndAt'))\
+            .with_next_repeat_start_at(data.get('nextRepeatStartAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "repeatCount": self.repeat_count,
+            "currentRepeatStartAt": self.current_repeat_start_at,
+            "currentRepeatEndAt": self.current_repeat_end_at,
+            "lastRepeatEndAt": self.last_repeat_end_at,
+            "nextRepeatStartAt": self.next_repeat_start_at,
+        }
+
+
+class RepeatSetting(core.Gs2Model):
+    repeat_type: str = None
+    begin_day_of_month: int = None
+    end_day_of_month: int = None
+    begin_day_of_week: str = None
+    end_day_of_week: str = None
+    begin_hour: int = None
+    end_hour: int = None
+
+    def with_repeat_type(self, repeat_type: str) -> RepeatSetting:
+        self.repeat_type = repeat_type
+        return self
+
+    def with_begin_day_of_month(self, begin_day_of_month: int) -> RepeatSetting:
+        self.begin_day_of_month = begin_day_of_month
+        return self
+
+    def with_end_day_of_month(self, end_day_of_month: int) -> RepeatSetting:
+        self.end_day_of_month = end_day_of_month
+        return self
+
+    def with_begin_day_of_week(self, begin_day_of_week: str) -> RepeatSetting:
+        self.begin_day_of_week = begin_day_of_week
+        return self
+
+    def with_end_day_of_week(self, end_day_of_week: str) -> RepeatSetting:
+        self.end_day_of_week = end_day_of_week
+        return self
+
+    def with_begin_hour(self, begin_hour: int) -> RepeatSetting:
+        self.begin_hour = begin_hour
+        return self
+
+    def with_end_hour(self, end_hour: int) -> RepeatSetting:
+        self.end_hour = end_hour
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RepeatSetting]:
+        if data is None:
+            return None
+        return RepeatSetting()\
+            .with_repeat_type(data.get('repeatType'))\
+            .with_begin_day_of_month(data.get('beginDayOfMonth'))\
+            .with_end_day_of_month(data.get('endDayOfMonth'))\
+            .with_begin_day_of_week(data.get('beginDayOfWeek'))\
+            .with_end_day_of_week(data.get('endDayOfWeek'))\
+            .with_begin_hour(data.get('beginHour'))\
+            .with_end_hour(data.get('endHour'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "repeatType": self.repeat_type,
+            "beginDayOfMonth": self.begin_day_of_month,
+            "endDayOfMonth": self.end_day_of_month,
+            "beginDayOfWeek": self.begin_day_of_week,
+            "endDayOfWeek": self.end_day_of_week,
+            "beginHour": self.begin_hour,
+            "endHour": self.end_hour,
+        }
+
+
 class Event(core.Gs2Model):
     event_id: str = None
     name: str = None
     metadata: str = None
     schedule_type: str = None
-    repeat_type: str = None
     absolute_begin: int = None
     absolute_end: int = None
+    relative_trigger_name: str = None
+    repeat_setting: RepeatSetting = None
+    repeat_type: str = None
     repeat_begin_day_of_month: int = None
     repeat_end_day_of_month: int = None
     repeat_begin_day_of_week: str = None
     repeat_end_day_of_week: str = None
     repeat_begin_hour: int = None
     repeat_end_hour: int = None
-    relative_trigger_name: str = None
 
     def with_event_id(self, event_id: str) -> Event:
         self.event_id = event_id
@@ -307,16 +384,24 @@ class Event(core.Gs2Model):
         self.schedule_type = schedule_type
         return self
 
-    def with_repeat_type(self, repeat_type: str) -> Event:
-        self.repeat_type = repeat_type
-        return self
-
     def with_absolute_begin(self, absolute_begin: int) -> Event:
         self.absolute_begin = absolute_begin
         return self
 
     def with_absolute_end(self, absolute_end: int) -> Event:
         self.absolute_end = absolute_end
+        return self
+
+    def with_relative_trigger_name(self, relative_trigger_name: str) -> Event:
+        self.relative_trigger_name = relative_trigger_name
+        return self
+
+    def with_repeat_setting(self, repeat_setting: RepeatSetting) -> Event:
+        self.repeat_setting = repeat_setting
+        return self
+
+    def with_repeat_type(self, repeat_type: str) -> Event:
+        self.repeat_type = repeat_type
         return self
 
     def with_repeat_begin_day_of_month(self, repeat_begin_day_of_month: int) -> Event:
@@ -341,10 +426,6 @@ class Event(core.Gs2Model):
 
     def with_repeat_end_hour(self, repeat_end_hour: int) -> Event:
         self.repeat_end_hour = repeat_end_hour
-        return self
-
-    def with_relative_trigger_name(self, relative_trigger_name: str) -> Event:
-        self.relative_trigger_name = relative_trigger_name
         return self
 
     @classmethod
@@ -425,16 +506,17 @@ class Event(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_schedule_type(data.get('scheduleType'))\
-            .with_repeat_type(data.get('repeatType'))\
             .with_absolute_begin(data.get('absoluteBegin'))\
             .with_absolute_end(data.get('absoluteEnd'))\
+            .with_relative_trigger_name(data.get('relativeTriggerName'))\
+            .with_repeat_setting(RepeatSetting.from_dict(data.get('repeatSetting')))\
+            .with_repeat_type(data.get('repeatType'))\
             .with_repeat_begin_day_of_month(data.get('repeatBeginDayOfMonth'))\
             .with_repeat_end_day_of_month(data.get('repeatEndDayOfMonth'))\
             .with_repeat_begin_day_of_week(data.get('repeatBeginDayOfWeek'))\
             .with_repeat_end_day_of_week(data.get('repeatEndDayOfWeek'))\
             .with_repeat_begin_hour(data.get('repeatBeginHour'))\
-            .with_repeat_end_hour(data.get('repeatEndHour'))\
-            .with_relative_trigger_name(data.get('relativeTriggerName'))
+            .with_repeat_end_hour(data.get('repeatEndHour'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -442,16 +524,17 @@ class Event(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "scheduleType": self.schedule_type,
-            "repeatType": self.repeat_type,
             "absoluteBegin": self.absolute_begin,
             "absoluteEnd": self.absolute_end,
+            "relativeTriggerName": self.relative_trigger_name,
+            "repeatSetting": self.repeat_setting.to_dict() if self.repeat_setting else None,
+            "repeatType": self.repeat_type,
             "repeatBeginDayOfMonth": self.repeat_begin_day_of_month,
             "repeatEndDayOfMonth": self.repeat_end_day_of_month,
             "repeatBeginDayOfWeek": self.repeat_begin_day_of_week,
             "repeatEndDayOfWeek": self.repeat_end_day_of_week,
             "repeatBeginHour": self.repeat_begin_hour,
             "repeatEndHour": self.repeat_end_hour,
-            "relativeTriggerName": self.relative_trigger_name,
         }
 
 
@@ -597,19 +680,20 @@ class EventMaster(core.Gs2Model):
     description: str = None
     metadata: str = None
     schedule_type: str = None
-    repeat_type: str = None
     absolute_begin: int = None
     absolute_end: int = None
+    relative_trigger_name: str = None
+    repeat_setting: RepeatSetting = None
+    created_at: int = None
+    updated_at: int = None
+    revision: int = None
+    repeat_type: str = None
     repeat_begin_day_of_month: int = None
     repeat_end_day_of_month: int = None
     repeat_begin_day_of_week: str = None
     repeat_end_day_of_week: str = None
     repeat_begin_hour: int = None
     repeat_end_hour: int = None
-    relative_trigger_name: str = None
-    created_at: int = None
-    updated_at: int = None
-    revision: int = None
 
     def with_event_id(self, event_id: str) -> EventMaster:
         self.event_id = event_id
@@ -631,16 +715,36 @@ class EventMaster(core.Gs2Model):
         self.schedule_type = schedule_type
         return self
 
-    def with_repeat_type(self, repeat_type: str) -> EventMaster:
-        self.repeat_type = repeat_type
-        return self
-
     def with_absolute_begin(self, absolute_begin: int) -> EventMaster:
         self.absolute_begin = absolute_begin
         return self
 
     def with_absolute_end(self, absolute_end: int) -> EventMaster:
         self.absolute_end = absolute_end
+        return self
+
+    def with_relative_trigger_name(self, relative_trigger_name: str) -> EventMaster:
+        self.relative_trigger_name = relative_trigger_name
+        return self
+
+    def with_repeat_setting(self, repeat_setting: RepeatSetting) -> EventMaster:
+        self.repeat_setting = repeat_setting
+        return self
+
+    def with_created_at(self, created_at: int) -> EventMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> EventMaster:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> EventMaster:
+        self.revision = revision
+        return self
+
+    def with_repeat_type(self, repeat_type: str) -> EventMaster:
+        self.repeat_type = repeat_type
         return self
 
     def with_repeat_begin_day_of_month(self, repeat_begin_day_of_month: int) -> EventMaster:
@@ -665,22 +769,6 @@ class EventMaster(core.Gs2Model):
 
     def with_repeat_end_hour(self, repeat_end_hour: int) -> EventMaster:
         self.repeat_end_hour = repeat_end_hour
-        return self
-
-    def with_relative_trigger_name(self, relative_trigger_name: str) -> EventMaster:
-        self.relative_trigger_name = relative_trigger_name
-        return self
-
-    def with_created_at(self, created_at: int) -> EventMaster:
-        self.created_at = created_at
-        return self
-
-    def with_updated_at(self, updated_at: int) -> EventMaster:
-        self.updated_at = updated_at
-        return self
-
-    def with_revision(self, revision: int) -> EventMaster:
-        self.revision = revision
         return self
 
     @classmethod
@@ -762,19 +850,20 @@ class EventMaster(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_schedule_type(data.get('scheduleType'))\
-            .with_repeat_type(data.get('repeatType'))\
             .with_absolute_begin(data.get('absoluteBegin'))\
             .with_absolute_end(data.get('absoluteEnd'))\
+            .with_relative_trigger_name(data.get('relativeTriggerName'))\
+            .with_repeat_setting(RepeatSetting.from_dict(data.get('repeatSetting')))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))\
+            .with_repeat_type(data.get('repeatType'))\
             .with_repeat_begin_day_of_month(data.get('repeatBeginDayOfMonth'))\
             .with_repeat_end_day_of_month(data.get('repeatEndDayOfMonth'))\
             .with_repeat_begin_day_of_week(data.get('repeatBeginDayOfWeek'))\
             .with_repeat_end_day_of_week(data.get('repeatEndDayOfWeek'))\
             .with_repeat_begin_hour(data.get('repeatBeginHour'))\
-            .with_repeat_end_hour(data.get('repeatEndHour'))\
-            .with_relative_trigger_name(data.get('relativeTriggerName'))\
-            .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))\
-            .with_revision(data.get('revision'))
+            .with_repeat_end_hour(data.get('repeatEndHour'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -783,19 +872,20 @@ class EventMaster(core.Gs2Model):
             "description": self.description,
             "metadata": self.metadata,
             "scheduleType": self.schedule_type,
-            "repeatType": self.repeat_type,
             "absoluteBegin": self.absolute_begin,
             "absoluteEnd": self.absolute_end,
+            "relativeTriggerName": self.relative_trigger_name,
+            "repeatSetting": self.repeat_setting.to_dict() if self.repeat_setting else None,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+            "repeatType": self.repeat_type,
             "repeatBeginDayOfMonth": self.repeat_begin_day_of_month,
             "repeatEndDayOfMonth": self.repeat_end_day_of_month,
             "repeatBeginDayOfWeek": self.repeat_begin_day_of_week,
             "repeatEndDayOfWeek": self.repeat_end_day_of_week,
             "repeatBeginHour": self.repeat_begin_hour,
             "repeatEndHour": self.repeat_end_hour,
-            "relativeTriggerName": self.relative_trigger_name,
-            "createdAt": self.created_at,
-            "updatedAt": self.updated_at,
-            "revision": self.revision,
         }
 
 
