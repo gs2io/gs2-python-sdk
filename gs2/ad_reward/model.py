@@ -101,6 +101,61 @@ class NotificationSetting(core.Gs2Model):
         }
 
 
+class ScriptSetting(core.Gs2Model):
+    trigger_script_id: str = None
+    done_trigger_target_type: str = None
+    done_trigger_script_id: str = None
+    done_trigger_queue_namespace_id: str = None
+
+    def with_trigger_script_id(self, trigger_script_id: str) -> ScriptSetting:
+        self.trigger_script_id = trigger_script_id
+        return self
+
+    def with_done_trigger_target_type(self, done_trigger_target_type: str) -> ScriptSetting:
+        self.done_trigger_target_type = done_trigger_target_type
+        return self
+
+    def with_done_trigger_script_id(self, done_trigger_script_id: str) -> ScriptSetting:
+        self.done_trigger_script_id = done_trigger_script_id
+        return self
+
+    def with_done_trigger_queue_namespace_id(self, done_trigger_queue_namespace_id: str) -> ScriptSetting:
+        self.done_trigger_queue_namespace_id = done_trigger_queue_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ScriptSetting]:
+        if data is None:
+            return None
+        return ScriptSetting()\
+            .with_trigger_script_id(data.get('triggerScriptId'))\
+            .with_done_trigger_target_type(data.get('doneTriggerTargetType'))\
+            .with_done_trigger_script_id(data.get('doneTriggerScriptId'))\
+            .with_done_trigger_queue_namespace_id(data.get('doneTriggerQueueNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "triggerScriptId": self.trigger_script_id,
+            "doneTriggerTargetType": self.done_trigger_target_type,
+            "doneTriggerScriptId": self.done_trigger_script_id,
+            "doneTriggerQueueNamespaceId": self.done_trigger_queue_namespace_id,
+        }
+
+
 class AppLovinMax(core.Gs2Model):
     allow_ad_unit_id: str = None
     event_key: str = None
@@ -353,6 +408,8 @@ class Namespace(core.Gs2Model):
     admob: AdMob = None
     unity_ad: UnityAd = None
     app_lovin_maxes: List[AppLovinMax] = None
+    acquire_point_script: ScriptSetting = None
+    consume_point_script: ScriptSetting = None
     change_point_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
@@ -381,6 +438,14 @@ class Namespace(core.Gs2Model):
 
     def with_app_lovin_maxes(self, app_lovin_maxes: List[AppLovinMax]) -> Namespace:
         self.app_lovin_maxes = app_lovin_maxes
+        return self
+
+    def with_acquire_point_script(self, acquire_point_script: ScriptSetting) -> Namespace:
+        self.acquire_point_script = acquire_point_script
+        return self
+
+    def with_consume_point_script(self, consume_point_script: ScriptSetting) -> Namespace:
+        self.consume_point_script = consume_point_script
         return self
 
     def with_change_point_notification(self, change_point_notification: NotificationSetting) -> Namespace:
@@ -474,6 +539,8 @@ class Namespace(core.Gs2Model):
                 AppLovinMax.from_dict(data.get('appLovinMaxes')[i])
                 for i in range(len(data.get('appLovinMaxes')) if data.get('appLovinMaxes') else 0)
             ])\
+            .with_acquire_point_script(ScriptSetting.from_dict(data.get('acquirePointScript')))\
+            .with_consume_point_script(ScriptSetting.from_dict(data.get('consumePointScript')))\
             .with_change_point_notification(NotificationSetting.from_dict(data.get('changePointNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
@@ -491,6 +558,8 @@ class Namespace(core.Gs2Model):
                 self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
                 for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
             ],
+            "acquirePointScript": self.acquire_point_script.to_dict() if self.acquire_point_script else None,
+            "consumePointScript": self.consume_point_script.to_dict() if self.consume_point_script else None,
             "changePointNotification": self.change_point_notification.to_dict() if self.change_point_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,

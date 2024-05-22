@@ -2674,6 +2674,8 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["expiresTimeSpan"] = request.expires_time_span.to_dict()
         if request.expires_at is not None:
             body["expiresAt"] = request.expires_at
+        if request.message_reception_period_event_id is not None:
+            body["messageReceptionPeriodEventId"] = request.message_reception_period_event_id
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2831,6 +2833,8 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["expiresTimeSpan"] = request.expires_time_span.to_dict()
         if request.expires_at is not None:
             body["expiresAt"] = request.expires_at
+        if request.message_reception_period_event_id is not None:
+            body["messageReceptionPeriodEventId"] = request.message_reception_period_event_id
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

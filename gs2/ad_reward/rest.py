@@ -122,6 +122,10 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
             ]
         if request.description is not None:
             body["description"] = request.description
+        if request.acquire_point_script is not None:
+            body["acquirePointScript"] = request.acquire_point_script.to_dict()
+        if request.consume_point_script is not None:
+            body["consumePointScript"] = request.consume_point_script.to_dict()
         if request.change_point_notification is not None:
             body["changePointNotification"] = request.change_point_notification.to_dict()
         if request.log_setting is not None:
@@ -350,6 +354,10 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
                 item.to_dict()
                 for item in request.app_lovin_maxes
             ]
+        if request.acquire_point_script is not None:
+            body["acquirePointScript"] = request.acquire_point_script.to_dict()
+        if request.consume_point_script is not None:
+            body["consumePointScript"] = request.consume_point_script.to_dict()
         if request.change_point_notification is not None:
             body["changePointNotification"] = request.change_point_notification.to_dict()
         if request.log_setting is not None:

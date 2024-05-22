@@ -554,6 +554,7 @@ class GlobalMessage(core.Gs2Model):
     read_acquire_actions: List[AcquireAction] = None
     expires_time_span: TimeSpan = None
     expires_at: int = None
+    message_reception_period_event_id: str = None
 
     def with_global_message_id(self, global_message_id: str) -> GlobalMessage:
         self.global_message_id = global_message_id
@@ -577,6 +578,10 @@ class GlobalMessage(core.Gs2Model):
 
     def with_expires_at(self, expires_at: int) -> GlobalMessage:
         self.expires_at = expires_at
+        return self
+
+    def with_message_reception_period_event_id(self, message_reception_period_event_id: str) -> GlobalMessage:
+        self.message_reception_period_event_id = message_reception_period_event_id
         return self
 
     @classmethod
@@ -661,7 +666,8 @@ class GlobalMessage(core.Gs2Model):
                 for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
-            .with_expires_at(data.get('expiresAt'))
+            .with_expires_at(data.get('expiresAt'))\
+            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -674,6 +680,7 @@ class GlobalMessage(core.Gs2Model):
             ],
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
+            "messageReceptionPeriodEventId": self.message_reception_period_event_id,
         }
 
 
@@ -683,8 +690,9 @@ class GlobalMessageMaster(core.Gs2Model):
     metadata: str = None
     read_acquire_actions: List[AcquireAction] = None
     expires_time_span: TimeSpan = None
-    created_at: int = None
     expires_at: int = None
+    message_reception_period_event_id: str = None
+    created_at: int = None
     revision: int = None
 
     def with_global_message_id(self, global_message_id: str) -> GlobalMessageMaster:
@@ -707,12 +715,16 @@ class GlobalMessageMaster(core.Gs2Model):
         self.expires_time_span = expires_time_span
         return self
 
-    def with_created_at(self, created_at: int) -> GlobalMessageMaster:
-        self.created_at = created_at
-        return self
-
     def with_expires_at(self, expires_at: int) -> GlobalMessageMaster:
         self.expires_at = expires_at
+        return self
+
+    def with_message_reception_period_event_id(self, message_reception_period_event_id: str) -> GlobalMessageMaster:
+        self.message_reception_period_event_id = message_reception_period_event_id
+        return self
+
+    def with_created_at(self, created_at: int) -> GlobalMessageMaster:
+        self.created_at = created_at
         return self
 
     def with_revision(self, revision: int) -> GlobalMessageMaster:
@@ -801,8 +813,9 @@ class GlobalMessageMaster(core.Gs2Model):
                 for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
-            .with_created_at(data.get('createdAt'))\
             .with_expires_at(data.get('expiresAt'))\
+            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))\
+            .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -815,8 +828,9 @@ class GlobalMessageMaster(core.Gs2Model):
                 for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
             ],
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
-            "createdAt": self.created_at,
             "expiresAt": self.expires_at,
+            "messageReceptionPeriodEventId": self.message_reception_period_event_id,
+            "createdAt": self.created_at,
             "revision": self.revision,
         }
 

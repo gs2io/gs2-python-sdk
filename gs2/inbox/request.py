@@ -1887,6 +1887,7 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
     read_acquire_actions: List[AcquireAction] = None
     expires_time_span: TimeSpan = None
     expires_at: int = None
+    message_reception_period_event_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateGlobalMessageMasterRequest:
         self.namespace_name = namespace_name
@@ -1910,6 +1911,10 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
 
     def with_expires_at(self, expires_at: int) -> CreateGlobalMessageMasterRequest:
         self.expires_at = expires_at
+        return self
+
+    def with_message_reception_period_event_id(self, message_reception_period_event_id: str) -> CreateGlobalMessageMasterRequest:
+        self.message_reception_period_event_id = message_reception_period_event_id
         return self
 
     def get(self, key, default=None):
@@ -1939,7 +1944,8 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
                 for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
-            .with_expires_at(data.get('expiresAt'))
+            .with_expires_at(data.get('expiresAt'))\
+            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1952,6 +1958,7 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
             ],
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
+            "messageReceptionPeriodEventId": self.message_reception_period_event_id,
         }
 
 
@@ -2007,6 +2014,7 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
     read_acquire_actions: List[AcquireAction] = None
     expires_time_span: TimeSpan = None
     expires_at: int = None
+    message_reception_period_event_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateGlobalMessageMasterRequest:
         self.namespace_name = namespace_name
@@ -2030,6 +2038,10 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
 
     def with_expires_at(self, expires_at: int) -> UpdateGlobalMessageMasterRequest:
         self.expires_at = expires_at
+        return self
+
+    def with_message_reception_period_event_id(self, message_reception_period_event_id: str) -> UpdateGlobalMessageMasterRequest:
+        self.message_reception_period_event_id = message_reception_period_event_id
         return self
 
     def get(self, key, default=None):
@@ -2059,7 +2071,8 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
                 for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
-            .with_expires_at(data.get('expiresAt'))
+            .with_expires_at(data.get('expiresAt'))\
+            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2072,6 +2085,7 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
             ],
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
+            "messageReceptionPeriodEventId": self.message_reception_period_event_id,
         }
 
 

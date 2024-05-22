@@ -2645,6 +2645,8 @@ class Gs2InboxRestClient(rest.AbstractGs2RestClient):
             body["expiresTimeSpan"] = request.expires_time_span.to_dict()
         if request.expires_at is not None:
             body["expiresAt"] = request.expires_at
+        if request.message_reception_period_event_id is not None:
+            body["messageReceptionPeriodEventId"] = request.message_reception_period_event_id
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2800,6 +2802,8 @@ class Gs2InboxRestClient(rest.AbstractGs2RestClient):
             body["expiresTimeSpan"] = request.expires_time_span.to_dict()
         if request.expires_at is not None:
             body["expiresAt"] = request.expires_at
+        if request.message_reception_period_event_id is not None:
+            body["messageReceptionPeriodEventId"] = request.message_reception_period_event_id
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
