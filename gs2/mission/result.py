@@ -1576,6 +1576,60 @@ class GetCounterByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyCounterValueResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCounterValueResult]:
+        if data is None:
+            return None
+        return VerifyCounterValueResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class VerifyCounterValueByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCounterValueByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyCounterValueByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class DeleteCounterByUserIdResult(core.Gs2Result):
     item: Counter = None
 
@@ -1761,6 +1815,40 @@ class DecreaseByStampTaskResult(core.Gs2Result):
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)
             ],
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class VerifyCounterValueByStampTaskResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyCounterValueByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCounterValueByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyCounterValueByStampTaskResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
             "newContextStack": self.new_context_stack,
         }
 

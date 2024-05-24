@@ -3183,6 +3183,173 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_counter_value(
+        self,
+        request: VerifyCounterValueRequest,
+        callback: Callable[[AsyncResult[VerifyCounterValueResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/counter/{counterName}/verify/counter/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            counterName=request.counter_name if request.counter_name is not None and request.counter_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.reset_type is not None:
+            body["resetType"] = request.reset_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyCounterValueResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_counter_value(
+        self,
+        request: VerifyCounterValueRequest,
+    ) -> VerifyCounterValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_counter_value(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_counter_value_async(
+        self,
+        request: VerifyCounterValueRequest,
+    ) -> VerifyCounterValueResult:
+        async_result = []
+        self._verify_counter_value(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_counter_value_by_user_id(
+        self,
+        request: VerifyCounterValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyCounterValueByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/counter/{counterName}/verify/counter/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            counterName=request.counter_name if request.counter_name is not None and request.counter_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.reset_type is not None:
+            body["resetType"] = request.reset_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyCounterValueByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_counter_value_by_user_id(
+        self,
+        request: VerifyCounterValueByUserIdRequest,
+    ) -> VerifyCounterValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_counter_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_counter_value_by_user_id_async(
+        self,
+        request: VerifyCounterValueByUserIdRequest,
+    ) -> VerifyCounterValueByUserIdResult:
+        async_result = []
+        self._verify_counter_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_counter_by_user_id(
         self,
         request: DeleteCounterByUserIdRequest,
@@ -3465,6 +3632,79 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
     ) -> DecreaseByStampTaskResult:
         async_result = []
         self._decrease_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_counter_value_by_stamp_task(
+        self,
+        request: VerifyCounterValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyCounterValueByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/stamp/counter/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyCounterValueByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_counter_value_by_stamp_task(
+        self,
+        request: VerifyCounterValueByStampTaskRequest,
+    ) -> VerifyCounterValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_counter_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_counter_value_by_stamp_task_async(
+        self,
+        request: VerifyCounterValueByStampTaskRequest,
+    ) -> VerifyCounterValueByStampTaskResult:
+        async_result = []
+        self._verify_counter_value_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -4298,12 +4538,15 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             body["metadata"] = request.metadata
         if request.description is not None:
             body["description"] = request.description
-        if request.counter_name is not None:
-            body["counterName"] = request.counter_name
-        if request.target_reset_type is not None:
-            body["targetResetType"] = request.target_reset_type
-        if request.target_value is not None:
-            body["targetValue"] = request.target_value
+        if request.verify_complete_type is not None:
+            body["verifyCompleteType"] = request.verify_complete_type
+        if request.target_counter is not None:
+            body["targetCounter"] = request.target_counter.to_dict()
+        if request.verify_complete_consume_actions is not None:
+            body["verifyCompleteConsumeActions"] = [
+                item.to_dict()
+                for item in request.verify_complete_consume_actions
+            ]
         if request.complete_acquire_actions is not None:
             body["completeAcquireActions"] = [
                 item.to_dict()
@@ -4313,6 +4556,12 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             body["challengePeriodEventId"] = request.challenge_period_event_id
         if request.premise_mission_task_name is not None:
             body["premiseMissionTaskName"] = request.premise_mission_task_name
+        if request.counter_name is not None:
+            body["counterName"] = request.counter_name
+        if request.target_reset_type is not None:
+            body["targetResetType"] = request.target_reset_type
+        if request.target_value is not None:
+            body["targetValue"] = request.target_value
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -4463,12 +4712,15 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             body["metadata"] = request.metadata
         if request.description is not None:
             body["description"] = request.description
-        if request.counter_name is not None:
-            body["counterName"] = request.counter_name
-        if request.target_reset_type is not None:
-            body["targetResetType"] = request.target_reset_type
-        if request.target_value is not None:
-            body["targetValue"] = request.target_value
+        if request.verify_complete_type is not None:
+            body["verifyCompleteType"] = request.verify_complete_type
+        if request.target_counter is not None:
+            body["targetCounter"] = request.target_counter.to_dict()
+        if request.verify_complete_consume_actions is not None:
+            body["verifyCompleteConsumeActions"] = [
+                item.to_dict()
+                for item in request.verify_complete_consume_actions
+            ]
         if request.complete_acquire_actions is not None:
             body["completeAcquireActions"] = [
                 item.to_dict()
@@ -4478,6 +4730,12 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             body["challengePeriodEventId"] = request.challenge_period_event_id
         if request.premise_mission_task_name is not None:
             body["premiseMissionTaskName"] = request.premise_mission_task_name
+        if request.counter_name is not None:
+            body["counterName"] = request.counter_name
+        if request.target_reset_type is not None:
+            body["targetResetType"] = request.target_reset_type
+        if request.target_value is not None:
+            body["targetValue"] = request.target_value
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

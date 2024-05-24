@@ -280,6 +280,47 @@ class Config(core.Gs2Model):
         }
 
 
+class ConsumeAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> ConsumeAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> ConsumeAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeAction]:
+        if data is None:
+            return None
+        return ConsumeAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
 class AcquireAction(core.Gs2Model):
     action: str = None
     request: str = None
@@ -321,20 +362,126 @@ class AcquireAction(core.Gs2Model):
         }
 
 
+class TargetCounterModel(core.Gs2Model):
+    counter_name: str = None
+    reset_type: str = None
+    value: int = None
+
+    def with_counter_name(self, counter_name: str) -> TargetCounterModel:
+        self.counter_name = counter_name
+        return self
+
+    def with_reset_type(self, reset_type: str) -> TargetCounterModel:
+        self.reset_type = reset_type
+        return self
+
+    def with_value(self, value: int) -> TargetCounterModel:
+        self.value = value
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TargetCounterModel]:
+        if data is None:
+            return None
+        return TargetCounterModel()\
+            .with_counter_name(data.get('counterName'))\
+            .with_reset_type(data.get('resetType'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "counterName": self.counter_name,
+            "resetType": self.reset_type,
+            "value": self.value,
+        }
+
+
+class ScopedValue(core.Gs2Model):
+    reset_type: str = None
+    value: int = None
+    next_reset_at: int = None
+    updated_at: int = None
+
+    def with_reset_type(self, reset_type: str) -> ScopedValue:
+        self.reset_type = reset_type
+        return self
+
+    def with_value(self, value: int) -> ScopedValue:
+        self.value = value
+        return self
+
+    def with_next_reset_at(self, next_reset_at: int) -> ScopedValue:
+        self.next_reset_at = next_reset_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> ScopedValue:
+        self.updated_at = updated_at
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ScopedValue]:
+        if data is None:
+            return None
+        return ScopedValue()\
+            .with_reset_type(data.get('resetType'))\
+            .with_value(data.get('value'))\
+            .with_next_reset_at(data.get('nextResetAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "resetType": self.reset_type,
+            "value": self.value,
+            "nextResetAt": self.next_reset_at,
+            "updatedAt": self.updated_at,
+        }
+
+
 class MissionTaskModelMaster(core.Gs2Model):
     mission_task_id: str = None
     name: str = None
     metadata: str = None
     description: str = None
-    counter_name: str = None
-    target_reset_type: str = None
-    target_value: int = None
+    verify_complete_type: str = None
+    target_counter: TargetCounterModel = None
+    verify_complete_consume_actions: List[ConsumeAction] = None
     complete_acquire_actions: List[AcquireAction] = None
     challenge_period_event_id: str = None
     premise_mission_task_name: str = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
+    counter_name: str = None
+    target_reset_type: str = None
+    target_value: int = None
 
     def with_mission_task_id(self, mission_task_id: str) -> MissionTaskModelMaster:
         self.mission_task_id = mission_task_id
@@ -352,16 +499,16 @@ class MissionTaskModelMaster(core.Gs2Model):
         self.description = description
         return self
 
-    def with_counter_name(self, counter_name: str) -> MissionTaskModelMaster:
-        self.counter_name = counter_name
+    def with_verify_complete_type(self, verify_complete_type: str) -> MissionTaskModelMaster:
+        self.verify_complete_type = verify_complete_type
         return self
 
-    def with_target_reset_type(self, target_reset_type: str) -> MissionTaskModelMaster:
-        self.target_reset_type = target_reset_type
+    def with_target_counter(self, target_counter: TargetCounterModel) -> MissionTaskModelMaster:
+        self.target_counter = target_counter
         return self
 
-    def with_target_value(self, target_value: int) -> MissionTaskModelMaster:
-        self.target_value = target_value
+    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[ConsumeAction]) -> MissionTaskModelMaster:
+        self.verify_complete_consume_actions = verify_complete_consume_actions
         return self
 
     def with_complete_acquire_actions(self, complete_acquire_actions: List[AcquireAction]) -> MissionTaskModelMaster:
@@ -386,6 +533,18 @@ class MissionTaskModelMaster(core.Gs2Model):
 
     def with_revision(self, revision: int) -> MissionTaskModelMaster:
         self.revision = revision
+        return self
+
+    def with_counter_name(self, counter_name: str) -> MissionTaskModelMaster:
+        self.counter_name = counter_name
+        return self
+
+    def with_target_reset_type(self, target_reset_type: str) -> MissionTaskModelMaster:
+        self.target_reset_type = target_reset_type
+        return self
+
+    def with_target_value(self, target_value: int) -> MissionTaskModelMaster:
+        self.target_value = target_value
         return self
 
     @classmethod
@@ -478,9 +637,12 @@ class MissionTaskModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
-            .with_counter_name(data.get('counterName'))\
-            .with_target_reset_type(data.get('targetResetType'))\
-            .with_target_value(data.get('targetValue'))\
+            .with_verify_complete_type(data.get('verifyCompleteType'))\
+            .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
+            .with_verify_complete_consume_actions([
+                ConsumeAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
+                for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
+            ])\
             .with_complete_acquire_actions([
                 AcquireAction.from_dict(data.get('completeAcquireActions')[i])
                 for i in range(len(data.get('completeAcquireActions')) if data.get('completeAcquireActions') else 0)
@@ -489,7 +651,10 @@ class MissionTaskModelMaster(core.Gs2Model):
             .with_premise_mission_task_name(data.get('premiseMissionTaskName'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
-            .with_revision(data.get('revision'))
+            .with_revision(data.get('revision'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_target_reset_type(data.get('targetResetType'))\
+            .with_target_value(data.get('targetValue'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -497,9 +662,12 @@ class MissionTaskModelMaster(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "description": self.description,
-            "counterName": self.counter_name,
-            "targetResetType": self.target_reset_type,
-            "targetValue": self.target_value,
+            "verifyCompleteType": self.verify_complete_type,
+            "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
+            "verifyCompleteConsumeActions": [
+                self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
+                for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
+            ],
             "completeAcquireActions": [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
                 for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
@@ -509,61 +677,9 @@ class MissionTaskModelMaster(core.Gs2Model):
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
-        }
-
-
-class ScopedValue(core.Gs2Model):
-    reset_type: str = None
-    value: int = None
-    next_reset_at: int = None
-    updated_at: int = None
-
-    def with_reset_type(self, reset_type: str) -> ScopedValue:
-        self.reset_type = reset_type
-        return self
-
-    def with_value(self, value: int) -> ScopedValue:
-        self.value = value
-        return self
-
-    def with_next_reset_at(self, next_reset_at: int) -> ScopedValue:
-        self.next_reset_at = next_reset_at
-        return self
-
-    def with_updated_at(self, updated_at: int) -> ScopedValue:
-        self.updated_at = updated_at
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[ScopedValue]:
-        if data is None:
-            return None
-        return ScopedValue()\
-            .with_reset_type(data.get('resetType'))\
-            .with_value(data.get('value'))\
-            .with_next_reset_at(data.get('nextResetAt'))\
-            .with_updated_at(data.get('updatedAt'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "resetType": self.reset_type,
-            "value": self.value,
-            "nextResetAt": self.next_reset_at,
-            "updatedAt": self.updated_at,
+            "counterName": self.counter_name,
+            "targetResetType": self.target_reset_type,
+            "targetValue": self.target_value,
         }
 
 
@@ -571,12 +687,15 @@ class MissionTaskModel(core.Gs2Model):
     mission_task_id: str = None
     name: str = None
     metadata: str = None
-    counter_name: str = None
-    target_reset_type: str = None
-    target_value: int = None
+    verify_complete_type: str = None
+    target_counter: TargetCounterModel = None
+    verify_complete_consume_actions: List[ConsumeAction] = None
     complete_acquire_actions: List[AcquireAction] = None
     challenge_period_event_id: str = None
     premise_mission_task_name: str = None
+    counter_name: str = None
+    target_reset_type: str = None
+    target_value: int = None
 
     def with_mission_task_id(self, mission_task_id: str) -> MissionTaskModel:
         self.mission_task_id = mission_task_id
@@ -590,16 +709,16 @@ class MissionTaskModel(core.Gs2Model):
         self.metadata = metadata
         return self
 
-    def with_counter_name(self, counter_name: str) -> MissionTaskModel:
-        self.counter_name = counter_name
+    def with_verify_complete_type(self, verify_complete_type: str) -> MissionTaskModel:
+        self.verify_complete_type = verify_complete_type
         return self
 
-    def with_target_reset_type(self, target_reset_type: str) -> MissionTaskModel:
-        self.target_reset_type = target_reset_type
+    def with_target_counter(self, target_counter: TargetCounterModel) -> MissionTaskModel:
+        self.target_counter = target_counter
         return self
 
-    def with_target_value(self, target_value: int) -> MissionTaskModel:
-        self.target_value = target_value
+    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[ConsumeAction]) -> MissionTaskModel:
+        self.verify_complete_consume_actions = verify_complete_consume_actions
         return self
 
     def with_complete_acquire_actions(self, complete_acquire_actions: List[AcquireAction]) -> MissionTaskModel:
@@ -612,6 +731,18 @@ class MissionTaskModel(core.Gs2Model):
 
     def with_premise_mission_task_name(self, premise_mission_task_name: str) -> MissionTaskModel:
         self.premise_mission_task_name = premise_mission_task_name
+        return self
+
+    def with_counter_name(self, counter_name: str) -> MissionTaskModel:
+        self.counter_name = counter_name
+        return self
+
+    def with_target_reset_type(self, target_reset_type: str) -> MissionTaskModel:
+        self.target_reset_type = target_reset_type
+        return self
+
+    def with_target_value(self, target_value: int) -> MissionTaskModel:
+        self.target_value = target_value
         return self
 
     @classmethod
@@ -703,30 +834,42 @@ class MissionTaskModel(core.Gs2Model):
             .with_mission_task_id(data.get('missionTaskId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_counter_name(data.get('counterName'))\
-            .with_target_reset_type(data.get('targetResetType'))\
-            .with_target_value(data.get('targetValue'))\
+            .with_verify_complete_type(data.get('verifyCompleteType'))\
+            .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
+            .with_verify_complete_consume_actions([
+                ConsumeAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
+                for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
+            ])\
             .with_complete_acquire_actions([
                 AcquireAction.from_dict(data.get('completeAcquireActions')[i])
                 for i in range(len(data.get('completeAcquireActions')) if data.get('completeAcquireActions') else 0)
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
-            .with_premise_mission_task_name(data.get('premiseMissionTaskName'))
+            .with_premise_mission_task_name(data.get('premiseMissionTaskName'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_target_reset_type(data.get('targetResetType'))\
+            .with_target_value(data.get('targetValue'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "missionTaskId": self.mission_task_id,
             "name": self.name,
             "metadata": self.metadata,
-            "counterName": self.counter_name,
-            "targetResetType": self.target_reset_type,
-            "targetValue": self.target_value,
+            "verifyCompleteType": self.verify_complete_type,
+            "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
+            "verifyCompleteConsumeActions": [
+                self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
+                for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
+            ],
             "completeAcquireActions": [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
                 for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "premiseMissionTaskName": self.premise_mission_task_name,
+            "counterName": self.counter_name,
+            "targetResetType": self.target_reset_type,
+            "targetValue": self.target_value,
         }
 
 
