@@ -304,6 +304,169 @@ class CalculatedAt(core.Gs2Model):
         }
 
 
+class FixedTiming(core.Gs2Model):
+    hour: int = None
+    minute: int = None
+
+    def with_hour(self, hour: int) -> FixedTiming:
+        self.hour = hour
+        return self
+
+    def with_minute(self, minute: int) -> FixedTiming:
+        self.minute = minute
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FixedTiming]:
+        if data is None:
+            return None
+        return FixedTiming()\
+            .with_hour(data.get('hour'))\
+            .with_minute(data.get('minute'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "hour": self.hour,
+            "minute": self.minute,
+        }
+
+
+class GlobalRankingSetting(core.Gs2Model):
+    unique_by_user_id: bool = None
+    calculate_interval_minutes: int = None
+    calculate_fixed_timing: FixedTiming = None
+    additional_scopes: List[Scope] = None
+    ignore_user_ids: List[str] = None
+    generation: str = None
+
+    def with_unique_by_user_id(self, unique_by_user_id: bool) -> GlobalRankingSetting:
+        self.unique_by_user_id = unique_by_user_id
+        return self
+
+    def with_calculate_interval_minutes(self, calculate_interval_minutes: int) -> GlobalRankingSetting:
+        self.calculate_interval_minutes = calculate_interval_minutes
+        return self
+
+    def with_calculate_fixed_timing(self, calculate_fixed_timing: FixedTiming) -> GlobalRankingSetting:
+        self.calculate_fixed_timing = calculate_fixed_timing
+        return self
+
+    def with_additional_scopes(self, additional_scopes: List[Scope]) -> GlobalRankingSetting:
+        self.additional_scopes = additional_scopes
+        return self
+
+    def with_ignore_user_ids(self, ignore_user_ids: List[str]) -> GlobalRankingSetting:
+        self.ignore_user_ids = ignore_user_ids
+        return self
+
+    def with_generation(self, generation: str) -> GlobalRankingSetting:
+        self.generation = generation
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GlobalRankingSetting]:
+        if data is None:
+            return None
+        return GlobalRankingSetting()\
+            .with_unique_by_user_id(data.get('uniqueByUserId'))\
+            .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
+            .with_calculate_fixed_timing(FixedTiming.from_dict(data.get('calculateFixedTiming')))\
+            .with_additional_scopes([
+                Scope.from_dict(data.get('additionalScopes')[i])
+                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+            ])\
+            .with_ignore_user_ids([
+                data.get('ignoreUserIds')[i]
+                for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
+            ])\
+            .with_generation(data.get('generation'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uniqueByUserId": self.unique_by_user_id,
+            "calculateIntervalMinutes": self.calculate_interval_minutes,
+            "calculateFixedTiming": self.calculate_fixed_timing.to_dict() if self.calculate_fixed_timing else None,
+            "additionalScopes": [
+                self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
+                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+            ],
+            "ignoreUserIds": [
+                self.ignore_user_ids[i]
+                for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
+            ],
+            "generation": self.generation,
+        }
+
+
+class Scope(core.Gs2Model):
+    name: str = None
+    target_days: int = None
+
+    def with_name(self, name: str) -> Scope:
+        self.name = name
+        return self
+
+    def with_target_days(self, target_days: int) -> Scope:
+        self.target_days = target_days
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Scope]:
+        if data is None:
+            return None
+        return Scope()\
+            .with_name(data.get('name'))\
+            .with_target_days(data.get('targetDays'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "targetDays": self.target_days,
+        }
+
+
 class CurrentRankingMaster(core.Gs2Model):
     namespace_id: str = None
     settings: str = None
@@ -385,47 +548,6 @@ class CurrentRankingMaster(core.Gs2Model):
         return {
             "namespaceId": self.namespace_id,
             "settings": self.settings,
-        }
-
-
-class Scope(core.Gs2Model):
-    name: str = None
-    target_days: int = None
-
-    def with_name(self, name: str) -> Scope:
-        self.name = name
-        return self
-
-    def with_target_days(self, target_days: int) -> Scope:
-        self.target_days = target_days
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[Scope]:
-        if data is None:
-            return None
-        return Scope()\
-            .with_name(data.get('name'))\
-            .with_target_days(data.get('targetDays'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "name": self.name,
-            "targetDays": self.target_days,
         }
 
 
@@ -841,16 +963,17 @@ class CategoryModelMaster(core.Gs2Model):
     metadata: str = None
     minimum_value: int = None
     maximum_value: int = None
+    sum: bool = None
     order_direction: str = None
     scope: str = None
+    global_ranking_setting: GlobalRankingSetting = None
+    entry_period_event_id: str = None
+    access_period_event_id: str = None
     unique_by_user_id: bool = None
-    sum: bool = None
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
     additional_scopes: List[Scope] = None
-    entry_period_event_id: str = None
-    access_period_event_id: str = None
     ignore_user_ids: List[str] = None
     generation: str = None
     created_at: int = None
@@ -881,6 +1004,10 @@ class CategoryModelMaster(core.Gs2Model):
         self.maximum_value = maximum_value
         return self
 
+    def with_sum(self, sum: bool) -> CategoryModelMaster:
+        self.sum = sum
+        return self
+
     def with_order_direction(self, order_direction: str) -> CategoryModelMaster:
         self.order_direction = order_direction
         return self
@@ -889,12 +1016,20 @@ class CategoryModelMaster(core.Gs2Model):
         self.scope = scope
         return self
 
-    def with_unique_by_user_id(self, unique_by_user_id: bool) -> CategoryModelMaster:
-        self.unique_by_user_id = unique_by_user_id
+    def with_global_ranking_setting(self, global_ranking_setting: GlobalRankingSetting) -> CategoryModelMaster:
+        self.global_ranking_setting = global_ranking_setting
         return self
 
-    def with_sum(self, sum: bool) -> CategoryModelMaster:
-        self.sum = sum
+    def with_entry_period_event_id(self, entry_period_event_id: str) -> CategoryModelMaster:
+        self.entry_period_event_id = entry_period_event_id
+        return self
+
+    def with_access_period_event_id(self, access_period_event_id: str) -> CategoryModelMaster:
+        self.access_period_event_id = access_period_event_id
+        return self
+
+    def with_unique_by_user_id(self, unique_by_user_id: bool) -> CategoryModelMaster:
+        self.unique_by_user_id = unique_by_user_id
         return self
 
     def with_calculate_fixed_timing_hour(self, calculate_fixed_timing_hour: int) -> CategoryModelMaster:
@@ -911,14 +1046,6 @@ class CategoryModelMaster(core.Gs2Model):
 
     def with_additional_scopes(self, additional_scopes: List[Scope]) -> CategoryModelMaster:
         self.additional_scopes = additional_scopes
-        return self
-
-    def with_entry_period_event_id(self, entry_period_event_id: str) -> CategoryModelMaster:
-        self.entry_period_event_id = entry_period_event_id
-        return self
-
-    def with_access_period_event_id(self, access_period_event_id: str) -> CategoryModelMaster:
-        self.access_period_event_id = access_period_event_id
         return self
 
     def with_ignore_user_ids(self, ignore_user_ids: List[str]) -> CategoryModelMaster:
@@ -1021,10 +1148,13 @@ class CategoryModelMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_minimum_value(data.get('minimumValue'))\
             .with_maximum_value(data.get('maximumValue'))\
+            .with_sum(data.get('sum'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_scope(data.get('scope'))\
+            .with_global_ranking_setting(GlobalRankingSetting.from_dict(data.get('globalRankingSetting')))\
+            .with_entry_period_event_id(data.get('entryPeriodEventId'))\
+            .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_unique_by_user_id(data.get('uniqueByUserId'))\
-            .with_sum(data.get('sum'))\
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
@@ -1032,8 +1162,6 @@ class CategoryModelMaster(core.Gs2Model):
                 Scope.from_dict(data.get('additionalScopes')[i])
                 for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
             ])\
-            .with_entry_period_event_id(data.get('entryPeriodEventId'))\
-            .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_ignore_user_ids([
                 data.get('ignoreUserIds')[i]
                 for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
@@ -1051,10 +1179,13 @@ class CategoryModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "minimumValue": self.minimum_value,
             "maximumValue": self.maximum_value,
+            "sum": self.sum,
             "orderDirection": self.order_direction,
             "scope": self.scope,
+            "globalRankingSetting": self.global_ranking_setting.to_dict() if self.global_ranking_setting else None,
+            "entryPeriodEventId": self.entry_period_event_id,
+            "accessPeriodEventId": self.access_period_event_id,
             "uniqueByUserId": self.unique_by_user_id,
-            "sum": self.sum,
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
@@ -1062,8 +1193,6 @@ class CategoryModelMaster(core.Gs2Model):
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "entryPeriodEventId": self.entry_period_event_id,
-            "accessPeriodEventId": self.access_period_event_id,
             "ignoreUserIds": [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
@@ -1081,16 +1210,17 @@ class CategoryModel(core.Gs2Model):
     metadata: str = None
     minimum_value: int = None
     maximum_value: int = None
+    sum: bool = None
     order_direction: str = None
     scope: str = None
+    global_ranking_setting: GlobalRankingSetting = None
+    entry_period_event_id: str = None
+    access_period_event_id: str = None
     unique_by_user_id: bool = None
-    sum: bool = None
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
     additional_scopes: List[Scope] = None
-    entry_period_event_id: str = None
-    access_period_event_id: str = None
     ignore_user_ids: List[str] = None
     generation: str = None
 
@@ -1114,6 +1244,10 @@ class CategoryModel(core.Gs2Model):
         self.maximum_value = maximum_value
         return self
 
+    def with_sum(self, sum: bool) -> CategoryModel:
+        self.sum = sum
+        return self
+
     def with_order_direction(self, order_direction: str) -> CategoryModel:
         self.order_direction = order_direction
         return self
@@ -1122,12 +1256,20 @@ class CategoryModel(core.Gs2Model):
         self.scope = scope
         return self
 
-    def with_unique_by_user_id(self, unique_by_user_id: bool) -> CategoryModel:
-        self.unique_by_user_id = unique_by_user_id
+    def with_global_ranking_setting(self, global_ranking_setting: GlobalRankingSetting) -> CategoryModel:
+        self.global_ranking_setting = global_ranking_setting
         return self
 
-    def with_sum(self, sum: bool) -> CategoryModel:
-        self.sum = sum
+    def with_entry_period_event_id(self, entry_period_event_id: str) -> CategoryModel:
+        self.entry_period_event_id = entry_period_event_id
+        return self
+
+    def with_access_period_event_id(self, access_period_event_id: str) -> CategoryModel:
+        self.access_period_event_id = access_period_event_id
+        return self
+
+    def with_unique_by_user_id(self, unique_by_user_id: bool) -> CategoryModel:
+        self.unique_by_user_id = unique_by_user_id
         return self
 
     def with_calculate_fixed_timing_hour(self, calculate_fixed_timing_hour: int) -> CategoryModel:
@@ -1144,14 +1286,6 @@ class CategoryModel(core.Gs2Model):
 
     def with_additional_scopes(self, additional_scopes: List[Scope]) -> CategoryModel:
         self.additional_scopes = additional_scopes
-        return self
-
-    def with_entry_period_event_id(self, entry_period_event_id: str) -> CategoryModel:
-        self.entry_period_event_id = entry_period_event_id
-        return self
-
-    def with_access_period_event_id(self, access_period_event_id: str) -> CategoryModel:
-        self.access_period_event_id = access_period_event_id
         return self
 
     def with_ignore_user_ids(self, ignore_user_ids: List[str]) -> CategoryModel:
@@ -1241,10 +1375,13 @@ class CategoryModel(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_minimum_value(data.get('minimumValue'))\
             .with_maximum_value(data.get('maximumValue'))\
+            .with_sum(data.get('sum'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_scope(data.get('scope'))\
+            .with_global_ranking_setting(GlobalRankingSetting.from_dict(data.get('globalRankingSetting')))\
+            .with_entry_period_event_id(data.get('entryPeriodEventId'))\
+            .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_unique_by_user_id(data.get('uniqueByUserId'))\
-            .with_sum(data.get('sum'))\
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
@@ -1252,8 +1389,6 @@ class CategoryModel(core.Gs2Model):
                 Scope.from_dict(data.get('additionalScopes')[i])
                 for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
             ])\
-            .with_entry_period_event_id(data.get('entryPeriodEventId'))\
-            .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_ignore_user_ids([
                 data.get('ignoreUserIds')[i]
                 for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
@@ -1267,10 +1402,13 @@ class CategoryModel(core.Gs2Model):
             "metadata": self.metadata,
             "minimumValue": self.minimum_value,
             "maximumValue": self.maximum_value,
+            "sum": self.sum,
             "orderDirection": self.order_direction,
             "scope": self.scope,
+            "globalRankingSetting": self.global_ranking_setting.to_dict() if self.global_ranking_setting else None,
+            "entryPeriodEventId": self.entry_period_event_id,
+            "accessPeriodEventId": self.access_period_event_id,
             "uniqueByUserId": self.unique_by_user_id,
-            "sum": self.sum,
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
@@ -1278,8 +1416,6 @@ class CategoryModel(core.Gs2Model):
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "entryPeriodEventId": self.entry_period_event_id,
-            "accessPeriodEventId": self.access_period_event_id,
             "ignoreUserIds": [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)

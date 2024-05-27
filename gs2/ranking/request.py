@@ -758,14 +758,15 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
     maximum_value: int = None
     order_direction: str = None
     scope: str = None
+    global_ranking_setting: GlobalRankingSetting = None
+    entry_period_event_id: str = None
+    access_period_event_id: str = None
     unique_by_user_id: bool = None
     sum: bool = None
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
     additional_scopes: List[Scope] = None
-    entry_period_event_id: str = None
-    access_period_event_id: str = None
     ignore_user_ids: List[str] = None
     generation: str = None
 
@@ -801,6 +802,18 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
         self.scope = scope
         return self
 
+    def with_global_ranking_setting(self, global_ranking_setting: GlobalRankingSetting) -> CreateCategoryModelMasterRequest:
+        self.global_ranking_setting = global_ranking_setting
+        return self
+
+    def with_entry_period_event_id(self, entry_period_event_id: str) -> CreateCategoryModelMasterRequest:
+        self.entry_period_event_id = entry_period_event_id
+        return self
+
+    def with_access_period_event_id(self, access_period_event_id: str) -> CreateCategoryModelMasterRequest:
+        self.access_period_event_id = access_period_event_id
+        return self
+
     def with_unique_by_user_id(self, unique_by_user_id: bool) -> CreateCategoryModelMasterRequest:
         self.unique_by_user_id = unique_by_user_id
         return self
@@ -823,14 +836,6 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
 
     def with_additional_scopes(self, additional_scopes: List[Scope]) -> CreateCategoryModelMasterRequest:
         self.additional_scopes = additional_scopes
-        return self
-
-    def with_entry_period_event_id(self, entry_period_event_id: str) -> CreateCategoryModelMasterRequest:
-        self.entry_period_event_id = entry_period_event_id
-        return self
-
-    def with_access_period_event_id(self, access_period_event_id: str) -> CreateCategoryModelMasterRequest:
-        self.access_period_event_id = access_period_event_id
         return self
 
     def with_ignore_user_ids(self, ignore_user_ids: List[str]) -> CreateCategoryModelMasterRequest:
@@ -868,6 +873,9 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             .with_maximum_value(data.get('maximumValue'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_scope(data.get('scope'))\
+            .with_global_ranking_setting(GlobalRankingSetting.from_dict(data.get('globalRankingSetting')))\
+            .with_entry_period_event_id(data.get('entryPeriodEventId'))\
+            .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_unique_by_user_id(data.get('uniqueByUserId'))\
             .with_sum(data.get('sum'))\
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
@@ -877,8 +885,6 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
                 Scope.from_dict(data.get('additionalScopes')[i])
                 for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
             ])\
-            .with_entry_period_event_id(data.get('entryPeriodEventId'))\
-            .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_ignore_user_ids([
                 data.get('ignoreUserIds')[i]
                 for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
@@ -895,6 +901,9 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             "maximumValue": self.maximum_value,
             "orderDirection": self.order_direction,
             "scope": self.scope,
+            "globalRankingSetting": self.global_ranking_setting.to_dict() if self.global_ranking_setting else None,
+            "entryPeriodEventId": self.entry_period_event_id,
+            "accessPeriodEventId": self.access_period_event_id,
             "uniqueByUserId": self.unique_by_user_id,
             "sum": self.sum,
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
@@ -904,8 +913,6 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "entryPeriodEventId": self.entry_period_event_id,
-            "accessPeriodEventId": self.access_period_event_id,
             "ignoreUserIds": [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
@@ -968,14 +975,15 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
     maximum_value: int = None
     order_direction: str = None
     scope: str = None
+    global_ranking_setting: GlobalRankingSetting = None
+    entry_period_event_id: str = None
+    access_period_event_id: str = None
     unique_by_user_id: bool = None
     sum: bool = None
     calculate_fixed_timing_hour: int = None
     calculate_fixed_timing_minute: int = None
     calculate_interval_minutes: int = None
     additional_scopes: List[Scope] = None
-    entry_period_event_id: str = None
-    access_period_event_id: str = None
     ignore_user_ids: List[str] = None
     generation: str = None
 
@@ -1011,6 +1019,18 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
         self.scope = scope
         return self
 
+    def with_global_ranking_setting(self, global_ranking_setting: GlobalRankingSetting) -> UpdateCategoryModelMasterRequest:
+        self.global_ranking_setting = global_ranking_setting
+        return self
+
+    def with_entry_period_event_id(self, entry_period_event_id: str) -> UpdateCategoryModelMasterRequest:
+        self.entry_period_event_id = entry_period_event_id
+        return self
+
+    def with_access_period_event_id(self, access_period_event_id: str) -> UpdateCategoryModelMasterRequest:
+        self.access_period_event_id = access_period_event_id
+        return self
+
     def with_unique_by_user_id(self, unique_by_user_id: bool) -> UpdateCategoryModelMasterRequest:
         self.unique_by_user_id = unique_by_user_id
         return self
@@ -1033,14 +1053,6 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
 
     def with_additional_scopes(self, additional_scopes: List[Scope]) -> UpdateCategoryModelMasterRequest:
         self.additional_scopes = additional_scopes
-        return self
-
-    def with_entry_period_event_id(self, entry_period_event_id: str) -> UpdateCategoryModelMasterRequest:
-        self.entry_period_event_id = entry_period_event_id
-        return self
-
-    def with_access_period_event_id(self, access_period_event_id: str) -> UpdateCategoryModelMasterRequest:
-        self.access_period_event_id = access_period_event_id
         return self
 
     def with_ignore_user_ids(self, ignore_user_ids: List[str]) -> UpdateCategoryModelMasterRequest:
@@ -1078,6 +1090,9 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             .with_maximum_value(data.get('maximumValue'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_scope(data.get('scope'))\
+            .with_global_ranking_setting(GlobalRankingSetting.from_dict(data.get('globalRankingSetting')))\
+            .with_entry_period_event_id(data.get('entryPeriodEventId'))\
+            .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_unique_by_user_id(data.get('uniqueByUserId'))\
             .with_sum(data.get('sum'))\
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
@@ -1087,8 +1102,6 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
                 Scope.from_dict(data.get('additionalScopes')[i])
                 for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
             ])\
-            .with_entry_period_event_id(data.get('entryPeriodEventId'))\
-            .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_ignore_user_ids([
                 data.get('ignoreUserIds')[i]
                 for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
@@ -1105,6 +1118,9 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             "maximumValue": self.maximum_value,
             "orderDirection": self.order_direction,
             "scope": self.scope,
+            "globalRankingSetting": self.global_ranking_setting.to_dict() if self.global_ranking_setting else None,
+            "entryPeriodEventId": self.entry_period_event_id,
+            "accessPeriodEventId": self.access_period_event_id,
             "uniqueByUserId": self.unique_by_user_id,
             "sum": self.sum,
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
@@ -1114,8 +1130,6 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "entryPeriodEventId": self.entry_period_event_id,
-            "accessPeriodEventId": self.access_period_event_id,
             "ignoreUserIds": [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)

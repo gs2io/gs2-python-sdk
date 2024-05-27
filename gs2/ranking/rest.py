@@ -1234,6 +1234,12 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
             body["orderDirection"] = request.order_direction
         if request.scope is not None:
             body["scope"] = request.scope
+        if request.global_ranking_setting is not None:
+            body["globalRankingSetting"] = request.global_ranking_setting.to_dict()
+        if request.entry_period_event_id is not None:
+            body["entryPeriodEventId"] = request.entry_period_event_id
+        if request.access_period_event_id is not None:
+            body["accessPeriodEventId"] = request.access_period_event_id
         if request.unique_by_user_id is not None:
             body["uniqueByUserId"] = request.unique_by_user_id
         if request.sum is not None:
@@ -1249,10 +1255,6 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
                 item.to_dict()
                 for item in request.additional_scopes
             ]
-        if request.entry_period_event_id is not None:
-            body["entryPeriodEventId"] = request.entry_period_event_id
-        if request.access_period_event_id is not None:
-            body["accessPeriodEventId"] = request.access_period_event_id
         if request.ignore_user_ids is not None:
             body["ignoreUserIds"] = [
                 item
@@ -1416,6 +1418,12 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
             body["orderDirection"] = request.order_direction
         if request.scope is not None:
             body["scope"] = request.scope
+        if request.global_ranking_setting is not None:
+            body["globalRankingSetting"] = request.global_ranking_setting.to_dict()
+        if request.entry_period_event_id is not None:
+            body["entryPeriodEventId"] = request.entry_period_event_id
+        if request.access_period_event_id is not None:
+            body["accessPeriodEventId"] = request.access_period_event_id
         if request.unique_by_user_id is not None:
             body["uniqueByUserId"] = request.unique_by_user_id
         if request.sum is not None:
@@ -1431,10 +1439,6 @@ class Gs2RankingRestClient(rest.AbstractGs2RestClient):
                 item.to_dict()
                 for item in request.additional_scopes
             ]
-        if request.entry_period_event_id is not None:
-            body["entryPeriodEventId"] = request.entry_period_event_id
-        if request.access_period_event_id is not None:
-            body["accessPeriodEventId"] = request.access_period_event_id
         if request.ignore_user_ids is not None:
             body["ignoreUserIds"] = [
                 item
