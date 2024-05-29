@@ -115,6 +115,8 @@ class Gs2BuffWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.apply_buff_script is not None:
+            body["applyBuffScript"] = request.apply_buff_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -332,6 +334,8 @@ class Gs2BuffWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.apply_buff_script is not None:
+            body["applyBuffScript"] = request.apply_buff_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

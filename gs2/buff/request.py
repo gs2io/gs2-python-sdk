@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    apply_buff_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -73,6 +74,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_apply_buff_script(self, apply_buff_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.apply_buff_script = apply_buff_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -100,12 +105,14 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_apply_buff_script(ScriptSetting.from_dict(data.get('applyBuffScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
             "description": self.description,
+            "applyBuffScript": self.apply_buff_script.to_dict() if self.apply_buff_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -187,6 +194,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    apply_buff_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -195,6 +203,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_apply_buff_script(self, apply_buff_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.apply_buff_script = apply_buff_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -222,12 +234,14 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_apply_buff_script(ScriptSetting.from_dict(data.get('applyBuffScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "applyBuffScript": self.apply_buff_script.to_dict() if self.apply_buff_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

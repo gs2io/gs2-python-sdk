@@ -113,6 +113,8 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.apply_buff_script is not None:
+            body["applyBuffScript"] = request.apply_buff_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -330,6 +332,8 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         }
         if request.description is not None:
             body["description"] = request.description
+        if request.apply_buff_script is not None:
+            body["applyBuffScript"] = request.apply_buff_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

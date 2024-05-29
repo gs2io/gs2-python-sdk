@@ -129,6 +129,102 @@ class GitHubCheckoutSetting(core.Gs2Model):
         }
 
 
+class ScriptSetting(core.Gs2Model):
+    trigger_script_id: str = None
+    done_trigger_target_type: str = None
+    done_trigger_script_id: str = None
+    done_trigger_queue_namespace_id: str = None
+
+    def with_trigger_script_id(self, trigger_script_id: str) -> ScriptSetting:
+        self.trigger_script_id = trigger_script_id
+        return self
+
+    def with_done_trigger_target_type(self, done_trigger_target_type: str) -> ScriptSetting:
+        self.done_trigger_target_type = done_trigger_target_type
+        return self
+
+    def with_done_trigger_script_id(self, done_trigger_script_id: str) -> ScriptSetting:
+        self.done_trigger_script_id = done_trigger_script_id
+        return self
+
+    def with_done_trigger_queue_namespace_id(self, done_trigger_queue_namespace_id: str) -> ScriptSetting:
+        self.done_trigger_queue_namespace_id = done_trigger_queue_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ScriptSetting]:
+        if data is None:
+            return None
+        return ScriptSetting()\
+            .with_trigger_script_id(data.get('triggerScriptId'))\
+            .with_done_trigger_target_type(data.get('doneTriggerTargetType'))\
+            .with_done_trigger_script_id(data.get('doneTriggerScriptId'))\
+            .with_done_trigger_queue_namespace_id(data.get('doneTriggerQueueNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "triggerScriptId": self.trigger_script_id,
+            "doneTriggerTargetType": self.done_trigger_target_type,
+            "doneTriggerScriptId": self.done_trigger_script_id,
+            "doneTriggerQueueNamespaceId": self.done_trigger_queue_namespace_id,
+        }
+
+
+class OverrideBuffRate(core.Gs2Model):
+    name: str = None
+    rate: float = None
+
+    def with_name(self, name: str) -> OverrideBuffRate:
+        self.name = name
+        return self
+
+    def with_rate(self, rate: float) -> OverrideBuffRate:
+        self.rate = rate
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[OverrideBuffRate]:
+        if data is None:
+            return None
+        return OverrideBuffRate()\
+            .with_name(data.get('name'))\
+            .with_rate(data.get('rate'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "rate": self.rate,
+        }
+
+
 class CurrentBuffMaster(core.Gs2Model):
     namespace_id: str = None
     settings: str = None
@@ -698,6 +794,7 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    apply_buff_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -713,6 +810,10 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_apply_buff_script(self, apply_buff_script: ScriptSetting) -> Namespace:
+        self.apply_buff_script = apply_buff_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -796,6 +897,7 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_apply_buff_script(ScriptSetting.from_dict(data.get('applyBuffScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -806,6 +908,7 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "applyBuffScript": self.apply_buff_script.to_dict() if self.apply_buff_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
