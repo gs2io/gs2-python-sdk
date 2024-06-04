@@ -636,6 +636,7 @@ class Score(core.Gs2Model):
     score: int = None
     metadata: str = None
     created_at: int = None
+    revision: int = None
 
     def with_score_id(self, score_id: str) -> Score:
         self.score_id = score_id
@@ -667,6 +668,10 @@ class Score(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Score:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> Score:
+        self.revision = revision
         return self
 
     @classmethod
@@ -786,7 +791,8 @@ class Score(core.Gs2Model):
             .with_scorer_user_id(data.get('scorerUserId'))\
             .with_score(data.get('score'))\
             .with_metadata(data.get('metadata'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -798,6 +804,7 @@ class Score(core.Gs2Model):
             "score": self.score,
             "metadata": self.metadata,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 

@@ -2983,6 +2983,340 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_current_maximum_member_count(
+        self,
+        request: VerifyCurrentMaximumMemberCountRequest,
+        callback: Callable[[AsyncResult[VerifyCurrentMaximumMemberCountResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='verifyCurrentMaximumMemberCount',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCurrentMaximumMemberCountResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_current_maximum_member_count(
+        self,
+        request: VerifyCurrentMaximumMemberCountRequest,
+    ) -> VerifyCurrentMaximumMemberCountResult:
+        async_result = []
+        with timeout(30):
+            self._verify_current_maximum_member_count(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_current_maximum_member_count_async(
+        self,
+        request: VerifyCurrentMaximumMemberCountRequest,
+    ) -> VerifyCurrentMaximumMemberCountResult:
+        async_result = []
+        self._verify_current_maximum_member_count(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_current_maximum_member_count_by_guild_name(
+        self,
+        request: VerifyCurrentMaximumMemberCountByGuildNameRequest,
+        callback: Callable[[AsyncResult[VerifyCurrentMaximumMemberCountByGuildNameResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='verifyCurrentMaximumMemberCountByGuildName',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCurrentMaximumMemberCountByGuildNameResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_current_maximum_member_count_by_guild_name(
+        self,
+        request: VerifyCurrentMaximumMemberCountByGuildNameRequest,
+    ) -> VerifyCurrentMaximumMemberCountByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._verify_current_maximum_member_count_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_current_maximum_member_count_by_guild_name_async(
+        self,
+        request: VerifyCurrentMaximumMemberCountByGuildNameRequest,
+    ) -> VerifyCurrentMaximumMemberCountByGuildNameResult:
+        async_result = []
+        self._verify_current_maximum_member_count_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_include_member(
+        self,
+        request: VerifyIncludeMemberRequest,
+        callback: Callable[[AsyncResult[VerifyIncludeMemberResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='verifyIncludeMember',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyIncludeMemberResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_include_member(
+        self,
+        request: VerifyIncludeMemberRequest,
+    ) -> VerifyIncludeMemberResult:
+        async_result = []
+        with timeout(30):
+            self._verify_include_member(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_include_member_async(
+        self,
+        request: VerifyIncludeMemberRequest,
+    ) -> VerifyIncludeMemberResult:
+        async_result = []
+        self._verify_include_member(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_include_member_by_user_id(
+        self,
+        request: VerifyIncludeMemberByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyIncludeMemberByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='verifyIncludeMemberByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyIncludeMemberByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_include_member_by_user_id(
+        self,
+        request: VerifyIncludeMemberByUserIdRequest,
+    ) -> VerifyIncludeMemberByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_include_member_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_include_member_by_user_id_async(
+        self,
+        request: VerifyIncludeMemberByUserIdRequest,
+    ) -> VerifyIncludeMemberByUserIdResult:
+        async_result = []
+        self._verify_include_member_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _set_maximum_current_maximum_member_count_by_guild_name(
         self,
         request: SetMaximumCurrentMaximumMemberCountByGuildNameRequest,
@@ -3430,6 +3764,152 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> SetMaximumCurrentMaximumMemberCountByStampSheetResult:
         async_result = []
         self._set_maximum_current_maximum_member_count_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_current_maximum_member_count_by_stamp_task(
+        self,
+        request: VerifyCurrentMaximumMemberCountByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyCurrentMaximumMemberCountByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='verifyCurrentMaximumMemberCountByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCurrentMaximumMemberCountByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_current_maximum_member_count_by_stamp_task(
+        self,
+        request: VerifyCurrentMaximumMemberCountByStampTaskRequest,
+    ) -> VerifyCurrentMaximumMemberCountByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_current_maximum_member_count_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_current_maximum_member_count_by_stamp_task_async(
+        self,
+        request: VerifyCurrentMaximumMemberCountByStampTaskRequest,
+    ) -> VerifyCurrentMaximumMemberCountByStampTaskResult:
+        async_result = []
+        self._verify_current_maximum_member_count_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_include_member_by_stamp_task(
+        self,
+        request: VerifyIncludeMemberByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyIncludeMemberByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='verifyIncludeMemberByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyIncludeMemberByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_include_member_by_stamp_task(
+        self,
+        request: VerifyIncludeMemberByStampTaskRequest,
+    ) -> VerifyIncludeMemberByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_include_member_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_include_member_by_stamp_task_async(
+        self,
+        request: VerifyIncludeMemberByStampTaskRequest,
+    ) -> VerifyIncludeMemberByStampTaskResult:
+        async_result = []
+        self._verify_include_member_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

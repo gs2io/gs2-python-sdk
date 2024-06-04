@@ -2562,6 +2562,303 @@ class DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest(core.Gs2Request
         }
 
 
+class VerifyCurrentMaximumMemberCountRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyCurrentMaximumMemberCountRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> VerifyCurrentMaximumMemberCountRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyCurrentMaximumMemberCountRequest:
+        self.access_token = access_token
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyCurrentMaximumMemberCountRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyCurrentMaximumMemberCountRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyCurrentMaximumMemberCountRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCurrentMaximumMemberCountRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCurrentMaximumMemberCountRequest]:
+        if data is None:
+            return None
+        return VerifyCurrentMaximumMemberCountRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyCurrentMaximumMemberCountByGuildNameRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyCurrentMaximumMemberCountByGuildNameRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> VerifyCurrentMaximumMemberCountByGuildNameRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> VerifyCurrentMaximumMemberCountByGuildNameRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyCurrentMaximumMemberCountByGuildNameRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyCurrentMaximumMemberCountByGuildNameRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyCurrentMaximumMemberCountByGuildNameRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCurrentMaximumMemberCountByGuildNameRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCurrentMaximumMemberCountByGuildNameRequest]:
+        if data is None:
+            return None
+        return VerifyCurrentMaximumMemberCountByGuildNameRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyIncludeMemberRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    access_token: str = None
+    verify_type: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyIncludeMemberRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> VerifyIncludeMemberRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> VerifyIncludeMemberRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyIncludeMemberRequest:
+        self.access_token = access_token
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyIncludeMemberRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyIncludeMemberRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyIncludeMemberRequest]:
+        if data is None:
+            return None
+        return VerifyIncludeMemberRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_verify_type(data.get('verifyType'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "accessToken": self.access_token,
+            "verifyType": self.verify_type,
+        }
+
+
+class VerifyIncludeMemberByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    user_id: str = None
+    verify_type: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyIncludeMemberByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> VerifyIncludeMemberByUserIdRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> VerifyIncludeMemberByUserIdRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyIncludeMemberByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyIncludeMemberByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyIncludeMemberByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyIncludeMemberByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyIncludeMemberByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyIncludeMemberByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_user_id(data.get('userId'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "userId": self.user_id,
+            "verifyType": self.verify_type,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class SetMaximumCurrentMaximumMemberCountByGuildNameRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2880,6 +3177,92 @@ class SetMaximumCurrentMaximumMemberCountByStampSheetRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyCurrentMaximumMemberCountByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyCurrentMaximumMemberCountByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyCurrentMaximumMemberCountByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCurrentMaximumMemberCountByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyCurrentMaximumMemberCountByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyIncludeMemberByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyIncludeMemberByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyIncludeMemberByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyIncludeMemberByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyIncludeMemberByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
             "keyId": self.key_id,
         }
 
