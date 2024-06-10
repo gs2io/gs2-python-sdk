@@ -2271,6 +2271,8 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.season is not None:
+            body["season"] = request.season
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2348,6 +2350,8 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.season is not None:
+            body["season"] = request.season
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -4498,6 +4502,8 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.season is not None:
+            body["season"] = request.season
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -4576,6 +4582,8 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.season is not None:
+            body["season"] = request.season
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

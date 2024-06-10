@@ -1332,6 +1332,81 @@ class SetMaximumIdleMinutesByStampSheetResult(core.Gs2Result):
         }
 
 
+class ReceiveByStampSheetResult(core.Gs2Result):
+    items: List[AcquireAction] = None
+    status: Status = None
+    transaction_id: str = None
+    stamp_sheet: str = None
+    stamp_sheet_encryption_key_id: str = None
+    auto_run_stamp_sheet: bool = None
+
+    def with_items(self, items: List[AcquireAction]) -> ReceiveByStampSheetResult:
+        self.items = items
+        return self
+
+    def with_status(self, status: Status) -> ReceiveByStampSheetResult:
+        self.status = status
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> ReceiveByStampSheetResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> ReceiveByStampSheetResult:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_stamp_sheet_encryption_key_id(self, stamp_sheet_encryption_key_id: str) -> ReceiveByStampSheetResult:
+        self.stamp_sheet_encryption_key_id = stamp_sheet_encryption_key_id
+        return self
+
+    def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ReceiveByStampSheetResult:
+        self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ReceiveByStampSheetResult]:
+        if data is None:
+            return None
+        return ReceiveByStampSheetResult()\
+            .with_items([
+                AcquireAction.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_status(Status.from_dict(data.get('status')))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "status": self.status.to_dict() if self.status else None,
+            "transactionId": self.transaction_id,
+            "stampSheet": self.stamp_sheet,
+            "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
+            "autoRunStampSheet": self.auto_run_stamp_sheet,
+        }
+
+
 class ExportMasterResult(core.Gs2Result):
     item: CurrentCategoryMaster = None
 
