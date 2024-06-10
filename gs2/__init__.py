@@ -35,6 +35,7 @@ from . import money
 from . import news
 from . import quest
 from . import ranking
+from . import ranking2
 from . import realtime
 from . import schedule
 from . import script

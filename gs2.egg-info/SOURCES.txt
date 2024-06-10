@@ -229,6 +229,12 @@ src/gs2/ranking/request.py
 src/gs2/ranking/rest.py
 src/gs2/ranking/result.py
 src/gs2/ranking/web_socket.py
+src/gs2/ranking2/__init__.py
+src/gs2/ranking2/model.py
+src/gs2/ranking2/request.py
+src/gs2/ranking2/rest.py
+src/gs2/ranking2/result.py
+src/gs2/ranking2/web_socket.py
 src/gs2/realtime/__init__.py
 src/gs2/realtime/model.py
 src/gs2/realtime/request.py

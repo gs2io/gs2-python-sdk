@@ -1310,56 +1310,6 @@ class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
         }
 
 
-class PutLogRequest(core.Gs2Request):
-
-    context_stack: str = None
-    logging_namespace_id: str = None
-    log_category: str = None
-    payload: str = None
-
-    def with_logging_namespace_id(self, logging_namespace_id: str) -> PutLogRequest:
-        self.logging_namespace_id = logging_namespace_id
-        return self
-
-    def with_log_category(self, log_category: str) -> PutLogRequest:
-        self.log_category = log_category
-        return self
-
-    def with_payload(self, payload: str) -> PutLogRequest:
-        self.payload = payload
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[PutLogRequest]:
-        if data is None:
-            return None
-        return PutLogRequest()\
-            .with_logging_namespace_id(data.get('loggingNamespaceId'))\
-            .with_log_category(data.get('logCategory'))\
-            .with_payload(data.get('payload'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "loggingNamespaceId": self.logging_namespace_id,
-            "logCategory": self.log_category,
-            "payload": self.payload,
-        }
-
-
 class DescribeInsightsRequest(core.Gs2Request):
 
     context_stack: str = None
