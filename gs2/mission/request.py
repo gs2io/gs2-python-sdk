@@ -602,6 +602,89 @@ class DeleteCompleteByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyCompleteByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    mission_group_name: str = None
+    user_id: str = None
+    verify_type: str = None
+    mission_task_name: str = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyCompleteByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_mission_group_name(self, mission_group_name: str) -> VerifyCompleteByUserIdRequest:
+        self.mission_group_name = mission_group_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyCompleteByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyCompleteByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_mission_task_name(self, mission_task_name: str) -> VerifyCompleteByUserIdRequest:
+        self.mission_task_name = mission_task_name
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyCompleteByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyCompleteByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCompleteByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompleteByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyCompleteByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_mission_group_name(data.get('missionGroupName'))\
+            .with_user_id(data.get('userId'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_mission_task_name(data.get('missionTaskName'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "missionGroupName": self.mission_group_name,
+            "userId": self.user_id,
+            "verifyType": self.verify_type,
+            "missionTaskName": self.mission_task_name,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class ReceiveByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -684,6 +767,49 @@ class RevertReceiveByStampSheetRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyCompleteByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyCompleteByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyCompleteByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompleteByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyCompleteByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
             "keyId": self.key_id,
         }
 

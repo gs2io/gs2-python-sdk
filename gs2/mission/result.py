@@ -391,6 +391,33 @@ class DeleteCompleteByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyCompleteByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompleteByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyCompleteByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class ReceiveByStampTaskResult(core.Gs2Result):
     item: Complete = None
     new_context_stack: str = None
@@ -463,6 +490,40 @@ class RevertReceiveByStampSheetResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyCompleteByStampTaskResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyCompleteByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompleteByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyCompleteByStampTaskResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newContextStack": self.new_context_stack,
         }
 
 

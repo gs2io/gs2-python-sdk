@@ -746,6 +746,91 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_complete_by_user_id(
+        self,
+        request: VerifyCompleteByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyCompleteByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='complete',
+            function='verifyCompleteByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.mission_group_name is not None:
+            body["missionGroupName"] = request.mission_group_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.mission_task_name is not None:
+            body["missionTaskName"] = request.mission_task_name
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCompleteByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_complete_by_user_id(
+        self,
+        request: VerifyCompleteByUserIdRequest,
+    ) -> VerifyCompleteByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_complete_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_complete_by_user_id_async(
+        self,
+        request: VerifyCompleteByUserIdRequest,
+    ) -> VerifyCompleteByUserIdResult:
+        async_result = []
+        self._verify_complete_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _receive_by_stamp_task(
         self,
         request: ReceiveByStampTaskRequest,
@@ -879,6 +964,79 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> RevertReceiveByStampSheetResult:
         async_result = []
         self._revert_receive_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_complete_by_stamp_task(
+        self,
+        request: VerifyCompleteByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyCompleteByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='complete',
+            function='verifyCompleteByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCompleteByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_complete_by_stamp_task(
+        self,
+        request: VerifyCompleteByStampTaskRequest,
+    ) -> VerifyCompleteByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_complete_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_complete_by_stamp_task_async(
+        self,
+        request: VerifyCompleteByStampTaskRequest,
+    ) -> VerifyCompleteByStampTaskResult:
+        async_result = []
+        self._verify_complete_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

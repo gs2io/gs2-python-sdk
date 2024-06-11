@@ -723,6 +723,86 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_complete_by_user_id(
+        self,
+        request: VerifyCompleteByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyCompleteByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/complete/group/{missionGroupName}/task/{missionTaskName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            missionGroupName=request.mission_group_name if request.mission_group_name is not None and request.mission_group_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+            missionTaskName=request.mission_task_name if request.mission_task_name is not None and request.mission_task_name != '' else 'null',
+            multiplyValueSpecifyingQuantity=request.multiply_value_specifying_quantity if request.multiply_value_specifying_quantity is not None and request.multiply_value_specifying_quantity != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyCompleteByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_complete_by_user_id(
+        self,
+        request: VerifyCompleteByUserIdRequest,
+    ) -> VerifyCompleteByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_complete_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_complete_by_user_id_async(
+        self,
+        request: VerifyCompleteByUserIdRequest,
+    ) -> VerifyCompleteByUserIdResult:
+        async_result = []
+        self._verify_complete_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _receive_by_stamp_task(
         self,
         request: ReceiveByStampTaskRequest,
@@ -855,6 +935,79 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
     ) -> RevertReceiveByStampSheetResult:
         async_result = []
         self._revert_receive_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_complete_by_stamp_task(
+        self,
+        request: VerifyCompleteByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyCompleteByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/stamp/complete/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyCompleteByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_complete_by_stamp_task(
+        self,
+        request: VerifyCompleteByStampTaskRequest,
+    ) -> VerifyCompleteByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_complete_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_complete_by_stamp_task_async(
+        self,
+        request: VerifyCompleteByStampTaskRequest,
+    ) -> VerifyCompleteByStampTaskResult:
+        async_result = []
+        self._verify_complete_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
