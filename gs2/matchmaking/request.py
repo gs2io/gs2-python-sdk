@@ -2283,12 +2283,12 @@ class ExportMasterRequest(core.Gs2Request):
         }
 
 
-class GetCurrentRatingModelMasterRequest(core.Gs2Request):
+class GetCurrentModelMasterRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
 
-    def with_namespace_name(self, namespace_name: str) -> GetCurrentRatingModelMasterRequest:
+    def with_namespace_name(self, namespace_name: str) -> GetCurrentModelMasterRequest:
         self.namespace_name = namespace_name
         return self
 
@@ -2307,10 +2307,10 @@ class GetCurrentRatingModelMasterRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[GetCurrentRatingModelMasterRequest]:
+    ) -> Optional[GetCurrentModelMasterRequest]:
         if data is None:
             return None
-        return GetCurrentRatingModelMasterRequest()\
+        return GetCurrentModelMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2319,17 +2319,17 @@ class GetCurrentRatingModelMasterRequest(core.Gs2Request):
         }
 
 
-class UpdateCurrentRatingModelMasterRequest(core.Gs2Request):
+class UpdateCurrentModelMasterRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
     settings: str = None
 
-    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentRatingModelMasterRequest:
+    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentModelMasterRequest:
         self.namespace_name = namespace_name
         return self
 
-    def with_settings(self, settings: str) -> UpdateCurrentRatingModelMasterRequest:
+    def with_settings(self, settings: str) -> UpdateCurrentModelMasterRequest:
         self.settings = settings
         return self
 
@@ -2348,10 +2348,10 @@ class UpdateCurrentRatingModelMasterRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentRatingModelMasterRequest]:
+    ) -> Optional[UpdateCurrentModelMasterRequest]:
         if data is None:
             return None
-        return UpdateCurrentRatingModelMasterRequest()\
+        return UpdateCurrentModelMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_settings(data.get('settings'))
 
@@ -2362,17 +2362,17 @@ class UpdateCurrentRatingModelMasterRequest(core.Gs2Request):
         }
 
 
-class UpdateCurrentRatingModelMasterFromGitHubRequest(core.Gs2Request):
+class UpdateCurrentModelMasterFromGitHubRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
     checkout_setting: GitHubCheckoutSetting = None
 
-    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentRatingModelMasterFromGitHubRequest:
+    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentModelMasterFromGitHubRequest:
         self.namespace_name = namespace_name
         return self
 
-    def with_checkout_setting(self, checkout_setting: GitHubCheckoutSetting) -> UpdateCurrentRatingModelMasterFromGitHubRequest:
+    def with_checkout_setting(self, checkout_setting: GitHubCheckoutSetting) -> UpdateCurrentModelMasterFromGitHubRequest:
         self.checkout_setting = checkout_setting
         return self
 
@@ -2391,10 +2391,10 @@ class UpdateCurrentRatingModelMasterFromGitHubRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentRatingModelMasterFromGitHubRequest]:
+    ) -> Optional[UpdateCurrentModelMasterFromGitHubRequest]:
         if data is None:
             return None
-        return UpdateCurrentRatingModelMasterFromGitHubRequest()\
+        return UpdateCurrentModelMasterFromGitHubRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_checkout_setting(GitHubCheckoutSetting.from_dict(data.get('checkoutSetting')))
 
@@ -2402,6 +2402,1034 @@ class UpdateCurrentRatingModelMasterFromGitHubRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "checkoutSetting": self.checkout_setting.to_dict() if self.checkout_setting else None,
+        }
+
+
+class DescribeSeasonModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeSeasonModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSeasonModelsRequest]:
+        if data is None:
+            return None
+        return DescribeSeasonModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetSeasonModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetSeasonModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> GetSeasonModelRequest:
+        self.season_name = season_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSeasonModelRequest]:
+        if data is None:
+            return None
+        return GetSeasonModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+        }
+
+
+class DescribeSeasonModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeSeasonModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeSeasonModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeSeasonModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSeasonModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribeSeasonModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateSeasonModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    maximum_participants: int = None
+    experience_model_id: str = None
+    challenge_period_event_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateSeasonModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name(self, name: str) -> CreateSeasonModelMasterRequest:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> CreateSeasonModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateSeasonModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_maximum_participants(self, maximum_participants: int) -> CreateSeasonModelMasterRequest:
+        self.maximum_participants = maximum_participants
+        return self
+
+    def with_experience_model_id(self, experience_model_id: str) -> CreateSeasonModelMasterRequest:
+        self.experience_model_id = experience_model_id
+        return self
+
+    def with_challenge_period_event_id(self, challenge_period_event_id: str) -> CreateSeasonModelMasterRequest:
+        self.challenge_period_event_id = challenge_period_event_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateSeasonModelMasterRequest]:
+        if data is None:
+            return None
+        return CreateSeasonModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_maximum_participants(data.get('maximumParticipants'))\
+            .with_experience_model_id(data.get('experienceModelId'))\
+            .with_challenge_period_event_id(data.get('challengePeriodEventId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "maximumParticipants": self.maximum_participants,
+            "experienceModelId": self.experience_model_id,
+            "challengePeriodEventId": self.challenge_period_event_id,
+        }
+
+
+class GetSeasonModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetSeasonModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> GetSeasonModelMasterRequest:
+        self.season_name = season_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSeasonModelMasterRequest]:
+        if data is None:
+            return None
+        return GetSeasonModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+        }
+
+
+class UpdateSeasonModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    description: str = None
+    metadata: str = None
+    maximum_participants: int = None
+    experience_model_id: str = None
+    challenge_period_event_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateSeasonModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> UpdateSeasonModelMasterRequest:
+        self.season_name = season_name
+        return self
+
+    def with_description(self, description: str) -> UpdateSeasonModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateSeasonModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_maximum_participants(self, maximum_participants: int) -> UpdateSeasonModelMasterRequest:
+        self.maximum_participants = maximum_participants
+        return self
+
+    def with_experience_model_id(self, experience_model_id: str) -> UpdateSeasonModelMasterRequest:
+        self.experience_model_id = experience_model_id
+        return self
+
+    def with_challenge_period_event_id(self, challenge_period_event_id: str) -> UpdateSeasonModelMasterRequest:
+        self.challenge_period_event_id = challenge_period_event_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateSeasonModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateSeasonModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_maximum_participants(data.get('maximumParticipants'))\
+            .with_experience_model_id(data.get('experienceModelId'))\
+            .with_challenge_period_event_id(data.get('challengePeriodEventId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "maximumParticipants": self.maximum_participants,
+            "experienceModelId": self.experience_model_id,
+            "challengePeriodEventId": self.challenge_period_event_id,
+        }
+
+
+class DeleteSeasonModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteSeasonModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> DeleteSeasonModelMasterRequest:
+        self.season_name = season_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteSeasonModelMasterRequest]:
+        if data is None:
+            return None
+        return DeleteSeasonModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+        }
+
+
+class DescribeSeasonGatheringsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    season: int = None
+    tier: int = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeSeasonGatheringsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> DescribeSeasonGatheringsRequest:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> DescribeSeasonGatheringsRequest:
+        self.season = season
+        return self
+
+    def with_tier(self, tier: int) -> DescribeSeasonGatheringsRequest:
+        self.tier = tier
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeSeasonGatheringsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeSeasonGatheringsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSeasonGatheringsRequest]:
+        if data is None:
+            return None
+        return DescribeSeasonGatheringsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_tier(data.get('tier'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "tier": self.tier,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeMatchmakingSeasonGatheringsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    season: int = None
+    tier: int = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeMatchmakingSeasonGatheringsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> DescribeMatchmakingSeasonGatheringsRequest:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> DescribeMatchmakingSeasonGatheringsRequest:
+        self.season = season
+        return self
+
+    def with_tier(self, tier: int) -> DescribeMatchmakingSeasonGatheringsRequest:
+        self.tier = tier
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeMatchmakingSeasonGatheringsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeMatchmakingSeasonGatheringsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeMatchmakingSeasonGatheringsRequest]:
+        if data is None:
+            return None
+        return DescribeMatchmakingSeasonGatheringsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_tier(data.get('tier'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "tier": self.tier,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DoSeasonMatchmakingRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    access_token: str = None
+    matchmaking_context_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DoSeasonMatchmakingRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> DoSeasonMatchmakingRequest:
+        self.season_name = season_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DoSeasonMatchmakingRequest:
+        self.access_token = access_token
+        return self
+
+    def with_matchmaking_context_token(self, matchmaking_context_token: str) -> DoSeasonMatchmakingRequest:
+        self.matchmaking_context_token = matchmaking_context_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DoSeasonMatchmakingRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DoSeasonMatchmakingRequest]:
+        if data is None:
+            return None
+        return DoSeasonMatchmakingRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_matchmaking_context_token(data.get('matchmakingContextToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "accessToken": self.access_token,
+            "matchmakingContextToken": self.matchmaking_context_token,
+        }
+
+
+class DoSeasonMatchmakingByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    user_id: str = None
+    matchmaking_context_token: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DoSeasonMatchmakingByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> DoSeasonMatchmakingByUserIdRequest:
+        self.season_name = season_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DoSeasonMatchmakingByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_matchmaking_context_token(self, matchmaking_context_token: str) -> DoSeasonMatchmakingByUserIdRequest:
+        self.matchmaking_context_token = matchmaking_context_token
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DoSeasonMatchmakingByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DoSeasonMatchmakingByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DoSeasonMatchmakingByUserIdRequest]:
+        if data is None:
+            return None
+        return DoSeasonMatchmakingByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_user_id(data.get('userId'))\
+            .with_matchmaking_context_token(data.get('matchmakingContextToken'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "userId": self.user_id,
+            "matchmakingContextToken": self.matchmaking_context_token,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class GetSeasonGatheringRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    season: int = None
+    tier: int = None
+    season_gathering_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetSeasonGatheringRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> GetSeasonGatheringRequest:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> GetSeasonGatheringRequest:
+        self.season = season
+        return self
+
+    def with_tier(self, tier: int) -> GetSeasonGatheringRequest:
+        self.tier = tier
+        return self
+
+    def with_season_gathering_name(self, season_gathering_name: str) -> GetSeasonGatheringRequest:
+        self.season_gathering_name = season_gathering_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSeasonGatheringRequest]:
+        if data is None:
+            return None
+        return GetSeasonGatheringRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_tier(data.get('tier'))\
+            .with_season_gathering_name(data.get('seasonGatheringName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "tier": self.tier,
+            "seasonGatheringName": self.season_gathering_name,
+        }
+
+
+class DeleteSeasonGatheringRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    season: int = None
+    tier: int = None
+    season_gathering_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteSeasonGatheringRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> DeleteSeasonGatheringRequest:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> DeleteSeasonGatheringRequest:
+        self.season = season
+        return self
+
+    def with_tier(self, tier: int) -> DeleteSeasonGatheringRequest:
+        self.tier = tier
+        return self
+
+    def with_season_gathering_name(self, season_gathering_name: str) -> DeleteSeasonGatheringRequest:
+        self.season_gathering_name = season_gathering_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteSeasonGatheringRequest]:
+        if data is None:
+            return None
+        return DeleteSeasonGatheringRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_tier(data.get('tier'))\
+            .with_season_gathering_name(data.get('seasonGatheringName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "tier": self.tier,
+            "seasonGatheringName": self.season_gathering_name,
+        }
+
+
+class DescribeJoinedSeasonGatheringsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    season_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeJoinedSeasonGatheringsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeJoinedSeasonGatheringsRequest:
+        self.access_token = access_token
+        return self
+
+    def with_season_name(self, season_name: str) -> DescribeJoinedSeasonGatheringsRequest:
+        self.season_name = season_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeJoinedSeasonGatheringsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeJoinedSeasonGatheringsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeJoinedSeasonGatheringsRequest]:
+        if data is None:
+            return None
+        return DescribeJoinedSeasonGatheringsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "seasonName": self.season_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeJoinedSeasonGatheringsByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    season_name: str = None
+    page_token: str = None
+    limit: int = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeJoinedSeasonGatheringsByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeJoinedSeasonGatheringsByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_season_name(self, season_name: str) -> DescribeJoinedSeasonGatheringsByUserIdRequest:
+        self.season_name = season_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeJoinedSeasonGatheringsByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeJoinedSeasonGatheringsByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeJoinedSeasonGatheringsByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeJoinedSeasonGatheringsByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeJoinedSeasonGatheringsByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "seasonName": self.season_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class GetJoinedSeasonGatheringRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    season_name: str = None
+    season: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetJoinedSeasonGatheringRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetJoinedSeasonGatheringRequest:
+        self.access_token = access_token
+        return self
+
+    def with_season_name(self, season_name: str) -> GetJoinedSeasonGatheringRequest:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> GetJoinedSeasonGatheringRequest:
+        self.season = season
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetJoinedSeasonGatheringRequest]:
+        if data is None:
+            return None
+        return GetJoinedSeasonGatheringRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "seasonName": self.season_name,
+            "season": self.season,
+        }
+
+
+class GetJoinedSeasonGatheringByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    season_name: str = None
+    season: int = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetJoinedSeasonGatheringByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetJoinedSeasonGatheringByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_season_name(self, season_name: str) -> GetJoinedSeasonGatheringByUserIdRequest:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> GetJoinedSeasonGatheringByUserIdRequest:
+        self.season = season
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetJoinedSeasonGatheringByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetJoinedSeasonGatheringByUserIdRequest]:
+        if data is None:
+            return None
+        return GetJoinedSeasonGatheringByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 

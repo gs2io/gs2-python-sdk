@@ -979,15 +979,626 @@ class ScriptSetting(core.Gs2Model):
         }
 
 
-class CurrentRatingModelMaster(core.Gs2Model):
+class JoinedSeasonGathering(core.Gs2Model):
+    joined_season_gathering_id: str = None
+    user_id: str = None
+    season_name: str = None
+    season: int = None
+    tier: int = None
+    season_gathering_name: str = None
+    created_at: int = None
+
+    def with_joined_season_gathering_id(self, joined_season_gathering_id: str) -> JoinedSeasonGathering:
+        self.joined_season_gathering_id = joined_season_gathering_id
+        return self
+
+    def with_user_id(self, user_id: str) -> JoinedSeasonGathering:
+        self.user_id = user_id
+        return self
+
+    def with_season_name(self, season_name: str) -> JoinedSeasonGathering:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> JoinedSeasonGathering:
+        self.season = season
+        return self
+
+    def with_tier(self, tier: int) -> JoinedSeasonGathering:
+        self.tier = tier
+        return self
+
+    def with_season_gathering_name(self, season_gathering_name: str) -> JoinedSeasonGathering:
+        self.season_gathering_name = season_gathering_name
+        return self
+
+    def with_created_at(self, created_at: int) -> JoinedSeasonGathering:
+        self.created_at = created_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        season_name,
+        season,
+        user_id,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:matchmaking:{namespaceName}:season:{seasonName}:{season}:user:{userId}:joinedGathering'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            seasonName=season_name,
+            season=season,
+            userId=user_id,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):user:(?P<userId>.+):joinedGathering', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):user:(?P<userId>.+):joinedGathering', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):user:(?P<userId>.+):joinedGathering', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_season_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):user:(?P<userId>.+):joinedGathering', grn)
+        if match is None:
+            return None
+        return match.group('season_name')
+
+    @classmethod
+    def get_season_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):user:(?P<userId>.+):joinedGathering', grn)
+        if match is None:
+            return None
+        return match.group('season')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):user:(?P<userId>.+):joinedGathering', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[JoinedSeasonGathering]:
+        if data is None:
+            return None
+        return JoinedSeasonGathering()\
+            .with_joined_season_gathering_id(data.get('joinedSeasonGatheringId'))\
+            .with_user_id(data.get('userId'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_tier(data.get('tier'))\
+            .with_season_gathering_name(data.get('seasonGatheringName'))\
+            .with_created_at(data.get('createdAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "joinedSeasonGatheringId": self.joined_season_gathering_id,
+            "userId": self.user_id,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "tier": self.tier,
+            "seasonGatheringName": self.season_gathering_name,
+            "createdAt": self.created_at,
+        }
+
+
+class SeasonGathering(core.Gs2Model):
+    season_gathering_id: str = None
+    season_name: str = None
+    season: int = None
+    tier: int = None
+    name: str = None
+    participants: List[str] = None
+    created_at: int = None
+    revision: int = None
+
+    def with_season_gathering_id(self, season_gathering_id: str) -> SeasonGathering:
+        self.season_gathering_id = season_gathering_id
+        return self
+
+    def with_season_name(self, season_name: str) -> SeasonGathering:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> SeasonGathering:
+        self.season = season
+        return self
+
+    def with_tier(self, tier: int) -> SeasonGathering:
+        self.tier = tier
+        return self
+
+    def with_name(self, name: str) -> SeasonGathering:
+        self.name = name
+        return self
+
+    def with_participants(self, participants: List[str]) -> SeasonGathering:
+        self.participants = participants
+        return self
+
+    def with_created_at(self, created_at: int) -> SeasonGathering:
+        self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> SeasonGathering:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        season_name,
+        season,
+        tier,
+        season_gathering_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:matchmaking:{namespaceName}:season:{seasonName}:{season}:{tier}:gathering:{seasonGatheringName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            seasonName=season_name,
+            season=season,
+            tier=tier,
+            seasonGatheringName=season_gathering_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):(?P<tier>.+):gathering:(?P<seasonGatheringName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):(?P<tier>.+):gathering:(?P<seasonGatheringName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):(?P<tier>.+):gathering:(?P<seasonGatheringName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_season_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):(?P<tier>.+):gathering:(?P<seasonGatheringName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('season_name')
+
+    @classmethod
+    def get_season_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):(?P<tier>.+):gathering:(?P<seasonGatheringName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('season')
+
+    @classmethod
+    def get_tier_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):(?P<tier>.+):gathering:(?P<seasonGatheringName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('tier')
+
+    @classmethod
+    def get_season_gathering_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):season:(?P<seasonName>.+):(?P<season>.+):(?P<tier>.+):gathering:(?P<seasonGatheringName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('season_gathering_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SeasonGathering]:
+        if data is None:
+            return None
+        return SeasonGathering()\
+            .with_season_gathering_id(data.get('seasonGatheringId'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_tier(data.get('tier'))\
+            .with_name(data.get('name'))\
+            .with_participants([
+                data.get('participants')[i]
+                for i in range(len(data.get('participants')) if data.get('participants') else 0)
+            ])\
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "seasonGatheringId": self.season_gathering_id,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "tier": self.tier,
+            "name": self.name,
+            "participants": [
+                self.participants[i]
+                for i in range(len(self.participants) if self.participants else 0)
+            ],
+            "createdAt": self.created_at,
+            "revision": self.revision,
+        }
+
+
+class SeasonModelMaster(core.Gs2Model):
+    season_model_id: str = None
+    name: str = None
+    metadata: str = None
+    description: str = None
+    maximum_participants: int = None
+    experience_model_id: str = None
+    challenge_period_event_id: str = None
+    created_at: int = None
+    updated_at: int = None
+    revision: int = None
+
+    def with_season_model_id(self, season_model_id: str) -> SeasonModelMaster:
+        self.season_model_id = season_model_id
+        return self
+
+    def with_name(self, name: str) -> SeasonModelMaster:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> SeasonModelMaster:
+        self.metadata = metadata
+        return self
+
+    def with_description(self, description: str) -> SeasonModelMaster:
+        self.description = description
+        return self
+
+    def with_maximum_participants(self, maximum_participants: int) -> SeasonModelMaster:
+        self.maximum_participants = maximum_participants
+        return self
+
+    def with_experience_model_id(self, experience_model_id: str) -> SeasonModelMaster:
+        self.experience_model_id = experience_model_id
+        return self
+
+    def with_challenge_period_event_id(self, challenge_period_event_id: str) -> SeasonModelMaster:
+        self.challenge_period_event_id = challenge_period_event_id
+        return self
+
+    def with_created_at(self, created_at: int) -> SeasonModelMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> SeasonModelMaster:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> SeasonModelMaster:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        season_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:matchmaking:{namespaceName}:model:{seasonName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            seasonName=season_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):model:(?P<seasonName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):model:(?P<seasonName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):model:(?P<seasonName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_season_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):model:(?P<seasonName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('season_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SeasonModelMaster]:
+        if data is None:
+            return None
+        return SeasonModelMaster()\
+            .with_season_model_id(data.get('seasonModelId'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_description(data.get('description'))\
+            .with_maximum_participants(data.get('maximumParticipants'))\
+            .with_experience_model_id(data.get('experienceModelId'))\
+            .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "seasonModelId": self.season_model_id,
+            "name": self.name,
+            "metadata": self.metadata,
+            "description": self.description,
+            "maximumParticipants": self.maximum_participants,
+            "experienceModelId": self.experience_model_id,
+            "challengePeriodEventId": self.challenge_period_event_id,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+        }
+
+
+class SeasonModel(core.Gs2Model):
+    season_model_id: str = None
+    name: str = None
+    metadata: str = None
+    maximum_participants: int = None
+    experience_model_id: str = None
+    challenge_period_event_id: str = None
+
+    def with_season_model_id(self, season_model_id: str) -> SeasonModel:
+        self.season_model_id = season_model_id
+        return self
+
+    def with_name(self, name: str) -> SeasonModel:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> SeasonModel:
+        self.metadata = metadata
+        return self
+
+    def with_maximum_participants(self, maximum_participants: int) -> SeasonModel:
+        self.maximum_participants = maximum_participants
+        return self
+
+    def with_experience_model_id(self, experience_model_id: str) -> SeasonModel:
+        self.experience_model_id = experience_model_id
+        return self
+
+    def with_challenge_period_event_id(self, challenge_period_event_id: str) -> SeasonModel:
+        self.challenge_period_event_id = challenge_period_event_id
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        season_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:matchmaking:{namespaceName}:model:{seasonName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            seasonName=season_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):model:(?P<seasonName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):model:(?P<seasonName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):model:(?P<seasonName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_season_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):matchmaking:(?P<namespaceName>.+):model:(?P<seasonName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('season_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SeasonModel]:
+        if data is None:
+            return None
+        return SeasonModel()\
+            .with_season_model_id(data.get('seasonModelId'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_maximum_participants(data.get('maximumParticipants'))\
+            .with_experience_model_id(data.get('experienceModelId'))\
+            .with_challenge_period_event_id(data.get('challengePeriodEventId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "seasonModelId": self.season_model_id,
+            "name": self.name,
+            "metadata": self.metadata,
+            "maximumParticipants": self.maximum_participants,
+            "experienceModelId": self.experience_model_id,
+            "challengePeriodEventId": self.challenge_period_event_id,
+        }
+
+
+class CurrentModelMaster(core.Gs2Model):
     namespace_id: str = None
     settings: str = None
 
-    def with_namespace_id(self, namespace_id: str) -> CurrentRatingModelMaster:
+    def with_namespace_id(self, namespace_id: str) -> CurrentModelMaster:
         self.namespace_id = namespace_id
         return self
 
-    def with_settings(self, settings: str) -> CurrentRatingModelMaster:
+    def with_settings(self, settings: str) -> CurrentModelMaster:
         self.settings = settings
         return self
 
@@ -1049,10 +1660,10 @@ class CurrentRatingModelMaster(core.Gs2Model):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[CurrentRatingModelMaster]:
+    ) -> Optional[CurrentModelMaster]:
         if data is None:
             return None
-        return CurrentRatingModelMaster()\
+        return CurrentModelMaster()\
             .with_namespace_id(data.get('namespaceId'))\
             .with_settings(data.get('settings'))
 

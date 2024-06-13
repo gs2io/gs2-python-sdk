@@ -1287,9 +1287,9 @@ class GetRatingModelResult(core.Gs2Result):
 
 
 class ExportMasterResult(core.Gs2Result):
-    item: CurrentRatingModelMaster = None
+    item: CurrentModelMaster = None
 
-    def with_item(self, item: CurrentRatingModelMaster) -> ExportMasterResult:
+    def with_item(self, item: CurrentModelMaster) -> ExportMasterResult:
         self.item = item
         return self
 
@@ -1312,7 +1312,7 @@ class ExportMasterResult(core.Gs2Result):
         if data is None:
             return None
         return ExportMasterResult()\
-            .with_item(CurrentRatingModelMaster.from_dict(data.get('item')))
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1320,10 +1320,10 @@ class ExportMasterResult(core.Gs2Result):
         }
 
 
-class GetCurrentRatingModelMasterResult(core.Gs2Result):
-    item: CurrentRatingModelMaster = None
+class GetCurrentModelMasterResult(core.Gs2Result):
+    item: CurrentModelMaster = None
 
-    def with_item(self, item: CurrentRatingModelMaster) -> GetCurrentRatingModelMasterResult:
+    def with_item(self, item: CurrentModelMaster) -> GetCurrentModelMasterResult:
         self.item = item
         return self
 
@@ -1342,11 +1342,11 @@ class GetCurrentRatingModelMasterResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[GetCurrentRatingModelMasterResult]:
+    ) -> Optional[GetCurrentModelMasterResult]:
         if data is None:
             return None
-        return GetCurrentRatingModelMasterResult()\
-            .with_item(CurrentRatingModelMaster.from_dict(data.get('item')))
+        return GetCurrentModelMasterResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1354,10 +1354,10 @@ class GetCurrentRatingModelMasterResult(core.Gs2Result):
         }
 
 
-class UpdateCurrentRatingModelMasterResult(core.Gs2Result):
-    item: CurrentRatingModelMaster = None
+class UpdateCurrentModelMasterResult(core.Gs2Result):
+    item: CurrentModelMaster = None
 
-    def with_item(self, item: CurrentRatingModelMaster) -> UpdateCurrentRatingModelMasterResult:
+    def with_item(self, item: CurrentModelMaster) -> UpdateCurrentModelMasterResult:
         self.item = item
         return self
 
@@ -1376,11 +1376,11 @@ class UpdateCurrentRatingModelMasterResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentRatingModelMasterResult]:
+    ) -> Optional[UpdateCurrentModelMasterResult]:
         if data is None:
             return None
-        return UpdateCurrentRatingModelMasterResult()\
-            .with_item(CurrentRatingModelMaster.from_dict(data.get('item')))
+        return UpdateCurrentModelMasterResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1388,10 +1388,10 @@ class UpdateCurrentRatingModelMasterResult(core.Gs2Result):
         }
 
 
-class UpdateCurrentRatingModelMasterFromGitHubResult(core.Gs2Result):
-    item: CurrentRatingModelMaster = None
+class UpdateCurrentModelMasterFromGitHubResult(core.Gs2Result):
+    item: CurrentModelMaster = None
 
-    def with_item(self, item: CurrentRatingModelMaster) -> UpdateCurrentRatingModelMasterFromGitHubResult:
+    def with_item(self, item: CurrentModelMaster) -> UpdateCurrentModelMasterFromGitHubResult:
         self.item = item
         return self
 
@@ -1410,11 +1410,674 @@ class UpdateCurrentRatingModelMasterFromGitHubResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentRatingModelMasterFromGitHubResult]:
+    ) -> Optional[UpdateCurrentModelMasterFromGitHubResult]:
         if data is None:
             return None
-        return UpdateCurrentRatingModelMasterFromGitHubResult()\
-            .with_item(CurrentRatingModelMaster.from_dict(data.get('item')))
+        return UpdateCurrentModelMasterFromGitHubResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeSeasonModelsResult(core.Gs2Result):
+    items: List[SeasonModel] = None
+
+    def with_items(self, items: List[SeasonModel]) -> DescribeSeasonModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSeasonModelsResult]:
+        if data is None:
+            return None
+        return DescribeSeasonModelsResult()\
+            .with_items([
+                SeasonModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetSeasonModelResult(core.Gs2Result):
+    item: SeasonModel = None
+
+    def with_item(self, item: SeasonModel) -> GetSeasonModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSeasonModelResult]:
+        if data is None:
+            return None
+        return GetSeasonModelResult()\
+            .with_item(SeasonModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeSeasonModelMastersResult(core.Gs2Result):
+    items: List[SeasonModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[SeasonModelMaster]) -> DescribeSeasonModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeSeasonModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSeasonModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeSeasonModelMastersResult()\
+            .with_items([
+                SeasonModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateSeasonModelMasterResult(core.Gs2Result):
+    item: SeasonModelMaster = None
+
+    def with_item(self, item: SeasonModelMaster) -> CreateSeasonModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateSeasonModelMasterResult]:
+        if data is None:
+            return None
+        return CreateSeasonModelMasterResult()\
+            .with_item(SeasonModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetSeasonModelMasterResult(core.Gs2Result):
+    item: SeasonModelMaster = None
+
+    def with_item(self, item: SeasonModelMaster) -> GetSeasonModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSeasonModelMasterResult]:
+        if data is None:
+            return None
+        return GetSeasonModelMasterResult()\
+            .with_item(SeasonModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateSeasonModelMasterResult(core.Gs2Result):
+    item: SeasonModelMaster = None
+
+    def with_item(self, item: SeasonModelMaster) -> UpdateSeasonModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateSeasonModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateSeasonModelMasterResult()\
+            .with_item(SeasonModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteSeasonModelMasterResult(core.Gs2Result):
+    item: SeasonModelMaster = None
+
+    def with_item(self, item: SeasonModelMaster) -> DeleteSeasonModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteSeasonModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteSeasonModelMasterResult()\
+            .with_item(SeasonModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeSeasonGatheringsResult(core.Gs2Result):
+    items: List[SeasonGathering] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[SeasonGathering]) -> DescribeSeasonGatheringsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeSeasonGatheringsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSeasonGatheringsResult]:
+        if data is None:
+            return None
+        return DescribeSeasonGatheringsResult()\
+            .with_items([
+                SeasonGathering.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeMatchmakingSeasonGatheringsResult(core.Gs2Result):
+    items: List[SeasonGathering] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[SeasonGathering]) -> DescribeMatchmakingSeasonGatheringsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeMatchmakingSeasonGatheringsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeMatchmakingSeasonGatheringsResult]:
+        if data is None:
+            return None
+        return DescribeMatchmakingSeasonGatheringsResult()\
+            .with_items([
+                SeasonGathering.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DoSeasonMatchmakingResult(core.Gs2Result):
+    item: SeasonGathering = None
+    matchmaking_context_token: str = None
+
+    def with_item(self, item: SeasonGathering) -> DoSeasonMatchmakingResult:
+        self.item = item
+        return self
+
+    def with_matchmaking_context_token(self, matchmaking_context_token: str) -> DoSeasonMatchmakingResult:
+        self.matchmaking_context_token = matchmaking_context_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DoSeasonMatchmakingResult]:
+        if data is None:
+            return None
+        return DoSeasonMatchmakingResult()\
+            .with_item(SeasonGathering.from_dict(data.get('item')))\
+            .with_matchmaking_context_token(data.get('matchmakingContextToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "matchmakingContextToken": self.matchmaking_context_token,
+        }
+
+
+class DoSeasonMatchmakingByUserIdResult(core.Gs2Result):
+    item: SeasonGathering = None
+    matchmaking_context_token: str = None
+
+    def with_item(self, item: SeasonGathering) -> DoSeasonMatchmakingByUserIdResult:
+        self.item = item
+        return self
+
+    def with_matchmaking_context_token(self, matchmaking_context_token: str) -> DoSeasonMatchmakingByUserIdResult:
+        self.matchmaking_context_token = matchmaking_context_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DoSeasonMatchmakingByUserIdResult]:
+        if data is None:
+            return None
+        return DoSeasonMatchmakingByUserIdResult()\
+            .with_item(SeasonGathering.from_dict(data.get('item')))\
+            .with_matchmaking_context_token(data.get('matchmakingContextToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "matchmakingContextToken": self.matchmaking_context_token,
+        }
+
+
+class GetSeasonGatheringResult(core.Gs2Result):
+    item: SeasonGathering = None
+
+    def with_item(self, item: SeasonGathering) -> GetSeasonGatheringResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSeasonGatheringResult]:
+        if data is None:
+            return None
+        return GetSeasonGatheringResult()\
+            .with_item(SeasonGathering.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteSeasonGatheringResult(core.Gs2Result):
+    item: SeasonGathering = None
+
+    def with_item(self, item: SeasonGathering) -> DeleteSeasonGatheringResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteSeasonGatheringResult]:
+        if data is None:
+            return None
+        return DeleteSeasonGatheringResult()\
+            .with_item(SeasonGathering.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeJoinedSeasonGatheringsResult(core.Gs2Result):
+    items: List[JoinedSeasonGathering] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[JoinedSeasonGathering]) -> DescribeJoinedSeasonGatheringsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeJoinedSeasonGatheringsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeJoinedSeasonGatheringsResult]:
+        if data is None:
+            return None
+        return DescribeJoinedSeasonGatheringsResult()\
+            .with_items([
+                JoinedSeasonGathering.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeJoinedSeasonGatheringsByUserIdResult(core.Gs2Result):
+    items: List[JoinedSeasonGathering] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[JoinedSeasonGathering]) -> DescribeJoinedSeasonGatheringsByUserIdResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeJoinedSeasonGatheringsByUserIdResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeJoinedSeasonGatheringsByUserIdResult]:
+        if data is None:
+            return None
+        return DescribeJoinedSeasonGatheringsByUserIdResult()\
+            .with_items([
+                JoinedSeasonGathering.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetJoinedSeasonGatheringResult(core.Gs2Result):
+    item: JoinedSeasonGathering = None
+
+    def with_item(self, item: JoinedSeasonGathering) -> GetJoinedSeasonGatheringResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetJoinedSeasonGatheringResult]:
+        if data is None:
+            return None
+        return GetJoinedSeasonGatheringResult()\
+            .with_item(JoinedSeasonGathering.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetJoinedSeasonGatheringByUserIdResult(core.Gs2Result):
+    item: JoinedSeasonGathering = None
+
+    def with_item(self, item: JoinedSeasonGathering) -> GetJoinedSeasonGatheringByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetJoinedSeasonGatheringByUserIdResult]:
+        if data is None:
+            return None
+        return GetJoinedSeasonGatheringByUserIdResult()\
+            .with_item(JoinedSeasonGathering.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {

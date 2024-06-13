@@ -2887,7 +2887,7 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="matchmaking",
-            component='currentRatingModelMaster',
+            component='currentModelMaster',
             function='exportMaster',
             request_id=request_id,
         )
@@ -2948,18 +2948,18 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _get_current_rating_model_master(
+    def _get_current_model_master(
         self,
-        request: GetCurrentRatingModelMasterRequest,
-        callback: Callable[[AsyncResult[GetCurrentRatingModelMasterResult]], None],
+        request: GetCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[GetCurrentModelMasterResult]], None],
     ):
         import uuid
 
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="matchmaking",
-            component='currentRatingModelMaster',
-            function='getCurrentRatingModelMaster',
+            component='currentModelMaster',
+            function='getCurrentModelMaster',
             request_id=request_id,
         )
 
@@ -2974,19 +2974,19 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=GetCurrentRatingModelMasterResult,
+                result_type=GetCurrentModelMasterResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def get_current_rating_model_master(
+    def get_current_model_master(
         self,
-        request: GetCurrentRatingModelMasterRequest,
-    ) -> GetCurrentRatingModelMasterResult:
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
         async_result = []
         with timeout(30):
-            self._get_current_rating_model_master(
+            self._get_current_model_master(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -3000,12 +3000,12 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def get_current_rating_model_master_async(
+    async def get_current_model_master_async(
         self,
-        request: GetCurrentRatingModelMasterRequest,
-    ) -> GetCurrentRatingModelMasterResult:
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
         async_result = []
-        self._get_current_rating_model_master(
+        self._get_current_model_master(
             request,
             lambda result: async_result.append(result),
         )
@@ -3019,18 +3019,18 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_rating_model_master(
+    def _update_current_model_master(
         self,
-        request: UpdateCurrentRatingModelMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentRatingModelMasterResult]], None],
+        request: UpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
     ):
         import uuid
 
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="matchmaking",
-            component='currentRatingModelMaster',
-            function='updateCurrentRatingModelMaster',
+            component='currentModelMaster',
+            function='updateCurrentModelMaster',
             request_id=request_id,
         )
 
@@ -3047,19 +3047,19 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=UpdateCurrentRatingModelMasterResult,
+                result_type=UpdateCurrentModelMasterResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def update_current_rating_model_master(
+    def update_current_model_master(
         self,
-        request: UpdateCurrentRatingModelMasterRequest,
-    ) -> UpdateCurrentRatingModelMasterResult:
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
         async_result = []
         with timeout(30):
-            self._update_current_rating_model_master(
+            self._update_current_model_master(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -3073,12 +3073,12 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def update_current_rating_model_master_async(
+    async def update_current_model_master_async(
         self,
-        request: UpdateCurrentRatingModelMasterRequest,
-    ) -> UpdateCurrentRatingModelMasterResult:
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
         async_result = []
-        self._update_current_rating_model_master(
+        self._update_current_model_master(
             request,
             lambda result: async_result.append(result),
         )
@@ -3092,18 +3092,18 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_rating_model_master_from_git_hub(
+    def _update_current_model_master_from_git_hub(
         self,
-        request: UpdateCurrentRatingModelMasterFromGitHubRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentRatingModelMasterFromGitHubResult]], None],
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterFromGitHubResult]], None],
     ):
         import uuid
 
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="matchmaking",
-            component='currentRatingModelMaster',
-            function='updateCurrentRatingModelMasterFromGitHub',
+            component='currentModelMaster',
+            function='updateCurrentModelMasterFromGitHub',
             request_id=request_id,
         )
 
@@ -3120,19 +3120,19 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=UpdateCurrentRatingModelMasterFromGitHubResult,
+                result_type=UpdateCurrentModelMasterFromGitHubResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def update_current_rating_model_master_from_git_hub(
+    def update_current_model_master_from_git_hub(
         self,
-        request: UpdateCurrentRatingModelMasterFromGitHubRequest,
-    ) -> UpdateCurrentRatingModelMasterFromGitHubResult:
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
         async_result = []
         with timeout(30):
-            self._update_current_rating_model_master_from_git_hub(
+            self._update_current_model_master_from_git_hub(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -3146,12 +3146,1345 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def update_current_rating_model_master_from_git_hub_async(
+    async def update_current_model_master_from_git_hub_async(
         self,
-        request: UpdateCurrentRatingModelMasterFromGitHubRequest,
-    ) -> UpdateCurrentRatingModelMasterFromGitHubResult:
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
         async_result = []
-        self._update_current_rating_model_master_from_git_hub(
+        self._update_current_model_master_from_git_hub(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_season_models(
+        self,
+        request: DescribeSeasonModelsRequest,
+        callback: Callable[[AsyncResult[DescribeSeasonModelsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonModel',
+            function='describeSeasonModels',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeSeasonModelsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_season_models(
+        self,
+        request: DescribeSeasonModelsRequest,
+    ) -> DescribeSeasonModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_season_models(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_season_models_async(
+        self,
+        request: DescribeSeasonModelsRequest,
+    ) -> DescribeSeasonModelsResult:
+        async_result = []
+        self._describe_season_models(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_season_model(
+        self,
+        request: GetSeasonModelRequest,
+        callback: Callable[[AsyncResult[GetSeasonModelResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonModel',
+            function='getSeasonModel',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetSeasonModelResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_season_model(
+        self,
+        request: GetSeasonModelRequest,
+    ) -> GetSeasonModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_season_model(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_season_model_async(
+        self,
+        request: GetSeasonModelRequest,
+    ) -> GetSeasonModelResult:
+        async_result = []
+        self._get_season_model(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_season_model_masters(
+        self,
+        request: DescribeSeasonModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeSeasonModelMastersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonModelMaster',
+            function='describeSeasonModelMasters',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeSeasonModelMastersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_season_model_masters(
+        self,
+        request: DescribeSeasonModelMastersRequest,
+    ) -> DescribeSeasonModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_season_model_masters(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_season_model_masters_async(
+        self,
+        request: DescribeSeasonModelMastersRequest,
+    ) -> DescribeSeasonModelMastersResult:
+        async_result = []
+        self._describe_season_model_masters(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_season_model_master(
+        self,
+        request: CreateSeasonModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateSeasonModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonModelMaster',
+            function='createSeasonModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.maximum_participants is not None:
+            body["maximumParticipants"] = request.maximum_participants
+        if request.experience_model_id is not None:
+            body["experienceModelId"] = request.experience_model_id
+        if request.challenge_period_event_id is not None:
+            body["challengePeriodEventId"] = request.challenge_period_event_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateSeasonModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_season_model_master(
+        self,
+        request: CreateSeasonModelMasterRequest,
+    ) -> CreateSeasonModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_season_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_season_model_master_async(
+        self,
+        request: CreateSeasonModelMasterRequest,
+    ) -> CreateSeasonModelMasterResult:
+        async_result = []
+        self._create_season_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_season_model_master(
+        self,
+        request: GetSeasonModelMasterRequest,
+        callback: Callable[[AsyncResult[GetSeasonModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonModelMaster',
+            function='getSeasonModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetSeasonModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_season_model_master(
+        self,
+        request: GetSeasonModelMasterRequest,
+    ) -> GetSeasonModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_season_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_season_model_master_async(
+        self,
+        request: GetSeasonModelMasterRequest,
+    ) -> GetSeasonModelMasterResult:
+        async_result = []
+        self._get_season_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_season_model_master(
+        self,
+        request: UpdateSeasonModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateSeasonModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonModelMaster',
+            function='updateSeasonModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.maximum_participants is not None:
+            body["maximumParticipants"] = request.maximum_participants
+        if request.experience_model_id is not None:
+            body["experienceModelId"] = request.experience_model_id
+        if request.challenge_period_event_id is not None:
+            body["challengePeriodEventId"] = request.challenge_period_event_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateSeasonModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_season_model_master(
+        self,
+        request: UpdateSeasonModelMasterRequest,
+    ) -> UpdateSeasonModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_season_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_season_model_master_async(
+        self,
+        request: UpdateSeasonModelMasterRequest,
+    ) -> UpdateSeasonModelMasterResult:
+        async_result = []
+        self._update_season_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_season_model_master(
+        self,
+        request: DeleteSeasonModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteSeasonModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonModelMaster',
+            function='deleteSeasonModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteSeasonModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_season_model_master(
+        self,
+        request: DeleteSeasonModelMasterRequest,
+    ) -> DeleteSeasonModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_season_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_season_model_master_async(
+        self,
+        request: DeleteSeasonModelMasterRequest,
+    ) -> DeleteSeasonModelMasterResult:
+        async_result = []
+        self._delete_season_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_season_gatherings(
+        self,
+        request: DescribeSeasonGatheringsRequest,
+        callback: Callable[[AsyncResult[DescribeSeasonGatheringsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='describeSeasonGatherings',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.season is not None:
+            body["season"] = request.season
+        if request.tier is not None:
+            body["tier"] = request.tier
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeSeasonGatheringsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_season_gatherings(
+        self,
+        request: DescribeSeasonGatheringsRequest,
+    ) -> DescribeSeasonGatheringsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_season_gatherings(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_season_gatherings_async(
+        self,
+        request: DescribeSeasonGatheringsRequest,
+    ) -> DescribeSeasonGatheringsResult:
+        async_result = []
+        self._describe_season_gatherings(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_matchmaking_season_gatherings(
+        self,
+        request: DescribeMatchmakingSeasonGatheringsRequest,
+        callback: Callable[[AsyncResult[DescribeMatchmakingSeasonGatheringsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='describeMatchmakingSeasonGatherings',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.season is not None:
+            body["season"] = request.season
+        if request.tier is not None:
+            body["tier"] = request.tier
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeMatchmakingSeasonGatheringsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_matchmaking_season_gatherings(
+        self,
+        request: DescribeMatchmakingSeasonGatheringsRequest,
+    ) -> DescribeMatchmakingSeasonGatheringsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_matchmaking_season_gatherings(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_matchmaking_season_gatherings_async(
+        self,
+        request: DescribeMatchmakingSeasonGatheringsRequest,
+    ) -> DescribeMatchmakingSeasonGatheringsResult:
+        async_result = []
+        self._describe_matchmaking_season_gatherings(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _do_season_matchmaking(
+        self,
+        request: DoSeasonMatchmakingRequest,
+        callback: Callable[[AsyncResult[DoSeasonMatchmakingResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='doSeasonMatchmaking',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.matchmaking_context_token is not None:
+            body["matchmakingContextToken"] = request.matchmaking_context_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DoSeasonMatchmakingResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def do_season_matchmaking(
+        self,
+        request: DoSeasonMatchmakingRequest,
+    ) -> DoSeasonMatchmakingResult:
+        async_result = []
+        with timeout(30):
+            self._do_season_matchmaking(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def do_season_matchmaking_async(
+        self,
+        request: DoSeasonMatchmakingRequest,
+    ) -> DoSeasonMatchmakingResult:
+        async_result = []
+        self._do_season_matchmaking(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _do_season_matchmaking_by_user_id(
+        self,
+        request: DoSeasonMatchmakingByUserIdRequest,
+        callback: Callable[[AsyncResult[DoSeasonMatchmakingByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='doSeasonMatchmakingByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.matchmaking_context_token is not None:
+            body["matchmakingContextToken"] = request.matchmaking_context_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DoSeasonMatchmakingByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def do_season_matchmaking_by_user_id(
+        self,
+        request: DoSeasonMatchmakingByUserIdRequest,
+    ) -> DoSeasonMatchmakingByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._do_season_matchmaking_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def do_season_matchmaking_by_user_id_async(
+        self,
+        request: DoSeasonMatchmakingByUserIdRequest,
+    ) -> DoSeasonMatchmakingByUserIdResult:
+        async_result = []
+        self._do_season_matchmaking_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_season_gathering(
+        self,
+        request: GetSeasonGatheringRequest,
+        callback: Callable[[AsyncResult[GetSeasonGatheringResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='getSeasonGathering',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.season is not None:
+            body["season"] = request.season
+        if request.tier is not None:
+            body["tier"] = request.tier
+        if request.season_gathering_name is not None:
+            body["seasonGatheringName"] = request.season_gathering_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetSeasonGatheringResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_season_gathering(
+        self,
+        request: GetSeasonGatheringRequest,
+    ) -> GetSeasonGatheringResult:
+        async_result = []
+        with timeout(30):
+            self._get_season_gathering(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_season_gathering_async(
+        self,
+        request: GetSeasonGatheringRequest,
+    ) -> GetSeasonGatheringResult:
+        async_result = []
+        self._get_season_gathering(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_season_gathering(
+        self,
+        request: DeleteSeasonGatheringRequest,
+        callback: Callable[[AsyncResult[DeleteSeasonGatheringResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='deleteSeasonGathering',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.season is not None:
+            body["season"] = request.season
+        if request.tier is not None:
+            body["tier"] = request.tier
+        if request.season_gathering_name is not None:
+            body["seasonGatheringName"] = request.season_gathering_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteSeasonGatheringResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_season_gathering(
+        self,
+        request: DeleteSeasonGatheringRequest,
+    ) -> DeleteSeasonGatheringResult:
+        async_result = []
+        with timeout(30):
+            self._delete_season_gathering(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_season_gathering_async(
+        self,
+        request: DeleteSeasonGatheringRequest,
+    ) -> DeleteSeasonGatheringResult:
+        async_result = []
+        self._delete_season_gathering(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_joined_season_gatherings(
+        self,
+        request: DescribeJoinedSeasonGatheringsRequest,
+        callback: Callable[[AsyncResult[DescribeJoinedSeasonGatheringsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='joinedSeasonGathering',
+            function='describeJoinedSeasonGatherings',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeJoinedSeasonGatheringsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_joined_season_gatherings(
+        self,
+        request: DescribeJoinedSeasonGatheringsRequest,
+    ) -> DescribeJoinedSeasonGatheringsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_joined_season_gatherings(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_joined_season_gatherings_async(
+        self,
+        request: DescribeJoinedSeasonGatheringsRequest,
+    ) -> DescribeJoinedSeasonGatheringsResult:
+        async_result = []
+        self._describe_joined_season_gatherings(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_joined_season_gatherings_by_user_id(
+        self,
+        request: DescribeJoinedSeasonGatheringsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeJoinedSeasonGatheringsByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='joinedSeasonGathering',
+            function='describeJoinedSeasonGatheringsByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeJoinedSeasonGatheringsByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_joined_season_gatherings_by_user_id(
+        self,
+        request: DescribeJoinedSeasonGatheringsByUserIdRequest,
+    ) -> DescribeJoinedSeasonGatheringsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_joined_season_gatherings_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_joined_season_gatherings_by_user_id_async(
+        self,
+        request: DescribeJoinedSeasonGatheringsByUserIdRequest,
+    ) -> DescribeJoinedSeasonGatheringsByUserIdResult:
+        async_result = []
+        self._describe_joined_season_gatherings_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_joined_season_gathering(
+        self,
+        request: GetJoinedSeasonGatheringRequest,
+        callback: Callable[[AsyncResult[GetJoinedSeasonGatheringResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='joinedSeasonGathering',
+            function='getJoinedSeasonGathering',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.season is not None:
+            body["season"] = request.season
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetJoinedSeasonGatheringResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_joined_season_gathering(
+        self,
+        request: GetJoinedSeasonGatheringRequest,
+    ) -> GetJoinedSeasonGatheringResult:
+        async_result = []
+        with timeout(30):
+            self._get_joined_season_gathering(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_joined_season_gathering_async(
+        self,
+        request: GetJoinedSeasonGatheringRequest,
+    ) -> GetJoinedSeasonGatheringResult:
+        async_result = []
+        self._get_joined_season_gathering(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_joined_season_gathering_by_user_id(
+        self,
+        request: GetJoinedSeasonGatheringByUserIdRequest,
+        callback: Callable[[AsyncResult[GetJoinedSeasonGatheringByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='joinedSeasonGathering',
+            function='getJoinedSeasonGatheringByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.season is not None:
+            body["season"] = request.season
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetJoinedSeasonGatheringByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_joined_season_gathering_by_user_id(
+        self,
+        request: GetJoinedSeasonGatheringByUserIdRequest,
+    ) -> GetJoinedSeasonGatheringByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_joined_season_gathering_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_joined_season_gathering_by_user_id_async(
+        self,
+        request: GetJoinedSeasonGatheringByUserIdRequest,
+    ) -> GetJoinedSeasonGatheringByUserIdResult:
+        async_result = []
+        self._get_joined_season_gathering_by_user_id(
             request,
             lambda result: async_result.append(result),
         )

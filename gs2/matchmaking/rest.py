@@ -2915,10 +2915,10 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _get_current_rating_model_master(
+    def _get_current_model_master(
         self,
-        request: GetCurrentRatingModelMasterRequest,
-        callback: Callable[[AsyncResult[GetCurrentRatingModelMasterResult]], None],
+        request: GetCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[GetCurrentModelMasterResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
@@ -2938,7 +2938,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='GET',
-            result_type=GetCurrentRatingModelMasterResult,
+            result_type=GetCurrentModelMasterResult,
             callback=callback,
             headers=headers,
             query_strings=query_strings,
@@ -2949,13 +2949,13 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def get_current_rating_model_master(
+    def get_current_model_master(
         self,
-        request: GetCurrentRatingModelMasterRequest,
-    ) -> GetCurrentRatingModelMasterResult:
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
         async_result = []
         with timeout(30):
-            self._get_current_rating_model_master(
+            self._get_current_model_master(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -2966,12 +2966,12 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def get_current_rating_model_master_async(
+    async def get_current_model_master_async(
         self,
-        request: GetCurrentRatingModelMasterRequest,
-    ) -> GetCurrentRatingModelMasterResult:
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
         async_result = []
-        self._get_current_rating_model_master(
+        self._get_current_model_master(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -2986,10 +2986,10 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_rating_model_master(
+    def _update_current_model_master(
         self,
-        request: UpdateCurrentRatingModelMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentRatingModelMasterResult]], None],
+        request: UpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
@@ -3011,7 +3011,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='PUT',
-            result_type=UpdateCurrentRatingModelMasterResult,
+            result_type=UpdateCurrentModelMasterResult,
             callback=callback,
             headers=headers,
             body=body,
@@ -3022,13 +3022,13 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def update_current_rating_model_master(
+    def update_current_model_master(
         self,
-        request: UpdateCurrentRatingModelMasterRequest,
-    ) -> UpdateCurrentRatingModelMasterResult:
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
         async_result = []
         with timeout(30):
-            self._update_current_rating_model_master(
+            self._update_current_model_master(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -3039,12 +3039,12 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def update_current_rating_model_master_async(
+    async def update_current_model_master_async(
         self,
-        request: UpdateCurrentRatingModelMasterRequest,
-    ) -> UpdateCurrentRatingModelMasterResult:
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
         async_result = []
-        self._update_current_rating_model_master(
+        self._update_current_model_master(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -3059,10 +3059,10 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_rating_model_master_from_git_hub(
+    def _update_current_model_master_from_git_hub(
         self,
-        request: UpdateCurrentRatingModelMasterFromGitHubRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentRatingModelMasterFromGitHubResult]], None],
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
@@ -3084,7 +3084,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='PUT',
-            result_type=UpdateCurrentRatingModelMasterFromGitHubResult,
+            result_type=UpdateCurrentModelMasterFromGitHubResult,
             callback=callback,
             headers=headers,
             body=body,
@@ -3095,13 +3095,13 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def update_current_rating_model_master_from_git_hub(
+    def update_current_model_master_from_git_hub(
         self,
-        request: UpdateCurrentRatingModelMasterFromGitHubRequest,
-    ) -> UpdateCurrentRatingModelMasterFromGitHubResult:
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
         async_result = []
         with timeout(30):
-            self._update_current_rating_model_master_from_git_hub(
+            self._update_current_model_master_from_git_hub(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -3112,12 +3112,1311 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def update_current_rating_model_master_from_git_hub_async(
+    async def update_current_model_master_from_git_hub_async(
         self,
-        request: UpdateCurrentRatingModelMasterFromGitHubRequest,
-    ) -> UpdateCurrentRatingModelMasterFromGitHubResult:
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
         async_result = []
-        self._update_current_rating_model_master_from_git_hub(
+        self._update_current_model_master_from_git_hub(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_season_models(
+        self,
+        request: DescribeSeasonModelsRequest,
+        callback: Callable[[AsyncResult[DescribeSeasonModelsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/season".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSeasonModelsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_season_models(
+        self,
+        request: DescribeSeasonModelsRequest,
+    ) -> DescribeSeasonModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_season_models(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_season_models_async(
+        self,
+        request: DescribeSeasonModelsRequest,
+    ) -> DescribeSeasonModelsResult:
+        async_result = []
+        self._describe_season_models(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_season_model(
+        self,
+        request: GetSeasonModelRequest,
+        callback: Callable[[AsyncResult[GetSeasonModelResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/season/{seasonName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSeasonModelResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_season_model(
+        self,
+        request: GetSeasonModelRequest,
+    ) -> GetSeasonModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_season_model(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_season_model_async(
+        self,
+        request: GetSeasonModelRequest,
+    ) -> GetSeasonModelResult:
+        async_result = []
+        self._get_season_model(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_season_model_masters(
+        self,
+        request: DescribeSeasonModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeSeasonModelMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/season".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSeasonModelMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_season_model_masters(
+        self,
+        request: DescribeSeasonModelMastersRequest,
+    ) -> DescribeSeasonModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_season_model_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_season_model_masters_async(
+        self,
+        request: DescribeSeasonModelMastersRequest,
+    ) -> DescribeSeasonModelMastersResult:
+        async_result = []
+        self._describe_season_model_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_season_model_master(
+        self,
+        request: CreateSeasonModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateSeasonModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/season".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.maximum_participants is not None:
+            body["maximumParticipants"] = request.maximum_participants
+        if request.experience_model_id is not None:
+            body["experienceModelId"] = request.experience_model_id
+        if request.challenge_period_event_id is not None:
+            body["challengePeriodEventId"] = request.challenge_period_event_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateSeasonModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_season_model_master(
+        self,
+        request: CreateSeasonModelMasterRequest,
+    ) -> CreateSeasonModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_season_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_season_model_master_async(
+        self,
+        request: CreateSeasonModelMasterRequest,
+    ) -> CreateSeasonModelMasterResult:
+        async_result = []
+        self._create_season_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_season_model_master(
+        self,
+        request: GetSeasonModelMasterRequest,
+        callback: Callable[[AsyncResult[GetSeasonModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/season/{seasonName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSeasonModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_season_model_master(
+        self,
+        request: GetSeasonModelMasterRequest,
+    ) -> GetSeasonModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_season_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_season_model_master_async(
+        self,
+        request: GetSeasonModelMasterRequest,
+    ) -> GetSeasonModelMasterResult:
+        async_result = []
+        self._get_season_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_season_model_master(
+        self,
+        request: UpdateSeasonModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateSeasonModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/season/{seasonName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.maximum_participants is not None:
+            body["maximumParticipants"] = request.maximum_participants
+        if request.experience_model_id is not None:
+            body["experienceModelId"] = request.experience_model_id
+        if request.challenge_period_event_id is not None:
+            body["challengePeriodEventId"] = request.challenge_period_event_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateSeasonModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_season_model_master(
+        self,
+        request: UpdateSeasonModelMasterRequest,
+    ) -> UpdateSeasonModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_season_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_season_model_master_async(
+        self,
+        request: UpdateSeasonModelMasterRequest,
+    ) -> UpdateSeasonModelMasterResult:
+        async_result = []
+        self._update_season_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_season_model_master(
+        self,
+        request: DeleteSeasonModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteSeasonModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/season/{seasonName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteSeasonModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_season_model_master(
+        self,
+        request: DeleteSeasonModelMasterRequest,
+    ) -> DeleteSeasonModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_season_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_season_model_master_async(
+        self,
+        request: DeleteSeasonModelMasterRequest,
+    ) -> DeleteSeasonModelMasterResult:
+        async_result = []
+        self._delete_season_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_season_gatherings(
+        self,
+        request: DescribeSeasonGatheringsRequest,
+        callback: Callable[[AsyncResult[DescribeSeasonGatheringsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/season/{seasonName}/{season}/gathering".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+            season=request.season if request.season is not None and request.season != '' else 'null',
+            tier=request.tier if request.tier is not None and request.tier != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSeasonGatheringsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_season_gatherings(
+        self,
+        request: DescribeSeasonGatheringsRequest,
+    ) -> DescribeSeasonGatheringsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_season_gatherings(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_season_gatherings_async(
+        self,
+        request: DescribeSeasonGatheringsRequest,
+    ) -> DescribeSeasonGatheringsResult:
+        async_result = []
+        self._describe_season_gatherings(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_matchmaking_season_gatherings(
+        self,
+        request: DescribeMatchmakingSeasonGatheringsRequest,
+        callback: Callable[[AsyncResult[DescribeMatchmakingSeasonGatheringsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/season/{seasonName}/{season}/gathering/matchmaking".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+            season=request.season if request.season is not None and request.season != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.tier is not None:
+            query_strings["tier"] = request.tier
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeMatchmakingSeasonGatheringsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_matchmaking_season_gatherings(
+        self,
+        request: DescribeMatchmakingSeasonGatheringsRequest,
+    ) -> DescribeMatchmakingSeasonGatheringsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_matchmaking_season_gatherings(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_matchmaking_season_gatherings_async(
+        self,
+        request: DescribeMatchmakingSeasonGatheringsRequest,
+    ) -> DescribeMatchmakingSeasonGatheringsResult:
+        async_result = []
+        self._describe_matchmaking_season_gatherings(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _do_season_matchmaking(
+        self,
+        request: DoSeasonMatchmakingRequest,
+        callback: Callable[[AsyncResult[DoSeasonMatchmakingResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/season/{seasonName}/gathering/do".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.matchmaking_context_token is not None:
+            body["matchmakingContextToken"] = request.matchmaking_context_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DoSeasonMatchmakingResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def do_season_matchmaking(
+        self,
+        request: DoSeasonMatchmakingRequest,
+    ) -> DoSeasonMatchmakingResult:
+        async_result = []
+        with timeout(30):
+            self._do_season_matchmaking(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def do_season_matchmaking_async(
+        self,
+        request: DoSeasonMatchmakingRequest,
+    ) -> DoSeasonMatchmakingResult:
+        async_result = []
+        self._do_season_matchmaking(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _do_season_matchmaking_by_user_id(
+        self,
+        request: DoSeasonMatchmakingByUserIdRequest,
+        callback: Callable[[AsyncResult[DoSeasonMatchmakingByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/season/{seasonName}/gathering/do".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.matchmaking_context_token is not None:
+            body["matchmakingContextToken"] = request.matchmaking_context_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DoSeasonMatchmakingByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def do_season_matchmaking_by_user_id(
+        self,
+        request: DoSeasonMatchmakingByUserIdRequest,
+    ) -> DoSeasonMatchmakingByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._do_season_matchmaking_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def do_season_matchmaking_by_user_id_async(
+        self,
+        request: DoSeasonMatchmakingByUserIdRequest,
+    ) -> DoSeasonMatchmakingByUserIdResult:
+        async_result = []
+        self._do_season_matchmaking_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_season_gathering(
+        self,
+        request: GetSeasonGatheringRequest,
+        callback: Callable[[AsyncResult[GetSeasonGatheringResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/season/{seasonName}/{season}/{tier}/gathering/{seasonGatheringName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+            season=request.season if request.season is not None and request.season != '' else 'null',
+            tier=request.tier if request.tier is not None and request.tier != '' else 'null',
+            seasonGatheringName=request.season_gathering_name if request.season_gathering_name is not None and request.season_gathering_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSeasonGatheringResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_season_gathering(
+        self,
+        request: GetSeasonGatheringRequest,
+    ) -> GetSeasonGatheringResult:
+        async_result = []
+        with timeout(30):
+            self._get_season_gathering(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_season_gathering_async(
+        self,
+        request: GetSeasonGatheringRequest,
+    ) -> GetSeasonGatheringResult:
+        async_result = []
+        self._get_season_gathering(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_season_gathering(
+        self,
+        request: DeleteSeasonGatheringRequest,
+        callback: Callable[[AsyncResult[DeleteSeasonGatheringResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/season/{seasonName}/{season}/{tier}/gathering/{seasonGatheringName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+            season=request.season if request.season is not None and request.season != '' else 'null',
+            tier=request.tier if request.tier is not None and request.tier != '' else 'null',
+            seasonGatheringName=request.season_gathering_name if request.season_gathering_name is not None and request.season_gathering_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteSeasonGatheringResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_season_gathering(
+        self,
+        request: DeleteSeasonGatheringRequest,
+    ) -> DeleteSeasonGatheringResult:
+        async_result = []
+        with timeout(30):
+            self._delete_season_gathering(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_season_gathering_async(
+        self,
+        request: DeleteSeasonGatheringRequest,
+    ) -> DeleteSeasonGatheringResult:
+        async_result = []
+        self._delete_season_gathering(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_joined_season_gatherings(
+        self,
+        request: DescribeJoinedSeasonGatheringsRequest,
+        callback: Callable[[AsyncResult[DescribeJoinedSeasonGatheringsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/season/{seasonName}/gathering/join".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeJoinedSeasonGatheringsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_joined_season_gatherings(
+        self,
+        request: DescribeJoinedSeasonGatheringsRequest,
+    ) -> DescribeJoinedSeasonGatheringsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_joined_season_gatherings(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_joined_season_gatherings_async(
+        self,
+        request: DescribeJoinedSeasonGatheringsRequest,
+    ) -> DescribeJoinedSeasonGatheringsResult:
+        async_result = []
+        self._describe_joined_season_gatherings(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_joined_season_gatherings_by_user_id(
+        self,
+        request: DescribeJoinedSeasonGatheringsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeJoinedSeasonGatheringsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/season/{seasonName}/gathering/join".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeJoinedSeasonGatheringsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_joined_season_gatherings_by_user_id(
+        self,
+        request: DescribeJoinedSeasonGatheringsByUserIdRequest,
+    ) -> DescribeJoinedSeasonGatheringsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_joined_season_gatherings_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_joined_season_gatherings_by_user_id_async(
+        self,
+        request: DescribeJoinedSeasonGatheringsByUserIdRequest,
+    ) -> DescribeJoinedSeasonGatheringsByUserIdResult:
+        async_result = []
+        self._describe_joined_season_gatherings_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_joined_season_gathering(
+        self,
+        request: GetJoinedSeasonGatheringRequest,
+        callback: Callable[[AsyncResult[GetJoinedSeasonGatheringResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/season/{seasonName}/gathering/join/{season}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+            season=request.season if request.season is not None and request.season != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetJoinedSeasonGatheringResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_joined_season_gathering(
+        self,
+        request: GetJoinedSeasonGatheringRequest,
+    ) -> GetJoinedSeasonGatheringResult:
+        async_result = []
+        with timeout(30):
+            self._get_joined_season_gathering(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_joined_season_gathering_async(
+        self,
+        request: GetJoinedSeasonGatheringRequest,
+    ) -> GetJoinedSeasonGatheringResult:
+        async_result = []
+        self._get_joined_season_gathering(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_joined_season_gathering_by_user_id(
+        self,
+        request: GetJoinedSeasonGatheringByUserIdRequest,
+        callback: Callable[[AsyncResult[GetJoinedSeasonGatheringByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/season/{seasonName}/gathering/join/{season}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
+            season=request.season if request.season is not None and request.season != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetJoinedSeasonGatheringByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_joined_season_gathering_by_user_id(
+        self,
+        request: GetJoinedSeasonGatheringByUserIdRequest,
+    ) -> GetJoinedSeasonGatheringByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_joined_season_gathering_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_joined_season_gathering_by_user_id_async(
+        self,
+        request: GetJoinedSeasonGatheringByUserIdRequest,
+    ) -> GetJoinedSeasonGatheringByUserIdResult:
+        async_result = []
+        self._get_joined_season_gathering_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
