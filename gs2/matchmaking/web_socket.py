@@ -4099,6 +4099,180 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_include_participant(
+        self,
+        request: VerifyIncludeParticipantRequest,
+        callback: Callable[[AsyncResult[VerifyIncludeParticipantResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='verifyIncludeParticipant',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.season is not None:
+            body["season"] = request.season
+        if request.tier is not None:
+            body["tier"] = request.tier
+        if request.season_gathering_name is not None:
+            body["seasonGatheringName"] = request.season_gathering_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyIncludeParticipantResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_include_participant(
+        self,
+        request: VerifyIncludeParticipantRequest,
+    ) -> VerifyIncludeParticipantResult:
+        async_result = []
+        with timeout(30):
+            self._verify_include_participant(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_include_participant_async(
+        self,
+        request: VerifyIncludeParticipantRequest,
+    ) -> VerifyIncludeParticipantResult:
+        async_result = []
+        self._verify_include_participant(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_include_participant_by_user_id(
+        self,
+        request: VerifyIncludeParticipantByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyIncludeParticipantByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='verifyIncludeParticipantByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.season_name is not None:
+            body["seasonName"] = request.season_name
+        if request.season is not None:
+            body["season"] = request.season
+        if request.tier is not None:
+            body["tier"] = request.tier
+        if request.season_gathering_name is not None:
+            body["seasonGatheringName"] = request.season_gathering_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyIncludeParticipantByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_include_participant_by_user_id(
+        self,
+        request: VerifyIncludeParticipantByUserIdRequest,
+    ) -> VerifyIncludeParticipantByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_include_participant_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_include_participant_by_user_id_async(
+        self,
+        request: VerifyIncludeParticipantByUserIdRequest,
+    ) -> VerifyIncludeParticipantByUserIdResult:
+        async_result = []
+        self._verify_include_participant_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_season_gathering(
         self,
         request: DeleteSeasonGatheringRequest,
@@ -4165,6 +4339,79 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteSeasonGatheringResult:
         async_result = []
         self._delete_season_gathering(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_include_participant_by_stamp_task(
+        self,
+        request: VerifyIncludeParticipantByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyIncludeParticipantByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='seasonGathering',
+            function='verifyIncludeParticipantByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyIncludeParticipantByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_include_participant_by_stamp_task(
+        self,
+        request: VerifyIncludeParticipantByStampTaskRequest,
+    ) -> VerifyIncludeParticipantByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_include_participant_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_include_participant_by_stamp_task_async(
+        self,
+        request: VerifyIncludeParticipantByStampTaskRequest,
+    ) -> VerifyIncludeParticipantByStampTaskResult:
+        async_result = []
+        self._verify_include_participant_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

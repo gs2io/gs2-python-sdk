@@ -3113,6 +3113,179 @@ class GetSeasonGatheringRequest(core.Gs2Request):
         }
 
 
+class VerifyIncludeParticipantRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    season: int = None
+    tier: int = None
+    season_gathering_name: str = None
+    access_token: str = None
+    verify_type: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyIncludeParticipantRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> VerifyIncludeParticipantRequest:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> VerifyIncludeParticipantRequest:
+        self.season = season
+        return self
+
+    def with_tier(self, tier: int) -> VerifyIncludeParticipantRequest:
+        self.tier = tier
+        return self
+
+    def with_season_gathering_name(self, season_gathering_name: str) -> VerifyIncludeParticipantRequest:
+        self.season_gathering_name = season_gathering_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyIncludeParticipantRequest:
+        self.access_token = access_token
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyIncludeParticipantRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyIncludeParticipantRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyIncludeParticipantRequest]:
+        if data is None:
+            return None
+        return VerifyIncludeParticipantRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_tier(data.get('tier'))\
+            .with_season_gathering_name(data.get('seasonGatheringName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_verify_type(data.get('verifyType'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "tier": self.tier,
+            "seasonGatheringName": self.season_gathering_name,
+            "accessToken": self.access_token,
+            "verifyType": self.verify_type,
+        }
+
+
+class VerifyIncludeParticipantByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    season_name: str = None
+    season: int = None
+    tier: int = None
+    season_gathering_name: str = None
+    user_id: str = None
+    verify_type: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyIncludeParticipantByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_season_name(self, season_name: str) -> VerifyIncludeParticipantByUserIdRequest:
+        self.season_name = season_name
+        return self
+
+    def with_season(self, season: int) -> VerifyIncludeParticipantByUserIdRequest:
+        self.season = season
+        return self
+
+    def with_tier(self, tier: int) -> VerifyIncludeParticipantByUserIdRequest:
+        self.tier = tier
+        return self
+
+    def with_season_gathering_name(self, season_gathering_name: str) -> VerifyIncludeParticipantByUserIdRequest:
+        self.season_gathering_name = season_gathering_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyIncludeParticipantByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyIncludeParticipantByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyIncludeParticipantByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyIncludeParticipantByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyIncludeParticipantByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyIncludeParticipantByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_season_name(data.get('seasonName'))\
+            .with_season(data.get('season'))\
+            .with_tier(data.get('tier'))\
+            .with_season_gathering_name(data.get('seasonGatheringName'))\
+            .with_user_id(data.get('userId'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "seasonName": self.season_name,
+            "season": self.season,
+            "tier": self.tier,
+            "seasonGatheringName": self.season_gathering_name,
+            "userId": self.user_id,
+            "verifyType": self.verify_type,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DeleteSeasonGatheringRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -3174,6 +3347,49 @@ class DeleteSeasonGatheringRequest(core.Gs2Request):
             "season": self.season,
             "tier": self.tier,
             "seasonGatheringName": self.season_gathering_name,
+        }
+
+
+class VerifyIncludeParticipantByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyIncludeParticipantByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyIncludeParticipantByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyIncludeParticipantByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyIncludeParticipantByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
         }
 
 
