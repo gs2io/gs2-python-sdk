@@ -1230,14 +1230,14 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.expression is not None:
+            body["expression"] = request.expression
         if request.target_type is not None:
             body["targetType"] = request.target_type
         if request.target_model is not None:
             body["targetModel"] = request.target_model.to_dict()
         if request.target_action is not None:
             body["targetAction"] = request.target_action.to_dict()
-        if request.expression is not None:
-            body["expression"] = request.expression
         if request.priority is not None:
             body["priority"] = request.priority
         if request.apply_period_schedule_event_id is not None:
@@ -1390,14 +1390,14 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.expression is not None:
+            body["expression"] = request.expression
         if request.target_type is not None:
             body["targetType"] = request.target_type
         if request.target_model is not None:
             body["targetModel"] = request.target_model.to_dict()
         if request.target_action is not None:
             body["targetAction"] = request.target_action.to_dict()
-        if request.expression is not None:
-            body["expression"] = request.expression
         if request.priority is not None:
             body["priority"] = request.priority
         if request.apply_period_schedule_event_id is not None:

@@ -314,10 +314,10 @@ class BuffEntryModelMaster(core.Gs2Model):
     name: str = None
     description: str = None
     metadata: str = None
+    expression: str = None
     target_type: str = None
     target_model: BuffTargetModel = None
     target_action: BuffTargetAction = None
-    expression: str = None
     priority: int = None
     apply_period_schedule_event_id: str = None
     created_at: int = None
@@ -340,6 +340,10 @@ class BuffEntryModelMaster(core.Gs2Model):
         self.metadata = metadata
         return self
 
+    def with_expression(self, expression: str) -> BuffEntryModelMaster:
+        self.expression = expression
+        return self
+
     def with_target_type(self, target_type: str) -> BuffEntryModelMaster:
         self.target_type = target_type
         return self
@@ -350,10 +354,6 @@ class BuffEntryModelMaster(core.Gs2Model):
 
     def with_target_action(self, target_action: BuffTargetAction) -> BuffEntryModelMaster:
         self.target_action = target_action
-        return self
-
-    def with_expression(self, expression: str) -> BuffEntryModelMaster:
-        self.expression = expression
         return self
 
     def with_priority(self, priority: int) -> BuffEntryModelMaster:
@@ -454,10 +454,10 @@ class BuffEntryModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_expression(data.get('expression'))\
             .with_target_type(data.get('targetType'))\
             .with_target_model(BuffTargetModel.from_dict(data.get('targetModel')))\
             .with_target_action(BuffTargetAction.from_dict(data.get('targetAction')))\
-            .with_expression(data.get('expression'))\
             .with_priority(data.get('priority'))\
             .with_apply_period_schedule_event_id(data.get('applyPeriodScheduleEventId'))\
             .with_created_at(data.get('createdAt'))\
@@ -470,10 +470,10 @@ class BuffEntryModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
+            "expression": self.expression,
             "targetType": self.target_type,
             "targetModel": self.target_model.to_dict() if self.target_model else None,
             "targetAction": self.target_action.to_dict() if self.target_action else None,
-            "expression": self.expression,
             "priority": self.priority,
             "applyPeriodScheduleEventId": self.apply_period_schedule_event_id,
             "createdAt": self.created_at,
@@ -486,10 +486,10 @@ class BuffEntryModel(core.Gs2Model):
     buff_entry_model_id: str = None
     name: str = None
     metadata: str = None
+    expression: str = None
     target_type: str = None
     target_model: BuffTargetModel = None
     target_action: BuffTargetAction = None
-    expression: str = None
     priority: int = None
     apply_period_schedule_event_id: str = None
 
@@ -505,6 +505,10 @@ class BuffEntryModel(core.Gs2Model):
         self.metadata = metadata
         return self
 
+    def with_expression(self, expression: str) -> BuffEntryModel:
+        self.expression = expression
+        return self
+
     def with_target_type(self, target_type: str) -> BuffEntryModel:
         self.target_type = target_type
         return self
@@ -515,10 +519,6 @@ class BuffEntryModel(core.Gs2Model):
 
     def with_target_action(self, target_action: BuffTargetAction) -> BuffEntryModel:
         self.target_action = target_action
-        return self
-
-    def with_expression(self, expression: str) -> BuffEntryModel:
-        self.expression = expression
         return self
 
     def with_priority(self, priority: int) -> BuffEntryModel:
@@ -606,10 +606,10 @@ class BuffEntryModel(core.Gs2Model):
             .with_buff_entry_model_id(data.get('buffEntryModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
+            .with_expression(data.get('expression'))\
             .with_target_type(data.get('targetType'))\
             .with_target_model(BuffTargetModel.from_dict(data.get('targetModel')))\
             .with_target_action(BuffTargetAction.from_dict(data.get('targetAction')))\
-            .with_expression(data.get('expression'))\
             .with_priority(data.get('priority'))\
             .with_apply_period_schedule_event_id(data.get('applyPeriodScheduleEventId'))
 
@@ -618,10 +618,10 @@ class BuffEntryModel(core.Gs2Model):
             "buffEntryModelId": self.buff_entry_model_id,
             "name": self.name,
             "metadata": self.metadata,
+            "expression": self.expression,
             "targetType": self.target_type,
             "targetModel": self.target_model.to_dict() if self.target_model else None,
             "targetAction": self.target_action.to_dict() if self.target_action else None,
-            "expression": self.expression,
             "priority": self.priority,
             "applyPeriodScheduleEventId": self.apply_period_schedule_event_id,
         }
