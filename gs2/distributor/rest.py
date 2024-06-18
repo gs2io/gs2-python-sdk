@@ -1879,6 +1879,160 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _set_transaction_default_config(
+        self,
+        request: SetTransactionDefaultConfigRequest,
+        callback: Callable[[AsyncResult[SetTransactionDefaultConfigResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/transaction/user/me/config"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SetTransactionDefaultConfigResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_transaction_default_config(
+        self,
+        request: SetTransactionDefaultConfigRequest,
+    ) -> SetTransactionDefaultConfigResult:
+        async_result = []
+        with timeout(30):
+            self._set_transaction_default_config(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_transaction_default_config_async(
+        self,
+        request: SetTransactionDefaultConfigRequest,
+    ) -> SetTransactionDefaultConfigResult:
+        async_result = []
+        self._set_transaction_default_config(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _set_transaction_default_config_by_user_id(
+        self,
+        request: SetTransactionDefaultConfigByUserIdRequest,
+        callback: Callable[[AsyncResult[SetTransactionDefaultConfigByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/transaction/user/{userId}/config".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SetTransactionDefaultConfigByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def set_transaction_default_config_by_user_id(
+        self,
+        request: SetTransactionDefaultConfigByUserIdRequest,
+    ) -> SetTransactionDefaultConfigByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._set_transaction_default_config_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_transaction_default_config_by_user_id_async(
+        self,
+        request: SetTransactionDefaultConfigByUserIdRequest,
+    ) -> SetTransactionDefaultConfigByUserIdResult:
+        async_result = []
+        self._set_transaction_default_config_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_stamp_sheet_result(
         self,
         request: GetStampSheetResultRequest,

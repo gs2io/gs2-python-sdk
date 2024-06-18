@@ -1216,6 +1216,111 @@ class RunStampSheetExpressWithoutNamespaceRequest(core.Gs2Request):
         }
 
 
+class SetTransactionDefaultConfigRequest(core.Gs2Request):
+
+    context_stack: str = None
+    access_token: str = None
+    config: List[Config] = None
+
+    def with_access_token(self, access_token: str) -> SetTransactionDefaultConfigRequest:
+        self.access_token = access_token
+        return self
+
+    def with_config(self, config: List[Config]) -> SetTransactionDefaultConfigRequest:
+        self.config = config
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetTransactionDefaultConfigRequest]:
+        if data is None:
+            return None
+        return SetTransactionDefaultConfigRequest()\
+            .with_access_token(data.get('accessToken'))\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "accessToken": self.access_token,
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+        }
+
+
+class SetTransactionDefaultConfigByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    config: List[Config] = None
+    time_offset_token: str = None
+
+    def with_user_id(self, user_id: str) -> SetTransactionDefaultConfigByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_config(self, config: List[Config]) -> SetTransactionDefaultConfigByUserIdRequest:
+        self.config = config
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> SetTransactionDefaultConfigByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetTransactionDefaultConfigByUserIdRequest]:
+        if data is None:
+            return None
+        return SetTransactionDefaultConfigByUserIdRequest()\
+            .with_user_id(data.get('userId'))\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class GetStampSheetResultRequest(core.Gs2Request):
 
     context_stack: str = None

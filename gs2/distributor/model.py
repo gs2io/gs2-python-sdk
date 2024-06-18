@@ -218,6 +218,47 @@ class GitHubCheckoutSetting(core.Gs2Model):
         }
 
 
+class Config(core.Gs2Model):
+    key: str = None
+    value: str = None
+
+    def with_key(self, key: str) -> Config:
+        self.key = key
+        return self
+
+    def with_value(self, value: str) -> Config:
+        self.value = value
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Config]:
+        if data is None:
+            return None
+        return Config()\
+            .with_key(data.get('key'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "key": self.key,
+            "value": self.value,
+        }
+
+
 class ConsumeAction(core.Gs2Model):
     action: str = None
     request: str = None
