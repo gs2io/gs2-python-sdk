@@ -211,6 +211,12 @@ src/gs2/money/request.py
 src/gs2/money/rest.py
 src/gs2/money/result.py
 src/gs2/money/web_socket.py
+src/gs2/money2/__init__.py
+src/gs2/money2/model.py
+src/gs2/money2/request.py
+src/gs2/money2/rest.py
+src/gs2/money2/result.py
+src/gs2/money2/web_socket.py
 src/gs2/news/__init__.py
 src/gs2/news/model.py
 src/gs2/news/request.py

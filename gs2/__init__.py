@@ -32,6 +32,7 @@ from . import lottery
 from . import matchmaking
 from . import mission
 from . import money
+from . import money2
 from . import news
 from . import quest
 from . import ranking
