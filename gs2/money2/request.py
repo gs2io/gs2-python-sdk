@@ -2009,3 +2009,302 @@ class UpdateCurrentModelMasterFromGitHubRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "checkoutSetting": self.checkout_setting.to_dict() if self.checkout_setting else None,
         }
+
+
+class DescribeDailyTransactionHistoriesByCurrencyRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    currency: str = None
+    year: int = None
+    month: int = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeDailyTransactionHistoriesByCurrencyRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_currency(self, currency: str) -> DescribeDailyTransactionHistoriesByCurrencyRequest:
+        self.currency = currency
+        return self
+
+    def with_year(self, year: int) -> DescribeDailyTransactionHistoriesByCurrencyRequest:
+        self.year = year
+        return self
+
+    def with_month(self, month: int) -> DescribeDailyTransactionHistoriesByCurrencyRequest:
+        self.month = month
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeDailyTransactionHistoriesByCurrencyRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeDailyTransactionHistoriesByCurrencyRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeDailyTransactionHistoriesByCurrencyRequest]:
+        if data is None:
+            return None
+        return DescribeDailyTransactionHistoriesByCurrencyRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_currency(data.get('currency'))\
+            .with_year(data.get('year'))\
+            .with_month(data.get('month'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "currency": self.currency,
+            "year": self.year,
+            "month": self.month,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeDailyTransactionHistoriesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    year: int = None
+    month: int = None
+    day: int = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeDailyTransactionHistoriesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_year(self, year: int) -> DescribeDailyTransactionHistoriesRequest:
+        self.year = year
+        return self
+
+    def with_month(self, month: int) -> DescribeDailyTransactionHistoriesRequest:
+        self.month = month
+        return self
+
+    def with_day(self, day: int) -> DescribeDailyTransactionHistoriesRequest:
+        self.day = day
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeDailyTransactionHistoriesRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeDailyTransactionHistoriesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeDailyTransactionHistoriesRequest]:
+        if data is None:
+            return None
+        return DescribeDailyTransactionHistoriesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_year(data.get('year'))\
+            .with_month(data.get('month'))\
+            .with_day(data.get('day'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "year": self.year,
+            "month": self.month,
+            "day": self.day,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetDailyTransactionHistoryRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    year: int = None
+    month: int = None
+    day: int = None
+    currency: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetDailyTransactionHistoryRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_year(self, year: int) -> GetDailyTransactionHistoryRequest:
+        self.year = year
+        return self
+
+    def with_month(self, month: int) -> GetDailyTransactionHistoryRequest:
+        self.month = month
+        return self
+
+    def with_day(self, day: int) -> GetDailyTransactionHistoryRequest:
+        self.day = day
+        return self
+
+    def with_currency(self, currency: str) -> GetDailyTransactionHistoryRequest:
+        self.currency = currency
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetDailyTransactionHistoryRequest]:
+        if data is None:
+            return None
+        return GetDailyTransactionHistoryRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_year(data.get('year'))\
+            .with_month(data.get('month'))\
+            .with_day(data.get('day'))\
+            .with_currency(data.get('currency'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "year": self.year,
+            "month": self.month,
+            "day": self.day,
+            "currency": self.currency,
+        }
+
+
+class DescribeUnusedBalancesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeUnusedBalancesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeUnusedBalancesRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeUnusedBalancesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUnusedBalancesRequest]:
+        if data is None:
+            return None
+        return DescribeUnusedBalancesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetUnusedBalanceRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    currency: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetUnusedBalanceRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_currency(self, currency: str) -> GetUnusedBalanceRequest:
+        self.currency = currency
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetUnusedBalanceRequest]:
+        if data is None:
+            return None
+        return GetUnusedBalanceRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_currency(data.get('currency'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "currency": self.currency,
+        }

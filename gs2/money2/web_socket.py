@@ -2913,3 +2913,392 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_daily_transaction_histories_by_currency(
+        self,
+        request: DescribeDailyTransactionHistoriesByCurrencyRequest,
+        callback: Callable[[AsyncResult[DescribeDailyTransactionHistoriesByCurrencyResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='dailyTransactionHistory',
+            function='describeDailyTransactionHistoriesByCurrency',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.currency is not None:
+            body["currency"] = request.currency
+        if request.year is not None:
+            body["year"] = request.year
+        if request.month is not None:
+            body["month"] = request.month
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeDailyTransactionHistoriesByCurrencyResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_daily_transaction_histories_by_currency(
+        self,
+        request: DescribeDailyTransactionHistoriesByCurrencyRequest,
+    ) -> DescribeDailyTransactionHistoriesByCurrencyResult:
+        async_result = []
+        with timeout(30):
+            self._describe_daily_transaction_histories_by_currency(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_daily_transaction_histories_by_currency_async(
+        self,
+        request: DescribeDailyTransactionHistoriesByCurrencyRequest,
+    ) -> DescribeDailyTransactionHistoriesByCurrencyResult:
+        async_result = []
+        self._describe_daily_transaction_histories_by_currency(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_daily_transaction_histories(
+        self,
+        request: DescribeDailyTransactionHistoriesRequest,
+        callback: Callable[[AsyncResult[DescribeDailyTransactionHistoriesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='dailyTransactionHistory',
+            function='describeDailyTransactionHistories',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.year is not None:
+            body["year"] = request.year
+        if request.month is not None:
+            body["month"] = request.month
+        if request.day is not None:
+            body["day"] = request.day
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeDailyTransactionHistoriesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_daily_transaction_histories(
+        self,
+        request: DescribeDailyTransactionHistoriesRequest,
+    ) -> DescribeDailyTransactionHistoriesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_daily_transaction_histories(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_daily_transaction_histories_async(
+        self,
+        request: DescribeDailyTransactionHistoriesRequest,
+    ) -> DescribeDailyTransactionHistoriesResult:
+        async_result = []
+        self._describe_daily_transaction_histories(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_daily_transaction_history(
+        self,
+        request: GetDailyTransactionHistoryRequest,
+        callback: Callable[[AsyncResult[GetDailyTransactionHistoryResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='dailyTransactionHistory',
+            function='getDailyTransactionHistory',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.year is not None:
+            body["year"] = request.year
+        if request.month is not None:
+            body["month"] = request.month
+        if request.day is not None:
+            body["day"] = request.day
+        if request.currency is not None:
+            body["currency"] = request.currency
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetDailyTransactionHistoryResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_daily_transaction_history(
+        self,
+        request: GetDailyTransactionHistoryRequest,
+    ) -> GetDailyTransactionHistoryResult:
+        async_result = []
+        with timeout(30):
+            self._get_daily_transaction_history(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_daily_transaction_history_async(
+        self,
+        request: GetDailyTransactionHistoryRequest,
+    ) -> GetDailyTransactionHistoryResult:
+        async_result = []
+        self._get_daily_transaction_history(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_unused_balances(
+        self,
+        request: DescribeUnusedBalancesRequest,
+        callback: Callable[[AsyncResult[DescribeUnusedBalancesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='unusedBalance',
+            function='describeUnusedBalances',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeUnusedBalancesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_unused_balances(
+        self,
+        request: DescribeUnusedBalancesRequest,
+    ) -> DescribeUnusedBalancesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_unused_balances(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_unused_balances_async(
+        self,
+        request: DescribeUnusedBalancesRequest,
+    ) -> DescribeUnusedBalancesResult:
+        async_result = []
+        self._describe_unused_balances(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_unused_balance(
+        self,
+        request: GetUnusedBalanceRequest,
+        callback: Callable[[AsyncResult[GetUnusedBalanceResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='unusedBalance',
+            function='getUnusedBalance',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.currency is not None:
+            body["currency"] = request.currency
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetUnusedBalanceResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_unused_balance(
+        self,
+        request: GetUnusedBalanceRequest,
+    ) -> GetUnusedBalanceResult:
+        async_result = []
+        with timeout(30):
+            self._get_unused_balance(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_unused_balance_async(
+        self,
+        request: GetUnusedBalanceRequest,
+    ) -> GetUnusedBalanceResult:
+        async_result = []
+        self._get_unused_balance(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

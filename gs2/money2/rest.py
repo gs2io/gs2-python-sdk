@@ -2886,3 +2886,384 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_daily_transaction_histories_by_currency(
+        self,
+        request: DescribeDailyTransactionHistoriesByCurrencyRequest,
+        callback: Callable[[AsyncResult[DescribeDailyTransactionHistoriesByCurrencyResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/transaction/daily/currency/{currency}/date/{year}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            currency=request.currency if request.currency is not None and request.currency != '' else 'null',
+            year=request.year if request.year is not None and request.year != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.month is not None:
+            query_strings["month"] = request.month
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeDailyTransactionHistoriesByCurrencyResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_daily_transaction_histories_by_currency(
+        self,
+        request: DescribeDailyTransactionHistoriesByCurrencyRequest,
+    ) -> DescribeDailyTransactionHistoriesByCurrencyResult:
+        async_result = []
+        with timeout(30):
+            self._describe_daily_transaction_histories_by_currency(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_daily_transaction_histories_by_currency_async(
+        self,
+        request: DescribeDailyTransactionHistoriesByCurrencyRequest,
+    ) -> DescribeDailyTransactionHistoriesByCurrencyResult:
+        async_result = []
+        self._describe_daily_transaction_histories_by_currency(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_daily_transaction_histories(
+        self,
+        request: DescribeDailyTransactionHistoriesRequest,
+        callback: Callable[[AsyncResult[DescribeDailyTransactionHistoriesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/transaction/daily/{year}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            year=request.year if request.year is not None and request.year != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.month is not None:
+            query_strings["month"] = request.month
+        if request.day is not None:
+            query_strings["day"] = request.day
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeDailyTransactionHistoriesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_daily_transaction_histories(
+        self,
+        request: DescribeDailyTransactionHistoriesRequest,
+    ) -> DescribeDailyTransactionHistoriesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_daily_transaction_histories(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_daily_transaction_histories_async(
+        self,
+        request: DescribeDailyTransactionHistoriesRequest,
+    ) -> DescribeDailyTransactionHistoriesResult:
+        async_result = []
+        self._describe_daily_transaction_histories(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_daily_transaction_history(
+        self,
+        request: GetDailyTransactionHistoryRequest,
+        callback: Callable[[AsyncResult[GetDailyTransactionHistoryResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/transaction/daily/{year}/{month}/{day}/currency/{currency}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            year=request.year if request.year is not None and request.year != '' else 'null',
+            month=request.month if request.month is not None and request.month != '' else 'null',
+            day=request.day if request.day is not None and request.day != '' else 'null',
+            currency=request.currency if request.currency is not None and request.currency != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetDailyTransactionHistoryResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_daily_transaction_history(
+        self,
+        request: GetDailyTransactionHistoryRequest,
+    ) -> GetDailyTransactionHistoryResult:
+        async_result = []
+        with timeout(30):
+            self._get_daily_transaction_history(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_daily_transaction_history_async(
+        self,
+        request: GetDailyTransactionHistoryRequest,
+    ) -> GetDailyTransactionHistoryResult:
+        async_result = []
+        self._get_daily_transaction_history(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_unused_balances(
+        self,
+        request: DescribeUnusedBalancesRequest,
+        callback: Callable[[AsyncResult[DescribeUnusedBalancesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/balance/unused".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeUnusedBalancesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_unused_balances(
+        self,
+        request: DescribeUnusedBalancesRequest,
+    ) -> DescribeUnusedBalancesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_unused_balances(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_unused_balances_async(
+        self,
+        request: DescribeUnusedBalancesRequest,
+    ) -> DescribeUnusedBalancesResult:
+        async_result = []
+        self._describe_unused_balances(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_unused_balance(
+        self,
+        request: GetUnusedBalanceRequest,
+        callback: Callable[[AsyncResult[GetUnusedBalanceResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/balance/unused/{currency}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            currency=request.currency if request.currency is not None and request.currency != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetUnusedBalanceResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_unused_balance(
+        self,
+        request: GetUnusedBalanceRequest,
+    ) -> GetUnusedBalanceResult:
+        async_result = []
+        with timeout(30):
+            self._get_unused_balance(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_unused_balance_async(
+        self,
+        request: GetUnusedBalanceRequest,
+    ) -> GetUnusedBalanceResult:
+        async_result = []
+        self._get_unused_balance(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

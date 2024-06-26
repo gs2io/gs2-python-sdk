@@ -19,6 +19,304 @@ from typing import *
 from gs2 import core
 
 
+class UnusedBalance(core.Gs2Model):
+    unused_balance_id: str = None
+    currency: str = None
+    balance: float = None
+    updated_at: int = None
+    revision: int = None
+
+    def with_unused_balance_id(self, unused_balance_id: str) -> UnusedBalance:
+        self.unused_balance_id = unused_balance_id
+        return self
+
+    def with_currency(self, currency: str) -> UnusedBalance:
+        self.currency = currency
+        return self
+
+    def with_balance(self, balance: float) -> UnusedBalance:
+        self.balance = balance
+        return self
+
+    def with_updated_at(self, updated_at: int) -> UnusedBalance:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> UnusedBalance:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        currency,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:money2:{namespaceName}:unused:{currency}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            currency=currency,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):unused:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):unused:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):unused:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_currency_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):unused:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('currency')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnusedBalance]:
+        if data is None:
+            return None
+        return UnusedBalance()\
+            .with_unused_balance_id(data.get('unusedBalanceId'))\
+            .with_currency(data.get('currency'))\
+            .with_balance(data.get('balance'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "unusedBalanceId": self.unused_balance_id,
+            "currency": self.currency,
+            "balance": self.balance,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+        }
+
+
+class DailyTransactionHistory(core.Gs2Model):
+    daily_transaction_history_id: str = None
+    year: int = None
+    month: int = None
+    day: int = None
+    currency: str = None
+    deposit_amount: float = None
+    withdraw_amount: float = None
+    updated_at: int = None
+    revision: int = None
+
+    def with_daily_transaction_history_id(self, daily_transaction_history_id: str) -> DailyTransactionHistory:
+        self.daily_transaction_history_id = daily_transaction_history_id
+        return self
+
+    def with_year(self, year: int) -> DailyTransactionHistory:
+        self.year = year
+        return self
+
+    def with_month(self, month: int) -> DailyTransactionHistory:
+        self.month = month
+        return self
+
+    def with_day(self, day: int) -> DailyTransactionHistory:
+        self.day = day
+        return self
+
+    def with_currency(self, currency: str) -> DailyTransactionHistory:
+        self.currency = currency
+        return self
+
+    def with_deposit_amount(self, deposit_amount: float) -> DailyTransactionHistory:
+        self.deposit_amount = deposit_amount
+        return self
+
+    def with_withdraw_amount(self, withdraw_amount: float) -> DailyTransactionHistory:
+        self.withdraw_amount = withdraw_amount
+        return self
+
+    def with_updated_at(self, updated_at: int) -> DailyTransactionHistory:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> DailyTransactionHistory:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        year,
+        month,
+        day,
+        currency,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:money2:{namespaceName}:transaction:history:daily:{year}:{month}:{day}:currency:{currency}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            year=year,
+            month=month,
+            day=day,
+            currency=currency,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):transaction:history:daily:(?P<year>.+):(?P<month>.+):(?P<day>.+):currency:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):transaction:history:daily:(?P<year>.+):(?P<month>.+):(?P<day>.+):currency:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):transaction:history:daily:(?P<year>.+):(?P<month>.+):(?P<day>.+):currency:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_year_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):transaction:history:daily:(?P<year>.+):(?P<month>.+):(?P<day>.+):currency:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('year')
+
+    @classmethod
+    def get_month_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):transaction:history:daily:(?P<year>.+):(?P<month>.+):(?P<day>.+):currency:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('month')
+
+    @classmethod
+    def get_day_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):transaction:history:daily:(?P<year>.+):(?P<month>.+):(?P<day>.+):currency:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('day')
+
+    @classmethod
+    def get_currency_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):transaction:history:daily:(?P<year>.+):(?P<month>.+):(?P<day>.+):currency:(?P<currency>.+)', grn)
+        if match is None:
+            return None
+        return match.group('currency')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DailyTransactionHistory]:
+        if data is None:
+            return None
+        return DailyTransactionHistory()\
+            .with_daily_transaction_history_id(data.get('dailyTransactionHistoryId'))\
+            .with_year(data.get('year'))\
+            .with_month(data.get('month'))\
+            .with_day(data.get('day'))\
+            .with_currency(data.get('currency'))\
+            .with_deposit_amount(data.get('depositAmount'))\
+            .with_withdraw_amount(data.get('withdrawAmount'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "dailyTransactionHistoryId": self.daily_transaction_history_id,
+            "year": self.year,
+            "month": self.month,
+            "day": self.day,
+            "currency": self.currency,
+            "depositAmount": self.deposit_amount,
+            "withdrawAmount": self.withdraw_amount,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 

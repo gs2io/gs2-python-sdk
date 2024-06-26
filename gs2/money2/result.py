@@ -1410,3 +1410,212 @@ class UpdateCurrentModelMasterFromGitHubResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
         }
+
+
+class DescribeDailyTransactionHistoriesByCurrencyResult(core.Gs2Result):
+    items: List[DailyTransactionHistory] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[DailyTransactionHistory]) -> DescribeDailyTransactionHistoriesByCurrencyResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeDailyTransactionHistoriesByCurrencyResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeDailyTransactionHistoriesByCurrencyResult]:
+        if data is None:
+            return None
+        return DescribeDailyTransactionHistoriesByCurrencyResult()\
+            .with_items([
+                DailyTransactionHistory.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeDailyTransactionHistoriesResult(core.Gs2Result):
+    items: List[DailyTransactionHistory] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[DailyTransactionHistory]) -> DescribeDailyTransactionHistoriesResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeDailyTransactionHistoriesResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeDailyTransactionHistoriesResult]:
+        if data is None:
+            return None
+        return DescribeDailyTransactionHistoriesResult()\
+            .with_items([
+                DailyTransactionHistory.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetDailyTransactionHistoryResult(core.Gs2Result):
+    item: DailyTransactionHistory = None
+
+    def with_item(self, item: DailyTransactionHistory) -> GetDailyTransactionHistoryResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetDailyTransactionHistoryResult]:
+        if data is None:
+            return None
+        return GetDailyTransactionHistoryResult()\
+            .with_item(DailyTransactionHistory.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeUnusedBalancesResult(core.Gs2Result):
+    items: List[UnusedBalance] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[UnusedBalance]) -> DescribeUnusedBalancesResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeUnusedBalancesResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUnusedBalancesResult]:
+        if data is None:
+            return None
+        return DescribeUnusedBalancesResult()\
+            .with_items([
+                UnusedBalance.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetUnusedBalanceResult(core.Gs2Result):
+    item: UnusedBalance = None
+
+    def with_item(self, item: UnusedBalance) -> GetUnusedBalanceResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetUnusedBalanceResult]:
+        if data is None:
+            return None
+        return GetUnusedBalanceResult()\
+            .with_item(UnusedBalance.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
