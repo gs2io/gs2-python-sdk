@@ -119,6 +119,8 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.receive_script is not None:
             body["receiveScript"] = request.receive_script.to_dict()
+        if request.override_acquire_actions_script_id is not None:
+            body["overrideAcquireActionsScriptId"] = request.override_acquire_actions_script_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -340,6 +342,8 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.receive_script is not None:
             body["receiveScript"] = request.receive_script.to_dict()
+        if request.override_acquire_actions_script_id is not None:
+            body["overrideAcquireActionsScriptId"] = request.override_acquire_actions_script_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

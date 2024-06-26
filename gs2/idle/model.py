@@ -924,6 +924,7 @@ class Namespace(core.Gs2Model):
     description: str = None
     transaction_setting: TransactionSetting = None
     receive_script: ScriptSetting = None
+    override_acquire_actions_script_id: str = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -947,6 +948,10 @@ class Namespace(core.Gs2Model):
 
     def with_receive_script(self, receive_script: ScriptSetting) -> Namespace:
         self.receive_script = receive_script
+        return self
+
+    def with_override_acquire_actions_script_id(self, override_acquire_actions_script_id: str) -> Namespace:
+        self.override_acquire_actions_script_id = override_acquire_actions_script_id
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1032,6 +1037,7 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_receive_script(ScriptSetting.from_dict(data.get('receiveScript')))\
+            .with_override_acquire_actions_script_id(data.get('overrideAcquireActionsScriptId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1044,6 +1050,7 @@ class Namespace(core.Gs2Model):
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "receiveScript": self.receive_script.to_dict() if self.receive_script else None,
+            "overrideAcquireActionsScriptId": self.override_acquire_actions_script_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

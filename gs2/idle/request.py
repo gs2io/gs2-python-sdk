@@ -67,6 +67,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     description: str = None
     transaction_setting: TransactionSetting = None
     receive_script: ScriptSetting = None
+    override_acquire_actions_script_id: str = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -83,6 +84,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_receive_script(self, receive_script: ScriptSetting) -> CreateNamespaceRequest:
         self.receive_script = receive_script
+        return self
+
+    def with_override_acquire_actions_script_id(self, override_acquire_actions_script_id: str) -> CreateNamespaceRequest:
+        self.override_acquire_actions_script_id = override_acquire_actions_script_id
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -112,6 +117,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_receive_script(ScriptSetting.from_dict(data.get('receiveScript')))\
+            .with_override_acquire_actions_script_id(data.get('overrideAcquireActionsScriptId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -120,6 +126,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "receiveScript": self.receive_script.to_dict() if self.receive_script else None,
+            "overrideAcquireActionsScriptId": self.override_acquire_actions_script_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -203,6 +210,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     description: str = None
     transaction_setting: TransactionSetting = None
     receive_script: ScriptSetting = None
+    override_acquire_actions_script_id: str = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -219,6 +227,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_receive_script(self, receive_script: ScriptSetting) -> UpdateNamespaceRequest:
         self.receive_script = receive_script
+        return self
+
+    def with_override_acquire_actions_script_id(self, override_acquire_actions_script_id: str) -> UpdateNamespaceRequest:
+        self.override_acquire_actions_script_id = override_acquire_actions_script_id
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -248,6 +260,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_receive_script(ScriptSetting.from_dict(data.get('receiveScript')))\
+            .with_override_acquire_actions_script_id(data.get('overrideAcquireActionsScriptId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -256,6 +269,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "receiveScript": self.receive_script.to_dict() if self.receive_script else None,
+            "overrideAcquireActionsScriptId": self.override_acquire_actions_script_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
