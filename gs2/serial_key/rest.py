@@ -1747,7 +1747,7 @@ class Gs2SerialKeyRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='serial-key',
             region=self.session.region,
-        ) + "/serialKey/use"
+        ) + "/serialKey/revert"
 
         headers = self._create_authorized_headers()
         body = {
