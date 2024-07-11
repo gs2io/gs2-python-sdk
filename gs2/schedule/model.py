@@ -283,6 +283,9 @@ class RepeatSetting(core.Gs2Model):
     end_day_of_week: str = None
     begin_hour: int = None
     end_hour: int = None
+    anchor_timestamp: int = None
+    active_days: int = None
+    inactive_days: int = None
 
     def with_repeat_type(self, repeat_type: str) -> RepeatSetting:
         self.repeat_type = repeat_type
@@ -312,6 +315,18 @@ class RepeatSetting(core.Gs2Model):
         self.end_hour = end_hour
         return self
 
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> RepeatSetting:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_active_days(self, active_days: int) -> RepeatSetting:
+        self.active_days = active_days
+        return self
+
+    def with_inactive_days(self, inactive_days: int) -> RepeatSetting:
+        self.inactive_days = inactive_days
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -337,7 +352,10 @@ class RepeatSetting(core.Gs2Model):
             .with_begin_day_of_week(data.get('beginDayOfWeek'))\
             .with_end_day_of_week(data.get('endDayOfWeek'))\
             .with_begin_hour(data.get('beginHour'))\
-            .with_end_hour(data.get('endHour'))
+            .with_end_hour(data.get('endHour'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_active_days(data.get('activeDays'))\
+            .with_inactive_days(data.get('inactiveDays'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -348,6 +366,9 @@ class RepeatSetting(core.Gs2Model):
             "endDayOfWeek": self.end_day_of_week,
             "beginHour": self.begin_hour,
             "endHour": self.end_hour,
+            "anchorTimestamp": self.anchor_timestamp,
+            "activeDays": self.active_days,
+            "inactiveDays": self.inactive_days,
         }
 
 
