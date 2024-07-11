@@ -156,6 +156,54 @@ class BanStatus(core.Gs2Model):
         }
 
 
+class PlatformUser(core.Gs2Model):
+    type: int = None
+    user_identifier: str = None
+    user_id: str = None
+
+    def with_type(self, type: int) -> PlatformUser:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> PlatformUser:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_user_id(self, user_id: str) -> PlatformUser:
+        self.user_id = user_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PlatformUser]:
+        if data is None:
+            return None
+        return PlatformUser()\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
+            "userId": self.user_id,
+        }
+
+
 class DataOwner(core.Gs2Model):
     data_owner_id: str = None
     user_id: str = None
@@ -280,6 +328,142 @@ class DataOwner(core.Gs2Model):
             "dataOwnerId": self.data_owner_id,
             "userId": self.user_id,
             "name": self.name,
+            "createdAt": self.created_at,
+            "revision": self.revision,
+        }
+
+
+class PlatformId(core.Gs2Model):
+    platform_id: str = None
+    user_id: str = None
+    type: int = None
+    user_identifier: str = None
+    created_at: int = None
+    revision: int = None
+
+    def with_platform_id(self, platform_id: str) -> PlatformId:
+        self.platform_id = platform_id
+        return self
+
+    def with_user_id(self, user_id: str) -> PlatformId:
+        self.user_id = user_id
+        return self
+
+    def with_type(self, type: int) -> PlatformId:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> PlatformId:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_created_at(self, created_at: int) -> PlatformId:
+        self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> PlatformId:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        _type,
+        user_identifier,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:account:{namespaceName}:platformId:{type}:{userIdentifier}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            Type=_type,
+            userIdentifier=user_identifier,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):platformId:(?P<type>.+):(?P<userIdentifier>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):platformId:(?P<type>.+):(?P<userIdentifier>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):platformId:(?P<type>.+):(?P<userIdentifier>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get__type_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):platformId:(?P<type>.+):(?P<userIdentifier>.+)', grn)
+        if match is None:
+            return None
+        return match.group('_type')
+
+    @classmethod
+    def get_user_identifier_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):platformId:(?P<type>.+):(?P<userIdentifier>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_identifier')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PlatformId]:
+        if data is None:
+            return None
+        return PlatformId()\
+            .with_platform_id(data.get('platformId'))\
+            .with_user_id(data.get('userId'))\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "platformId": self.platform_id,
+            "userId": self.user_id,
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
             "createdAt": self.created_at,
             "revision": self.revision,
         }

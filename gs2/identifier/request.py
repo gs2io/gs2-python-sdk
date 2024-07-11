@@ -968,8 +968,8 @@ class LoginRequest(core.Gs2Request):
         if data is None:
             return None
         return LoginRequest()\
-            .with_client_id(data.get('clientId'))\
-            .with_client_secret(data.get('clientSecret'))
+            .with_client_id(data.get('client_id'))\
+            .with_client_secret(data.get('client_secret'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {

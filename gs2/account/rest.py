@@ -2628,6 +2628,854 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_platform_ids(
+        self,
+        request: DescribePlatformIdsRequest,
+        callback: Callable[[AsyncResult[DescribePlatformIdsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/me/platformId".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribePlatformIdsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_platform_ids(
+        self,
+        request: DescribePlatformIdsRequest,
+    ) -> DescribePlatformIdsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_platform_ids(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_platform_ids_async(
+        self,
+        request: DescribePlatformIdsRequest,
+    ) -> DescribePlatformIdsResult:
+        async_result = []
+        self._describe_platform_ids(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_platform_ids_by_user_id(
+        self,
+        request: DescribePlatformIdsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribePlatformIdsByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/platformId".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribePlatformIdsByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_platform_ids_by_user_id(
+        self,
+        request: DescribePlatformIdsByUserIdRequest,
+    ) -> DescribePlatformIdsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_platform_ids_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_platform_ids_by_user_id_async(
+        self,
+        request: DescribePlatformIdsByUserIdRequest,
+    ) -> DescribePlatformIdsByUserIdResult:
+        async_result = []
+        self._describe_platform_ids_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_platform_id(
+        self,
+        request: CreatePlatformIdRequest,
+        callback: Callable[[AsyncResult[CreatePlatformIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/me/platformId".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreatePlatformIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_platform_id(
+        self,
+        request: CreatePlatformIdRequest,
+    ) -> CreatePlatformIdResult:
+        async_result = []
+        with timeout(30):
+            self._create_platform_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_platform_id_async(
+        self,
+        request: CreatePlatformIdRequest,
+    ) -> CreatePlatformIdResult:
+        async_result = []
+        self._create_platform_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_platform_id_by_user_id(
+        self,
+        request: CreatePlatformIdByUserIdRequest,
+        callback: Callable[[AsyncResult[CreatePlatformIdByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/platformId".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreatePlatformIdByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_platform_id_by_user_id(
+        self,
+        request: CreatePlatformIdByUserIdRequest,
+    ) -> CreatePlatformIdByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._create_platform_id_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_platform_id_by_user_id_async(
+        self,
+        request: CreatePlatformIdByUserIdRequest,
+    ) -> CreatePlatformIdByUserIdResult:
+        async_result = []
+        self._create_platform_id_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_platform_id(
+        self,
+        request: GetPlatformIdRequest,
+        callback: Callable[[AsyncResult[GetPlatformIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/me/platformId/type/{type}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetPlatformIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_platform_id(
+        self,
+        request: GetPlatformIdRequest,
+    ) -> GetPlatformIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_platform_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_platform_id_async(
+        self,
+        request: GetPlatformIdRequest,
+    ) -> GetPlatformIdResult:
+        async_result = []
+        self._get_platform_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_platform_id_by_user_id(
+        self,
+        request: GetPlatformIdByUserIdRequest,
+        callback: Callable[[AsyncResult[GetPlatformIdByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/platformId/type/{type}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetPlatformIdByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_platform_id_by_user_id(
+        self,
+        request: GetPlatformIdByUserIdRequest,
+    ) -> GetPlatformIdByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_platform_id_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_platform_id_by_user_id_async(
+        self,
+        request: GetPlatformIdByUserIdRequest,
+    ) -> GetPlatformIdByUserIdResult:
+        async_result = []
+        self._get_platform_id_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _find_platform_id(
+        self,
+        request: FindPlatformIdRequest,
+        callback: Callable[[AsyncResult[FindPlatformIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/me/platformId/type/{type}/userIdentifier/{userIdentifier}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+            userIdentifier=request.user_identifier if request.user_identifier is not None and request.user_identifier != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=FindPlatformIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def find_platform_id(
+        self,
+        request: FindPlatformIdRequest,
+    ) -> FindPlatformIdResult:
+        async_result = []
+        with timeout(30):
+            self._find_platform_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def find_platform_id_async(
+        self,
+        request: FindPlatformIdRequest,
+    ) -> FindPlatformIdResult:
+        async_result = []
+        self._find_platform_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _find_platform_id_by_user_id(
+        self,
+        request: FindPlatformIdByUserIdRequest,
+        callback: Callable[[AsyncResult[FindPlatformIdByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/platformId/type/{type}/userIdentifier/{userIdentifier}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+            userIdentifier=request.user_identifier if request.user_identifier is not None and request.user_identifier != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=FindPlatformIdByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def find_platform_id_by_user_id(
+        self,
+        request: FindPlatformIdByUserIdRequest,
+    ) -> FindPlatformIdByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._find_platform_id_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def find_platform_id_by_user_id_async(
+        self,
+        request: FindPlatformIdByUserIdRequest,
+    ) -> FindPlatformIdByUserIdResult:
+        async_result = []
+        self._find_platform_id_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_platform_id(
+        self,
+        request: DeletePlatformIdRequest,
+        callback: Callable[[AsyncResult[DeletePlatformIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/me/platformId/type/{type}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.user_identifier is not None:
+            query_strings["userIdentifier"] = request.user_identifier
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeletePlatformIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_platform_id(
+        self,
+        request: DeletePlatformIdRequest,
+    ) -> DeletePlatformIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_platform_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_platform_id_async(
+        self,
+        request: DeletePlatformIdRequest,
+    ) -> DeletePlatformIdResult:
+        async_result = []
+        self._delete_platform_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_platform_id_by_user_identifier(
+        self,
+        request: DeletePlatformIdByUserIdentifierRequest,
+        callback: Callable[[AsyncResult[DeletePlatformIdByUserIdentifierResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/platformId/type/{type}/userIdentifier/{userIdentifier}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+            userIdentifier=request.user_identifier if request.user_identifier is not None and request.user_identifier != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeletePlatformIdByUserIdentifierResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_platform_id_by_user_identifier(
+        self,
+        request: DeletePlatformIdByUserIdentifierRequest,
+    ) -> DeletePlatformIdByUserIdentifierResult:
+        async_result = []
+        with timeout(30):
+            self._delete_platform_id_by_user_identifier(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_platform_id_by_user_identifier_async(
+        self,
+        request: DeletePlatformIdByUserIdentifierRequest,
+    ) -> DeletePlatformIdByUserIdentifierResult:
+        async_result = []
+        self._delete_platform_id_by_user_identifier(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_platform_id_by_user_id(
+        self,
+        request: DeletePlatformIdByUserIdRequest,
+        callback: Callable[[AsyncResult[DeletePlatformIdByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/platformId/type/{type}/platformId".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeletePlatformIdByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_platform_id_by_user_id(
+        self,
+        request: DeletePlatformIdByUserIdRequest,
+    ) -> DeletePlatformIdByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_platform_id_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_platform_id_by_user_id_async(
+        self,
+        request: DeletePlatformIdByUserIdRequest,
+    ) -> DeletePlatformIdByUserIdResult:
+        async_result = []
+        self._delete_platform_id_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_data_owner_by_user_id(
         self,
         request: GetDataOwnerByUserIdRequest,

@@ -2661,6 +2661,879 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_platform_ids(
+        self,
+        request: DescribePlatformIdsRequest,
+        callback: Callable[[AsyncResult[DescribePlatformIdsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='describePlatformIds',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribePlatformIdsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_platform_ids(
+        self,
+        request: DescribePlatformIdsRequest,
+    ) -> DescribePlatformIdsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_platform_ids(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_platform_ids_async(
+        self,
+        request: DescribePlatformIdsRequest,
+    ) -> DescribePlatformIdsResult:
+        async_result = []
+        self._describe_platform_ids(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_platform_ids_by_user_id(
+        self,
+        request: DescribePlatformIdsByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribePlatformIdsByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='describePlatformIdsByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribePlatformIdsByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_platform_ids_by_user_id(
+        self,
+        request: DescribePlatformIdsByUserIdRequest,
+    ) -> DescribePlatformIdsByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_platform_ids_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_platform_ids_by_user_id_async(
+        self,
+        request: DescribePlatformIdsByUserIdRequest,
+    ) -> DescribePlatformIdsByUserIdResult:
+        async_result = []
+        self._describe_platform_ids_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_platform_id(
+        self,
+        request: CreatePlatformIdRequest,
+        callback: Callable[[AsyncResult[CreatePlatformIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='createPlatformId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreatePlatformIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_platform_id(
+        self,
+        request: CreatePlatformIdRequest,
+    ) -> CreatePlatformIdResult:
+        async_result = []
+        with timeout(30):
+            self._create_platform_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_platform_id_async(
+        self,
+        request: CreatePlatformIdRequest,
+    ) -> CreatePlatformIdResult:
+        async_result = []
+        self._create_platform_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_platform_id_by_user_id(
+        self,
+        request: CreatePlatformIdByUserIdRequest,
+        callback: Callable[[AsyncResult[CreatePlatformIdByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='createPlatformIdByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreatePlatformIdByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_platform_id_by_user_id(
+        self,
+        request: CreatePlatformIdByUserIdRequest,
+    ) -> CreatePlatformIdByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._create_platform_id_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_platform_id_by_user_id_async(
+        self,
+        request: CreatePlatformIdByUserIdRequest,
+    ) -> CreatePlatformIdByUserIdResult:
+        async_result = []
+        self._create_platform_id_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_platform_id(
+        self,
+        request: GetPlatformIdRequest,
+        callback: Callable[[AsyncResult[GetPlatformIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='getPlatformId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.type is not None:
+            body["type"] = request.type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetPlatformIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_platform_id(
+        self,
+        request: GetPlatformIdRequest,
+    ) -> GetPlatformIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_platform_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_platform_id_async(
+        self,
+        request: GetPlatformIdRequest,
+    ) -> GetPlatformIdResult:
+        async_result = []
+        self._get_platform_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_platform_id_by_user_id(
+        self,
+        request: GetPlatformIdByUserIdRequest,
+        callback: Callable[[AsyncResult[GetPlatformIdByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='getPlatformIdByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.type is not None:
+            body["type"] = request.type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetPlatformIdByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_platform_id_by_user_id(
+        self,
+        request: GetPlatformIdByUserIdRequest,
+    ) -> GetPlatformIdByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_platform_id_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_platform_id_by_user_id_async(
+        self,
+        request: GetPlatformIdByUserIdRequest,
+    ) -> GetPlatformIdByUserIdResult:
+        async_result = []
+        self._get_platform_id_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _find_platform_id(
+        self,
+        request: FindPlatformIdRequest,
+        callback: Callable[[AsyncResult[FindPlatformIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='findPlatformId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=FindPlatformIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def find_platform_id(
+        self,
+        request: FindPlatformIdRequest,
+    ) -> FindPlatformIdResult:
+        async_result = []
+        with timeout(30):
+            self._find_platform_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def find_platform_id_async(
+        self,
+        request: FindPlatformIdRequest,
+    ) -> FindPlatformIdResult:
+        async_result = []
+        self._find_platform_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _find_platform_id_by_user_id(
+        self,
+        request: FindPlatformIdByUserIdRequest,
+        callback: Callable[[AsyncResult[FindPlatformIdByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='findPlatformIdByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=FindPlatformIdByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def find_platform_id_by_user_id(
+        self,
+        request: FindPlatformIdByUserIdRequest,
+    ) -> FindPlatformIdByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._find_platform_id_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def find_platform_id_by_user_id_async(
+        self,
+        request: FindPlatformIdByUserIdRequest,
+    ) -> FindPlatformIdByUserIdResult:
+        async_result = []
+        self._find_platform_id_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_platform_id(
+        self,
+        request: DeletePlatformIdRequest,
+        callback: Callable[[AsyncResult[DeletePlatformIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='deletePlatformId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeletePlatformIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_platform_id(
+        self,
+        request: DeletePlatformIdRequest,
+    ) -> DeletePlatformIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_platform_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_platform_id_async(
+        self,
+        request: DeletePlatformIdRequest,
+    ) -> DeletePlatformIdResult:
+        async_result = []
+        self._delete_platform_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_platform_id_by_user_identifier(
+        self,
+        request: DeletePlatformIdByUserIdentifierRequest,
+        callback: Callable[[AsyncResult[DeletePlatformIdByUserIdentifierResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='deletePlatformIdByUserIdentifier',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeletePlatformIdByUserIdentifierResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_platform_id_by_user_identifier(
+        self,
+        request: DeletePlatformIdByUserIdentifierRequest,
+    ) -> DeletePlatformIdByUserIdentifierResult:
+        async_result = []
+        with timeout(30):
+            self._delete_platform_id_by_user_identifier(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_platform_id_by_user_identifier_async(
+        self,
+        request: DeletePlatformIdByUserIdentifierRequest,
+    ) -> DeletePlatformIdByUserIdentifierResult:
+        async_result = []
+        self._delete_platform_id_by_user_identifier(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_platform_id_by_user_id(
+        self,
+        request: DeletePlatformIdByUserIdRequest,
+        callback: Callable[[AsyncResult[DeletePlatformIdByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='platformId',
+            function='deletePlatformIdByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.type is not None:
+            body["type"] = request.type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeletePlatformIdByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_platform_id_by_user_id(
+        self,
+        request: DeletePlatformIdByUserIdRequest,
+    ) -> DeletePlatformIdByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_platform_id_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_platform_id_by_user_id_async(
+        self,
+        request: DeletePlatformIdByUserIdRequest,
+    ) -> DeletePlatformIdByUserIdResult:
+        async_result = []
+        self._delete_platform_id_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_data_owner_by_user_id(
         self,
         request: GetDataOwnerByUserIdRequest,

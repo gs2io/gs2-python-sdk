@@ -1231,6 +1231,406 @@ class DoTakeOverResult(core.Gs2Result):
         }
 
 
+class DescribePlatformIdsResult(core.Gs2Result):
+    items: List[PlatformId] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[PlatformId]) -> DescribePlatformIdsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribePlatformIdsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePlatformIdsResult]:
+        if data is None:
+            return None
+        return DescribePlatformIdsResult()\
+            .with_items([
+                PlatformId.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribePlatformIdsByUserIdResult(core.Gs2Result):
+    items: List[PlatformId] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[PlatformId]) -> DescribePlatformIdsByUserIdResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribePlatformIdsByUserIdResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePlatformIdsByUserIdResult]:
+        if data is None:
+            return None
+        return DescribePlatformIdsByUserIdResult()\
+            .with_items([
+                PlatformId.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreatePlatformIdResult(core.Gs2Result):
+    item: PlatformId = None
+
+    def with_item(self, item: PlatformId) -> CreatePlatformIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreatePlatformIdResult]:
+        if data is None:
+            return None
+        return CreatePlatformIdResult()\
+            .with_item(PlatformId.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class CreatePlatformIdByUserIdResult(core.Gs2Result):
+    item: PlatformId = None
+
+    def with_item(self, item: PlatformId) -> CreatePlatformIdByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreatePlatformIdByUserIdResult]:
+        if data is None:
+            return None
+        return CreatePlatformIdByUserIdResult()\
+            .with_item(PlatformId.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetPlatformIdResult(core.Gs2Result):
+    item: PlatformId = None
+
+    def with_item(self, item: PlatformId) -> GetPlatformIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPlatformIdResult]:
+        if data is None:
+            return None
+        return GetPlatformIdResult()\
+            .with_item(PlatformId.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetPlatformIdByUserIdResult(core.Gs2Result):
+    item: PlatformId = None
+
+    def with_item(self, item: PlatformId) -> GetPlatformIdByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPlatformIdByUserIdResult]:
+        if data is None:
+            return None
+        return GetPlatformIdByUserIdResult()\
+            .with_item(PlatformId.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class FindPlatformIdResult(core.Gs2Result):
+    item: PlatformUser = None
+
+    def with_item(self, item: PlatformUser) -> FindPlatformIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FindPlatformIdResult]:
+        if data is None:
+            return None
+        return FindPlatformIdResult()\
+            .with_item(PlatformUser.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class FindPlatformIdByUserIdResult(core.Gs2Result):
+    item: PlatformUser = None
+
+    def with_item(self, item: PlatformUser) -> FindPlatformIdByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FindPlatformIdByUserIdResult]:
+        if data is None:
+            return None
+        return FindPlatformIdByUserIdResult()\
+            .with_item(PlatformUser.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeletePlatformIdResult(core.Gs2Result):
+    item: PlatformId = None
+
+    def with_item(self, item: PlatformId) -> DeletePlatformIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePlatformIdResult]:
+        if data is None:
+            return None
+        return DeletePlatformIdResult()\
+            .with_item(PlatformId.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeletePlatformIdByUserIdentifierResult(core.Gs2Result):
+    item: PlatformId = None
+
+    def with_item(self, item: PlatformId) -> DeletePlatformIdByUserIdentifierResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePlatformIdByUserIdentifierResult]:
+        if data is None:
+            return None
+        return DeletePlatformIdByUserIdentifierResult()\
+            .with_item(PlatformId.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeletePlatformIdByUserIdResult(core.Gs2Result):
+    item: PlatformId = None
+
+    def with_item(self, item: PlatformId) -> DeletePlatformIdByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePlatformIdByUserIdResult]:
+        if data is None:
+            return None
+        return DeletePlatformIdByUserIdResult()\
+            .with_item(PlatformId.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class GetDataOwnerByUserIdResult(core.Gs2Result):
     item: DataOwner = None
 

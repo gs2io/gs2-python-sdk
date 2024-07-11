@@ -1957,6 +1957,675 @@ class DoTakeOverRequest(core.Gs2Request):
         }
 
 
+class DescribePlatformIdsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribePlatformIdsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribePlatformIdsRequest:
+        self.access_token = access_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribePlatformIdsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribePlatformIdsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePlatformIdsRequest]:
+        if data is None:
+            return None
+        return DescribePlatformIdsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribePlatformIdsByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    page_token: str = None
+    limit: int = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribePlatformIdsByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribePlatformIdsByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribePlatformIdsByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribePlatformIdsByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribePlatformIdsByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribePlatformIdsByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribePlatformIdsByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class CreatePlatformIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    type: int = None
+    user_identifier: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreatePlatformIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> CreatePlatformIdRequest:
+        self.access_token = access_token
+        return self
+
+    def with_type(self, type: int) -> CreatePlatformIdRequest:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> CreatePlatformIdRequest:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreatePlatformIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreatePlatformIdRequest]:
+        if data is None:
+            return None
+        return CreatePlatformIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
+        }
+
+
+class CreatePlatformIdByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    type: int = None
+    user_identifier: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreatePlatformIdByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> CreatePlatformIdByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_type(self, type: int) -> CreatePlatformIdByUserIdRequest:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> CreatePlatformIdByUserIdRequest:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CreatePlatformIdByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreatePlatformIdByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreatePlatformIdByUserIdRequest]:
+        if data is None:
+            return None
+        return CreatePlatformIdByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class GetPlatformIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    type: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPlatformIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetPlatformIdRequest:
+        self.access_token = access_token
+        return self
+
+    def with_type(self, type: int) -> GetPlatformIdRequest:
+        self.type = type
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPlatformIdRequest]:
+        if data is None:
+            return None
+        return GetPlatformIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_type(data.get('type'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "type": self.type,
+        }
+
+
+class GetPlatformIdByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    type: int = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetPlatformIdByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetPlatformIdByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_type(self, type: int) -> GetPlatformIdByUserIdRequest:
+        self.type = type
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetPlatformIdByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetPlatformIdByUserIdRequest]:
+        if data is None:
+            return None
+        return GetPlatformIdByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_type(data.get('type'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "type": self.type,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class FindPlatformIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    type: int = None
+    user_identifier: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> FindPlatformIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> FindPlatformIdRequest:
+        self.access_token = access_token
+        return self
+
+    def with_type(self, type: int) -> FindPlatformIdRequest:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> FindPlatformIdRequest:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> FindPlatformIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FindPlatformIdRequest]:
+        if data is None:
+            return None
+        return FindPlatformIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
+        }
+
+
+class FindPlatformIdByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    type: int = None
+    user_identifier: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> FindPlatformIdByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> FindPlatformIdByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_type(self, type: int) -> FindPlatformIdByUserIdRequest:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> FindPlatformIdByUserIdRequest:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> FindPlatformIdByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> FindPlatformIdByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FindPlatformIdByUserIdRequest]:
+        if data is None:
+            return None
+        return FindPlatformIdByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class DeletePlatformIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    type: int = None
+    user_identifier: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeletePlatformIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DeletePlatformIdRequest:
+        self.access_token = access_token
+        return self
+
+    def with_type(self, type: int) -> DeletePlatformIdRequest:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> DeletePlatformIdRequest:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeletePlatformIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePlatformIdRequest]:
+        if data is None:
+            return None
+        return DeletePlatformIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
+        }
+
+
+class DeletePlatformIdByUserIdentifierRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+    user_identifier: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeletePlatformIdByUserIdentifierRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> DeletePlatformIdByUserIdentifierRequest:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> DeletePlatformIdByUserIdentifierRequest:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeletePlatformIdByUserIdentifierRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePlatformIdByUserIdentifierRequest]:
+        if data is None:
+            return None
+        return DeletePlatformIdByUserIdentifierRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
+        }
+
+
+class DeletePlatformIdByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    type: int = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeletePlatformIdByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DeletePlatformIdByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_type(self, type: int) -> DeletePlatformIdByUserIdRequest:
+        self.type = type
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DeletePlatformIdByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeletePlatformIdByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeletePlatformIdByUserIdRequest]:
+        if data is None:
+            return None
+        return DeletePlatformIdByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_type(data.get('type'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "type": self.type,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class GetDataOwnerByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
