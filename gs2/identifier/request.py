@@ -777,6 +777,121 @@ class GetPasswordRequest(core.Gs2Request):
         }
 
 
+class EnableMfaRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_name: str = None
+
+    def with_user_name(self, user_name: str) -> EnableMfaRequest:
+        self.user_name = user_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EnableMfaRequest]:
+        if data is None:
+            return None
+        return EnableMfaRequest()\
+            .with_user_name(data.get('userName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userName": self.user_name,
+        }
+
+
+class ChallengeMfaRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_name: str = None
+    passcode: str = None
+
+    def with_user_name(self, user_name: str) -> ChallengeMfaRequest:
+        self.user_name = user_name
+        return self
+
+    def with_passcode(self, passcode: str) -> ChallengeMfaRequest:
+        self.passcode = passcode
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ChallengeMfaRequest]:
+        if data is None:
+            return None
+        return ChallengeMfaRequest()\
+            .with_user_name(data.get('userName'))\
+            .with_passcode(data.get('passcode'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userName": self.user_name,
+            "passcode": self.passcode,
+        }
+
+
+class DisableMfaRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_name: str = None
+
+    def with_user_name(self, user_name: str) -> DisableMfaRequest:
+        self.user_name = user_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DisableMfaRequest]:
+        if data is None:
+            return None
+        return DisableMfaRequest()\
+            .with_user_name(data.get('userName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userName": self.user_name,
+        }
+
+
 class DeletePasswordRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -983,6 +1098,7 @@ class LoginByUserRequest(core.Gs2Request):
     context_stack: str = None
     user_name: str = None
     password: str = None
+    otp: str = None
 
     def with_user_name(self, user_name: str) -> LoginByUserRequest:
         self.user_name = user_name
@@ -990,6 +1106,10 @@ class LoginByUserRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> LoginByUserRequest:
         self.password = password
+        return self
+
+    def with_otp(self, otp: str) -> LoginByUserRequest:
+        self.otp = otp
         return self
 
     def get(self, key, default=None):
@@ -1012,10 +1132,12 @@ class LoginByUserRequest(core.Gs2Request):
             return None
         return LoginByUserRequest()\
             .with_user_name(data.get('userName'))\
-            .with_password(data.get('password'))
+            .with_password(data.get('password'))\
+            .with_otp(data.get('otp'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userName": self.user_name,
             "password": self.password,
+            "otp": self.otp,
         }

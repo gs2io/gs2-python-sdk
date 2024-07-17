@@ -19,6 +19,40 @@ from typing import *
 from gs2 import core
 
 
+class TwoFactorAuthenticationSetting(core.Gs2Model):
+    status: str = None
+
+    def with_status(self, status: str) -> TwoFactorAuthenticationSetting:
+        self.status = status
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TwoFactorAuthenticationSetting]:
+        if data is None:
+            return None
+        return TwoFactorAuthenticationSetting()\
+            .with_status(data.get('status'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "status": self.status,
+        }
+
+
 class ProjectToken(core.Gs2Model):
     token: str = None
 
@@ -149,6 +183,8 @@ class Password(core.Gs2Model):
     password_id: str = None
     user_id: str = None
     user_name: str = None
+    enable_two_factor_authentication: str = None
+    two_factor_authentication_setting: TwoFactorAuthenticationSetting = None
     created_at: int = None
     revision: int = None
 
@@ -162,6 +198,14 @@ class Password(core.Gs2Model):
 
     def with_user_name(self, user_name: str) -> Password:
         self.user_name = user_name
+        return self
+
+    def with_enable_two_factor_authentication(self, enable_two_factor_authentication: str) -> Password:
+        self.enable_two_factor_authentication = enable_two_factor_authentication
+        return self
+
+    def with_two_factor_authentication_setting(self, two_factor_authentication_setting: TwoFactorAuthenticationSetting) -> Password:
+        self.two_factor_authentication_setting = two_factor_authentication_setting
         return self
 
     def with_created_at(self, created_at: int) -> Password:
@@ -225,6 +269,8 @@ class Password(core.Gs2Model):
             .with_password_id(data.get('passwordId'))\
             .with_user_id(data.get('userId'))\
             .with_user_name(data.get('userName'))\
+            .with_enable_two_factor_authentication(data.get('enableTwoFactorAuthentication'))\
+            .with_two_factor_authentication_setting(TwoFactorAuthenticationSetting.from_dict(data.get('twoFactorAuthenticationSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
@@ -233,6 +279,8 @@ class Password(core.Gs2Model):
             "passwordId": self.password_id,
             "userId": self.user_id,
             "userName": self.user_name,
+            "enableTwoFactorAuthentication": self.enable_two_factor_authentication,
+            "twoFactorAuthenticationSetting": self.two_factor_authentication_setting.to_dict() if self.two_factor_authentication_setting else None,
             "createdAt": self.created_at,
             "revision": self.revision,
         }

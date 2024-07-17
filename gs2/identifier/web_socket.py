@@ -1331,6 +1331,221 @@ class Gs2IdentifierWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _enable_mfa(
+        self,
+        request: EnableMfaRequest,
+        callback: Callable[[AsyncResult[EnableMfaResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="identifier",
+            component='password',
+            function='enableMfa',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_name is not None:
+            body["userName"] = request.user_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=EnableMfaResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def enable_mfa(
+        self,
+        request: EnableMfaRequest,
+    ) -> EnableMfaResult:
+        async_result = []
+        with timeout(30):
+            self._enable_mfa(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def enable_mfa_async(
+        self,
+        request: EnableMfaRequest,
+    ) -> EnableMfaResult:
+        async_result = []
+        self._enable_mfa(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _challenge_mfa(
+        self,
+        request: ChallengeMfaRequest,
+        callback: Callable[[AsyncResult[ChallengeMfaResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="identifier",
+            component='password',
+            function='challengeMfa',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_name is not None:
+            body["userName"] = request.user_name
+        if request.passcode is not None:
+            body["passcode"] = request.passcode
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ChallengeMfaResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def challenge_mfa(
+        self,
+        request: ChallengeMfaRequest,
+    ) -> ChallengeMfaResult:
+        async_result = []
+        with timeout(30):
+            self._challenge_mfa(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def challenge_mfa_async(
+        self,
+        request: ChallengeMfaRequest,
+    ) -> ChallengeMfaResult:
+        async_result = []
+        self._challenge_mfa(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _disable_mfa(
+        self,
+        request: DisableMfaRequest,
+        callback: Callable[[AsyncResult[DisableMfaResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="identifier",
+            component='password',
+            function='disableMfa',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_name is not None:
+            body["userName"] = request.user_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DisableMfaResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def disable_mfa(
+        self,
+        request: DisableMfaRequest,
+    ) -> DisableMfaResult:
+        async_result = []
+        with timeout(30):
+            self._disable_mfa(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def disable_mfa_async(
+        self,
+        request: DisableMfaRequest,
+    ) -> DisableMfaResult:
+        async_result = []
+        self._disable_mfa(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_password(
         self,
         request: DeletePasswordRequest,
@@ -1713,6 +1928,8 @@ class Gs2IdentifierWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userName"] = request.user_name
         if request.password is not None:
             body["password"] = request.password
+        if request.otp is not None:
+            body["otp"] = request.otp
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
