@@ -495,8 +495,6 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -570,8 +568,6 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -645,8 +641,6 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -720,8 +714,6 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -795,8 +787,6 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -872,8 +862,6 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -949,8 +937,6 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
-        if request.duplication_avoider:
-            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(

@@ -654,7 +654,6 @@ class InvokeScriptRequest(core.Gs2Request):
     args: str = None
     random_status: RandomStatus = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_script_id(self, script_id: str) -> InvokeScriptRequest:
         self.script_id = script_id
@@ -674,10 +673,6 @@ class InvokeScriptRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> InvokeScriptRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> InvokeScriptRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
