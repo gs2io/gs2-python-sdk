@@ -703,6 +703,115 @@ class GetPasswordResult(core.Gs2Result):
         }
 
 
+class EnableMfaResult(core.Gs2Result):
+    item: Password = None
+    challenge_token: str = None
+
+    def with_item(self, item: Password) -> EnableMfaResult:
+        self.item = item
+        return self
+
+    def with_challenge_token(self, challenge_token: str) -> EnableMfaResult:
+        self.challenge_token = challenge_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EnableMfaResult]:
+        if data is None:
+            return None
+        return EnableMfaResult()\
+            .with_item(Password.from_dict(data.get('item')))\
+            .with_challenge_token(data.get('challengeToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "challengeToken": self.challenge_token,
+        }
+
+
+class ChallengeMfaResult(core.Gs2Result):
+    item: Password = None
+
+    def with_item(self, item: Password) -> ChallengeMfaResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ChallengeMfaResult]:
+        if data is None:
+            return None
+        return ChallengeMfaResult()\
+            .with_item(Password.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DisableMfaResult(core.Gs2Result):
+    item: Password = None
+
+    def with_item(self, item: Password) -> DisableMfaResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DisableMfaResult]:
+        if data is None:
+            return None
+        return DisableMfaResult()\
+            .with_item(Password.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeletePasswordResult(core.Gs2Result):
     item: Password = None
 

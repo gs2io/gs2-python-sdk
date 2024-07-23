@@ -287,6 +287,114 @@ class TransactionSetting(core.Gs2Model):
         }
 
 
+class IgnoreUser(core.Gs2Model):
+    user_id: str = None
+    created_at: int = None
+
+    def with_user_id(self, user_id: str) -> IgnoreUser:
+        self.user_id = user_id
+        return self
+
+    def with_created_at(self, created_at: int) -> IgnoreUser:
+        self.created_at = created_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        guild_model_name,
+        guild_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:guild:{namespaceName}:guild:{guildModelName}:{guildName}:ignore:user'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            guildModelName=guild_model_name,
+            guildName=guild_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):ignore:user', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):ignore:user', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):ignore:user', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_guild_model_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):ignore:user', grn)
+        if match is None:
+            return None
+        return match.group('guild_model_name')
+
+    @classmethod
+    def get_guild_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):ignore:user', grn)
+        if match is None:
+            return None
+        return match.group('guild_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IgnoreUser]:
+        if data is None:
+            return None
+        return IgnoreUser()\
+            .with_user_id(data.get('userId'))\
+            .with_created_at(data.get('createdAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "createdAt": self.created_at,
+        }
+
+
 class SendMemberRequest(core.Gs2Model):
     user_id: str = None
     target_guild_name: str = None

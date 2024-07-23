@@ -5972,3 +5972,645 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_ignore_users(
+        self,
+        request: DescribeIgnoreUsersRequest,
+        callback: Callable[[AsyncResult[DescribeIgnoreUsersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='ignoreUser',
+            function='describeIgnoreUsers',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeIgnoreUsersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_ignore_users(
+        self,
+        request: DescribeIgnoreUsersRequest,
+    ) -> DescribeIgnoreUsersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_ignore_users(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_ignore_users_async(
+        self,
+        request: DescribeIgnoreUsersRequest,
+    ) -> DescribeIgnoreUsersResult:
+        async_result = []
+        self._describe_ignore_users(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_ignore_users_by_guild_name(
+        self,
+        request: DescribeIgnoreUsersByGuildNameRequest,
+        callback: Callable[[AsyncResult[DescribeIgnoreUsersByGuildNameResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='ignoreUser',
+            function='describeIgnoreUsersByGuildName',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeIgnoreUsersByGuildNameResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_ignore_users_by_guild_name(
+        self,
+        request: DescribeIgnoreUsersByGuildNameRequest,
+    ) -> DescribeIgnoreUsersByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._describe_ignore_users_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_ignore_users_by_guild_name_async(
+        self,
+        request: DescribeIgnoreUsersByGuildNameRequest,
+    ) -> DescribeIgnoreUsersByGuildNameResult:
+        async_result = []
+        self._describe_ignore_users_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_ignore_user(
+        self,
+        request: GetIgnoreUserRequest,
+        callback: Callable[[AsyncResult[GetIgnoreUserResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='ignoreUser',
+            function='getIgnoreUser',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetIgnoreUserResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_ignore_user(
+        self,
+        request: GetIgnoreUserRequest,
+    ) -> GetIgnoreUserResult:
+        async_result = []
+        with timeout(30):
+            self._get_ignore_user(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_ignore_user_async(
+        self,
+        request: GetIgnoreUserRequest,
+    ) -> GetIgnoreUserResult:
+        async_result = []
+        self._get_ignore_user(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_ignore_user_by_guild_name(
+        self,
+        request: GetIgnoreUserByGuildNameRequest,
+        callback: Callable[[AsyncResult[GetIgnoreUserByGuildNameResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='ignoreUser',
+            function='getIgnoreUserByGuildName',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetIgnoreUserByGuildNameResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_ignore_user_by_guild_name(
+        self,
+        request: GetIgnoreUserByGuildNameRequest,
+    ) -> GetIgnoreUserByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._get_ignore_user_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_ignore_user_by_guild_name_async(
+        self,
+        request: GetIgnoreUserByGuildNameRequest,
+    ) -> GetIgnoreUserByGuildNameResult:
+        async_result = []
+        self._get_ignore_user_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _add_ignore_user(
+        self,
+        request: AddIgnoreUserRequest,
+        callback: Callable[[AsyncResult[AddIgnoreUserResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='ignoreUser',
+            function='addIgnoreUser',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AddIgnoreUserResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def add_ignore_user(
+        self,
+        request: AddIgnoreUserRequest,
+    ) -> AddIgnoreUserResult:
+        async_result = []
+        with timeout(30):
+            self._add_ignore_user(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def add_ignore_user_async(
+        self,
+        request: AddIgnoreUserRequest,
+    ) -> AddIgnoreUserResult:
+        async_result = []
+        self._add_ignore_user(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _add_ignore_user_by_guild_name(
+        self,
+        request: AddIgnoreUserByGuildNameRequest,
+        callback: Callable[[AsyncResult[AddIgnoreUserByGuildNameResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='ignoreUser',
+            function='addIgnoreUserByGuildName',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AddIgnoreUserByGuildNameResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def add_ignore_user_by_guild_name(
+        self,
+        request: AddIgnoreUserByGuildNameRequest,
+    ) -> AddIgnoreUserByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._add_ignore_user_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def add_ignore_user_by_guild_name_async(
+        self,
+        request: AddIgnoreUserByGuildNameRequest,
+    ) -> AddIgnoreUserByGuildNameResult:
+        async_result = []
+        self._add_ignore_user_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_ignore_user(
+        self,
+        request: DeleteIgnoreUserRequest,
+        callback: Callable[[AsyncResult[DeleteIgnoreUserResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='ignoreUser',
+            function='deleteIgnoreUser',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteIgnoreUserResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_ignore_user(
+        self,
+        request: DeleteIgnoreUserRequest,
+    ) -> DeleteIgnoreUserResult:
+        async_result = []
+        with timeout(30):
+            self._delete_ignore_user(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_ignore_user_async(
+        self,
+        request: DeleteIgnoreUserRequest,
+    ) -> DeleteIgnoreUserResult:
+        async_result = []
+        self._delete_ignore_user(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_ignore_user_by_guild_name(
+        self,
+        request: DeleteIgnoreUserByGuildNameRequest,
+        callback: Callable[[AsyncResult[DeleteIgnoreUserByGuildNameResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='ignoreUser',
+            function='deleteIgnoreUserByGuildName',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteIgnoreUserByGuildNameResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_ignore_user_by_guild_name(
+        self,
+        request: DeleteIgnoreUserByGuildNameRequest,
+    ) -> DeleteIgnoreUserByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._delete_ignore_user_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_ignore_user_by_guild_name_async(
+        self,
+        request: DeleteIgnoreUserByGuildNameRequest,
+    ) -> DeleteIgnoreUserByGuildNameResult:
+        async_result = []
+        self._delete_ignore_user_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

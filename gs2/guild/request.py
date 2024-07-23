@@ -4818,3 +4818,514 @@ class DeleteRequestByUserIdRequest(core.Gs2Request):
             "targetGuildName": self.target_guild_name,
             "timeOffsetToken": self.time_offset_token,
         }
+
+
+class DescribeIgnoreUsersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeIgnoreUsersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> DescribeIgnoreUsersRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeIgnoreUsersRequest:
+        self.access_token = access_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeIgnoreUsersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeIgnoreUsersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeIgnoreUsersRequest]:
+        if data is None:
+            return None
+        return DescribeIgnoreUsersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeIgnoreUsersByGuildNameRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeIgnoreUsersByGuildNameRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> DescribeIgnoreUsersByGuildNameRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> DescribeIgnoreUsersByGuildNameRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeIgnoreUsersByGuildNameRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeIgnoreUsersByGuildNameRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeIgnoreUsersByGuildNameRequest]:
+        if data is None:
+            return None
+        return DescribeIgnoreUsersByGuildNameRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetIgnoreUserRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+    user_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetIgnoreUserRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> GetIgnoreUserRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetIgnoreUserRequest:
+        self.access_token = access_token
+        return self
+
+    def with_user_id(self, user_id: str) -> GetIgnoreUserRequest:
+        self.user_id = user_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetIgnoreUserRequest]:
+        if data is None:
+            return None
+        return GetIgnoreUserRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+            "userId": self.user_id,
+        }
+
+
+class GetIgnoreUserByGuildNameRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetIgnoreUserByGuildNameRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> GetIgnoreUserByGuildNameRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> GetIgnoreUserByGuildNameRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetIgnoreUserByGuildNameRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetIgnoreUserByGuildNameRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetIgnoreUserByGuildNameRequest]:
+        if data is None:
+            return None
+        return GetIgnoreUserByGuildNameRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class AddIgnoreUserRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AddIgnoreUserRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> AddIgnoreUserRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> AddIgnoreUserRequest:
+        self.access_token = access_token
+        return self
+
+    def with_user_id(self, user_id: str) -> AddIgnoreUserRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddIgnoreUserRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddIgnoreUserRequest]:
+        if data is None:
+            return None
+        return AddIgnoreUserRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+            "userId": self.user_id,
+        }
+
+
+class AddIgnoreUserByGuildNameRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AddIgnoreUserByGuildNameRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> AddIgnoreUserByGuildNameRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> AddIgnoreUserByGuildNameRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AddIgnoreUserByGuildNameRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> AddIgnoreUserByGuildNameRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddIgnoreUserByGuildNameRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddIgnoreUserByGuildNameRequest]:
+        if data is None:
+            return None
+        return AddIgnoreUserByGuildNameRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class DeleteIgnoreUserRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+    user_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteIgnoreUserRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> DeleteIgnoreUserRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DeleteIgnoreUserRequest:
+        self.access_token = access_token
+        return self
+
+    def with_user_id(self, user_id: str) -> DeleteIgnoreUserRequest:
+        self.user_id = user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteIgnoreUserRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteIgnoreUserRequest]:
+        if data is None:
+            return None
+        return DeleteIgnoreUserRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_user_id(data.get('userId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+            "userId": self.user_id,
+        }
+
+
+class DeleteIgnoreUserByGuildNameRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteIgnoreUserByGuildNameRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> DeleteIgnoreUserByGuildNameRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> DeleteIgnoreUserByGuildNameRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DeleteIgnoreUserByGuildNameRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DeleteIgnoreUserByGuildNameRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteIgnoreUserByGuildNameRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteIgnoreUserByGuildNameRequest]:
+        if data is None:
+            return None
+        return DeleteIgnoreUserByGuildNameRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }

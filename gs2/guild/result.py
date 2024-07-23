@@ -2709,3 +2709,315 @@ class DeleteRequestByUserIdResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
         }
+
+
+class DescribeIgnoreUsersResult(core.Gs2Result):
+    items: List[IgnoreUser] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[IgnoreUser]) -> DescribeIgnoreUsersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeIgnoreUsersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeIgnoreUsersResult]:
+        if data is None:
+            return None
+        return DescribeIgnoreUsersResult()\
+            .with_items([
+                IgnoreUser.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeIgnoreUsersByGuildNameResult(core.Gs2Result):
+    items: List[IgnoreUser] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[IgnoreUser]) -> DescribeIgnoreUsersByGuildNameResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeIgnoreUsersByGuildNameResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeIgnoreUsersByGuildNameResult]:
+        if data is None:
+            return None
+        return DescribeIgnoreUsersByGuildNameResult()\
+            .with_items([
+                IgnoreUser.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetIgnoreUserResult(core.Gs2Result):
+    item: IgnoreUser = None
+
+    def with_item(self, item: IgnoreUser) -> GetIgnoreUserResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetIgnoreUserResult]:
+        if data is None:
+            return None
+        return GetIgnoreUserResult()\
+            .with_item(IgnoreUser.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetIgnoreUserByGuildNameResult(core.Gs2Result):
+    item: IgnoreUser = None
+
+    def with_item(self, item: IgnoreUser) -> GetIgnoreUserByGuildNameResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetIgnoreUserByGuildNameResult]:
+        if data is None:
+            return None
+        return GetIgnoreUserByGuildNameResult()\
+            .with_item(IgnoreUser.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class AddIgnoreUserResult(core.Gs2Result):
+    item: IgnoreUser = None
+    guild: Guild = None
+
+    def with_item(self, item: IgnoreUser) -> AddIgnoreUserResult:
+        self.item = item
+        return self
+
+    def with_guild(self, guild: Guild) -> AddIgnoreUserResult:
+        self.guild = guild
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddIgnoreUserResult]:
+        if data is None:
+            return None
+        return AddIgnoreUserResult()\
+            .with_item(IgnoreUser.from_dict(data.get('item')))\
+            .with_guild(Guild.from_dict(data.get('guild')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "guild": self.guild.to_dict() if self.guild else None,
+        }
+
+
+class AddIgnoreUserByGuildNameResult(core.Gs2Result):
+    item: IgnoreUser = None
+    guild: Guild = None
+
+    def with_item(self, item: IgnoreUser) -> AddIgnoreUserByGuildNameResult:
+        self.item = item
+        return self
+
+    def with_guild(self, guild: Guild) -> AddIgnoreUserByGuildNameResult:
+        self.guild = guild
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddIgnoreUserByGuildNameResult]:
+        if data is None:
+            return None
+        return AddIgnoreUserByGuildNameResult()\
+            .with_item(IgnoreUser.from_dict(data.get('item')))\
+            .with_guild(Guild.from_dict(data.get('guild')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "guild": self.guild.to_dict() if self.guild else None,
+        }
+
+
+class DeleteIgnoreUserResult(core.Gs2Result):
+    item: IgnoreUser = None
+
+    def with_item(self, item: IgnoreUser) -> DeleteIgnoreUserResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteIgnoreUserResult]:
+        if data is None:
+            return None
+        return DeleteIgnoreUserResult()\
+            .with_item(IgnoreUser.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteIgnoreUserByGuildNameResult(core.Gs2Result):
+    item: IgnoreUser = None
+
+    def with_item(self, item: IgnoreUser) -> DeleteIgnoreUserByGuildNameResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteIgnoreUserByGuildNameResult]:
+        if data is None:
+            return None
+        return DeleteIgnoreUserByGuildNameResult()\
+            .with_item(IgnoreUser.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }

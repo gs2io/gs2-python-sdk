@@ -1331,6 +1331,221 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _enable_mfa(
+        self,
+        request: EnableMfaRequest,
+        callback: Callable[[AsyncResult[EnableMfaResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='identifier',
+            region=self.session.region,
+        ) + "/user/{userName}/mfa".format(
+            userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=EnableMfaResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def enable_mfa(
+        self,
+        request: EnableMfaRequest,
+    ) -> EnableMfaResult:
+        async_result = []
+        with timeout(30):
+            self._enable_mfa(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def enable_mfa_async(
+        self,
+        request: EnableMfaRequest,
+    ) -> EnableMfaResult:
+        async_result = []
+        self._enable_mfa(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _challenge_mfa(
+        self,
+        request: ChallengeMfaRequest,
+        callback: Callable[[AsyncResult[ChallengeMfaResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='identifier',
+            region=self.session.region,
+        ) + "/user/{userName}/mfa/challenge".format(
+            userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.passcode is not None:
+            body["passcode"] = request.passcode
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ChallengeMfaResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def challenge_mfa(
+        self,
+        request: ChallengeMfaRequest,
+    ) -> ChallengeMfaResult:
+        async_result = []
+        with timeout(30):
+            self._challenge_mfa(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def challenge_mfa_async(
+        self,
+        request: ChallengeMfaRequest,
+    ) -> ChallengeMfaResult:
+        async_result = []
+        self._challenge_mfa(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _disable_mfa(
+        self,
+        request: DisableMfaRequest,
+        callback: Callable[[AsyncResult[DisableMfaResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='identifier',
+            region=self.session.region,
+        ) + "/user/{userName}/mfa".format(
+            userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DisableMfaResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def disable_mfa(
+        self,
+        request: DisableMfaRequest,
+    ) -> DisableMfaResult:
+        async_result = []
+        with timeout(30):
+            self._disable_mfa(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def disable_mfa_async(
+        self,
+        request: DisableMfaRequest,
+    ) -> DisableMfaResult:
+        async_result = []
+        self._disable_mfa(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_password(
         self,
         request: DeletePasswordRequest,
@@ -1710,6 +1925,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
             body["userName"] = request.user_name
         if request.password is not None:
             body["password"] = request.password
+        if request.otp is not None:
+            body["otp"] = request.otp
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
