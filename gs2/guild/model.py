@@ -671,6 +671,114 @@ class CurrentGuildMaster(core.Gs2Model):
         }
 
 
+class LastGuildMasterActivity(core.Gs2Model):
+    user_id: str = None
+    updated_at: int = None
+
+    def with_user_id(self, user_id: str) -> LastGuildMasterActivity:
+        self.user_id = user_id
+        return self
+
+    def with_updated_at(self, updated_at: int) -> LastGuildMasterActivity:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        guild_model_name,
+        guild_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:guild:{namespaceName}:guild:{guildModelName}:{guildName}:lastActivity:master'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            guildModelName=guild_model_name,
+            guildName=guild_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):lastActivity:master', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):lastActivity:master', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):lastActivity:master', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_guild_model_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):lastActivity:master', grn)
+        if match is None:
+            return None
+        return match.group('guild_model_name')
+
+    @classmethod
+    def get_guild_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):lastActivity:master', grn)
+        if match is None:
+            return None
+        return match.group('guild_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[LastGuildMasterActivity]:
+        if data is None:
+            return None
+        return LastGuildMasterActivity()\
+            .with_user_id(data.get('userId'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "updatedAt": self.updated_at,
+        }
+
+
 class JoinedGuild(core.Gs2Model):
     joined_guild_id: str = None
     guild_model_name: str = None
@@ -1334,6 +1442,7 @@ class GuildModel(core.Gs2Model):
     metadata: str = None
     default_maximum_member_count: int = None
     maximum_member_count: int = None
+    inactivity_period_days: int = None
     roles: List[RoleModel] = None
     guild_master_role: str = None
     guild_member_default_role: str = None
@@ -1357,6 +1466,10 @@ class GuildModel(core.Gs2Model):
 
     def with_maximum_member_count(self, maximum_member_count: int) -> GuildModel:
         self.maximum_member_count = maximum_member_count
+        return self
+
+    def with_inactivity_period_days(self, inactivity_period_days: int) -> GuildModel:
+        self.inactivity_period_days = inactivity_period_days
         return self
 
     def with_roles(self, roles: List[RoleModel]) -> GuildModel:
@@ -1454,6 +1567,7 @@ class GuildModel(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_default_maximum_member_count(data.get('defaultMaximumMemberCount'))\
             .with_maximum_member_count(data.get('maximumMemberCount'))\
+            .with_inactivity_period_days(data.get('inactivityPeriodDays'))\
             .with_roles([
                 RoleModel.from_dict(data.get('roles')[i])
                 for i in range(len(data.get('roles')) if data.get('roles') else 0)
@@ -1469,6 +1583,7 @@ class GuildModel(core.Gs2Model):
             "metadata": self.metadata,
             "defaultMaximumMemberCount": self.default_maximum_member_count,
             "maximumMemberCount": self.maximum_member_count,
+            "inactivityPeriodDays": self.inactivity_period_days,
             "roles": [
                 self.roles[i].to_dict() if self.roles[i] else None
                 for i in range(len(self.roles) if self.roles else 0)
@@ -1486,6 +1601,7 @@ class GuildModelMaster(core.Gs2Model):
     metadata: str = None
     default_maximum_member_count: int = None
     maximum_member_count: int = None
+    inactivity_period_days: int = None
     roles: List[RoleModel] = None
     guild_master_role: str = None
     guild_member_default_role: str = None
@@ -1516,6 +1632,10 @@ class GuildModelMaster(core.Gs2Model):
 
     def with_maximum_member_count(self, maximum_member_count: int) -> GuildModelMaster:
         self.maximum_member_count = maximum_member_count
+        return self
+
+    def with_inactivity_period_days(self, inactivity_period_days: int) -> GuildModelMaster:
+        self.inactivity_period_days = inactivity_period_days
         return self
 
     def with_roles(self, roles: List[RoleModel]) -> GuildModelMaster:
@@ -1626,6 +1746,7 @@ class GuildModelMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_default_maximum_member_count(data.get('defaultMaximumMemberCount'))\
             .with_maximum_member_count(data.get('maximumMemberCount'))\
+            .with_inactivity_period_days(data.get('inactivityPeriodDays'))\
             .with_roles([
                 RoleModel.from_dict(data.get('roles')[i])
                 for i in range(len(data.get('roles')) if data.get('roles') else 0)
@@ -1645,6 +1766,7 @@ class GuildModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "defaultMaximumMemberCount": self.default_maximum_member_count,
             "maximumMemberCount": self.maximum_member_count,
+            "inactivityPeriodDays": self.inactivity_period_days,
             "roles": [
                 self.roles[i].to_dict() if self.roles[i] else None
                 for i in range(len(self.roles) if self.roles else 0)
@@ -1667,6 +1789,10 @@ class Namespace(core.Gs2Model):
     change_member_notification: NotificationSetting = None
     receive_request_notification: NotificationSetting = None
     remove_request_notification: NotificationSetting = None
+    create_guild_script: ScriptSetting = None
+    join_guild_script: ScriptSetting = None
+    leave_guild_script: ScriptSetting = None
+    change_role_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1702,6 +1828,22 @@ class Namespace(core.Gs2Model):
 
     def with_remove_request_notification(self, remove_request_notification: NotificationSetting) -> Namespace:
         self.remove_request_notification = remove_request_notification
+        return self
+
+    def with_create_guild_script(self, create_guild_script: ScriptSetting) -> Namespace:
+        self.create_guild_script = create_guild_script
+        return self
+
+    def with_join_guild_script(self, join_guild_script: ScriptSetting) -> Namespace:
+        self.join_guild_script = join_guild_script
+        return self
+
+    def with_leave_guild_script(self, leave_guild_script: ScriptSetting) -> Namespace:
+        self.leave_guild_script = leave_guild_script
+        return self
+
+    def with_change_role_script(self, change_role_script: ScriptSetting) -> Namespace:
+        self.change_role_script = change_role_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1790,6 +1932,10 @@ class Namespace(core.Gs2Model):
             .with_change_member_notification(NotificationSetting.from_dict(data.get('changeMemberNotification')))\
             .with_receive_request_notification(NotificationSetting.from_dict(data.get('receiveRequestNotification')))\
             .with_remove_request_notification(NotificationSetting.from_dict(data.get('removeRequestNotification')))\
+            .with_create_guild_script(ScriptSetting.from_dict(data.get('createGuildScript')))\
+            .with_join_guild_script(ScriptSetting.from_dict(data.get('joinGuildScript')))\
+            .with_leave_guild_script(ScriptSetting.from_dict(data.get('leaveGuildScript')))\
+            .with_change_role_script(ScriptSetting.from_dict(data.get('changeRoleScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1805,6 +1951,10 @@ class Namespace(core.Gs2Model):
             "changeMemberNotification": self.change_member_notification.to_dict() if self.change_member_notification else None,
             "receiveRequestNotification": self.receive_request_notification.to_dict() if self.receive_request_notification else None,
             "removeRequestNotification": self.remove_request_notification.to_dict() if self.remove_request_notification else None,
+            "createGuildScript": self.create_guild_script.to_dict() if self.create_guild_script else None,
+            "joinGuildScript": self.join_guild_script.to_dict() if self.join_guild_script else None,
+            "leaveGuildScript": self.leave_guild_script.to_dict() if self.leave_guild_script else None,
+            "changeRoleScript": self.change_role_script.to_dict() if self.change_role_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

@@ -70,6 +70,10 @@ class CreateNamespaceRequest(core.Gs2Request):
     change_member_notification: NotificationSetting = None
     receive_request_notification: NotificationSetting = None
     remove_request_notification: NotificationSetting = None
+    create_guild_script: ScriptSetting = None
+    join_guild_script: ScriptSetting = None
+    leave_guild_script: ScriptSetting = None
+    change_role_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -98,6 +102,22 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_remove_request_notification(self, remove_request_notification: NotificationSetting) -> CreateNamespaceRequest:
         self.remove_request_notification = remove_request_notification
+        return self
+
+    def with_create_guild_script(self, create_guild_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.create_guild_script = create_guild_script
+        return self
+
+    def with_join_guild_script(self, join_guild_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.join_guild_script = join_guild_script
+        return self
+
+    def with_leave_guild_script(self, leave_guild_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.leave_guild_script = leave_guild_script
+        return self
+
+    def with_change_role_script(self, change_role_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.change_role_script = change_role_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -130,6 +150,10 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_change_member_notification(NotificationSetting.from_dict(data.get('changeMemberNotification')))\
             .with_receive_request_notification(NotificationSetting.from_dict(data.get('receiveRequestNotification')))\
             .with_remove_request_notification(NotificationSetting.from_dict(data.get('removeRequestNotification')))\
+            .with_create_guild_script(ScriptSetting.from_dict(data.get('createGuildScript')))\
+            .with_join_guild_script(ScriptSetting.from_dict(data.get('joinGuildScript')))\
+            .with_leave_guild_script(ScriptSetting.from_dict(data.get('leaveGuildScript')))\
+            .with_change_role_script(ScriptSetting.from_dict(data.get('changeRoleScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -141,6 +165,10 @@ class CreateNamespaceRequest(core.Gs2Request):
             "changeMemberNotification": self.change_member_notification.to_dict() if self.change_member_notification else None,
             "receiveRequestNotification": self.receive_request_notification.to_dict() if self.receive_request_notification else None,
             "removeRequestNotification": self.remove_request_notification.to_dict() if self.remove_request_notification else None,
+            "createGuildScript": self.create_guild_script.to_dict() if self.create_guild_script else None,
+            "joinGuildScript": self.join_guild_script.to_dict() if self.join_guild_script else None,
+            "leaveGuildScript": self.leave_guild_script.to_dict() if self.leave_guild_script else None,
+            "changeRoleScript": self.change_role_script.to_dict() if self.change_role_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -227,6 +255,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
     change_member_notification: NotificationSetting = None
     receive_request_notification: NotificationSetting = None
     remove_request_notification: NotificationSetting = None
+    create_guild_script: ScriptSetting = None
+    join_guild_script: ScriptSetting = None
+    leave_guild_script: ScriptSetting = None
+    change_role_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -255,6 +287,22 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_remove_request_notification(self, remove_request_notification: NotificationSetting) -> UpdateNamespaceRequest:
         self.remove_request_notification = remove_request_notification
+        return self
+
+    def with_create_guild_script(self, create_guild_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.create_guild_script = create_guild_script
+        return self
+
+    def with_join_guild_script(self, join_guild_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.join_guild_script = join_guild_script
+        return self
+
+    def with_leave_guild_script(self, leave_guild_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.leave_guild_script = leave_guild_script
+        return self
+
+    def with_change_role_script(self, change_role_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.change_role_script = change_role_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -287,6 +335,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_change_member_notification(NotificationSetting.from_dict(data.get('changeMemberNotification')))\
             .with_receive_request_notification(NotificationSetting.from_dict(data.get('receiveRequestNotification')))\
             .with_remove_request_notification(NotificationSetting.from_dict(data.get('removeRequestNotification')))\
+            .with_create_guild_script(ScriptSetting.from_dict(data.get('createGuildScript')))\
+            .with_join_guild_script(ScriptSetting.from_dict(data.get('joinGuildScript')))\
+            .with_leave_guild_script(ScriptSetting.from_dict(data.get('leaveGuildScript')))\
+            .with_change_role_script(ScriptSetting.from_dict(data.get('changeRoleScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -298,6 +350,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "changeMemberNotification": self.change_member_notification.to_dict() if self.change_member_notification else None,
             "receiveRequestNotification": self.receive_request_notification.to_dict() if self.receive_request_notification else None,
             "removeRequestNotification": self.remove_request_notification.to_dict() if self.remove_request_notification else None,
+            "createGuildScript": self.create_guild_script.to_dict() if self.create_guild_script else None,
+            "joinGuildScript": self.join_guild_script.to_dict() if self.join_guild_script else None,
+            "leaveGuildScript": self.leave_guild_script.to_dict() if self.leave_guild_script else None,
+            "changeRoleScript": self.change_role_script.to_dict() if self.change_role_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -712,6 +768,7 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
     metadata: str = None
     default_maximum_member_count: int = None
     maximum_member_count: int = None
+    inactivity_period_days: int = None
     roles: List[RoleModel] = None
     guild_master_role: str = None
     guild_member_default_role: str = None
@@ -739,6 +796,10 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
 
     def with_maximum_member_count(self, maximum_member_count: int) -> CreateGuildModelMasterRequest:
         self.maximum_member_count = maximum_member_count
+        return self
+
+    def with_inactivity_period_days(self, inactivity_period_days: int) -> CreateGuildModelMasterRequest:
+        self.inactivity_period_days = inactivity_period_days
         return self
 
     def with_roles(self, roles: List[RoleModel]) -> CreateGuildModelMasterRequest:
@@ -782,6 +843,7 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_default_maximum_member_count(data.get('defaultMaximumMemberCount'))\
             .with_maximum_member_count(data.get('maximumMemberCount'))\
+            .with_inactivity_period_days(data.get('inactivityPeriodDays'))\
             .with_roles([
                 RoleModel.from_dict(data.get('roles')[i])
                 for i in range(len(data.get('roles')) if data.get('roles') else 0)
@@ -798,6 +860,7 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "defaultMaximumMemberCount": self.default_maximum_member_count,
             "maximumMemberCount": self.maximum_member_count,
+            "inactivityPeriodDays": self.inactivity_period_days,
             "roles": [
                 self.roles[i].to_dict() if self.roles[i] else None
                 for i in range(len(self.roles) if self.roles else 0)
@@ -860,6 +923,7 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
     metadata: str = None
     default_maximum_member_count: int = None
     maximum_member_count: int = None
+    inactivity_period_days: int = None
     roles: List[RoleModel] = None
     guild_master_role: str = None
     guild_member_default_role: str = None
@@ -887,6 +951,10 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
 
     def with_maximum_member_count(self, maximum_member_count: int) -> UpdateGuildModelMasterRequest:
         self.maximum_member_count = maximum_member_count
+        return self
+
+    def with_inactivity_period_days(self, inactivity_period_days: int) -> UpdateGuildModelMasterRequest:
+        self.inactivity_period_days = inactivity_period_days
         return self
 
     def with_roles(self, roles: List[RoleModel]) -> UpdateGuildModelMasterRequest:
@@ -930,6 +998,7 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_default_maximum_member_count(data.get('defaultMaximumMemberCount'))\
             .with_maximum_member_count(data.get('maximumMemberCount'))\
+            .with_inactivity_period_days(data.get('inactivityPeriodDays'))\
             .with_roles([
                 RoleModel.from_dict(data.get('roles')[i])
                 for i in range(len(data.get('roles')) if data.get('roles') else 0)
@@ -946,6 +1015,7 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "defaultMaximumMemberCount": self.default_maximum_member_count,
             "maximumMemberCount": self.maximum_member_count,
+            "inactivityPeriodDays": self.inactivity_period_days,
             "roles": [
                 self.roles[i].to_dict() if self.roles[i] else None
                 for i in range(len(self.roles) if self.roles else 0)
@@ -3616,6 +3686,216 @@ class WithdrawalByUserIdRequest(core.Gs2Request):
             "guildModelName": self.guild_model_name,
             "guildName": self.guild_name,
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class GetLastGuildMasterActivityRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetLastGuildMasterActivityRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> GetLastGuildMasterActivityRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetLastGuildMasterActivityRequest:
+        self.access_token = access_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetLastGuildMasterActivityRequest]:
+        if data is None:
+            return None
+        return GetLastGuildMasterActivityRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+        }
+
+
+class GetLastGuildMasterActivityByGuildNameRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetLastGuildMasterActivityByGuildNameRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> GetLastGuildMasterActivityByGuildNameRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> GetLastGuildMasterActivityByGuildNameRequest:
+        self.guild_name = guild_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetLastGuildMasterActivityByGuildNameRequest]:
+        if data is None:
+            return None
+        return GetLastGuildMasterActivityByGuildNameRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+        }
+
+
+class PromoteSeniorMemberRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PromoteSeniorMemberRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> PromoteSeniorMemberRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> PromoteSeniorMemberRequest:
+        self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PromoteSeniorMemberRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PromoteSeniorMemberRequest]:
+        if data is None:
+            return None
+        return PromoteSeniorMemberRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+        }
+
+
+class PromoteSeniorMemberByGuildNameRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PromoteSeniorMemberByGuildNameRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> PromoteSeniorMemberByGuildNameRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> PromoteSeniorMemberByGuildNameRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> PromoteSeniorMemberByGuildNameRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PromoteSeniorMemberByGuildNameRequest]:
+        if data is None:
+            return None
+        return PromoteSeniorMemberByGuildNameRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
         }
 
 

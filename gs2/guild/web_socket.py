@@ -125,6 +125,14 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["receiveRequestNotification"] = request.receive_request_notification.to_dict()
         if request.remove_request_notification is not None:
             body["removeRequestNotification"] = request.remove_request_notification.to_dict()
+        if request.create_guild_script is not None:
+            body["createGuildScript"] = request.create_guild_script.to_dict()
+        if request.join_guild_script is not None:
+            body["joinGuildScript"] = request.join_guild_script.to_dict()
+        if request.leave_guild_script is not None:
+            body["leaveGuildScript"] = request.leave_guild_script.to_dict()
+        if request.change_role_script is not None:
+            body["changeRoleScript"] = request.change_role_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -352,6 +360,14 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["receiveRequestNotification"] = request.receive_request_notification.to_dict()
         if request.remove_request_notification is not None:
             body["removeRequestNotification"] = request.remove_request_notification.to_dict()
+        if request.create_guild_script is not None:
+            body["createGuildScript"] = request.create_guild_script.to_dict()
+        if request.join_guild_script is not None:
+            body["joinGuildScript"] = request.join_guild_script.to_dict()
+        if request.leave_guild_script is not None:
+            body["leaveGuildScript"] = request.leave_guild_script.to_dict()
+        if request.change_role_script is not None:
+            body["changeRoleScript"] = request.change_role_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -1096,6 +1112,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["defaultMaximumMemberCount"] = request.default_maximum_member_count
         if request.maximum_member_count is not None:
             body["maximumMemberCount"] = request.maximum_member_count
+        if request.inactivity_period_days is not None:
+            body["inactivityPeriodDays"] = request.inactivity_period_days
         if request.roles is not None:
             body["roles"] = [
                 item.to_dict()
@@ -1261,6 +1279,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["defaultMaximumMemberCount"] = request.default_maximum_member_count
         if request.maximum_member_count is not None:
             body["maximumMemberCount"] = request.maximum_member_count
+        if request.inactivity_period_days is not None:
+            body["inactivityPeriodDays"] = request.inactivity_period_days
         if request.roles is not None:
             body["roles"] = [
                 item.to_dict()
@@ -4378,6 +4398,314 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> WithdrawalByUserIdResult:
         async_result = []
         self._withdrawal_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_last_guild_master_activity(
+        self,
+        request: GetLastGuildMasterActivityRequest,
+        callback: Callable[[AsyncResult[GetLastGuildMasterActivityResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='lastGuildMasterActivity',
+            function='getLastGuildMasterActivity',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetLastGuildMasterActivityResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_last_guild_master_activity(
+        self,
+        request: GetLastGuildMasterActivityRequest,
+    ) -> GetLastGuildMasterActivityResult:
+        async_result = []
+        with timeout(30):
+            self._get_last_guild_master_activity(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_last_guild_master_activity_async(
+        self,
+        request: GetLastGuildMasterActivityRequest,
+    ) -> GetLastGuildMasterActivityResult:
+        async_result = []
+        self._get_last_guild_master_activity(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_last_guild_master_activity_by_guild_name(
+        self,
+        request: GetLastGuildMasterActivityByGuildNameRequest,
+        callback: Callable[[AsyncResult[GetLastGuildMasterActivityByGuildNameResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='lastGuildMasterActivity',
+            function='getLastGuildMasterActivityByGuildName',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetLastGuildMasterActivityByGuildNameResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_last_guild_master_activity_by_guild_name(
+        self,
+        request: GetLastGuildMasterActivityByGuildNameRequest,
+    ) -> GetLastGuildMasterActivityByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._get_last_guild_master_activity_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_last_guild_master_activity_by_guild_name_async(
+        self,
+        request: GetLastGuildMasterActivityByGuildNameRequest,
+    ) -> GetLastGuildMasterActivityByGuildNameResult:
+        async_result = []
+        self._get_last_guild_master_activity_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _promote_senior_member(
+        self,
+        request: PromoteSeniorMemberRequest,
+        callback: Callable[[AsyncResult[PromoteSeniorMemberResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='lastGuildMasterActivity',
+            function='promoteSeniorMember',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PromoteSeniorMemberResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def promote_senior_member(
+        self,
+        request: PromoteSeniorMemberRequest,
+    ) -> PromoteSeniorMemberResult:
+        async_result = []
+        with timeout(30):
+            self._promote_senior_member(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def promote_senior_member_async(
+        self,
+        request: PromoteSeniorMemberRequest,
+    ) -> PromoteSeniorMemberResult:
+        async_result = []
+        self._promote_senior_member(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _promote_senior_member_by_guild_name(
+        self,
+        request: PromoteSeniorMemberByGuildNameRequest,
+        callback: Callable[[AsyncResult[PromoteSeniorMemberByGuildNameResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='lastGuildMasterActivity',
+            function='promoteSeniorMemberByGuildName',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PromoteSeniorMemberByGuildNameResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def promote_senior_member_by_guild_name(
+        self,
+        request: PromoteSeniorMemberByGuildNameRequest,
+    ) -> PromoteSeniorMemberByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._promote_senior_member_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def promote_senior_member_by_guild_name_async(
+        self,
+        request: PromoteSeniorMemberByGuildNameRequest,
+    ) -> PromoteSeniorMemberByGuildNameResult:
+        async_result = []
+        self._promote_senior_member_by_guild_name(
             request,
             lambda result: async_result.append(result),
         )

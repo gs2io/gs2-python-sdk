@@ -1951,6 +1951,170 @@ class WithdrawalByUserIdResult(core.Gs2Result):
         }
 
 
+class GetLastGuildMasterActivityResult(core.Gs2Result):
+    item: LastGuildMasterActivity = None
+    guild: Guild = None
+
+    def with_item(self, item: LastGuildMasterActivity) -> GetLastGuildMasterActivityResult:
+        self.item = item
+        return self
+
+    def with_guild(self, guild: Guild) -> GetLastGuildMasterActivityResult:
+        self.guild = guild
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetLastGuildMasterActivityResult]:
+        if data is None:
+            return None
+        return GetLastGuildMasterActivityResult()\
+            .with_item(LastGuildMasterActivity.from_dict(data.get('item')))\
+            .with_guild(Guild.from_dict(data.get('guild')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "guild": self.guild.to_dict() if self.guild else None,
+        }
+
+
+class GetLastGuildMasterActivityByGuildNameResult(core.Gs2Result):
+    item: LastGuildMasterActivity = None
+    guild: Guild = None
+
+    def with_item(self, item: LastGuildMasterActivity) -> GetLastGuildMasterActivityByGuildNameResult:
+        self.item = item
+        return self
+
+    def with_guild(self, guild: Guild) -> GetLastGuildMasterActivityByGuildNameResult:
+        self.guild = guild
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetLastGuildMasterActivityByGuildNameResult]:
+        if data is None:
+            return None
+        return GetLastGuildMasterActivityByGuildNameResult()\
+            .with_item(LastGuildMasterActivity.from_dict(data.get('item')))\
+            .with_guild(Guild.from_dict(data.get('guild')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "guild": self.guild.to_dict() if self.guild else None,
+        }
+
+
+class PromoteSeniorMemberResult(core.Gs2Result):
+    item: LastGuildMasterActivity = None
+    guild: Guild = None
+
+    def with_item(self, item: LastGuildMasterActivity) -> PromoteSeniorMemberResult:
+        self.item = item
+        return self
+
+    def with_guild(self, guild: Guild) -> PromoteSeniorMemberResult:
+        self.guild = guild
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PromoteSeniorMemberResult]:
+        if data is None:
+            return None
+        return PromoteSeniorMemberResult()\
+            .with_item(LastGuildMasterActivity.from_dict(data.get('item')))\
+            .with_guild(Guild.from_dict(data.get('guild')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "guild": self.guild.to_dict() if self.guild else None,
+        }
+
+
+class PromoteSeniorMemberByGuildNameResult(core.Gs2Result):
+    item: LastGuildMasterActivity = None
+    guild: Guild = None
+
+    def with_item(self, item: LastGuildMasterActivity) -> PromoteSeniorMemberByGuildNameResult:
+        self.item = item
+        return self
+
+    def with_guild(self, guild: Guild) -> PromoteSeniorMemberByGuildNameResult:
+        self.guild = guild
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PromoteSeniorMemberByGuildNameResult]:
+        if data is None:
+            return None
+        return PromoteSeniorMemberByGuildNameResult()\
+            .with_item(LastGuildMasterActivity.from_dict(data.get('item')))\
+            .with_guild(Guild.from_dict(data.get('guild')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "guild": self.guild.to_dict() if self.guild else None,
+        }
+
+
 class ExportMasterResult(core.Gs2Result):
     item: CurrentGuildMaster = None
 
