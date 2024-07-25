@@ -2311,6 +2311,8 @@ class Gs2ScheduleRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.is_in_schedule is not None:
+            query_strings["isInSchedule"] = request.is_in_schedule
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2386,6 +2388,8 @@ class Gs2ScheduleRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.is_in_schedule is not None:
+            query_strings["isInSchedule"] = request.is_in_schedule
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
