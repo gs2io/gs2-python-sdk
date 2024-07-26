@@ -716,6 +716,54 @@ class DistributeWithoutOverflowProcessResult(core.Gs2Result):
         }
 
 
+class RunVerifyTaskResult(core.Gs2Result):
+    context_stack: str = None
+    status_code: int = None
+    result: str = None
+
+    def with_context_stack(self, context_stack: str) -> RunVerifyTaskResult:
+        self.context_stack = context_stack
+        return self
+
+    def with_status_code(self, status_code: int) -> RunVerifyTaskResult:
+        self.status_code = status_code
+        return self
+
+    def with_result(self, result: str) -> RunVerifyTaskResult:
+        self.result = result
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RunVerifyTaskResult]:
+        if data is None:
+            return None
+        return RunVerifyTaskResult()\
+            .with_context_stack(data.get('contextStack'))\
+            .with_status_code(data.get('statusCode'))\
+            .with_result(data.get('result'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "contextStack": self.context_stack,
+            "statusCode": self.status_code,
+            "result": self.result,
+        }
+
+
 class RunStampTaskResult(core.Gs2Result):
     context_stack: str = None
     status_code: int = None
@@ -806,10 +854,20 @@ class RunStampSheetResult(core.Gs2Result):
 
 
 class RunStampSheetExpressResult(core.Gs2Result):
+    verify_task_result_codes: List[int] = None
+    verify_task_results: List[str] = None
     task_result_codes: List[int] = None
     task_results: List[str] = None
     sheet_result_code: int = None
     sheet_result: str = None
+
+    def with_verify_task_result_codes(self, verify_task_result_codes: List[int]) -> RunStampSheetExpressResult:
+        self.verify_task_result_codes = verify_task_result_codes
+        return self
+
+    def with_verify_task_results(self, verify_task_results: List[str]) -> RunStampSheetExpressResult:
+        self.verify_task_results = verify_task_results
+        return self
 
     def with_task_result_codes(self, task_result_codes: List[int]) -> RunStampSheetExpressResult:
         self.task_result_codes = task_result_codes
@@ -846,6 +904,14 @@ class RunStampSheetExpressResult(core.Gs2Result):
         if data is None:
             return None
         return RunStampSheetExpressResult()\
+            .with_verify_task_result_codes([
+                data.get('verifyTaskResultCodes')[i]
+                for i in range(len(data.get('verifyTaskResultCodes')) if data.get('verifyTaskResultCodes') else 0)
+            ])\
+            .with_verify_task_results([
+                data.get('verifyTaskResults')[i]
+                for i in range(len(data.get('verifyTaskResults')) if data.get('verifyTaskResults') else 0)
+            ])\
             .with_task_result_codes([
                 data.get('taskResultCodes')[i]
                 for i in range(len(data.get('taskResultCodes')) if data.get('taskResultCodes') else 0)
@@ -859,6 +925,14 @@ class RunStampSheetExpressResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "verifyTaskResultCodes": [
+                self.verify_task_result_codes[i]
+                for i in range(len(self.verify_task_result_codes) if self.verify_task_result_codes else 0)
+            ],
+            "verifyTaskResults": [
+                self.verify_task_results[i]
+                for i in range(len(self.verify_task_results) if self.verify_task_results else 0)
+            ],
             "taskResultCodes": [
                 self.task_result_codes[i]
                 for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
@@ -869,6 +943,54 @@ class RunStampSheetExpressResult(core.Gs2Result):
             ],
             "sheetResultCode": self.sheet_result_code,
             "sheetResult": self.sheet_result,
+        }
+
+
+class RunVerifyTaskWithoutNamespaceResult(core.Gs2Result):
+    context_stack: str = None
+    status_code: int = None
+    result: str = None
+
+    def with_context_stack(self, context_stack: str) -> RunVerifyTaskWithoutNamespaceResult:
+        self.context_stack = context_stack
+        return self
+
+    def with_status_code(self, status_code: int) -> RunVerifyTaskWithoutNamespaceResult:
+        self.status_code = status_code
+        return self
+
+    def with_result(self, result: str) -> RunVerifyTaskWithoutNamespaceResult:
+        self.result = result
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RunVerifyTaskWithoutNamespaceResult]:
+        if data is None:
+            return None
+        return RunVerifyTaskWithoutNamespaceResult()\
+            .with_context_stack(data.get('contextStack'))\
+            .with_status_code(data.get('statusCode'))\
+            .with_result(data.get('result'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "contextStack": self.context_stack,
+            "statusCode": self.status_code,
+            "result": self.result,
         }
 
 
@@ -962,10 +1084,20 @@ class RunStampSheetWithoutNamespaceResult(core.Gs2Result):
 
 
 class RunStampSheetExpressWithoutNamespaceResult(core.Gs2Result):
+    verify_task_result_codes: List[int] = None
+    verify_task_results: List[str] = None
     task_result_codes: List[int] = None
     task_results: List[str] = None
     sheet_result_code: int = None
     sheet_result: str = None
+
+    def with_verify_task_result_codes(self, verify_task_result_codes: List[int]) -> RunStampSheetExpressWithoutNamespaceResult:
+        self.verify_task_result_codes = verify_task_result_codes
+        return self
+
+    def with_verify_task_results(self, verify_task_results: List[str]) -> RunStampSheetExpressWithoutNamespaceResult:
+        self.verify_task_results = verify_task_results
+        return self
 
     def with_task_result_codes(self, task_result_codes: List[int]) -> RunStampSheetExpressWithoutNamespaceResult:
         self.task_result_codes = task_result_codes
@@ -1002,6 +1134,14 @@ class RunStampSheetExpressWithoutNamespaceResult(core.Gs2Result):
         if data is None:
             return None
         return RunStampSheetExpressWithoutNamespaceResult()\
+            .with_verify_task_result_codes([
+                data.get('verifyTaskResultCodes')[i]
+                for i in range(len(data.get('verifyTaskResultCodes')) if data.get('verifyTaskResultCodes') else 0)
+            ])\
+            .with_verify_task_results([
+                data.get('verifyTaskResults')[i]
+                for i in range(len(data.get('verifyTaskResults')) if data.get('verifyTaskResults') else 0)
+            ])\
             .with_task_result_codes([
                 data.get('taskResultCodes')[i]
                 for i in range(len(data.get('taskResultCodes')) if data.get('taskResultCodes') else 0)
@@ -1015,6 +1155,14 @@ class RunStampSheetExpressWithoutNamespaceResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "verifyTaskResultCodes": [
+                self.verify_task_result_codes[i]
+                for i in range(len(self.verify_task_result_codes) if self.verify_task_result_codes else 0)
+            ],
+            "verifyTaskResults": [
+                self.verify_task_results[i]
+                for i in range(len(self.verify_task_results) if self.verify_task_results else 0)
+            ],
             "taskResultCodes": [
                 self.task_result_codes[i]
                 for i in range(len(self.task_result_codes) if self.task_result_codes else 0)

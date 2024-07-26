@@ -937,6 +937,56 @@ class DistributeWithoutOverflowProcessRequest(core.Gs2Request):
         }
 
 
+class RunVerifyTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    verify_task: str = None
+    key_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RunVerifyTaskRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_verify_task(self, verify_task: str) -> RunVerifyTaskRequest:
+        self.verify_task = verify_task
+        return self
+
+    def with_key_id(self, key_id: str) -> RunVerifyTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RunVerifyTaskRequest]:
+        if data is None:
+            return None
+        return RunVerifyTaskRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_verify_task(data.get('verifyTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "verifyTask": self.verify_task,
+            "keyId": self.key_id,
+        }
+
+
 class RunStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1083,6 +1133,49 @@ class RunStampSheetExpressRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class RunVerifyTaskWithoutNamespaceRequest(core.Gs2Request):
+
+    context_stack: str = None
+    verify_task: str = None
+    key_id: str = None
+
+    def with_verify_task(self, verify_task: str) -> RunVerifyTaskWithoutNamespaceRequest:
+        self.verify_task = verify_task
+        return self
+
+    def with_key_id(self, key_id: str) -> RunVerifyTaskWithoutNamespaceRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RunVerifyTaskWithoutNamespaceRequest]:
+        if data is None:
+            return None
+        return RunVerifyTaskWithoutNamespaceRequest()\
+            .with_verify_task(data.get('verifyTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "verifyTask": self.verify_task,
             "keyId": self.key_id,
         }
 

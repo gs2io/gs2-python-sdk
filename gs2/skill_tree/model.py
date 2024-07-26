@@ -280,6 +280,47 @@ class AcquireAction(core.Gs2Model):
         }
 
 
+class VerifyAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> VerifyAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> VerifyAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyAction]:
+        if data is None:
+            return None
+        return VerifyAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
 class ConsumeAction(core.Gs2Model):
     action: str = None
     request: str = None
@@ -600,6 +641,7 @@ class NodeModelMaster(core.Gs2Model):
     name: str = None
     description: str = None
     metadata: str = None
+    release_verify_actions: List[VerifyAction] = None
     release_consume_actions: List[ConsumeAction] = None
     restrain_return_rate: float = None
     premise_node_names: List[str] = None
@@ -621,6 +663,10 @@ class NodeModelMaster(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> NodeModelMaster:
         self.metadata = metadata
+        return self
+
+    def with_release_verify_actions(self, release_verify_actions: List[VerifyAction]) -> NodeModelMaster:
+        self.release_verify_actions = release_verify_actions
         return self
 
     def with_release_consume_actions(self, release_consume_actions: List[ConsumeAction]) -> NodeModelMaster:
@@ -725,6 +771,10 @@ class NodeModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_release_verify_actions([
+                VerifyAction.from_dict(data.get('releaseVerifyActions')[i])
+                for i in range(len(data.get('releaseVerifyActions')) if data.get('releaseVerifyActions') else 0)
+            ])\
             .with_release_consume_actions([
                 ConsumeAction.from_dict(data.get('releaseConsumeActions')[i])
                 for i in range(len(data.get('releaseConsumeActions')) if data.get('releaseConsumeActions') else 0)
@@ -744,6 +794,10 @@ class NodeModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
+            "releaseVerifyActions": [
+                self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
+                for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
+            ],
             "releaseConsumeActions": [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
                 for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
@@ -763,6 +817,7 @@ class NodeModel(core.Gs2Model):
     node_model_id: str = None
     name: str = None
     metadata: str = None
+    release_verify_actions: List[VerifyAction] = None
     release_consume_actions: List[ConsumeAction] = None
     return_acquire_actions: List[AcquireAction] = None
     restrain_return_rate: float = None
@@ -778,6 +833,10 @@ class NodeModel(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> NodeModel:
         self.metadata = metadata
+        return self
+
+    def with_release_verify_actions(self, release_verify_actions: List[VerifyAction]) -> NodeModel:
+        self.release_verify_actions = release_verify_actions
         return self
 
     def with_release_consume_actions(self, release_consume_actions: List[ConsumeAction]) -> NodeModel:
@@ -873,6 +932,10 @@ class NodeModel(core.Gs2Model):
             .with_node_model_id(data.get('nodeModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
+            .with_release_verify_actions([
+                VerifyAction.from_dict(data.get('releaseVerifyActions')[i])
+                for i in range(len(data.get('releaseVerifyActions')) if data.get('releaseVerifyActions') else 0)
+            ])\
             .with_release_consume_actions([
                 ConsumeAction.from_dict(data.get('releaseConsumeActions')[i])
                 for i in range(len(data.get('releaseConsumeActions')) if data.get('releaseConsumeActions') else 0)
@@ -892,6 +955,10 @@ class NodeModel(core.Gs2Model):
             "nodeModelId": self.node_model_id,
             "name": self.name,
             "metadata": self.metadata,
+            "releaseVerifyActions": [
+                self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
+                for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
+            ],
             "releaseConsumeActions": [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
                 for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)

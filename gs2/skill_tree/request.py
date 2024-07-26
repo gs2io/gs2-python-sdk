@@ -761,6 +761,7 @@ class CreateNodeModelMasterRequest(core.Gs2Request):
     name: str = None
     description: str = None
     metadata: str = None
+    release_verify_actions: List[VerifyAction] = None
     release_consume_actions: List[ConsumeAction] = None
     restrain_return_rate: float = None
     premise_node_names: List[str] = None
@@ -779,6 +780,10 @@ class CreateNodeModelMasterRequest(core.Gs2Request):
 
     def with_metadata(self, metadata: str) -> CreateNodeModelMasterRequest:
         self.metadata = metadata
+        return self
+
+    def with_release_verify_actions(self, release_verify_actions: List[VerifyAction]) -> CreateNodeModelMasterRequest:
+        self.release_verify_actions = release_verify_actions
         return self
 
     def with_release_consume_actions(self, release_consume_actions: List[ConsumeAction]) -> CreateNodeModelMasterRequest:
@@ -816,6 +821,10 @@ class CreateNodeModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_release_verify_actions([
+                VerifyAction.from_dict(data.get('releaseVerifyActions')[i])
+                for i in range(len(data.get('releaseVerifyActions')) if data.get('releaseVerifyActions') else 0)
+            ])\
             .with_release_consume_actions([
                 ConsumeAction.from_dict(data.get('releaseConsumeActions')[i])
                 for i in range(len(data.get('releaseConsumeActions')) if data.get('releaseConsumeActions') else 0)
@@ -832,6 +841,10 @@ class CreateNodeModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
+            "releaseVerifyActions": [
+                self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
+                for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
+            ],
             "releaseConsumeActions": [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
                 for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
@@ -894,6 +907,7 @@ class UpdateNodeModelMasterRequest(core.Gs2Request):
     node_model_name: str = None
     description: str = None
     metadata: str = None
+    release_verify_actions: List[VerifyAction] = None
     release_consume_actions: List[ConsumeAction] = None
     restrain_return_rate: float = None
     premise_node_names: List[str] = None
@@ -912,6 +926,10 @@ class UpdateNodeModelMasterRequest(core.Gs2Request):
 
     def with_metadata(self, metadata: str) -> UpdateNodeModelMasterRequest:
         self.metadata = metadata
+        return self
+
+    def with_release_verify_actions(self, release_verify_actions: List[VerifyAction]) -> UpdateNodeModelMasterRequest:
+        self.release_verify_actions = release_verify_actions
         return self
 
     def with_release_consume_actions(self, release_consume_actions: List[ConsumeAction]) -> UpdateNodeModelMasterRequest:
@@ -949,6 +967,10 @@ class UpdateNodeModelMasterRequest(core.Gs2Request):
             .with_node_model_name(data.get('nodeModelName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_release_verify_actions([
+                VerifyAction.from_dict(data.get('releaseVerifyActions')[i])
+                for i in range(len(data.get('releaseVerifyActions')) if data.get('releaseVerifyActions') else 0)
+            ])\
             .with_release_consume_actions([
                 ConsumeAction.from_dict(data.get('releaseConsumeActions')[i])
                 for i in range(len(data.get('releaseConsumeActions')) if data.get('releaseConsumeActions') else 0)
@@ -965,6 +987,10 @@ class UpdateNodeModelMasterRequest(core.Gs2Request):
             "nodeModelName": self.node_model_name,
             "description": self.description,
             "metadata": self.metadata,
+            "releaseVerifyActions": [
+                self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
+                for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
+            ],
             "releaseConsumeActions": [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
                 for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)

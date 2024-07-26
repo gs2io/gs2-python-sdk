@@ -1092,6 +1092,11 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
             ]
         if request.missed_receive_relief is not None:
             body["missedReceiveRelief"] = request.missed_receive_relief
+        if request.missed_receive_relief_verify_actions is not None:
+            body["missedReceiveReliefVerifyActions"] = [
+                item.to_dict()
+                for item in request.missed_receive_relief_verify_actions
+            ]
         if request.missed_receive_relief_consume_actions is not None:
             body["missedReceiveReliefConsumeActions"] = [
                 item.to_dict()
@@ -1260,6 +1265,11 @@ class Gs2LoginRewardRestClient(rest.AbstractGs2RestClient):
             ]
         if request.missed_receive_relief is not None:
             body["missedReceiveRelief"] = request.missed_receive_relief
+        if request.missed_receive_relief_verify_actions is not None:
+            body["missedReceiveReliefVerifyActions"] = [
+                item.to_dict()
+                for item in request.missed_receive_relief_verify_actions
+            ]
         if request.missed_receive_relief_consume_actions is not None:
             body["missedReceiveReliefConsumeActions"] = [
                 item.to_dict()

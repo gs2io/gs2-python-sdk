@@ -280,6 +280,47 @@ class Config(core.Gs2Model):
         }
 
 
+class VerifyAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> VerifyAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> VerifyAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyAction]:
+        if data is None:
+            return None
+        return VerifyAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
 class AcquireAction(core.Gs2Model):
     action: str = None
     request: str = None
@@ -568,6 +609,7 @@ class BonusModel(core.Gs2Model):
     repeat: str = None
     rewards: List[Reward] = None
     missed_receive_relief: str = None
+    missed_receive_relief_verify_actions: List[VerifyAction] = None
     missed_receive_relief_consume_actions: List[ConsumeAction] = None
 
     def with_bonus_model_id(self, bonus_model_id: str) -> BonusModel:
@@ -604,6 +646,10 @@ class BonusModel(core.Gs2Model):
 
     def with_missed_receive_relief(self, missed_receive_relief: str) -> BonusModel:
         self.missed_receive_relief = missed_receive_relief
+        return self
+
+    def with_missed_receive_relief_verify_actions(self, missed_receive_relief_verify_actions: List[VerifyAction]) -> BonusModel:
+        self.missed_receive_relief_verify_actions = missed_receive_relief_verify_actions
         return self
 
     def with_missed_receive_relief_consume_actions(self, missed_receive_relief_consume_actions: List[ConsumeAction]) -> BonusModel:
@@ -696,6 +742,10 @@ class BonusModel(core.Gs2Model):
                 for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
             ])\
             .with_missed_receive_relief(data.get('missedReceiveRelief'))\
+            .with_missed_receive_relief_verify_actions([
+                VerifyAction.from_dict(data.get('missedReceiveReliefVerifyActions')[i])
+                for i in range(len(data.get('missedReceiveReliefVerifyActions')) if data.get('missedReceiveReliefVerifyActions') else 0)
+            ])\
             .with_missed_receive_relief_consume_actions([
                 ConsumeAction.from_dict(data.get('missedReceiveReliefConsumeActions')[i])
                 for i in range(len(data.get('missedReceiveReliefConsumeActions')) if data.get('missedReceiveReliefConsumeActions') else 0)
@@ -715,6 +765,10 @@ class BonusModel(core.Gs2Model):
                 for i in range(len(self.rewards) if self.rewards else 0)
             ],
             "missedReceiveRelief": self.missed_receive_relief,
+            "missedReceiveReliefVerifyActions": [
+                self.missed_receive_relief_verify_actions[i].to_dict() if self.missed_receive_relief_verify_actions[i] else None
+                for i in range(len(self.missed_receive_relief_verify_actions) if self.missed_receive_relief_verify_actions else 0)
+            ],
             "missedReceiveReliefConsumeActions": [
                 self.missed_receive_relief_consume_actions[i].to_dict() if self.missed_receive_relief_consume_actions[i] else None
                 for i in range(len(self.missed_receive_relief_consume_actions) if self.missed_receive_relief_consume_actions else 0)
@@ -817,6 +871,7 @@ class BonusModelMaster(core.Gs2Model):
     repeat: str = None
     rewards: List[Reward] = None
     missed_receive_relief: str = None
+    missed_receive_relief_verify_actions: List[VerifyAction] = None
     missed_receive_relief_consume_actions: List[ConsumeAction] = None
     created_at: int = None
     updated_at: int = None
@@ -860,6 +915,10 @@ class BonusModelMaster(core.Gs2Model):
 
     def with_missed_receive_relief(self, missed_receive_relief: str) -> BonusModelMaster:
         self.missed_receive_relief = missed_receive_relief
+        return self
+
+    def with_missed_receive_relief_verify_actions(self, missed_receive_relief_verify_actions: List[VerifyAction]) -> BonusModelMaster:
+        self.missed_receive_relief_verify_actions = missed_receive_relief_verify_actions
         return self
 
     def with_missed_receive_relief_consume_actions(self, missed_receive_relief_consume_actions: List[ConsumeAction]) -> BonusModelMaster:
@@ -965,6 +1024,10 @@ class BonusModelMaster(core.Gs2Model):
                 for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
             ])\
             .with_missed_receive_relief(data.get('missedReceiveRelief'))\
+            .with_missed_receive_relief_verify_actions([
+                VerifyAction.from_dict(data.get('missedReceiveReliefVerifyActions')[i])
+                for i in range(len(data.get('missedReceiveReliefVerifyActions')) if data.get('missedReceiveReliefVerifyActions') else 0)
+            ])\
             .with_missed_receive_relief_consume_actions([
                 ConsumeAction.from_dict(data.get('missedReceiveReliefConsumeActions')[i])
                 for i in range(len(data.get('missedReceiveReliefConsumeActions')) if data.get('missedReceiveReliefConsumeActions') else 0)
@@ -988,6 +1051,10 @@ class BonusModelMaster(core.Gs2Model):
                 for i in range(len(self.rewards) if self.rewards else 0)
             ],
             "missedReceiveRelief": self.missed_receive_relief,
+            "missedReceiveReliefVerifyActions": [
+                self.missed_receive_relief_verify_actions[i].to_dict() if self.missed_receive_relief_verify_actions[i] else None
+                for i in range(len(self.missed_receive_relief_verify_actions) if self.missed_receive_relief_verify_actions else 0)
+            ],
             "missedReceiveReliefConsumeActions": [
                 self.missed_receive_relief_consume_actions[i].to_dict() if self.missed_receive_relief_consume_actions[i] else None
                 for i in range(len(self.missed_receive_relief_consume_actions) if self.missed_receive_relief_consume_actions else 0)

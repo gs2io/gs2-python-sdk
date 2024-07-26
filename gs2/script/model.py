@@ -186,11 +186,16 @@ class TransactionSetting(core.Gs2Model):
 
 class Transaction(core.Gs2Model):
     transaction_id: str = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
 
     def with_transaction_id(self, transaction_id: str) -> Transaction:
         self.transaction_id = transaction_id
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> Transaction:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> Transaction:
@@ -221,6 +226,10 @@ class Transaction(core.Gs2Model):
             return None
         return Transaction()\
             .with_transaction_id(data.get('transactionId'))\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -233,6 +242,10 @@ class Transaction(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "transactionId": self.transaction_id,
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+            ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
@@ -241,6 +254,47 @@ class Transaction(core.Gs2Model):
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
+        }
+
+
+class VerifyAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> VerifyAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> VerifyAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyAction]:
+        if data is None:
+            return None
+        return VerifyAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
         }
 
 

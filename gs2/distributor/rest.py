@@ -1435,6 +1435,81 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _run_verify_task(
+        self,
+        request: RunVerifyTaskRequest,
+        callback: Callable[[AsyncResult[RunVerifyTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/distribute/stamp/verifyTask/run".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.verify_task is not None:
+            body["verifyTask"] = request.verify_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RunVerifyTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def run_verify_task(
+        self,
+        request: RunVerifyTaskRequest,
+    ) -> RunVerifyTaskResult:
+        async_result = []
+        with timeout(30):
+            self._run_verify_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def run_verify_task_async(
+        self,
+        request: RunVerifyTaskRequest,
+    ) -> RunVerifyTaskResult:
+        async_result = []
+        self._run_verify_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _run_stamp_task(
         self,
         request: RunStampTaskRequest,
@@ -1646,6 +1721,79 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
     ) -> RunStampSheetExpressResult:
         async_result = []
         self._run_stamp_sheet_express(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _run_verify_task_without_namespace(
+        self,
+        request: RunVerifyTaskWithoutNamespaceRequest,
+        callback: Callable[[AsyncResult[RunVerifyTaskWithoutNamespaceResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/stamp/verifyTask/run"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.verify_task is not None:
+            body["verifyTask"] = request.verify_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RunVerifyTaskWithoutNamespaceResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def run_verify_task_without_namespace(
+        self,
+        request: RunVerifyTaskWithoutNamespaceRequest,
+    ) -> RunVerifyTaskWithoutNamespaceResult:
+        async_result = []
+        with timeout(30):
+            self._run_verify_task_without_namespace(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def run_verify_task_without_namespace_async(
+        self,
+        request: RunVerifyTaskWithoutNamespaceRequest,
+    ) -> RunVerifyTaskWithoutNamespaceResult:
+        async_result = []
+        self._run_verify_task_without_namespace(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

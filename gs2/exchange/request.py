@@ -820,6 +820,7 @@ class CreateRateModelMasterRequest(core.Gs2Request):
     timing_type: str = None
     lock_time: int = None
     acquire_actions: List[AcquireAction] = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateRateModelMasterRequest:
@@ -848,6 +849,10 @@ class CreateRateModelMasterRequest(core.Gs2Request):
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> CreateRateModelMasterRequest:
         self.acquire_actions = acquire_actions
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> CreateRateModelMasterRequest:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> CreateRateModelMasterRequest:
@@ -883,6 +888,10 @@ class CreateRateModelMasterRequest(core.Gs2Request):
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
             ])\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -899,6 +908,10 @@ class CreateRateModelMasterRequest(core.Gs2Request):
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
@@ -960,6 +973,7 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
     timing_type: str = None
     lock_time: int = None
     acquire_actions: List[AcquireAction] = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateRateModelMasterRequest:
@@ -988,6 +1002,10 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> UpdateRateModelMasterRequest:
         self.acquire_actions = acquire_actions
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> UpdateRateModelMasterRequest:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> UpdateRateModelMasterRequest:
@@ -1023,6 +1041,10 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
             ])\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -1039,6 +1061,10 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
             "acquireActions": [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+            ],
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None

@@ -999,6 +999,7 @@ class CreateQuestModelMasterRequest(core.Gs2Request):
     contents: List[Contents] = None
     challenge_period_event_id: str = None
     first_complete_acquire_actions: List[AcquireAction] = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     failed_acquire_actions: List[AcquireAction] = None
     premise_quest_names: List[str] = None
@@ -1033,6 +1034,10 @@ class CreateQuestModelMasterRequest(core.Gs2Request):
 
     def with_first_complete_acquire_actions(self, first_complete_acquire_actions: List[AcquireAction]) -> CreateQuestModelMasterRequest:
         self.first_complete_acquire_actions = first_complete_acquire_actions
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> CreateQuestModelMasterRequest:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> CreateQuestModelMasterRequest:
@@ -1080,6 +1085,10 @@ class CreateQuestModelMasterRequest(core.Gs2Request):
                 AcquireAction.from_dict(data.get('firstCompleteAcquireActions')[i])
                 for i in range(len(data.get('firstCompleteAcquireActions')) if data.get('firstCompleteAcquireActions') else 0)
             ])\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -1108,6 +1117,10 @@ class CreateQuestModelMasterRequest(core.Gs2Request):
             "firstCompleteAcquireActions": [
                 self.first_complete_acquire_actions[i].to_dict() if self.first_complete_acquire_actions[i] else None
                 for i in range(len(self.first_complete_acquire_actions) if self.first_complete_acquire_actions else 0)
+            ],
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
@@ -1185,6 +1198,7 @@ class UpdateQuestModelMasterRequest(core.Gs2Request):
     contents: List[Contents] = None
     challenge_period_event_id: str = None
     first_complete_acquire_actions: List[AcquireAction] = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     failed_acquire_actions: List[AcquireAction] = None
     premise_quest_names: List[str] = None
@@ -1219,6 +1233,10 @@ class UpdateQuestModelMasterRequest(core.Gs2Request):
 
     def with_first_complete_acquire_actions(self, first_complete_acquire_actions: List[AcquireAction]) -> UpdateQuestModelMasterRequest:
         self.first_complete_acquire_actions = first_complete_acquire_actions
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> UpdateQuestModelMasterRequest:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> UpdateQuestModelMasterRequest:
@@ -1266,6 +1284,10 @@ class UpdateQuestModelMasterRequest(core.Gs2Request):
                 AcquireAction.from_dict(data.get('firstCompleteAcquireActions')[i])
                 for i in range(len(data.get('firstCompleteAcquireActions')) if data.get('firstCompleteAcquireActions') else 0)
             ])\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -1294,6 +1316,10 @@ class UpdateQuestModelMasterRequest(core.Gs2Request):
             "firstCompleteAcquireActions": [
                 self.first_complete_acquire_actions[i].to_dict() if self.first_complete_acquire_actions[i] else None
                 for i in range(len(self.first_complete_acquire_actions) if self.first_complete_acquire_actions else 0)
+            ],
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None

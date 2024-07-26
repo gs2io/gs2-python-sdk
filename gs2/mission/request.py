@@ -3412,7 +3412,7 @@ class CreateMissionTaskModelMasterRequest(core.Gs2Request):
     description: str = None
     verify_complete_type: str = None
     target_counter: TargetCounterModel = None
-    verify_complete_consume_actions: List[ConsumeAction] = None
+    verify_complete_consume_actions: List[VerifyAction] = None
     complete_acquire_actions: List[AcquireAction] = None
     challenge_period_event_id: str = None
     premise_mission_task_name: str = None
@@ -3448,7 +3448,7 @@ class CreateMissionTaskModelMasterRequest(core.Gs2Request):
         self.target_counter = target_counter
         return self
 
-    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[ConsumeAction]) -> CreateMissionTaskModelMasterRequest:
+    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[VerifyAction]) -> CreateMissionTaskModelMasterRequest:
         self.verify_complete_consume_actions = verify_complete_consume_actions
         return self
 
@@ -3503,7 +3503,7 @@ class CreateMissionTaskModelMasterRequest(core.Gs2Request):
             .with_verify_complete_type(data.get('verifyCompleteType'))\
             .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
             .with_verify_complete_consume_actions([
-                ConsumeAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
+                VerifyAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
                 for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
             ])\
             .with_complete_acquire_actions([
@@ -3601,7 +3601,7 @@ class UpdateMissionTaskModelMasterRequest(core.Gs2Request):
     description: str = None
     verify_complete_type: str = None
     target_counter: TargetCounterModel = None
-    verify_complete_consume_actions: List[ConsumeAction] = None
+    verify_complete_consume_actions: List[VerifyAction] = None
     complete_acquire_actions: List[AcquireAction] = None
     challenge_period_event_id: str = None
     premise_mission_task_name: str = None
@@ -3637,7 +3637,7 @@ class UpdateMissionTaskModelMasterRequest(core.Gs2Request):
         self.target_counter = target_counter
         return self
 
-    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[ConsumeAction]) -> UpdateMissionTaskModelMasterRequest:
+    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[VerifyAction]) -> UpdateMissionTaskModelMasterRequest:
         self.verify_complete_consume_actions = verify_complete_consume_actions
         return self
 
@@ -3692,7 +3692,7 @@ class UpdateMissionTaskModelMasterRequest(core.Gs2Request):
             .with_verify_complete_type(data.get('verifyCompleteType'))\
             .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
             .with_verify_complete_consume_actions([
-                ConsumeAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
+                VerifyAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
                 for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
             ])\
             .with_complete_acquire_actions([

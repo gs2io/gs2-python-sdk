@@ -1228,6 +1228,11 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.release_verify_actions is not None:
+            body["releaseVerifyActions"] = [
+                item.to_dict()
+                for item in request.release_verify_actions
+            ]
         if request.release_consume_actions is not None:
             body["releaseConsumeActions"] = [
                 item.to_dict()
@@ -1390,6 +1395,11 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.release_verify_actions is not None:
+            body["releaseVerifyActions"] = [
+                item.to_dict()
+                for item in request.release_verify_actions
+            ]
         if request.release_consume_actions is not None:
             body["releaseConsumeActions"] = [
                 item.to_dict()

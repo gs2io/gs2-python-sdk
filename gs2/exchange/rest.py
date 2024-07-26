@@ -1249,6 +1249,11 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
                 item.to_dict()
                 for item in request.acquire_actions
             ]
+        if request.verify_actions is not None:
+            body["verifyActions"] = [
+                item.to_dict()
+                for item in request.verify_actions
+            ]
         if request.consume_actions is not None:
             body["consumeActions"] = [
                 item.to_dict()
@@ -1410,6 +1415,11 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
             body["acquireActions"] = [
                 item.to_dict()
                 for item in request.acquire_actions
+            ]
+        if request.verify_actions is not None:
+            body["verifyActions"] = [
+                item.to_dict()
+                for item in request.verify_actions
             ]
         if request.consume_actions is not None:
             body["consumeActions"] = [

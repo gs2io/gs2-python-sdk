@@ -280,6 +280,47 @@ class Config(core.Gs2Model):
         }
 
 
+class VerifyAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> VerifyAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> VerifyAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyAction]:
+        if data is None:
+            return None
+        return VerifyAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
 class ConsumeAction(core.Gs2Model):
     action: str = None
     request: str = None
@@ -472,7 +513,7 @@ class MissionTaskModelMaster(core.Gs2Model):
     description: str = None
     verify_complete_type: str = None
     target_counter: TargetCounterModel = None
-    verify_complete_consume_actions: List[ConsumeAction] = None
+    verify_complete_consume_actions: List[VerifyAction] = None
     complete_acquire_actions: List[AcquireAction] = None
     challenge_period_event_id: str = None
     premise_mission_task_name: str = None
@@ -507,7 +548,7 @@ class MissionTaskModelMaster(core.Gs2Model):
         self.target_counter = target_counter
         return self
 
-    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[ConsumeAction]) -> MissionTaskModelMaster:
+    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[VerifyAction]) -> MissionTaskModelMaster:
         self.verify_complete_consume_actions = verify_complete_consume_actions
         return self
 
@@ -640,7 +681,7 @@ class MissionTaskModelMaster(core.Gs2Model):
             .with_verify_complete_type(data.get('verifyCompleteType'))\
             .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
             .with_verify_complete_consume_actions([
-                ConsumeAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
+                VerifyAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
                 for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
             ])\
             .with_complete_acquire_actions([
@@ -689,7 +730,7 @@ class MissionTaskModel(core.Gs2Model):
     metadata: str = None
     verify_complete_type: str = None
     target_counter: TargetCounterModel = None
-    verify_complete_consume_actions: List[ConsumeAction] = None
+    verify_complete_consume_actions: List[VerifyAction] = None
     complete_acquire_actions: List[AcquireAction] = None
     challenge_period_event_id: str = None
     premise_mission_task_name: str = None
@@ -717,7 +758,7 @@ class MissionTaskModel(core.Gs2Model):
         self.target_counter = target_counter
         return self
 
-    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[ConsumeAction]) -> MissionTaskModel:
+    def with_verify_complete_consume_actions(self, verify_complete_consume_actions: List[VerifyAction]) -> MissionTaskModel:
         self.verify_complete_consume_actions = verify_complete_consume_actions
         return self
 
@@ -837,7 +878,7 @@ class MissionTaskModel(core.Gs2Model):
             .with_verify_complete_type(data.get('verifyCompleteType'))\
             .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
             .with_verify_complete_consume_actions([
-                ConsumeAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
+                VerifyAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
                 for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
             ])\
             .with_complete_acquire_actions([

@@ -696,6 +696,7 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
     name: str = None
     description: str = None
     metadata: str = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
 
@@ -713,6 +714,10 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
 
     def with_metadata(self, metadata: str) -> CreateSalesItemMasterRequest:
         self.metadata = metadata
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> CreateSalesItemMasterRequest:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> CreateSalesItemMasterRequest:
@@ -746,6 +751,10 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -761,6 +770,10 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+            ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
@@ -822,6 +835,7 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
     sales_item_name: str = None
     description: str = None
     metadata: str = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
 
@@ -839,6 +853,10 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
 
     def with_metadata(self, metadata: str) -> UpdateSalesItemMasterRequest:
         self.metadata = metadata
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> UpdateSalesItemMasterRequest:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> UpdateSalesItemMasterRequest:
@@ -872,6 +890,10 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
             .with_sales_item_name(data.get('salesItemName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -887,6 +909,10 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
             "salesItemName": self.sales_item_name,
             "description": self.description,
             "metadata": self.metadata,
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+            ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)

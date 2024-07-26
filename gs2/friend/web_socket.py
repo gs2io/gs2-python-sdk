@@ -135,8 +135,14 @@ class Gs2FriendWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["followNotification"] = request.follow_notification.to_dict()
         if request.receive_request_notification is not None:
             body["receiveRequestNotification"] = request.receive_request_notification.to_dict()
+        if request.cancel_request_notification is not None:
+            body["cancelRequestNotification"] = request.cancel_request_notification.to_dict()
         if request.accept_request_notification is not None:
             body["acceptRequestNotification"] = request.accept_request_notification.to_dict()
+        if request.reject_request_notification is not None:
+            body["rejectRequestNotification"] = request.reject_request_notification.to_dict()
+        if request.delete_friend_notification is not None:
+            body["deleteFriendNotification"] = request.delete_friend_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -374,8 +380,14 @@ class Gs2FriendWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["followNotification"] = request.follow_notification.to_dict()
         if request.receive_request_notification is not None:
             body["receiveRequestNotification"] = request.receive_request_notification.to_dict()
+        if request.cancel_request_notification is not None:
+            body["cancelRequestNotification"] = request.cancel_request_notification.to_dict()
         if request.accept_request_notification is not None:
             body["acceptRequestNotification"] = request.accept_request_notification.to_dict()
+        if request.reject_request_notification is not None:
+            body["rejectRequestNotification"] = request.reject_request_notification.to_dict()
+        if request.delete_friend_notification is not None:
+            body["deleteFriendNotification"] = request.delete_friend_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

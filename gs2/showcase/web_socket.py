@@ -1088,6 +1088,11 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.verify_actions is not None:
+            body["verifyActions"] = [
+                item.to_dict()
+                for item in request.verify_actions
+            ]
         if request.consume_actions is not None:
             body["consumeActions"] = [
                 item.to_dict()
@@ -1248,6 +1253,11 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.verify_actions is not None:
+            body["verifyActions"] = [
+                item.to_dict()
+                for item in request.verify_actions
+            ]
         if request.consume_actions is not None:
             body["consumeActions"] = [
                 item.to_dict()

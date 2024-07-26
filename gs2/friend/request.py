@@ -75,7 +75,10 @@ class CreateNamespaceRequest(core.Gs2Request):
     update_profile_script: ScriptSetting = None
     follow_notification: NotificationSetting = None
     receive_request_notification: NotificationSetting = None
+    cancel_request_notification: NotificationSetting = None
     accept_request_notification: NotificationSetting = None
+    reject_request_notification: NotificationSetting = None
+    delete_friend_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -126,8 +129,20 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.receive_request_notification = receive_request_notification
         return self
 
+    def with_cancel_request_notification(self, cancel_request_notification: NotificationSetting) -> CreateNamespaceRequest:
+        self.cancel_request_notification = cancel_request_notification
+        return self
+
     def with_accept_request_notification(self, accept_request_notification: NotificationSetting) -> CreateNamespaceRequest:
         self.accept_request_notification = accept_request_notification
+        return self
+
+    def with_reject_request_notification(self, reject_request_notification: NotificationSetting) -> CreateNamespaceRequest:
+        self.reject_request_notification = reject_request_notification
+        return self
+
+    def with_delete_friend_notification(self, delete_friend_notification: NotificationSetting) -> CreateNamespaceRequest:
+        self.delete_friend_notification = delete_friend_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -165,7 +180,10 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_update_profile_script(ScriptSetting.from_dict(data.get('updateProfileScript')))\
             .with_follow_notification(NotificationSetting.from_dict(data.get('followNotification')))\
             .with_receive_request_notification(NotificationSetting.from_dict(data.get('receiveRequestNotification')))\
+            .with_cancel_request_notification(NotificationSetting.from_dict(data.get('cancelRequestNotification')))\
             .with_accept_request_notification(NotificationSetting.from_dict(data.get('acceptRequestNotification')))\
+            .with_reject_request_notification(NotificationSetting.from_dict(data.get('rejectRequestNotification')))\
+            .with_delete_friend_notification(NotificationSetting.from_dict(data.get('deleteFriendNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -182,7 +200,10 @@ class CreateNamespaceRequest(core.Gs2Request):
             "updateProfileScript": self.update_profile_script.to_dict() if self.update_profile_script else None,
             "followNotification": self.follow_notification.to_dict() if self.follow_notification else None,
             "receiveRequestNotification": self.receive_request_notification.to_dict() if self.receive_request_notification else None,
+            "cancelRequestNotification": self.cancel_request_notification.to_dict() if self.cancel_request_notification else None,
             "acceptRequestNotification": self.accept_request_notification.to_dict() if self.accept_request_notification else None,
+            "rejectRequestNotification": self.reject_request_notification.to_dict() if self.reject_request_notification else None,
+            "deleteFriendNotification": self.delete_friend_notification.to_dict() if self.delete_friend_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -274,7 +295,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
     update_profile_script: ScriptSetting = None
     follow_notification: NotificationSetting = None
     receive_request_notification: NotificationSetting = None
+    cancel_request_notification: NotificationSetting = None
     accept_request_notification: NotificationSetting = None
+    reject_request_notification: NotificationSetting = None
+    delete_friend_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -325,8 +349,20 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.receive_request_notification = receive_request_notification
         return self
 
+    def with_cancel_request_notification(self, cancel_request_notification: NotificationSetting) -> UpdateNamespaceRequest:
+        self.cancel_request_notification = cancel_request_notification
+        return self
+
     def with_accept_request_notification(self, accept_request_notification: NotificationSetting) -> UpdateNamespaceRequest:
         self.accept_request_notification = accept_request_notification
+        return self
+
+    def with_reject_request_notification(self, reject_request_notification: NotificationSetting) -> UpdateNamespaceRequest:
+        self.reject_request_notification = reject_request_notification
+        return self
+
+    def with_delete_friend_notification(self, delete_friend_notification: NotificationSetting) -> UpdateNamespaceRequest:
+        self.delete_friend_notification = delete_friend_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -364,7 +400,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_update_profile_script(ScriptSetting.from_dict(data.get('updateProfileScript')))\
             .with_follow_notification(NotificationSetting.from_dict(data.get('followNotification')))\
             .with_receive_request_notification(NotificationSetting.from_dict(data.get('receiveRequestNotification')))\
+            .with_cancel_request_notification(NotificationSetting.from_dict(data.get('cancelRequestNotification')))\
             .with_accept_request_notification(NotificationSetting.from_dict(data.get('acceptRequestNotification')))\
+            .with_reject_request_notification(NotificationSetting.from_dict(data.get('rejectRequestNotification')))\
+            .with_delete_friend_notification(NotificationSetting.from_dict(data.get('deleteFriendNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -381,7 +420,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "updateProfileScript": self.update_profile_script.to_dict() if self.update_profile_script else None,
             "followNotification": self.follow_notification.to_dict() if self.follow_notification else None,
             "receiveRequestNotification": self.receive_request_notification.to_dict() if self.receive_request_notification else None,
+            "cancelRequestNotification": self.cancel_request_notification.to_dict() if self.cancel_request_notification else None,
             "acceptRequestNotification": self.accept_request_notification.to_dict() if self.accept_request_notification else None,
+            "rejectRequestNotification": self.reject_request_notification.to_dict() if self.reject_request_notification else None,
+            "deleteFriendNotification": self.delete_friend_notification.to_dict() if self.delete_friend_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

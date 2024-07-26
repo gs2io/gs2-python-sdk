@@ -280,6 +280,47 @@ class Config(core.Gs2Model):
         }
 
 
+class VerifyAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> VerifyAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> VerifyAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyAction]:
+        if data is None:
+            return None
+        return VerifyAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
 class ConsumeAction(core.Gs2Model):
     action: str = None
     request: str = None
@@ -979,6 +1020,7 @@ class RateModelMaster(core.Gs2Model):
     name: str = None
     description: str = None
     metadata: str = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     timing_type: str = None
     lock_time: int = None
@@ -1001,6 +1043,10 @@ class RateModelMaster(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> RateModelMaster:
         self.metadata = metadata
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> RateModelMaster:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> RateModelMaster:
@@ -1109,6 +1155,10 @@ class RateModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -1129,6 +1179,10 @@ class RateModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+            ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
@@ -1149,6 +1203,7 @@ class RateModel(core.Gs2Model):
     rate_model_id: str = None
     name: str = None
     metadata: str = None
+    verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     timing_type: str = None
     lock_time: int = None
@@ -1164,6 +1219,10 @@ class RateModel(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> RateModel:
         self.metadata = metadata
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> RateModel:
+        self.verify_actions = verify_actions
         return self
 
     def with_consume_actions(self, consume_actions: List[ConsumeAction]) -> RateModel:
@@ -1259,6 +1318,10 @@ class RateModel(core.Gs2Model):
             .with_rate_model_id(data.get('rateModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
+            .with_verify_actions([
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+            ])\
             .with_consume_actions([
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
                 for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
@@ -1275,6 +1338,10 @@ class RateModel(core.Gs2Model):
             "rateModelId": self.rate_model_id,
             "name": self.name,
             "metadata": self.metadata,
+            "verifyActions": [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+            ],
             "consumeActions": [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
