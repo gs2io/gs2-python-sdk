@@ -65,10 +65,10 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
-    enable_direct_enhance: bool = None
     transaction_setting: TransactionSetting = None
     enhance_script: ScriptSetting = None
     log_setting: LogSetting = None
+    enable_direct_enhance: bool = None
     queue_namespace_id: str = None
     key_id: str = None
 
@@ -78,10 +78,6 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
-        return self
-
-    def with_enable_direct_enhance(self, enable_direct_enhance: bool) -> CreateNamespaceRequest:
-        self.enable_direct_enhance = enable_direct_enhance
         return self
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
@@ -94,6 +90,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
         self.log_setting = log_setting
+        return self
+
+    def with_enable_direct_enhance(self, enable_direct_enhance: bool) -> CreateNamespaceRequest:
+        self.enable_direct_enhance = enable_direct_enhance
         return self
 
     def with_queue_namespace_id(self, queue_namespace_id: str) -> CreateNamespaceRequest:
@@ -125,10 +125,10 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_enable_direct_enhance(data.get('enableDirectEnhance'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_enhance_script(ScriptSetting.from_dict(data.get('enhanceScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
+            .with_enable_direct_enhance(data.get('enableDirectEnhance'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))
 
@@ -136,10 +136,10 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
-            "enableDirectEnhance": self.enable_direct_enhance,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "enhanceScript": self.enhance_script.to_dict() if self.enhance_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
+            "enableDirectEnhance": self.enable_direct_enhance,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
         }
@@ -222,10 +222,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
-    enable_direct_enhance: bool = None
     transaction_setting: TransactionSetting = None
     enhance_script: ScriptSetting = None
     log_setting: LogSetting = None
+    enable_direct_enhance: bool = None
     queue_namespace_id: str = None
     key_id: str = None
 
@@ -235,10 +235,6 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
-        return self
-
-    def with_enable_direct_enhance(self, enable_direct_enhance: bool) -> UpdateNamespaceRequest:
-        self.enable_direct_enhance = enable_direct_enhance
         return self
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
@@ -251,6 +247,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
         self.log_setting = log_setting
+        return self
+
+    def with_enable_direct_enhance(self, enable_direct_enhance: bool) -> UpdateNamespaceRequest:
+        self.enable_direct_enhance = enable_direct_enhance
         return self
 
     def with_queue_namespace_id(self, queue_namespace_id: str) -> UpdateNamespaceRequest:
@@ -282,10 +282,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
-            .with_enable_direct_enhance(data.get('enableDirectEnhance'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_enhance_script(ScriptSetting.from_dict(data.get('enhanceScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
+            .with_enable_direct_enhance(data.get('enableDirectEnhance'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))
 
@@ -293,10 +293,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
-            "enableDirectEnhance": self.enable_direct_enhance,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "enhanceScript": self.enhance_script.to_dict() if self.enhance_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
+            "enableDirectEnhance": self.enable_direct_enhance,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
         }

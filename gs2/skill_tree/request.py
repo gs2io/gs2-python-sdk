@@ -1290,6 +1290,74 @@ class ReleaseByUserIdRequest(core.Gs2Request):
         }
 
 
+class MarkRestrainRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    property_id: str = None
+    node_model_names: List[str] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> MarkRestrainRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> MarkRestrainRequest:
+        self.access_token = access_token
+        return self
+
+    def with_property_id(self, property_id: str) -> MarkRestrainRequest:
+        self.property_id = property_id
+        return self
+
+    def with_node_model_names(self, node_model_names: List[str]) -> MarkRestrainRequest:
+        self.node_model_names = node_model_names
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> MarkRestrainRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[MarkRestrainRequest]:
+        if data is None:
+            return None
+        return MarkRestrainRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_node_model_names([
+                data.get('nodeModelNames')[i]
+                for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "propertyId": self.property_id,
+            "nodeModelNames": [
+                self.node_model_names[i]
+                for i in range(len(self.node_model_names) if self.node_model_names else 0)
+            ],
+        }
+
+
 class MarkRestrainByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

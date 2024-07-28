@@ -2535,6 +2535,68 @@ class IncreaseMaximumCurrentMaximumMemberCountByGuildNameRequest(core.Gs2Request
         }
 
 
+class DecreaseMaximumCurrentMaximumMemberCountRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+    value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DecreaseMaximumCurrentMaximumMemberCountRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> DecreaseMaximumCurrentMaximumMemberCountRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DecreaseMaximumCurrentMaximumMemberCountRequest:
+        self.access_token = access_token
+        return self
+
+    def with_value(self, value: int) -> DecreaseMaximumCurrentMaximumMemberCountRequest:
+        self.value = value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DecreaseMaximumCurrentMaximumMemberCountRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaximumCurrentMaximumMemberCountRequest]:
+        if data is None:
+            return None
+        return DecreaseMaximumCurrentMaximumMemberCountRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+            "value": self.value,
+        }
+
+
 class DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest(core.Gs2Request):
 
     context_stack: str = None

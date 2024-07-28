@@ -1307,6 +1307,8 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         if request.time_offset_token:
             headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
@@ -1382,6 +1384,8 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         if request.time_offset_token:
             headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
@@ -2052,6 +2056,8 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         if request.access_token:
             headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         _job = rest.NetworkJob(
             url=url,
             method='POST',
@@ -2128,6 +2134,8 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         if request.time_offset_token:
             headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
@@ -2167,6 +2175,478 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
     ) -> SetTransactionDefaultConfigByUserIdResult:
         async_result = []
         self._set_transaction_default_config_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _if_expression_by_user_id(
+        self,
+        request: IfExpressionByUserIdRequest,
+        callback: Callable[[AsyncResult[IfExpressionByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/expression/if".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.condition is not None:
+            body["condition"] = request.condition.to_dict()
+        if request.true_actions is not None:
+            body["trueActions"] = [
+                item.to_dict()
+                for item in request.true_actions
+            ]
+        if request.false_actions is not None:
+            body["falseActions"] = [
+                item.to_dict()
+                for item in request.false_actions
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=IfExpressionByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def if_expression_by_user_id(
+        self,
+        request: IfExpressionByUserIdRequest,
+    ) -> IfExpressionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._if_expression_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def if_expression_by_user_id_async(
+        self,
+        request: IfExpressionByUserIdRequest,
+    ) -> IfExpressionByUserIdResult:
+        async_result = []
+        self._if_expression_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _and_expression_by_user_id(
+        self,
+        request: AndExpressionByUserIdRequest,
+        callback: Callable[[AsyncResult[AndExpressionByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/expression/and".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.actions is not None:
+            body["actions"] = [
+                item.to_dict()
+                for item in request.actions
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AndExpressionByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def and_expression_by_user_id(
+        self,
+        request: AndExpressionByUserIdRequest,
+    ) -> AndExpressionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._and_expression_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def and_expression_by_user_id_async(
+        self,
+        request: AndExpressionByUserIdRequest,
+    ) -> AndExpressionByUserIdResult:
+        async_result = []
+        self._and_expression_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _or_expression_by_user_id(
+        self,
+        request: OrExpressionByUserIdRequest,
+        callback: Callable[[AsyncResult[OrExpressionByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/expression/or".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.actions is not None:
+            body["actions"] = [
+                item.to_dict()
+                for item in request.actions
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=OrExpressionByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def or_expression_by_user_id(
+        self,
+        request: OrExpressionByUserIdRequest,
+    ) -> OrExpressionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._or_expression_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def or_expression_by_user_id_async(
+        self,
+        request: OrExpressionByUserIdRequest,
+    ) -> OrExpressionByUserIdResult:
+        async_result = []
+        self._or_expression_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _if_expression_by_user_by_stamp_task(
+        self,
+        request: IfExpressionByUserByStampTaskRequest,
+        callback: Callable[[AsyncResult[IfExpressionByUserByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/stamp/expression/if"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=IfExpressionByUserByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def if_expression_by_user_by_stamp_task(
+        self,
+        request: IfExpressionByUserByStampTaskRequest,
+    ) -> IfExpressionByUserByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._if_expression_by_user_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def if_expression_by_user_by_stamp_task_async(
+        self,
+        request: IfExpressionByUserByStampTaskRequest,
+    ) -> IfExpressionByUserByStampTaskResult:
+        async_result = []
+        self._if_expression_by_user_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _and_expression_by_user_by_stamp_task(
+        self,
+        request: AndExpressionByUserByStampTaskRequest,
+        callback: Callable[[AsyncResult[AndExpressionByUserByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/stamp/expression/and"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AndExpressionByUserByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def and_expression_by_user_by_stamp_task(
+        self,
+        request: AndExpressionByUserByStampTaskRequest,
+    ) -> AndExpressionByUserByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._and_expression_by_user_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def and_expression_by_user_by_stamp_task_async(
+        self,
+        request: AndExpressionByUserByStampTaskRequest,
+    ) -> AndExpressionByUserByStampTaskResult:
+        async_result = []
+        self._and_expression_by_user_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _or_expression_by_user_by_stamp_task(
+        self,
+        request: OrExpressionByUserByStampTaskRequest,
+        callback: Callable[[AsyncResult[OrExpressionByUserByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/stamp/expression/or"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=OrExpressionByUserByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def or_expression_by_user_by_stamp_task(
+        self,
+        request: OrExpressionByUserByStampTaskRequest,
+    ) -> OrExpressionByUserByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._or_expression_by_user_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def or_expression_by_user_by_stamp_task_async(
+        self,
+        request: OrExpressionByUserByStampTaskRequest,
+    ) -> OrExpressionByUserByStampTaskResult:
+        async_result = []
+        self._or_expression_by_user_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

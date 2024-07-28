@@ -1244,6 +1244,40 @@ class IncreaseMaximumCurrentMaximumMemberCountByGuildNameResult(core.Gs2Result):
         }
 
 
+class DecreaseMaximumCurrentMaximumMemberCountResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> DecreaseMaximumCurrentMaximumMemberCountResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaximumCurrentMaximumMemberCountResult]:
+        if data is None:
+            return None
+        return DecreaseMaximumCurrentMaximumMemberCountResult()\
+            .with_item(Guild.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult(core.Gs2Result):
     item: Guild = None
 

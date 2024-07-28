@@ -602,6 +602,82 @@ class DeleteCompleteByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyCompleteRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    mission_group_name: str = None
+    access_token: str = None
+    verify_type: str = None
+    mission_task_name: str = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyCompleteRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_mission_group_name(self, mission_group_name: str) -> VerifyCompleteRequest:
+        self.mission_group_name = mission_group_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyCompleteRequest:
+        self.access_token = access_token
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyCompleteRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_mission_task_name(self, mission_task_name: str) -> VerifyCompleteRequest:
+        self.mission_task_name = mission_task_name
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyCompleteRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCompleteRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompleteRequest]:
+        if data is None:
+            return None
+        return VerifyCompleteRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_mission_group_name(data.get('missionGroupName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_mission_task_name(data.get('missionTaskName'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "missionGroupName": self.mission_group_name,
+            "accessToken": self.access_token,
+            "verifyType": self.verify_type,
+            "missionTaskName": self.mission_task_name,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
 class VerifyCompleteByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2350,6 +2426,68 @@ class SetCounterByUserIdRequest(core.Gs2Request):
                 for i in range(len(self.values) if self.values else 0)
             ],
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class DecreaseCounterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    counter_name: str = None
+    access_token: str = None
+    value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DecreaseCounterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_counter_name(self, counter_name: str) -> DecreaseCounterRequest:
+        self.counter_name = counter_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DecreaseCounterRequest:
+        self.access_token = access_token
+        return self
+
+    def with_value(self, value: int) -> DecreaseCounterRequest:
+        self.value = value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DecreaseCounterRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseCounterRequest]:
+        if data is None:
+            return None
+        return DecreaseCounterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "counterName": self.counter_name,
+            "accessToken": self.access_token,
+            "value": self.value,
         }
 
 

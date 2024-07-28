@@ -1287,12 +1287,12 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
-    enable_direct_enhance: bool = None
     transaction_setting: TransactionSetting = None
     enhance_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
+    enable_direct_enhance: bool = None
     queue_namespace_id: str = None
     key_id: str = None
     revision: int = None
@@ -1307,10 +1307,6 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
-        return self
-
-    def with_enable_direct_enhance(self, enable_direct_enhance: bool) -> Namespace:
-        self.enable_direct_enhance = enable_direct_enhance
         return self
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
@@ -1331,6 +1327,10 @@ class Namespace(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> Namespace:
         self.updated_at = updated_at
+        return self
+
+    def with_enable_direct_enhance(self, enable_direct_enhance: bool) -> Namespace:
+        self.enable_direct_enhance = enable_direct_enhance
         return self
 
     def with_queue_namespace_id(self, queue_namespace_id: str) -> Namespace:
@@ -1410,12 +1410,12 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_enable_direct_enhance(data.get('enableDirectEnhance'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_enhance_script(ScriptSetting.from_dict(data.get('enhanceScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
+            .with_enable_direct_enhance(data.get('enableDirectEnhance'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_revision(data.get('revision'))
@@ -1425,12 +1425,12 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
-            "enableDirectEnhance": self.enable_direct_enhance,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "enhanceScript": self.enhance_script.to_dict() if self.enhance_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+            "enableDirectEnhance": self.enable_direct_enhance,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
             "revision": self.revision,

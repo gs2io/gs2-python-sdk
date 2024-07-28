@@ -1244,6 +1244,189 @@ class SetTransactionDefaultConfigByUserIdResult(core.Gs2Result):
         }
 
 
+class IfExpressionByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IfExpressionByUserIdResult]:
+        if data is None:
+            return None
+        return IfExpressionByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class AndExpressionByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AndExpressionByUserIdResult]:
+        if data is None:
+            return None
+        return AndExpressionByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class OrExpressionByUserIdResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[OrExpressionByUserIdResult]:
+        if data is None:
+            return None
+        return OrExpressionByUserIdResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class IfExpressionByUserByStampTaskResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> IfExpressionByUserByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IfExpressionByUserByStampTaskResult]:
+        if data is None:
+            return None
+        return IfExpressionByUserByStampTaskResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class AndExpressionByUserByStampTaskResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> AndExpressionByUserByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AndExpressionByUserByStampTaskResult]:
+        if data is None:
+            return None
+        return AndExpressionByUserByStampTaskResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class OrExpressionByUserByStampTaskResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> OrExpressionByUserByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[OrExpressionByUserByStampTaskResult]:
+        if data is None:
+            return None
+        return OrExpressionByUserByStampTaskResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class GetStampSheetResultResult(core.Gs2Result):
     item: StampSheetResult = None
 

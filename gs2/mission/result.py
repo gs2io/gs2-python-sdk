@@ -391,6 +391,33 @@ class DeleteCompleteByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyCompleteResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompleteResult]:
+        if data is None:
+            return None
+        return VerifyCompleteResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class VerifyCompleteByUserIdResult(core.Gs2Result):
 
     def get(self, key, default=None):
@@ -1515,6 +1542,53 @@ class SetCounterByUserIdResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
             "old": self.old.to_dict() if self.old else None,
+            "changedCompletes": [
+                self.changed_completes[i].to_dict() if self.changed_completes[i] else None
+                for i in range(len(self.changed_completes) if self.changed_completes else 0)
+            ],
+        }
+
+
+class DecreaseCounterResult(core.Gs2Result):
+    item: Counter = None
+    changed_completes: List[Complete] = None
+
+    def with_item(self, item: Counter) -> DecreaseCounterResult:
+        self.item = item
+        return self
+
+    def with_changed_completes(self, changed_completes: List[Complete]) -> DecreaseCounterResult:
+        self.changed_completes = changed_completes
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseCounterResult]:
+        if data is None:
+            return None
+        return DecreaseCounterResult()\
+            .with_item(Counter.from_dict(data.get('item')))\
+            .with_changed_completes([
+                Complete.from_dict(data.get('changedCompletes')[i])
+                for i in range(len(data.get('changedCompletes')) if data.get('changedCompletes') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
             "changedCompletes": [
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)

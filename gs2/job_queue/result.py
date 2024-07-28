@@ -675,6 +675,40 @@ class RunByUserIdResult(core.Gs2Result):
         }
 
 
+class DeleteJobResult(core.Gs2Result):
+    item: Job = None
+
+    def with_item(self, item: Job) -> DeleteJobResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteJobResult]:
+        if data is None:
+            return None
+        return DeleteJobResult()\
+            .with_item(Job.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteJobByUserIdResult(core.Gs2Result):
     item: Job = None
 

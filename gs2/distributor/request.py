@@ -831,6 +831,7 @@ class DistributeRequest(core.Gs2Request):
     user_id: str = None
     distribute_resource: DistributeResource = None
     time_offset_token: str = None
+    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DistributeRequest:
         self.namespace_name = namespace_name
@@ -850,6 +851,10 @@ class DistributeRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> DistributeRequest:
         self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DistributeRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -893,6 +898,7 @@ class DistributeWithoutOverflowProcessRequest(core.Gs2Request):
     user_id: str = None
     distribute_resource: DistributeResource = None
     time_offset_token: str = None
+    duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> DistributeWithoutOverflowProcessRequest:
         self.user_id = user_id
@@ -904,6 +910,10 @@ class DistributeWithoutOverflowProcessRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> DistributeWithoutOverflowProcessRequest:
         self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DistributeWithoutOverflowProcessRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1314,6 +1324,7 @@ class SetTransactionDefaultConfigRequest(core.Gs2Request):
     context_stack: str = None
     access_token: str = None
     config: List[Config] = None
+    duplication_avoider: str = None
 
     def with_access_token(self, access_token: str) -> SetTransactionDefaultConfigRequest:
         self.access_token = access_token
@@ -1321,6 +1332,10 @@ class SetTransactionDefaultConfigRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> SetTransactionDefaultConfigRequest:
         self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetTransactionDefaultConfigRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1364,6 +1379,7 @@ class SetTransactionDefaultConfigByUserIdRequest(core.Gs2Request):
     user_id: str = None
     config: List[Config] = None
     time_offset_token: str = None
+    duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> SetTransactionDefaultConfigByUserIdRequest:
         self.user_id = user_id
@@ -1375,6 +1391,10 @@ class SetTransactionDefaultConfigByUserIdRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> SetTransactionDefaultConfigByUserIdRequest:
         self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetTransactionDefaultConfigByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1411,6 +1431,359 @@ class SetTransactionDefaultConfigByUserIdRequest(core.Gs2Request):
                 for i in range(len(self.config) if self.config else 0)
             ],
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class IfExpressionByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    condition: VerifyAction = None
+    true_actions: List[ConsumeAction] = None
+    false_actions: List[ConsumeAction] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> IfExpressionByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> IfExpressionByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_condition(self, condition: VerifyAction) -> IfExpressionByUserIdRequest:
+        self.condition = condition
+        return self
+
+    def with_true_actions(self, true_actions: List[ConsumeAction]) -> IfExpressionByUserIdRequest:
+        self.true_actions = true_actions
+        return self
+
+    def with_false_actions(self, false_actions: List[ConsumeAction]) -> IfExpressionByUserIdRequest:
+        self.false_actions = false_actions
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> IfExpressionByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> IfExpressionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IfExpressionByUserIdRequest]:
+        if data is None:
+            return None
+        return IfExpressionByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_condition(VerifyAction.from_dict(data.get('condition')))\
+            .with_true_actions([
+                ConsumeAction.from_dict(data.get('trueActions')[i])
+                for i in range(len(data.get('trueActions')) if data.get('trueActions') else 0)
+            ])\
+            .with_false_actions([
+                ConsumeAction.from_dict(data.get('falseActions')[i])
+                for i in range(len(data.get('falseActions')) if data.get('falseActions') else 0)
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "condition": self.condition.to_dict() if self.condition else None,
+            "trueActions": [
+                self.true_actions[i].to_dict() if self.true_actions[i] else None
+                for i in range(len(self.true_actions) if self.true_actions else 0)
+            ],
+            "falseActions": [
+                self.false_actions[i].to_dict() if self.false_actions[i] else None
+                for i in range(len(self.false_actions) if self.false_actions else 0)
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class AndExpressionByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    actions: List[VerifyAction] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AndExpressionByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AndExpressionByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_actions(self, actions: List[VerifyAction]) -> AndExpressionByUserIdRequest:
+        self.actions = actions
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> AndExpressionByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AndExpressionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AndExpressionByUserIdRequest]:
+        if data is None:
+            return None
+        return AndExpressionByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_actions([
+                VerifyAction.from_dict(data.get('actions')[i])
+                for i in range(len(data.get('actions')) if data.get('actions') else 0)
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "actions": [
+                self.actions[i].to_dict() if self.actions[i] else None
+                for i in range(len(self.actions) if self.actions else 0)
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class OrExpressionByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    actions: List[VerifyAction] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> OrExpressionByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> OrExpressionByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_actions(self, actions: List[VerifyAction]) -> OrExpressionByUserIdRequest:
+        self.actions = actions
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> OrExpressionByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> OrExpressionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[OrExpressionByUserIdRequest]:
+        if data is None:
+            return None
+        return OrExpressionByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_actions([
+                VerifyAction.from_dict(data.get('actions')[i])
+                for i in range(len(data.get('actions')) if data.get('actions') else 0)
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "actions": [
+                self.actions[i].to_dict() if self.actions[i] else None
+                for i in range(len(self.actions) if self.actions else 0)
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class IfExpressionByUserByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> IfExpressionByUserByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> IfExpressionByUserByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IfExpressionByUserByStampTaskRequest]:
+        if data is None:
+            return None
+        return IfExpressionByUserByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class AndExpressionByUserByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> AndExpressionByUserByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> AndExpressionByUserByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AndExpressionByUserByStampTaskRequest]:
+        if data is None:
+            return None
+        return AndExpressionByUserByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class OrExpressionByUserByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> OrExpressionByUserByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> OrExpressionByUserByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[OrExpressionByUserByStampTaskRequest]:
+        if data is None:
+            return None
+        return OrExpressionByUserByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
         }
 
 

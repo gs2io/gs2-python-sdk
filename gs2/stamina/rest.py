@@ -3672,6 +3672,84 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _decrease_max_value(
+        self,
+        request: DecreaseMaxValueRequest,
+        callback: Callable[[AsyncResult[DecreaseMaxValueResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/stamina/{staminaName}/decrease".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.decrease_value is not None:
+            body["decreaseValue"] = request.decrease_value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DecreaseMaxValueResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def decrease_max_value(
+        self,
+        request: DecreaseMaxValueRequest,
+    ) -> DecreaseMaxValueResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_max_value(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_max_value_async(
+        self,
+        request: DecreaseMaxValueRequest,
+    ) -> DecreaseMaxValueResult:
+        async_result = []
+        self._decrease_max_value(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _decrease_max_value_by_user_id(
         self,
         request: DecreaseMaxValueByUserIdRequest,

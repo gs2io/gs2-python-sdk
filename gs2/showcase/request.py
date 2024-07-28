@@ -2394,6 +2394,75 @@ class DeleteRandomShowcaseMasterRequest(core.Gs2Request):
         }
 
 
+class IncrementPurchaseCountRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    showcase_name: str = None
+    display_item_name: str = None
+    access_token: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> IncrementPurchaseCountRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_showcase_name(self, showcase_name: str) -> IncrementPurchaseCountRequest:
+        self.showcase_name = showcase_name
+        return self
+
+    def with_display_item_name(self, display_item_name: str) -> IncrementPurchaseCountRequest:
+        self.display_item_name = display_item_name
+        return self
+
+    def with_access_token(self, access_token: str) -> IncrementPurchaseCountRequest:
+        self.access_token = access_token
+        return self
+
+    def with_count(self, count: int) -> IncrementPurchaseCountRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> IncrementPurchaseCountRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IncrementPurchaseCountRequest]:
+        if data is None:
+            return None
+        return IncrementPurchaseCountRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_showcase_name(data.get('showcaseName'))\
+            .with_display_item_name(data.get('displayItemName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "showcaseName": self.showcase_name,
+            "displayItemName": self.display_item_name,
+            "accessToken": self.access_token,
+            "count": self.count,
+        }
+
+
 class IncrementPurchaseCountByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

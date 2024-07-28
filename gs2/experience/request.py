@@ -1986,6 +1986,75 @@ class AddExperienceByUserIdRequest(core.Gs2Request):
         }
 
 
+class SubExperienceRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    experience_name: str = None
+    property_id: str = None
+    experience_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SubExperienceRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> SubExperienceRequest:
+        self.access_token = access_token
+        return self
+
+    def with_experience_name(self, experience_name: str) -> SubExperienceRequest:
+        self.experience_name = experience_name
+        return self
+
+    def with_property_id(self, property_id: str) -> SubExperienceRequest:
+        self.property_id = property_id
+        return self
+
+    def with_experience_value(self, experience_value: int) -> SubExperienceRequest:
+        self.experience_value = experience_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SubExperienceRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubExperienceRequest]:
+        if data is None:
+            return None
+        return SubExperienceRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_experience_name(data.get('experienceName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_experience_value(data.get('experienceValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "experienceName": self.experience_name,
+            "propertyId": self.property_id,
+            "experienceValue": self.experience_value,
+        }
+
+
 class SubExperienceByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2211,6 +2280,75 @@ class AddRankCapByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "rankCapValue": self.rank_cap_value,
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class SubRankCapRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    experience_name: str = None
+    property_id: str = None
+    rank_cap_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SubRankCapRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> SubRankCapRequest:
+        self.access_token = access_token
+        return self
+
+    def with_experience_name(self, experience_name: str) -> SubRankCapRequest:
+        self.experience_name = experience_name
+        return self
+
+    def with_property_id(self, property_id: str) -> SubRankCapRequest:
+        self.property_id = property_id
+        return self
+
+    def with_rank_cap_value(self, rank_cap_value: int) -> SubRankCapRequest:
+        self.rank_cap_value = rank_cap_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SubRankCapRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubRankCapRequest]:
+        if data is None:
+            return None
+        return SubRankCapRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_experience_name(data.get('experienceName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_rank_cap_value(data.get('rankCapValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "experienceName": self.experience_name,
+            "propertyId": self.property_id,
+            "rankCapValue": self.rank_cap_value,
         }
 
 

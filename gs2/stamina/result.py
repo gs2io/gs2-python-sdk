@@ -1781,6 +1781,47 @@ class RaiseMaxValueByUserIdResult(core.Gs2Result):
         }
 
 
+class DecreaseMaxValueResult(core.Gs2Result):
+    item: Stamina = None
+    stamina_model: StaminaModel = None
+
+    def with_item(self, item: Stamina) -> DecreaseMaxValueResult:
+        self.item = item
+        return self
+
+    def with_stamina_model(self, stamina_model: StaminaModel) -> DecreaseMaxValueResult:
+        self.stamina_model = stamina_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaxValueResult]:
+        if data is None:
+            return None
+        return DecreaseMaxValueResult()\
+            .with_item(Stamina.from_dict(data.get('item')))\
+            .with_stamina_model(StaminaModel.from_dict(data.get('staminaModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "staminaModel": self.stamina_model.to_dict() if self.stamina_model else None,
+        }
+
+
 class DecreaseMaxValueByUserIdResult(core.Gs2Result):
     item: Stamina = None
     stamina_model: StaminaModel = None

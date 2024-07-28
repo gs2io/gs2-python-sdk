@@ -1799,6 +1799,90 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _mark_restrain(
+        self,
+        request: MarkRestrainRequest,
+        callback: Callable[[AsyncResult[MarkRestrainResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="skillTree",
+            component='status',
+            function='markRestrain',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.node_model_names is not None:
+            body["nodeModelNames"] = [
+                item
+                for item in request.node_model_names
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=MarkRestrainResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def mark_restrain(
+        self,
+        request: MarkRestrainRequest,
+    ) -> MarkRestrainResult:
+        async_result = []
+        with timeout(30):
+            self._mark_restrain(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def mark_restrain_async(
+        self,
+        request: MarkRestrainRequest,
+    ) -> MarkRestrainResult:
+        async_result = []
+        self._mark_restrain(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _mark_restrain_by_user_id(
         self,
         request: MarkRestrainByUserIdRequest,

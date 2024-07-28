@@ -1316,6 +1316,8 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -1391,6 +1393,8 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -2061,6 +2065,8 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["xGs2RequestId"] = request.request_id
         if request.access_token:
             body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -2139,6 +2145,8 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
@@ -2175,6 +2183,478 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> SetTransactionDefaultConfigByUserIdResult:
         async_result = []
         self._set_transaction_default_config_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _if_expression_by_user_id(
+        self,
+        request: IfExpressionByUserIdRequest,
+        callback: Callable[[AsyncResult[IfExpressionByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='distribute',
+            function='ifExpressionByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.condition is not None:
+            body["condition"] = request.condition.to_dict()
+        if request.true_actions is not None:
+            body["trueActions"] = [
+                item.to_dict()
+                for item in request.true_actions
+            ]
+        if request.false_actions is not None:
+            body["falseActions"] = [
+                item.to_dict()
+                for item in request.false_actions
+            ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=IfExpressionByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def if_expression_by_user_id(
+        self,
+        request: IfExpressionByUserIdRequest,
+    ) -> IfExpressionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._if_expression_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def if_expression_by_user_id_async(
+        self,
+        request: IfExpressionByUserIdRequest,
+    ) -> IfExpressionByUserIdResult:
+        async_result = []
+        self._if_expression_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _and_expression_by_user_id(
+        self,
+        request: AndExpressionByUserIdRequest,
+        callback: Callable[[AsyncResult[AndExpressionByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='distribute',
+            function='andExpressionByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.actions is not None:
+            body["actions"] = [
+                item.to_dict()
+                for item in request.actions
+            ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AndExpressionByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def and_expression_by_user_id(
+        self,
+        request: AndExpressionByUserIdRequest,
+    ) -> AndExpressionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._and_expression_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def and_expression_by_user_id_async(
+        self,
+        request: AndExpressionByUserIdRequest,
+    ) -> AndExpressionByUserIdResult:
+        async_result = []
+        self._and_expression_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _or_expression_by_user_id(
+        self,
+        request: OrExpressionByUserIdRequest,
+        callback: Callable[[AsyncResult[OrExpressionByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='distribute',
+            function='orExpressionByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.actions is not None:
+            body["actions"] = [
+                item.to_dict()
+                for item in request.actions
+            ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=OrExpressionByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def or_expression_by_user_id(
+        self,
+        request: OrExpressionByUserIdRequest,
+    ) -> OrExpressionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._or_expression_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def or_expression_by_user_id_async(
+        self,
+        request: OrExpressionByUserIdRequest,
+    ) -> OrExpressionByUserIdResult:
+        async_result = []
+        self._or_expression_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _if_expression_by_user_by_stamp_task(
+        self,
+        request: IfExpressionByUserByStampTaskRequest,
+        callback: Callable[[AsyncResult[IfExpressionByUserByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='distribute',
+            function='ifExpressionByUserByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=IfExpressionByUserByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def if_expression_by_user_by_stamp_task(
+        self,
+        request: IfExpressionByUserByStampTaskRequest,
+    ) -> IfExpressionByUserByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._if_expression_by_user_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def if_expression_by_user_by_stamp_task_async(
+        self,
+        request: IfExpressionByUserByStampTaskRequest,
+    ) -> IfExpressionByUserByStampTaskResult:
+        async_result = []
+        self._if_expression_by_user_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _and_expression_by_user_by_stamp_task(
+        self,
+        request: AndExpressionByUserByStampTaskRequest,
+        callback: Callable[[AsyncResult[AndExpressionByUserByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='distribute',
+            function='andExpressionByUserByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AndExpressionByUserByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def and_expression_by_user_by_stamp_task(
+        self,
+        request: AndExpressionByUserByStampTaskRequest,
+    ) -> AndExpressionByUserByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._and_expression_by_user_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def and_expression_by_user_by_stamp_task_async(
+        self,
+        request: AndExpressionByUserByStampTaskRequest,
+    ) -> AndExpressionByUserByStampTaskResult:
+        async_result = []
+        self._and_expression_by_user_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _or_expression_by_user_by_stamp_task(
+        self,
+        request: OrExpressionByUserByStampTaskRequest,
+        callback: Callable[[AsyncResult[OrExpressionByUserByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='distribute',
+            function='orExpressionByUserByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=OrExpressionByUserByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def or_expression_by_user_by_stamp_task(
+        self,
+        request: OrExpressionByUserByStampTaskRequest,
+    ) -> OrExpressionByUserByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._or_expression_by_user_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def or_expression_by_user_by_stamp_task_async(
+        self,
+        request: OrExpressionByUserByStampTaskRequest,
+    ) -> OrExpressionByUserByStampTaskResult:
+        async_result = []
+        self._or_expression_by_user_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

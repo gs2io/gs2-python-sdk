@@ -1543,6 +1543,67 @@ class VerifyEntryByUserIdRequest(core.Gs2Request):
         }
 
 
+class DeleteEntriesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    entry_model_names: List[str] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteEntriesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DeleteEntriesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_entry_model_names(self, entry_model_names: List[str]) -> DeleteEntriesRequest:
+        self.entry_model_names = entry_model_names
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteEntriesRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteEntriesRequest]:
+        if data is None:
+            return None
+        return DeleteEntriesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_entry_model_names([
+                data.get('entryModelNames')[i]
+                for i in range(len(data.get('entryModelNames')) if data.get('entryModelNames') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "entryModelNames": [
+                self.entry_model_names[i]
+                for i in range(len(self.entry_model_names) if self.entry_model_names else 0)
+            ],
+        }
+
+
 class DeleteEntriesByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

@@ -1364,6 +1364,75 @@ class AddGradeByUserIdRequest(core.Gs2Request):
         }
 
 
+class SubGradeRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    grade_name: str = None
+    property_id: str = None
+    grade_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SubGradeRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> SubGradeRequest:
+        self.access_token = access_token
+        return self
+
+    def with_grade_name(self, grade_name: str) -> SubGradeRequest:
+        self.grade_name = grade_name
+        return self
+
+    def with_property_id(self, property_id: str) -> SubGradeRequest:
+        self.property_id = property_id
+        return self
+
+    def with_grade_value(self, grade_value: int) -> SubGradeRequest:
+        self.grade_value = grade_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SubGradeRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubGradeRequest]:
+        if data is None:
+            return None
+        return SubGradeRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_grade_name(data.get('gradeName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_grade_value(data.get('gradeValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "gradeName": self.grade_name,
+            "propertyId": self.property_id,
+            "gradeValue": self.grade_value,
+        }
+
+
 class SubGradeByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

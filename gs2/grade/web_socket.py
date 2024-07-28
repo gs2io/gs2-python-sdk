@@ -1936,6 +1936,89 @@ class Gs2GradeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _sub_grade(
+        self,
+        request: SubGradeRequest,
+        callback: Callable[[AsyncResult[SubGradeResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="grade",
+            component='status',
+            function='subGrade',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.grade_name is not None:
+            body["gradeName"] = request.grade_name
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.grade_value is not None:
+            body["gradeValue"] = request.grade_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SubGradeResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def sub_grade(
+        self,
+        request: SubGradeRequest,
+    ) -> SubGradeResult:
+        async_result = []
+        with timeout(30):
+            self._sub_grade(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_grade_async(
+        self,
+        request: SubGradeRequest,
+    ) -> SubGradeResult:
+        async_result = []
+        self._sub_grade(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _sub_grade_by_user_id(
         self,
         request: SubGradeByUserIdRequest,

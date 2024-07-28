@@ -2653,6 +2653,68 @@ class RaiseMaxValueByUserIdRequest(core.Gs2Request):
         }
 
 
+class DecreaseMaxValueRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    stamina_name: str = None
+    access_token: str = None
+    decrease_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DecreaseMaxValueRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> DecreaseMaxValueRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DecreaseMaxValueRequest:
+        self.access_token = access_token
+        return self
+
+    def with_decrease_value(self, decrease_value: int) -> DecreaseMaxValueRequest:
+        self.decrease_value = decrease_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DecreaseMaxValueRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaxValueRequest]:
+        if data is None:
+            return None
+        return DecreaseMaxValueRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_decrease_value(data.get('decreaseValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "staminaName": self.stamina_name,
+            "accessToken": self.access_token,
+            "decreaseValue": self.decrease_value,
+        }
+
+
 class DecreaseMaxValueByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

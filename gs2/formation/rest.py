@@ -3243,6 +3243,84 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _sub_mold_capacity(
+        self,
+        request: SubMoldCapacityRequest,
+        callback: Callable[[AsyncResult[SubMoldCapacityResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='formation',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/mold/{moldModelName}/sub".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            moldModelName=request.mold_model_name if request.mold_model_name is not None and request.mold_model_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.capacity is not None:
+            body["capacity"] = request.capacity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SubMoldCapacityResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def sub_mold_capacity(
+        self,
+        request: SubMoldCapacityRequest,
+    ) -> SubMoldCapacityResult:
+        async_result = []
+        with timeout(30):
+            self._sub_mold_capacity(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sub_mold_capacity_async(
+        self,
+        request: SubMoldCapacityRequest,
+    ) -> SubMoldCapacityResult:
+        async_result = []
+        self._sub_mold_capacity(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _sub_mold_capacity_by_user_id(
         self,
         request: SubMoldCapacityByUserIdRequest,

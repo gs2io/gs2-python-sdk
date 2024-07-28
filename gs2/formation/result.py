@@ -1583,6 +1583,47 @@ class AddMoldCapacityByUserIdResult(core.Gs2Result):
         }
 
 
+class SubMoldCapacityResult(core.Gs2Result):
+    item: Mold = None
+    mold_model: MoldModel = None
+
+    def with_item(self, item: Mold) -> SubMoldCapacityResult:
+        self.item = item
+        return self
+
+    def with_mold_model(self, mold_model: MoldModel) -> SubMoldCapacityResult:
+        self.mold_model = mold_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubMoldCapacityResult]:
+        if data is None:
+            return None
+        return SubMoldCapacityResult()\
+            .with_item(Mold.from_dict(data.get('item')))\
+            .with_mold_model(MoldModel.from_dict(data.get('moldModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "moldModel": self.mold_model.to_dict() if self.mold_model else None,
+        }
+
+
 class SubMoldCapacityByUserIdResult(core.Gs2Result):
     item: Mold = None
     mold_model: MoldModel = None

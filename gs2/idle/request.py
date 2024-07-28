@@ -1593,6 +1593,68 @@ class IncreaseMaximumIdleMinutesByUserIdRequest(core.Gs2Request):
         }
 
 
+class DecreaseMaximumIdleMinutesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    category_name: str = None
+    decrease_minutes: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DecreaseMaximumIdleMinutesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DecreaseMaximumIdleMinutesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_category_name(self, category_name: str) -> DecreaseMaximumIdleMinutesRequest:
+        self.category_name = category_name
+        return self
+
+    def with_decrease_minutes(self, decrease_minutes: int) -> DecreaseMaximumIdleMinutesRequest:
+        self.decrease_minutes = decrease_minutes
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DecreaseMaximumIdleMinutesRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DecreaseMaximumIdleMinutesRequest]:
+        if data is None:
+            return None
+        return DecreaseMaximumIdleMinutesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_category_name(data.get('categoryName'))\
+            .with_decrease_minutes(data.get('decreaseMinutes'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "categoryName": self.category_name,
+            "decreaseMinutes": self.decrease_minutes,
+        }
+
+
 class DecreaseMaximumIdleMinutesByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

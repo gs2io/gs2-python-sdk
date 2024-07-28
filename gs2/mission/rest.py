@@ -723,6 +723,85 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_complete(
+        self,
+        request: VerifyCompleteRequest,
+        callback: Callable[[AsyncResult[VerifyCompleteResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/complete/group/{missionGroupName}/task/{missionTaskName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            missionGroupName=request.mission_group_name if request.mission_group_name is not None and request.mission_group_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+            missionTaskName=request.mission_task_name if request.mission_task_name is not None and request.mission_task_name != '' else 'null',
+            multiplyValueSpecifyingQuantity=request.multiply_value_specifying_quantity if request.multiply_value_specifying_quantity is not None and request.multiply_value_specifying_quantity != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyCompleteResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_complete(
+        self,
+        request: VerifyCompleteRequest,
+    ) -> VerifyCompleteResult:
+        async_result = []
+        with timeout(30):
+            self._verify_complete(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_complete_async(
+        self,
+        request: VerifyCompleteRequest,
+    ) -> VerifyCompleteResult:
+        async_result = []
+        self._verify_complete(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _verify_complete_by_user_id(
         self,
         request: VerifyCompleteByUserIdRequest,
@@ -3080,6 +3159,84 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
     ) -> SetCounterByUserIdResult:
         async_result = []
         self._set_counter_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _decrease_counter(
+        self,
+        request: DecreaseCounterRequest,
+        callback: Callable[[AsyncResult[DecreaseCounterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/counter/{counterName}/decrease".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            counterName=request.counter_name if request.counter_name is not None and request.counter_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DecreaseCounterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def decrease_counter(
+        self,
+        request: DecreaseCounterRequest,
+    ) -> DecreaseCounterResult:
+        async_result = []
+        with timeout(30):
+            self._decrease_counter(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def decrease_counter_async(
+        self,
+        request: DecreaseCounterRequest,
+    ) -> DecreaseCounterResult:
+        async_result = []
+        self._decrease_counter(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

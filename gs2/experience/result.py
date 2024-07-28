@@ -1319,6 +1319,40 @@ class AddExperienceByUserIdResult(core.Gs2Result):
         }
 
 
+class SubExperienceResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> SubExperienceResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubExperienceResult]:
+        if data is None:
+            return None
+        return SubExperienceResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class SubExperienceByUserIdResult(core.Gs2Result):
     item: Status = None
 
@@ -1420,6 +1454,40 @@ class AddRankCapByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return AddRankCapByUserIdResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class SubRankCapResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> SubRankCapResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubRankCapResult]:
+        if data is None:
+            return None
+        return SubRankCapResult()\
             .with_item(Status.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
