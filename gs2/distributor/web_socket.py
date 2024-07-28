@@ -2229,6 +2229,8 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.false_actions
             ]
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
@@ -2449,10 +2451,10 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _if_expression_by_user_by_stamp_task(
+    def _if_expression_by_stamp_task(
         self,
-        request: IfExpressionByUserByStampTaskRequest,
-        callback: Callable[[AsyncResult[IfExpressionByUserByStampTaskResult]], None],
+        request: IfExpressionByStampTaskRequest,
+        callback: Callable[[AsyncResult[IfExpressionByStampTaskResult]], None],
     ):
         import uuid
 
@@ -2460,7 +2462,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         body = self._create_metadata(
             service="distributor",
             component='distribute',
-            function='ifExpressionByUserByStampTask',
+            function='ifExpressionByStampTask',
             request_id=request_id,
         )
 
@@ -2477,19 +2479,19 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=IfExpressionByUserByStampTaskResult,
+                result_type=IfExpressionByStampTaskResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def if_expression_by_user_by_stamp_task(
+    def if_expression_by_stamp_task(
         self,
-        request: IfExpressionByUserByStampTaskRequest,
-    ) -> IfExpressionByUserByStampTaskResult:
+        request: IfExpressionByStampTaskRequest,
+    ) -> IfExpressionByStampTaskResult:
         async_result = []
         with timeout(30):
-            self._if_expression_by_user_by_stamp_task(
+            self._if_expression_by_stamp_task(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -2503,12 +2505,12 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def if_expression_by_user_by_stamp_task_async(
+    async def if_expression_by_stamp_task_async(
         self,
-        request: IfExpressionByUserByStampTaskRequest,
-    ) -> IfExpressionByUserByStampTaskResult:
+        request: IfExpressionByStampTaskRequest,
+    ) -> IfExpressionByStampTaskResult:
         async_result = []
-        self._if_expression_by_user_by_stamp_task(
+        self._if_expression_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )
@@ -2522,10 +2524,10 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _and_expression_by_user_by_stamp_task(
+    def _and_expression_by_stamp_task(
         self,
-        request: AndExpressionByUserByStampTaskRequest,
-        callback: Callable[[AsyncResult[AndExpressionByUserByStampTaskResult]], None],
+        request: AndExpressionByStampTaskRequest,
+        callback: Callable[[AsyncResult[AndExpressionByStampTaskResult]], None],
     ):
         import uuid
 
@@ -2533,7 +2535,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         body = self._create_metadata(
             service="distributor",
             component='distribute',
-            function='andExpressionByUserByStampTask',
+            function='andExpressionByStampTask',
             request_id=request_id,
         )
 
@@ -2550,19 +2552,19 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=AndExpressionByUserByStampTaskResult,
+                result_type=AndExpressionByStampTaskResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def and_expression_by_user_by_stamp_task(
+    def and_expression_by_stamp_task(
         self,
-        request: AndExpressionByUserByStampTaskRequest,
-    ) -> AndExpressionByUserByStampTaskResult:
+        request: AndExpressionByStampTaskRequest,
+    ) -> AndExpressionByStampTaskResult:
         async_result = []
         with timeout(30):
-            self._and_expression_by_user_by_stamp_task(
+            self._and_expression_by_stamp_task(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -2576,12 +2578,12 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def and_expression_by_user_by_stamp_task_async(
+    async def and_expression_by_stamp_task_async(
         self,
-        request: AndExpressionByUserByStampTaskRequest,
-    ) -> AndExpressionByUserByStampTaskResult:
+        request: AndExpressionByStampTaskRequest,
+    ) -> AndExpressionByStampTaskResult:
         async_result = []
-        self._and_expression_by_user_by_stamp_task(
+        self._and_expression_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )
@@ -2595,10 +2597,10 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _or_expression_by_user_by_stamp_task(
+    def _or_expression_by_stamp_task(
         self,
-        request: OrExpressionByUserByStampTaskRequest,
-        callback: Callable[[AsyncResult[OrExpressionByUserByStampTaskResult]], None],
+        request: OrExpressionByStampTaskRequest,
+        callback: Callable[[AsyncResult[OrExpressionByStampTaskResult]], None],
     ):
         import uuid
 
@@ -2606,7 +2608,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         body = self._create_metadata(
             service="distributor",
             component='distribute',
-            function='orExpressionByUserByStampTask',
+            function='orExpressionByStampTask',
             request_id=request_id,
         )
 
@@ -2623,19 +2625,19 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         self.session.send(
             web_socket.NetworkJob(
                 request_id=request_id,
-                result_type=OrExpressionByUserByStampTaskResult,
+                result_type=OrExpressionByStampTaskResult,
                 callback=callback,
                 body=body,
             )
         )
 
-    def or_expression_by_user_by_stamp_task(
+    def or_expression_by_stamp_task(
         self,
-        request: OrExpressionByUserByStampTaskRequest,
-    ) -> OrExpressionByUserByStampTaskResult:
+        request: OrExpressionByStampTaskRequest,
+    ) -> OrExpressionByStampTaskResult:
         async_result = []
         with timeout(30):
-            self._or_expression_by_user_by_stamp_task(
+            self._or_expression_by_stamp_task(
                 request,
                 lambda result: async_result.append(result),
             )
@@ -2649,12 +2651,12 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         return async_result[0].result
 
 
-    async def or_expression_by_user_by_stamp_task_async(
+    async def or_expression_by_stamp_task_async(
         self,
-        request: OrExpressionByUserByStampTaskRequest,
-    ) -> OrExpressionByUserByStampTaskResult:
+        request: OrExpressionByStampTaskRequest,
+    ) -> OrExpressionByStampTaskResult:
         async_result = []
-        self._or_expression_by_user_by_stamp_task(
+        self._or_expression_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

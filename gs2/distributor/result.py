@@ -1325,10 +1325,10 @@ class OrExpressionByUserIdResult(core.Gs2Result):
         }
 
 
-class IfExpressionByUserByStampTaskResult(core.Gs2Result):
+class IfExpressionByStampTaskResult(core.Gs2Result):
     new_context_stack: str = None
 
-    def with_new_context_stack(self, new_context_stack: str) -> IfExpressionByUserByStampTaskResult:
+    def with_new_context_stack(self, new_context_stack: str) -> IfExpressionByStampTaskResult:
         self.new_context_stack = new_context_stack
         return self
 
@@ -1347,10 +1347,10 @@ class IfExpressionByUserByStampTaskResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[IfExpressionByUserByStampTaskResult]:
+    ) -> Optional[IfExpressionByStampTaskResult]:
         if data is None:
             return None
-        return IfExpressionByUserByStampTaskResult()\
+        return IfExpressionByStampTaskResult()\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1359,10 +1359,10 @@ class IfExpressionByUserByStampTaskResult(core.Gs2Result):
         }
 
 
-class AndExpressionByUserByStampTaskResult(core.Gs2Result):
+class AndExpressionByStampTaskResult(core.Gs2Result):
     new_context_stack: str = None
 
-    def with_new_context_stack(self, new_context_stack: str) -> AndExpressionByUserByStampTaskResult:
+    def with_new_context_stack(self, new_context_stack: str) -> AndExpressionByStampTaskResult:
         self.new_context_stack = new_context_stack
         return self
 
@@ -1381,10 +1381,10 @@ class AndExpressionByUserByStampTaskResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[AndExpressionByUserByStampTaskResult]:
+    ) -> Optional[AndExpressionByStampTaskResult]:
         if data is None:
             return None
-        return AndExpressionByUserByStampTaskResult()\
+        return AndExpressionByStampTaskResult()\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1393,10 +1393,10 @@ class AndExpressionByUserByStampTaskResult(core.Gs2Result):
         }
 
 
-class OrExpressionByUserByStampTaskResult(core.Gs2Result):
+class OrExpressionByStampTaskResult(core.Gs2Result):
     new_context_stack: str = None
 
-    def with_new_context_stack(self, new_context_stack: str) -> OrExpressionByUserByStampTaskResult:
+    def with_new_context_stack(self, new_context_stack: str) -> OrExpressionByStampTaskResult:
         self.new_context_stack = new_context_stack
         return self
 
@@ -1415,10 +1415,10 @@ class OrExpressionByUserByStampTaskResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[OrExpressionByUserByStampTaskResult]:
+    ) -> Optional[OrExpressionByStampTaskResult]:
         if data is None:
             return None
-        return OrExpressionByUserByStampTaskResult()\
+        return OrExpressionByStampTaskResult()\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:

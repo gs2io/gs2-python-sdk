@@ -1442,6 +1442,7 @@ class IfExpressionByUserIdRequest(core.Gs2Request):
     condition: VerifyAction = None
     true_actions: List[ConsumeAction] = None
     false_actions: List[ConsumeAction] = None
+    multiply_value_specifying_quantity: bool = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1463,6 +1464,10 @@ class IfExpressionByUserIdRequest(core.Gs2Request):
 
     def with_false_actions(self, false_actions: List[ConsumeAction]) -> IfExpressionByUserIdRequest:
         self.false_actions = false_actions
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> IfExpressionByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> IfExpressionByUserIdRequest:
@@ -1503,6 +1508,7 @@ class IfExpressionByUserIdRequest(core.Gs2Request):
                 ConsumeAction.from_dict(data.get('falseActions')[i])
                 for i in range(len(data.get('falseActions')) if data.get('falseActions') else 0)
             ])\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1518,6 +1524,7 @@ class IfExpressionByUserIdRequest(core.Gs2Request):
                 self.false_actions[i].to_dict() if self.false_actions[i] else None
                 for i in range(len(self.false_actions) if self.false_actions else 0)
             ],
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -1658,17 +1665,17 @@ class OrExpressionByUserIdRequest(core.Gs2Request):
         }
 
 
-class IfExpressionByUserByStampTaskRequest(core.Gs2Request):
+class IfExpressionByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
     stamp_task: str = None
     key_id: str = None
 
-    def with_stamp_task(self, stamp_task: str) -> IfExpressionByUserByStampTaskRequest:
+    def with_stamp_task(self, stamp_task: str) -> IfExpressionByStampTaskRequest:
         self.stamp_task = stamp_task
         return self
 
-    def with_key_id(self, key_id: str) -> IfExpressionByUserByStampTaskRequest:
+    def with_key_id(self, key_id: str) -> IfExpressionByStampTaskRequest:
         self.key_id = key_id
         return self
 
@@ -1687,10 +1694,10 @@ class IfExpressionByUserByStampTaskRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[IfExpressionByUserByStampTaskRequest]:
+    ) -> Optional[IfExpressionByStampTaskRequest]:
         if data is None:
             return None
-        return IfExpressionByUserByStampTaskRequest()\
+        return IfExpressionByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 
@@ -1701,17 +1708,17 @@ class IfExpressionByUserByStampTaskRequest(core.Gs2Request):
         }
 
 
-class AndExpressionByUserByStampTaskRequest(core.Gs2Request):
+class AndExpressionByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
     stamp_task: str = None
     key_id: str = None
 
-    def with_stamp_task(self, stamp_task: str) -> AndExpressionByUserByStampTaskRequest:
+    def with_stamp_task(self, stamp_task: str) -> AndExpressionByStampTaskRequest:
         self.stamp_task = stamp_task
         return self
 
-    def with_key_id(self, key_id: str) -> AndExpressionByUserByStampTaskRequest:
+    def with_key_id(self, key_id: str) -> AndExpressionByStampTaskRequest:
         self.key_id = key_id
         return self
 
@@ -1730,10 +1737,10 @@ class AndExpressionByUserByStampTaskRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[AndExpressionByUserByStampTaskRequest]:
+    ) -> Optional[AndExpressionByStampTaskRequest]:
         if data is None:
             return None
-        return AndExpressionByUserByStampTaskRequest()\
+        return AndExpressionByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 
@@ -1744,17 +1751,17 @@ class AndExpressionByUserByStampTaskRequest(core.Gs2Request):
         }
 
 
-class OrExpressionByUserByStampTaskRequest(core.Gs2Request):
+class OrExpressionByStampTaskRequest(core.Gs2Request):
 
     context_stack: str = None
     stamp_task: str = None
     key_id: str = None
 
-    def with_stamp_task(self, stamp_task: str) -> OrExpressionByUserByStampTaskRequest:
+    def with_stamp_task(self, stamp_task: str) -> OrExpressionByStampTaskRequest:
         self.stamp_task = stamp_task
         return self
 
-    def with_key_id(self, key_id: str) -> OrExpressionByUserByStampTaskRequest:
+    def with_key_id(self, key_id: str) -> OrExpressionByStampTaskRequest:
         self.key_id = key_id
         return self
 
@@ -1773,10 +1780,10 @@ class OrExpressionByUserByStampTaskRequest(core.Gs2Request):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[OrExpressionByUserByStampTaskRequest]:
+    ) -> Optional[OrExpressionByStampTaskRequest]:
         if data is None:
             return None
-        return OrExpressionByUserByStampTaskRequest()\
+        return OrExpressionByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 
