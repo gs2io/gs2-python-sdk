@@ -2206,7 +2206,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="distributor",
-            component='distribute',
+            component='expression',
             function='ifExpressionByUserId',
             request_id=request_id,
         )
@@ -2297,7 +2297,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="distributor",
-            component='distribute',
+            component='expression',
             function='andExpressionByUserId',
             request_id=request_id,
         )
@@ -2379,7 +2379,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="distributor",
-            component='distribute',
+            component='expression',
             function='orExpressionByUserId',
             request_id=request_id,
         )
@@ -2461,7 +2461,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="distributor",
-            component='distribute',
+            component='expression',
             function='ifExpressionByStampTask',
             request_id=request_id,
         )
@@ -2534,7 +2534,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="distributor",
-            component='distribute',
+            component='expression',
             function='andExpressionByStampTask',
             request_id=request_id,
         )
@@ -2607,7 +2607,7 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         request_id = str(uuid.uuid4())
         body = self._create_metadata(
             service="distributor",
-            component='distribute',
+            component='expression',
             function='orExpressionByStampTask',
             request_id=request_id,
         )
