@@ -1998,6 +1998,165 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _create_take_over_open_id_connect(
+        self,
+        request: CreateTakeOverOpenIdConnectRequest,
+        callback: Callable[[AsyncResult[CreateTakeOverOpenIdConnectResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/me/takeover/openIdConnect".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.type is not None:
+            body["type"] = request.type
+        if request.id_token is not None:
+            body["idToken"] = request.id_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateTakeOverOpenIdConnectResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_take_over_open_id_connect(
+        self,
+        request: CreateTakeOverOpenIdConnectRequest,
+    ) -> CreateTakeOverOpenIdConnectResult:
+        async_result = []
+        with timeout(30):
+            self._create_take_over_open_id_connect(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_take_over_open_id_connect_async(
+        self,
+        request: CreateTakeOverOpenIdConnectRequest,
+    ) -> CreateTakeOverOpenIdConnectResult:
+        async_result = []
+        self._create_take_over_open_id_connect(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_take_over_open_id_connect_and_by_user_id(
+        self,
+        request: CreateTakeOverOpenIdConnectAndByUserIdRequest,
+        callback: Callable[[AsyncResult[CreateTakeOverOpenIdConnectAndByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/takeover/openIdConnect".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.type is not None:
+            body["type"] = request.type
+        if request.id_token is not None:
+            body["idToken"] = request.id_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateTakeOverOpenIdConnectAndByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_take_over_open_id_connect_and_by_user_id(
+        self,
+        request: CreateTakeOverOpenIdConnectAndByUserIdRequest,
+    ) -> CreateTakeOverOpenIdConnectAndByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._create_take_over_open_id_connect_and_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_take_over_open_id_connect_and_by_user_id_async(
+        self,
+        request: CreateTakeOverOpenIdConnectAndByUserIdRequest,
+    ) -> CreateTakeOverOpenIdConnectAndByUserIdResult:
+        async_result = []
+        self._create_take_over_open_id_connect_and_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_take_over(
         self,
         request: GetTakeOverRequest,
@@ -2600,6 +2759,154 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
     ) -> DoTakeOverResult:
         async_result = []
         self._do_take_over(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _do_take_over_open_id_connect(
+        self,
+        request: DoTakeOverOpenIdConnectRequest,
+        callback: Callable[[AsyncResult[DoTakeOverOpenIdConnectResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/takeover/type/{type}/openIdConnect".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.id_token is not None:
+            body["idToken"] = request.id_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=DoTakeOverOpenIdConnectResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def do_take_over_open_id_connect(
+        self,
+        request: DoTakeOverOpenIdConnectRequest,
+    ) -> DoTakeOverOpenIdConnectResult:
+        async_result = []
+        with timeout(30):
+            self._do_take_over_open_id_connect(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def do_take_over_open_id_connect_async(
+        self,
+        request: DoTakeOverOpenIdConnectRequest,
+    ) -> DoTakeOverOpenIdConnectResult:
+        async_result = []
+        self._do_take_over_open_id_connect(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_authorization_url(
+        self,
+        request: GetAuthorizationUrlRequest,
+        callback: Callable[[AsyncResult[GetAuthorizationUrlResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/type/{type}/authorization/url".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetAuthorizationUrlResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_authorization_url(
+        self,
+        request: GetAuthorizationUrlRequest,
+    ) -> GetAuthorizationUrlResult:
+        async_result = []
+        with timeout(30):
+            self._get_authorization_url(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_authorization_url_async(
+        self,
+        request: GetAuthorizationUrlRequest,
+    ) -> GetAuthorizationUrlResult:
+        async_result = []
+        self._get_authorization_url(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -3598,6 +3905,813 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
     ) -> DeleteDataOwnerByUserIdResult:
         async_result = []
         self._delete_data_owner_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_take_over_type_models(
+        self,
+        request: DescribeTakeOverTypeModelsRequest,
+        callback: Callable[[AsyncResult[DescribeTakeOverTypeModelsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/model".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeTakeOverTypeModelsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_take_over_type_models(
+        self,
+        request: DescribeTakeOverTypeModelsRequest,
+    ) -> DescribeTakeOverTypeModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_take_over_type_models(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_take_over_type_models_async(
+        self,
+        request: DescribeTakeOverTypeModelsRequest,
+    ) -> DescribeTakeOverTypeModelsResult:
+        async_result = []
+        self._describe_take_over_type_models(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_take_over_type_model(
+        self,
+        request: GetTakeOverTypeModelRequest,
+        callback: Callable[[AsyncResult[GetTakeOverTypeModelResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/model/{type}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetTakeOverTypeModelResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_take_over_type_model(
+        self,
+        request: GetTakeOverTypeModelRequest,
+    ) -> GetTakeOverTypeModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_take_over_type_model(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_take_over_type_model_async(
+        self,
+        request: GetTakeOverTypeModelRequest,
+    ) -> GetTakeOverTypeModelResult:
+        async_result = []
+        self._get_take_over_type_model(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_take_over_type_model_masters(
+        self,
+        request: DescribeTakeOverTypeModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeTakeOverTypeModelMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeTakeOverTypeModelMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_take_over_type_model_masters(
+        self,
+        request: DescribeTakeOverTypeModelMastersRequest,
+    ) -> DescribeTakeOverTypeModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_take_over_type_model_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_take_over_type_model_masters_async(
+        self,
+        request: DescribeTakeOverTypeModelMastersRequest,
+    ) -> DescribeTakeOverTypeModelMastersResult:
+        async_result = []
+        self._describe_take_over_type_model_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_take_over_type_model_master(
+        self,
+        request: CreateTakeOverTypeModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateTakeOverTypeModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.type is not None:
+            body["type"] = request.type
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.open_id_connect_setting is not None:
+            body["openIdConnectSetting"] = request.open_id_connect_setting.to_dict()
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateTakeOverTypeModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_take_over_type_model_master(
+        self,
+        request: CreateTakeOverTypeModelMasterRequest,
+    ) -> CreateTakeOverTypeModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_take_over_type_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_take_over_type_model_master_async(
+        self,
+        request: CreateTakeOverTypeModelMasterRequest,
+    ) -> CreateTakeOverTypeModelMasterResult:
+        async_result = []
+        self._create_take_over_type_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_take_over_type_model_master(
+        self,
+        request: GetTakeOverTypeModelMasterRequest,
+        callback: Callable[[AsyncResult[GetTakeOverTypeModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model/{type}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetTakeOverTypeModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_take_over_type_model_master(
+        self,
+        request: GetTakeOverTypeModelMasterRequest,
+    ) -> GetTakeOverTypeModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_take_over_type_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_take_over_type_model_master_async(
+        self,
+        request: GetTakeOverTypeModelMasterRequest,
+    ) -> GetTakeOverTypeModelMasterResult:
+        async_result = []
+        self._get_take_over_type_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_take_over_type_model_master(
+        self,
+        request: UpdateTakeOverTypeModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateTakeOverTypeModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model/{type}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.open_id_connect_setting is not None:
+            body["openIdConnectSetting"] = request.open_id_connect_setting.to_dict()
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateTakeOverTypeModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_take_over_type_model_master(
+        self,
+        request: UpdateTakeOverTypeModelMasterRequest,
+    ) -> UpdateTakeOverTypeModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_take_over_type_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_take_over_type_model_master_async(
+        self,
+        request: UpdateTakeOverTypeModelMasterRequest,
+    ) -> UpdateTakeOverTypeModelMasterResult:
+        async_result = []
+        self._update_take_over_type_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_take_over_type_model_master(
+        self,
+        request: DeleteTakeOverTypeModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteTakeOverTypeModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model/{type}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteTakeOverTypeModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_take_over_type_model_master(
+        self,
+        request: DeleteTakeOverTypeModelMasterRequest,
+    ) -> DeleteTakeOverTypeModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_take_over_type_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_take_over_type_model_master_async(
+        self,
+        request: DeleteTakeOverTypeModelMasterRequest,
+    ) -> DeleteTakeOverTypeModelMasterResult:
+        async_result = []
+        self._delete_take_over_type_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _export_master(
+        self,
+        request: ExportMasterRequest,
+        callback: Callable[[AsyncResult[ExportMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/export".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=ExportMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def export_master(
+        self,
+        request: ExportMasterRequest,
+    ) -> ExportMasterResult:
+        async_result = []
+        with timeout(30):
+            self._export_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def export_master_async(
+        self,
+        request: ExportMasterRequest,
+    ) -> ExportMasterResult:
+        async_result = []
+        self._export_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_current_model_master(
+        self,
+        request: GetCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[GetCurrentModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetCurrentModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_current_model_master(
+        self,
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_current_model_master_async(
+        self,
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
+        async_result = []
+        self._get_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_model_master(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.settings is not None:
+            body["settings"] = request.settings
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateCurrentModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_current_model_master(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_current_model_master_async(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
+        async_result = []
+        self._update_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_model_master_from_git_hub(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterFromGitHubResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/from_git_hub".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.checkout_setting is not None:
+            body["checkoutSetting"] = request.checkout_setting.to_dict()
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateCurrentModelMasterFromGitHubResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_current_model_master_from_git_hub(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
+        async_result = []
+        with timeout(30):
+            self._update_current_model_master_from_git_hub(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_current_model_master_from_git_hub_async(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
+        async_result = []
+        self._update_current_model_master_from_git_hub(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

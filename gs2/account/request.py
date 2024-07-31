@@ -1434,6 +1434,137 @@ class CreateTakeOverByUserIdRequest(core.Gs2Request):
         }
 
 
+class CreateTakeOverOpenIdConnectRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    type: int = None
+    id_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateTakeOverOpenIdConnectRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> CreateTakeOverOpenIdConnectRequest:
+        self.access_token = access_token
+        return self
+
+    def with_type(self, type: int) -> CreateTakeOverOpenIdConnectRequest:
+        self.type = type
+        return self
+
+    def with_id_token(self, id_token: str) -> CreateTakeOverOpenIdConnectRequest:
+        self.id_token = id_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateTakeOverOpenIdConnectRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateTakeOverOpenIdConnectRequest]:
+        if data is None:
+            return None
+        return CreateTakeOverOpenIdConnectRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_type(data.get('type'))\
+            .with_id_token(data.get('idToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "type": self.type,
+            "idToken": self.id_token,
+        }
+
+
+class CreateTakeOverOpenIdConnectAndByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    type: int = None
+    id_token: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateTakeOverOpenIdConnectAndByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> CreateTakeOverOpenIdConnectAndByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_type(self, type: int) -> CreateTakeOverOpenIdConnectAndByUserIdRequest:
+        self.type = type
+        return self
+
+    def with_id_token(self, id_token: str) -> CreateTakeOverOpenIdConnectAndByUserIdRequest:
+        self.id_token = id_token
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CreateTakeOverOpenIdConnectAndByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CreateTakeOverOpenIdConnectAndByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateTakeOverOpenIdConnectAndByUserIdRequest]:
+        if data is None:
+            return None
+        return CreateTakeOverOpenIdConnectAndByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_type(data.get('type'))\
+            .with_id_token(data.get('idToken'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "type": self.type,
+            "idToken": self.id_token,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class GetTakeOverRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1919,6 +2050,106 @@ class DoTakeOverRequest(core.Gs2Request):
             "type": self.type,
             "userIdentifier": self.user_identifier,
             "password": self.password,
+        }
+
+
+class DoTakeOverOpenIdConnectRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+    id_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DoTakeOverOpenIdConnectRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> DoTakeOverOpenIdConnectRequest:
+        self.type = type
+        return self
+
+    def with_id_token(self, id_token: str) -> DoTakeOverOpenIdConnectRequest:
+        self.id_token = id_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DoTakeOverOpenIdConnectRequest]:
+        if data is None:
+            return None
+        return DoTakeOverOpenIdConnectRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))\
+            .with_id_token(data.get('idToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+            "idToken": self.id_token,
+        }
+
+
+class GetAuthorizationUrlRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    type: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetAuthorizationUrlRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetAuthorizationUrlRequest:
+        self.access_token = access_token
+        return self
+
+    def with_type(self, type: int) -> GetAuthorizationUrlRequest:
+        self.type = type
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetAuthorizationUrlRequest]:
+        if data is None:
+            return None
+        return GetAuthorizationUrlRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_type(data.get('type'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "type": self.type,
         }
 
 
@@ -2693,4 +2924,505 @@ class DeleteDataOwnerByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class DescribeTakeOverTypeModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeTakeOverTypeModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeTakeOverTypeModelsRequest]:
+        if data is None:
+            return None
+        return DescribeTakeOverTypeModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetTakeOverTypeModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetTakeOverTypeModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> GetTakeOverTypeModelRequest:
+        self.type = type
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTakeOverTypeModelRequest]:
+        if data is None:
+            return None
+        return GetTakeOverTypeModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+        }
+
+
+class DescribeTakeOverTypeModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeTakeOverTypeModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeTakeOverTypeModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeTakeOverTypeModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeTakeOverTypeModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribeTakeOverTypeModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateTakeOverTypeModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+    description: str = None
+    metadata: str = None
+    open_id_connect_setting: OpenIdConnectSetting = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateTakeOverTypeModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> CreateTakeOverTypeModelMasterRequest:
+        self.type = type
+        return self
+
+    def with_description(self, description: str) -> CreateTakeOverTypeModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateTakeOverTypeModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_open_id_connect_setting(self, open_id_connect_setting: OpenIdConnectSetting) -> CreateTakeOverTypeModelMasterRequest:
+        self.open_id_connect_setting = open_id_connect_setting
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateTakeOverTypeModelMasterRequest]:
+        if data is None:
+            return None
+        return CreateTakeOverTypeModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+            "description": self.description,
+            "metadata": self.metadata,
+            "openIdConnectSetting": self.open_id_connect_setting.to_dict() if self.open_id_connect_setting else None,
+        }
+
+
+class GetTakeOverTypeModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetTakeOverTypeModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> GetTakeOverTypeModelMasterRequest:
+        self.type = type
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTakeOverTypeModelMasterRequest]:
+        if data is None:
+            return None
+        return GetTakeOverTypeModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+        }
+
+
+class UpdateTakeOverTypeModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+    description: str = None
+    metadata: str = None
+    open_id_connect_setting: OpenIdConnectSetting = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateTakeOverTypeModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> UpdateTakeOverTypeModelMasterRequest:
+        self.type = type
+        return self
+
+    def with_description(self, description: str) -> UpdateTakeOverTypeModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateTakeOverTypeModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_open_id_connect_setting(self, open_id_connect_setting: OpenIdConnectSetting) -> UpdateTakeOverTypeModelMasterRequest:
+        self.open_id_connect_setting = open_id_connect_setting
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateTakeOverTypeModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateTakeOverTypeModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+            "description": self.description,
+            "metadata": self.metadata,
+            "openIdConnectSetting": self.open_id_connect_setting.to_dict() if self.open_id_connect_setting else None,
+        }
+
+
+class DeleteTakeOverTypeModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteTakeOverTypeModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> DeleteTakeOverTypeModelMasterRequest:
+        self.type = type
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteTakeOverTypeModelMasterRequest]:
+        if data is None:
+            return None
+        return DeleteTakeOverTypeModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+        }
+
+
+class ExportMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ExportMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExportMasterRequest]:
+        if data is None:
+            return None
+        return ExportMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetCurrentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetCurrentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetCurrentModelMasterRequest]:
+        if data is None:
+            return None
+        return GetCurrentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class UpdateCurrentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    settings: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_settings(self, settings: str) -> UpdateCurrentModelMasterRequest:
+        self.settings = settings
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCurrentModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateCurrentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_settings(data.get('settings'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "settings": self.settings,
+        }
+
+
+class UpdateCurrentModelMasterFromGitHubRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    checkout_setting: GitHubCheckoutSetting = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentModelMasterFromGitHubRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_checkout_setting(self, checkout_setting: GitHubCheckoutSetting) -> UpdateCurrentModelMasterFromGitHubRequest:
+        self.checkout_setting = checkout_setting
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCurrentModelMasterFromGitHubRequest]:
+        if data is None:
+            return None
+        return UpdateCurrentModelMasterFromGitHubRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_checkout_setting(GitHubCheckoutSetting.from_dict(data.get('checkoutSetting')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "checkoutSetting": self.checkout_setting.to_dict() if self.checkout_setting else None,
         }

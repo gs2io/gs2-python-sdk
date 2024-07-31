@@ -108,6 +108,82 @@ class ScriptSetting(core.Gs2Model):
         }
 
 
+class GitHubCheckoutSetting(core.Gs2Model):
+    api_key_id: str = None
+    repository_name: str = None
+    source_path: str = None
+    reference_type: str = None
+    commit_hash: str = None
+    branch_name: str = None
+    tag_name: str = None
+
+    def with_api_key_id(self, api_key_id: str) -> GitHubCheckoutSetting:
+        self.api_key_id = api_key_id
+        return self
+
+    def with_repository_name(self, repository_name: str) -> GitHubCheckoutSetting:
+        self.repository_name = repository_name
+        return self
+
+    def with_source_path(self, source_path: str) -> GitHubCheckoutSetting:
+        self.source_path = source_path
+        return self
+
+    def with_reference_type(self, reference_type: str) -> GitHubCheckoutSetting:
+        self.reference_type = reference_type
+        return self
+
+    def with_commit_hash(self, commit_hash: str) -> GitHubCheckoutSetting:
+        self.commit_hash = commit_hash
+        return self
+
+    def with_branch_name(self, branch_name: str) -> GitHubCheckoutSetting:
+        self.branch_name = branch_name
+        return self
+
+    def with_tag_name(self, tag_name: str) -> GitHubCheckoutSetting:
+        self.tag_name = tag_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GitHubCheckoutSetting]:
+        if data is None:
+            return None
+        return GitHubCheckoutSetting()\
+            .with_api_key_id(data.get('apiKeyId'))\
+            .with_repository_name(data.get('repositoryName'))\
+            .with_source_path(data.get('sourcePath'))\
+            .with_reference_type(data.get('referenceType'))\
+            .with_commit_hash(data.get('commitHash'))\
+            .with_branch_name(data.get('branchName'))\
+            .with_tag_name(data.get('tagName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "apiKeyId": self.api_key_id,
+            "repositoryName": self.repository_name,
+            "sourcePath": self.source_path,
+            "referenceType": self.reference_type,
+            "commitHash": self.commit_hash,
+            "branchName": self.branch_name,
+            "tagName": self.tag_name,
+        }
+
+
 class BanStatus(core.Gs2Model):
     name: str = None
     reason: str = None
@@ -201,6 +277,407 @@ class PlatformUser(core.Gs2Model):
             "type": self.type,
             "userIdentifier": self.user_identifier,
             "userId": self.user_id,
+        }
+
+
+class OpenIdConnectSetting(core.Gs2Model):
+    configuration_path: str = None
+    client_id: str = None
+    client_secret: str = None
+    apple_team_id: str = None
+    apple_key_id: str = None
+    apple_private_key_pem: str = None
+
+    def with_configuration_path(self, configuration_path: str) -> OpenIdConnectSetting:
+        self.configuration_path = configuration_path
+        return self
+
+    def with_client_id(self, client_id: str) -> OpenIdConnectSetting:
+        self.client_id = client_id
+        return self
+
+    def with_client_secret(self, client_secret: str) -> OpenIdConnectSetting:
+        self.client_secret = client_secret
+        return self
+
+    def with_apple_team_id(self, apple_team_id: str) -> OpenIdConnectSetting:
+        self.apple_team_id = apple_team_id
+        return self
+
+    def with_apple_key_id(self, apple_key_id: str) -> OpenIdConnectSetting:
+        self.apple_key_id = apple_key_id
+        return self
+
+    def with_apple_private_key_pem(self, apple_private_key_pem: str) -> OpenIdConnectSetting:
+        self.apple_private_key_pem = apple_private_key_pem
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[OpenIdConnectSetting]:
+        if data is None:
+            return None
+        return OpenIdConnectSetting()\
+            .with_configuration_path(data.get('configurationPath'))\
+            .with_client_id(data.get('clientId'))\
+            .with_client_secret(data.get('clientSecret'))\
+            .with_apple_team_id(data.get('appleTeamId'))\
+            .with_apple_key_id(data.get('appleKeyId'))\
+            .with_apple_private_key_pem(data.get('applePrivateKeyPem'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "configurationPath": self.configuration_path,
+            "clientId": self.client_id,
+            "clientSecret": self.client_secret,
+            "appleTeamId": self.apple_team_id,
+            "appleKeyId": self.apple_key_id,
+            "applePrivateKeyPem": self.apple_private_key_pem,
+        }
+
+
+class CurrentModelMaster(core.Gs2Model):
+    namespace_id: str = None
+    settings: str = None
+
+    def with_namespace_id(self, namespace_id: str) -> CurrentModelMaster:
+        self.namespace_id = namespace_id
+        return self
+
+    def with_settings(self, settings: str) -> CurrentModelMaster:
+        self.settings = settings
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:account:{namespaceName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CurrentModelMaster]:
+        if data is None:
+            return None
+        return CurrentModelMaster()\
+            .with_namespace_id(data.get('namespaceId'))\
+            .with_settings(data.get('settings'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceId": self.namespace_id,
+            "settings": self.settings,
+        }
+
+
+class TakeOverTypeModelMaster(core.Gs2Model):
+    take_over_type_model_id: str = None
+    type: int = None
+    description: str = None
+    metadata: str = None
+    open_id_connect_setting: OpenIdConnectSetting = None
+    created_at: int = None
+    updated_at: int = None
+    revision: int = None
+
+    def with_take_over_type_model_id(self, take_over_type_model_id: str) -> TakeOverTypeModelMaster:
+        self.take_over_type_model_id = take_over_type_model_id
+        return self
+
+    def with_type(self, type: int) -> TakeOverTypeModelMaster:
+        self.type = type
+        return self
+
+    def with_description(self, description: str) -> TakeOverTypeModelMaster:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> TakeOverTypeModelMaster:
+        self.metadata = metadata
+        return self
+
+    def with_open_id_connect_setting(self, open_id_connect_setting: OpenIdConnectSetting) -> TakeOverTypeModelMaster:
+        self.open_id_connect_setting = open_id_connect_setting
+        return self
+
+    def with_created_at(self, created_at: int) -> TakeOverTypeModelMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> TakeOverTypeModelMaster:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> TakeOverTypeModelMaster:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        _type,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:account:{namespaceName}:model:takeOver:{type}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            Type=_type,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):model:takeOver:(?P<type>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):model:takeOver:(?P<type>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):model:takeOver:(?P<type>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get__type_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):model:takeOver:(?P<type>.+)', grn)
+        if match is None:
+            return None
+        return match.group('_type')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TakeOverTypeModelMaster]:
+        if data is None:
+            return None
+        return TakeOverTypeModelMaster()\
+            .with_take_over_type_model_id(data.get('takeOverTypeModelId'))\
+            .with_type(data.get('type'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "takeOverTypeModelId": self.take_over_type_model_id,
+            "type": self.type,
+            "description": self.description,
+            "metadata": self.metadata,
+            "openIdConnectSetting": self.open_id_connect_setting.to_dict() if self.open_id_connect_setting else None,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+        }
+
+
+class TakeOverTypeModel(core.Gs2Model):
+    take_over_type_model_id: str = None
+    type: int = None
+    metadata: str = None
+    open_id_connect_setting: OpenIdConnectSetting = None
+
+    def with_take_over_type_model_id(self, take_over_type_model_id: str) -> TakeOverTypeModel:
+        self.take_over_type_model_id = take_over_type_model_id
+        return self
+
+    def with_type(self, type: int) -> TakeOverTypeModel:
+        self.type = type
+        return self
+
+    def with_metadata(self, metadata: str) -> TakeOverTypeModel:
+        self.metadata = metadata
+        return self
+
+    def with_open_id_connect_setting(self, open_id_connect_setting: OpenIdConnectSetting) -> TakeOverTypeModel:
+        self.open_id_connect_setting = open_id_connect_setting
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        _type,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:account:{namespaceName}:model:takeOver:{type}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            Type=_type,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):model:takeOver:(?P<type>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):model:takeOver:(?P<type>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):model:takeOver:(?P<type>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get__type_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):account:(?P<namespaceName>.+):model:takeOver:(?P<type>.+)', grn)
+        if match is None:
+            return None
+        return match.group('_type')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TakeOverTypeModel]:
+        if data is None:
+            return None
+        return TakeOverTypeModel()\
+            .with_take_over_type_model_id(data.get('takeOverTypeModelId'))\
+            .with_type(data.get('type'))\
+            .with_metadata(data.get('metadata'))\
+            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "takeOverTypeModelId": self.take_over_type_model_id,
+            "type": self.type,
+            "metadata": self.metadata,
+            "openIdConnectSetting": self.open_id_connect_setting.to_dict() if self.open_id_connect_setting else None,
         }
 
 

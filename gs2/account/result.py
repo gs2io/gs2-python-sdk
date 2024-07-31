@@ -959,6 +959,74 @@ class CreateTakeOverByUserIdResult(core.Gs2Result):
         }
 
 
+class CreateTakeOverOpenIdConnectResult(core.Gs2Result):
+    item: TakeOver = None
+
+    def with_item(self, item: TakeOver) -> CreateTakeOverOpenIdConnectResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateTakeOverOpenIdConnectResult]:
+        if data is None:
+            return None
+        return CreateTakeOverOpenIdConnectResult()\
+            .with_item(TakeOver.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class CreateTakeOverOpenIdConnectAndByUserIdResult(core.Gs2Result):
+    item: TakeOver = None
+
+    def with_item(self, item: TakeOver) -> CreateTakeOverOpenIdConnectAndByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateTakeOverOpenIdConnectAndByUserIdResult]:
+        if data is None:
+            return None
+        return CreateTakeOverOpenIdConnectAndByUserIdResult()\
+            .with_item(TakeOver.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class GetTakeOverResult(core.Gs2Result):
     item: TakeOver = None
 
@@ -1228,6 +1296,74 @@ class DoTakeOverResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DoTakeOverOpenIdConnectResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> DoTakeOverOpenIdConnectResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DoTakeOverOpenIdConnectResult]:
+        if data is None:
+            return None
+        return DoTakeOverOpenIdConnectResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetAuthorizationUrlResult(core.Gs2Result):
+    authorization_url: str = None
+
+    def with_authorization_url(self, authorization_url: str) -> GetAuthorizationUrlResult:
+        self.authorization_url = authorization_url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetAuthorizationUrlResult]:
+        if data is None:
+            return None
+        return GetAuthorizationUrlResult()\
+            .with_authorization_url(data.get('authorizationUrl'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "authorizationUrl": self.authorization_url,
         }
 
 
@@ -1692,6 +1828,399 @@ class DeleteDataOwnerByUserIdResult(core.Gs2Result):
             return None
         return DeleteDataOwnerByUserIdResult()\
             .with_item(DataOwner.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeTakeOverTypeModelsResult(core.Gs2Result):
+    items: List[TakeOverTypeModel] = None
+
+    def with_items(self, items: List[TakeOverTypeModel]) -> DescribeTakeOverTypeModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeTakeOverTypeModelsResult]:
+        if data is None:
+            return None
+        return DescribeTakeOverTypeModelsResult()\
+            .with_items([
+                TakeOverTypeModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class GetTakeOverTypeModelResult(core.Gs2Result):
+    item: TakeOverTypeModel = None
+
+    def with_item(self, item: TakeOverTypeModel) -> GetTakeOverTypeModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTakeOverTypeModelResult]:
+        if data is None:
+            return None
+        return GetTakeOverTypeModelResult()\
+            .with_item(TakeOverTypeModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeTakeOverTypeModelMastersResult(core.Gs2Result):
+    items: List[TakeOverTypeModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[TakeOverTypeModelMaster]) -> DescribeTakeOverTypeModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeTakeOverTypeModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeTakeOverTypeModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeTakeOverTypeModelMastersResult()\
+            .with_items([
+                TakeOverTypeModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateTakeOverTypeModelMasterResult(core.Gs2Result):
+    item: TakeOverTypeModelMaster = None
+
+    def with_item(self, item: TakeOverTypeModelMaster) -> CreateTakeOverTypeModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateTakeOverTypeModelMasterResult]:
+        if data is None:
+            return None
+        return CreateTakeOverTypeModelMasterResult()\
+            .with_item(TakeOverTypeModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetTakeOverTypeModelMasterResult(core.Gs2Result):
+    item: TakeOverTypeModelMaster = None
+
+    def with_item(self, item: TakeOverTypeModelMaster) -> GetTakeOverTypeModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTakeOverTypeModelMasterResult]:
+        if data is None:
+            return None
+        return GetTakeOverTypeModelMasterResult()\
+            .with_item(TakeOverTypeModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateTakeOverTypeModelMasterResult(core.Gs2Result):
+    item: TakeOverTypeModelMaster = None
+
+    def with_item(self, item: TakeOverTypeModelMaster) -> UpdateTakeOverTypeModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateTakeOverTypeModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateTakeOverTypeModelMasterResult()\
+            .with_item(TakeOverTypeModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteTakeOverTypeModelMasterResult(core.Gs2Result):
+    item: TakeOverTypeModelMaster = None
+
+    def with_item(self, item: TakeOverTypeModelMaster) -> DeleteTakeOverTypeModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteTakeOverTypeModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteTakeOverTypeModelMasterResult()\
+            .with_item(TakeOverTypeModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ExportMasterResult(core.Gs2Result):
+    item: CurrentModelMaster = None
+
+    def with_item(self, item: CurrentModelMaster) -> ExportMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExportMasterResult]:
+        if data is None:
+            return None
+        return ExportMasterResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetCurrentModelMasterResult(core.Gs2Result):
+    item: CurrentModelMaster = None
+
+    def with_item(self, item: CurrentModelMaster) -> GetCurrentModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetCurrentModelMasterResult]:
+        if data is None:
+            return None
+        return GetCurrentModelMasterResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateCurrentModelMasterResult(core.Gs2Result):
+    item: CurrentModelMaster = None
+
+    def with_item(self, item: CurrentModelMaster) -> UpdateCurrentModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCurrentModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateCurrentModelMasterResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateCurrentModelMasterFromGitHubResult(core.Gs2Result):
+    item: CurrentModelMaster = None
+
+    def with_item(self, item: CurrentModelMaster) -> UpdateCurrentModelMasterFromGitHubResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCurrentModelMasterFromGitHubResult]:
+        if data is None:
+            return None
+        return UpdateCurrentModelMasterFromGitHubResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {

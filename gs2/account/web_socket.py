@@ -2013,6 +2013,168 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _create_take_over_open_id_connect(
+        self,
+        request: CreateTakeOverOpenIdConnectRequest,
+        callback: Callable[[AsyncResult[CreateTakeOverOpenIdConnectResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOver',
+            function='createTakeOverOpenIdConnect',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.type is not None:
+            body["type"] = request.type
+        if request.id_token is not None:
+            body["idToken"] = request.id_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateTakeOverOpenIdConnectResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_take_over_open_id_connect(
+        self,
+        request: CreateTakeOverOpenIdConnectRequest,
+    ) -> CreateTakeOverOpenIdConnectResult:
+        async_result = []
+        with timeout(30):
+            self._create_take_over_open_id_connect(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_take_over_open_id_connect_async(
+        self,
+        request: CreateTakeOverOpenIdConnectRequest,
+    ) -> CreateTakeOverOpenIdConnectResult:
+        async_result = []
+        self._create_take_over_open_id_connect(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_take_over_open_id_connect_and_by_user_id(
+        self,
+        request: CreateTakeOverOpenIdConnectAndByUserIdRequest,
+        callback: Callable[[AsyncResult[CreateTakeOverOpenIdConnectAndByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOver',
+            function='createTakeOverOpenIdConnectAndByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.type is not None:
+            body["type"] = request.type
+        if request.id_token is not None:
+            body["idToken"] = request.id_token
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateTakeOverOpenIdConnectAndByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_take_over_open_id_connect_and_by_user_id(
+        self,
+        request: CreateTakeOverOpenIdConnectAndByUserIdRequest,
+    ) -> CreateTakeOverOpenIdConnectAndByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._create_take_over_open_id_connect_and_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_take_over_open_id_connect_and_by_user_id_async(
+        self,
+        request: CreateTakeOverOpenIdConnectAndByUserIdRequest,
+    ) -> CreateTakeOverOpenIdConnectAndByUserIdResult:
+        async_result = []
+        self._create_take_over_open_id_connect_and_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_take_over(
         self,
         request: GetTakeOverRequest,
@@ -2634,6 +2796,158 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DoTakeOverResult:
         async_result = []
         self._do_take_over(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _do_take_over_open_id_connect(
+        self,
+        request: DoTakeOverOpenIdConnectRequest,
+        callback: Callable[[AsyncResult[DoTakeOverOpenIdConnectResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOver',
+            function='doTakeOverOpenIdConnect',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+        if request.id_token is not None:
+            body["idToken"] = request.id_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DoTakeOverOpenIdConnectResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def do_take_over_open_id_connect(
+        self,
+        request: DoTakeOverOpenIdConnectRequest,
+    ) -> DoTakeOverOpenIdConnectResult:
+        async_result = []
+        with timeout(30):
+            self._do_take_over_open_id_connect(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def do_take_over_open_id_connect_async(
+        self,
+        request: DoTakeOverOpenIdConnectRequest,
+    ) -> DoTakeOverOpenIdConnectResult:
+        async_result = []
+        self._do_take_over_open_id_connect(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_authorization_url(
+        self,
+        request: GetAuthorizationUrlRequest,
+        callback: Callable[[AsyncResult[GetAuthorizationUrlResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOver',
+            function='getAuthorizationUrl',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.type is not None:
+            body["type"] = request.type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetAuthorizationUrlResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_authorization_url(
+        self,
+        request: GetAuthorizationUrlRequest,
+    ) -> GetAuthorizationUrlResult:
+        async_result = []
+        with timeout(30):
+            self._get_authorization_url(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_authorization_url_async(
+        self,
+        request: GetAuthorizationUrlRequest,
+    ) -> GetAuthorizationUrlResult:
+        async_result = []
+        self._get_authorization_url(
             request,
             lambda result: async_result.append(result),
         )
@@ -3659,6 +3973,817 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteDataOwnerByUserIdResult:
         async_result = []
         self._delete_data_owner_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_take_over_type_models(
+        self,
+        request: DescribeTakeOverTypeModelsRequest,
+        callback: Callable[[AsyncResult[DescribeTakeOverTypeModelsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOverTypeModel',
+            function='describeTakeOverTypeModels',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeTakeOverTypeModelsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_take_over_type_models(
+        self,
+        request: DescribeTakeOverTypeModelsRequest,
+    ) -> DescribeTakeOverTypeModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_take_over_type_models(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_take_over_type_models_async(
+        self,
+        request: DescribeTakeOverTypeModelsRequest,
+    ) -> DescribeTakeOverTypeModelsResult:
+        async_result = []
+        self._describe_take_over_type_models(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_take_over_type_model(
+        self,
+        request: GetTakeOverTypeModelRequest,
+        callback: Callable[[AsyncResult[GetTakeOverTypeModelResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOverTypeModel',
+            function='getTakeOverTypeModel',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetTakeOverTypeModelResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_take_over_type_model(
+        self,
+        request: GetTakeOverTypeModelRequest,
+    ) -> GetTakeOverTypeModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_take_over_type_model(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_take_over_type_model_async(
+        self,
+        request: GetTakeOverTypeModelRequest,
+    ) -> GetTakeOverTypeModelResult:
+        async_result = []
+        self._get_take_over_type_model(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_take_over_type_model_masters(
+        self,
+        request: DescribeTakeOverTypeModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeTakeOverTypeModelMastersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOverTypeModelMaster',
+            function='describeTakeOverTypeModelMasters',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeTakeOverTypeModelMastersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_take_over_type_model_masters(
+        self,
+        request: DescribeTakeOverTypeModelMastersRequest,
+    ) -> DescribeTakeOverTypeModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_take_over_type_model_masters(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_take_over_type_model_masters_async(
+        self,
+        request: DescribeTakeOverTypeModelMastersRequest,
+    ) -> DescribeTakeOverTypeModelMastersResult:
+        async_result = []
+        self._describe_take_over_type_model_masters(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_take_over_type_model_master(
+        self,
+        request: CreateTakeOverTypeModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateTakeOverTypeModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOverTypeModelMaster',
+            function='createTakeOverTypeModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.open_id_connect_setting is not None:
+            body["openIdConnectSetting"] = request.open_id_connect_setting.to_dict()
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateTakeOverTypeModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_take_over_type_model_master(
+        self,
+        request: CreateTakeOverTypeModelMasterRequest,
+    ) -> CreateTakeOverTypeModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_take_over_type_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_take_over_type_model_master_async(
+        self,
+        request: CreateTakeOverTypeModelMasterRequest,
+    ) -> CreateTakeOverTypeModelMasterResult:
+        async_result = []
+        self._create_take_over_type_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_take_over_type_model_master(
+        self,
+        request: GetTakeOverTypeModelMasterRequest,
+        callback: Callable[[AsyncResult[GetTakeOverTypeModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOverTypeModelMaster',
+            function='getTakeOverTypeModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetTakeOverTypeModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_take_over_type_model_master(
+        self,
+        request: GetTakeOverTypeModelMasterRequest,
+    ) -> GetTakeOverTypeModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_take_over_type_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_take_over_type_model_master_async(
+        self,
+        request: GetTakeOverTypeModelMasterRequest,
+    ) -> GetTakeOverTypeModelMasterResult:
+        async_result = []
+        self._get_take_over_type_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_take_over_type_model_master(
+        self,
+        request: UpdateTakeOverTypeModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateTakeOverTypeModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOverTypeModelMaster',
+            function='updateTakeOverTypeModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.open_id_connect_setting is not None:
+            body["openIdConnectSetting"] = request.open_id_connect_setting.to_dict()
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateTakeOverTypeModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_take_over_type_model_master(
+        self,
+        request: UpdateTakeOverTypeModelMasterRequest,
+    ) -> UpdateTakeOverTypeModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_take_over_type_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_take_over_type_model_master_async(
+        self,
+        request: UpdateTakeOverTypeModelMasterRequest,
+    ) -> UpdateTakeOverTypeModelMasterResult:
+        async_result = []
+        self._update_take_over_type_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_take_over_type_model_master(
+        self,
+        request: DeleteTakeOverTypeModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteTakeOverTypeModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOverTypeModelMaster',
+            function='deleteTakeOverTypeModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteTakeOverTypeModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_take_over_type_model_master(
+        self,
+        request: DeleteTakeOverTypeModelMasterRequest,
+    ) -> DeleteTakeOverTypeModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_take_over_type_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_take_over_type_model_master_async(
+        self,
+        request: DeleteTakeOverTypeModelMasterRequest,
+    ) -> DeleteTakeOverTypeModelMasterResult:
+        async_result = []
+        self._delete_take_over_type_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _export_master(
+        self,
+        request: ExportMasterRequest,
+        callback: Callable[[AsyncResult[ExportMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='currentModelMaster',
+            function='exportMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ExportMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def export_master(
+        self,
+        request: ExportMasterRequest,
+    ) -> ExportMasterResult:
+        async_result = []
+        with timeout(30):
+            self._export_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def export_master_async(
+        self,
+        request: ExportMasterRequest,
+    ) -> ExportMasterResult:
+        async_result = []
+        self._export_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_current_model_master(
+        self,
+        request: GetCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[GetCurrentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='currentModelMaster',
+            function='getCurrentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetCurrentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_current_model_master(
+        self,
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_current_model_master_async(
+        self,
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
+        async_result = []
+        self._get_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_model_master(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='currentModelMaster',
+            function='updateCurrentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.settings is not None:
+            body["settings"] = request.settings
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateCurrentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_current_model_master(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_current_model_master_async(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
+        async_result = []
+        self._update_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_model_master_from_git_hub(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterFromGitHubResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='currentModelMaster',
+            function='updateCurrentModelMasterFromGitHub',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.checkout_setting is not None:
+            body["checkoutSetting"] = request.checkout_setting.to_dict()
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateCurrentModelMasterFromGitHubResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_current_model_master_from_git_hub(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
+        async_result = []
+        with timeout(30):
+            self._update_current_model_master_from_git_hub(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_current_model_master_from_git_hub_async(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
+        async_result = []
+        self._update_current_model_master_from_git_hub(
             request,
             lambda result: async_result.append(result),
         )
