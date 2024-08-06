@@ -1217,6 +1217,263 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _query_in_game_log(
+        self,
+        request: QueryInGameLogRequest,
+        callback: Callable[[AsyncResult[QueryInGameLogResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='log',
+            region=self.session.region,
+        ) + "/{namespaceName}/ingame/log".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.tags is not None:
+            body["tags"] = [
+                item.to_dict()
+                for item in request.tags
+            ]
+        if request.begin is not None:
+            body["begin"] = request.begin
+        if request.end is not None:
+            body["end"] = request.end
+        if request.long_term is not None:
+            body["longTerm"] = request.long_term
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=QueryInGameLogResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def query_in_game_log(
+        self,
+        request: QueryInGameLogRequest,
+    ) -> QueryInGameLogResult:
+        async_result = []
+        with timeout(30):
+            self._query_in_game_log(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def query_in_game_log_async(
+        self,
+        request: QueryInGameLogRequest,
+    ) -> QueryInGameLogResult:
+        async_result = []
+        self._query_in_game_log(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _send_in_game_log(
+        self,
+        request: SendInGameLogRequest,
+        callback: Callable[[AsyncResult[SendInGameLogResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='log',
+            region=self.session.region,
+        ) + "/{namespaceName}/ingame/log/user/me/send".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.tags is not None:
+            body["tags"] = [
+                item.to_dict()
+                for item in request.tags
+            ]
+        if request.payload is not None:
+            body["payload"] = request.payload
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SendInGameLogResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def send_in_game_log(
+        self,
+        request: SendInGameLogRequest,
+    ) -> SendInGameLogResult:
+        async_result = []
+        with timeout(30):
+            self._send_in_game_log(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def send_in_game_log_async(
+        self,
+        request: SendInGameLogRequest,
+    ) -> SendInGameLogResult:
+        async_result = []
+        self._send_in_game_log(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _send_in_game_log_by_user_id(
+        self,
+        request: SendInGameLogByUserIdRequest,
+        callback: Callable[[AsyncResult[SendInGameLogByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='log',
+            region=self.session.region,
+        ) + "/{namespaceName}/ingame/log/user/{userId}/send".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.tags is not None:
+            body["tags"] = [
+                item.to_dict()
+                for item in request.tags
+            ]
+        if request.payload is not None:
+            body["payload"] = request.payload
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SendInGameLogByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def send_in_game_log_by_user_id(
+        self,
+        request: SendInGameLogByUserIdRequest,
+    ) -> SendInGameLogByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._send_in_game_log_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def send_in_game_log_by_user_id_async(
+        self,
+        request: SendInGameLogByUserIdRequest,
+    ) -> SendInGameLogByUserIdResult:
+        async_result = []
+        self._send_in_game_log_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _query_access_log_with_telemetry(
         self,
         request: QueryAccessLogWithTelemetryRequest,

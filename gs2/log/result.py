@@ -722,6 +722,135 @@ class CountExecuteStampTaskLogResult(core.Gs2Result):
         }
 
 
+class QueryInGameLogResult(core.Gs2Result):
+    items: List[InGameLog] = None
+    next_page_token: str = None
+    total_count: int = None
+    scan_size: int = None
+
+    def with_items(self, items: List[InGameLog]) -> QueryInGameLogResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> QueryInGameLogResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def with_total_count(self, total_count: int) -> QueryInGameLogResult:
+        self.total_count = total_count
+        return self
+
+    def with_scan_size(self, scan_size: int) -> QueryInGameLogResult:
+        self.scan_size = scan_size
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryInGameLogResult]:
+        if data is None:
+            return None
+        return QueryInGameLogResult()\
+            .with_items([
+                InGameLog.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))\
+            .with_total_count(data.get('totalCount'))\
+            .with_scan_size(data.get('scanSize'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items) if self.items else 0)
+            ],
+            "nextPageToken": self.next_page_token,
+            "totalCount": self.total_count,
+            "scanSize": self.scan_size,
+        }
+
+
+class SendInGameLogResult(core.Gs2Result):
+    item: InGameLog = None
+
+    def with_item(self, item: InGameLog) -> SendInGameLogResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SendInGameLogResult]:
+        if data is None:
+            return None
+        return SendInGameLogResult()\
+            .with_item(InGameLog.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class SendInGameLogByUserIdResult(core.Gs2Result):
+    item: InGameLog = None
+
+    def with_item(self, item: InGameLog) -> SendInGameLogByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SendInGameLogByUserIdResult]:
+        if data is None:
+            return None
+        return SendInGameLogByUserIdResult()\
+            .with_item(InGameLog.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class QueryAccessLogWithTelemetryResult(core.Gs2Result):
     items: List[AccessLogWithTelemetry] = None
     next_page_token: str = None

@@ -1220,6 +1220,252 @@ class CountExecuteStampTaskLogRequest(core.Gs2Request):
         }
 
 
+class QueryInGameLogRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    tags: List[InGameLogTag] = None
+    begin: int = None
+    end: int = None
+    long_term: bool = None
+    page_token: str = None
+    limit: int = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> QueryInGameLogRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> QueryInGameLogRequest:
+        self.user_id = user_id
+        return self
+
+    def with_tags(self, tags: List[InGameLogTag]) -> QueryInGameLogRequest:
+        self.tags = tags
+        return self
+
+    def with_begin(self, begin: int) -> QueryInGameLogRequest:
+        self.begin = begin
+        return self
+
+    def with_end(self, end: int) -> QueryInGameLogRequest:
+        self.end = end
+        return self
+
+    def with_long_term(self, long_term: bool) -> QueryInGameLogRequest:
+        self.long_term = long_term
+        return self
+
+    def with_page_token(self, page_token: str) -> QueryInGameLogRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> QueryInGameLogRequest:
+        self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> QueryInGameLogRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> QueryInGameLogRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryInGameLogRequest]:
+        if data is None:
+            return None
+        return QueryInGameLogRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_tags([
+                InGameLogTag.from_dict(data.get('tags')[i])
+                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+            ])\
+            .with_begin(data.get('begin'))\
+            .with_end(data.get('end'))\
+            .with_long_term(data.get('longTerm'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "tags": [
+                self.tags[i].to_dict() if self.tags[i] else None
+                for i in range(len(self.tags) if self.tags else 0)
+            ],
+            "begin": self.begin,
+            "end": self.end,
+            "longTerm": self.long_term,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class SendInGameLogRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    tags: List[InGameLogTag] = None
+    payload: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SendInGameLogRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> SendInGameLogRequest:
+        self.access_token = access_token
+        return self
+
+    def with_tags(self, tags: List[InGameLogTag]) -> SendInGameLogRequest:
+        self.tags = tags
+        return self
+
+    def with_payload(self, payload: str) -> SendInGameLogRequest:
+        self.payload = payload
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SendInGameLogRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SendInGameLogRequest]:
+        if data is None:
+            return None
+        return SendInGameLogRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_tags([
+                InGameLogTag.from_dict(data.get('tags')[i])
+                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+            ])\
+            .with_payload(data.get('payload'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "tags": [
+                self.tags[i].to_dict() if self.tags[i] else None
+                for i in range(len(self.tags) if self.tags else 0)
+            ],
+            "payload": self.payload,
+        }
+
+
+class SendInGameLogByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    tags: List[InGameLogTag] = None
+    payload: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SendInGameLogByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> SendInGameLogByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_tags(self, tags: List[InGameLogTag]) -> SendInGameLogByUserIdRequest:
+        self.tags = tags
+        return self
+
+    def with_payload(self, payload: str) -> SendInGameLogByUserIdRequest:
+        self.payload = payload
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> SendInGameLogByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SendInGameLogByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SendInGameLogByUserIdRequest]:
+        if data is None:
+            return None
+        return SendInGameLogByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_tags([
+                InGameLogTag.from_dict(data.get('tags')[i])
+                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+            ])\
+            .with_payload(data.get('payload'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "tags": [
+                self.tags[i].to_dict() if self.tags[i] else None
+                for i in range(len(self.tags) if self.tags else 0)
+            ],
+            "payload": self.payload,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
 
     context_stack: str = None

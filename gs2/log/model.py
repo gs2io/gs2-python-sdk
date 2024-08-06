@@ -19,6 +19,47 @@ from typing import *
 from gs2 import core
 
 
+class InGameLogTag(core.Gs2Model):
+    key: str = None
+    value: str = None
+
+    def with_key(self, key: str) -> InGameLogTag:
+        self.key = key
+        return self
+
+    def with_value(self, value: str) -> InGameLogTag:
+        self.value = value
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[InGameLogTag]:
+        if data is None:
+            return None
+        return InGameLogTag()\
+            .with_key(data.get('key'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "key": self.key,
+            "value": self.value,
+        }
+
+
 class Insight(core.Gs2Model):
     insight_id: str = None
     name: str = None
@@ -251,6 +292,81 @@ class AccessLogWithTelemetry(core.Gs2Model):
             "request": self.request,
             "result": self.result,
             "status": self.status,
+        }
+
+
+class InGameLog(core.Gs2Model):
+    timestamp: int = None
+    request_id: str = None
+    user_id: str = None
+    tags: List[InGameLogTag] = None
+    payload: str = None
+
+    def with_timestamp(self, timestamp: int) -> InGameLog:
+        self.timestamp = timestamp
+        return self
+
+    def with_request_id(self, request_id: str) -> InGameLog:
+        self.request_id = request_id
+        return self
+
+    def with_user_id(self, user_id: str) -> InGameLog:
+        self.user_id = user_id
+        return self
+
+    def with_tags(self, tags: List[InGameLogTag]) -> InGameLog:
+        self.tags = tags
+        return self
+
+    def with_payload(self, payload: str) -> InGameLog:
+        self.payload = payload
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+    ):
+        return ''.format(
+        )
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[InGameLog]:
+        if data is None:
+            return None
+        return InGameLog()\
+            .with_timestamp(data.get('timestamp'))\
+            .with_request_id(data.get('requestId'))\
+            .with_user_id(data.get('userId'))\
+            .with_tags([
+                InGameLogTag.from_dict(data.get('tags')[i])
+                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+            ])\
+            .with_payload(data.get('payload'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "timestamp": self.timestamp,
+            "requestId": self.request_id,
+            "userId": self.user_id,
+            "tags": [
+                self.tags[i].to_dict() if self.tags[i] else None
+                for i in range(len(self.tags) if self.tags else 0)
+            ],
+            "payload": self.payload,
         }
 
 
