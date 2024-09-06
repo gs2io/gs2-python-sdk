@@ -451,6 +451,7 @@ class Status(core.Gs2Model):
     user_id: str = None
     random_seed: int = None
     idle_minutes: int = None
+    next_rewards_at: int = None
     maximum_idle_minutes: int = None
     created_at: int = None
     updated_at: int = None
@@ -474,6 +475,10 @@ class Status(core.Gs2Model):
 
     def with_idle_minutes(self, idle_minutes: int) -> Status:
         self.idle_minutes = idle_minutes
+        return self
+
+    def with_next_rewards_at(self, next_rewards_at: int) -> Status:
+        self.next_rewards_at = next_rewards_at
         return self
 
     def with_maximum_idle_minutes(self, maximum_idle_minutes: int) -> Status:
@@ -583,6 +588,7 @@ class Status(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_random_seed(data.get('randomSeed'))\
             .with_idle_minutes(data.get('idleMinutes'))\
+            .with_next_rewards_at(data.get('nextRewardsAt'))\
             .with_maximum_idle_minutes(data.get('maximumIdleMinutes'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -595,6 +601,7 @@ class Status(core.Gs2Model):
             "userId": self.user_id,
             "randomSeed": self.random_seed,
             "idleMinutes": self.idle_minutes,
+            "nextRewardsAt": self.next_rewards_at,
             "maximumIdleMinutes": self.maximum_idle_minutes,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
