@@ -1823,7 +1823,6 @@ class DeleteTakeOverRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     type: int = None
-    user_identifier: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> DeleteTakeOverRequest:
@@ -1836,10 +1835,6 @@ class DeleteTakeOverRequest(core.Gs2Request):
 
     def with_type(self, type: int) -> DeleteTakeOverRequest:
         self.type = type
-        return self
-
-    def with_user_identifier(self, user_identifier: str) -> DeleteTakeOverRequest:
-        self.user_identifier = user_identifier
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> DeleteTakeOverRequest:
@@ -1867,15 +1862,13 @@ class DeleteTakeOverRequest(core.Gs2Request):
         return DeleteTakeOverRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_type(data.get('type'))\
-            .with_user_identifier(data.get('userIdentifier'))
+            .with_type(data.get('type'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "type": self.type,
-            "userIdentifier": self.user_identifier,
         }
 
 

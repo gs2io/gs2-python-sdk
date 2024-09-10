@@ -2518,8 +2518,6 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["accessToken"] = request.access_token
         if request.type is not None:
             body["type"] = request.type
-        if request.user_identifier is not None:
-            body["userIdentifier"] = request.user_identifier
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

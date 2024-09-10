@@ -1750,7 +1750,8 @@ class Namespace(core.Gs2Model):
     currency_usage_priority: str = None
     shared_free_currency: bool = None
     platform_setting: PlatformSetting = None
-    change_balance_script: ScriptSetting = None
+    deposit_balance_script: ScriptSetting = None
+    withdraw_balance_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1780,8 +1781,12 @@ class Namespace(core.Gs2Model):
         self.platform_setting = platform_setting
         return self
 
-    def with_change_balance_script(self, change_balance_script: ScriptSetting) -> Namespace:
-        self.change_balance_script = change_balance_script
+    def with_deposit_balance_script(self, deposit_balance_script: ScriptSetting) -> Namespace:
+        self.deposit_balance_script = deposit_balance_script
+        return self
+
+    def with_withdraw_balance_script(self, withdraw_balance_script: ScriptSetting) -> Namespace:
+        self.withdraw_balance_script = withdraw_balance_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1868,7 +1873,8 @@ class Namespace(core.Gs2Model):
             .with_currency_usage_priority(data.get('currencyUsagePriority'))\
             .with_shared_free_currency(data.get('sharedFreeCurrency'))\
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
-            .with_change_balance_script(ScriptSetting.from_dict(data.get('changeBalanceScript')))\
+            .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
+            .with_withdraw_balance_script(ScriptSetting.from_dict(data.get('withdrawBalanceScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1882,7 +1888,8 @@ class Namespace(core.Gs2Model):
             "currencyUsagePriority": self.currency_usage_priority,
             "sharedFreeCurrency": self.shared_free_currency,
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
-            "changeBalanceScript": self.change_balance_script.to_dict() if self.change_balance_script else None,
+            "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
+            "withdrawBalanceScript": self.withdraw_balance_script.to_dict() if self.withdraw_balance_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

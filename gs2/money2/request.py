@@ -68,7 +68,8 @@ class CreateNamespaceRequest(core.Gs2Request):
     description: str = None
     shared_free_currency: bool = None
     platform_setting: PlatformSetting = None
-    change_balance_script: ScriptSetting = None
+    deposit_balance_script: ScriptSetting = None
+    withdraw_balance_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -91,8 +92,12 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.platform_setting = platform_setting
         return self
 
-    def with_change_balance_script(self, change_balance_script: ScriptSetting) -> CreateNamespaceRequest:
-        self.change_balance_script = change_balance_script
+    def with_deposit_balance_script(self, deposit_balance_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.deposit_balance_script = deposit_balance_script
+        return self
+
+    def with_withdraw_balance_script(self, withdraw_balance_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.withdraw_balance_script = withdraw_balance_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -123,7 +128,8 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_shared_free_currency(data.get('sharedFreeCurrency'))\
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
-            .with_change_balance_script(ScriptSetting.from_dict(data.get('changeBalanceScript')))\
+            .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
+            .with_withdraw_balance_script(ScriptSetting.from_dict(data.get('withdrawBalanceScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -133,7 +139,8 @@ class CreateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "sharedFreeCurrency": self.shared_free_currency,
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
-            "changeBalanceScript": self.change_balance_script.to_dict() if self.change_balance_script else None,
+            "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
+            "withdrawBalanceScript": self.withdraw_balance_script.to_dict() if self.withdraw_balance_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -217,7 +224,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
     currency_usage_priority: str = None
     description: str = None
     platform_setting: PlatformSetting = None
-    change_balance_script: ScriptSetting = None
+    deposit_balance_script: ScriptSetting = None
+    withdraw_balance_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -236,8 +244,12 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.platform_setting = platform_setting
         return self
 
-    def with_change_balance_script(self, change_balance_script: ScriptSetting) -> UpdateNamespaceRequest:
-        self.change_balance_script = change_balance_script
+    def with_deposit_balance_script(self, deposit_balance_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.deposit_balance_script = deposit_balance_script
+        return self
+
+    def with_withdraw_balance_script(self, withdraw_balance_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.withdraw_balance_script = withdraw_balance_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -267,7 +279,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_currency_usage_priority(data.get('currencyUsagePriority'))\
             .with_description(data.get('description'))\
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
-            .with_change_balance_script(ScriptSetting.from_dict(data.get('changeBalanceScript')))\
+            .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
+            .with_withdraw_balance_script(ScriptSetting.from_dict(data.get('withdrawBalanceScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -276,7 +289,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "currencyUsagePriority": self.currency_usage_priority,
             "description": self.description,
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
-            "changeBalanceScript": self.change_balance_script.to_dict() if self.change_balance_script else None,
+            "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
+            "withdrawBalanceScript": self.withdraw_balance_script.to_dict() if self.withdraw_balance_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

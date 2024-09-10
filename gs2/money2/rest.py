@@ -119,8 +119,10 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             body["sharedFreeCurrency"] = request.shared_free_currency
         if request.platform_setting is not None:
             body["platformSetting"] = request.platform_setting.to_dict()
-        if request.change_balance_script is not None:
-            body["changeBalanceScript"] = request.change_balance_script.to_dict()
+        if request.deposit_balance_script is not None:
+            body["depositBalanceScript"] = request.deposit_balance_script.to_dict()
+        if request.withdraw_balance_script is not None:
+            body["withdrawBalanceScript"] = request.withdraw_balance_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -342,8 +344,10 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.platform_setting is not None:
             body["platformSetting"] = request.platform_setting.to_dict()
-        if request.change_balance_script is not None:
-            body["changeBalanceScript"] = request.change_balance_script.to_dict()
+        if request.deposit_balance_script is not None:
+            body["depositBalanceScript"] = request.deposit_balance_script.to_dict()
+        if request.withdraw_balance_script is not None:
+            body["withdrawBalanceScript"] = request.withdraw_balance_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

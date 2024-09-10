@@ -2485,8 +2485,6 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
-        if request.user_identifier is not None:
-            query_strings["userIdentifier"] = request.user_identifier
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
