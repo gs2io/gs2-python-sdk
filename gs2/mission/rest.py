@@ -3498,8 +3498,12 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.scope_type is not None:
+            body["scopeType"] = request.scope_type
         if request.reset_type is not None:
             body["resetType"] = request.reset_type
+        if request.condition_name is not None:
+            body["conditionName"] = request.condition_name
         if request.value is not None:
             body["value"] = request.value
         if request.multiply_value_specifying_quantity is not None:
@@ -3582,8 +3586,12 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.scope_type is not None:
+            body["scopeType"] = request.scope_type
         if request.reset_type is not None:
             body["resetType"] = request.reset_type
+        if request.condition_name is not None:
+            body["conditionName"] = request.condition_name
         if request.value is not None:
             body["value"] = request.value
         if request.multiply_value_specifying_quantity is not None:

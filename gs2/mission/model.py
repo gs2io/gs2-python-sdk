@@ -405,15 +405,25 @@ class AcquireAction(core.Gs2Model):
 
 class TargetCounterModel(core.Gs2Model):
     counter_name: str = None
+    scope_type: str = None
     reset_type: str = None
+    condition_name: str = None
     value: int = None
 
     def with_counter_name(self, counter_name: str) -> TargetCounterModel:
         self.counter_name = counter_name
         return self
 
+    def with_scope_type(self, scope_type: str) -> TargetCounterModel:
+        self.scope_type = scope_type
+        return self
+
     def with_reset_type(self, reset_type: str) -> TargetCounterModel:
         self.reset_type = reset_type
+        return self
+
+    def with_condition_name(self, condition_name: str) -> TargetCounterModel:
+        self.condition_name = condition_name
         return self
 
     def with_value(self, value: int) -> TargetCounterModel:
@@ -440,25 +450,39 @@ class TargetCounterModel(core.Gs2Model):
             return None
         return TargetCounterModel()\
             .with_counter_name(data.get('counterName'))\
+            .with_scope_type(data.get('scopeType'))\
             .with_reset_type(data.get('resetType'))\
+            .with_condition_name(data.get('conditionName'))\
             .with_value(data.get('value'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "counterName": self.counter_name,
+            "scopeType": self.scope_type,
             "resetType": self.reset_type,
+            "conditionName": self.condition_name,
             "value": self.value,
         }
 
 
 class ScopedValue(core.Gs2Model):
+    scope_type: str = None
     reset_type: str = None
+    condition_name: str = None
     value: int = None
     next_reset_at: int = None
     updated_at: int = None
 
+    def with_scope_type(self, scope_type: str) -> ScopedValue:
+        self.scope_type = scope_type
+        return self
+
     def with_reset_type(self, reset_type: str) -> ScopedValue:
         self.reset_type = reset_type
+        return self
+
+    def with_condition_name(self, condition_name: str) -> ScopedValue:
+        self.condition_name = condition_name
         return self
 
     def with_value(self, value: int) -> ScopedValue:
@@ -492,14 +516,18 @@ class ScopedValue(core.Gs2Model):
         if data is None:
             return None
         return ScopedValue()\
+            .with_scope_type(data.get('scopeType'))\
             .with_reset_type(data.get('resetType'))\
+            .with_condition_name(data.get('conditionName'))\
             .with_value(data.get('value'))\
             .with_next_reset_at(data.get('nextResetAt'))\
             .with_updated_at(data.get('updatedAt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "scopeType": self.scope_type,
             "resetType": self.reset_type,
+            "conditionName": self.condition_name,
             "value": self.value,
             "nextResetAt": self.next_reset_at,
             "updatedAt": self.updated_at,
@@ -1756,10 +1784,17 @@ class MissionGroupModelMaster(core.Gs2Model):
 
 
 class CounterScopeModel(core.Gs2Model):
+    scope_type: str = None
     reset_type: str = None
     reset_day_of_month: int = None
     reset_day_of_week: str = None
     reset_hour: int = None
+    condition_name: str = None
+    condition: VerifyAction = None
+
+    def with_scope_type(self, scope_type: str) -> CounterScopeModel:
+        self.scope_type = scope_type
+        return self
 
     def with_reset_type(self, reset_type: str) -> CounterScopeModel:
         self.reset_type = reset_type
@@ -1775,6 +1810,14 @@ class CounterScopeModel(core.Gs2Model):
 
     def with_reset_hour(self, reset_hour: int) -> CounterScopeModel:
         self.reset_hour = reset_hour
+        return self
+
+    def with_condition_name(self, condition_name: str) -> CounterScopeModel:
+        self.condition_name = condition_name
+        return self
+
+    def with_condition(self, condition: VerifyAction) -> CounterScopeModel:
+        self.condition = condition
         return self
 
     def get(self, key, default=None):
@@ -1796,17 +1839,23 @@ class CounterScopeModel(core.Gs2Model):
         if data is None:
             return None
         return CounterScopeModel()\
+            .with_scope_type(data.get('scopeType'))\
             .with_reset_type(data.get('resetType'))\
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
-            .with_reset_hour(data.get('resetHour'))
+            .with_reset_hour(data.get('resetHour'))\
+            .with_condition_name(data.get('conditionName'))\
+            .with_condition(VerifyAction.from_dict(data.get('condition')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "scopeType": self.scope_type,
             "resetType": self.reset_type,
             "resetDayOfMonth": self.reset_day_of_month,
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
+            "conditionName": self.condition_name,
+            "condition": self.condition.to_dict() if self.condition else None,
         }
 
 

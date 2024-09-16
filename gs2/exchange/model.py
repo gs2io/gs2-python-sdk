@@ -403,6 +403,66 @@ class AcquireAction(core.Gs2Model):
         }
 
 
+class LogCost(core.Gs2Model):
+    base: float = None
+    adds: List[float] = None
+    subs: List[float] = None
+
+    def with_base(self, base: float) -> LogCost:
+        self.base = base
+        return self
+
+    def with_adds(self, adds: List[float]) -> LogCost:
+        self.adds = adds
+        return self
+
+    def with_subs(self, subs: List[float]) -> LogCost:
+        self.subs = subs
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[LogCost]:
+        if data is None:
+            return None
+        return LogCost()\
+            .with_base(data.get('base'))\
+            .with_adds([
+                data.get('adds')[i]
+                for i in range(len(data.get('adds')) if data.get('adds') else 0)
+            ])\
+            .with_subs([
+                data.get('subs')[i]
+                for i in range(len(data.get('subs')) if data.get('subs') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "base": self.base,
+            "adds": [
+                self.adds[i]
+                for i in range(len(self.adds) if self.adds else 0)
+            ],
+            "subs": [
+                self.subs[i]
+                for i in range(len(self.subs) if self.subs else 0)
+            ],
+        }
+
+
 class Await(core.Gs2Model):
     await_id: str = None
     user_id: str = None

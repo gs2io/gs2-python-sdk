@@ -2674,7 +2674,9 @@ class VerifyCounterValueRequest(core.Gs2Request):
     access_token: str = None
     counter_name: str = None
     verify_type: str = None
+    scope_type: str = None
     reset_type: str = None
+    condition_name: str = None
     value: int = None
     multiply_value_specifying_quantity: bool = None
     duplication_avoider: str = None
@@ -2695,8 +2697,16 @@ class VerifyCounterValueRequest(core.Gs2Request):
         self.verify_type = verify_type
         return self
 
+    def with_scope_type(self, scope_type: str) -> VerifyCounterValueRequest:
+        self.scope_type = scope_type
+        return self
+
     def with_reset_type(self, reset_type: str) -> VerifyCounterValueRequest:
         self.reset_type = reset_type
+        return self
+
+    def with_condition_name(self, condition_name: str) -> VerifyCounterValueRequest:
+        self.condition_name = condition_name
         return self
 
     def with_value(self, value: int) -> VerifyCounterValueRequest:
@@ -2734,7 +2744,9 @@ class VerifyCounterValueRequest(core.Gs2Request):
             .with_access_token(data.get('accessToken'))\
             .with_counter_name(data.get('counterName'))\
             .with_verify_type(data.get('verifyType'))\
+            .with_scope_type(data.get('scopeType'))\
             .with_reset_type(data.get('resetType'))\
+            .with_condition_name(data.get('conditionName'))\
             .with_value(data.get('value'))\
             .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
 
@@ -2744,7 +2756,9 @@ class VerifyCounterValueRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "counterName": self.counter_name,
             "verifyType": self.verify_type,
+            "scopeType": self.scope_type,
             "resetType": self.reset_type,
+            "conditionName": self.condition_name,
             "value": self.value,
             "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
         }
@@ -2757,7 +2771,9 @@ class VerifyCounterValueByUserIdRequest(core.Gs2Request):
     user_id: str = None
     counter_name: str = None
     verify_type: str = None
+    scope_type: str = None
     reset_type: str = None
+    condition_name: str = None
     value: int = None
     multiply_value_specifying_quantity: bool = None
     time_offset_token: str = None
@@ -2779,8 +2795,16 @@ class VerifyCounterValueByUserIdRequest(core.Gs2Request):
         self.verify_type = verify_type
         return self
 
+    def with_scope_type(self, scope_type: str) -> VerifyCounterValueByUserIdRequest:
+        self.scope_type = scope_type
+        return self
+
     def with_reset_type(self, reset_type: str) -> VerifyCounterValueByUserIdRequest:
         self.reset_type = reset_type
+        return self
+
+    def with_condition_name(self, condition_name: str) -> VerifyCounterValueByUserIdRequest:
+        self.condition_name = condition_name
         return self
 
     def with_value(self, value: int) -> VerifyCounterValueByUserIdRequest:
@@ -2822,7 +2846,9 @@ class VerifyCounterValueByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_counter_name(data.get('counterName'))\
             .with_verify_type(data.get('verifyType'))\
+            .with_scope_type(data.get('scopeType'))\
             .with_reset_type(data.get('resetType'))\
+            .with_condition_name(data.get('conditionName'))\
             .with_value(data.get('value'))\
             .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -2833,7 +2859,9 @@ class VerifyCounterValueByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "counterName": self.counter_name,
             "verifyType": self.verify_type,
+            "scopeType": self.scope_type,
             "resetType": self.reset_type,
+            "conditionName": self.condition_name,
             "value": self.value,
             "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
             "timeOffsetToken": self.time_offset_token,
