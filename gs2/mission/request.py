@@ -295,6 +295,175 @@ class CompleteByUserIdRequest(core.Gs2Request):
         }
 
 
+class BatchCompleteRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    mission_group_name: str = None
+    access_token: str = None
+    mission_task_names: List[str] = None
+    config: List[Config] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> BatchCompleteRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_mission_group_name(self, mission_group_name: str) -> BatchCompleteRequest:
+        self.mission_group_name = mission_group_name
+        return self
+
+    def with_access_token(self, access_token: str) -> BatchCompleteRequest:
+        self.access_token = access_token
+        return self
+
+    def with_mission_task_names(self, mission_task_names: List[str]) -> BatchCompleteRequest:
+        self.mission_task_names = mission_task_names
+        return self
+
+    def with_config(self, config: List[Config]) -> BatchCompleteRequest:
+        self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BatchCompleteRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchCompleteRequest]:
+        if data is None:
+            return None
+        return BatchCompleteRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_mission_group_name(data.get('missionGroupName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_mission_task_names([
+                data.get('missionTaskNames')[i]
+                for i in range(len(data.get('missionTaskNames')) if data.get('missionTaskNames') else 0)
+            ])\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "missionGroupName": self.mission_group_name,
+            "accessToken": self.access_token,
+            "missionTaskNames": [
+                self.mission_task_names[i]
+                for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
+            ],
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+        }
+
+
+class BatchCompleteByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    mission_group_name: str = None
+    user_id: str = None
+    mission_task_names: List[str] = None
+    config: List[Config] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> BatchCompleteByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_mission_group_name(self, mission_group_name: str) -> BatchCompleteByUserIdRequest:
+        self.mission_group_name = mission_group_name
+        return self
+
+    def with_user_id(self, user_id: str) -> BatchCompleteByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_mission_task_names(self, mission_task_names: List[str]) -> BatchCompleteByUserIdRequest:
+        self.mission_task_names = mission_task_names
+        return self
+
+    def with_config(self, config: List[Config]) -> BatchCompleteByUserIdRequest:
+        self.config = config
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> BatchCompleteByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BatchCompleteByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchCompleteByUserIdRequest]:
+        if data is None:
+            return None
+        return BatchCompleteByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_mission_group_name(data.get('missionGroupName'))\
+            .with_user_id(data.get('userId'))\
+            .with_mission_task_names([
+                data.get('missionTaskNames')[i]
+                for i in range(len(data.get('missionTaskNames')) if data.get('missionTaskNames') else 0)
+            ])\
+            .with_config([
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')) if data.get('config') else 0)
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "missionGroupName": self.mission_group_name,
+            "userId": self.user_id,
+            "missionTaskNames": [
+                self.mission_task_names[i]
+                for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
+            ],
+            "config": [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config) if self.config else 0)
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class ReceiveByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -360,6 +529,81 @@ class ReceiveByUserIdRequest(core.Gs2Request):
             "missionGroupName": self.mission_group_name,
             "missionTaskName": self.mission_task_name,
             "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class BatchReceiveByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    mission_group_name: str = None
+    user_id: str = None
+    mission_task_names: List[str] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> BatchReceiveByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_mission_group_name(self, mission_group_name: str) -> BatchReceiveByUserIdRequest:
+        self.mission_group_name = mission_group_name
+        return self
+
+    def with_user_id(self, user_id: str) -> BatchReceiveByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_mission_task_names(self, mission_task_names: List[str]) -> BatchReceiveByUserIdRequest:
+        self.mission_task_names = mission_task_names
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> BatchReceiveByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BatchReceiveByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchReceiveByUserIdRequest]:
+        if data is None:
+            return None
+        return BatchReceiveByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_mission_group_name(data.get('missionGroupName'))\
+            .with_user_id(data.get('userId'))\
+            .with_mission_task_names([
+                data.get('missionTaskNames')[i]
+                for i in range(len(data.get('missionTaskNames')) if data.get('missionTaskNames') else 0)
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "missionGroupName": self.mission_group_name,
+            "userId": self.user_id,
+            "missionTaskNames": [
+                self.mission_task_names[i]
+                for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
+            ],
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -794,6 +1038,49 @@ class ReceiveByStampTaskRequest(core.Gs2Request):
         if data is None:
             return None
         return ReceiveByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class BatchReceiveByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> BatchReceiveByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> BatchReceiveByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchReceiveByStampTaskRequest]:
+        if data is None:
+            return None
+        return BatchReceiveByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 
