@@ -1219,7 +1219,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
-        ) + "/stamp/receive"
+        ) + "/stamp/receive/batch"
 
         headers = self._create_authorized_headers()
         body = {
