@@ -473,6 +473,7 @@ class Script(core.Gs2Model):
     name: str = None
     description: str = None
     script: str = None
+    disable_string_number_to_number: bool = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -491,6 +492,10 @@ class Script(core.Gs2Model):
 
     def with_script(self, script: str) -> Script:
         self.script = script
+        return self
+
+    def with_disable_string_number_to_number(self, disable_string_number_to_number: bool) -> Script:
+        self.disable_string_number_to_number = disable_string_number_to_number
         return self
 
     def with_created_at(self, created_at: int) -> Script:
@@ -583,6 +588,7 @@ class Script(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_script(data.get('script'))\
+            .with_disable_string_number_to_number(data.get('disableStringNumberToNumber'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -593,6 +599,7 @@ class Script(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "script": self.script,
+            "disableStringNumberToNumber": self.disable_string_number_to_number,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,

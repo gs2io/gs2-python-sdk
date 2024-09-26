@@ -339,6 +339,7 @@ class CreateScriptRequest(core.Gs2Request):
     name: str = None
     description: str = None
     script: str = None
+    disable_string_number_to_number: bool = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateScriptRequest:
         self.namespace_name = namespace_name
@@ -354,6 +355,10 @@ class CreateScriptRequest(core.Gs2Request):
 
     def with_script(self, script: str) -> CreateScriptRequest:
         self.script = script
+        return self
+
+    def with_disable_string_number_to_number(self, disable_string_number_to_number: bool) -> CreateScriptRequest:
+        self.disable_string_number_to_number = disable_string_number_to_number
         return self
 
     def get(self, key, default=None):
@@ -378,7 +383,8 @@ class CreateScriptRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_script(data.get('script'))
+            .with_script(data.get('script'))\
+            .with_disable_string_number_to_number(data.get('disableStringNumberToNumber'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -386,6 +392,7 @@ class CreateScriptRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "script": self.script,
+            "disableStringNumberToNumber": self.disable_string_number_to_number,
         }
 
 
@@ -396,6 +403,7 @@ class CreateScriptFromGitHubRequest(core.Gs2Request):
     name: str = None
     description: str = None
     checkout_setting: GitHubCheckoutSetting = None
+    disable_string_number_to_number: bool = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateScriptFromGitHubRequest:
         self.namespace_name = namespace_name
@@ -411,6 +419,10 @@ class CreateScriptFromGitHubRequest(core.Gs2Request):
 
     def with_checkout_setting(self, checkout_setting: GitHubCheckoutSetting) -> CreateScriptFromGitHubRequest:
         self.checkout_setting = checkout_setting
+        return self
+
+    def with_disable_string_number_to_number(self, disable_string_number_to_number: bool) -> CreateScriptFromGitHubRequest:
+        self.disable_string_number_to_number = disable_string_number_to_number
         return self
 
     def get(self, key, default=None):
@@ -435,7 +447,8 @@ class CreateScriptFromGitHubRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_checkout_setting(GitHubCheckoutSetting.from_dict(data.get('checkoutSetting')))
+            .with_checkout_setting(GitHubCheckoutSetting.from_dict(data.get('checkoutSetting')))\
+            .with_disable_string_number_to_number(data.get('disableStringNumberToNumber'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -443,6 +456,7 @@ class CreateScriptFromGitHubRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "checkoutSetting": self.checkout_setting.to_dict() if self.checkout_setting else None,
+            "disableStringNumberToNumber": self.disable_string_number_to_number,
         }
 
 
@@ -496,6 +510,7 @@ class UpdateScriptRequest(core.Gs2Request):
     script_name: str = None
     description: str = None
     script: str = None
+    disable_string_number_to_number: bool = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateScriptRequest:
         self.namespace_name = namespace_name
@@ -511,6 +526,10 @@ class UpdateScriptRequest(core.Gs2Request):
 
     def with_script(self, script: str) -> UpdateScriptRequest:
         self.script = script
+        return self
+
+    def with_disable_string_number_to_number(self, disable_string_number_to_number: bool) -> UpdateScriptRequest:
+        self.disable_string_number_to_number = disable_string_number_to_number
         return self
 
     def get(self, key, default=None):
@@ -535,7 +554,8 @@ class UpdateScriptRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_script_name(data.get('scriptName'))\
             .with_description(data.get('description'))\
-            .with_script(data.get('script'))
+            .with_script(data.get('script'))\
+            .with_disable_string_number_to_number(data.get('disableStringNumberToNumber'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -543,6 +563,7 @@ class UpdateScriptRequest(core.Gs2Request):
             "scriptName": self.script_name,
             "description": self.description,
             "script": self.script,
+            "disableStringNumberToNumber": self.disable_string_number_to_number,
         }
 
 
@@ -553,6 +574,7 @@ class UpdateScriptFromGitHubRequest(core.Gs2Request):
     script_name: str = None
     description: str = None
     checkout_setting: GitHubCheckoutSetting = None
+    disable_string_number_to_number: bool = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateScriptFromGitHubRequest:
         self.namespace_name = namespace_name
@@ -568,6 +590,10 @@ class UpdateScriptFromGitHubRequest(core.Gs2Request):
 
     def with_checkout_setting(self, checkout_setting: GitHubCheckoutSetting) -> UpdateScriptFromGitHubRequest:
         self.checkout_setting = checkout_setting
+        return self
+
+    def with_disable_string_number_to_number(self, disable_string_number_to_number: bool) -> UpdateScriptFromGitHubRequest:
+        self.disable_string_number_to_number = disable_string_number_to_number
         return self
 
     def get(self, key, default=None):
@@ -592,7 +618,8 @@ class UpdateScriptFromGitHubRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_script_name(data.get('scriptName'))\
             .with_description(data.get('description'))\
-            .with_checkout_setting(GitHubCheckoutSetting.from_dict(data.get('checkoutSetting')))
+            .with_checkout_setting(GitHubCheckoutSetting.from_dict(data.get('checkoutSetting')))\
+            .with_disable_string_number_to_number(data.get('disableStringNumberToNumber'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -600,6 +627,7 @@ class UpdateScriptFromGitHubRequest(core.Gs2Request):
             "scriptName": self.script_name,
             "description": self.description,
             "checkoutSetting": self.checkout_setting.to_dict() if self.checkout_setting else None,
+            "disableStringNumberToNumber": self.disable_string_number_to_number,
         }
 
 
@@ -716,6 +744,7 @@ class DebugInvokeRequest(core.Gs2Request):
     script: str = None
     args: str = None
     random_status: RandomStatus = None
+    disable_string_number_to_number: bool = None
 
     def with_script(self, script: str) -> DebugInvokeRequest:
         self.script = script
@@ -727,6 +756,10 @@ class DebugInvokeRequest(core.Gs2Request):
 
     def with_random_status(self, random_status: RandomStatus) -> DebugInvokeRequest:
         self.random_status = random_status
+        return self
+
+    def with_disable_string_number_to_number(self, disable_string_number_to_number: bool) -> DebugInvokeRequest:
+        self.disable_string_number_to_number = disable_string_number_to_number
         return self
 
     def get(self, key, default=None):
@@ -750,11 +783,13 @@ class DebugInvokeRequest(core.Gs2Request):
         return DebugInvokeRequest()\
             .with_script(data.get('script'))\
             .with_args(data.get('args'))\
-            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))
+            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
+            .with_disable_string_number_to_number(data.get('disableStringNumberToNumber'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "script": self.script,
             "args": self.args,
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
+            "disableStringNumberToNumber": self.disable_string_number_to_number,
         }

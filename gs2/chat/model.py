@@ -645,6 +645,7 @@ class Namespace(core.Gs2Model):
     name: str = None
     description: str = None
     allow_create_room: bool = None
+    message_life_time_days: int = None
     post_message_script: ScriptSetting = None
     create_room_script: ScriptSetting = None
     delete_room_script: ScriptSetting = None
@@ -670,6 +671,10 @@ class Namespace(core.Gs2Model):
 
     def with_allow_create_room(self, allow_create_room: bool) -> Namespace:
         self.allow_create_room = allow_create_room
+        return self
+
+    def with_message_life_time_days(self, message_life_time_days: int) -> Namespace:
+        self.message_life_time_days = message_life_time_days
         return self
 
     def with_post_message_script(self, post_message_script: ScriptSetting) -> Namespace:
@@ -778,6 +783,7 @@ class Namespace(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_allow_create_room(data.get('allowCreateRoom'))\
+            .with_message_life_time_days(data.get('messageLifeTimeDays'))\
             .with_post_message_script(ScriptSetting.from_dict(data.get('postMessageScript')))\
             .with_create_room_script(ScriptSetting.from_dict(data.get('createRoomScript')))\
             .with_delete_room_script(ScriptSetting.from_dict(data.get('deleteRoomScript')))\
@@ -795,6 +801,7 @@ class Namespace(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "allowCreateRoom": self.allow_create_room,
+            "messageLifeTimeDays": self.message_life_time_days,
             "postMessageScript": self.post_message_script.to_dict() if self.post_message_script else None,
             "createRoomScript": self.create_room_script.to_dict() if self.create_room_script else None,
             "deleteRoomScript": self.delete_room_script.to_dict() if self.delete_room_script else None,

@@ -115,6 +115,8 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.allow_create_room is not None:
             body["allowCreateRoom"] = request.allow_create_room
+        if request.message_life_time_days is not None:
+            body["messageLifeTimeDays"] = request.message_life_time_days
         if request.post_message_script is not None:
             body["postMessageScript"] = request.post_message_script.to_dict()
         if request.create_room_script is not None:
@@ -346,6 +348,8 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.allow_create_room is not None:
             body["allowCreateRoom"] = request.allow_create_room
+        if request.message_life_time_days is not None:
+            body["messageLifeTimeDays"] = request.message_life_time_days
         if request.post_message_script is not None:
             body["postMessageScript"] = request.post_message_script.to_dict()
         if request.create_room_script is not None:
@@ -1794,6 +1798,164 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
     ) -> DescribeMessagesByUserIdResult:
         async_result = []
         self._describe_messages_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_latest_messages(
+        self,
+        request: DescribeLatestMessagesRequest,
+        callback: Callable[[AsyncResult[DescribeLatestMessagesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='chat',
+            region=self.session.region,
+        ) + "/{namespaceName}/room/{roomName}/message/latest".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            roomName=request.room_name if request.room_name is not None and request.room_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.password is not None:
+            query_strings["password"] = request.password
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeLatestMessagesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_latest_messages(
+        self,
+        request: DescribeLatestMessagesRequest,
+    ) -> DescribeLatestMessagesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_latest_messages(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_latest_messages_async(
+        self,
+        request: DescribeLatestMessagesRequest,
+    ) -> DescribeLatestMessagesResult:
+        async_result = []
+        self._describe_latest_messages(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_latest_messages_by_user_id(
+        self,
+        request: DescribeLatestMessagesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeLatestMessagesByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='chat',
+            region=self.session.region,
+        ) + "/{namespaceName}/room/{roomName}/message/latest/get".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            roomName=request.room_name if request.room_name is not None and request.room_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.password is not None:
+            query_strings["password"] = request.password
+        if request.user_id is not None:
+            query_strings["userId"] = request.user_id
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeLatestMessagesByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_latest_messages_by_user_id(
+        self,
+        request: DescribeLatestMessagesByUserIdRequest,
+    ) -> DescribeLatestMessagesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_latest_messages_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_latest_messages_by_user_id_async(
+        self,
+        request: DescribeLatestMessagesByUserIdRequest,
+    ) -> DescribeLatestMessagesByUserIdResult:
+        async_result = []
+        self._describe_latest_messages_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

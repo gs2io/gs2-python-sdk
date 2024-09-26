@@ -561,6 +561,8 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.script is not None:
             body["script"] = request.script
+        if request.disable_string_number_to_number is not None:
+            body["disableStringNumberToNumber"] = request.disable_string_number_to_number
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -638,6 +640,8 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.checkout_setting is not None:
             body["checkoutSetting"] = request.checkout_setting.to_dict()
+        if request.disable_string_number_to_number is not None:
+            body["disableStringNumberToNumber"] = request.disable_string_number_to_number
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -788,6 +792,8 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.script is not None:
             body["script"] = request.script
+        if request.disable_string_number_to_number is not None:
+            body["disableStringNumberToNumber"] = request.disable_string_number_to_number
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -865,6 +871,8 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.checkout_setting is not None:
             body["checkoutSetting"] = request.checkout_setting.to_dict()
+        if request.disable_string_number_to_number is not None:
+            body["disableStringNumberToNumber"] = request.disable_string_number_to_number
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1092,6 +1100,8 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["args"] = request.args
         if request.random_status is not None:
             body["randomStatus"] = request.random_status.to_dict()
+        if request.disable_string_number_to_number is not None:
+            body["disableStringNumberToNumber"] = request.disable_string_number_to_number
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

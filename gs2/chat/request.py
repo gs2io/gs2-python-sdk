@@ -66,6 +66,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     allow_create_room: bool = None
+    message_life_time_days: int = None
     post_message_script: ScriptSetting = None
     create_room_script: ScriptSetting = None
     delete_room_script: ScriptSetting = None
@@ -84,6 +85,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_allow_create_room(self, allow_create_room: bool) -> CreateNamespaceRequest:
         self.allow_create_room = allow_create_room
+        return self
+
+    def with_message_life_time_days(self, message_life_time_days: int) -> CreateNamespaceRequest:
+        self.message_life_time_days = message_life_time_days
         return self
 
     def with_post_message_script(self, post_message_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -136,6 +141,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_allow_create_room(data.get('allowCreateRoom'))\
+            .with_message_life_time_days(data.get('messageLifeTimeDays'))\
             .with_post_message_script(ScriptSetting.from_dict(data.get('postMessageScript')))\
             .with_create_room_script(ScriptSetting.from_dict(data.get('createRoomScript')))\
             .with_delete_room_script(ScriptSetting.from_dict(data.get('deleteRoomScript')))\
@@ -149,6 +155,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "allowCreateRoom": self.allow_create_room,
+            "messageLifeTimeDays": self.message_life_time_days,
             "postMessageScript": self.post_message_script.to_dict() if self.post_message_script else None,
             "createRoomScript": self.create_room_script.to_dict() if self.create_room_script else None,
             "deleteRoomScript": self.delete_room_script.to_dict() if self.delete_room_script else None,
@@ -237,6 +244,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     allow_create_room: bool = None
+    message_life_time_days: int = None
     post_message_script: ScriptSetting = None
     create_room_script: ScriptSetting = None
     delete_room_script: ScriptSetting = None
@@ -255,6 +263,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_allow_create_room(self, allow_create_room: bool) -> UpdateNamespaceRequest:
         self.allow_create_room = allow_create_room
+        return self
+
+    def with_message_life_time_days(self, message_life_time_days: int) -> UpdateNamespaceRequest:
+        self.message_life_time_days = message_life_time_days
         return self
 
     def with_post_message_script(self, post_message_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -307,6 +319,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_allow_create_room(data.get('allowCreateRoom'))\
+            .with_message_life_time_days(data.get('messageLifeTimeDays'))\
             .with_post_message_script(ScriptSetting.from_dict(data.get('postMessageScript')))\
             .with_create_room_script(ScriptSetting.from_dict(data.get('createRoomScript')))\
             .with_delete_room_script(ScriptSetting.from_dict(data.get('deleteRoomScript')))\
@@ -320,6 +333,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "allowCreateRoom": self.allow_create_room,
+            "messageLifeTimeDays": self.message_life_time_days,
             "postMessageScript": self.post_message_script.to_dict() if self.post_message_script else None,
             "createRoomScript": self.create_room_script.to_dict() if self.create_room_script else None,
             "deleteRoomScript": self.delete_room_script.to_dict() if self.delete_room_script else None,
@@ -1377,6 +1391,141 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
             "password": self.password,
             "userId": self.user_id,
             "startAt": self.start_at,
+            "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class DescribeLatestMessagesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    room_name: str = None
+    password: str = None
+    access_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeLatestMessagesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_room_name(self, room_name: str) -> DescribeLatestMessagesRequest:
+        self.room_name = room_name
+        return self
+
+    def with_password(self, password: str) -> DescribeLatestMessagesRequest:
+        self.password = password
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeLatestMessagesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeLatestMessagesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeLatestMessagesRequest]:
+        if data is None:
+            return None
+        return DescribeLatestMessagesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_room_name(data.get('roomName'))\
+            .with_password(data.get('password'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "roomName": self.room_name,
+            "password": self.password,
+            "accessToken": self.access_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    room_name: str = None
+    password: str = None
+    user_id: str = None
+    limit: int = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeLatestMessagesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_room_name(self, room_name: str) -> DescribeLatestMessagesByUserIdRequest:
+        self.room_name = room_name
+        return self
+
+    def with_password(self, password: str) -> DescribeLatestMessagesByUserIdRequest:
+        self.password = password
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeLatestMessagesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_limit(self, limit: int) -> DescribeLatestMessagesByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeLatestMessagesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeLatestMessagesByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeLatestMessagesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_room_name(data.get('roomName'))\
+            .with_password(data.get('password'))\
+            .with_user_id(data.get('userId'))\
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "roomName": self.room_name,
+            "password": self.password,
+            "userId": self.user_id,
             "limit": self.limit,
             "timeOffsetToken": self.time_offset_token,
         }
