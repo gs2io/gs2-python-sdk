@@ -1162,6 +1162,7 @@ class SearchGuildsRequest(core.Gs2Request):
     attributes5: List[int] = None
     join_policies: List[str] = None
     include_full_members_guild: bool = None
+    order_by: str = None
     page_token: str = None
     limit: int = None
     duplication_avoider: str = None
@@ -1208,6 +1209,10 @@ class SearchGuildsRequest(core.Gs2Request):
 
     def with_include_full_members_guild(self, include_full_members_guild: bool) -> SearchGuildsRequest:
         self.include_full_members_guild = include_full_members_guild
+        return self
+
+    def with_order_by(self, order_by: str) -> SearchGuildsRequest:
+        self.order_by = order_by
         return self
 
     def with_page_token(self, page_token: str) -> SearchGuildsRequest:
@@ -1270,6 +1275,7 @@ class SearchGuildsRequest(core.Gs2Request):
                 for i in range(len(data.get('joinPolicies')) if data.get('joinPolicies') else 0)
             ])\
             .with_include_full_members_guild(data.get('includeFullMembersGuild'))\
+            .with_order_by(data.get('orderBy'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -1304,6 +1310,7 @@ class SearchGuildsRequest(core.Gs2Request):
                 for i in range(len(self.join_policies) if self.join_policies else 0)
             ],
             "includeFullMembersGuild": self.include_full_members_guild,
+            "orderBy": self.order_by,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -1323,6 +1330,7 @@ class SearchGuildsByUserIdRequest(core.Gs2Request):
     attributes5: List[int] = None
     join_policies: List[str] = None
     include_full_members_guild: bool = None
+    order_by: str = None
     page_token: str = None
     limit: int = None
     time_offset_token: str = None
@@ -1370,6 +1378,10 @@ class SearchGuildsByUserIdRequest(core.Gs2Request):
 
     def with_include_full_members_guild(self, include_full_members_guild: bool) -> SearchGuildsByUserIdRequest:
         self.include_full_members_guild = include_full_members_guild
+        return self
+
+    def with_order_by(self, order_by: str) -> SearchGuildsByUserIdRequest:
+        self.order_by = order_by
         return self
 
     def with_page_token(self, page_token: str) -> SearchGuildsByUserIdRequest:
@@ -1436,6 +1448,7 @@ class SearchGuildsByUserIdRequest(core.Gs2Request):
                 for i in range(len(data.get('joinPolicies')) if data.get('joinPolicies') else 0)
             ])\
             .with_include_full_members_guild(data.get('includeFullMembersGuild'))\
+            .with_order_by(data.get('orderBy'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -1471,6 +1484,7 @@ class SearchGuildsByUserIdRequest(core.Gs2Request):
                 for i in range(len(self.join_policies) if self.join_policies else 0)
             ],
             "includeFullMembersGuild": self.include_full_members_guild,
+            "orderBy": self.order_by,
             "pageToken": self.page_token,
             "limit": self.limit,
             "timeOffsetToken": self.time_offset_token,

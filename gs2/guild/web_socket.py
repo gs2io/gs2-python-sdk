@@ -1618,6 +1618,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             ]
         if request.include_full_members_guild is not None:
             body["includeFullMembersGuild"] = request.include_full_members_guild
+        if request.order_by is not None:
+            body["orderBy"] = request.order_by
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
@@ -1735,6 +1737,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             ]
         if request.include_full_members_guild is not None:
             body["includeFullMembersGuild"] = request.include_full_members_guild
+        if request.order_by is not None:
+            body["orderBy"] = request.order_by
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:

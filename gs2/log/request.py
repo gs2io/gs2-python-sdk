@@ -379,7 +379,6 @@ class QueryAccessLogRequest(core.Gs2Request):
     page_token: str = None
     limit: int = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryAccessLogRequest:
         self.namespace_name = namespace_name
@@ -419,10 +418,6 @@ class QueryAccessLogRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> QueryAccessLogRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> QueryAccessLogRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -583,7 +578,6 @@ class QueryIssueStampSheetLogRequest(core.Gs2Request):
     page_token: str = None
     limit: int = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryIssueStampSheetLogRequest:
         self.namespace_name = namespace_name
@@ -627,10 +621,6 @@ class QueryIssueStampSheetLogRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> QueryIssueStampSheetLogRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> QueryIssueStampSheetLogRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -800,7 +790,6 @@ class QueryExecuteStampSheetLogRequest(core.Gs2Request):
     page_token: str = None
     limit: int = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryExecuteStampSheetLogRequest:
         self.namespace_name = namespace_name
@@ -844,10 +833,6 @@ class QueryExecuteStampSheetLogRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> QueryExecuteStampSheetLogRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> QueryExecuteStampSheetLogRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1017,7 +1002,6 @@ class QueryExecuteStampTaskLogRequest(core.Gs2Request):
     page_token: str = None
     limit: int = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryExecuteStampTaskLogRequest:
         self.namespace_name = namespace_name
@@ -1061,10 +1045,6 @@ class QueryExecuteStampTaskLogRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> QueryExecuteStampTaskLogRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> QueryExecuteStampTaskLogRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1477,7 +1457,6 @@ class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
     page_token: str = None
     limit: int = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> QueryAccessLogWithTelemetryRequest:
         self.namespace_name = namespace_name
@@ -1509,10 +1488,6 @@ class QueryAccessLogWithTelemetryRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> QueryAccessLogWithTelemetryRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> QueryAccessLogWithTelemetryRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

@@ -1346,6 +1346,80 @@ class Gs2SerialKeyRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _issue_once(
+        self,
+        request: IssueOnceRequest,
+        callback: Callable[[AsyncResult[IssueOnceResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='serial-key',
+            region=self.session.region,
+        ) + "/{namespaceName}/campaign/{campaignModelName}/serialKey".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            campaignModelName=request.campaign_model_name if request.campaign_model_name is not None and request.campaign_model_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=IssueOnceResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def issue_once(
+        self,
+        request: IssueOnceRequest,
+    ) -> IssueOnceResult:
+        async_result = []
+        with timeout(30):
+            self._issue_once(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def issue_once_async(
+        self,
+        request: IssueOnceRequest,
+    ) -> IssueOnceResult:
+        async_result = []
+        self._issue_once(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_serial_key(
         self,
         request: GetSerialKeyRequest,
@@ -1404,6 +1478,165 @@ class Gs2SerialKeyRestClient(rest.AbstractGs2RestClient):
     ) -> GetSerialKeyResult:
         async_result = []
         self._get_serial_key(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_code(
+        self,
+        request: VerifyCodeRequest,
+        callback: Callable[[AsyncResult[VerifyCodeResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='serial-key',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/serialKey/verify".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.code is not None:
+            body["code"] = request.code
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyCodeResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_code(
+        self,
+        request: VerifyCodeRequest,
+    ) -> VerifyCodeResult:
+        async_result = []
+        with timeout(30):
+            self._verify_code(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_code_async(
+        self,
+        request: VerifyCodeRequest,
+    ) -> VerifyCodeResult:
+        async_result = []
+        self._verify_code(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_code_by_user_id(
+        self,
+        request: VerifyCodeByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyCodeByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='serial-key',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/serialKey/verify".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.code is not None:
+            body["code"] = request.code
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyCodeByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_code_by_user_id(
+        self,
+        request: VerifyCodeByUserIdRequest,
+    ) -> VerifyCodeByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_code_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_code_by_user_id_async(
+        self,
+        request: VerifyCodeByUserIdRequest,
+    ) -> VerifyCodeByUserIdResult:
+        async_result = []
+        self._verify_code_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -1783,6 +2016,79 @@ class Gs2SerialKeyRestClient(rest.AbstractGs2RestClient):
     ) -> RevertUseByStampSheetResult:
         async_result = []
         self._revert_use_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_by_stamp_task(
+        self,
+        request: VerifyByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='serial-key',
+            region=self.session.region,
+        ) + "/serialKey/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_by_stamp_task(
+        self,
+        request: VerifyByStampTaskRequest,
+    ) -> VerifyByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_by_stamp_task_async(
+        self,
+        request: VerifyByStampTaskRequest,
+    ) -> VerifyByStampTaskResult:
+        async_result = []
+        self._verify_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

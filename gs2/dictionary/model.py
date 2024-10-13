@@ -338,14 +338,14 @@ class Entry(core.Gs2Model):
         owner_id,
         namespace_name,
         user_id,
-        entry_name,
+        entry_model_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:dictionary:{namespaceName}:user:{userId}:entry:{entryName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:dictionary:{namespaceName}:user:{userId}:entry:{entryModelName}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
             userId=user_id,
-            entryName=entry_name,
+            entryModelName=entry_model_name,
         )
 
     @classmethod
@@ -353,7 +353,7 @@ class Entry(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -363,7 +363,7 @@ class Entry(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -373,7 +373,7 @@ class Entry(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -383,20 +383,20 @@ class Entry(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('user_id')
 
     @classmethod
-    def get_entry_name_from_grn(
+    def get_entry_model_name_from_grn(
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):entry:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
-        return match.group('entry_name')
+        return match.group('entry_model_name')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -474,13 +474,13 @@ class EntryModelMaster(core.Gs2Model):
         region,
         owner_id,
         namespace_name,
-        entry_name,
+        entry_model_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:dictionary:{namespaceName}:model:{entryName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:dictionary:{namespaceName}:model:{entryModelName}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
-            entryName=entry_name,
+            entryModelName=entry_model_name,
         )
 
     @classmethod
@@ -488,7 +488,7 @@ class EntryModelMaster(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -498,7 +498,7 @@ class EntryModelMaster(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -508,20 +508,20 @@ class EntryModelMaster(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
 
     @classmethod
-    def get_entry_name_from_grn(
+    def get_entry_model_name_from_grn(
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
-        return match.group('entry_name')
+        return match.group('entry_model_name')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -585,13 +585,13 @@ class EntryModel(core.Gs2Model):
         region,
         owner_id,
         namespace_name,
-        entry_name,
+        entry_model_name,
     ):
-        return 'grn:gs2:{region}:{ownerId}:dictionary:{namespaceName}:model:{entryName}'.format(
+        return 'grn:gs2:{region}:{ownerId}:dictionary:{namespaceName}:model:{entryModelName}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
-            entryName=entry_name,
+            entryModelName=entry_model_name,
         )
 
     @classmethod
@@ -599,7 +599,7 @@ class EntryModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -609,7 +609,7 @@ class EntryModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -619,20 +619,20 @@ class EntryModel(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
 
     @classmethod
-    def get_entry_name_from_grn(
+    def get_entry_model_name_from_grn(
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryName>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):model:(?P<entryModelName>.+)', grn)
         if match is None:
             return None
-        return match.group('entry_name')
+        return match.group('entry_model_name')
 
     def get(self, key, default=None):
         items = self.to_dict()

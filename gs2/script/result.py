@@ -647,3 +647,85 @@ class DebugInvokeResult(core.Gs2Result):
                 for i in range(len(self.output) if self.output else 0)
             ],
         }
+
+
+class InvokeByStampSheetResult(core.Gs2Result):
+    code: int = None
+    result: str = None
+    transaction: Transaction = None
+    random_status: RandomStatus = None
+    execute_time: int = None
+    charged: int = None
+    output: List[str] = None
+
+    def with_code(self, code: int) -> InvokeByStampSheetResult:
+        self.code = code
+        return self
+
+    def with_result(self, result: str) -> InvokeByStampSheetResult:
+        self.result = result
+        return self
+
+    def with_transaction(self, transaction: Transaction) -> InvokeByStampSheetResult:
+        self.transaction = transaction
+        return self
+
+    def with_random_status(self, random_status: RandomStatus) -> InvokeByStampSheetResult:
+        self.random_status = random_status
+        return self
+
+    def with_execute_time(self, execute_time: int) -> InvokeByStampSheetResult:
+        self.execute_time = execute_time
+        return self
+
+    def with_charged(self, charged: int) -> InvokeByStampSheetResult:
+        self.charged = charged
+        return self
+
+    def with_output(self, output: List[str]) -> InvokeByStampSheetResult:
+        self.output = output
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[InvokeByStampSheetResult]:
+        if data is None:
+            return None
+        return InvokeByStampSheetResult()\
+            .with_code(data.get('code'))\
+            .with_result(data.get('result'))\
+            .with_transaction(Transaction.from_dict(data.get('transaction')))\
+            .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
+            .with_execute_time(data.get('executeTime'))\
+            .with_charged(data.get('charged'))\
+            .with_output([
+                data.get('output')[i]
+                for i in range(len(data.get('output')) if data.get('output') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "code": self.code,
+            "result": self.result,
+            "transaction": self.transaction.to_dict() if self.transaction else None,
+            "randomStatus": self.random_status.to_dict() if self.random_status else None,
+            "executeTime": self.execute_time,
+            "charged": self.charged,
+            "output": [
+                self.output[i]
+                for i in range(len(self.output) if self.output else 0)
+            ],
+        }

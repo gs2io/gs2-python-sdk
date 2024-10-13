@@ -1355,6 +1355,81 @@ class Gs2SerialKeyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _issue_once(
+        self,
+        request: IssueOnceRequest,
+        callback: Callable[[AsyncResult[IssueOnceResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="serialKey",
+            component='serialKey',
+            function='issueOnce',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.campaign_model_name is not None:
+            body["campaignModelName"] = request.campaign_model_name
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=IssueOnceResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def issue_once(
+        self,
+        request: IssueOnceRequest,
+    ) -> IssueOnceResult:
+        async_result = []
+        with timeout(30):
+            self._issue_once(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def issue_once_async(
+        self,
+        request: IssueOnceRequest,
+    ) -> IssueOnceResult:
+        async_result = []
+        self._issue_once(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _get_serial_key(
         self,
         request: GetSerialKeyRequest,
@@ -1415,6 +1490,168 @@ class Gs2SerialKeyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> GetSerialKeyResult:
         async_result = []
         self._get_serial_key(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_code(
+        self,
+        request: VerifyCodeRequest,
+        callback: Callable[[AsyncResult[VerifyCodeResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="serialKey",
+            component='serialKey',
+            function='verifyCode',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.code is not None:
+            body["code"] = request.code
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCodeResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_code(
+        self,
+        request: VerifyCodeRequest,
+    ) -> VerifyCodeResult:
+        async_result = []
+        with timeout(30):
+            self._verify_code(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_code_async(
+        self,
+        request: VerifyCodeRequest,
+    ) -> VerifyCodeResult:
+        async_result = []
+        self._verify_code(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_code_by_user_id(
+        self,
+        request: VerifyCodeByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyCodeByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="serialKey",
+            component='serialKey',
+            function='verifyCodeByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.code is not None:
+            body["code"] = request.code
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCodeByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_code_by_user_id(
+        self,
+        request: VerifyCodeByUserIdRequest,
+    ) -> VerifyCodeByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_code_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_code_by_user_id_async(
+        self,
+        request: VerifyCodeByUserIdRequest,
+    ) -> VerifyCodeByUserIdResult:
+        async_result = []
+        self._verify_code_by_user_id(
             request,
             lambda result: async_result.append(result),
         )
@@ -1798,6 +2035,79 @@ class Gs2SerialKeyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> RevertUseByStampSheetResult:
         async_result = []
         self._revert_use_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_by_stamp_task(
+        self,
+        request: VerifyByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="serialKey",
+            component='serialKey',
+            function='verifyByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_by_stamp_task(
+        self,
+        request: VerifyByStampTaskRequest,
+    ) -> VerifyByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_by_stamp_task_async(
+        self,
+        request: VerifyByStampTaskRequest,
+    ) -> VerifyByStampTaskResult:
+        async_result = []
+        self._verify_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

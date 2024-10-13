@@ -1020,6 +1020,8 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
         if request.time_offset_token:
             headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
@@ -1136,6 +1138,79 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
     ) -> DebugInvokeResult:
         async_result = []
         self._debug_invoke(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _invoke_by_stamp_sheet(
+        self,
+        request: InvokeByStampSheetRequest,
+        callback: Callable[[AsyncResult[InvokeByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='script',
+            region=self.session.region,
+        ) + "/stamp/script/invoke"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=InvokeByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def invoke_by_stamp_sheet(
+        self,
+        request: InvokeByStampSheetRequest,
+    ) -> InvokeByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._invoke_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def invoke_by_stamp_sheet_async(
+        self,
+        request: InvokeByStampSheetRequest,
+    ) -> InvokeByStampSheetResult:
+        async_result = []
+        self._invoke_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
