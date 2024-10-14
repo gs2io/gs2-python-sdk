@@ -1506,6 +1506,222 @@ class DeleteGlobalRankingScoreByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyGlobalRankingScoreRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    ranking_name: str = None
+    verify_type: str = None
+    season: int = None
+    score: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyGlobalRankingScoreRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyGlobalRankingScoreRequest:
+        self.access_token = access_token
+        return self
+
+    def with_ranking_name(self, ranking_name: str) -> VerifyGlobalRankingScoreRequest:
+        self.ranking_name = ranking_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyGlobalRankingScoreRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_season(self, season: int) -> VerifyGlobalRankingScoreRequest:
+        self.season = season
+        return self
+
+    def with_score(self, score: int) -> VerifyGlobalRankingScoreRequest:
+        self.score = score
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyGlobalRankingScoreRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyGlobalRankingScoreRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyGlobalRankingScoreRequest]:
+        if data is None:
+            return None
+        return VerifyGlobalRankingScoreRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_ranking_name(data.get('rankingName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_season(data.get('season'))\
+            .with_score(data.get('score'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "rankingName": self.ranking_name,
+            "verifyType": self.verify_type,
+            "season": self.season,
+            "score": self.score,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyGlobalRankingScoreByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    ranking_name: str = None
+    verify_type: str = None
+    season: int = None
+    score: int = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_ranking_name(self, ranking_name: str) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.ranking_name = ranking_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_season(self, season: int) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.season = season
+        return self
+
+    def with_score(self, score: int) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.score = score
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyGlobalRankingScoreByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyGlobalRankingScoreByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyGlobalRankingScoreByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_ranking_name(data.get('rankingName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_season(data.get('season'))\
+            .with_score(data.get('score'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "rankingName": self.ranking_name,
+            "verifyType": self.verify_type,
+            "season": self.season,
+            "score": self.score,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyGlobalRankingScoreByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyGlobalRankingScoreByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyGlobalRankingScoreByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyGlobalRankingScoreByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyGlobalRankingScoreByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
 class DescribeGlobalRankingReceivedRewardsRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -3443,6 +3659,236 @@ class DeleteClusterRankingScoreByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "season": self.season,
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyClusterRankingScoreRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    ranking_name: str = None
+    cluster_name: str = None
+    verify_type: str = None
+    season: int = None
+    score: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyClusterRankingScoreRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyClusterRankingScoreRequest:
+        self.access_token = access_token
+        return self
+
+    def with_ranking_name(self, ranking_name: str) -> VerifyClusterRankingScoreRequest:
+        self.ranking_name = ranking_name
+        return self
+
+    def with_cluster_name(self, cluster_name: str) -> VerifyClusterRankingScoreRequest:
+        self.cluster_name = cluster_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyClusterRankingScoreRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_season(self, season: int) -> VerifyClusterRankingScoreRequest:
+        self.season = season
+        return self
+
+    def with_score(self, score: int) -> VerifyClusterRankingScoreRequest:
+        self.score = score
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyClusterRankingScoreRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyClusterRankingScoreRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyClusterRankingScoreRequest]:
+        if data is None:
+            return None
+        return VerifyClusterRankingScoreRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_ranking_name(data.get('rankingName'))\
+            .with_cluster_name(data.get('clusterName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_season(data.get('season'))\
+            .with_score(data.get('score'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "rankingName": self.ranking_name,
+            "clusterName": self.cluster_name,
+            "verifyType": self.verify_type,
+            "season": self.season,
+            "score": self.score,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyClusterRankingScoreByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    ranking_name: str = None
+    cluster_name: str = None
+    verify_type: str = None
+    season: int = None
+    score: int = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_ranking_name(self, ranking_name: str) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.ranking_name = ranking_name
+        return self
+
+    def with_cluster_name(self, cluster_name: str) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.cluster_name = cluster_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_season(self, season: int) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.season = season
+        return self
+
+    def with_score(self, score: int) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.score = score
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyClusterRankingScoreByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyClusterRankingScoreByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyClusterRankingScoreByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_ranking_name(data.get('rankingName'))\
+            .with_cluster_name(data.get('clusterName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_season(data.get('season'))\
+            .with_score(data.get('score'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "rankingName": self.ranking_name,
+            "clusterName": self.cluster_name,
+            "verifyType": self.verify_type,
+            "season": self.season,
+            "score": self.score,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyClusterRankingScoreByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyClusterRankingScoreByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyClusterRankingScoreByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyClusterRankingScoreByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyClusterRankingScoreByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
         }
 
 
@@ -5637,6 +6083,222 @@ class DeleteSubscribeRankingScoreByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "season": self.season,
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifySubscribeRankingScoreRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    ranking_name: str = None
+    verify_type: str = None
+    season: int = None
+    score: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifySubscribeRankingScoreRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifySubscribeRankingScoreRequest:
+        self.access_token = access_token
+        return self
+
+    def with_ranking_name(self, ranking_name: str) -> VerifySubscribeRankingScoreRequest:
+        self.ranking_name = ranking_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifySubscribeRankingScoreRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_season(self, season: int) -> VerifySubscribeRankingScoreRequest:
+        self.season = season
+        return self
+
+    def with_score(self, score: int) -> VerifySubscribeRankingScoreRequest:
+        self.score = score
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifySubscribeRankingScoreRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifySubscribeRankingScoreRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySubscribeRankingScoreRequest]:
+        if data is None:
+            return None
+        return VerifySubscribeRankingScoreRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_ranking_name(data.get('rankingName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_season(data.get('season'))\
+            .with_score(data.get('score'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "rankingName": self.ranking_name,
+            "verifyType": self.verify_type,
+            "season": self.season,
+            "score": self.score,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifySubscribeRankingScoreByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    ranking_name: str = None
+    verify_type: str = None
+    season: int = None
+    score: int = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_ranking_name(self, ranking_name: str) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.ranking_name = ranking_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_season(self, season: int) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.season = season
+        return self
+
+    def with_score(self, score: int) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.score = score
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifySubscribeRankingScoreByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySubscribeRankingScoreByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifySubscribeRankingScoreByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_ranking_name(data.get('rankingName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_season(data.get('season'))\
+            .with_score(data.get('score'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "rankingName": self.ranking_name,
+            "verifyType": self.verify_type,
+            "season": self.season,
+            "score": self.score,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifySubscribeRankingScoreByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifySubscribeRankingScoreByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifySubscribeRankingScoreByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySubscribeRankingScoreByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifySubscribeRankingScoreByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
         }
 
 

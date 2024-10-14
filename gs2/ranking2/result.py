@@ -972,6 +972,115 @@ class DeleteGlobalRankingScoreByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyGlobalRankingScoreResult(core.Gs2Result):
+    item: GlobalRankingScore = None
+
+    def with_item(self, item: GlobalRankingScore) -> VerifyGlobalRankingScoreResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyGlobalRankingScoreResult]:
+        if data is None:
+            return None
+        return VerifyGlobalRankingScoreResult()\
+            .with_item(GlobalRankingScore.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyGlobalRankingScoreByUserIdResult(core.Gs2Result):
+    item: GlobalRankingScore = None
+
+    def with_item(self, item: GlobalRankingScore) -> VerifyGlobalRankingScoreByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyGlobalRankingScoreByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyGlobalRankingScoreByUserIdResult()\
+            .with_item(GlobalRankingScore.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyGlobalRankingScoreByStampTaskResult(core.Gs2Result):
+    item: GlobalRankingScore = None
+    new_context_stack: str = None
+
+    def with_item(self, item: GlobalRankingScore) -> VerifyGlobalRankingScoreByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyGlobalRankingScoreByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyGlobalRankingScoreByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyGlobalRankingScoreByStampTaskResult()\
+            .with_item(GlobalRankingScore.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class DescribeGlobalRankingReceivedRewardsResult(core.Gs2Result):
     items: List[GlobalRankingReceivedReward] = None
     next_page_token: str = None
@@ -2107,6 +2216,115 @@ class DeleteClusterRankingScoreByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyClusterRankingScoreResult(core.Gs2Result):
+    item: ClusterRankingScore = None
+
+    def with_item(self, item: ClusterRankingScore) -> VerifyClusterRankingScoreResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyClusterRankingScoreResult]:
+        if data is None:
+            return None
+        return VerifyClusterRankingScoreResult()\
+            .with_item(ClusterRankingScore.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyClusterRankingScoreByUserIdResult(core.Gs2Result):
+    item: ClusterRankingScore = None
+
+    def with_item(self, item: ClusterRankingScore) -> VerifyClusterRankingScoreByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyClusterRankingScoreByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyClusterRankingScoreByUserIdResult()\
+            .with_item(ClusterRankingScore.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyClusterRankingScoreByStampTaskResult(core.Gs2Result):
+    item: ClusterRankingScore = None
+    new_context_stack: str = None
+
+    def with_item(self, item: ClusterRankingScore) -> VerifyClusterRankingScoreByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyClusterRankingScoreByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyClusterRankingScoreByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyClusterRankingScoreByStampTaskResult()\
+            .with_item(ClusterRankingScore.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
         }
 
 
@@ -3407,6 +3625,115 @@ class DeleteSubscribeRankingScoreByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifySubscribeRankingScoreResult(core.Gs2Result):
+    item: SubscribeRankingScore = None
+
+    def with_item(self, item: SubscribeRankingScore) -> VerifySubscribeRankingScoreResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySubscribeRankingScoreResult]:
+        if data is None:
+            return None
+        return VerifySubscribeRankingScoreResult()\
+            .with_item(SubscribeRankingScore.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifySubscribeRankingScoreByUserIdResult(core.Gs2Result):
+    item: SubscribeRankingScore = None
+
+    def with_item(self, item: SubscribeRankingScore) -> VerifySubscribeRankingScoreByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySubscribeRankingScoreByUserIdResult]:
+        if data is None:
+            return None
+        return VerifySubscribeRankingScoreByUserIdResult()\
+            .with_item(SubscribeRankingScore.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifySubscribeRankingScoreByStampTaskResult(core.Gs2Result):
+    item: SubscribeRankingScore = None
+    new_context_stack: str = None
+
+    def with_item(self, item: SubscribeRankingScore) -> VerifySubscribeRankingScoreByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifySubscribeRankingScoreByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifySubscribeRankingScoreByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifySubscribeRankingScoreByStampTaskResult()\
+            .with_item(SubscribeRankingScore.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
         }
 
 

@@ -2096,6 +2096,253 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_global_ranking_score(
+        self,
+        request: VerifyGlobalRankingScoreRequest,
+        callback: Callable[[AsyncResult[VerifyGlobalRankingScoreResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='globalRankingScore',
+            function='verifyGlobalRankingScore',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.ranking_name is not None:
+            body["rankingName"] = request.ranking_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyGlobalRankingScoreResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_global_ranking_score(
+        self,
+        request: VerifyGlobalRankingScoreRequest,
+    ) -> VerifyGlobalRankingScoreResult:
+        async_result = []
+        with timeout(30):
+            self._verify_global_ranking_score(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_global_ranking_score_async(
+        self,
+        request: VerifyGlobalRankingScoreRequest,
+    ) -> VerifyGlobalRankingScoreResult:
+        async_result = []
+        self._verify_global_ranking_score(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_global_ranking_score_by_user_id(
+        self,
+        request: VerifyGlobalRankingScoreByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyGlobalRankingScoreByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='globalRankingScore',
+            function='verifyGlobalRankingScoreByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.ranking_name is not None:
+            body["rankingName"] = request.ranking_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyGlobalRankingScoreByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_global_ranking_score_by_user_id(
+        self,
+        request: VerifyGlobalRankingScoreByUserIdRequest,
+    ) -> VerifyGlobalRankingScoreByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_global_ranking_score_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_global_ranking_score_by_user_id_async(
+        self,
+        request: VerifyGlobalRankingScoreByUserIdRequest,
+    ) -> VerifyGlobalRankingScoreByUserIdResult:
+        async_result = []
+        self._verify_global_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_global_ranking_score_by_stamp_task(
+        self,
+        request: VerifyGlobalRankingScoreByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyGlobalRankingScoreByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='globalRankingScore',
+            function='verifyGlobalRankingScoreByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyGlobalRankingScoreByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_global_ranking_score_by_stamp_task(
+        self,
+        request: VerifyGlobalRankingScoreByStampTaskRequest,
+    ) -> VerifyGlobalRankingScoreByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_global_ranking_score_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_global_ranking_score_by_stamp_task_async(
+        self,
+        request: VerifyGlobalRankingScoreByStampTaskRequest,
+    ) -> VerifyGlobalRankingScoreByStampTaskResult:
+        async_result = []
+        self._verify_global_ranking_score_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_global_ranking_received_rewards(
         self,
         request: DescribeGlobalRankingReceivedRewardsRequest,
@@ -4365,6 +4612,257 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteClusterRankingScoreByUserIdResult:
         async_result = []
         self._delete_cluster_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_cluster_ranking_score(
+        self,
+        request: VerifyClusterRankingScoreRequest,
+        callback: Callable[[AsyncResult[VerifyClusterRankingScoreResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='clusterRankingScore',
+            function='verifyClusterRankingScore',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.ranking_name is not None:
+            body["rankingName"] = request.ranking_name
+        if request.cluster_name is not None:
+            body["clusterName"] = request.cluster_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyClusterRankingScoreResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_cluster_ranking_score(
+        self,
+        request: VerifyClusterRankingScoreRequest,
+    ) -> VerifyClusterRankingScoreResult:
+        async_result = []
+        with timeout(30):
+            self._verify_cluster_ranking_score(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_cluster_ranking_score_async(
+        self,
+        request: VerifyClusterRankingScoreRequest,
+    ) -> VerifyClusterRankingScoreResult:
+        async_result = []
+        self._verify_cluster_ranking_score(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_cluster_ranking_score_by_user_id(
+        self,
+        request: VerifyClusterRankingScoreByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyClusterRankingScoreByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='clusterRankingScore',
+            function='verifyClusterRankingScoreByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.ranking_name is not None:
+            body["rankingName"] = request.ranking_name
+        if request.cluster_name is not None:
+            body["clusterName"] = request.cluster_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyClusterRankingScoreByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_cluster_ranking_score_by_user_id(
+        self,
+        request: VerifyClusterRankingScoreByUserIdRequest,
+    ) -> VerifyClusterRankingScoreByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_cluster_ranking_score_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_cluster_ranking_score_by_user_id_async(
+        self,
+        request: VerifyClusterRankingScoreByUserIdRequest,
+    ) -> VerifyClusterRankingScoreByUserIdResult:
+        async_result = []
+        self._verify_cluster_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_cluster_ranking_score_by_stamp_task(
+        self,
+        request: VerifyClusterRankingScoreByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyClusterRankingScoreByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='clusterRankingScore',
+            function='verifyClusterRankingScoreByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyClusterRankingScoreByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_cluster_ranking_score_by_stamp_task(
+        self,
+        request: VerifyClusterRankingScoreByStampTaskRequest,
+    ) -> VerifyClusterRankingScoreByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_cluster_ranking_score_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_cluster_ranking_score_by_stamp_task_async(
+        self,
+        request: VerifyClusterRankingScoreByStampTaskRequest,
+    ) -> VerifyClusterRankingScoreByStampTaskResult:
+        async_result = []
+        self._verify_cluster_ranking_score_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )
@@ -6965,6 +7463,253 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteSubscribeRankingScoreByUserIdResult:
         async_result = []
         self._delete_subscribe_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_subscribe_ranking_score(
+        self,
+        request: VerifySubscribeRankingScoreRequest,
+        callback: Callable[[AsyncResult[VerifySubscribeRankingScoreResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='subscribeRankingScore',
+            function='verifySubscribeRankingScore',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.ranking_name is not None:
+            body["rankingName"] = request.ranking_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifySubscribeRankingScoreResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_subscribe_ranking_score(
+        self,
+        request: VerifySubscribeRankingScoreRequest,
+    ) -> VerifySubscribeRankingScoreResult:
+        async_result = []
+        with timeout(30):
+            self._verify_subscribe_ranking_score(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_subscribe_ranking_score_async(
+        self,
+        request: VerifySubscribeRankingScoreRequest,
+    ) -> VerifySubscribeRankingScoreResult:
+        async_result = []
+        self._verify_subscribe_ranking_score(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_subscribe_ranking_score_by_user_id(
+        self,
+        request: VerifySubscribeRankingScoreByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifySubscribeRankingScoreByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='subscribeRankingScore',
+            function='verifySubscribeRankingScoreByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.ranking_name is not None:
+            body["rankingName"] = request.ranking_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifySubscribeRankingScoreByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_subscribe_ranking_score_by_user_id(
+        self,
+        request: VerifySubscribeRankingScoreByUserIdRequest,
+    ) -> VerifySubscribeRankingScoreByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_subscribe_ranking_score_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_subscribe_ranking_score_by_user_id_async(
+        self,
+        request: VerifySubscribeRankingScoreByUserIdRequest,
+    ) -> VerifySubscribeRankingScoreByUserIdResult:
+        async_result = []
+        self._verify_subscribe_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_subscribe_ranking_score_by_stamp_task(
+        self,
+        request: VerifySubscribeRankingScoreByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifySubscribeRankingScoreByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="ranking2",
+            component='subscribeRankingScore',
+            function='verifySubscribeRankingScoreByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifySubscribeRankingScoreByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_subscribe_ranking_score_by_stamp_task(
+        self,
+        request: VerifySubscribeRankingScoreByStampTaskRequest,
+    ) -> VerifySubscribeRankingScoreByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_subscribe_ranking_score_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_subscribe_ranking_score_by_stamp_task_async(
+        self,
+        request: VerifySubscribeRankingScoreByStampTaskRequest,
+    ) -> VerifySubscribeRankingScoreByStampTaskResult:
+        async_result = []
+        self._verify_subscribe_ranking_score_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

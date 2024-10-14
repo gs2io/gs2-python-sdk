@@ -2076,6 +2076,246 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_global_ranking_score(
+        self,
+        request: VerifyGlobalRankingScoreRequest,
+        callback: Callable[[AsyncResult[VerifyGlobalRankingScoreResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/score/global/{rankingName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rankingName=request.ranking_name if request.ranking_name is not None and request.ranking_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyGlobalRankingScoreResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_global_ranking_score(
+        self,
+        request: VerifyGlobalRankingScoreRequest,
+    ) -> VerifyGlobalRankingScoreResult:
+        async_result = []
+        with timeout(30):
+            self._verify_global_ranking_score(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_global_ranking_score_async(
+        self,
+        request: VerifyGlobalRankingScoreRequest,
+    ) -> VerifyGlobalRankingScoreResult:
+        async_result = []
+        self._verify_global_ranking_score(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_global_ranking_score_by_user_id(
+        self,
+        request: VerifyGlobalRankingScoreByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyGlobalRankingScoreByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/score/global/{rankingName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            rankingName=request.ranking_name if request.ranking_name is not None and request.ranking_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyGlobalRankingScoreByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_global_ranking_score_by_user_id(
+        self,
+        request: VerifyGlobalRankingScoreByUserIdRequest,
+    ) -> VerifyGlobalRankingScoreByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_global_ranking_score_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_global_ranking_score_by_user_id_async(
+        self,
+        request: VerifyGlobalRankingScoreByUserIdRequest,
+    ) -> VerifyGlobalRankingScoreByUserIdResult:
+        async_result = []
+        self._verify_global_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_global_ranking_score_by_stamp_task(
+        self,
+        request: VerifyGlobalRankingScoreByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyGlobalRankingScoreByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/stamp/global/score/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyGlobalRankingScoreByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_global_ranking_score_by_stamp_task(
+        self,
+        request: VerifyGlobalRankingScoreByStampTaskRequest,
+    ) -> VerifyGlobalRankingScoreByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_global_ranking_score_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_global_ranking_score_by_stamp_task_async(
+        self,
+        request: VerifyGlobalRankingScoreByStampTaskRequest,
+    ) -> VerifyGlobalRankingScoreByStampTaskResult:
+        async_result = []
+        self._verify_global_ranking_score_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_global_ranking_received_rewards(
         self,
         request: DescribeGlobalRankingReceivedRewardsRequest,
@@ -4288,6 +4528,248 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
     ) -> DeleteClusterRankingScoreByUserIdResult:
         async_result = []
         self._delete_cluster_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_cluster_ranking_score(
+        self,
+        request: VerifyClusterRankingScoreRequest,
+        callback: Callable[[AsyncResult[VerifyClusterRankingScoreResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/score/cluster/{rankingName}/{clusterName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rankingName=request.ranking_name if request.ranking_name is not None and request.ranking_name != '' else 'null',
+            clusterName=request.cluster_name if request.cluster_name is not None and request.cluster_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyClusterRankingScoreResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_cluster_ranking_score(
+        self,
+        request: VerifyClusterRankingScoreRequest,
+    ) -> VerifyClusterRankingScoreResult:
+        async_result = []
+        with timeout(30):
+            self._verify_cluster_ranking_score(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_cluster_ranking_score_async(
+        self,
+        request: VerifyClusterRankingScoreRequest,
+    ) -> VerifyClusterRankingScoreResult:
+        async_result = []
+        self._verify_cluster_ranking_score(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_cluster_ranking_score_by_user_id(
+        self,
+        request: VerifyClusterRankingScoreByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyClusterRankingScoreByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/score/cluster/{rankingName}/{clusterName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            rankingName=request.ranking_name if request.ranking_name is not None and request.ranking_name != '' else 'null',
+            clusterName=request.cluster_name if request.cluster_name is not None and request.cluster_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyClusterRankingScoreByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_cluster_ranking_score_by_user_id(
+        self,
+        request: VerifyClusterRankingScoreByUserIdRequest,
+    ) -> VerifyClusterRankingScoreByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_cluster_ranking_score_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_cluster_ranking_score_by_user_id_async(
+        self,
+        request: VerifyClusterRankingScoreByUserIdRequest,
+    ) -> VerifyClusterRankingScoreByUserIdResult:
+        async_result = []
+        self._verify_cluster_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_cluster_ranking_score_by_stamp_task(
+        self,
+        request: VerifyClusterRankingScoreByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyClusterRankingScoreByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/stamp/cluster/score/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyClusterRankingScoreByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_cluster_ranking_score_by_stamp_task(
+        self,
+        request: VerifyClusterRankingScoreByStampTaskRequest,
+    ) -> VerifyClusterRankingScoreByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_cluster_ranking_score_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_cluster_ranking_score_by_stamp_task_async(
+        self,
+        request: VerifyClusterRankingScoreByStampTaskRequest,
+    ) -> VerifyClusterRankingScoreByStampTaskResult:
+        async_result = []
+        self._verify_cluster_ranking_score_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -6816,6 +7298,246 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
     ) -> DeleteSubscribeRankingScoreByUserIdResult:
         async_result = []
         self._delete_subscribe_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_subscribe_ranking_score(
+        self,
+        request: VerifySubscribeRankingScoreRequest,
+        callback: Callable[[AsyncResult[VerifySubscribeRankingScoreResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/score/subscribe/{rankingName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            rankingName=request.ranking_name if request.ranking_name is not None and request.ranking_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifySubscribeRankingScoreResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_subscribe_ranking_score(
+        self,
+        request: VerifySubscribeRankingScoreRequest,
+    ) -> VerifySubscribeRankingScoreResult:
+        async_result = []
+        with timeout(30):
+            self._verify_subscribe_ranking_score(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_subscribe_ranking_score_async(
+        self,
+        request: VerifySubscribeRankingScoreRequest,
+    ) -> VerifySubscribeRankingScoreResult:
+        async_result = []
+        self._verify_subscribe_ranking_score(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_subscribe_ranking_score_by_user_id(
+        self,
+        request: VerifySubscribeRankingScoreByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifySubscribeRankingScoreByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/score/subscribe/{rankingName}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            rankingName=request.ranking_name if request.ranking_name is not None and request.ranking_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.season is not None:
+            body["season"] = request.season
+        if request.score is not None:
+            body["score"] = request.score
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifySubscribeRankingScoreByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_subscribe_ranking_score_by_user_id(
+        self,
+        request: VerifySubscribeRankingScoreByUserIdRequest,
+    ) -> VerifySubscribeRankingScoreByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_subscribe_ranking_score_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_subscribe_ranking_score_by_user_id_async(
+        self,
+        request: VerifySubscribeRankingScoreByUserIdRequest,
+    ) -> VerifySubscribeRankingScoreByUserIdResult:
+        async_result = []
+        self._verify_subscribe_ranking_score_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_subscribe_ranking_score_by_stamp_task(
+        self,
+        request: VerifySubscribeRankingScoreByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifySubscribeRankingScoreByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/stamp/subscribe/score/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifySubscribeRankingScoreByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_subscribe_ranking_score_by_stamp_task(
+        self,
+        request: VerifySubscribeRankingScoreByStampTaskRequest,
+    ) -> VerifySubscribeRankingScoreByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_subscribe_ranking_score_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_subscribe_ranking_score_by_stamp_task_async(
+        self,
+        request: VerifySubscribeRankingScoreByStampTaskRequest,
+    ) -> VerifySubscribeRankingScoreByStampTaskResult:
+        async_result = []
+        self._verify_subscribe_ranking_score_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
