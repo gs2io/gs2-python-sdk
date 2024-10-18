@@ -1244,6 +1244,74 @@ class SetTransactionDefaultConfigByUserIdResult(core.Gs2Result):
         }
 
 
+class FreezeMasterDataResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> FreezeMasterDataResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FreezeMasterDataResult]:
+        if data is None:
+            return None
+        return FreezeMasterDataResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class FreezeMasterDataByUserIdResult(core.Gs2Result):
+    new_context_stack: str = None
+
+    def with_new_context_stack(self, new_context_stack: str) -> FreezeMasterDataByUserIdResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FreezeMasterDataByUserIdResult]:
+        if data is None:
+            return None
+        return FreezeMasterDataByUserIdResult()\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newContextStack": self.new_context_stack,
+        }
+
+
 class IfExpressionByUserIdResult(core.Gs2Result):
 
     def get(self, key, default=None):

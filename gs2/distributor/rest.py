@@ -2189,6 +2189,157 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _freeze_master_data(
+        self,
+        request: FreezeMasterDataRequest,
+        callback: Callable[[AsyncResult[FreezeMasterDataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/masterdata/freeze".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=FreezeMasterDataResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def freeze_master_data(
+        self,
+        request: FreezeMasterDataRequest,
+    ) -> FreezeMasterDataResult:
+        async_result = []
+        with timeout(30):
+            self._freeze_master_data(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def freeze_master_data_async(
+        self,
+        request: FreezeMasterDataRequest,
+    ) -> FreezeMasterDataResult:
+        async_result = []
+        self._freeze_master_data(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _freeze_master_data_by_user_id(
+        self,
+        request: FreezeMasterDataByUserIdRequest,
+        callback: Callable[[AsyncResult[FreezeMasterDataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/masterdata/freeze".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=FreezeMasterDataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def freeze_master_data_by_user_id(
+        self,
+        request: FreezeMasterDataByUserIdRequest,
+    ) -> FreezeMasterDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._freeze_master_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def freeze_master_data_by_user_id_async(
+        self,
+        request: FreezeMasterDataByUserIdRequest,
+    ) -> FreezeMasterDataByUserIdResult:
+        async_result = []
+        self._freeze_master_data_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _if_expression_by_user_id(
         self,
         request: IfExpressionByUserIdRequest,
