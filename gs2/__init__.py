@@ -17,6 +17,7 @@ from . import formation
 from . import friend
 from . import gateway
 from . import grade
+from . import guard
 from . import guild
 from . import identifier
 from . import idle

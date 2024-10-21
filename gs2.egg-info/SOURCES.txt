@@ -115,6 +115,12 @@ src/gs2/grade/request.py
 src/gs2/grade/rest.py
 src/gs2/grade/result.py
 src/gs2/grade/web_socket.py
+src/gs2/guard/__init__.py
+src/gs2/guard/model.py
+src/gs2/guard/request.py
+src/gs2/guard/rest.py
+src/gs2/guard/result.py
+src/gs2/guard/web_socket.py
 src/gs2/guild/__init__.py
 src/gs2/guild/model.py
 src/gs2/guild/request.py
