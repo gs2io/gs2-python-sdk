@@ -588,6 +588,126 @@ class DeleteIdentifierResult(core.Gs2Result):
         }
 
 
+class DescribeAttachedGuardsResult(core.Gs2Result):
+    items: List[str] = None
+
+    def with_items(self, items: List[str]) -> DescribeAttachedGuardsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeAttachedGuardsResult]:
+        if data is None:
+            return None
+        return DescribeAttachedGuardsResult()\
+            .with_items([
+                data.get('items')[i]
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i]
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class AttachGuardResult(core.Gs2Result):
+    items: List[str] = None
+
+    def with_items(self, items: List[str]) -> AttachGuardResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AttachGuardResult]:
+        if data is None:
+            return None
+        return AttachGuardResult()\
+            .with_items([
+                data.get('items')[i]
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i]
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
+class DetachGuardResult(core.Gs2Result):
+    items: List[str] = None
+
+    def with_items(self, items: List[str]) -> DetachGuardResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DetachGuardResult]:
+        if data is None:
+            return None
+        return DetachGuardResult()\
+            .with_items([
+                data.get('items')[i]
+                for i in range(len(data.get('items')) if data.get('items') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [
+                self.items[i]
+                for i in range(len(self.items) if self.items else 0)
+            ],
+        }
+
+
 class DescribePasswordsResult(core.Gs2Result):
     items: List[Password] = None
     next_page_token: str = None
@@ -970,6 +1090,7 @@ class LoginResult(core.Gs2Result):
     access_token: str = None
     token_type: str = None
     expires_in: int = None
+    owner_id: str = None
 
     def with_access_token(self, access_token: str) -> LoginResult:
         self.access_token = access_token
@@ -981,6 +1102,10 @@ class LoginResult(core.Gs2Result):
 
     def with_expires_in(self, expires_in: int) -> LoginResult:
         self.expires_in = expires_in
+        return self
+
+    def with_owner_id(self, owner_id: str) -> LoginResult:
+        self.owner_id = owner_id
         return self
 
     def get(self, key, default=None):
@@ -1004,13 +1129,15 @@ class LoginResult(core.Gs2Result):
         return LoginResult()\
             .with_access_token(data.get('access_token'))\
             .with_token_type(data.get('token_type'))\
-            .with_expires_in(data.get('expires_in'))
+            .with_expires_in(data.get('expires_in'))\
+            .with_owner_id(data.get('owner_id'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "access_token": self.access_token,
             "token_type": self.token_type,
             "expires_in": self.expires_in,
+            "owner_id": self.owner_id,
         }
 
 

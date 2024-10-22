@@ -648,6 +648,149 @@ class DeleteIdentifierRequest(core.Gs2Request):
         }
 
 
+class DescribeAttachedGuardsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    client_id: str = None
+    user_name: str = None
+
+    def with_client_id(self, client_id: str) -> DescribeAttachedGuardsRequest:
+        self.client_id = client_id
+        return self
+
+    def with_user_name(self, user_name: str) -> DescribeAttachedGuardsRequest:
+        self.user_name = user_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeAttachedGuardsRequest]:
+        if data is None:
+            return None
+        return DescribeAttachedGuardsRequest()\
+            .with_client_id(data.get('clientId'))\
+            .with_user_name(data.get('userName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "clientId": self.client_id,
+            "userName": self.user_name,
+        }
+
+
+class AttachGuardRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_name: str = None
+    client_id: str = None
+    guard_namespace_id: str = None
+
+    def with_user_name(self, user_name: str) -> AttachGuardRequest:
+        self.user_name = user_name
+        return self
+
+    def with_client_id(self, client_id: str) -> AttachGuardRequest:
+        self.client_id = client_id
+        return self
+
+    def with_guard_namespace_id(self, guard_namespace_id: str) -> AttachGuardRequest:
+        self.guard_namespace_id = guard_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AttachGuardRequest]:
+        if data is None:
+            return None
+        return AttachGuardRequest()\
+            .with_user_name(data.get('userName'))\
+            .with_client_id(data.get('clientId'))\
+            .with_guard_namespace_id(data.get('guardNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userName": self.user_name,
+            "clientId": self.client_id,
+            "guardNamespaceId": self.guard_namespace_id,
+        }
+
+
+class DetachGuardRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_name: str = None
+    client_id: str = None
+    guard_namespace_id: str = None
+
+    def with_user_name(self, user_name: str) -> DetachGuardRequest:
+        self.user_name = user_name
+        return self
+
+    def with_client_id(self, client_id: str) -> DetachGuardRequest:
+        self.client_id = client_id
+        return self
+
+    def with_guard_namespace_id(self, guard_namespace_id: str) -> DetachGuardRequest:
+        self.guard_namespace_id = guard_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DetachGuardRequest]:
+        if data is None:
+            return None
+        return DetachGuardRequest()\
+            .with_user_name(data.get('userName'))\
+            .with_client_id(data.get('clientId'))\
+            .with_guard_namespace_id(data.get('guardNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userName": self.user_name,
+            "clientId": self.client_id,
+            "guardNamespaceId": self.guard_namespace_id,
+        }
+
+
 class DescribePasswordsRequest(core.Gs2Request):
 
     context_stack: str = None

@@ -1112,6 +1112,229 @@ class Gs2IdentifierWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_attached_guards(
+        self,
+        request: DescribeAttachedGuardsRequest,
+        callback: Callable[[AsyncResult[DescribeAttachedGuardsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="identifier",
+            component='identifier',
+            function='describeAttachedGuards',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.client_id is not None:
+            body["clientId"] = request.client_id
+        if request.user_name is not None:
+            body["userName"] = request.user_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeAttachedGuardsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_attached_guards(
+        self,
+        request: DescribeAttachedGuardsRequest,
+    ) -> DescribeAttachedGuardsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_attached_guards(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_attached_guards_async(
+        self,
+        request: DescribeAttachedGuardsRequest,
+    ) -> DescribeAttachedGuardsResult:
+        async_result = []
+        self._describe_attached_guards(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _attach_guard(
+        self,
+        request: AttachGuardRequest,
+        callback: Callable[[AsyncResult[AttachGuardResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="identifier",
+            component='identifier',
+            function='attachGuard',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_name is not None:
+            body["userName"] = request.user_name
+        if request.client_id is not None:
+            body["clientId"] = request.client_id
+        if request.guard_namespace_id is not None:
+            body["guardNamespaceId"] = request.guard_namespace_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AttachGuardResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def attach_guard(
+        self,
+        request: AttachGuardRequest,
+    ) -> AttachGuardResult:
+        async_result = []
+        with timeout(30):
+            self._attach_guard(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def attach_guard_async(
+        self,
+        request: AttachGuardRequest,
+    ) -> AttachGuardResult:
+        async_result = []
+        self._attach_guard(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _detach_guard(
+        self,
+        request: DetachGuardRequest,
+        callback: Callable[[AsyncResult[DetachGuardResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="identifier",
+            component='identifier',
+            function='detachGuard',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_name is not None:
+            body["userName"] = request.user_name
+        if request.client_id is not None:
+            body["clientId"] = request.client_id
+        if request.guard_namespace_id is not None:
+            body["guardNamespaceId"] = request.guard_namespace_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DetachGuardResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def detach_guard(
+        self,
+        request: DetachGuardRequest,
+    ) -> DetachGuardResult:
+        async_result = []
+        with timeout(30):
+            self._detach_guard(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def detach_guard_async(
+        self,
+        request: DetachGuardRequest,
+    ) -> DetachGuardResult:
+        async_result = []
+        self._detach_guard(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_passwords(
         self,
         request: DescribePasswordsRequest,
