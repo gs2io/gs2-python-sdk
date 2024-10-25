@@ -1784,12 +1784,14 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    change_notification: NotificationSetting = None
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
     change_member_notification: NotificationSetting = None
     receive_request_notification: NotificationSetting = None
     remove_request_notification: NotificationSetting = None
     create_guild_script: ScriptSetting = None
+    update_guild_script: ScriptSetting = None
     join_guild_script: ScriptSetting = None
     leave_guild_script: ScriptSetting = None
     change_role_script: ScriptSetting = None
@@ -1808,6 +1810,10 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_change_notification(self, change_notification: NotificationSetting) -> Namespace:
+        self.change_notification = change_notification
         return self
 
     def with_join_notification(self, join_notification: NotificationSetting) -> Namespace:
@@ -1832,6 +1838,10 @@ class Namespace(core.Gs2Model):
 
     def with_create_guild_script(self, create_guild_script: ScriptSetting) -> Namespace:
         self.create_guild_script = create_guild_script
+        return self
+
+    def with_update_guild_script(self, update_guild_script: ScriptSetting) -> Namespace:
+        self.update_guild_script = update_guild_script
         return self
 
     def with_join_guild_script(self, join_guild_script: ScriptSetting) -> Namespace:
@@ -1927,12 +1937,14 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_change_notification(NotificationSetting.from_dict(data.get('changeNotification')))\
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
             .with_change_member_notification(NotificationSetting.from_dict(data.get('changeMemberNotification')))\
             .with_receive_request_notification(NotificationSetting.from_dict(data.get('receiveRequestNotification')))\
             .with_remove_request_notification(NotificationSetting.from_dict(data.get('removeRequestNotification')))\
             .with_create_guild_script(ScriptSetting.from_dict(data.get('createGuildScript')))\
+            .with_update_guild_script(ScriptSetting.from_dict(data.get('updateGuildScript')))\
             .with_join_guild_script(ScriptSetting.from_dict(data.get('joinGuildScript')))\
             .with_leave_guild_script(ScriptSetting.from_dict(data.get('leaveGuildScript')))\
             .with_change_role_script(ScriptSetting.from_dict(data.get('changeRoleScript')))\
@@ -1946,12 +1958,14 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "changeNotification": self.change_notification.to_dict() if self.change_notification else None,
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
             "changeMemberNotification": self.change_member_notification.to_dict() if self.change_member_notification else None,
             "receiveRequestNotification": self.receive_request_notification.to_dict() if self.receive_request_notification else None,
             "removeRequestNotification": self.remove_request_notification.to_dict() if self.remove_request_notification else None,
             "createGuildScript": self.create_guild_script.to_dict() if self.create_guild_script else None,
+            "updateGuildScript": self.update_guild_script.to_dict() if self.update_guild_script else None,
             "joinGuildScript": self.join_guild_script.to_dict() if self.join_guild_script else None,
             "leaveGuildScript": self.leave_guild_script.to_dict() if self.leave_guild_script else None,
             "changeRoleScript": self.change_role_script.to_dict() if self.change_role_script else None,

@@ -115,6 +115,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.change_notification is not None:
+            body["changeNotification"] = request.change_notification.to_dict()
         if request.join_notification is not None:
             body["joinNotification"] = request.join_notification.to_dict()
         if request.leave_notification is not None:
@@ -127,6 +129,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["removeRequestNotification"] = request.remove_request_notification.to_dict()
         if request.create_guild_script is not None:
             body["createGuildScript"] = request.create_guild_script.to_dict()
+        if request.update_guild_script is not None:
+            body["updateGuildScript"] = request.update_guild_script.to_dict()
         if request.join_guild_script is not None:
             body["joinGuildScript"] = request.join_guild_script.to_dict()
         if request.leave_guild_script is not None:
@@ -350,6 +354,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.change_notification is not None:
+            body["changeNotification"] = request.change_notification.to_dict()
         if request.join_notification is not None:
             body["joinNotification"] = request.join_notification.to_dict()
         if request.leave_notification is not None:
@@ -362,6 +368,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["removeRequestNotification"] = request.remove_request_notification.to_dict()
         if request.create_guild_script is not None:
             body["createGuildScript"] = request.create_guild_script.to_dict()
+        if request.update_guild_script is not None:
+            body["updateGuildScript"] = request.update_guild_script.to_dict()
         if request.join_guild_script is not None:
             body["joinGuildScript"] = request.join_guild_script.to_dict()
         if request.leave_guild_script is not None:
