@@ -3819,6 +3819,79 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _acquire_force_by_stamp_sheet(
+        self,
+        request: AcquireForceByStampSheetRequest,
+        callback: Callable[[AsyncResult[AcquireForceByStampSheetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='exchange',
+            region=self.session.region,
+        ) + "/stamp/await/acquire/force"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AcquireForceByStampSheetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def acquire_force_by_stamp_sheet(
+        self,
+        request: AcquireForceByStampSheetRequest,
+    ) -> AcquireForceByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._acquire_force_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def acquire_force_by_stamp_sheet_async(
+        self,
+        request: AcquireForceByStampSheetRequest,
+    ) -> AcquireForceByStampSheetResult:
+        async_result = []
+        self._acquire_force_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _skip_by_stamp_sheet(
         self,
         request: SkipByStampSheetRequest,
