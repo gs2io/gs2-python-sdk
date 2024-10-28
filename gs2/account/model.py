@@ -294,6 +294,7 @@ class OpenIdConnectSetting(core.Gs2Model):
     apple_team_id: str = None
     apple_key_id: str = None
     apple_private_key_pem: str = None
+    done_endpoint_url: str = None
 
     def with_configuration_path(self, configuration_path: str) -> OpenIdConnectSetting:
         self.configuration_path = configuration_path
@@ -317,6 +318,10 @@ class OpenIdConnectSetting(core.Gs2Model):
 
     def with_apple_private_key_pem(self, apple_private_key_pem: str) -> OpenIdConnectSetting:
         self.apple_private_key_pem = apple_private_key_pem
+        return self
+
+    def with_done_endpoint_url(self, done_endpoint_url: str) -> OpenIdConnectSetting:
+        self.done_endpoint_url = done_endpoint_url
         return self
 
     def get(self, key, default=None):
@@ -343,7 +348,8 @@ class OpenIdConnectSetting(core.Gs2Model):
             .with_client_secret(data.get('clientSecret'))\
             .with_apple_team_id(data.get('appleTeamId'))\
             .with_apple_key_id(data.get('appleKeyId'))\
-            .with_apple_private_key_pem(data.get('applePrivateKeyPem'))
+            .with_apple_private_key_pem(data.get('applePrivateKeyPem'))\
+            .with_done_endpoint_url(data.get('doneEndpointUrl'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -353,6 +359,7 @@ class OpenIdConnectSetting(core.Gs2Model):
             "appleTeamId": self.apple_team_id,
             "appleKeyId": self.apple_key_id,
             "applePrivateKeyPem": self.apple_private_key_pem,
+            "doneEndpointUrl": self.done_endpoint_url,
         }
 
 
