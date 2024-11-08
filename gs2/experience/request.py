@@ -3186,6 +3186,7 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
     property_id: str = None
     rate_name: str = None
     acquire_actions: List[AcquireAction] = None
+    base_rate: float = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -3211,6 +3212,10 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> MultiplyAcquireActionsByUserIdRequest:
         self.acquire_actions = acquire_actions
+        return self
+
+    def with_base_rate(self, base_rate: float) -> MultiplyAcquireActionsByUserIdRequest:
+        self.base_rate = base_rate
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> MultiplyAcquireActionsByUserIdRequest:
@@ -3249,6 +3254,7 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
             ])\
+            .with_base_rate(data.get('baseRate'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -3262,6 +3268,7 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
+            "baseRate": self.base_rate,
             "timeOffsetToken": self.time_offset_token,
         }
 

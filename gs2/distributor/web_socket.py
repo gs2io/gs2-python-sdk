@@ -17,7 +17,6 @@
 from gs2.core import *
 from .request import *
 from .result import *
-import time
 
 
 class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):

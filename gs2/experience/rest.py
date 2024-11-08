@@ -4187,6 +4187,8 @@ class Gs2ExperienceRestClient(rest.AbstractGs2RestClient):
                 item.to_dict()
                 for item in request.acquire_actions
             ]
+        if request.base_rate is not None:
+            body["baseRate"] = request.base_rate
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

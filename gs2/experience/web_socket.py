@@ -17,7 +17,6 @@
 from gs2.core import *
 from .request import *
 from .result import *
-import time
 
 
 class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
@@ -4262,6 +4261,8 @@ class Gs2ExperienceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.acquire_actions
             ]
+        if request.base_rate is not None:
+            body["baseRate"] = request.base_rate
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
