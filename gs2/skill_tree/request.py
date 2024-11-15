@@ -841,16 +841,16 @@ class CreateNodeModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "releaseVerifyActions": [
+            "releaseVerifyActions": None if self.release_verify_actions is None else [
                 self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
                 for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
             ],
-            "releaseConsumeActions": [
+            "releaseConsumeActions": None if self.release_consume_actions is None else [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
                 for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
             ],
             "restrainReturnRate": self.restrain_return_rate,
-            "premiseNodeNames": [
+            "premiseNodeNames": None if self.premise_node_names is None else [
                 self.premise_node_names[i]
                 for i in range(len(self.premise_node_names) if self.premise_node_names else 0)
             ],
@@ -987,16 +987,16 @@ class UpdateNodeModelMasterRequest(core.Gs2Request):
             "nodeModelName": self.node_model_name,
             "description": self.description,
             "metadata": self.metadata,
-            "releaseVerifyActions": [
+            "releaseVerifyActions": None if self.release_verify_actions is None else [
                 self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
                 for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
             ],
-            "releaseConsumeActions": [
+            "releaseConsumeActions": None if self.release_consume_actions is None else [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
                 for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
             ],
             "restrainReturnRate": self.restrain_return_rate,
-            "premiseNodeNames": [
+            "premiseNodeNames": None if self.premise_node_names is None else [
                 self.premise_node_names[i]
                 for i in range(len(self.premise_node_names) if self.premise_node_names else 0)
             ],
@@ -1113,7 +1113,7 @@ class MarkReleaseByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "propertyId": self.property_id,
-            "nodeModelNames": [
+            "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
             ],
@@ -1191,11 +1191,11 @@ class ReleaseRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "propertyId": self.property_id,
-            "nodeModelNames": [
+            "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1278,11 +1278,11 @@ class ReleaseByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "propertyId": self.property_id,
-            "nodeModelNames": [
+            "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1351,7 +1351,7 @@ class MarkRestrainRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "propertyId": self.property_id,
-            "nodeModelNames": [
+            "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
             ],
@@ -1425,7 +1425,7 @@ class MarkRestrainByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "propertyId": self.property_id,
-            "nodeModelNames": [
+            "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
             ],
@@ -1503,11 +1503,11 @@ class RestrainRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "propertyId": self.property_id,
-            "nodeModelNames": [
+            "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1590,11 +1590,11 @@ class RestrainByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "propertyId": self.property_id,
-            "nodeModelNames": [
+            "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
                 for i in range(len(self.node_model_names) if self.node_model_names else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1891,7 +1891,7 @@ class ResetRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "propertyId": self.property_id,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1965,7 +1965,7 @@ class ResetByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "propertyId": self.property_id,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

@@ -146,7 +146,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "admob": self.admob.to_dict() if self.admob else None,
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
-            "appLovinMaxes": [
+            "appLovinMaxes": None if self.app_lovin_maxes is None else [
                 self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
                 for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
             ],
@@ -317,7 +317,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "admob": self.admob.to_dict() if self.admob else None,
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
-            "appLovinMaxes": [
+            "appLovinMaxes": None if self.app_lovin_maxes is None else [
                 self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
                 for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
             ],

@@ -626,7 +626,7 @@ class Status(core.Gs2Model):
             "statusId": self.status_id,
             "userId": self.user_id,
             "propertyId": self.property_id,
-            "releasedNodeNames": [
+            "releasedNodeNames": None if self.released_node_names is None else [
                 self.released_node_names[i]
                 for i in range(len(self.released_node_names) if self.released_node_names else 0)
             ],
@@ -794,16 +794,16 @@ class NodeModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "releaseVerifyActions": [
+            "releaseVerifyActions": None if self.release_verify_actions is None else [
                 self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
                 for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
             ],
-            "releaseConsumeActions": [
+            "releaseConsumeActions": None if self.release_consume_actions is None else [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
                 for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
             ],
             "restrainReturnRate": self.restrain_return_rate,
-            "premiseNodeNames": [
+            "premiseNodeNames": None if self.premise_node_names is None else [
                 self.premise_node_names[i]
                 for i in range(len(self.premise_node_names) if self.premise_node_names else 0)
             ],
@@ -955,20 +955,20 @@ class NodeModel(core.Gs2Model):
             "nodeModelId": self.node_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "releaseVerifyActions": [
+            "releaseVerifyActions": None if self.release_verify_actions is None else [
                 self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
                 for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
             ],
-            "releaseConsumeActions": [
+            "releaseConsumeActions": None if self.release_consume_actions is None else [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
                 for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
             ],
-            "returnAcquireActions": [
+            "returnAcquireActions": None if self.return_acquire_actions is None else [
                 self.return_acquire_actions[i].to_dict() if self.return_acquire_actions[i] else None
                 for i in range(len(self.return_acquire_actions) if self.return_acquire_actions else 0)
             ],
             "restrainReturnRate": self.restrain_return_rate,
-            "premiseNodeNames": [
+            "premiseNodeNames": None if self.premise_node_names is None else [
                 self.premise_node_names[i]
                 for i in range(len(self.premise_node_names) if self.premise_node_names else 0)
             ],

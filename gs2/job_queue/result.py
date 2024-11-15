@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -490,7 +490,7 @@ class DescribeJobsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -571,7 +571,7 @@ class PushByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -782,7 +782,7 @@ class PushByStampSheetResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -938,7 +938,7 @@ class DescribeDeadLetterJobsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],

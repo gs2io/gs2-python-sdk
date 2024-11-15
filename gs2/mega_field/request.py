@@ -1374,7 +1374,7 @@ class FetchPositionRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "areaModelName": self.area_model_name,
             "layerModelName": self.layer_model_name,
-            "userIds": [
+            "userIds": None if self.user_ids is None else [
                 self.user_ids[i]
                 for i in range(len(self.user_ids) if self.user_ids else 0)
             ],
@@ -1442,7 +1442,7 @@ class FetchPositionFromSystemRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "areaModelName": self.area_model_name,
             "layerModelName": self.layer_model_name,
-            "userIds": [
+            "userIds": None if self.user_ids is None else [
                 self.user_ids[i]
                 for i in range(len(self.user_ids) if self.user_ids else 0)
             ],
@@ -1683,7 +1683,7 @@ class ActionRequest(core.Gs2Request):
             "areaModelName": self.area_model_name,
             "layerModelName": self.layer_model_name,
             "position": self.position.to_dict() if self.position else None,
-            "scopes": [
+            "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
                 for i in range(len(self.scopes) if self.scopes else 0)
             ],
@@ -1771,7 +1771,7 @@ class ActionByUserIdRequest(core.Gs2Request):
             "areaModelName": self.area_model_name,
             "layerModelName": self.layer_model_name,
             "position": self.position.to_dict() if self.position else None,
-            "scopes": [
+            "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
                 for i in range(len(self.scopes) if self.scopes else 0)
             ],

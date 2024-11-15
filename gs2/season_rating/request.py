@@ -908,7 +908,7 @@ class CreateSeasonModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "tiers": [
+            "tiers": None if self.tiers is None else [
                 self.tiers[i].to_dict() if self.tiers[i] else None
                 for i in range(len(self.tiers) if self.tiers else 0)
             ],
@@ -1035,7 +1035,7 @@ class UpdateSeasonModelMasterRequest(core.Gs2Request):
             "seasonName": self.season_name,
             "description": self.description,
             "metadata": self.metadata,
-            "tiers": [
+            "tiers": None if self.tiers is None else [
                 self.tiers[i].to_dict() if self.tiers[i] else None
                 for i in range(len(self.tiers) if self.tiers else 0)
             ],
@@ -1535,7 +1535,7 @@ class VoteRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "ballotBody": self.ballot_body,
             "ballotSignature": self.ballot_signature,
-            "gameResults": [
+            "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
                 for i in range(len(self.game_results) if self.game_results else 0)
             ],
@@ -1600,11 +1600,11 @@ class VoteMultipleRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "signedBallots": [
+            "signedBallots": None if self.signed_ballots is None else [
                 self.signed_ballots[i].to_dict() if self.signed_ballots[i] else None
                 for i in range(len(self.signed_ballots) if self.signed_ballots else 0)
             ],
-            "gameResults": [
+            "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
                 for i in range(len(self.game_results) if self.game_results else 0)
             ],

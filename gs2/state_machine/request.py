@@ -1413,7 +1413,7 @@ class ReportRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "statusName": self.status_name,
-            "events": [
+            "events": None if self.events is None else [
                 self.events[i].to_dict() if self.events[i] else None
                 for i in range(len(self.events) if self.events else 0)
             ],
@@ -1487,7 +1487,7 @@ class ReportByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "statusName": self.status_name,
-            "events": [
+            "events": None if self.events is None else [
                 self.events[i].to_dict() if self.events[i] else None
                 for i in range(len(self.events) if self.events else 0)
             ],

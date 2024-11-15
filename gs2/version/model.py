@@ -821,7 +821,7 @@ class VersionModel(core.Gs2Model):
             "currentVersion": self.current_version.to_dict() if self.current_version else None,
             "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
-            "scheduleVersions": [
+            "scheduleVersions": None if self.schedule_versions is None else [
                 self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
                 for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
             ],
@@ -1011,7 +1011,7 @@ class VersionModelMaster(core.Gs2Model):
             "currentVersion": self.current_version.to_dict() if self.current_version else None,
             "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
-            "scheduleVersions": [
+            "scheduleVersions": None if self.schedule_versions is None else [
                 self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
                 for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
             ],

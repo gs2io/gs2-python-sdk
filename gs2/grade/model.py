@@ -420,11 +420,11 @@ class AcquireActionRate(core.Gs2Model):
         return {
             "name": self.name,
             "mode": self.mode,
-            "rates": [
+            "rates": None if self.rates is None else [
                 self.rates[i]
                 for i in range(len(self.rates) if self.rates else 0)
             ],
-            "bigRates": [
+            "bigRates": None if self.big_rates is None else [
                 self.big_rates[i]
                 for i in range(len(self.big_rates) if self.big_rates else 0)
             ],
@@ -822,16 +822,16 @@ class GradeModel(core.Gs2Model):
             "gradeModelId": self.grade_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "defaultGrades": [
+            "defaultGrades": None if self.default_grades is None else [
                 self.default_grades[i].to_dict() if self.default_grades[i] else None
                 for i in range(len(self.default_grades) if self.default_grades else 0)
             ],
             "experienceModelId": self.experience_model_id,
-            "gradeEntries": [
+            "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries) if self.grade_entries else 0)
             ],
-            "acquireActionRates": [
+            "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
                 for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
             ],
@@ -996,16 +996,16 @@ class GradeModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "defaultGrades": [
+            "defaultGrades": None if self.default_grades is None else [
                 self.default_grades[i].to_dict() if self.default_grades[i] else None
                 for i in range(len(self.default_grades) if self.default_grades else 0)
             ],
             "experienceModelId": self.experience_model_id,
-            "gradeEntries": [
+            "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries) if self.grade_entries else 0)
             ],
-            "acquireActionRates": [
+            "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
                 for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
             ],

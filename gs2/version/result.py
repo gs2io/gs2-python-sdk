@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -490,7 +490,7 @@ class DescribeVersionModelMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -667,7 +667,7 @@ class DescribeVersionModelsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -747,7 +747,7 @@ class DescribeAcceptVersionsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -794,7 +794,7 @@ class DescribeAcceptVersionsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1055,11 +1055,11 @@ class CheckVersionResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "projectToken": self.project_token,
-            "warnings": [
+            "warnings": None if self.warnings is None else [
                 self.warnings[i].to_dict() if self.warnings[i] else None
                 for i in range(len(self.warnings) if self.warnings else 0)
             ],
-            "errors": [
+            "errors": None if self.errors is None else [
                 self.errors[i].to_dict() if self.errors[i] else None
                 for i in range(len(self.errors) if self.errors else 0)
             ],
@@ -1115,11 +1115,11 @@ class CheckVersionByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "projectToken": self.project_token,
-            "warnings": [
+            "warnings": None if self.warnings is None else [
                 self.warnings[i].to_dict() if self.warnings[i] else None
                 for i in range(len(self.warnings) if self.warnings else 0)
             ],
-            "errors": [
+            "errors": None if self.errors is None else [
                 self.errors[i].to_dict() if self.errors[i] else None
                 for i in range(len(self.errors) if self.errors else 0)
             ],

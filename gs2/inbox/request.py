@@ -909,7 +909,7 @@ class SendMessageByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "metadata": self.metadata,
-            "readAcquireActions": [
+            "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
                 for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
             ],
@@ -1307,7 +1307,7 @@ class ReadMessageRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "messageName": self.message_name,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1381,7 +1381,7 @@ class ReadMessageByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "messageName": self.message_name,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1917,7 +1917,7 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "name": self.name,
             "metadata": self.metadata,
-            "readAcquireActions": [
+            "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
                 for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
             ],
@@ -2044,7 +2044,7 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "globalMessageName": self.global_message_name,
             "metadata": self.metadata,
-            "readAcquireActions": [
+            "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
                 for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
             ],
@@ -2286,7 +2286,7 @@ class UpdateReceivedByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "receivedGlobalMessageNames": [
+            "receivedGlobalMessageNames": None if self.received_global_message_names is None else [
                 self.received_global_message_names[i]
                 for i in range(len(self.received_global_message_names) if self.received_global_message_names else 0)
             ],

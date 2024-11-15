@@ -200,7 +200,7 @@ class Vote(core.Gs2Model):
             "voteId": self.vote_id,
             "ratingName": self.rating_name,
             "gatheringName": self.gathering_name,
-            "writtenBallots": [
+            "writtenBallots": None if self.written_ballots is None else [
                 self.written_ballots[i].to_dict() if self.written_ballots[i] else None
                 for i in range(len(self.written_ballots) if self.written_ballots else 0)
             ],
@@ -249,7 +249,7 @@ class WrittenBallot(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "ballot": self.ballot.to_dict() if self.ballot else None,
-            "gameResults": [
+            "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
                 for i in range(len(self.game_results) if self.game_results else 0)
             ],
@@ -597,12 +597,12 @@ class Player(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
-            "attributes": [
+            "attributes": None if self.attributes is None else [
                 self.attributes[i].to_dict() if self.attributes[i] else None
                 for i in range(len(self.attributes) if self.attributes else 0)
             ],
             "roleName": self.role_name,
-            "denyUserIds": [
+            "denyUserIds": None if self.deny_user_ids is None else [
                 self.deny_user_ids[i]
                 for i in range(len(self.deny_user_ids) if self.deny_user_ids else 0)
             ],
@@ -706,12 +706,12 @@ class CapacityOfRole(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "roleName": self.role_name,
-            "roleAliases": [
+            "roleAliases": None if self.role_aliases is None else [
                 self.role_aliases[i]
                 for i in range(len(self.role_aliases) if self.role_aliases else 0)
             ],
             "capacity": self.capacity,
-            "participants": [
+            "participants": None if self.participants is None else [
                 self.participants[i].to_dict() if self.participants[i] else None
                 for i in range(len(self.participants) if self.participants else 0)
             ],
@@ -1305,7 +1305,7 @@ class SeasonGathering(core.Gs2Model):
             "season": self.season,
             "tier": self.tier,
             "name": self.name,
-            "participants": [
+            "participants": None if self.participants is None else [
                 self.participants[i]
                 for i in range(len(self.participants) if self.participants else 0)
             ],
@@ -2086,15 +2086,15 @@ class Gathering(core.Gs2Model):
         return {
             "gatheringId": self.gathering_id,
             "name": self.name,
-            "attributeRanges": [
+            "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
                 for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
             ],
-            "capacityOfRoles": [
+            "capacityOfRoles": None if self.capacity_of_roles is None else [
                 self.capacity_of_roles[i].to_dict() if self.capacity_of_roles[i] else None
                 for i in range(len(self.capacity_of_roles) if self.capacity_of_roles else 0)
             ],
-            "allowUserIds": [
+            "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
                 for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
             ],

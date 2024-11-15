@@ -721,7 +721,7 @@ class BuffTargetAction(core.Gs2Model):
         return {
             "targetActionName": self.target_action_name,
             "targetFieldName": self.target_field_name,
-            "conditionGrns": [
+            "conditionGrns": None if self.condition_grns is None else [
                 self.condition_grns[i].to_dict() if self.condition_grns[i] else None
                 for i in range(len(self.condition_grns) if self.condition_grns else 0)
             ],
@@ -782,7 +782,7 @@ class BuffTargetModel(core.Gs2Model):
         return {
             "targetModelName": self.target_model_name,
             "targetFieldName": self.target_field_name,
-            "conditionGrns": [
+            "conditionGrns": None if self.condition_grns is None else [
                 self.condition_grns[i].to_dict() if self.condition_grns[i] else None
                 for i in range(len(self.condition_grns) if self.condition_grns else 0)
             ],

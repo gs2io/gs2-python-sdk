@@ -748,16 +748,16 @@ class CreateGradeModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "defaultGrades": [
+            "defaultGrades": None if self.default_grades is None else [
                 self.default_grades[i].to_dict() if self.default_grades[i] else None
                 for i in range(len(self.default_grades) if self.default_grades else 0)
             ],
             "experienceModelId": self.experience_model_id,
-            "gradeEntries": [
+            "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries) if self.grade_entries else 0)
             ],
-            "acquireActionRates": [
+            "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
                 for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
             ],
@@ -894,16 +894,16 @@ class UpdateGradeModelMasterRequest(core.Gs2Request):
             "gradeName": self.grade_name,
             "description": self.description,
             "metadata": self.metadata,
-            "defaultGrades": [
+            "defaultGrades": None if self.default_grades is None else [
                 self.default_grades[i].to_dict() if self.default_grades[i] else None
                 for i in range(len(self.default_grades) if self.default_grades else 0)
             ],
             "experienceModelId": self.experience_model_id,
-            "gradeEntries": [
+            "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries) if self.grade_entries else 0)
             ],
-            "acquireActionRates": [
+            "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
                 for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
             ],
@@ -2327,7 +2327,7 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
             "gradeName": self.grade_name,
             "propertyId": self.property_id,
             "rateName": self.rate_name,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],

@@ -813,7 +813,7 @@ class PrepareUploadRequest(core.Gs2Request):
             "name": self.name,
             "contentType": self.content_type,
             "scope": self.scope,
-            "allowUserIds": [
+            "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
                 for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
             ],
@@ -908,7 +908,7 @@ class PrepareUploadByUserIdRequest(core.Gs2Request):
             "name": self.name,
             "contentType": self.content_type,
             "scope": self.scope,
-            "allowUserIds": [
+            "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
                 for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
             ],
@@ -985,7 +985,7 @@ class UpdateDataObjectRequest(core.Gs2Request):
             "dataObjectName": self.data_object_name,
             "accessToken": self.access_token,
             "scope": self.scope,
-            "allowUserIds": [
+            "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
                 for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
             ],
@@ -1066,7 +1066,7 @@ class UpdateDataObjectByUserIdRequest(core.Gs2Request):
             "dataObjectName": self.data_object_name,
             "userId": self.user_id,
             "scope": self.scope,
-            "allowUserIds": [
+            "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
                 for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
             ],

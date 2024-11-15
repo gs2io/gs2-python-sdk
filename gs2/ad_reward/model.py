@@ -230,7 +230,7 @@ class UnityAd(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "keys": [
+            "keys": None if self.keys is None else [
                 self.keys[i]
                 for i in range(len(self.keys) if self.keys else 0)
             ],
@@ -270,7 +270,7 @@ class AdMob(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "allowAdUnitIds": [
+            "allowAdUnitIds": None if self.allow_ad_unit_ids is None else [
                 self.allow_ad_unit_ids[i]
                 for i in range(len(self.allow_ad_unit_ids) if self.allow_ad_unit_ids else 0)
             ],
@@ -554,7 +554,7 @@ class Namespace(core.Gs2Model):
             "description": self.description,
             "admob": self.admob.to_dict() if self.admob else None,
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
-            "appLovinMaxes": [
+            "appLovinMaxes": None if self.app_lovin_maxes is None else [
                 self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
                 for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
             ],

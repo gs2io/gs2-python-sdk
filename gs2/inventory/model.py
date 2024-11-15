@@ -595,7 +595,7 @@ class BigInventory(core.Gs2Model):
             "inventoryId": self.inventory_id,
             "inventoryName": self.inventory_name,
             "userId": self.user_id,
-            "bigItems": [
+            "bigItems": None if self.big_items is None else [
                 self.big_items[i].to_dict() if self.big_items[i] else None
                 for i in range(len(self.big_items) if self.big_items else 0)
             ],
@@ -884,7 +884,7 @@ class SimpleInventory(core.Gs2Model):
             "inventoryId": self.inventory_id,
             "inventoryName": self.inventory_name,
             "userId": self.user_id,
-            "simpleItems": [
+            "simpleItems": None if self.simple_items is None else [
                 self.simple_items[i].to_dict() if self.simple_items[i] else None
                 for i in range(len(self.simple_items) if self.simple_items else 0)
             ],
@@ -1228,7 +1228,7 @@ class ItemSet(core.Gs2Model):
             "userId": self.user_id,
             "itemName": self.item_name,
             "count": self.count,
-            "referenceOf": [
+            "referenceOf": None if self.reference_of is None else [
                 self.reference_of[i]
                 for i in range(len(self.reference_of) if self.reference_of else 0)
             ],
@@ -1840,7 +1840,7 @@ class BigInventoryModel(core.Gs2Model):
             "inventoryModelId": self.inventory_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "bigItemModels": [
+            "bigItemModels": None if self.big_item_models is None else [
                 self.big_item_models[i].to_dict() if self.big_item_models[i] else None
                 for i in range(len(self.big_item_models) if self.big_item_models else 0)
             ],
@@ -2345,7 +2345,7 @@ class SimpleInventoryModel(core.Gs2Model):
             "inventoryModelId": self.inventory_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "simpleItemModels": [
+            "simpleItemModels": None if self.simple_item_models is None else [
                 self.simple_item_models[i].to_dict() if self.simple_item_models[i] else None
                 for i in range(len(self.simple_item_models) if self.simple_item_models else 0)
             ],
@@ -2920,7 +2920,7 @@ class InventoryModel(core.Gs2Model):
             "initialCapacity": self.initial_capacity,
             "maxCapacity": self.max_capacity,
             "protectReferencedItem": self.protect_referenced_item,
-            "itemModels": [
+            "itemModels": None if self.item_models is None else [
                 self.item_models[i].to_dict() if self.item_models[i] else None
                 for i in range(len(self.item_models) if self.item_models else 0)
             ],

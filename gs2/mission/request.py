@@ -206,7 +206,7 @@ class CompleteRequest(core.Gs2Request):
             "missionGroupName": self.mission_group_name,
             "missionTaskName": self.mission_task_name,
             "accessToken": self.access_token,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -287,7 +287,7 @@ class CompleteByUserIdRequest(core.Gs2Request):
             "missionGroupName": self.mission_group_name,
             "missionTaskName": self.mission_task_name,
             "userId": self.user_id,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -365,11 +365,11 @@ class BatchCompleteRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "missionGroupName": self.mission_group_name,
             "accessToken": self.access_token,
-            "missionTaskNames": [
+            "missionTaskNames": None if self.mission_task_names is None else [
                 self.mission_task_names[i]
                 for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -452,11 +452,11 @@ class BatchCompleteByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "missionGroupName": self.mission_group_name,
             "userId": self.user_id,
-            "missionTaskNames": [
+            "missionTaskNames": None if self.mission_task_names is None else [
                 self.mission_task_names[i]
                 for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -600,7 +600,7 @@ class BatchReceiveByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "missionGroupName": self.mission_group_name,
             "userId": self.user_id,
-            "missionTaskNames": [
+            "missionTaskNames": None if self.mission_task_names is None else [
                 self.mission_task_names[i]
                 for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
             ],
@@ -1296,7 +1296,7 @@ class CreateCounterModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "metadata": self.metadata,
             "description": self.description,
-            "scopes": [
+            "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
                 for i in range(len(self.scopes) if self.scopes else 0)
             ],
@@ -1416,7 +1416,7 @@ class UpdateCounterModelMasterRequest(core.Gs2Request):
             "counterName": self.counter_name,
             "metadata": self.metadata,
             "description": self.description,
-            "scopes": [
+            "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
                 for i in range(len(self.scopes) if self.scopes else 0)
             ],
@@ -2708,7 +2708,7 @@ class SetCounterByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "counterName": self.counter_name,
             "userId": self.user_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i].to_dict() if self.values[i] else None
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -3978,11 +3978,11 @@ class CreateMissionTaskModelMasterRequest(core.Gs2Request):
             "description": self.description,
             "verifyCompleteType": self.verify_complete_type,
             "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
-            "verifyCompleteConsumeActions": [
+            "verifyCompleteConsumeActions": None if self.verify_complete_consume_actions is None else [
                 self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
                 for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
             ],
-            "completeAcquireActions": [
+            "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
                 for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
             ],
@@ -4167,11 +4167,11 @@ class UpdateMissionTaskModelMasterRequest(core.Gs2Request):
             "description": self.description,
             "verifyCompleteType": self.verify_complete_type,
             "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
-            "verifyCompleteConsumeActions": [
+            "verifyCompleteConsumeActions": None if self.verify_complete_consume_actions is None else [
                 self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
                 for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
             ],
-            "completeAcquireActions": [
+            "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
                 for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
             ],

@@ -493,7 +493,7 @@ class Wallet(core.Gs2Model):
             "slot": self.slot,
             "paid": self.paid,
             "free": self.free,
-            "detail": [
+            "detail": None if self.detail is None else [
                 self.detail[i].to_dict() if self.detail[i] else None
                 for i in range(len(self.detail) if self.detail else 0)
             ],

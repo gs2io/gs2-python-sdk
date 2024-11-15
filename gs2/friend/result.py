@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -694,7 +694,7 @@ class DescribeFriendsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -741,7 +741,7 @@ class DescribeFriendsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -788,7 +788,7 @@ class DescribeBlackListResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i]
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -835,7 +835,7 @@ class DescribeBlackListByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i]
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1018,7 +1018,7 @@ class DescribeFollowsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1065,7 +1065,7 @@ class DescribeFollowsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1452,7 +1452,7 @@ class DescribeSendRequestsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1499,7 +1499,7 @@ class DescribeSendRequestsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1750,7 +1750,7 @@ class DescribeReceiveRequestsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1797,7 +1797,7 @@ class DescribeReceiveRequestsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],

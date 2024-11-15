@@ -170,7 +170,7 @@ class AttachSecurityPolicy(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
-            "securityPolicyIds": [
+            "securityPolicyIds": None if self.security_policy_ids is None else [
                 self.security_policy_ids[i]
                 for i in range(len(self.security_policy_ids) if self.security_policy_ids else 0)
             ],

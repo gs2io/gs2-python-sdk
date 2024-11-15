@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -490,7 +490,7 @@ class DescribeCountersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -537,7 +537,7 @@ class DescribeCountersByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -985,7 +985,7 @@ class DescribeLimitModelMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1298,7 +1298,7 @@ class DescribeLimitModelsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],

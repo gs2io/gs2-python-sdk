@@ -1208,7 +1208,7 @@ class AreaModel(core.Gs2Model):
             "areaModelId": self.area_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "layerModels": [
+            "layerModels": None if self.layer_models is None else [
                 self.layer_models[i].to_dict() if self.layer_models[i] else None
                 for i in range(len(self.layer_models) if self.layer_models else 0)
             ],

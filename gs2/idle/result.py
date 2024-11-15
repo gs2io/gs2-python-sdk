@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -490,7 +490,7 @@ class DescribeCategoryModelMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -667,7 +667,7 @@ class DescribeCategoryModelsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -747,7 +747,7 @@ class DescribeStatusesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -794,7 +794,7 @@ class DescribeStatusesByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -909,7 +909,7 @@ class PredictionResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -956,7 +956,7 @@ class PredictionByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1027,7 +1027,7 @@ class ReceiveResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1102,7 +1102,7 @@ class ReceiveByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1429,7 +1429,7 @@ class ReceiveByStampSheetResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],

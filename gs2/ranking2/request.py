@@ -829,7 +829,7 @@ class CreateGlobalRankingModelMasterRequest(core.Gs2Request):
             "maximumValue": self.maximum_value,
             "sum": self.sum,
             "orderDirection": self.order_direction,
-            "rankingRewards": [
+            "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
             ],
@@ -984,7 +984,7 @@ class UpdateGlobalRankingModelMasterRequest(core.Gs2Request):
             "maximumValue": self.maximum_value,
             "sum": self.sum,
             "orderDirection": self.order_direction,
-            "rankingRewards": [
+            "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
             ],
@@ -2070,7 +2070,7 @@ class ReceiveGlobalRankingReceivedRewardRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "rankingName": self.ranking_name,
             "season": self.season,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2151,7 +2151,7 @@ class ReceiveGlobalRankingReceivedRewardByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "rankingName": self.ranking_name,
             "season": self.season,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2908,7 +2908,7 @@ class CreateClusterRankingModelMasterRequest(core.Gs2Request):
             "sum": self.sum,
             "scoreTtlDays": self.score_ttl_days,
             "orderDirection": self.order_direction,
-            "rankingRewards": [
+            "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
             ],
@@ -3077,7 +3077,7 @@ class UpdateClusterRankingModelMasterRequest(core.Gs2Request):
             "sum": self.sum,
             "scoreTtlDays": self.score_ttl_days,
             "orderDirection": self.order_direction,
-            "rankingRewards": [
+            "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
             ],
@@ -4275,7 +4275,7 @@ class ReceiveClusterRankingReceivedRewardRequest(core.Gs2Request):
             "rankingName": self.ranking_name,
             "clusterName": self.cluster_name,
             "season": self.season,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -4363,7 +4363,7 @@ class ReceiveClusterRankingReceivedRewardByUserIdRequest(core.Gs2Request):
             "rankingName": self.ranking_name,
             "clusterName": self.cluster_name,
             "season": self.season,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

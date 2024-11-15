@@ -272,7 +272,7 @@ class AcquireActionList(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -744,7 +744,7 @@ class CategoryModel(core.Gs2Model):
             "metadata": self.metadata,
             "rewardIntervalMinutes": self.reward_interval_minutes,
             "defaultMaximumIdleMinutes": self.default_maximum_idle_minutes,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -913,7 +913,7 @@ class CategoryModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "rewardIntervalMinutes": self.reward_interval_minutes,
             "defaultMaximumIdleMinutes": self.default_maximum_idle_minutes,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],

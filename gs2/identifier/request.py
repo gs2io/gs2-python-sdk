@@ -791,56 +791,6 @@ class DetachGuardRequest(core.Gs2Request):
         }
 
 
-class DescribePasswordsRequest(core.Gs2Request):
-
-    context_stack: str = None
-    user_name: str = None
-    page_token: str = None
-    limit: int = None
-
-    def with_user_name(self, user_name: str) -> DescribePasswordsRequest:
-        self.user_name = user_name
-        return self
-
-    def with_page_token(self, page_token: str) -> DescribePasswordsRequest:
-        self.page_token = page_token
-        return self
-
-    def with_limit(self, limit: int) -> DescribePasswordsRequest:
-        self.limit = limit
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribePasswordsRequest]:
-        if data is None:
-            return None
-        return DescribePasswordsRequest()\
-            .with_user_name(data.get('userName'))\
-            .with_page_token(data.get('pageToken'))\
-            .with_limit(data.get('limit'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "userName": self.user_name,
-            "pageToken": self.page_token,
-            "limit": self.limit,
-        }
-
-
 class CreatePasswordRequest(core.Gs2Request):
 
     context_stack: str = None

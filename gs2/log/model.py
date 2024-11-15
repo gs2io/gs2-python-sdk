@@ -362,7 +362,7 @@ class InGameLog(core.Gs2Model):
             "timestamp": self.timestamp,
             "requestId": self.request_id,
             "userId": self.user_id,
-            "tags": [
+            "tags": None if self.tags is None else [
                 self.tags[i].to_dict() if self.tags[i] else None
                 for i in range(len(self.tags) if self.tags else 0)
             ],
@@ -790,7 +790,7 @@ class IssueStampSheetLog(core.Gs2Model):
             "userId": self.user_id,
             "action": self.action,
             "args": self.args,
-            "tasks": [
+            "tasks": None if self.tasks is None else [
                 self.tasks[i]
                 for i in range(len(self.tasks) if self.tasks else 0)
             ],

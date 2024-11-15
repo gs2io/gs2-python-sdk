@@ -806,7 +806,7 @@ class PushByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "jobs": [
+            "jobs": None if self.jobs is None else [
                 self.jobs[i].to_dict() if self.jobs[i] else None
                 for i in range(len(self.jobs) if self.jobs else 0)
             ],

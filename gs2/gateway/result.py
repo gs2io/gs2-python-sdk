@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -490,7 +490,7 @@ class DescribeWebSocketSessionsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -537,7 +537,7 @@ class DescribeWebSocketSessionsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -615,9 +615,14 @@ class SetUserIdByUserIdResult(core.Gs2Result):
 
 class SendNotificationResult(core.Gs2Result):
     protocol: str = None
+    send_connection_ids: List[str] = None
 
     def with_protocol(self, protocol: str) -> SendNotificationResult:
         self.protocol = protocol
+        return self
+
+    def with_send_connection_ids(self, send_connection_ids: List[str]) -> SendNotificationResult:
+        self.send_connection_ids = send_connection_ids
         return self
 
     def get(self, key, default=None):
@@ -639,11 +644,19 @@ class SendNotificationResult(core.Gs2Result):
         if data is None:
             return None
         return SendNotificationResult()\
-            .with_protocol(data.get('protocol'))
+            .with_protocol(data.get('protocol'))\
+            .with_send_connection_ids([
+                data.get('sendConnectionIds')[i]
+                for i in range(len(data.get('sendConnectionIds')) if data.get('sendConnectionIds') else 0)
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "protocol": self.protocol,
+            "sendConnectionIds": None if self.send_connection_ids is None else [
+                self.send_connection_ids[i]
+                for i in range(len(self.send_connection_ids) if self.send_connection_ids else 0)
+            ],
         }
 
 
@@ -680,7 +693,7 @@ class DisconnectByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],

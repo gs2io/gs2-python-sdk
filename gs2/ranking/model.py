@@ -414,11 +414,11 @@ class GlobalRankingSetting(core.Gs2Model):
             "uniqueByUserId": self.unique_by_user_id,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
             "calculateFixedTiming": self.calculate_fixed_timing.to_dict() if self.calculate_fixed_timing else None,
-            "additionalScopes": [
+            "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "ignoreUserIds": [
+            "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
             ],
@@ -950,11 +950,11 @@ class Subscribe(core.Gs2Model):
             "subscribeId": self.subscribe_id,
             "categoryName": self.category_name,
             "userId": self.user_id,
-            "targetUserIds": [
+            "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
                 for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
             ],
-            "subscribedUserIds": [
+            "subscribedUserIds": None if self.subscribed_user_ids is None else [
                 self.subscribed_user_ids[i]
                 for i in range(len(self.subscribed_user_ids) if self.subscribed_user_ids else 0)
             ],
@@ -1196,11 +1196,11 @@ class CategoryModelMaster(core.Gs2Model):
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
-            "additionalScopes": [
+            "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "ignoreUserIds": [
+            "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
             ],
@@ -1419,11 +1419,11 @@ class CategoryModel(core.Gs2Model):
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
-            "additionalScopes": [
+            "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "ignoreUserIds": [
+            "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
             ],
@@ -1552,7 +1552,7 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
-            "lastCalculatedAts": [
+            "lastCalculatedAts": None if self.last_calculated_ats is None else [
                 self.last_calculated_ats[i].to_dict() if self.last_calculated_ats[i] else None
                 for i in range(len(self.last_calculated_ats) if self.last_calculated_ats else 0)
             ],

@@ -313,7 +313,7 @@ class RankingReward(core.Gs2Model):
         return {
             "thresholdRank": self.threshold_rank,
             "metadata": self.metadata,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -971,11 +971,11 @@ class Subscribe(core.Gs2Model):
             "subscribeId": self.subscribe_id,
             "rankingName": self.ranking_name,
             "userId": self.user_id,
-            "targetUserIds": [
+            "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
                 for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
             ],
-            "fromUserIds": [
+            "fromUserIds": None if self.from_user_ids is None else [
                 self.from_user_ids[i]
                 for i in range(len(self.from_user_ids) if self.from_user_ids else 0)
             ],
@@ -2056,7 +2056,7 @@ class ClusterRankingModelMaster(core.Gs2Model):
             "scoreTtlDays": self.score_ttl_days,
             "orderDirection": self.order_direction,
             "entryPeriodEventId": self.entry_period_event_id,
-            "rankingRewards": [
+            "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
             ],
@@ -2224,7 +2224,7 @@ class ClusterRankingModel(core.Gs2Model):
             "sum": self.sum,
             "orderDirection": self.order_direction,
             "entryPeriodEventId": self.entry_period_event_id,
-            "rankingRewards": [
+            "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
             ],
@@ -2907,7 +2907,7 @@ class GlobalRankingModelMaster(core.Gs2Model):
             "sum": self.sum,
             "orderDirection": self.order_direction,
             "entryPeriodEventId": self.entry_period_event_id,
-            "rankingRewards": [
+            "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
             ],
@@ -3068,7 +3068,7 @@ class GlobalRankingModel(core.Gs2Model):
             "sum": self.sum,
             "orderDirection": self.order_direction,
             "entryPeriodEventId": self.entry_period_event_id,
-            "rankingRewards": [
+            "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
             ],

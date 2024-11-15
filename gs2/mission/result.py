@@ -56,7 +56,7 @@ class DescribeCompletesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -103,7 +103,7 @@ class DescribeCompletesByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -778,7 +778,7 @@ class DescribeCounterModelMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -961,7 +961,7 @@ class DescribeMissionGroupModelMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1144,7 +1144,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1578,7 +1578,7 @@ class DescribeCountersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1625,7 +1625,7 @@ class DescribeCountersByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1673,7 +1673,7 @@ class IncreaseCounterByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "changedCompletes": [
+            "changedCompletes": None if self.changed_completes is None else [
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)
             ],
@@ -1727,7 +1727,7 @@ class SetCounterByUserIdResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
             "old": self.old.to_dict() if self.old else None,
-            "changedCompletes": [
+            "changedCompletes": None if self.changed_completes is None else [
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)
             ],
@@ -1774,7 +1774,7 @@ class DecreaseCounterResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "changedCompletes": [
+            "changedCompletes": None if self.changed_completes is None else [
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)
             ],
@@ -1821,7 +1821,7 @@ class DecreaseCounterByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "changedCompletes": [
+            "changedCompletes": None if self.changed_completes is None else [
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)
             ],
@@ -2024,7 +2024,7 @@ class IncreaseByStampSheetResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "changedCompletes": [
+            "changedCompletes": None if self.changed_completes is None else [
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)
             ],
@@ -2078,7 +2078,7 @@ class SetByStampSheetResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
             "old": self.old.to_dict() if self.old else None,
-            "changedCompletes": [
+            "changedCompletes": None if self.changed_completes is None else [
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)
             ],
@@ -2131,7 +2131,7 @@ class DecreaseByStampTaskResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "changedCompletes": [
+            "changedCompletes": None if self.changed_completes is None else [
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes) if self.changed_completes else 0)
             ],
@@ -2342,7 +2342,7 @@ class DescribeCounterModelsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -2416,7 +2416,7 @@ class DescribeMissionGroupModelsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -2490,7 +2490,7 @@ class DescribeMissionTaskModelsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -2570,7 +2570,7 @@ class DescribeMissionTaskModelMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],

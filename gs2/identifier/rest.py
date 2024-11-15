@@ -1112,16 +1112,17 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_passwords(
+    def _describe_attached_guards(
         self,
-        request: DescribePasswordsRequest,
-        callback: Callable[[AsyncResult[DescribePasswordsResult]], None],
+        request: DescribeAttachedGuardsRequest,
+        callback: Callable[[AsyncResult[DescribeAttachedGuardsResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
-        ) + "/user/{userName}/password".format(
+        ) + "/user/{userName}/identifier/{clientId}/guard".format(
+            clientId=request.client_id if request.client_id is not None and request.client_id != '' else 'null',
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
 
@@ -1129,17 +1130,13 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
-        if request.page_token is not None:
-            query_strings["pageToken"] = request.page_token
-        if request.limit is not None:
-            query_strings["limit"] = request.limit
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
         _job = rest.NetworkJob(
             url=url,
             method='GET',
-            result_type=DescribePasswordsResult,
+            result_type=DescribeAttachedGuardsResult,
             callback=callback,
             headers=headers,
             query_strings=query_strings,
@@ -1150,13 +1147,13 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def describe_passwords(
+    def describe_attached_guards(
         self,
-        request: DescribePasswordsRequest,
-    ) -> DescribePasswordsResult:
+        request: DescribeAttachedGuardsRequest,
+    ) -> DescribeAttachedGuardsResult:
         async_result = []
         with timeout(30):
-            self._describe_passwords(
+            self._describe_attached_guards(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -1167,12 +1164,159 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def describe_passwords_async(
+    async def describe_attached_guards_async(
         self,
-        request: DescribePasswordsRequest,
-    ) -> DescribePasswordsResult:
+        request: DescribeAttachedGuardsRequest,
+    ) -> DescribeAttachedGuardsResult:
         async_result = []
-        self._describe_passwords(
+        self._describe_attached_guards(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _attach_guard(
+        self,
+        request: AttachGuardRequest,
+        callback: Callable[[AsyncResult[AttachGuardResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='identifier',
+            region=self.session.region,
+        ) + "/user/{userName}/identifier/{clientId}/guard".format(
+            userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
+            clientId=request.client_id if request.client_id is not None and request.client_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.guard_namespace_id is not None:
+            body["guardNamespaceId"] = request.guard_namespace_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=AttachGuardResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def attach_guard(
+        self,
+        request: AttachGuardRequest,
+    ) -> AttachGuardResult:
+        async_result = []
+        with timeout(30):
+            self._attach_guard(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def attach_guard_async(
+        self,
+        request: AttachGuardRequest,
+    ) -> AttachGuardResult:
+        async_result = []
+        self._attach_guard(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _detach_guard(
+        self,
+        request: DetachGuardRequest,
+        callback: Callable[[AsyncResult[DetachGuardResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='identifier',
+            region=self.session.region,
+        ) + "/user/{userName}/identifier/{clientId}/guard/{guardNamespaceId}".format(
+            userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
+            clientId=request.client_id if request.client_id is not None and request.client_id != '' else 'null',
+            guardNamespaceId=request.guard_namespace_id if request.guard_namespace_id is not None and request.guard_namespace_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DetachGuardResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def detach_guard(
+        self,
+        request: DetachGuardRequest,
+    ) -> DetachGuardResult:
+        async_result = []
+        with timeout(30):
+            self._detach_guard(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def detach_guard_async(
+        self,
+        request: DetachGuardRequest,
+    ) -> DetachGuardResult:
+        async_result = []
+        self._detach_guard(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

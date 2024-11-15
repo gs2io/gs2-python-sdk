@@ -905,15 +905,15 @@ class CreateRateModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
@@ -1058,15 +1058,15 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
@@ -1357,7 +1357,7 @@ class CreateIncrementalRateModelMasterRequest(core.Gs2Request):
             "calculateScriptId": self.calculate_script_id,
             "exchangeCountId": self.exchange_count_id,
             "maximumExchangeCount": self.maximum_exchange_count,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -1519,7 +1519,7 @@ class UpdateIncrementalRateModelMasterRequest(core.Gs2Request):
             "calculateScriptId": self.calculate_script_id,
             "exchangeCountId": self.exchange_count_id,
             "maximumExchangeCount": self.maximum_exchange_count,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -1637,7 +1637,7 @@ class ExchangeRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "accessToken": self.access_token,
             "count": self.count,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1718,7 +1718,7 @@ class ExchangeByUserIdRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "userId": self.user_id,
             "count": self.count,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1837,7 +1837,7 @@ class IncrementalExchangeRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "accessToken": self.access_token,
             "count": self.count,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1918,7 +1918,7 @@ class IncrementalExchangeByUserIdRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "userId": self.user_id,
             "count": self.count,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2201,7 +2201,7 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "rateName": self.rate_name,
             "count": self.count,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2512,7 +2512,7 @@ class AcquireRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "awaitName": self.await_name,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2586,7 +2586,7 @@ class AcquireByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "awaitName": self.await_name,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2661,7 +2661,7 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "awaitName": self.await_name,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

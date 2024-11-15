@@ -365,7 +365,7 @@ class DataObject(core.Gs2Model):
             "name": self.name,
             "userId": self.user_id,
             "scope": self.scope,
-            "allowUserIds": [
+            "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
                 for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
             ],

@@ -1290,7 +1290,7 @@ class QueryInGameLogRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "tags": [
+            "tags": None if self.tags is None else [
                 self.tags[i].to_dict() if self.tags[i] else None
                 for i in range(len(self.tags) if self.tags else 0)
             ],
@@ -1363,7 +1363,7 @@ class SendInGameLogRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "tags": [
+            "tags": None if self.tags is None else [
                 self.tags[i].to_dict() if self.tags[i] else None
                 for i in range(len(self.tags) if self.tags else 0)
             ],
@@ -1437,7 +1437,7 @@ class SendInGameLogByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "tags": [
+            "tags": None if self.tags is None else [
                 self.tags[i].to_dict() if self.tags[i] else None
                 for i in range(len(self.tags) if self.tags else 0)
             ],

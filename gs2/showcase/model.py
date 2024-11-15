@@ -480,15 +480,15 @@ class RandomDisplayItemModel(core.Gs2Model):
         return {
             "name": self.name,
             "metadata": self.metadata,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -581,15 +581,15 @@ class RandomDisplayItem(core.Gs2Model):
             "showcaseName": self.showcase_name,
             "name": self.name,
             "metadata": self.metadata,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -773,7 +773,7 @@ class RandomShowcase(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "maximumNumberOfChoice": self.maximum_number_of_choice,
-            "displayItems": [
+            "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
                 for i in range(len(self.display_items) if self.display_items else 0)
             ],
@@ -942,7 +942,7 @@ class RandomShowcaseMaster(core.Gs2Model):
             "description": self.description,
             "metadata": self.metadata,
             "maximumNumberOfChoice": self.maximum_number_of_choice,
-            "displayItems": [
+            "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
                 for i in range(len(self.display_items) if self.display_items else 0)
             ],
@@ -1209,7 +1209,7 @@ class Showcase(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "salesPeriodEventId": self.sales_period_event_id,
-            "displayItems": [
+            "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
                 for i in range(len(self.display_items) if self.display_items else 0)
             ],
@@ -1263,7 +1263,7 @@ class SalesItemGroup(core.Gs2Model):
         return {
             "name": self.name,
             "metadata": self.metadata,
-            "salesItems": [
+            "salesItems": None if self.sales_items is None else [
                 self.sales_items[i].to_dict() if self.sales_items[i] else None
                 for i in range(len(self.sales_items) if self.sales_items else 0)
             ],
@@ -1335,15 +1335,15 @@ class SalesItem(core.Gs2Model):
         return {
             "name": self.name,
             "metadata": self.metadata,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -1575,7 +1575,7 @@ class ShowcaseMaster(core.Gs2Model):
             "description": self.description,
             "metadata": self.metadata,
             "salesPeriodEventId": self.sales_period_event_id,
-            "displayItems": [
+            "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
                 for i in range(len(self.display_items) if self.display_items else 0)
             ],
@@ -1719,7 +1719,7 @@ class SalesItemGroupMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "salesItemNames": [
+            "salesItemNames": None if self.sales_item_names is None else [
                 self.sales_item_names[i]
                 for i in range(len(self.sales_item_names) if self.sales_item_names else 0)
             ],
@@ -1881,15 +1881,15 @@ class SalesItemMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],

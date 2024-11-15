@@ -452,11 +452,11 @@ class LogCost(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "base": self.base,
-            "adds": [
+            "adds": None if self.adds is None else [
                 self.adds[i]
                 for i in range(len(self.adds) if self.adds else 0)
             ],
-            "subs": [
+            "subs": None if self.subs is None else [
                 self.subs[i]
                 for i in range(len(self.subs) if self.subs else 0)
             ],
@@ -623,7 +623,7 @@ class Await(core.Gs2Model):
             "name": self.name,
             "count": self.count,
             "skipSeconds": self.skip_seconds,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -900,7 +900,7 @@ class IncrementalRateModelMaster(core.Gs2Model):
             "calculateScriptId": self.calculate_script_id,
             "exchangeCountId": self.exchange_count_id,
             "maximumExchangeCount": self.maximum_exchange_count,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -1068,7 +1068,7 @@ class IncrementalRateModel(core.Gs2Model):
             "calculateScriptId": self.calculate_script_id,
             "exchangeCountId": self.exchange_count_id,
             "maximumExchangeCount": self.maximum_exchange_count,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -1239,17 +1239,17 @@ class RateModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -1398,17 +1398,17 @@ class RateModel(core.Gs2Model):
             "rateModelId": self.rate_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],

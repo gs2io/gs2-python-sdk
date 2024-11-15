@@ -423,7 +423,7 @@ class RecoverValueTable(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -484,7 +484,7 @@ class RecoverIntervalTable(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -545,7 +545,7 @@ class MaxStaminaTable(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -936,7 +936,7 @@ class RecoverValueTableMaster(core.Gs2Model):
             "metadata": self.metadata,
             "description": self.description,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1087,7 +1087,7 @@ class RecoverIntervalTableMaster(core.Gs2Model):
             "metadata": self.metadata,
             "description": self.description,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1238,7 +1238,7 @@ class MaxStaminaTableMaster(core.Gs2Model):
             "metadata": self.metadata,
             "description": self.description,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],

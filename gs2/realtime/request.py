@@ -445,7 +445,7 @@ class WantRoomRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "name": self.name,
-            "notificationUserIds": [
+            "notificationUserIds": None if self.notification_user_ids is None else [
                 self.notification_user_ids[i]
                 for i in range(len(self.notification_user_ids) if self.notification_user_ids else 0)
             ],

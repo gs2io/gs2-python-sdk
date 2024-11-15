@@ -889,7 +889,7 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
             "defaultMaximumMemberCount": self.default_maximum_member_count,
             "maximumMemberCount": self.maximum_member_count,
             "inactivityPeriodDays": self.inactivity_period_days,
-            "roles": [
+            "roles": None if self.roles is None else [
                 self.roles[i].to_dict() if self.roles[i] else None
                 for i in range(len(self.roles) if self.roles else 0)
             ],
@@ -1044,7 +1044,7 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
             "defaultMaximumMemberCount": self.default_maximum_member_count,
             "maximumMemberCount": self.maximum_member_count,
             "inactivityPeriodDays": self.inactivity_period_days,
-            "roles": [
+            "roles": None if self.roles is None else [
                 self.roles[i].to_dict() if self.roles[i] else None
                 for i in range(len(self.roles) if self.roles else 0)
             ],
@@ -1313,27 +1313,27 @@ class SearchGuildsRequest(core.Gs2Request):
             "guildModelName": self.guild_model_name,
             "accessToken": self.access_token,
             "displayName": self.display_name,
-            "attributes1": [
+            "attributes1": None if self.attributes1 is None else [
                 self.attributes1[i]
                 for i in range(len(self.attributes1) if self.attributes1 else 0)
             ],
-            "attributes2": [
+            "attributes2": None if self.attributes2 is None else [
                 self.attributes2[i]
                 for i in range(len(self.attributes2) if self.attributes2 else 0)
             ],
-            "attributes3": [
+            "attributes3": None if self.attributes3 is None else [
                 self.attributes3[i]
                 for i in range(len(self.attributes3) if self.attributes3 else 0)
             ],
-            "attributes4": [
+            "attributes4": None if self.attributes4 is None else [
                 self.attributes4[i]
                 for i in range(len(self.attributes4) if self.attributes4 else 0)
             ],
-            "attributes5": [
+            "attributes5": None if self.attributes5 is None else [
                 self.attributes5[i]
                 for i in range(len(self.attributes5) if self.attributes5 else 0)
             ],
-            "joinPolicies": [
+            "joinPolicies": None if self.join_policies is None else [
                 self.join_policies[i]
                 for i in range(len(self.join_policies) if self.join_policies else 0)
             ],
@@ -1487,27 +1487,27 @@ class SearchGuildsByUserIdRequest(core.Gs2Request):
             "guildModelName": self.guild_model_name,
             "userId": self.user_id,
             "displayName": self.display_name,
-            "attributes1": [
+            "attributes1": None if self.attributes1 is None else [
                 self.attributes1[i]
                 for i in range(len(self.attributes1) if self.attributes1 else 0)
             ],
-            "attributes2": [
+            "attributes2": None if self.attributes2 is None else [
                 self.attributes2[i]
                 for i in range(len(self.attributes2) if self.attributes2 else 0)
             ],
-            "attributes3": [
+            "attributes3": None if self.attributes3 is None else [
                 self.attributes3[i]
                 for i in range(len(self.attributes3) if self.attributes3 else 0)
             ],
-            "attributes4": [
+            "attributes4": None if self.attributes4 is None else [
                 self.attributes4[i]
                 for i in range(len(self.attributes4) if self.attributes4 else 0)
             ],
-            "attributes5": [
+            "attributes5": None if self.attributes5 is None else [
                 self.attributes5[i]
                 for i in range(len(self.attributes5) if self.attributes5 else 0)
             ],
-            "joinPolicies": [
+            "joinPolicies": None if self.join_policies is None else [
                 self.join_policies[i]
                 for i in range(len(self.join_policies) if self.join_policies else 0)
             ],
@@ -1635,7 +1635,7 @@ class CreateGuildRequest(core.Gs2Request):
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
             "joinPolicy": self.join_policy,
-            "customRoles": [
+            "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
                 for i in range(len(self.custom_roles) if self.custom_roles else 0)
             ],
@@ -1765,7 +1765,7 @@ class CreateGuildByUserIdRequest(core.Gs2Request):
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
             "joinPolicy": self.join_policy,
-            "customRoles": [
+            "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
                 for i in range(len(self.custom_roles) if self.custom_roles else 0)
             ],
@@ -2011,7 +2011,7 @@ class UpdateGuildRequest(core.Gs2Request):
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
             "joinPolicy": self.join_policy,
-            "customRoles": [
+            "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
                 for i in range(len(self.custom_roles) if self.custom_roles else 0)
             ],
@@ -2135,7 +2135,7 @@ class UpdateGuildByGuildNameRequest(core.Gs2Request):
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
             "joinPolicy": self.join_policy,
-            "customRoles": [
+            "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
                 for i in range(len(self.custom_roles) if self.custom_roles else 0)
             ],

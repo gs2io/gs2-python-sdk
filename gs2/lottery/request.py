@@ -1072,7 +1072,7 @@ class CreatePrizeTableMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "prizes": [
+            "prizes": None if self.prizes is None else [
                 self.prizes[i].to_dict() if self.prizes[i] else None
                 for i in range(len(self.prizes) if self.prizes else 0)
             ],
@@ -1185,7 +1185,7 @@ class UpdatePrizeTableMasterRequest(core.Gs2Request):
             "prizeTableName": self.prize_table_name,
             "description": self.description,
             "metadata": self.metadata,
-            "prizes": [
+            "prizes": None if self.prizes is None else [
                 self.prizes[i].to_dict() if self.prizes[i] else None
                 for i in range(len(self.prizes) if self.prizes else 0)
             ],
@@ -1467,7 +1467,7 @@ class DrawByUserIdRequest(core.Gs2Request):
             "lotteryName": self.lottery_name,
             "userId": self.user_id,
             "count": self.count,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1701,7 +1701,7 @@ class DrawWithRandomSeedByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "randomSeed": self.random_seed,
             "count": self.count,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

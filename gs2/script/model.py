@@ -242,15 +242,15 @@ class Transaction(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "transactionId": self.transaction_id,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -461,7 +461,7 @@ class RandomStatus(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "seed": self.seed,
-            "used": [
+            "used": None if self.used is None else [
                 self.used[i].to_dict() if self.used[i] else None
                 for i in range(len(self.used) if self.used else 0)
             ],

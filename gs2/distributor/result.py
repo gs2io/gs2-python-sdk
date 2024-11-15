@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -273,7 +273,7 @@ class DescribeDistributorModelMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -450,7 +450,7 @@ class DescribeDistributorModelsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -925,19 +925,19 @@ class RunStampSheetExpressResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "verifyTaskResultCodes": [
+            "verifyTaskResultCodes": None if self.verify_task_result_codes is None else [
                 self.verify_task_result_codes[i]
                 for i in range(len(self.verify_task_result_codes) if self.verify_task_result_codes else 0)
             ],
-            "verifyTaskResults": [
+            "verifyTaskResults": None if self.verify_task_results is None else [
                 self.verify_task_results[i]
                 for i in range(len(self.verify_task_results) if self.verify_task_results else 0)
             ],
-            "taskResultCodes": [
+            "taskResultCodes": None if self.task_result_codes is None else [
                 self.task_result_codes[i]
                 for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
             ],
-            "taskResults": [
+            "taskResults": None if self.task_results is None else [
                 self.task_results[i]
                 for i in range(len(self.task_results) if self.task_results else 0)
             ],
@@ -1155,19 +1155,19 @@ class RunStampSheetExpressWithoutNamespaceResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "verifyTaskResultCodes": [
+            "verifyTaskResultCodes": None if self.verify_task_result_codes is None else [
                 self.verify_task_result_codes[i]
                 for i in range(len(self.verify_task_result_codes) if self.verify_task_result_codes else 0)
             ],
-            "verifyTaskResults": [
+            "verifyTaskResults": None if self.verify_task_results is None else [
                 self.verify_task_results[i]
                 for i in range(len(self.verify_task_results) if self.verify_task_results else 0)
             ],
-            "taskResultCodes": [
+            "taskResultCodes": None if self.task_result_codes is None else [
                 self.task_result_codes[i]
                 for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
             ],
-            "taskResults": [
+            "taskResults": None if self.task_results is None else [
                 self.task_results[i]
                 for i in range(len(self.task_results) if self.task_results else 0)
             ],

@@ -770,15 +770,15 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -909,15 +909,15 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
             "salesItemName": self.sales_item_name,
             "description": self.description,
             "metadata": self.metadata,
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -1080,7 +1080,7 @@ class CreateSalesItemGroupMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "salesItemNames": [
+            "salesItemNames": None if self.sales_item_names is None else [
                 self.sales_item_names[i]
                 for i in range(len(self.sales_item_names) if self.sales_item_names else 0)
             ],
@@ -1193,7 +1193,7 @@ class UpdateSalesItemGroupMasterRequest(core.Gs2Request):
             "salesItemGroupName": self.sales_item_group_name,
             "description": self.description,
             "metadata": self.metadata,
-            "salesItemNames": [
+            "salesItemNames": None if self.sales_item_names is None else [
                 self.sales_item_names[i]
                 for i in range(len(self.sales_item_names) if self.sales_item_names else 0)
             ],
@@ -1362,7 +1362,7 @@ class CreateShowcaseMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "displayItems": [
+            "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
                 for i in range(len(self.display_items) if self.display_items else 0)
             ],
@@ -1482,7 +1482,7 @@ class UpdateShowcaseMasterRequest(core.Gs2Request):
             "showcaseName": self.showcase_name,
             "description": self.description,
             "metadata": self.metadata,
-            "displayItems": [
+            "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
                 for i in range(len(self.display_items) if self.display_items else 0)
             ],
@@ -1966,7 +1966,7 @@ class BuyRequest(core.Gs2Request):
             "displayItemId": self.display_item_id,
             "accessToken": self.access_token,
             "quantity": self.quantity,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2054,7 +2054,7 @@ class BuyByUserIdRequest(core.Gs2Request):
             "displayItemId": self.display_item_id,
             "userId": self.user_id,
             "quantity": self.quantity,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2200,7 +2200,7 @@ class CreateRandomShowcaseMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "maximumNumberOfChoice": self.maximum_number_of_choice,
-            "displayItems": [
+            "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
                 for i in range(len(self.display_items) if self.display_items else 0)
             ],
@@ -2341,7 +2341,7 @@ class UpdateRandomShowcaseMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "maximumNumberOfChoice": self.maximum_number_of_choice,
-            "displayItems": [
+            "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
                 for i in range(len(self.display_items) if self.display_items else 0)
             ],
@@ -3109,7 +3109,7 @@ class RandomShowcaseBuyRequest(core.Gs2Request):
             "displayItemName": self.display_item_name,
             "accessToken": self.access_token,
             "quantity": self.quantity,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -3197,7 +3197,7 @@ class RandomShowcaseBuyByUserIdRequest(core.Gs2Request):
             "displayItemName": self.display_item_name,
             "userId": self.user_id,
             "quantity": self.quantity,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

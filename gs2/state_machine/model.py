@@ -189,7 +189,7 @@ class RandomStatus(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "seed": self.seed,
-            "used": [
+            "used": None if self.used is None else [
                 self.used[i].to_dict() if self.used[i] else None
                 for i in range(len(self.used) if self.used else 0)
             ],
@@ -665,11 +665,11 @@ class Status(core.Gs2Model):
             "enableSpeculativeExecution": self.enable_speculative_execution,
             "stateMachineDefinition": self.state_machine_definition,
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
-            "stacks": [
+            "stacks": None if self.stacks is None else [
                 self.stacks[i].to_dict() if self.stacks[i] else None
                 for i in range(len(self.stacks) if self.stacks else 0)
             ],
-            "variables": [
+            "variables": None if self.variables is None else [
                 self.variables[i].to_dict() if self.variables[i] else None
                 for i in range(len(self.variables) if self.variables else 0)
             ],

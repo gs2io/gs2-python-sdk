@@ -803,7 +803,7 @@ class CreateBalanceParameterModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "totalValue": self.total_value,
             "initialValueStrategy": self.initial_value_strategy,
-            "parameters": [
+            "parameters": None if self.parameters is None else [
                 self.parameters[i].to_dict() if self.parameters[i] else None
                 for i in range(len(self.parameters) if self.parameters else 0)
             ],
@@ -930,7 +930,7 @@ class UpdateBalanceParameterModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "totalValue": self.total_value,
             "initialValueStrategy": self.initial_value_strategy,
-            "parameters": [
+            "parameters": None if self.parameters is None else [
                 self.parameters[i].to_dict() if self.parameters[i] else None
                 for i in range(len(self.parameters) if self.parameters else 0)
             ],
@@ -1188,11 +1188,11 @@ class CreateRarityParameterModelMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "maximumParameterCount": self.maximum_parameter_count,
-            "parameterCounts": [
+            "parameterCounts": None if self.parameter_counts is None else [
                 self.parameter_counts[i].to_dict() if self.parameter_counts[i] else None
                 for i in range(len(self.parameter_counts) if self.parameter_counts else 0)
             ],
-            "parameters": [
+            "parameters": None if self.parameters is None else [
                 self.parameters[i].to_dict() if self.parameters[i] else None
                 for i in range(len(self.parameters) if self.parameters else 0)
             ],
@@ -1321,11 +1321,11 @@ class UpdateRarityParameterModelMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "maximumParameterCount": self.maximum_parameter_count,
-            "parameterCounts": [
+            "parameterCounts": None if self.parameter_counts is None else [
                 self.parameter_counts[i].to_dict() if self.parameter_counts[i] else None
                 for i in range(len(self.parameter_counts) if self.parameter_counts else 0)
             ],
-            "parameters": [
+            "parameters": None if self.parameters is None else [
                 self.parameters[i].to_dict() if self.parameters[i] else None
                 for i in range(len(self.parameters) if self.parameters else 0)
             ],
@@ -1932,7 +1932,7 @@ class ReDrawBalanceParameterStatusByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "parameterName": self.parameter_name,
             "propertyId": self.property_id,
-            "fixedParameterNames": [
+            "fixedParameterNames": None if self.fixed_parameter_names is None else [
                 self.fixed_parameter_names[i]
                 for i in range(len(self.fixed_parameter_names) if self.fixed_parameter_names else 0)
             ],
@@ -2057,7 +2057,7 @@ class SetBalanceParameterStatusByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "parameterName": self.parameter_name,
             "propertyId": self.property_id,
-            "parameterValues": [
+            "parameterValues": None if self.parameter_values is None else [
                 self.parameter_values[i].to_dict() if self.parameter_values[i] else None
                 for i in range(len(self.parameter_values) if self.parameter_values else 0)
             ],
@@ -2507,7 +2507,7 @@ class ReDrawRarityParameterStatusByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "parameterName": self.parameter_name,
             "propertyId": self.property_id,
-            "fixedParameterNames": [
+            "fixedParameterNames": None if self.fixed_parameter_names is None else [
                 self.fixed_parameter_names[i]
                 for i in range(len(self.fixed_parameter_names) if self.fixed_parameter_names else 0)
             ],
@@ -2981,7 +2981,7 @@ class SetRarityParameterStatusByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "parameterName": self.parameter_name,
             "propertyId": self.property_id,
-            "parameterValues": [
+            "parameterValues": None if self.parameter_values is None else [
                 self.parameter_values[i].to_dict() if self.parameter_values[i] else None
                 for i in range(len(self.parameter_values) if self.parameter_values else 0)
             ],

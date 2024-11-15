@@ -575,28 +575,28 @@ class QuestModel(core.Gs2Model):
             "questModelId": self.quest_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "contents": [
+            "contents": None if self.contents is None else [
                 self.contents[i].to_dict() if self.contents[i] else None
                 for i in range(len(self.contents) if self.contents else 0)
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
-            "firstCompleteAcquireActions": [
+            "firstCompleteAcquireActions": None if self.first_complete_acquire_actions is None else [
                 self.first_complete_acquire_actions[i].to_dict() if self.first_complete_acquire_actions[i] else None
                 for i in range(len(self.first_complete_acquire_actions) if self.first_complete_acquire_actions else 0)
             ],
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "failedAcquireActions": [
+            "failedAcquireActions": None if self.failed_acquire_actions is None else [
                 self.failed_acquire_actions[i].to_dict() if self.failed_acquire_actions[i] else None
                 for i in range(len(self.failed_acquire_actions) if self.failed_acquire_actions else 0)
             ],
-            "premiseQuestNames": [
+            "premiseQuestNames": None if self.premise_quest_names is None else [
                 self.premise_quest_names[i]
                 for i in range(len(self.premise_quest_names) if self.premise_quest_names else 0)
             ],
@@ -718,7 +718,7 @@ class QuestGroupModel(core.Gs2Model):
             "questGroupModelId": self.quest_group_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "quests": [
+            "quests": None if self.quests is None else [
                 self.quests[i].to_dict() if self.quests[i] else None
                 for i in range(len(self.quests) if self.quests else 0)
             ],
@@ -865,7 +865,7 @@ class CompletedQuestList(core.Gs2Model):
             "completedQuestListId": self.completed_quest_list_id,
             "userId": self.user_id,
             "questGroupName": self.quest_group_name,
-            "completeQuestNames": [
+            "completeQuestNames": None if self.complete_quest_names is None else [
                 self.complete_quest_names[i]
                 for i in range(len(self.complete_quest_names) if self.complete_quest_names else 0)
             ],
@@ -1031,11 +1031,11 @@ class Progress(core.Gs2Model):
             "transactionId": self.transaction_id,
             "questModelId": self.quest_model_id,
             "randomSeed": self.random_seed,
-            "rewards": [
+            "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
                 for i in range(len(self.rewards) if self.rewards else 0)
             ],
-            "failedRewards": [
+            "failedRewards": None if self.failed_rewards is None else [
                 self.failed_rewards[i].to_dict() if self.failed_rewards[i] else None
                 for i in range(len(self.failed_rewards) if self.failed_rewards else 0)
             ],
@@ -1147,7 +1147,7 @@ class Contents(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "metadata": self.metadata,
-            "completeAcquireActions": [
+            "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
                 for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
             ],
@@ -1443,28 +1443,28 @@ class QuestModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "contents": [
+            "contents": None if self.contents is None else [
                 self.contents[i].to_dict() if self.contents[i] else None
                 for i in range(len(self.contents) if self.contents else 0)
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
-            "firstCompleteAcquireActions": [
+            "firstCompleteAcquireActions": None if self.first_complete_acquire_actions is None else [
                 self.first_complete_acquire_actions[i].to_dict() if self.first_complete_acquire_actions[i] else None
                 for i in range(len(self.first_complete_acquire_actions) if self.first_complete_acquire_actions else 0)
             ],
-            "verifyActions": [
+            "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
                 for i in range(len(self.verify_actions) if self.verify_actions else 0)
             ],
-            "consumeActions": [
+            "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
                 for i in range(len(self.consume_actions) if self.consume_actions else 0)
             ],
-            "failedAcquireActions": [
+            "failedAcquireActions": None if self.failed_acquire_actions is None else [
                 self.failed_acquire_actions[i].to_dict() if self.failed_acquire_actions[i] else None
                 for i in range(len(self.failed_acquire_actions) if self.failed_acquire_actions else 0)
             ],
-            "premiseQuestNames": [
+            "premiseQuestNames": None if self.premise_quest_names is None else [
                 self.premise_quest_names[i]
                 for i in range(len(self.premise_quest_names) if self.premise_quest_names else 0)
             ],

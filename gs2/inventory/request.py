@@ -6315,7 +6315,7 @@ class AcquireSimpleItemsByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "inventoryName": self.inventory_name,
             "userId": self.user_id,
-            "acquireCounts": [
+            "acquireCounts": None if self.acquire_counts is None else [
                 self.acquire_counts[i].to_dict() if self.acquire_counts[i] else None
                 for i in range(len(self.acquire_counts) if self.acquire_counts else 0)
             ],
@@ -6384,7 +6384,7 @@ class ConsumeSimpleItemsRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "inventoryName": self.inventory_name,
             "accessToken": self.access_token,
-            "consumeCounts": [
+            "consumeCounts": None if self.consume_counts is None else [
                 self.consume_counts[i].to_dict() if self.consume_counts[i] else None
                 for i in range(len(self.consume_counts) if self.consume_counts else 0)
             ],
@@ -6458,7 +6458,7 @@ class ConsumeSimpleItemsByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "inventoryName": self.inventory_name,
             "userId": self.user_id,
-            "consumeCounts": [
+            "consumeCounts": None if self.consume_counts is None else [
                 self.consume_counts[i].to_dict() if self.consume_counts[i] else None
                 for i in range(len(self.consume_counts) if self.consume_counts else 0)
             ],
@@ -6533,7 +6533,7 @@ class SetSimpleItemsByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "inventoryName": self.inventory_name,
             "userId": self.user_id,
-            "counts": [
+            "counts": None if self.counts is None else [
                 self.counts[i].to_dict() if self.counts[i] else None
                 for i in range(len(self.counts) if self.counts else 0)
             ],

@@ -787,7 +787,7 @@ class UnleashRateModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "targetInventoryModelId": self.target_inventory_model_id,
             "gradeModelId": self.grade_model_id,
-            "gradeEntries": [
+            "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries) if self.grade_entries else 0)
             ],
@@ -927,7 +927,7 @@ class UnleashRateModel(core.Gs2Model):
             "metadata": self.metadata,
             "targetInventoryModelId": self.target_inventory_model_id,
             "gradeModelId": self.grade_model_id,
-            "gradeEntries": [
+            "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries) if self.grade_entries else 0)
             ],
@@ -1104,12 +1104,12 @@ class RateModelMaster(core.Gs2Model):
             "targetInventoryModelId": self.target_inventory_model_id,
             "acquireExperienceSuffix": self.acquire_experience_suffix,
             "materialInventoryModelId": self.material_inventory_model_id,
-            "acquireExperienceHierarchy": [
+            "acquireExperienceHierarchy": None if self.acquire_experience_hierarchy is None else [
                 self.acquire_experience_hierarchy[i]
                 for i in range(len(self.acquire_experience_hierarchy) if self.acquire_experience_hierarchy else 0)
             ],
             "experienceModelId": self.experience_model_id,
-            "bonusRates": [
+            "bonusRates": None if self.bonus_rates is None else [
                 self.bonus_rates[i].to_dict() if self.bonus_rates[i] else None
                 for i in range(len(self.bonus_rates) if self.bonus_rates else 0)
             ],
@@ -1271,12 +1271,12 @@ class RateModel(core.Gs2Model):
             "targetInventoryModelId": self.target_inventory_model_id,
             "acquireExperienceSuffix": self.acquire_experience_suffix,
             "materialInventoryModelId": self.material_inventory_model_id,
-            "acquireExperienceHierarchy": [
+            "acquireExperienceHierarchy": None if self.acquire_experience_hierarchy is None else [
                 self.acquire_experience_hierarchy[i]
                 for i in range(len(self.acquire_experience_hierarchy) if self.acquire_experience_hierarchy else 0)
             ],
             "experienceModelId": self.experience_model_id,
-            "bonusRates": [
+            "bonusRates": None if self.bonus_rates is None else [
                 self.bonus_rates[i].to_dict() if self.bonus_rates[i] else None
                 for i in range(len(self.bonus_rates) if self.bonus_rates else 0)
             ],

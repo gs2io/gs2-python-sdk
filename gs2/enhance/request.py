@@ -881,12 +881,12 @@ class CreateRateModelMasterRequest(core.Gs2Request):
             "targetInventoryModelId": self.target_inventory_model_id,
             "acquireExperienceSuffix": self.acquire_experience_suffix,
             "materialInventoryModelId": self.material_inventory_model_id,
-            "acquireExperienceHierarchy": [
+            "acquireExperienceHierarchy": None if self.acquire_experience_hierarchy is None else [
                 self.acquire_experience_hierarchy[i]
                 for i in range(len(self.acquire_experience_hierarchy) if self.acquire_experience_hierarchy else 0)
             ],
             "experienceModelId": self.experience_model_id,
-            "bonusRates": [
+            "bonusRates": None if self.bonus_rates is None else [
                 self.bonus_rates[i].to_dict() if self.bonus_rates[i] else None
                 for i in range(len(self.bonus_rates) if self.bonus_rates else 0)
             ],
@@ -1035,12 +1035,12 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
             "targetInventoryModelId": self.target_inventory_model_id,
             "acquireExperienceSuffix": self.acquire_experience_suffix,
             "materialInventoryModelId": self.material_inventory_model_id,
-            "acquireExperienceHierarchy": [
+            "acquireExperienceHierarchy": None if self.acquire_experience_hierarchy is None else [
                 self.acquire_experience_hierarchy[i]
                 for i in range(len(self.acquire_experience_hierarchy) if self.acquire_experience_hierarchy else 0)
             ],
             "experienceModelId": self.experience_model_id,
-            "bonusRates": [
+            "bonusRates": None if self.bonus_rates is None else [
                 self.bonus_rates[i].to_dict() if self.bonus_rates[i] else None
                 for i in range(len(self.bonus_rates) if self.bonus_rates else 0)
             ],
@@ -1296,7 +1296,7 @@ class CreateUnleashRateModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "targetInventoryModelId": self.target_inventory_model_id,
             "gradeModelId": self.grade_model_id,
-            "gradeEntries": [
+            "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries) if self.grade_entries else 0)
             ],
@@ -1423,7 +1423,7 @@ class UpdateUnleashRateModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "targetInventoryModelId": self.target_inventory_model_id,
             "gradeModelId": self.grade_model_id,
-            "gradeEntries": [
+            "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries) if self.grade_entries else 0)
             ],
@@ -1550,11 +1550,11 @@ class DirectEnhanceRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "accessToken": self.access_token,
             "targetItemSetId": self.target_item_set_id,
-            "materials": [
+            "materials": None if self.materials is None else [
                 self.materials[i].to_dict() if self.materials[i] else None
                 for i in range(len(self.materials) if self.materials else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1644,11 +1644,11 @@ class DirectEnhanceByUserIdRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "userId": self.user_id,
             "targetItemSetId": self.target_item_set_id,
-            "materials": [
+            "materials": None if self.materials is None else [
                 self.materials[i].to_dict() if self.materials[i] else None
                 for i in range(len(self.materials) if self.materials else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1776,11 +1776,11 @@ class UnleashRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "accessToken": self.access_token,
             "targetItemSetId": self.target_item_set_id,
-            "materials": [
+            "materials": None if self.materials is None else [
                 self.materials[i]
                 for i in range(len(self.materials) if self.materials else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1870,11 +1870,11 @@ class UnleashByUserIdRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "userId": self.user_id,
             "targetItemSetId": self.target_item_set_id,
-            "materials": [
+            "materials": None if self.materials is None else [
                 self.materials[i]
                 for i in range(len(self.materials) if self.materials else 0)
             ],
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2005,7 +2005,7 @@ class CreateProgressByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "rateName": self.rate_name,
             "targetItemSetId": self.target_item_set_id,
-            "materials": [
+            "materials": None if self.materials is None else [
                 self.materials[i].to_dict() if self.materials[i] else None
                 for i in range(len(self.materials) if self.materials else 0)
             ],
@@ -2189,13 +2189,13 @@ class StartRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "rateName": self.rate_name,
             "targetItemSetId": self.target_item_set_id,
-            "materials": [
+            "materials": None if self.materials is None else [
                 self.materials[i].to_dict() if self.materials[i] else None
                 for i in range(len(self.materials) if self.materials else 0)
             ],
             "accessToken": self.access_token,
             "force": self.force,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2290,13 +2290,13 @@ class StartByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "rateName": self.rate_name,
             "targetItemSetId": self.target_item_set_id,
-            "materials": [
+            "materials": None if self.materials is None else [
                 self.materials[i].to_dict() if self.materials[i] else None
                 for i in range(len(self.materials) if self.materials else 0)
             ],
             "userId": self.user_id,
             "force": self.force,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2358,7 +2358,7 @@ class EndRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -2425,7 +2425,7 @@ class EndByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

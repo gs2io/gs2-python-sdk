@@ -17,6 +17,7 @@
 from gs2.core import *
 from .request import *
 from .result import *
+import time
 
 
 class Gs2IdentifierWebSocketClient(web_socket.AbstractGs2WebSocketClient):
@@ -1322,81 +1323,6 @@ class Gs2IdentifierWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DetachGuardResult:
         async_result = []
         self._detach_guard(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _describe_passwords(
-        self,
-        request: DescribePasswordsRequest,
-        callback: Callable[[AsyncResult[DescribePasswordsResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="identifier",
-            component='password',
-            function='describePasswords',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.user_name is not None:
-            body["userName"] = request.user_name
-        if request.page_token is not None:
-            body["pageToken"] = request.page_token
-        if request.limit is not None:
-            body["limit"] = request.limit
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribePasswordsResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_passwords(
-        self,
-        request: DescribePasswordsRequest,
-    ) -> DescribePasswordsResult:
-        async_result = []
-        with timeout(30):
-            self._describe_passwords(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_passwords_async(
-        self,
-        request: DescribePasswordsRequest,
-    ) -> DescribePasswordsResult:
-        async_result = []
-        self._describe_passwords(
             request,
             lambda result: async_result.append(result),
         )

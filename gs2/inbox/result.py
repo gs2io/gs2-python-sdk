@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -490,7 +490,7 @@ class DescribeMessagesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -537,7 +537,7 @@ class DescribeMessagesByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -680,7 +680,7 @@ class ReceiveGlobalMessageResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
+            "item": None if self.item is None else [
                 self.item[i].to_dict() if self.item[i] else None
                 for i in range(len(self.item) if self.item else 0)
             ],
@@ -720,7 +720,7 @@ class ReceiveGlobalMessageByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "item": [
+            "item": None if self.item is None else [
                 self.item[i].to_dict() if self.item[i] else None
                 for i in range(len(self.item) if self.item else 0)
             ],
@@ -1278,7 +1278,7 @@ class DescribeGlobalMessageMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1455,7 +1455,7 @@ class DescribeGlobalMessagesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],

@@ -584,28 +584,28 @@ class StampSheetResult(core.Gs2Model):
             "stampSheetResultId": self.stamp_sheet_result_id,
             "userId": self.user_id,
             "transactionId": self.transaction_id,
-            "verifyTaskRequests": [
+            "verifyTaskRequests": None if self.verify_task_requests is None else [
                 self.verify_task_requests[i].to_dict() if self.verify_task_requests[i] else None
                 for i in range(len(self.verify_task_requests) if self.verify_task_requests else 0)
             ],
-            "taskRequests": [
+            "taskRequests": None if self.task_requests is None else [
                 self.task_requests[i].to_dict() if self.task_requests[i] else None
                 for i in range(len(self.task_requests) if self.task_requests else 0)
             ],
             "sheetRequest": self.sheet_request.to_dict() if self.sheet_request else None,
-            "verifyTaskResultCodes": [
+            "verifyTaskResultCodes": None if self.verify_task_result_codes is None else [
                 self.verify_task_result_codes[i]
                 for i in range(len(self.verify_task_result_codes) if self.verify_task_result_codes else 0)
             ],
-            "verifyTaskResults": [
+            "verifyTaskResults": None if self.verify_task_results is None else [
                 self.verify_task_results[i]
                 for i in range(len(self.verify_task_results) if self.verify_task_results else 0)
             ],
-            "taskResultCodes": [
+            "taskResultCodes": None if self.task_result_codes is None else [
                 self.task_result_codes[i]
                 for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
             ],
-            "taskResults": [
+            "taskResults": None if self.task_results is None else [
                 self.task_results[i]
                 for i in range(len(self.task_results) if self.task_results else 0)
             ],
@@ -817,7 +817,7 @@ class DistributorModel(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "inboxNamespaceId": self.inbox_namespace_id,
-            "whiteListTargetIds": [
+            "whiteListTargetIds": None if self.white_list_target_ids is None else [
                 self.white_list_target_ids[i]
                 for i in range(len(self.white_list_target_ids) if self.white_list_target_ids else 0)
             ],
@@ -965,7 +965,7 @@ class DistributorModelMaster(core.Gs2Model):
             "description": self.description,
             "metadata": self.metadata,
             "inboxNamespaceId": self.inbox_namespace_id,
-            "whiteListTargetIds": [
+            "whiteListTargetIds": None if self.white_list_target_ids is None else [
                 self.white_list_target_ids[i]
                 for i in range(len(self.white_list_target_ids) if self.white_list_target_ids else 0)
             ],

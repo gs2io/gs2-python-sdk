@@ -387,7 +387,7 @@ class BoxItems(core.Gs2Model):
             "boxId": self.box_id,
             "prizeTableName": self.prize_table_name,
             "userId": self.user_id,
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -446,7 +446,7 @@ class BoxItem(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "prizeId": self.prize_id,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -495,7 +495,7 @@ class DrawnPrize(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "prizeId": self.prize_id,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -709,7 +709,7 @@ class Prize(core.Gs2Model):
         return {
             "prizeId": self.prize_id,
             "type": self.type,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -954,7 +954,7 @@ class PrizeTable(core.Gs2Model):
             "prizeTableId": self.prize_table_id,
             "name": self.name,
             "metadata": self.metadata,
-            "prizes": [
+            "prizes": None if self.prizes is None else [
                 self.prizes[i].to_dict() if self.prizes[i] else None
                 for i in range(len(self.prizes) if self.prizes else 0)
             ],
@@ -1226,7 +1226,7 @@ class PrizeTableMaster(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "description": self.description,
-            "prizes": [
+            "prizes": None if self.prizes is None else [
                 self.prizes[i].to_dict() if self.prizes[i] else None
                 for i in range(len(self.prizes) if self.prizes else 0)
             ],

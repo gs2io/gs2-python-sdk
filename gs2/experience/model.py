@@ -603,11 +603,11 @@ class AcquireActionRate(core.Gs2Model):
         return {
             "name": self.name,
             "mode": self.mode,
-            "rates": [
+            "rates": None if self.rates is None else [
                 self.rates[i]
                 for i in range(len(self.rates) if self.rates else 0)
             ],
-            "bigRates": [
+            "bigRates": None if self.big_rates is None else [
                 self.big_rates[i]
                 for i in range(len(self.big_rates) if self.big_rates else 0)
             ],
@@ -654,7 +654,7 @@ class Threshold(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "metadata": self.metadata,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -795,7 +795,7 @@ class ThresholdMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -942,7 +942,7 @@ class ExperienceModel(core.Gs2Model):
             "defaultRankCap": self.default_rank_cap,
             "maxRankCap": self.max_rank_cap,
             "rankThreshold": self.rank_threshold.to_dict() if self.rank_threshold else None,
-            "acquireActionRates": [
+            "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
                 for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
             ],
@@ -1111,7 +1111,7 @@ class ExperienceModelMaster(core.Gs2Model):
             "defaultRankCap": self.default_rank_cap,
             "maxRankCap": self.max_rank_cap,
             "rankThresholdName": self.rank_threshold_name,
-            "acquireActionRates": [
+            "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
                 for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
             ],

@@ -820,7 +820,7 @@ class CreateRoomRequest(core.Gs2Request):
             "name": self.name,
             "metadata": self.metadata,
             "password": self.password,
-            "whiteListUserIds": [
+            "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
                 for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
             ],
@@ -908,7 +908,7 @@ class CreateRoomFromBackendRequest(core.Gs2Request):
             "userId": self.user_id,
             "metadata": self.metadata,
             "password": self.password,
-            "whiteListUserIds": [
+            "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
                 for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
             ],
@@ -1033,7 +1033,7 @@ class UpdateRoomRequest(core.Gs2Request):
             "roomName": self.room_name,
             "metadata": self.metadata,
             "password": self.password,
-            "whiteListUserIds": [
+            "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
                 for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
             ],
@@ -1121,7 +1121,7 @@ class UpdateRoomFromBackendRequest(core.Gs2Request):
             "roomName": self.room_name,
             "metadata": self.metadata,
             "password": self.password,
-            "whiteListUserIds": [
+            "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
                 for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
             ],
@@ -2133,7 +2133,7 @@ class SubscribeRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "roomName": self.room_name,
             "accessToken": self.access_token,
-            "notificationTypes": [
+            "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
                 for i in range(len(self.notification_types) if self.notification_types else 0)
             ],
@@ -2207,7 +2207,7 @@ class SubscribeByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "roomName": self.room_name,
             "userId": self.user_id,
-            "notificationTypes": [
+            "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
                 for i in range(len(self.notification_types) if self.notification_types else 0)
             ],
@@ -2383,7 +2383,7 @@ class UpdateNotificationTypeRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "roomName": self.room_name,
             "accessToken": self.access_token,
-            "notificationTypes": [
+            "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
                 for i in range(len(self.notification_types) if self.notification_types else 0)
             ],
@@ -2457,7 +2457,7 @@ class UpdateNotificationTypeByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "roomName": self.room_name,
             "userId": self.user_id,
-            "notificationTypes": [
+            "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
                 for i in range(len(self.notification_types) if self.notification_types else 0)
             ],

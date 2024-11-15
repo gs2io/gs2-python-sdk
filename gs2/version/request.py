@@ -785,7 +785,7 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
             "currentVersion": self.current_version.to_dict() if self.current_version else None,
             "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
-            "scheduleVersions": [
+            "scheduleVersions": None if self.schedule_versions is None else [
                 self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
                 for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
             ],
@@ -947,7 +947,7 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
             "currentVersion": self.current_version.to_dict() if self.current_version else None,
             "warningVersion": self.warning_version.to_dict() if self.warning_version else None,
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
-            "scheduleVersions": [
+            "scheduleVersions": None if self.schedule_versions is None else [
                 self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
                 for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
             ],
@@ -1608,7 +1608,7 @@ class CheckVersionRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "targetVersions": [
+            "targetVersions": None if self.target_versions is None else [
                 self.target_versions[i].to_dict() if self.target_versions[i] else None
                 for i in range(len(self.target_versions) if self.target_versions else 0)
             ],
@@ -1675,7 +1675,7 @@ class CheckVersionByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "targetVersions": [
+            "targetVersions": None if self.target_versions is None else [
                 self.target_versions[i].to_dict() if self.target_versions[i] else None
                 for i in range(len(self.target_versions) if self.target_versions else 0)
             ],

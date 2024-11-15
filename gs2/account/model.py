@@ -1243,7 +1243,7 @@ class Account(core.Gs2Model):
             "userId": self.user_id,
             "password": self.password,
             "timeOffset": self.time_offset,
-            "banStatuses": [
+            "banStatuses": None if self.ban_statuses is None else [
                 self.ban_statuses[i].to_dict() if self.ban_statuses[i] else None
                 for i in range(len(self.ban_statuses) if self.ban_statuses else 0)
             ],

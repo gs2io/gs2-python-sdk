@@ -1079,7 +1079,7 @@ class CreateMaxStaminaTableMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1199,7 +1199,7 @@ class UpdateMaxStaminaTableMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1369,7 +1369,7 @@ class CreateRecoverIntervalTableMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1489,7 +1489,7 @@ class UpdateRecoverIntervalTableMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1659,7 +1659,7 @@ class CreateRecoverValueTableMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1779,7 +1779,7 @@ class UpdateRecoverValueTableMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "experienceModelId": self.experience_model_id,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],

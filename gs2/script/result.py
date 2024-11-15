@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -273,7 +273,7 @@ class DescribeScriptsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -560,7 +560,7 @@ class InvokeScriptResult(core.Gs2Result):
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
             "executeTime": self.execute_time,
             "charged": self.charged,
-            "output": [
+            "output": None if self.output is None else [
                 self.output[i]
                 for i in range(len(self.output) if self.output else 0)
             ],
@@ -642,7 +642,7 @@ class DebugInvokeResult(core.Gs2Result):
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
             "executeTime": self.execute_time,
             "charged": self.charged,
-            "output": [
+            "output": None if self.output is None else [
                 self.output[i]
                 for i in range(len(self.output) if self.output else 0)
             ],
@@ -724,7 +724,7 @@ class InvokeByStampSheetResult(core.Gs2Result):
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
             "executeTime": self.execute_time,
             "charged": self.charged,
-            "output": [
+            "output": None if self.output is None else [
                 self.output[i]
                 for i in range(len(self.output) if self.output else 0)
             ],

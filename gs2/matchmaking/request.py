@@ -962,15 +962,15 @@ class CreateGatheringRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "player": self.player.to_dict() if self.player else None,
-            "attributeRanges": [
+            "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
                 for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
             ],
-            "capacityOfRoles": [
+            "capacityOfRoles": None if self.capacity_of_roles is None else [
                 self.capacity_of_roles[i].to_dict() if self.capacity_of_roles[i] else None
                 for i in range(len(self.capacity_of_roles) if self.capacity_of_roles else 0)
             ],
-            "allowUserIds": [
+            "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
                 for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
             ],
@@ -1076,15 +1076,15 @@ class CreateGatheringByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "player": self.player.to_dict() if self.player else None,
-            "attributeRanges": [
+            "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
                 for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
             ],
-            "capacityOfRoles": [
+            "capacityOfRoles": None if self.capacity_of_roles is None else [
                 self.capacity_of_roles[i].to_dict() if self.capacity_of_roles[i] else None
                 for i in range(len(self.capacity_of_roles) if self.capacity_of_roles else 0)
             ],
-            "allowUserIds": [
+            "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
                 for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
             ],
@@ -1155,7 +1155,7 @@ class UpdateGatheringRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "gatheringName": self.gathering_name,
             "accessToken": self.access_token,
-            "attributeRanges": [
+            "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
                 for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
             ],
@@ -1229,7 +1229,7 @@ class UpdateGatheringByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "gatheringName": self.gathering_name,
             "userId": self.user_id,
-            "attributeRanges": [
+            "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
                 for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
             ],
@@ -3891,7 +3891,7 @@ class PutResultRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "ratingName": self.rating_name,
-            "gameResults": [
+            "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
                 for i in range(len(self.game_results) if self.game_results else 0)
             ],
@@ -4171,7 +4171,7 @@ class VoteRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "ballotBody": self.ballot_body,
             "ballotSignature": self.ballot_signature,
-            "gameResults": [
+            "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
                 for i in range(len(self.game_results) if self.game_results else 0)
             ],
@@ -4236,11 +4236,11 @@ class VoteMultipleRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "signedBallots": [
+            "signedBallots": None if self.signed_ballots is None else [
                 self.signed_ballots[i].to_dict() if self.signed_ballots[i] else None
                 for i in range(len(self.signed_ballots) if self.signed_ballots else 0)
             ],
-            "gameResults": [
+            "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
                 for i in range(len(self.game_results) if self.game_results else 0)
             ],

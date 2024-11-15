@@ -776,16 +776,16 @@ class CreateBonusModelMasterRequest(core.Gs2Request):
             "periodEventId": self.period_event_id,
             "resetHour": self.reset_hour,
             "repeat": self.repeat,
-            "rewards": [
+            "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
                 for i in range(len(self.rewards) if self.rewards else 0)
             ],
             "missedReceiveRelief": self.missed_receive_relief,
-            "missedReceiveReliefVerifyActions": [
+            "missedReceiveReliefVerifyActions": None if self.missed_receive_relief_verify_actions is None else [
                 self.missed_receive_relief_verify_actions[i].to_dict() if self.missed_receive_relief_verify_actions[i] else None
                 for i in range(len(self.missed_receive_relief_verify_actions) if self.missed_receive_relief_verify_actions else 0)
             ],
-            "missedReceiveReliefConsumeActions": [
+            "missedReceiveReliefConsumeActions": None if self.missed_receive_relief_consume_actions is None else [
                 self.missed_receive_relief_consume_actions[i].to_dict() if self.missed_receive_relief_consume_actions[i] else None
                 for i in range(len(self.missed_receive_relief_consume_actions) if self.missed_receive_relief_consume_actions else 0)
             ],
@@ -950,16 +950,16 @@ class UpdateBonusModelMasterRequest(core.Gs2Request):
             "periodEventId": self.period_event_id,
             "resetHour": self.reset_hour,
             "repeat": self.repeat,
-            "rewards": [
+            "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
                 for i in range(len(self.rewards) if self.rewards else 0)
             ],
             "missedReceiveRelief": self.missed_receive_relief,
-            "missedReceiveReliefVerifyActions": [
+            "missedReceiveReliefVerifyActions": None if self.missed_receive_relief_verify_actions is None else [
                 self.missed_receive_relief_verify_actions[i].to_dict() if self.missed_receive_relief_verify_actions[i] else None
                 for i in range(len(self.missed_receive_relief_verify_actions) if self.missed_receive_relief_verify_actions else 0)
             ],
-            "missedReceiveReliefConsumeActions": [
+            "missedReceiveReliefConsumeActions": None if self.missed_receive_relief_consume_actions is None else [
                 self.missed_receive_relief_consume_actions[i].to_dict() if self.missed_receive_relief_consume_actions[i] else None
                 for i in range(len(self.missed_receive_relief_consume_actions) if self.missed_receive_relief_consume_actions else 0)
             ],
@@ -1307,7 +1307,7 @@ class ReceiveRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "bonusModelName": self.bonus_model_name,
             "accessToken": self.access_token,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1381,7 +1381,7 @@ class ReceiveByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "bonusModelName": self.bonus_model_name,
             "userId": self.user_id,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1457,7 +1457,7 @@ class MissedReceiveRequest(core.Gs2Request):
             "bonusModelName": self.bonus_model_name,
             "accessToken": self.access_token,
             "stepNumber": self.step_number,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1538,7 +1538,7 @@ class MissedReceiveByUserIdRequest(core.Gs2Request):
             "bonusModelName": self.bonus_model_name,
             "userId": self.user_id,
             "stepNumber": self.step_number,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

@@ -1129,13 +1129,13 @@ class Guild(core.Gs2Model):
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
             "joinPolicy": self.join_policy,
-            "customRoles": [
+            "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
                 for i in range(len(self.custom_roles) if self.custom_roles else 0)
             ],
             "guildMemberDefaultRole": self.guild_member_default_role,
             "currentMaximumMemberCount": self.current_maximum_member_count,
-            "members": [
+            "members": None if self.members is None else [
                 self.members[i].to_dict() if self.members[i] else None
                 for i in range(len(self.members) if self.members else 0)
             ],
@@ -1284,7 +1284,7 @@ class SendBox(core.Gs2Model):
             "sendBoxId": self.send_box_id,
             "userId": self.user_id,
             "guildModelName": self.guild_model_name,
-            "targetGuildNames": [
+            "targetGuildNames": None if self.target_guild_names is None else [
                 self.target_guild_names[i]
                 for i in range(len(self.target_guild_names) if self.target_guild_names else 0)
             ],
@@ -1426,7 +1426,7 @@ class Inbox(core.Gs2Model):
         return {
             "inboxId": self.inbox_id,
             "guildName": self.guild_name,
-            "fromUserIds": [
+            "fromUserIds": None if self.from_user_ids is None else [
                 self.from_user_ids[i]
                 for i in range(len(self.from_user_ids) if self.from_user_ids else 0)
             ],
@@ -1584,7 +1584,7 @@ class GuildModel(core.Gs2Model):
             "defaultMaximumMemberCount": self.default_maximum_member_count,
             "maximumMemberCount": self.maximum_member_count,
             "inactivityPeriodDays": self.inactivity_period_days,
-            "roles": [
+            "roles": None if self.roles is None else [
                 self.roles[i].to_dict() if self.roles[i] else None
                 for i in range(len(self.roles) if self.roles else 0)
             ],
@@ -1767,7 +1767,7 @@ class GuildModelMaster(core.Gs2Model):
             "defaultMaximumMemberCount": self.default_maximum_member_count,
             "maximumMemberCount": self.maximum_member_count,
             "inactivityPeriodDays": self.inactivity_period_days,
-            "roles": [
+            "roles": None if self.roles is None else [
                 self.roles[i].to_dict() if self.roles[i] else None
                 for i in range(len(self.roles) if self.roles else 0)
             ],

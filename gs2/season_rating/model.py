@@ -158,7 +158,7 @@ class Vote(core.Gs2Model):
             "voteId": self.vote_id,
             "seasonName": self.season_name,
             "sessionName": self.session_name,
-            "writtenBallots": [
+            "writtenBallots": None if self.written_ballots is None else [
                 self.written_ballots[i].to_dict() if self.written_ballots[i] else None
                 for i in range(len(self.written_ballots) if self.written_ballots else 0)
             ],
@@ -208,7 +208,7 @@ class WrittenBallot(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "ballot": self.ballot.to_dict() if self.ballot else None,
-            "gameResults": [
+            "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
                 for i in range(len(self.game_results) if self.game_results else 0)
             ],
@@ -825,7 +825,7 @@ class SeasonModel(core.Gs2Model):
             "seasonModelId": self.season_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "tiers": [
+            "tiers": None if self.tiers is None else [
                 self.tiers[i].to_dict() if self.tiers[i] else None
                 for i in range(len(self.tiers) if self.tiers else 0)
             ],
@@ -980,7 +980,7 @@ class SeasonModelMaster(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "description": self.description,
-            "tiers": [
+            "tiers": None if self.tiers is None else [
                 self.tiers[i].to_dict() if self.tiers[i] else None
                 for i in range(len(self.tiers) if self.tiers else 0)
             ],

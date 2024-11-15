@@ -808,7 +808,7 @@ class CreateExperienceModelMasterRequest(core.Gs2Request):
             "defaultRankCap": self.default_rank_cap,
             "maxRankCap": self.max_rank_cap,
             "rankThresholdName": self.rank_threshold_name,
-            "acquireActionRates": [
+            "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
                 for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
             ],
@@ -949,7 +949,7 @@ class UpdateExperienceModelMasterRequest(core.Gs2Request):
             "defaultRankCap": self.default_rank_cap,
             "maxRankCap": self.max_rank_cap,
             "rankThresholdName": self.rank_threshold_name,
-            "acquireActionRates": [
+            "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
                 for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
             ],
@@ -1191,7 +1191,7 @@ class CreateThresholdMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1304,7 +1304,7 @@ class UpdateThresholdMasterRequest(core.Gs2Request):
             "thresholdName": self.threshold_name,
             "description": self.description,
             "metadata": self.metadata,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i]
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -3264,7 +3264,7 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
             "experienceName": self.experience_name,
             "propertyId": self.property_id,
             "rateName": self.rate_name,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],

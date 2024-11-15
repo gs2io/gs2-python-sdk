@@ -733,11 +733,11 @@ class MissionTaskModelMaster(core.Gs2Model):
             "description": self.description,
             "verifyCompleteType": self.verify_complete_type,
             "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
-            "verifyCompleteConsumeActions": [
+            "verifyCompleteConsumeActions": None if self.verify_complete_consume_actions is None else [
                 self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
                 for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
             ],
-            "completeAcquireActions": [
+            "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
                 for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
             ],
@@ -926,11 +926,11 @@ class MissionTaskModel(core.Gs2Model):
             "metadata": self.metadata,
             "verifyCompleteType": self.verify_complete_type,
             "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
-            "verifyCompleteConsumeActions": [
+            "verifyCompleteConsumeActions": None if self.verify_complete_consume_actions is None else [
                 self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
                 for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
             ],
-            "completeAcquireActions": [
+            "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
                 for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
             ],
@@ -1081,7 +1081,7 @@ class MissionGroupModel(core.Gs2Model):
             "missionGroupId": self.mission_group_id,
             "name": self.name,
             "metadata": self.metadata,
-            "tasks": [
+            "tasks": None if self.tasks is None else [
                 self.tasks[i].to_dict() if self.tasks[i] else None
                 for i in range(len(self.tasks) if self.tasks else 0)
             ],
@@ -1208,7 +1208,7 @@ class CounterModel(core.Gs2Model):
             "counterId": self.counter_id,
             "name": self.name,
             "metadata": self.metadata,
-            "scopes": [
+            "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
                 for i in range(len(self.scopes) if self.scopes else 0)
             ],
@@ -1439,7 +1439,7 @@ class Counter(core.Gs2Model):
             "counterId": self.counter_id,
             "userId": self.user_id,
             "name": self.name,
-            "values": [
+            "values": None if self.values is None else [
                 self.values[i].to_dict() if self.values[i] else None
                 for i in range(len(self.values) if self.values else 0)
             ],
@@ -1999,7 +1999,7 @@ class CounterModelMaster(core.Gs2Model):
             "name": self.name,
             "metadata": self.metadata,
             "description": self.description,
-            "scopes": [
+            "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
                 for i in range(len(self.scopes) if self.scopes else 0)
             ],
@@ -2212,11 +2212,11 @@ class Complete(core.Gs2Model):
             "completeId": self.complete_id,
             "userId": self.user_id,
             "missionGroupName": self.mission_group_name,
-            "completedMissionTaskNames": [
+            "completedMissionTaskNames": None if self.completed_mission_task_names is None else [
                 self.completed_mission_task_names[i]
                 for i in range(len(self.completed_mission_task_names) if self.completed_mission_task_names else 0)
             ],
-            "receivedMissionTaskNames": [
+            "receivedMissionTaskNames": None if self.received_mission_task_names is None else [
                 self.received_mission_task_names[i]
                 for i in range(len(self.received_mission_task_names) if self.received_mission_task_names else 0)
             ],

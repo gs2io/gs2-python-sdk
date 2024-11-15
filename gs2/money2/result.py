@@ -56,7 +56,7 @@ class DescribeNamespacesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -490,7 +490,7 @@ class DescribeWalletsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -537,7 +537,7 @@ class DescribeWalletsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -687,7 +687,7 @@ class WithdrawResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "withdrawTransactions": [
+            "withdrawTransactions": None if self.withdraw_transactions is None else [
                 self.withdraw_transactions[i].to_dict() if self.withdraw_transactions[i] else None
                 for i in range(len(self.withdraw_transactions) if self.withdraw_transactions else 0)
             ],
@@ -734,7 +734,7 @@ class WithdrawByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "withdrawTransactions": [
+            "withdrawTransactions": None if self.withdraw_transactions is None else [
                 self.withdraw_transactions[i].to_dict() if self.withdraw_transactions[i] else None
                 for i in range(len(self.withdraw_transactions) if self.withdraw_transactions else 0)
             ],
@@ -821,7 +821,7 @@ class WithdrawByStampTaskResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-            "withdrawTransactions": [
+            "withdrawTransactions": None if self.withdraw_transactions is None else [
                 self.withdraw_transactions[i].to_dict() if self.withdraw_transactions[i] else None
                 for i in range(len(self.withdraw_transactions) if self.withdraw_transactions else 0)
             ],
@@ -868,7 +868,7 @@ class DescribeEventsByUserIdResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1052,7 +1052,7 @@ class DescribeStoreContentModelsResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1132,7 +1132,7 @@ class DescribeStoreContentModelMastersResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1451,7 +1451,7 @@ class DescribeDailyTransactionHistoriesByCurrencyResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1498,7 +1498,7 @@ class DescribeDailyTransactionHistoriesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],
@@ -1579,7 +1579,7 @@ class DescribeUnusedBalancesResult(core.Gs2Result):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items) if self.items else 0)
             ],

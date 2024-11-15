@@ -941,7 +941,7 @@ class DepositByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "slot": self.slot,
-            "depositTransactions": [
+            "depositTransactions": None if self.deposit_transactions is None else [
                 self.deposit_transactions[i].to_dict() if self.deposit_transactions[i] else None
                 for i in range(len(self.deposit_transactions) if self.deposit_transactions else 0)
             ],

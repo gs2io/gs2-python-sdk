@@ -330,7 +330,7 @@ class Subscribe(core.Gs2Model):
             "subscribeId": self.subscribe_id,
             "userId": self.user_id,
             "roomName": self.room_name,
-            "notificationTypes": [
+            "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
                 for i in range(len(self.notification_types) if self.notification_types else 0)
             ],
@@ -630,7 +630,7 @@ class Room(core.Gs2Model):
             "userId": self.user_id,
             "metadata": self.metadata,
             "password": self.password,
-            "whiteListUserIds": [
+            "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
                 for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
             ],

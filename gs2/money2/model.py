@@ -664,7 +664,7 @@ class WithdrawEvent(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "slot": self.slot,
-            "withdrawDetails": [
+            "withdrawDetails": None if self.withdraw_details is None else [
                 self.withdraw_details[i].to_dict() if self.withdraw_details[i] else None
                 for i in range(len(self.withdraw_details) if self.withdraw_details else 0)
             ],
@@ -718,7 +718,7 @@ class DepositEvent(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "slot": self.slot,
-            "depositTransactions": [
+            "depositTransactions": None if self.deposit_transactions is None else [
                 self.deposit_transactions[i].to_dict() if self.deposit_transactions[i] else None
                 for i in range(len(self.deposit_transactions) if self.deposit_transactions else 0)
             ],
@@ -1732,7 +1732,7 @@ class Wallet(core.Gs2Model):
             "userId": self.user_id,
             "slot": self.slot,
             "summary": self.summary.to_dict() if self.summary else None,
-            "depositTransactions": [
+            "depositTransactions": None if self.deposit_transactions is None else [
                 self.deposit_transactions[i].to_dict() if self.deposit_transactions[i] else None
                 for i in range(len(self.deposit_transactions) if self.deposit_transactions else 0)
             ],

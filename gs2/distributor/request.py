@@ -416,7 +416,7 @@ class CreateDistributorModelMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "inboxNamespaceId": self.inbox_namespace_id,
-            "whiteListTargetIds": [
+            "whiteListTargetIds": None if self.white_list_target_ids is None else [
                 self.white_list_target_ids[i]
                 for i in range(len(self.white_list_target_ids) if self.white_list_target_ids else 0)
             ],
@@ -536,7 +536,7 @@ class UpdateDistributorModelMasterRequest(core.Gs2Request):
             "description": self.description,
             "metadata": self.metadata,
             "inboxNamespaceId": self.inbox_namespace_id,
-            "whiteListTargetIds": [
+            "whiteListTargetIds": None if self.white_list_target_ids is None else [
                 self.white_list_target_ids[i]
                 for i in range(len(self.white_list_target_ids) if self.white_list_target_ids else 0)
             ],
@@ -1366,7 +1366,7 @@ class SetTransactionDefaultConfigRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "accessToken": self.access_token,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1426,7 +1426,7 @@ class SetTransactionDefaultConfigByUserIdRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1619,11 +1619,11 @@ class IfExpressionByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "condition": self.condition.to_dict() if self.condition else None,
-            "trueActions": [
+            "trueActions": None if self.true_actions is None else [
                 self.true_actions[i].to_dict() if self.true_actions[i] else None
                 for i in range(len(self.true_actions) if self.true_actions else 0)
             ],
-            "falseActions": [
+            "falseActions": None if self.false_actions is None else [
                 self.false_actions[i].to_dict() if self.false_actions[i] else None
                 for i in range(len(self.false_actions) if self.false_actions else 0)
             ],
@@ -1692,7 +1692,7 @@ class AndExpressionByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "actions": [
+            "actions": None if self.actions is None else [
                 self.actions[i].to_dict() if self.actions[i] else None
                 for i in range(len(self.actions) if self.actions else 0)
             ],
@@ -1760,7 +1760,7 @@ class OrExpressionByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "actions": [
+            "actions": None if self.actions is None else [
                 self.actions[i].to_dict() if self.actions[i] else None
                 for i in range(len(self.actions) if self.actions else 0)
             ],

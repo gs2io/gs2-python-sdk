@@ -537,7 +537,7 @@ class Received(core.Gs2Model):
         return {
             "receivedId": self.received_id,
             "userId": self.user_id,
-            "receivedGlobalMessageNames": [
+            "receivedGlobalMessageNames": None if self.received_global_message_names is None else [
                 self.received_global_message_names[i]
                 for i in range(len(self.received_global_message_names) if self.received_global_message_names else 0)
             ],
@@ -674,7 +674,7 @@ class GlobalMessage(core.Gs2Model):
             "globalMessageId": self.global_message_id,
             "name": self.name,
             "metadata": self.metadata,
-            "readAcquireActions": [
+            "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
                 for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
             ],
@@ -823,7 +823,7 @@ class GlobalMessageMaster(core.Gs2Model):
             "globalMessageId": self.global_message_id,
             "name": self.name,
             "metadata": self.metadata,
-            "readAcquireActions": [
+            "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
                 for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
             ],
@@ -1078,7 +1078,7 @@ class Message(core.Gs2Model):
             "userId": self.user_id,
             "metadata": self.metadata,
             "isRead": self.is_read,
-            "readAcquireActions": [
+            "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
                 for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
             ],

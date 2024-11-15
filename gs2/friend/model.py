@@ -578,7 +578,7 @@ class BlackList(core.Gs2Model):
         return {
             "blackListId": self.black_list_id,
             "userId": self.user_id,
-            "targetUserIds": [
+            "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
                 for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
             ],
@@ -708,7 +708,7 @@ class Inbox(core.Gs2Model):
         return {
             "inboxId": self.inbox_id,
             "userId": self.user_id,
-            "fromUserIds": [
+            "fromUserIds": None if self.from_user_ids is None else [
                 self.from_user_ids[i]
                 for i in range(len(self.from_user_ids) if self.from_user_ids else 0)
             ],
@@ -838,7 +838,7 @@ class SendBox(core.Gs2Model):
         return {
             "sendBoxId": self.send_box_id,
             "userId": self.user_id,
-            "targetUserIds": [
+            "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
                 for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
             ],
@@ -968,7 +968,7 @@ class Friend(core.Gs2Model):
         return {
             "friendId": self.friend_id,
             "userId": self.user_id,
-            "targetUserIds": [
+            "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
                 for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
             ],
@@ -1098,7 +1098,7 @@ class Follow(core.Gs2Model):
         return {
             "followId": self.follow_id,
             "userId": self.user_id,
-            "targetUserIds": [
+            "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
                 for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
             ],

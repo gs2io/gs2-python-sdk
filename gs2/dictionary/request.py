@@ -1121,7 +1121,7 @@ class AddEntriesByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "entryModelNames": [
+            "entryModelNames": None if self.entry_model_names is None else [
                 self.entry_model_names[i]
                 for i in range(len(self.entry_model_names) if self.entry_model_names else 0)
             ],
@@ -1597,7 +1597,7 @@ class DeleteEntriesRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "entryModelNames": [
+            "entryModelNames": None if self.entry_model_names is None else [
                 self.entry_model_names[i]
                 for i in range(len(self.entry_model_names) if self.entry_model_names else 0)
             ],
@@ -1664,7 +1664,7 @@ class DeleteEntriesByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "entryModelNames": [
+            "entryModelNames": None if self.entry_model_names is None else [
                 self.entry_model_names[i]
                 for i in range(len(self.entry_model_names) if self.entry_model_names else 0)
             ],

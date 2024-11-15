@@ -351,7 +351,7 @@ class DeadLetterJob(core.Gs2Model):
             "userId": self.user_id,
             "scriptId": self.script_id,
             "args": self.args,
-            "result": [
+            "result": None if self.result is None else [
                 self.result[i].to_dict() if self.result[i] else None
                 for i in range(len(self.result) if self.result else 0)
             ],

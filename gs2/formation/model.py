@@ -637,7 +637,7 @@ class PropertyForm(core.Gs2Model):
             "userId": self.user_id,
             "name": self.name,
             "propertyId": self.property_id,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -798,7 +798,7 @@ class Form(core.Gs2Model):
             "formId": self.form_id,
             "name": self.name,
             "index": self.index,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -1169,7 +1169,7 @@ class PropertyFormModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -1288,7 +1288,7 @@ class PropertyFormModel(core.Gs2Model):
             "propertyFormModelId": self.property_form_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -1705,7 +1705,7 @@ class FormModelMaster(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -1824,7 +1824,7 @@ class FormModel(core.Gs2Model):
             "formModelId": self.form_model_id,
             "name": self.name,
             "metadata": self.metadata,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],

@@ -764,7 +764,7 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "rewardIntervalMinutes": self.reward_interval_minutes,
             "defaultMaximumIdleMinutes": self.default_maximum_idle_minutes,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -905,7 +905,7 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "rewardIntervalMinutes": self.reward_interval_minutes,
             "defaultMaximumIdleMinutes": self.default_maximum_idle_minutes,
-            "acquireActions": [
+            "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
             ],
@@ -1442,7 +1442,7 @@ class ReceiveRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "categoryName": self.category_name,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -1516,7 +1516,7 @@ class ReceiveByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "categoryName": self.category_name,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

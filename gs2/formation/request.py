@@ -795,7 +795,7 @@ class CreateFormModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -908,7 +908,7 @@ class UpdateFormModelMasterRequest(core.Gs2Request):
             "formModelName": self.form_model_name,
             "description": self.description,
             "metadata": self.metadata,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -1521,7 +1521,7 @@ class CreatePropertyFormModelMasterRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "metadata": self.metadata,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -1634,7 +1634,7 @@ class UpdatePropertyFormModelMasterRequest(core.Gs2Request):
             "propertyFormModelName": self.property_form_model_name,
             "description": self.description,
             "metadata": self.metadata,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -3050,7 +3050,7 @@ class SetFormByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "moldModelName": self.mold_model_name,
             "index": self.index,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -3132,7 +3132,7 @@ class SetFormWithSignatureRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "moldModelName": self.mold_model_name,
             "index": self.index,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -3221,7 +3221,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
             "moldModelName": self.mold_model_name,
             "index": self.index,
             "acquireAction": self.acquire_action.to_dict() if self.acquire_action else None,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],
@@ -3911,7 +3911,7 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -3993,7 +3993,7 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
-            "slots": [
+            "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
                 for i in range(len(self.slots) if self.slots else 0)
             ],
@@ -4082,7 +4082,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
             "propertyFormModelName": self.property_form_model_name,
             "propertyId": self.property_id,
             "acquireAction": self.acquire_action.to_dict() if self.acquire_action else None,
-            "config": [
+            "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config) if self.config else 0)
             ],

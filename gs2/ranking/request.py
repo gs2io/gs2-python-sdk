@@ -874,11 +874,11 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
-            "additionalScopes": [
+            "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "ignoreUserIds": [
+            "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
             ],
@@ -1091,11 +1091,11 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             "calculateFixedTimingHour": self.calculate_fixed_timing_hour,
             "calculateFixedTimingMinute": self.calculate_fixed_timing_minute,
             "calculateIntervalMinutes": self.calculate_interval_minutes,
-            "additionalScopes": [
+            "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
                 for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
             ],
-            "ignoreUserIds": [
+            "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
                 for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
             ],
