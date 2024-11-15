@@ -1447,6 +1447,8 @@ class GuildModel(core.Gs2Model):
     guild_master_role: str = None
     guild_member_default_role: str = None
     rejoin_cool_time_minutes: int = None
+    max_concurrent_join_guilds: int = None
+    max_concurrent_guild_master_count: int = None
 
     def with_guild_model_id(self, guild_model_id: str) -> GuildModel:
         self.guild_model_id = guild_model_id
@@ -1486,6 +1488,14 @@ class GuildModel(core.Gs2Model):
 
     def with_rejoin_cool_time_minutes(self, rejoin_cool_time_minutes: int) -> GuildModel:
         self.rejoin_cool_time_minutes = rejoin_cool_time_minutes
+        return self
+
+    def with_max_concurrent_join_guilds(self, max_concurrent_join_guilds: int) -> GuildModel:
+        self.max_concurrent_join_guilds = max_concurrent_join_guilds
+        return self
+
+    def with_max_concurrent_guild_master_count(self, max_concurrent_guild_master_count: int) -> GuildModel:
+        self.max_concurrent_guild_master_count = max_concurrent_guild_master_count
         return self
 
     @classmethod
@@ -1574,7 +1584,9 @@ class GuildModel(core.Gs2Model):
             ])\
             .with_guild_master_role(data.get('guildMasterRole'))\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
-            .with_rejoin_cool_time_minutes(data.get('rejoinCoolTimeMinutes'))
+            .with_rejoin_cool_time_minutes(data.get('rejoinCoolTimeMinutes'))\
+            .with_max_concurrent_join_guilds(data.get('maxConcurrentJoinGuilds'))\
+            .with_max_concurrent_guild_master_count(data.get('maxConcurrentGuildMasterCount'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1591,6 +1603,8 @@ class GuildModel(core.Gs2Model):
             "guildMasterRole": self.guild_master_role,
             "guildMemberDefaultRole": self.guild_member_default_role,
             "rejoinCoolTimeMinutes": self.rejoin_cool_time_minutes,
+            "maxConcurrentJoinGuilds": self.max_concurrent_join_guilds,
+            "maxConcurrentGuildMasterCount": self.max_concurrent_guild_master_count,
         }
 
 
@@ -1606,6 +1620,8 @@ class GuildModelMaster(core.Gs2Model):
     guild_master_role: str = None
     guild_member_default_role: str = None
     rejoin_cool_time_minutes: int = None
+    max_concurrent_join_guilds: int = None
+    max_concurrent_guild_master_count: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -1652,6 +1668,14 @@ class GuildModelMaster(core.Gs2Model):
 
     def with_rejoin_cool_time_minutes(self, rejoin_cool_time_minutes: int) -> GuildModelMaster:
         self.rejoin_cool_time_minutes = rejoin_cool_time_minutes
+        return self
+
+    def with_max_concurrent_join_guilds(self, max_concurrent_join_guilds: int) -> GuildModelMaster:
+        self.max_concurrent_join_guilds = max_concurrent_join_guilds
+        return self
+
+    def with_max_concurrent_guild_master_count(self, max_concurrent_guild_master_count: int) -> GuildModelMaster:
+        self.max_concurrent_guild_master_count = max_concurrent_guild_master_count
         return self
 
     def with_created_at(self, created_at: int) -> GuildModelMaster:
@@ -1754,6 +1778,8 @@ class GuildModelMaster(core.Gs2Model):
             .with_guild_master_role(data.get('guildMasterRole'))\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
             .with_rejoin_cool_time_minutes(data.get('rejoinCoolTimeMinutes'))\
+            .with_max_concurrent_join_guilds(data.get('maxConcurrentJoinGuilds'))\
+            .with_max_concurrent_guild_master_count(data.get('maxConcurrentGuildMasterCount'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -1774,6 +1800,8 @@ class GuildModelMaster(core.Gs2Model):
             "guildMasterRole": self.guild_master_role,
             "guildMemberDefaultRole": self.guild_member_default_role,
             "rejoinCoolTimeMinutes": self.rejoin_cool_time_minutes,
+            "maxConcurrentJoinGuilds": self.max_concurrent_join_guilds,
+            "maxConcurrentGuildMasterCount": self.max_concurrent_guild_master_count,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,

@@ -31,6 +31,7 @@ from . import lock
 from . import log
 from . import lottery
 from . import matchmaking
+from . import mega_field
 from . import mission
 from . import money
 from . import money2

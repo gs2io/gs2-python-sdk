@@ -583,11 +583,11 @@ class Resource(core.Gs2Model):
             "response": self.response,
             "rollbackContext": self.rollback_context,
             "rollbackRequest": self.rollback_request,
-            "rollbackAfter": [
+            "rollbackAfter": None if self.rollback_after is None else [
                 self.rollback_after[i]
                 for i in range(len(self.rollback_after) if self.rollback_after else 0)
             ],
-            "outputFields": [
+            "outputFields": None if self.output_fields is None else [
                 self.output_fields[i].to_dict() if self.output_fields[i] else None
                 for i in range(len(self.output_fields) if self.output_fields else 0)
             ],

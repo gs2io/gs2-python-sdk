@@ -801,6 +801,8 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
     guild_master_role: str = None
     guild_member_default_role: str = None
     rejoin_cool_time_minutes: int = None
+    max_concurrent_join_guilds: int = None
+    max_concurrent_guild_master_count: int = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateGuildModelMasterRequest:
         self.namespace_name = namespace_name
@@ -846,6 +848,14 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
         self.rejoin_cool_time_minutes = rejoin_cool_time_minutes
         return self
 
+    def with_max_concurrent_join_guilds(self, max_concurrent_join_guilds: int) -> CreateGuildModelMasterRequest:
+        self.max_concurrent_join_guilds = max_concurrent_join_guilds
+        return self
+
+    def with_max_concurrent_guild_master_count(self, max_concurrent_guild_master_count: int) -> CreateGuildModelMasterRequest:
+        self.max_concurrent_guild_master_count = max_concurrent_guild_master_count
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -878,7 +888,9 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
             ])\
             .with_guild_master_role(data.get('guildMasterRole'))\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
-            .with_rejoin_cool_time_minutes(data.get('rejoinCoolTimeMinutes'))
+            .with_rejoin_cool_time_minutes(data.get('rejoinCoolTimeMinutes'))\
+            .with_max_concurrent_join_guilds(data.get('maxConcurrentJoinGuilds'))\
+            .with_max_concurrent_guild_master_count(data.get('maxConcurrentGuildMasterCount'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -896,6 +908,8 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
             "guildMasterRole": self.guild_master_role,
             "guildMemberDefaultRole": self.guild_member_default_role,
             "rejoinCoolTimeMinutes": self.rejoin_cool_time_minutes,
+            "maxConcurrentJoinGuilds": self.max_concurrent_join_guilds,
+            "maxConcurrentGuildMasterCount": self.max_concurrent_guild_master_count,
         }
 
 
@@ -956,6 +970,8 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
     guild_master_role: str = None
     guild_member_default_role: str = None
     rejoin_cool_time_minutes: int = None
+    max_concurrent_join_guilds: int = None
+    max_concurrent_guild_master_count: int = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateGuildModelMasterRequest:
         self.namespace_name = namespace_name
@@ -1001,6 +1017,14 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
         self.rejoin_cool_time_minutes = rejoin_cool_time_minutes
         return self
 
+    def with_max_concurrent_join_guilds(self, max_concurrent_join_guilds: int) -> UpdateGuildModelMasterRequest:
+        self.max_concurrent_join_guilds = max_concurrent_join_guilds
+        return self
+
+    def with_max_concurrent_guild_master_count(self, max_concurrent_guild_master_count: int) -> UpdateGuildModelMasterRequest:
+        self.max_concurrent_guild_master_count = max_concurrent_guild_master_count
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1033,7 +1057,9 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
             ])\
             .with_guild_master_role(data.get('guildMasterRole'))\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
-            .with_rejoin_cool_time_minutes(data.get('rejoinCoolTimeMinutes'))
+            .with_rejoin_cool_time_minutes(data.get('rejoinCoolTimeMinutes'))\
+            .with_max_concurrent_join_guilds(data.get('maxConcurrentJoinGuilds'))\
+            .with_max_concurrent_guild_master_count(data.get('maxConcurrentGuildMasterCount'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1051,6 +1077,8 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
             "guildMasterRole": self.guild_master_role,
             "guildMemberDefaultRole": self.guild_member_default_role,
             "rejoinCoolTimeMinutes": self.rejoin_cool_time_minutes,
+            "maxConcurrentJoinGuilds": self.max_concurrent_join_guilds,
+            "maxConcurrentGuildMasterCount": self.max_concurrent_guild_master_count,
         }
 
 
@@ -2402,6 +2430,142 @@ class UpdateMemberRoleByGuildNameRequest(core.Gs2Request):
             "guildName": self.guild_name,
             "targetUserId": self.target_user_id,
             "roleName": self.role_name,
+        }
+
+
+class BatchUpdateMemberRoleRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    access_token: str = None
+    members: List[Member] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> BatchUpdateMemberRoleRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> BatchUpdateMemberRoleRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_access_token(self, access_token: str) -> BatchUpdateMemberRoleRequest:
+        self.access_token = access_token
+        return self
+
+    def with_members(self, members: List[Member]) -> BatchUpdateMemberRoleRequest:
+        self.members = members
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BatchUpdateMemberRoleRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchUpdateMemberRoleRequest]:
+        if data is None:
+            return None
+        return BatchUpdateMemberRoleRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_members([
+                Member.from_dict(data.get('members')[i])
+                for i in range(len(data.get('members')) if data.get('members') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "accessToken": self.access_token,
+            "members": None if self.members is None else [
+                self.members[i].to_dict() if self.members[i] else None
+                for i in range(len(self.members) if self.members else 0)
+            ],
+        }
+
+
+class BatchUpdateMemberRoleByGuildNameRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    members: List[Member] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> BatchUpdateMemberRoleByGuildNameRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> BatchUpdateMemberRoleByGuildNameRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> BatchUpdateMemberRoleByGuildNameRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_members(self, members: List[Member]) -> BatchUpdateMemberRoleByGuildNameRequest:
+        self.members = members
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BatchUpdateMemberRoleByGuildNameRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchUpdateMemberRoleByGuildNameRequest]:
+        if data is None:
+            return None
+        return BatchUpdateMemberRoleByGuildNameRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_members([
+                Member.from_dict(data.get('members')[i])
+                for i in range(len(data.get('members')) if data.get('members') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "members": None if self.members is None else [
+                self.members[i].to_dict() if self.members[i] else None
+                for i in range(len(self.members) if self.members else 0)
+            ],
         }
 
 

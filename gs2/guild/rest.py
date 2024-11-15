@@ -1130,6 +1130,10 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             body["guildMemberDefaultRole"] = request.guild_member_default_role
         if request.rejoin_cool_time_minutes is not None:
             body["rejoinCoolTimeMinutes"] = request.rejoin_cool_time_minutes
+        if request.max_concurrent_join_guilds is not None:
+            body["maxConcurrentJoinGuilds"] = request.max_concurrent_join_guilds
+        if request.max_concurrent_guild_master_count is not None:
+            body["maxConcurrentGuildMasterCount"] = request.max_concurrent_guild_master_count
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1295,6 +1299,10 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             body["guildMemberDefaultRole"] = request.guild_member_default_role
         if request.rejoin_cool_time_minutes is not None:
             body["rejoinCoolTimeMinutes"] = request.rejoin_cool_time_minutes
+        if request.max_concurrent_join_guilds is not None:
+            body["maxConcurrentJoinGuilds"] = request.max_concurrent_join_guilds
+        if request.max_concurrent_guild_master_count is not None:
+            body["maxConcurrentGuildMasterCount"] = request.max_concurrent_guild_master_count
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2632,6 +2640,167 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
     ) -> UpdateMemberRoleByGuildNameResult:
         async_result = []
         self._update_member_role_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _batch_update_member_role(
+        self,
+        request: BatchUpdateMemberRoleRequest,
+        callback: Callable[[AsyncResult[BatchUpdateMemberRoleResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='guild',
+            region=self.session.region,
+        ) + "/{namespaceName}/guild/{guildModelName}/me/batch/member/role".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            guildModelName=request.guild_model_name if request.guild_model_name is not None and request.guild_model_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.members is not None:
+            body["members"] = [
+                item.to_dict()
+                for item in request.members
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=BatchUpdateMemberRoleResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def batch_update_member_role(
+        self,
+        request: BatchUpdateMemberRoleRequest,
+    ) -> BatchUpdateMemberRoleResult:
+        async_result = []
+        with timeout(30):
+            self._batch_update_member_role(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def batch_update_member_role_async(
+        self,
+        request: BatchUpdateMemberRoleRequest,
+    ) -> BatchUpdateMemberRoleResult:
+        async_result = []
+        self._batch_update_member_role(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _batch_update_member_role_by_guild_name(
+        self,
+        request: BatchUpdateMemberRoleByGuildNameRequest,
+        callback: Callable[[AsyncResult[BatchUpdateMemberRoleByGuildNameResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='guild',
+            region=self.session.region,
+        ) + "/{namespaceName}/guild/{guildModelName}/{guildName}/batch/member/role".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            guildModelName=request.guild_model_name if request.guild_model_name is not None and request.guild_model_name != '' else 'null',
+            guildName=request.guild_name if request.guild_name is not None and request.guild_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.members is not None:
+            body["members"] = [
+                item.to_dict()
+                for item in request.members
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=BatchUpdateMemberRoleByGuildNameResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def batch_update_member_role_by_guild_name(
+        self,
+        request: BatchUpdateMemberRoleByGuildNameRequest,
+    ) -> BatchUpdateMemberRoleByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._batch_update_member_role_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def batch_update_member_role_by_guild_name_async(
+        self,
+        request: BatchUpdateMemberRoleByGuildNameRequest,
+    ) -> BatchUpdateMemberRoleByGuildNameResult:
+        async_result = []
+        self._batch_update_member_role_by_guild_name(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

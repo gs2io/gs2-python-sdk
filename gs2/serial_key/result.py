@@ -724,9 +724,14 @@ class GetSerialKeyResult(core.Gs2Result):
 
 class VerifyCodeResult(core.Gs2Result):
     item: SerialKey = None
+    campaign_model: CampaignModel = None
 
     def with_item(self, item: SerialKey) -> VerifyCodeResult:
         self.item = item
+        return self
+
+    def with_campaign_model(self, campaign_model: CampaignModel) -> VerifyCodeResult:
+        self.campaign_model = campaign_model
         return self
 
     def get(self, key, default=None):
@@ -748,19 +753,26 @@ class VerifyCodeResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCodeResult()\
-            .with_item(SerialKey.from_dict(data.get('item')))
+            .with_item(SerialKey.from_dict(data.get('item')))\
+            .with_campaign_model(CampaignModel.from_dict(data.get('campaignModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "campaignModel": self.campaign_model.to_dict() if self.campaign_model else None,
         }
 
 
 class VerifyCodeByUserIdResult(core.Gs2Result):
     item: SerialKey = None
+    campaign_model: CampaignModel = None
 
     def with_item(self, item: SerialKey) -> VerifyCodeByUserIdResult:
         self.item = item
+        return self
+
+    def with_campaign_model(self, campaign_model: CampaignModel) -> VerifyCodeByUserIdResult:
+        self.campaign_model = campaign_model
         return self
 
     def get(self, key, default=None):
@@ -782,11 +794,13 @@ class VerifyCodeByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCodeByUserIdResult()\
-            .with_item(SerialKey.from_dict(data.get('item')))
+            .with_item(SerialKey.from_dict(data.get('item')))\
+            .with_campaign_model(CampaignModel.from_dict(data.get('campaignModel')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "campaignModel": self.campaign_model.to_dict() if self.campaign_model else None,
         }
 
 
@@ -1004,10 +1018,15 @@ class RevertUseByStampSheetResult(core.Gs2Result):
 
 class VerifyByStampTaskResult(core.Gs2Result):
     item: SerialKey = None
+    campaign_model: CampaignModel = None
     new_context_stack: str = None
 
     def with_item(self, item: SerialKey) -> VerifyByStampTaskResult:
         self.item = item
+        return self
+
+    def with_campaign_model(self, campaign_model: CampaignModel) -> VerifyByStampTaskResult:
+        self.campaign_model = campaign_model
         return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyByStampTaskResult:
@@ -1034,11 +1053,13 @@ class VerifyByStampTaskResult(core.Gs2Result):
             return None
         return VerifyByStampTaskResult()\
             .with_item(SerialKey.from_dict(data.get('item')))\
+            .with_campaign_model(CampaignModel.from_dict(data.get('campaignModel')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+            "campaignModel": self.campaign_model.to_dict() if self.campaign_model else None,
             "newContextStack": self.new_context_stack,
         }
 

@@ -1134,6 +1134,10 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["guildMemberDefaultRole"] = request.guild_member_default_role
         if request.rejoin_cool_time_minutes is not None:
             body["rejoinCoolTimeMinutes"] = request.rejoin_cool_time_minutes
+        if request.max_concurrent_join_guilds is not None:
+            body["maxConcurrentJoinGuilds"] = request.max_concurrent_join_guilds
+        if request.max_concurrent_guild_master_count is not None:
+            body["maxConcurrentGuildMasterCount"] = request.max_concurrent_guild_master_count
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1301,6 +1305,10 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["guildMemberDefaultRole"] = request.guild_member_default_role
         if request.rejoin_cool_time_minutes is not None:
             body["rejoinCoolTimeMinutes"] = request.rejoin_cool_time_minutes
+        if request.max_concurrent_join_guilds is not None:
+            body["maxConcurrentJoinGuilds"] = request.max_concurrent_join_guilds
+        if request.max_concurrent_guild_master_count is not None:
+            body["maxConcurrentGuildMasterCount"] = request.max_concurrent_guild_master_count
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2675,6 +2683,172 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> UpdateMemberRoleByGuildNameResult:
         async_result = []
         self._update_member_role_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _batch_update_member_role(
+        self,
+        request: BatchUpdateMemberRoleRequest,
+        callback: Callable[[AsyncResult[BatchUpdateMemberRoleResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='batchUpdateMemberRole',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.members is not None:
+            body["members"] = [
+                item.to_dict()
+                for item in request.members
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=BatchUpdateMemberRoleResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def batch_update_member_role(
+        self,
+        request: BatchUpdateMemberRoleRequest,
+    ) -> BatchUpdateMemberRoleResult:
+        async_result = []
+        with timeout(30):
+            self._batch_update_member_role(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def batch_update_member_role_async(
+        self,
+        request: BatchUpdateMemberRoleRequest,
+    ) -> BatchUpdateMemberRoleResult:
+        async_result = []
+        self._batch_update_member_role(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _batch_update_member_role_by_guild_name(
+        self,
+        request: BatchUpdateMemberRoleByGuildNameRequest,
+        callback: Callable[[AsyncResult[BatchUpdateMemberRoleByGuildNameResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='batchUpdateMemberRoleByGuildName',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.members is not None:
+            body["members"] = [
+                item.to_dict()
+                for item in request.members
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=BatchUpdateMemberRoleByGuildNameResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def batch_update_member_role_by_guild_name(
+        self,
+        request: BatchUpdateMemberRoleByGuildNameRequest,
+    ) -> BatchUpdateMemberRoleByGuildNameResult:
+        async_result = []
+        with timeout(30):
+            self._batch_update_member_role_by_guild_name(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def batch_update_member_role_by_guild_name_async(
+        self,
+        request: BatchUpdateMemberRoleByGuildNameRequest,
+    ) -> BatchUpdateMemberRoleByGuildNameResult:
+        async_result = []
+        self._batch_update_member_role_by_guild_name(
             request,
             lambda result: async_result.append(result),
         )

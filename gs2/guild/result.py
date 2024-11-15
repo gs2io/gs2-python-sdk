@@ -1142,6 +1142,74 @@ class UpdateMemberRoleByGuildNameResult(core.Gs2Result):
         }
 
 
+class BatchUpdateMemberRoleResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> BatchUpdateMemberRoleResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchUpdateMemberRoleResult]:
+        if data is None:
+            return None
+        return BatchUpdateMemberRoleResult()\
+            .with_item(Guild.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class BatchUpdateMemberRoleByGuildNameResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> BatchUpdateMemberRoleByGuildNameResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchUpdateMemberRoleByGuildNameResult]:
+        if data is None:
+            return None
+        return BatchUpdateMemberRoleByGuildNameResult()\
+            .with_item(Guild.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteGuildResult(core.Gs2Result):
     item: Guild = None
 

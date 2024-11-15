@@ -136,13 +136,13 @@ class BlockingPolicyModel(core.Gs2Model):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "passServices": [
+            "passServices": None if self.pass_services is None else [
                 self.pass_services[i]
                 for i in range(len(self.pass_services) if self.pass_services else 0)
             ],
             "defaultRestriction": self.default_restriction,
             "locationDetection": self.location_detection,
-            "locations": [
+            "locations": None if self.locations is None else [
                 self.locations[i]
                 for i in range(len(self.locations) if self.locations else 0)
             ],
@@ -154,7 +154,7 @@ class BlockingPolicyModel(core.Gs2Model):
             "reputationIpDetection": self.reputation_ip_detection,
             "reputationIpRestriction": self.reputation_ip_restriction,
             "ipAddressesDetection": self.ip_addresses_detection,
-            "ipAddresses": [
+            "ipAddresses": None if self.ip_addresses is None else [
                 self.ip_addresses[i]
                 for i in range(len(self.ip_addresses) if self.ip_addresses else 0)
             ],
