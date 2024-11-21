@@ -403,6 +403,53 @@ class AcquireAction(core.Gs2Model):
         }
 
 
+class LogRate(core.Gs2Model):
+    base: float = None
+    logs: List[float] = None
+
+    def with_base(self, base: float) -> LogRate:
+        self.base = base
+        return self
+
+    def with_logs(self, logs: List[float]) -> LogRate:
+        self.logs = logs
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[LogRate]:
+        if data is None:
+            return None
+        return LogRate()\
+            .with_base(data.get('base'))\
+            .with_logs([
+                data.get('logs')[i]
+                for i in range(len(data.get('logs')) if data.get('logs') else 0)
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "base": self.base,
+            "logs": None if self.logs is None else [
+                self.logs[i]
+                for i in range(len(self.logs) if self.logs else 0)
+            ],
+        }
+
+
 class LogCost(core.Gs2Model):
     base: float = None
     adds: List[float] = None
