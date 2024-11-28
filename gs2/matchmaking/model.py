@@ -188,9 +188,9 @@ class Vote(core.Gs2Model):
             .with_vote_id(data.get('voteId'))\
             .with_rating_name(data.get('ratingName'))\
             .with_gathering_name(data.get('gatheringName'))\
-            .with_written_ballots([
+            .with_written_ballots(None if data.get('writtenBallots') is None else [
                 WrittenBallot.from_dict(data.get('writtenBallots')[i])
-                for i in range(len(data.get('writtenBallots')) if data.get('writtenBallots') else 0)
+                for i in range(len(data.get('writtenBallots')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
@@ -202,7 +202,7 @@ class Vote(core.Gs2Model):
             "gatheringName": self.gathering_name,
             "writtenBallots": None if self.written_ballots is None else [
                 self.written_ballots[i].to_dict() if self.written_ballots[i] else None
-                for i in range(len(self.written_ballots) if self.written_ballots else 0)
+                for i in range(len(self.written_ballots))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -241,9 +241,9 @@ class WrittenBallot(core.Gs2Model):
             return None
         return WrittenBallot()\
             .with_ballot(Ballot.from_dict(data.get('ballot')))\
-            .with_game_results([
+            .with_game_results(None if data.get('gameResults') is None else [
                 GameResult.from_dict(data.get('gameResults')[i])
-                for i in range(len(data.get('gameResults')) if data.get('gameResults') else 0)
+                for i in range(len(data.get('gameResults')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -251,7 +251,7 @@ class WrittenBallot(core.Gs2Model):
             "ballot": self.ballot.to_dict() if self.ballot else None,
             "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
-                for i in range(len(self.game_results) if self.game_results else 0)
+                for i in range(len(self.game_results))
             ],
         }
 
@@ -583,14 +583,14 @@ class Player(core.Gs2Model):
             return None
         return Player()\
             .with_user_id(data.get('userId'))\
-            .with_attributes([
+            .with_attributes(None if data.get('attributes') is None else [
                 Attribute.from_dict(data.get('attributes')[i])
-                for i in range(len(data.get('attributes')) if data.get('attributes') else 0)
+                for i in range(len(data.get('attributes')))
             ])\
             .with_role_name(data.get('roleName'))\
-            .with_deny_user_ids([
+            .with_deny_user_ids(None if data.get('denyUserIds') is None else [
                 data.get('denyUserIds')[i]
-                for i in range(len(data.get('denyUserIds')) if data.get('denyUserIds') else 0)
+                for i in range(len(data.get('denyUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))
 
@@ -599,12 +599,12 @@ class Player(core.Gs2Model):
             "userId": self.user_id,
             "attributes": None if self.attributes is None else [
                 self.attributes[i].to_dict() if self.attributes[i] else None
-                for i in range(len(self.attributes) if self.attributes else 0)
+                for i in range(len(self.attributes))
             ],
             "roleName": self.role_name,
             "denyUserIds": None if self.deny_user_ids is None else [
                 self.deny_user_ids[i]
-                for i in range(len(self.deny_user_ids) if self.deny_user_ids else 0)
+                for i in range(len(self.deny_user_ids))
             ],
             "createdAt": self.created_at,
         }
@@ -693,14 +693,14 @@ class CapacityOfRole(core.Gs2Model):
             return None
         return CapacityOfRole()\
             .with_role_name(data.get('roleName'))\
-            .with_role_aliases([
+            .with_role_aliases(None if data.get('roleAliases') is None else [
                 data.get('roleAliases')[i]
-                for i in range(len(data.get('roleAliases')) if data.get('roleAliases') else 0)
+                for i in range(len(data.get('roleAliases')))
             ])\
             .with_capacity(data.get('capacity'))\
-            .with_participants([
+            .with_participants(None if data.get('participants') is None else [
                 Player.from_dict(data.get('participants')[i])
-                for i in range(len(data.get('participants')) if data.get('participants') else 0)
+                for i in range(len(data.get('participants')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -708,12 +708,12 @@ class CapacityOfRole(core.Gs2Model):
             "roleName": self.role_name,
             "roleAliases": None if self.role_aliases is None else [
                 self.role_aliases[i]
-                for i in range(len(self.role_aliases) if self.role_aliases else 0)
+                for i in range(len(self.role_aliases))
             ],
             "capacity": self.capacity,
             "participants": None if self.participants is None else [
                 self.participants[i].to_dict() if self.participants[i] else None
-                for i in range(len(self.participants) if self.participants else 0)
+                for i in range(len(self.participants))
             ],
         }
 
@@ -1291,9 +1291,9 @@ class SeasonGathering(core.Gs2Model):
             .with_season(data.get('season'))\
             .with_tier(data.get('tier'))\
             .with_name(data.get('name'))\
-            .with_participants([
+            .with_participants(None if data.get('participants') is None else [
                 data.get('participants')[i]
-                for i in range(len(data.get('participants')) if data.get('participants') else 0)
+                for i in range(len(data.get('participants')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
@@ -1307,7 +1307,7 @@ class SeasonGathering(core.Gs2Model):
             "name": self.name,
             "participants": None if self.participants is None else [
                 self.participants[i]
-                for i in range(len(self.participants) if self.participants else 0)
+                for i in range(len(self.participants))
             ],
             "createdAt": self.created_at,
             "revision": self.revision,
@@ -2064,17 +2064,17 @@ class Gathering(core.Gs2Model):
         return Gathering()\
             .with_gathering_id(data.get('gatheringId'))\
             .with_name(data.get('name'))\
-            .with_attribute_ranges([
+            .with_attribute_ranges(None if data.get('attributeRanges') is None else [
                 AttributeRange.from_dict(data.get('attributeRanges')[i])
-                for i in range(len(data.get('attributeRanges')) if data.get('attributeRanges') else 0)
+                for i in range(len(data.get('attributeRanges')))
             ])\
-            .with_capacity_of_roles([
+            .with_capacity_of_roles(None if data.get('capacityOfRoles') is None else [
                 CapacityOfRole.from_dict(data.get('capacityOfRoles')[i])
-                for i in range(len(data.get('capacityOfRoles')) if data.get('capacityOfRoles') else 0)
+                for i in range(len(data.get('capacityOfRoles')))
             ])\
-            .with_allow_user_ids([
+            .with_allow_user_ids(None if data.get('allowUserIds') is None else [
                 data.get('allowUserIds')[i]
-                for i in range(len(data.get('allowUserIds')) if data.get('allowUserIds') else 0)
+                for i in range(len(data.get('allowUserIds')))
             ])\
             .with_metadata(data.get('metadata'))\
             .with_expires_at(data.get('expiresAt'))\
@@ -2088,15 +2088,15 @@ class Gathering(core.Gs2Model):
             "name": self.name,
             "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
-                for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
+                for i in range(len(self.attribute_ranges))
             ],
             "capacityOfRoles": None if self.capacity_of_roles is None else [
                 self.capacity_of_roles[i].to_dict() if self.capacity_of_roles[i] else None
-                for i in range(len(self.capacity_of_roles) if self.capacity_of_roles else 0)
+                for i in range(len(self.capacity_of_roles))
             ],
             "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
-                for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
+                for i in range(len(self.allow_user_ids))
             ],
             "metadata": self.metadata,
             "expiresAt": self.expires_at,

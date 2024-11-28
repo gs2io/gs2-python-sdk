@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -477,16 +478,16 @@ class DescribeBuffEntryModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBuffEntryModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BuffEntryModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -556,9 +557,9 @@ class DescribeBuffEntryModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBuffEntryModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BuffEntryModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -566,7 +567,7 @@ class DescribeBuffEntryModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -739,9 +740,9 @@ class ApplyBuffResult(core.Gs2Result):
         if data is None:
             return None
         return ApplyBuffResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BuffEntryModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_new_context_stack(data.get('newContextStack'))
 
@@ -749,7 +750,7 @@ class ApplyBuffResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "newContextStack": self.new_context_stack,
         }
@@ -786,9 +787,9 @@ class ApplyBuffByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ApplyBuffByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BuffEntryModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_new_context_stack(data.get('newContextStack'))
 
@@ -796,7 +797,7 @@ class ApplyBuffByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "newContextStack": self.new_context_stack,
         }

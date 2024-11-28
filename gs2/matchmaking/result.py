@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeGatheringsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGatheringsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Gathering.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeGatheringsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1060,9 +1061,9 @@ class DescribeRatingModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRatingModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RatingModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1070,7 +1071,7 @@ class DescribeRatingModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1238,16 +1239,16 @@ class DescribeRatingModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRatingModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RatingModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1448,16 +1449,16 @@ class DescribeSeasonModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSeasonModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SeasonModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1527,9 +1528,9 @@ class DescribeSeasonModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSeasonModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SeasonModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1537,7 +1538,7 @@ class DescribeSeasonModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1710,9 +1711,9 @@ class DescribeSeasonGatheringsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSeasonGatheringsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SeasonGathering.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1720,7 +1721,7 @@ class DescribeSeasonGatheringsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1757,9 +1758,9 @@ class DescribeMatchmakingSeasonGatheringsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeMatchmakingSeasonGatheringsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SeasonGathering.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1767,7 +1768,7 @@ class DescribeMatchmakingSeasonGatheringsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2042,9 +2043,9 @@ class DescribeJoinedSeasonGatheringsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeJoinedSeasonGatheringsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 JoinedSeasonGathering.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2052,7 +2053,7 @@ class DescribeJoinedSeasonGatheringsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2089,9 +2090,9 @@ class DescribeJoinedSeasonGatheringsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeJoinedSeasonGatheringsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 JoinedSeasonGathering.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2099,7 +2100,7 @@ class DescribeJoinedSeasonGatheringsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2204,9 +2205,9 @@ class DescribeRatingsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRatingsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Rating.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2214,7 +2215,7 @@ class DescribeRatingsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2251,9 +2252,9 @@ class DescribeRatingsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRatingsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Rating.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2261,7 +2262,7 @@ class DescribeRatingsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2361,16 +2362,16 @@ class PutResultResult(core.Gs2Result):
         if data is None:
             return None
         return PutResultResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Rating.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 

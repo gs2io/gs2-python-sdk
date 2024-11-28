@@ -884,17 +884,17 @@ class CreateRateModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_timing_type(data.get('timingType'))\
             .with_lock_time(data.get('lockTime'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -907,15 +907,15 @@ class CreateRateModelMasterRequest(core.Gs2Request):
             "lockTime": self.lock_time,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
         }
 
@@ -1037,17 +1037,17 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_timing_type(data.get('timingType'))\
             .with_lock_time(data.get('lockTime'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1060,15 +1060,15 @@ class UpdateRateModelMasterRequest(core.Gs2Request):
             "lockTime": self.lock_time,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
         }
 
@@ -1339,9 +1339,9 @@ class CreateIncrementalRateModelMasterRequest(core.Gs2Request):
             .with_calculate_script_id(data.get('calculateScriptId'))\
             .with_exchange_count_id(data.get('exchangeCountId'))\
             .with_maximum_exchange_count(data.get('maximumExchangeCount'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1359,7 +1359,7 @@ class CreateIncrementalRateModelMasterRequest(core.Gs2Request):
             "maximumExchangeCount": self.maximum_exchange_count,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
         }
 
@@ -1501,9 +1501,9 @@ class UpdateIncrementalRateModelMasterRequest(core.Gs2Request):
             .with_calculate_script_id(data.get('calculateScriptId'))\
             .with_exchange_count_id(data.get('exchangeCountId'))\
             .with_maximum_exchange_count(data.get('maximumExchangeCount'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1521,7 +1521,7 @@ class UpdateIncrementalRateModelMasterRequest(core.Gs2Request):
             "maximumExchangeCount": self.maximum_exchange_count,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
         }
 
@@ -1626,9 +1626,9 @@ class ExchangeRequest(core.Gs2Request):
             .with_rate_name(data.get('rateName'))\
             .with_access_token(data.get('accessToken'))\
             .with_count(data.get('count'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1639,7 +1639,7 @@ class ExchangeRequest(core.Gs2Request):
             "count": self.count,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1706,9 +1706,9 @@ class ExchangeByUserIdRequest(core.Gs2Request):
             .with_rate_name(data.get('rateName'))\
             .with_user_id(data.get('userId'))\
             .with_count(data.get('count'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1720,7 +1720,7 @@ class ExchangeByUserIdRequest(core.Gs2Request):
             "count": self.count,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1826,9 +1826,9 @@ class IncrementalExchangeRequest(core.Gs2Request):
             .with_rate_name(data.get('rateName'))\
             .with_access_token(data.get('accessToken'))\
             .with_count(data.get('count'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1839,7 +1839,7 @@ class IncrementalExchangeRequest(core.Gs2Request):
             "count": self.count,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1906,9 +1906,9 @@ class IncrementalExchangeByUserIdRequest(core.Gs2Request):
             .with_rate_name(data.get('rateName'))\
             .with_user_id(data.get('userId'))\
             .with_count(data.get('count'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1920,7 +1920,7 @@ class IncrementalExchangeByUserIdRequest(core.Gs2Request):
             "count": self.count,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2189,9 +2189,9 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_rate_name(data.get('rateName'))\
             .with_count(data.get('count'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2203,7 +2203,7 @@ class CreateAwaitByUserIdRequest(core.Gs2Request):
             "count": self.count,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2502,9 +2502,9 @@ class AcquireRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_await_name(data.get('awaitName'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2514,7 +2514,7 @@ class AcquireRequest(core.Gs2Request):
             "awaitName": self.await_name,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -2575,9 +2575,9 @@ class AcquireByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_await_name(data.get('awaitName'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2588,7 +2588,7 @@ class AcquireByUserIdRequest(core.Gs2Request):
             "awaitName": self.await_name,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2650,9 +2650,9 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_await_name(data.get('awaitName'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2663,7 +2663,7 @@ class AcquireForceByUserIdRequest(core.Gs2Request):
             "awaitName": self.await_name,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

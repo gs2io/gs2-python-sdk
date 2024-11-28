@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -265,9 +266,9 @@ class DescribeDistributorModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeDistributorModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 DistributorModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -275,7 +276,7 @@ class DescribeDistributorModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -443,16 +444,16 @@ class DescribeDistributorModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeDistributorModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 DistributorModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -904,21 +905,21 @@ class RunStampSheetExpressResult(core.Gs2Result):
         if data is None:
             return None
         return RunStampSheetExpressResult()\
-            .with_verify_task_result_codes([
+            .with_verify_task_result_codes(None if data.get('verifyTaskResultCodes') is None else [
                 data.get('verifyTaskResultCodes')[i]
-                for i in range(len(data.get('verifyTaskResultCodes')) if data.get('verifyTaskResultCodes') else 0)
+                for i in range(len(data.get('verifyTaskResultCodes')))
             ])\
-            .with_verify_task_results([
+            .with_verify_task_results(None if data.get('verifyTaskResults') is None else [
                 data.get('verifyTaskResults')[i]
-                for i in range(len(data.get('verifyTaskResults')) if data.get('verifyTaskResults') else 0)
+                for i in range(len(data.get('verifyTaskResults')))
             ])\
-            .with_task_result_codes([
+            .with_task_result_codes(None if data.get('taskResultCodes') is None else [
                 data.get('taskResultCodes')[i]
-                for i in range(len(data.get('taskResultCodes')) if data.get('taskResultCodes') else 0)
+                for i in range(len(data.get('taskResultCodes')))
             ])\
-            .with_task_results([
+            .with_task_results(None if data.get('taskResults') is None else [
                 data.get('taskResults')[i]
-                for i in range(len(data.get('taskResults')) if data.get('taskResults') else 0)
+                for i in range(len(data.get('taskResults')))
             ])\
             .with_sheet_result_code(data.get('sheetResultCode'))\
             .with_sheet_result(data.get('sheetResult'))
@@ -927,19 +928,19 @@ class RunStampSheetExpressResult(core.Gs2Result):
         return {
             "verifyTaskResultCodes": None if self.verify_task_result_codes is None else [
                 self.verify_task_result_codes[i]
-                for i in range(len(self.verify_task_result_codes) if self.verify_task_result_codes else 0)
+                for i in range(len(self.verify_task_result_codes))
             ],
             "verifyTaskResults": None if self.verify_task_results is None else [
                 self.verify_task_results[i]
-                for i in range(len(self.verify_task_results) if self.verify_task_results else 0)
+                for i in range(len(self.verify_task_results))
             ],
             "taskResultCodes": None if self.task_result_codes is None else [
                 self.task_result_codes[i]
-                for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
+                for i in range(len(self.task_result_codes))
             ],
             "taskResults": None if self.task_results is None else [
                 self.task_results[i]
-                for i in range(len(self.task_results) if self.task_results else 0)
+                for i in range(len(self.task_results))
             ],
             "sheetResultCode": self.sheet_result_code,
             "sheetResult": self.sheet_result,
@@ -1134,21 +1135,21 @@ class RunStampSheetExpressWithoutNamespaceResult(core.Gs2Result):
         if data is None:
             return None
         return RunStampSheetExpressWithoutNamespaceResult()\
-            .with_verify_task_result_codes([
+            .with_verify_task_result_codes(None if data.get('verifyTaskResultCodes') is None else [
                 data.get('verifyTaskResultCodes')[i]
-                for i in range(len(data.get('verifyTaskResultCodes')) if data.get('verifyTaskResultCodes') else 0)
+                for i in range(len(data.get('verifyTaskResultCodes')))
             ])\
-            .with_verify_task_results([
+            .with_verify_task_results(None if data.get('verifyTaskResults') is None else [
                 data.get('verifyTaskResults')[i]
-                for i in range(len(data.get('verifyTaskResults')) if data.get('verifyTaskResults') else 0)
+                for i in range(len(data.get('verifyTaskResults')))
             ])\
-            .with_task_result_codes([
+            .with_task_result_codes(None if data.get('taskResultCodes') is None else [
                 data.get('taskResultCodes')[i]
-                for i in range(len(data.get('taskResultCodes')) if data.get('taskResultCodes') else 0)
+                for i in range(len(data.get('taskResultCodes')))
             ])\
-            .with_task_results([
+            .with_task_results(None if data.get('taskResults') is None else [
                 data.get('taskResults')[i]
-                for i in range(len(data.get('taskResults')) if data.get('taskResults') else 0)
+                for i in range(len(data.get('taskResults')))
             ])\
             .with_sheet_result_code(data.get('sheetResultCode'))\
             .with_sheet_result(data.get('sheetResult'))
@@ -1157,19 +1158,19 @@ class RunStampSheetExpressWithoutNamespaceResult(core.Gs2Result):
         return {
             "verifyTaskResultCodes": None if self.verify_task_result_codes is None else [
                 self.verify_task_result_codes[i]
-                for i in range(len(self.verify_task_result_codes) if self.verify_task_result_codes else 0)
+                for i in range(len(self.verify_task_result_codes))
             ],
             "verifyTaskResults": None if self.verify_task_results is None else [
                 self.verify_task_results[i]
-                for i in range(len(self.verify_task_results) if self.verify_task_results else 0)
+                for i in range(len(self.verify_task_results))
             ],
             "taskResultCodes": None if self.task_result_codes is None else [
                 self.task_result_codes[i]
-                for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
+                for i in range(len(self.task_result_codes))
             ],
             "taskResults": None if self.task_results is None else [
                 self.task_results[i]
-                for i in range(len(self.task_results) if self.task_results else 0)
+                for i in range(len(self.task_results))
             ],
             "sheetResultCode": self.sheet_result_code,
             "sheetResult": self.sheet_result,
@@ -1556,6 +1557,108 @@ class GetStampSheetResultByUserIdResult(core.Gs2Result):
             return None
         return GetStampSheetResultByUserIdResult()\
             .with_item(StampSheetResult.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class RunTransactionResult(core.Gs2Result):
+    item: TransactionResult = None
+
+    def with_item(self, item: TransactionResult) -> RunTransactionResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RunTransactionResult]:
+        if data is None:
+            return None
+        return RunTransactionResult()\
+            .with_item(TransactionResult.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetTransactionResultResult(core.Gs2Result):
+    item: TransactionResult = None
+
+    def with_item(self, item: TransactionResult) -> GetTransactionResultResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTransactionResultResult]:
+        if data is None:
+            return None
+        return GetTransactionResultResult()\
+            .with_item(TransactionResult.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetTransactionResultByUserIdResult(core.Gs2Result):
+    item: TransactionResult = None
+
+    def with_item(self, item: TransactionResult) -> GetTransactionResultByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTransactionResultByUserIdResult]:
+        if data is None:
+            return None
+        return GetTransactionResultByUserIdResult()\
+            .with_item(TransactionResult.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {

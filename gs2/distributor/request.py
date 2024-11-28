@@ -67,6 +67,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     description: str = None
     assume_user_id: str = None
     auto_run_stamp_sheet_notification: NotificationSetting = None
+    auto_run_transaction_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -83,6 +84,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_auto_run_stamp_sheet_notification(self, auto_run_stamp_sheet_notification: NotificationSetting) -> CreateNamespaceRequest:
         self.auto_run_stamp_sheet_notification = auto_run_stamp_sheet_notification
+        return self
+
+    def with_auto_run_transaction_notification(self, auto_run_transaction_notification: NotificationSetting) -> CreateNamespaceRequest:
+        self.auto_run_transaction_notification = auto_run_transaction_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -112,6 +117,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_assume_user_id(data.get('assumeUserId'))\
             .with_auto_run_stamp_sheet_notification(NotificationSetting.from_dict(data.get('autoRunStampSheetNotification')))\
+            .with_auto_run_transaction_notification(NotificationSetting.from_dict(data.get('autoRunTransactionNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -120,6 +126,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "assumeUserId": self.assume_user_id,
             "autoRunStampSheetNotification": self.auto_run_stamp_sheet_notification.to_dict() if self.auto_run_stamp_sheet_notification else None,
+            "autoRunTransactionNotification": self.auto_run_transaction_notification.to_dict() if self.auto_run_transaction_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -203,6 +210,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     description: str = None
     assume_user_id: str = None
     auto_run_stamp_sheet_notification: NotificationSetting = None
+    auto_run_transaction_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -219,6 +227,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_auto_run_stamp_sheet_notification(self, auto_run_stamp_sheet_notification: NotificationSetting) -> UpdateNamespaceRequest:
         self.auto_run_stamp_sheet_notification = auto_run_stamp_sheet_notification
+        return self
+
+    def with_auto_run_transaction_notification(self, auto_run_transaction_notification: NotificationSetting) -> UpdateNamespaceRequest:
+        self.auto_run_transaction_notification = auto_run_transaction_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -248,6 +260,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_assume_user_id(data.get('assumeUserId'))\
             .with_auto_run_stamp_sheet_notification(NotificationSetting.from_dict(data.get('autoRunStampSheetNotification')))\
+            .with_auto_run_transaction_notification(NotificationSetting.from_dict(data.get('autoRunTransactionNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -256,6 +269,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "assumeUserId": self.assume_user_id,
             "autoRunStampSheetNotification": self.auto_run_stamp_sheet_notification.to_dict() if self.auto_run_stamp_sheet_notification else None,
+            "autoRunTransactionNotification": self.auto_run_transaction_notification.to_dict() if self.auto_run_transaction_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -404,9 +418,9 @@ class CreateDistributorModelMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_inbox_namespace_id(data.get('inboxNamespaceId'))\
-            .with_white_list_target_ids([
+            .with_white_list_target_ids(None if data.get('whiteListTargetIds') is None else [
                 data.get('whiteListTargetIds')[i]
-                for i in range(len(data.get('whiteListTargetIds')) if data.get('whiteListTargetIds') else 0)
+                for i in range(len(data.get('whiteListTargetIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -418,7 +432,7 @@ class CreateDistributorModelMasterRequest(core.Gs2Request):
             "inboxNamespaceId": self.inbox_namespace_id,
             "whiteListTargetIds": None if self.white_list_target_ids is None else [
                 self.white_list_target_ids[i]
-                for i in range(len(self.white_list_target_ids) if self.white_list_target_ids else 0)
+                for i in range(len(self.white_list_target_ids))
             ],
         }
 
@@ -524,9 +538,9 @@ class UpdateDistributorModelMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_inbox_namespace_id(data.get('inboxNamespaceId'))\
-            .with_white_list_target_ids([
+            .with_white_list_target_ids(None if data.get('whiteListTargetIds') is None else [
                 data.get('whiteListTargetIds')[i]
-                for i in range(len(data.get('whiteListTargetIds')) if data.get('whiteListTargetIds') else 0)
+                for i in range(len(data.get('whiteListTargetIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -538,7 +552,7 @@ class UpdateDistributorModelMasterRequest(core.Gs2Request):
             "inboxNamespaceId": self.inbox_namespace_id,
             "whiteListTargetIds": None if self.white_list_target_ids is None else [
                 self.white_list_target_ids[i]
-                for i in range(len(self.white_list_target_ids) if self.white_list_target_ids else 0)
+                for i in range(len(self.white_list_target_ids))
             ],
         }
 
@@ -1358,9 +1372,9 @@ class SetTransactionDefaultConfigRequest(core.Gs2Request):
             return None
         return SetTransactionDefaultConfigRequest()\
             .with_access_token(data.get('accessToken'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1368,7 +1382,7 @@ class SetTransactionDefaultConfigRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1417,9 +1431,9 @@ class SetTransactionDefaultConfigByUserIdRequest(core.Gs2Request):
             return None
         return SetTransactionDefaultConfigByUserIdRequest()\
             .with_user_id(data.get('userId'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1428,7 +1442,7 @@ class SetTransactionDefaultConfigByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1603,13 +1617,13 @@ class IfExpressionByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_condition(VerifyAction.from_dict(data.get('condition')))\
-            .with_true_actions([
+            .with_true_actions(None if data.get('trueActions') is None else [
                 ConsumeAction.from_dict(data.get('trueActions')[i])
-                for i in range(len(data.get('trueActions')) if data.get('trueActions') else 0)
+                for i in range(len(data.get('trueActions')))
             ])\
-            .with_false_actions([
+            .with_false_actions(None if data.get('falseActions') is None else [
                 ConsumeAction.from_dict(data.get('falseActions')[i])
-                for i in range(len(data.get('falseActions')) if data.get('falseActions') else 0)
+                for i in range(len(data.get('falseActions')))
             ])\
             .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -1621,11 +1635,11 @@ class IfExpressionByUserIdRequest(core.Gs2Request):
             "condition": self.condition.to_dict() if self.condition else None,
             "trueActions": None if self.true_actions is None else [
                 self.true_actions[i].to_dict() if self.true_actions[i] else None
-                for i in range(len(self.true_actions) if self.true_actions else 0)
+                for i in range(len(self.true_actions))
             ],
             "falseActions": None if self.false_actions is None else [
                 self.false_actions[i].to_dict() if self.false_actions[i] else None
-                for i in range(len(self.false_actions) if self.false_actions else 0)
+                for i in range(len(self.false_actions))
             ],
             "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
             "timeOffsetToken": self.time_offset_token,
@@ -1682,9 +1696,9 @@ class AndExpressionByUserIdRequest(core.Gs2Request):
         return AndExpressionByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_actions([
+            .with_actions(None if data.get('actions') is None else [
                 VerifyAction.from_dict(data.get('actions')[i])
-                for i in range(len(data.get('actions')) if data.get('actions') else 0)
+                for i in range(len(data.get('actions')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1694,7 +1708,7 @@ class AndExpressionByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "actions": None if self.actions is None else [
                 self.actions[i].to_dict() if self.actions[i] else None
-                for i in range(len(self.actions) if self.actions else 0)
+                for i in range(len(self.actions))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1750,9 +1764,9 @@ class OrExpressionByUserIdRequest(core.Gs2Request):
         return OrExpressionByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_actions([
+            .with_actions(None if data.get('actions') is None else [
                 VerifyAction.from_dict(data.get('actions')[i])
-                for i in range(len(data.get('actions')) if data.get('actions') else 0)
+                for i in range(len(data.get('actions')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1762,7 +1776,7 @@ class OrExpressionByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "actions": None if self.actions is None else [
                 self.actions[i].to_dict() if self.actions[i] else None
-                for i in range(len(self.actions) if self.actions else 0)
+                for i in range(len(self.actions))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1990,6 +2004,182 @@ class GetStampSheetResultByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return GetStampSheetResultByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "transactionId": self.transaction_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class RunTransactionRequest(core.Gs2Request):
+
+    context_stack: str = None
+    owner_id: str = None
+    namespace_name: str = None
+    user_id: str = None
+    transaction: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_owner_id(self, owner_id: str) -> RunTransactionRequest:
+        self.owner_id = owner_id
+        return self
+
+    def with_namespace_name(self, namespace_name: str) -> RunTransactionRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> RunTransactionRequest:
+        self.user_id = user_id
+        return self
+
+    def with_transaction(self, transaction: str) -> RunTransactionRequest:
+        self.transaction = transaction
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> RunTransactionRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RunTransactionRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RunTransactionRequest]:
+        if data is None:
+            return None
+        return RunTransactionRequest()\
+            .with_owner_id(data.get('ownerId'))\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_transaction(data.get('transaction'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "ownerId": self.owner_id,
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "transaction": self.transaction,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class GetTransactionResultRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    transaction_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetTransactionResultRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetTransactionResultRequest:
+        self.access_token = access_token
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> GetTransactionResultRequest:
+        self.transaction_id = transaction_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTransactionResultRequest]:
+        if data is None:
+            return None
+        return GetTransactionResultRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_transaction_id(data.get('transactionId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "transactionId": self.transaction_id,
+        }
+
+
+class GetTransactionResultByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    transaction_id: str = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetTransactionResultByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetTransactionResultByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> GetTransactionResultByUserIdRequest:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetTransactionResultByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTransactionResultByUserIdRequest]:
+        if data is None:
+            return None
+        return GetTransactionResultByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_transaction_id(data.get('transactionId'))\

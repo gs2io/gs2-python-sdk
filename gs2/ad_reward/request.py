@@ -131,9 +131,9 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_admob(AdMob.from_dict(data.get('admob')))\
             .with_unity_ad(UnityAd.from_dict(data.get('unityAd')))\
-            .with_app_lovin_maxes([
+            .with_app_lovin_maxes(None if data.get('appLovinMaxes') is None else [
                 AppLovinMax.from_dict(data.get('appLovinMaxes')[i])
-                for i in range(len(data.get('appLovinMaxes')) if data.get('appLovinMaxes') else 0)
+                for i in range(len(data.get('appLovinMaxes')))
             ])\
             .with_description(data.get('description'))\
             .with_acquire_point_script(ScriptSetting.from_dict(data.get('acquirePointScript')))\
@@ -148,7 +148,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
             "appLovinMaxes": None if self.app_lovin_maxes is None else [
                 self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
-                for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
+                for i in range(len(self.app_lovin_maxes))
             ],
             "description": self.description,
             "acquirePointScript": self.acquire_point_script.to_dict() if self.acquire_point_script else None,
@@ -302,9 +302,9 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_admob(AdMob.from_dict(data.get('admob')))\
             .with_unity_ad(UnityAd.from_dict(data.get('unityAd')))\
-            .with_app_lovin_maxes([
+            .with_app_lovin_maxes(None if data.get('appLovinMaxes') is None else [
                 AppLovinMax.from_dict(data.get('appLovinMaxes')[i])
-                for i in range(len(data.get('appLovinMaxes')) if data.get('appLovinMaxes') else 0)
+                for i in range(len(data.get('appLovinMaxes')))
             ])\
             .with_acquire_point_script(ScriptSetting.from_dict(data.get('acquirePointScript')))\
             .with_consume_point_script(ScriptSetting.from_dict(data.get('consumePointScript')))\
@@ -319,7 +319,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
             "appLovinMaxes": None if self.app_lovin_maxes is None else [
                 self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
-                for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
+                for i in range(len(self.app_lovin_maxes))
             ],
             "acquirePointScript": self.acquire_point_script.to_dict() if self.acquire_point_script else None,
             "consumePointScript": self.consume_point_script.to_dict() if self.consume_point_script else None,

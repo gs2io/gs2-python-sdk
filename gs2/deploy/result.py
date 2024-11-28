@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeStacksResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStacksResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Stack.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeStacksResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -287,16 +288,16 @@ class ChangeSetResult(core.Gs2Result):
         if data is None:
             return None
         return ChangeSetResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ChangeSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -502,9 +503,9 @@ class DescribeResourcesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeResourcesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Resource.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -512,7 +513,7 @@ class DescribeResourcesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -583,9 +584,9 @@ class DescribeEventsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeEventsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Event.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -593,7 +594,7 @@ class DescribeEventsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -664,9 +665,9 @@ class DescribeOutputsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeOutputsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Output.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -674,7 +675,7 @@ class DescribeOutputsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

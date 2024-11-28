@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeSalesItemMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSalesItemMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SalesItemMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeSalesItemMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -665,9 +666,9 @@ class DescribeSalesItemGroupMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSalesItemGroupMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SalesItemGroupMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -675,7 +676,7 @@ class DescribeSalesItemGroupMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -848,9 +849,9 @@ class DescribeShowcaseMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeShowcaseMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ShowcaseMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -858,7 +859,7 @@ class DescribeShowcaseMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1162,16 +1163,16 @@ class DescribeShowcasesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeShowcasesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Showcase.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1202,16 +1203,16 @@ class DescribeShowcasesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeShowcasesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Showcase.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1290,6 +1291,9 @@ class BuyResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: SalesItem) -> BuyResult:
         self.item = item
@@ -1309,6 +1313,18 @@ class BuyResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> BuyResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> BuyResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> BuyResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> BuyResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1334,7 +1350,10 @@ class BuyResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1343,6 +1362,9 @@ class BuyResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1352,6 +1374,9 @@ class BuyByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: SalesItem) -> BuyByUserIdResult:
         self.item = item
@@ -1371,6 +1396,18 @@ class BuyByUserIdResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> BuyByUserIdResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> BuyByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> BuyByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> BuyByUserIdResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1396,7 +1433,10 @@ class BuyByUserIdResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1405,6 +1445,9 @@ class BuyByUserIdResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1439,9 +1482,9 @@ class DescribeRandomShowcaseMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRandomShowcaseMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RandomShowcaseMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1449,7 +1492,7 @@ class DescribeRandomShowcaseMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1794,16 +1837,16 @@ class ForceReDrawByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ForceReDrawByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RandomDisplayItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1834,16 +1877,16 @@ class ForceReDrawByUserIdByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return ForceReDrawByUserIdByStampSheetResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RandomDisplayItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1874,16 +1917,16 @@ class DescribeRandomDisplayItemsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRandomDisplayItemsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RandomDisplayItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1914,16 +1957,16 @@ class DescribeRandomDisplayItemsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRandomDisplayItemsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RandomDisplayItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -2002,6 +2045,9 @@ class RandomShowcaseBuyResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: RandomDisplayItem) -> RandomShowcaseBuyResult:
         self.item = item
@@ -2021,6 +2067,18 @@ class RandomShowcaseBuyResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> RandomShowcaseBuyResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> RandomShowcaseBuyResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> RandomShowcaseBuyResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> RandomShowcaseBuyResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -2046,7 +2104,10 @@ class RandomShowcaseBuyResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2055,6 +2116,9 @@ class RandomShowcaseBuyResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -2064,6 +2128,9 @@ class RandomShowcaseBuyByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: RandomDisplayItem) -> RandomShowcaseBuyByUserIdResult:
         self.item = item
@@ -2083,6 +2150,18 @@ class RandomShowcaseBuyByUserIdResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> RandomShowcaseBuyByUserIdResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> RandomShowcaseBuyByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> RandomShowcaseBuyByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> RandomShowcaseBuyByUserIdResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -2108,7 +2187,10 @@ class RandomShowcaseBuyByUserIdResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2117,4 +2199,7 @@ class RandomShowcaseBuyByUserIdResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }

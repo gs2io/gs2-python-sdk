@@ -767,9 +767,9 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
             .with_current_version(Version.from_dict(data.get('currentVersion')))\
             .with_warning_version(Version.from_dict(data.get('warningVersion')))\
             .with_error_version(Version.from_dict(data.get('errorVersion')))\
-            .with_schedule_versions([
+            .with_schedule_versions(None if data.get('scheduleVersions') is None else [
                 ScheduleVersion.from_dict(data.get('scheduleVersions')[i])
-                for i in range(len(data.get('scheduleVersions')) if data.get('scheduleVersions') else 0)
+                for i in range(len(data.get('scheduleVersions')))
             ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))
@@ -787,7 +787,7 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
             "scheduleVersions": None if self.schedule_versions is None else [
                 self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
-                for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
+                for i in range(len(self.schedule_versions))
             ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
@@ -929,9 +929,9 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
             .with_current_version(Version.from_dict(data.get('currentVersion')))\
             .with_warning_version(Version.from_dict(data.get('warningVersion')))\
             .with_error_version(Version.from_dict(data.get('errorVersion')))\
-            .with_schedule_versions([
+            .with_schedule_versions(None if data.get('scheduleVersions') is None else [
                 ScheduleVersion.from_dict(data.get('scheduleVersions')[i])
-                for i in range(len(data.get('scheduleVersions')) if data.get('scheduleVersions') else 0)
+                for i in range(len(data.get('scheduleVersions')))
             ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))
@@ -949,7 +949,7 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
             "scheduleVersions": None if self.schedule_versions is None else [
                 self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
-                for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
+                for i in range(len(self.schedule_versions))
             ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
@@ -1599,9 +1599,9 @@ class CheckVersionRequest(core.Gs2Request):
         return CheckVersionRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_target_versions([
+            .with_target_versions(None if data.get('targetVersions') is None else [
                 TargetVersion.from_dict(data.get('targetVersions')[i])
-                for i in range(len(data.get('targetVersions')) if data.get('targetVersions') else 0)
+                for i in range(len(data.get('targetVersions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1610,7 +1610,7 @@ class CheckVersionRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "targetVersions": None if self.target_versions is None else [
                 self.target_versions[i].to_dict() if self.target_versions[i] else None
-                for i in range(len(self.target_versions) if self.target_versions else 0)
+                for i in range(len(self.target_versions))
             ],
         }
 
@@ -1665,9 +1665,9 @@ class CheckVersionByUserIdRequest(core.Gs2Request):
         return CheckVersionByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_target_versions([
+            .with_target_versions(None if data.get('targetVersions') is None else [
                 TargetVersion.from_dict(data.get('targetVersions')[i])
-                for i in range(len(data.get('targetVersions')) if data.get('targetVersions') else 0)
+                for i in range(len(data.get('targetVersions')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1677,7 +1677,7 @@ class CheckVersionByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "targetVersions": None if self.target_versions is None else [
                 self.target_versions[i].to_dict() if self.target_versions[i] else None
-                for i in range(len(self.target_versions) if self.target_versions else 0)
+                for i in range(len(self.target_versions))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

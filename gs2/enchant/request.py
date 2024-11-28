@@ -790,9 +790,9 @@ class CreateBalanceParameterModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_total_value(data.get('totalValue'))\
             .with_initial_value_strategy(data.get('initialValueStrategy'))\
-            .with_parameters([
+            .with_parameters(None if data.get('parameters') is None else [
                 BalanceParameterValueModel.from_dict(data.get('parameters')[i])
-                for i in range(len(data.get('parameters')) if data.get('parameters') else 0)
+                for i in range(len(data.get('parameters')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -805,7 +805,7 @@ class CreateBalanceParameterModelMasterRequest(core.Gs2Request):
             "initialValueStrategy": self.initial_value_strategy,
             "parameters": None if self.parameters is None else [
                 self.parameters[i].to_dict() if self.parameters[i] else None
-                for i in range(len(self.parameters) if self.parameters else 0)
+                for i in range(len(self.parameters))
             ],
         }
 
@@ -917,9 +917,9 @@ class UpdateBalanceParameterModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_total_value(data.get('totalValue'))\
             .with_initial_value_strategy(data.get('initialValueStrategy'))\
-            .with_parameters([
+            .with_parameters(None if data.get('parameters') is None else [
                 BalanceParameterValueModel.from_dict(data.get('parameters')[i])
-                for i in range(len(data.get('parameters')) if data.get('parameters') else 0)
+                for i in range(len(data.get('parameters')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -932,7 +932,7 @@ class UpdateBalanceParameterModelMasterRequest(core.Gs2Request):
             "initialValueStrategy": self.initial_value_strategy,
             "parameters": None if self.parameters is None else [
                 self.parameters[i].to_dict() if self.parameters[i] else None
-                for i in range(len(self.parameters) if self.parameters else 0)
+                for i in range(len(self.parameters))
             ],
         }
 
@@ -1172,13 +1172,13 @@ class CreateRarityParameterModelMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_maximum_parameter_count(data.get('maximumParameterCount'))\
-            .with_parameter_counts([
+            .with_parameter_counts(None if data.get('parameterCounts') is None else [
                 RarityParameterCountModel.from_dict(data.get('parameterCounts')[i])
-                for i in range(len(data.get('parameterCounts')) if data.get('parameterCounts') else 0)
+                for i in range(len(data.get('parameterCounts')))
             ])\
-            .with_parameters([
+            .with_parameters(None if data.get('parameters') is None else [
                 RarityParameterValueModel.from_dict(data.get('parameters')[i])
-                for i in range(len(data.get('parameters')) if data.get('parameters') else 0)
+                for i in range(len(data.get('parameters')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1190,11 +1190,11 @@ class CreateRarityParameterModelMasterRequest(core.Gs2Request):
             "maximumParameterCount": self.maximum_parameter_count,
             "parameterCounts": None if self.parameter_counts is None else [
                 self.parameter_counts[i].to_dict() if self.parameter_counts[i] else None
-                for i in range(len(self.parameter_counts) if self.parameter_counts else 0)
+                for i in range(len(self.parameter_counts))
             ],
             "parameters": None if self.parameters is None else [
                 self.parameters[i].to_dict() if self.parameters[i] else None
-                for i in range(len(self.parameters) if self.parameters else 0)
+                for i in range(len(self.parameters))
             ],
         }
 
@@ -1305,13 +1305,13 @@ class UpdateRarityParameterModelMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_maximum_parameter_count(data.get('maximumParameterCount'))\
-            .with_parameter_counts([
+            .with_parameter_counts(None if data.get('parameterCounts') is None else [
                 RarityParameterCountModel.from_dict(data.get('parameterCounts')[i])
-                for i in range(len(data.get('parameterCounts')) if data.get('parameterCounts') else 0)
+                for i in range(len(data.get('parameterCounts')))
             ])\
-            .with_parameters([
+            .with_parameters(None if data.get('parameters') is None else [
                 RarityParameterValueModel.from_dict(data.get('parameters')[i])
-                for i in range(len(data.get('parameters')) if data.get('parameters') else 0)
+                for i in range(len(data.get('parameters')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1323,11 +1323,11 @@ class UpdateRarityParameterModelMasterRequest(core.Gs2Request):
             "maximumParameterCount": self.maximum_parameter_count,
             "parameterCounts": None if self.parameter_counts is None else [
                 self.parameter_counts[i].to_dict() if self.parameter_counts[i] else None
-                for i in range(len(self.parameter_counts) if self.parameter_counts else 0)
+                for i in range(len(self.parameter_counts))
             ],
             "parameters": None if self.parameters is None else [
                 self.parameters[i].to_dict() if self.parameters[i] else None
-                for i in range(len(self.parameters) if self.parameters else 0)
+                for i in range(len(self.parameters))
             ],
         }
 
@@ -1920,9 +1920,9 @@ class ReDrawBalanceParameterStatusByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_parameter_name(data.get('parameterName'))\
             .with_property_id(data.get('propertyId'))\
-            .with_fixed_parameter_names([
+            .with_fixed_parameter_names(None if data.get('fixedParameterNames') is None else [
                 data.get('fixedParameterNames')[i]
-                for i in range(len(data.get('fixedParameterNames')) if data.get('fixedParameterNames') else 0)
+                for i in range(len(data.get('fixedParameterNames')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1934,7 +1934,7 @@ class ReDrawBalanceParameterStatusByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "fixedParameterNames": None if self.fixed_parameter_names is None else [
                 self.fixed_parameter_names[i]
-                for i in range(len(self.fixed_parameter_names) if self.fixed_parameter_names else 0)
+                for i in range(len(self.fixed_parameter_names))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2045,9 +2045,9 @@ class SetBalanceParameterStatusByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_parameter_name(data.get('parameterName'))\
             .with_property_id(data.get('propertyId'))\
-            .with_parameter_values([
+            .with_parameter_values(None if data.get('parameterValues') is None else [
                 BalanceParameterValue.from_dict(data.get('parameterValues')[i])
-                for i in range(len(data.get('parameterValues')) if data.get('parameterValues') else 0)
+                for i in range(len(data.get('parameterValues')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2059,7 +2059,7 @@ class SetBalanceParameterStatusByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "parameterValues": None if self.parameter_values is None else [
                 self.parameter_values[i].to_dict() if self.parameter_values[i] else None
-                for i in range(len(self.parameter_values) if self.parameter_values else 0)
+                for i in range(len(self.parameter_values))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2495,9 +2495,9 @@ class ReDrawRarityParameterStatusByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_parameter_name(data.get('parameterName'))\
             .with_property_id(data.get('propertyId'))\
-            .with_fixed_parameter_names([
+            .with_fixed_parameter_names(None if data.get('fixedParameterNames') is None else [
                 data.get('fixedParameterNames')[i]
-                for i in range(len(data.get('fixedParameterNames')) if data.get('fixedParameterNames') else 0)
+                for i in range(len(data.get('fixedParameterNames')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2509,7 +2509,7 @@ class ReDrawRarityParameterStatusByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "fixedParameterNames": None if self.fixed_parameter_names is None else [
                 self.fixed_parameter_names[i]
-                for i in range(len(self.fixed_parameter_names) if self.fixed_parameter_names else 0)
+                for i in range(len(self.fixed_parameter_names))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2969,9 +2969,9 @@ class SetRarityParameterStatusByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_parameter_name(data.get('parameterName'))\
             .with_property_id(data.get('propertyId'))\
-            .with_parameter_values([
+            .with_parameter_values(None if data.get('parameterValues') is None else [
                 RarityParameterValue.from_dict(data.get('parameterValues')[i])
-                for i in range(len(data.get('parameterValues')) if data.get('parameterValues') else 0)
+                for i in range(len(data.get('parameterValues')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2983,7 +2983,7 @@ class SetRarityParameterStatusByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "parameterValues": None if self.parameter_values is None else [
                 self.parameter_values[i].to_dict() if self.parameter_values[i] else None
-                for i in range(len(self.parameter_values) if self.parameter_values else 0)
+                for i in range(len(self.parameter_values))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

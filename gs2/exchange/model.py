@@ -21,12 +21,27 @@ from gs2 import core
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -61,6 +76,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -68,6 +86,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -435,9 +456,9 @@ class LogRate(core.Gs2Model):
             return None
         return LogRate()\
             .with_base(data.get('base'))\
-            .with_logs([
+            .with_logs(None if data.get('logs') is None else [
                 data.get('logs')[i]
-                for i in range(len(data.get('logs')) if data.get('logs') else 0)
+                for i in range(len(data.get('logs')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -445,7 +466,7 @@ class LogRate(core.Gs2Model):
             "base": self.base,
             "logs": None if self.logs is None else [
                 self.logs[i]
-                for i in range(len(self.logs) if self.logs else 0)
+                for i in range(len(self.logs))
             ],
         }
 
@@ -487,13 +508,13 @@ class LogCost(core.Gs2Model):
             return None
         return LogCost()\
             .with_base(data.get('base'))\
-            .with_adds([
+            .with_adds(None if data.get('adds') is None else [
                 data.get('adds')[i]
-                for i in range(len(data.get('adds')) if data.get('adds') else 0)
+                for i in range(len(data.get('adds')))
             ])\
-            .with_subs([
+            .with_subs(None if data.get('subs') is None else [
                 data.get('subs')[i]
-                for i in range(len(data.get('subs')) if data.get('subs') else 0)
+                for i in range(len(data.get('subs')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -501,11 +522,11 @@ class LogCost(core.Gs2Model):
             "base": self.base,
             "adds": None if self.adds is None else [
                 self.adds[i]
-                for i in range(len(self.adds) if self.adds else 0)
+                for i in range(len(self.adds))
             ],
             "subs": None if self.subs is None else [
                 self.subs[i]
-                for i in range(len(self.subs) if self.subs else 0)
+                for i in range(len(self.subs))
             ],
         }
 
@@ -654,9 +675,9 @@ class Await(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_count(data.get('count'))\
             .with_skip_seconds(data.get('skipSeconds'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_acquirable_at(data.get('acquirableAt'))\
             .with_exchanged_at(data.get('exchangedAt'))\
@@ -672,7 +693,7 @@ class Await(core.Gs2Model):
             "skipSeconds": self.skip_seconds,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "acquirableAt": self.acquirable_at,
             "exchangedAt": self.exchanged_at,
@@ -926,9 +947,9 @@ class IncrementalRateModelMaster(core.Gs2Model):
             .with_calculate_script_id(data.get('calculateScriptId'))\
             .with_exchange_count_id(data.get('exchangeCountId'))\
             .with_maximum_exchange_count(data.get('maximumExchangeCount'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -949,7 +970,7 @@ class IncrementalRateModelMaster(core.Gs2Model):
             "maximumExchangeCount": self.maximum_exchange_count,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1098,9 +1119,9 @@ class IncrementalRateModel(core.Gs2Model):
             .with_calculate_script_id(data.get('calculateScriptId'))\
             .with_exchange_count_id(data.get('exchangeCountId'))\
             .with_maximum_exchange_count(data.get('maximumExchangeCount'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1117,7 +1138,7 @@ class IncrementalRateModel(core.Gs2Model):
             "maximumExchangeCount": self.maximum_exchange_count,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
         }
 
@@ -1262,19 +1283,19 @@ class RateModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
             .with_timing_type(data.get('timingType'))\
             .with_lock_time(data.get('lockTime'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1288,17 +1309,17 @@ class RateModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1425,19 +1446,19 @@ class RateModel(core.Gs2Model):
             .with_rate_model_id(data.get('rateModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
             .with_timing_type(data.get('timingType'))\
             .with_lock_time(data.get('lockTime'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1447,17 +1468,17 @@ class RateModel(core.Gs2Model):
             "metadata": self.metadata,
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "timingType": self.timing_type,
             "lockTime": self.lock_time,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
         }
 

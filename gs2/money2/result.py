@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeWalletsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeWalletsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Wallet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeWalletsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -529,9 +530,9 @@ class DescribeWalletsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeWalletsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Wallet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -539,7 +540,7 @@ class DescribeWalletsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -679,9 +680,9 @@ class WithdrawResult(core.Gs2Result):
             return None
         return WithdrawResult()\
             .with_item(Wallet.from_dict(data.get('item')))\
-            .with_withdraw_transactions([
+            .with_withdraw_transactions(None if data.get('withdrawTransactions') is None else [
                 DepositTransaction.from_dict(data.get('withdrawTransactions')[i])
-                for i in range(len(data.get('withdrawTransactions')) if data.get('withdrawTransactions') else 0)
+                for i in range(len(data.get('withdrawTransactions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -689,7 +690,7 @@ class WithdrawResult(core.Gs2Result):
             "item": self.item.to_dict() if self.item else None,
             "withdrawTransactions": None if self.withdraw_transactions is None else [
                 self.withdraw_transactions[i].to_dict() if self.withdraw_transactions[i] else None
-                for i in range(len(self.withdraw_transactions) if self.withdraw_transactions else 0)
+                for i in range(len(self.withdraw_transactions))
             ],
         }
 
@@ -726,9 +727,9 @@ class WithdrawByUserIdResult(core.Gs2Result):
             return None
         return WithdrawByUserIdResult()\
             .with_item(Wallet.from_dict(data.get('item')))\
-            .with_withdraw_transactions([
+            .with_withdraw_transactions(None if data.get('withdrawTransactions') is None else [
                 DepositTransaction.from_dict(data.get('withdrawTransactions')[i])
-                for i in range(len(data.get('withdrawTransactions')) if data.get('withdrawTransactions') else 0)
+                for i in range(len(data.get('withdrawTransactions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -736,7 +737,7 @@ class WithdrawByUserIdResult(core.Gs2Result):
             "item": self.item.to_dict() if self.item else None,
             "withdrawTransactions": None if self.withdraw_transactions is None else [
                 self.withdraw_transactions[i].to_dict() if self.withdraw_transactions[i] else None
-                for i in range(len(self.withdraw_transactions) if self.withdraw_transactions else 0)
+                for i in range(len(self.withdraw_transactions))
             ],
         }
 
@@ -812,9 +813,9 @@ class WithdrawByStampTaskResult(core.Gs2Result):
             return None
         return WithdrawByStampTaskResult()\
             .with_item(Wallet.from_dict(data.get('item')))\
-            .with_withdraw_transactions([
+            .with_withdraw_transactions(None if data.get('withdrawTransactions') is None else [
                 DepositTransaction.from_dict(data.get('withdrawTransactions')[i])
-                for i in range(len(data.get('withdrawTransactions')) if data.get('withdrawTransactions') else 0)
+                for i in range(len(data.get('withdrawTransactions')))
             ])\
             .with_new_context_stack(data.get('newContextStack'))
 
@@ -823,7 +824,7 @@ class WithdrawByStampTaskResult(core.Gs2Result):
             "item": self.item.to_dict() if self.item else None,
             "withdrawTransactions": None if self.withdraw_transactions is None else [
                 self.withdraw_transactions[i].to_dict() if self.withdraw_transactions[i] else None
-                for i in range(len(self.withdraw_transactions) if self.withdraw_transactions else 0)
+                for i in range(len(self.withdraw_transactions))
             ],
             "newContextStack": self.new_context_stack,
         }
@@ -860,9 +861,9 @@ class DescribeEventsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeEventsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Event.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -870,7 +871,7 @@ class DescribeEventsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1045,16 +1046,16 @@ class DescribeStoreContentModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStoreContentModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 StoreContentModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1124,9 +1125,9 @@ class DescribeStoreContentModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStoreContentModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 StoreContentModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1134,7 +1135,7 @@ class DescribeStoreContentModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1443,9 +1444,9 @@ class DescribeDailyTransactionHistoriesByCurrencyResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeDailyTransactionHistoriesByCurrencyResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 DailyTransactionHistory.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1453,7 +1454,7 @@ class DescribeDailyTransactionHistoriesByCurrencyResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1490,9 +1491,9 @@ class DescribeDailyTransactionHistoriesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeDailyTransactionHistoriesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 DailyTransactionHistory.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1500,7 +1501,7 @@ class DescribeDailyTransactionHistoriesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1571,9 +1572,9 @@ class DescribeUnusedBalancesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeUnusedBalancesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 UnusedBalance.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1581,7 +1582,7 @@ class DescribeUnusedBalancesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

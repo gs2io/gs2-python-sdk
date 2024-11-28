@@ -1061,9 +1061,9 @@ class CreatePrizeTableMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_prizes([
+            .with_prizes(None if data.get('prizes') is None else [
                 Prize.from_dict(data.get('prizes')[i])
-                for i in range(len(data.get('prizes')) if data.get('prizes') else 0)
+                for i in range(len(data.get('prizes')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1074,7 +1074,7 @@ class CreatePrizeTableMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "prizes": None if self.prizes is None else [
                 self.prizes[i].to_dict() if self.prizes[i] else None
-                for i in range(len(self.prizes) if self.prizes else 0)
+                for i in range(len(self.prizes))
             ],
         }
 
@@ -1174,9 +1174,9 @@ class UpdatePrizeTableMasterRequest(core.Gs2Request):
             .with_prize_table_name(data.get('prizeTableName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_prizes([
+            .with_prizes(None if data.get('prizes') is None else [
                 Prize.from_dict(data.get('prizes')[i])
-                for i in range(len(data.get('prizes')) if data.get('prizes') else 0)
+                for i in range(len(data.get('prizes')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1187,7 +1187,7 @@ class UpdatePrizeTableMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "prizes": None if self.prizes is None else [
                 self.prizes[i].to_dict() if self.prizes[i] else None
-                for i in range(len(self.prizes) if self.prizes else 0)
+                for i in range(len(self.prizes))
             ],
         }
 
@@ -1455,9 +1455,9 @@ class DrawByUserIdRequest(core.Gs2Request):
             .with_lottery_name(data.get('lotteryName'))\
             .with_user_id(data.get('userId'))\
             .with_count(data.get('count'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1469,7 +1469,7 @@ class DrawByUserIdRequest(core.Gs2Request):
             "count": self.count,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1688,9 +1688,9 @@ class DrawWithRandomSeedByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_random_seed(data.get('randomSeed'))\
             .with_count(data.get('count'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1703,7 +1703,7 @@ class DrawWithRandomSeedByUserIdRequest(core.Gs2Request):
             "count": self.count,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

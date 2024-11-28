@@ -477,9 +477,9 @@ class Wallet(core.Gs2Model):
             .with_slot(data.get('slot'))\
             .with_paid(data.get('paid'))\
             .with_free(data.get('free'))\
-            .with_detail([
+            .with_detail(None if data.get('detail') is None else [
                 WalletDetail.from_dict(data.get('detail')[i])
-                for i in range(len(data.get('detail')) if data.get('detail') else 0)
+                for i in range(len(data.get('detail')))
             ])\
             .with_share_free(data.get('shareFree'))\
             .with_created_at(data.get('createdAt'))\
@@ -495,7 +495,7 @@ class Wallet(core.Gs2Model):
             "free": self.free,
             "detail": None if self.detail is None else [
                 self.detail[i].to_dict() if self.detail[i] else None
-                for i in range(len(self.detail) if self.detail else 0)
+                for i in range(len(self.detail))
             ],
             "shareFree": self.share_free,
             "createdAt": self.created_at,

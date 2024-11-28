@@ -1198,9 +1198,9 @@ class AreaModel(core.Gs2Model):
             .with_area_model_id(data.get('areaModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_layer_models([
+            .with_layer_models(None if data.get('layerModels') is None else [
                 LayerModel.from_dict(data.get('layerModels')[i])
-                for i in range(len(data.get('layerModels')) if data.get('layerModels') else 0)
+                for i in range(len(data.get('layerModels')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1210,7 +1210,7 @@ class AreaModel(core.Gs2Model):
             "metadata": self.metadata,
             "layerModels": None if self.layer_models is None else [
                 self.layer_models[i].to_dict() if self.layer_models[i] else None
-                for i in range(len(self.layer_models) if self.layer_models else 0)
+                for i in range(len(self.layer_models))
             ],
         }
 

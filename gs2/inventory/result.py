@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeInventoryModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeInventoryModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 InventoryModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeInventoryModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -660,16 +661,16 @@ class DescribeInventoryModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeInventoryModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 InventoryModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -739,9 +740,9 @@ class DescribeItemModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeItemModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -749,7 +750,7 @@ class DescribeItemModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -917,16 +918,16 @@ class DescribeItemModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeItemModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -996,9 +997,9 @@ class DescribeSimpleInventoryModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSimpleInventoryModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleInventoryModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1006,7 +1007,7 @@ class DescribeSimpleInventoryModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1174,16 +1175,16 @@ class DescribeSimpleInventoryModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSimpleInventoryModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleInventoryModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1253,9 +1254,9 @@ class DescribeSimpleItemModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSimpleItemModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItemModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1263,7 +1264,7 @@ class DescribeSimpleItemModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1431,16 +1432,16 @@ class DescribeSimpleItemModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSimpleItemModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItemModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1510,9 +1511,9 @@ class DescribeBigInventoryModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBigInventoryModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BigInventoryModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1520,7 +1521,7 @@ class DescribeBigInventoryModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1688,16 +1689,16 @@ class DescribeBigInventoryModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBigInventoryModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BigInventoryModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1767,9 +1768,9 @@ class DescribeBigItemModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBigItemModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BigItemModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1777,7 +1778,7 @@ class DescribeBigItemModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1945,16 +1946,16 @@ class DescribeBigItemModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBigItemModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BigItemModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -2160,9 +2161,9 @@ class DescribeInventoriesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeInventoriesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Inventory.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2170,7 +2171,7 @@ class DescribeInventoriesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2207,9 +2208,9 @@ class DescribeInventoriesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeInventoriesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Inventory.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2217,7 +2218,7 @@ class DescribeInventoriesByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2587,9 +2588,9 @@ class DescribeItemSetsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeItemSetsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2597,7 +2598,7 @@ class DescribeItemSetsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2634,9 +2635,9 @@ class DescribeItemSetsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeItemSetsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2644,7 +2645,7 @@ class DescribeItemSetsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2686,9 +2687,9 @@ class GetItemSetResult(core.Gs2Result):
         if data is None:
             return None
         return GetItemSetResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
@@ -2697,7 +2698,7 @@ class GetItemSetResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -2740,9 +2741,9 @@ class GetItemSetByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return GetItemSetByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
@@ -2751,7 +2752,7 @@ class GetItemSetByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -2804,9 +2805,9 @@ class GetItemWithSignatureResult(core.Gs2Result):
         if data is None:
             return None
         return GetItemWithSignatureResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))\
@@ -2817,7 +2818,7 @@ class GetItemWithSignatureResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -2872,9 +2873,9 @@ class GetItemWithSignatureByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return GetItemWithSignatureByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))\
@@ -2885,7 +2886,7 @@ class GetItemWithSignatureByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -2935,9 +2936,9 @@ class AcquireItemSetByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return AcquireItemSetByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))\
@@ -2947,7 +2948,7 @@ class AcquireItemSetByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3053,9 +3054,9 @@ class ConsumeItemSetResult(core.Gs2Result):
         if data is None:
             return None
         return ConsumeItemSetResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
@@ -3064,7 +3065,7 @@ class ConsumeItemSetResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3107,9 +3108,9 @@ class ConsumeItemSetByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ConsumeItemSetByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
@@ -3118,7 +3119,7 @@ class ConsumeItemSetByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3161,9 +3162,9 @@ class DeleteItemSetByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DeleteItemSetByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))
@@ -3172,7 +3173,7 @@ class DeleteItemSetByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3274,9 +3275,9 @@ class AcquireItemSetByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return AcquireItemSetByStampSheetResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))\
@@ -3286,7 +3287,7 @@ class AcquireItemSetByStampSheetResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3397,9 +3398,9 @@ class ConsumeItemSetByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return ConsumeItemSetByStampTaskResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ItemSet.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
             .with_inventory(Inventory.from_dict(data.get('inventory')))\
@@ -3409,7 +3410,7 @@ class ConsumeItemSetByStampTaskResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemModel": self.item_model.to_dict() if self.item_model else None,
             "inventory": self.inventory.to_dict() if self.inventory else None,
@@ -3492,9 +3493,9 @@ class DescribeReferenceOfResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeReferenceOfResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 data.get('items')[i]
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
@@ -3504,7 +3505,7 @@ class DescribeReferenceOfResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i]
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
@@ -3553,9 +3554,9 @@ class DescribeReferenceOfByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeReferenceOfByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 data.get('items')[i]
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_item_set(ItemSet.from_dict(data.get('itemSet')))\
             .with_item_model(ItemModel.from_dict(data.get('itemModel')))\
@@ -3565,7 +3566,7 @@ class DescribeReferenceOfByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i]
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "itemSet": self.item_set.to_dict() if self.item_set else None,
             "itemModel": self.item_model.to_dict() if self.item_model else None,
@@ -4216,9 +4217,9 @@ class DescribeSimpleItemsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSimpleItemsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -4226,7 +4227,7 @@ class DescribeSimpleItemsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -4263,9 +4264,9 @@ class DescribeSimpleItemsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSimpleItemsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -4273,7 +4274,7 @@ class DescribeSimpleItemsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -4497,16 +4498,16 @@ class AcquireSimpleItemsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return AcquireSimpleItemsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -4537,16 +4538,16 @@ class ConsumeSimpleItemsResult(core.Gs2Result):
         if data is None:
             return None
         return ConsumeSimpleItemsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -4577,16 +4578,16 @@ class ConsumeSimpleItemsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ConsumeSimpleItemsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -4617,16 +4618,16 @@ class SetSimpleItemsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return SetSimpleItemsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -4738,16 +4739,16 @@ class AcquireSimpleItemsByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return AcquireSimpleItemsByStampSheetResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -4783,9 +4784,9 @@ class ConsumeSimpleItemsByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return ConsumeSimpleItemsByStampTaskResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_new_context_stack(data.get('newContextStack'))
 
@@ -4793,7 +4794,7 @@ class ConsumeSimpleItemsByStampTaskResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "newContextStack": self.new_context_stack,
         }
@@ -4825,16 +4826,16 @@ class SetSimpleItemsByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return SetSimpleItemsByStampSheetResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SimpleItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -4904,9 +4905,9 @@ class DescribeBigItemsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBigItemsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BigItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -4914,7 +4915,7 @@ class DescribeBigItemsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -4951,9 +4952,9 @@ class DescribeBigItemsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBigItemsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BigItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -4961,7 +4962,7 @@ class DescribeBigItemsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

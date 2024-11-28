@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -477,16 +478,16 @@ class DescribeRateModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRateModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RateModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -556,9 +557,9 @@ class DescribeRateModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRateModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RateModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -566,7 +567,7 @@ class DescribeRateModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -734,16 +735,16 @@ class DescribeIncrementalRateModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeIncrementalRateModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 IncrementalRateModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -813,9 +814,9 @@ class DescribeIncrementalRateModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeIncrementalRateModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 IncrementalRateModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -823,7 +824,7 @@ class DescribeIncrementalRateModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -971,6 +972,9 @@ class ExchangeResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: RateModel) -> ExchangeResult:
         self.item = item
@@ -990,6 +994,18 @@ class ExchangeResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ExchangeResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> ExchangeResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ExchangeResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ExchangeResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1015,7 +1031,10 @@ class ExchangeResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1024,6 +1043,9 @@ class ExchangeResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1033,6 +1055,9 @@ class ExchangeByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: RateModel) -> ExchangeByUserIdResult:
         self.item = item
@@ -1052,6 +1077,18 @@ class ExchangeByUserIdResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ExchangeByUserIdResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> ExchangeByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ExchangeByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ExchangeByUserIdResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1077,7 +1114,10 @@ class ExchangeByUserIdResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1086,6 +1126,9 @@ class ExchangeByUserIdResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1095,6 +1138,9 @@ class ExchangeByStampSheetResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: RateModel) -> ExchangeByStampSheetResult:
         self.item = item
@@ -1114,6 +1160,18 @@ class ExchangeByStampSheetResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ExchangeByStampSheetResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> ExchangeByStampSheetResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ExchangeByStampSheetResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ExchangeByStampSheetResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1139,7 +1197,10 @@ class ExchangeByStampSheetResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1148,6 +1209,9 @@ class ExchangeByStampSheetResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1157,6 +1221,9 @@ class IncrementalExchangeResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: IncrementalRateModel) -> IncrementalExchangeResult:
         self.item = item
@@ -1176,6 +1243,18 @@ class IncrementalExchangeResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> IncrementalExchangeResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> IncrementalExchangeResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> IncrementalExchangeResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> IncrementalExchangeResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1201,7 +1280,10 @@ class IncrementalExchangeResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1210,6 +1292,9 @@ class IncrementalExchangeResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1219,6 +1304,9 @@ class IncrementalExchangeByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: IncrementalRateModel) -> IncrementalExchangeByUserIdResult:
         self.item = item
@@ -1238,6 +1326,18 @@ class IncrementalExchangeByUserIdResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> IncrementalExchangeByUserIdResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> IncrementalExchangeByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> IncrementalExchangeByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> IncrementalExchangeByUserIdResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1263,7 +1363,10 @@ class IncrementalExchangeByUserIdResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1272,6 +1375,9 @@ class IncrementalExchangeByUserIdResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1281,6 +1387,9 @@ class IncrementalExchangeByStampSheetResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: IncrementalRateModel) -> IncrementalExchangeByStampSheetResult:
         self.item = item
@@ -1300,6 +1409,18 @@ class IncrementalExchangeByStampSheetResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> IncrementalExchangeByStampSheetResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> IncrementalExchangeByStampSheetResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> IncrementalExchangeByStampSheetResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> IncrementalExchangeByStampSheetResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1325,7 +1446,10 @@ class IncrementalExchangeByStampSheetResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1334,6 +1458,9 @@ class IncrementalExchangeByStampSheetResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1538,9 +1665,9 @@ class DescribeAwaitsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeAwaitsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Await.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1548,7 +1675,7 @@ class DescribeAwaitsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1585,9 +1712,9 @@ class DescribeAwaitsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeAwaitsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Await.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1595,7 +1722,7 @@ class DescribeAwaitsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1675,6 +1802,9 @@ class AcquireResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: Await) -> AcquireResult:
         self.item = item
@@ -1694,6 +1824,18 @@ class AcquireResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> AcquireResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> AcquireResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> AcquireResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1719,7 +1861,10 @@ class AcquireResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1728,6 +1873,9 @@ class AcquireResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1737,6 +1885,9 @@ class AcquireByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: Await) -> AcquireByUserIdResult:
         self.item = item
@@ -1756,6 +1907,18 @@ class AcquireByUserIdResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireByUserIdResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> AcquireByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> AcquireByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> AcquireByUserIdResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1781,7 +1944,10 @@ class AcquireByUserIdResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1790,6 +1956,9 @@ class AcquireByUserIdResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1799,6 +1968,9 @@ class AcquireForceByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: Await) -> AcquireForceByUserIdResult:
         self.item = item
@@ -1818,6 +1990,18 @@ class AcquireForceByUserIdResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireForceByUserIdResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> AcquireForceByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> AcquireForceByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> AcquireForceByUserIdResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1843,7 +2027,10 @@ class AcquireForceByUserIdResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1852,6 +2039,9 @@ class AcquireForceByUserIdResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1997,6 +2187,9 @@ class AcquireForceByStampSheetResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: Await) -> AcquireForceByStampSheetResult:
         self.item = item
@@ -2016,6 +2209,18 @@ class AcquireForceByStampSheetResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireForceByStampSheetResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> AcquireForceByStampSheetResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> AcquireForceByStampSheetResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> AcquireForceByStampSheetResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -2041,7 +2246,10 @@ class AcquireForceByStampSheetResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2050,6 +2258,9 @@ class AcquireForceByStampSheetResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 

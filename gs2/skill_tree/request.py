@@ -821,18 +821,18 @@ class CreateNodeModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_release_verify_actions([
+            .with_release_verify_actions(None if data.get('releaseVerifyActions') is None else [
                 VerifyAction.from_dict(data.get('releaseVerifyActions')[i])
-                for i in range(len(data.get('releaseVerifyActions')) if data.get('releaseVerifyActions') else 0)
+                for i in range(len(data.get('releaseVerifyActions')))
             ])\
-            .with_release_consume_actions([
+            .with_release_consume_actions(None if data.get('releaseConsumeActions') is None else [
                 ConsumeAction.from_dict(data.get('releaseConsumeActions')[i])
-                for i in range(len(data.get('releaseConsumeActions')) if data.get('releaseConsumeActions') else 0)
+                for i in range(len(data.get('releaseConsumeActions')))
             ])\
             .with_restrain_return_rate(data.get('restrainReturnRate'))\
-            .with_premise_node_names([
+            .with_premise_node_names(None if data.get('premiseNodeNames') is None else [
                 data.get('premiseNodeNames')[i]
-                for i in range(len(data.get('premiseNodeNames')) if data.get('premiseNodeNames') else 0)
+                for i in range(len(data.get('premiseNodeNames')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -843,16 +843,16 @@ class CreateNodeModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "releaseVerifyActions": None if self.release_verify_actions is None else [
                 self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
-                for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
+                for i in range(len(self.release_verify_actions))
             ],
             "releaseConsumeActions": None if self.release_consume_actions is None else [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
-                for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
+                for i in range(len(self.release_consume_actions))
             ],
             "restrainReturnRate": self.restrain_return_rate,
             "premiseNodeNames": None if self.premise_node_names is None else [
                 self.premise_node_names[i]
-                for i in range(len(self.premise_node_names) if self.premise_node_names else 0)
+                for i in range(len(self.premise_node_names))
             ],
         }
 
@@ -967,18 +967,18 @@ class UpdateNodeModelMasterRequest(core.Gs2Request):
             .with_node_model_name(data.get('nodeModelName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_release_verify_actions([
+            .with_release_verify_actions(None if data.get('releaseVerifyActions') is None else [
                 VerifyAction.from_dict(data.get('releaseVerifyActions')[i])
-                for i in range(len(data.get('releaseVerifyActions')) if data.get('releaseVerifyActions') else 0)
+                for i in range(len(data.get('releaseVerifyActions')))
             ])\
-            .with_release_consume_actions([
+            .with_release_consume_actions(None if data.get('releaseConsumeActions') is None else [
                 ConsumeAction.from_dict(data.get('releaseConsumeActions')[i])
-                for i in range(len(data.get('releaseConsumeActions')) if data.get('releaseConsumeActions') else 0)
+                for i in range(len(data.get('releaseConsumeActions')))
             ])\
             .with_restrain_return_rate(data.get('restrainReturnRate'))\
-            .with_premise_node_names([
+            .with_premise_node_names(None if data.get('premiseNodeNames') is None else [
                 data.get('premiseNodeNames')[i]
-                for i in range(len(data.get('premiseNodeNames')) if data.get('premiseNodeNames') else 0)
+                for i in range(len(data.get('premiseNodeNames')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -989,16 +989,16 @@ class UpdateNodeModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "releaseVerifyActions": None if self.release_verify_actions is None else [
                 self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
-                for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
+                for i in range(len(self.release_verify_actions))
             ],
             "releaseConsumeActions": None if self.release_consume_actions is None else [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
-                for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
+                for i in range(len(self.release_consume_actions))
             ],
             "restrainReturnRate": self.restrain_return_rate,
             "premiseNodeNames": None if self.premise_node_names is None else [
                 self.premise_node_names[i]
-                for i in range(len(self.premise_node_names) if self.premise_node_names else 0)
+                for i in range(len(self.premise_node_names))
             ],
         }
 
@@ -1102,9 +1102,9 @@ class MarkReleaseByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_property_id(data.get('propertyId'))\
-            .with_node_model_names([
+            .with_node_model_names(None if data.get('nodeModelNames') is None else [
                 data.get('nodeModelNames')[i]
-                for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
+                for i in range(len(data.get('nodeModelNames')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1115,7 +1115,7 @@ class MarkReleaseByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
-                for i in range(len(self.node_model_names) if self.node_model_names else 0)
+                for i in range(len(self.node_model_names))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1177,13 +1177,13 @@ class ReleaseRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_property_id(data.get('propertyId'))\
-            .with_node_model_names([
+            .with_node_model_names(None if data.get('nodeModelNames') is None else [
                 data.get('nodeModelNames')[i]
-                for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
+                for i in range(len(data.get('nodeModelNames')))
             ])\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1193,11 +1193,11 @@ class ReleaseRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
-                for i in range(len(self.node_model_names) if self.node_model_names else 0)
+                for i in range(len(self.node_model_names))
             ],
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1263,13 +1263,13 @@ class ReleaseByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_property_id(data.get('propertyId'))\
-            .with_node_model_names([
+            .with_node_model_names(None if data.get('nodeModelNames') is None else [
                 data.get('nodeModelNames')[i]
-                for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
+                for i in range(len(data.get('nodeModelNames')))
             ])\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1280,11 +1280,11 @@ class ReleaseByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
-                for i in range(len(self.node_model_names) if self.node_model_names else 0)
+                for i in range(len(self.node_model_names))
             ],
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1341,9 +1341,9 @@ class MarkRestrainRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_property_id(data.get('propertyId'))\
-            .with_node_model_names([
+            .with_node_model_names(None if data.get('nodeModelNames') is None else [
                 data.get('nodeModelNames')[i]
-                for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
+                for i in range(len(data.get('nodeModelNames')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1353,7 +1353,7 @@ class MarkRestrainRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
-                for i in range(len(self.node_model_names) if self.node_model_names else 0)
+                for i in range(len(self.node_model_names))
             ],
         }
 
@@ -1414,9 +1414,9 @@ class MarkRestrainByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_property_id(data.get('propertyId'))\
-            .with_node_model_names([
+            .with_node_model_names(None if data.get('nodeModelNames') is None else [
                 data.get('nodeModelNames')[i]
-                for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
+                for i in range(len(data.get('nodeModelNames')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1427,7 +1427,7 @@ class MarkRestrainByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
-                for i in range(len(self.node_model_names) if self.node_model_names else 0)
+                for i in range(len(self.node_model_names))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1489,13 +1489,13 @@ class RestrainRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_property_id(data.get('propertyId'))\
-            .with_node_model_names([
+            .with_node_model_names(None if data.get('nodeModelNames') is None else [
                 data.get('nodeModelNames')[i]
-                for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
+                for i in range(len(data.get('nodeModelNames')))
             ])\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1505,11 +1505,11 @@ class RestrainRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
-                for i in range(len(self.node_model_names) if self.node_model_names else 0)
+                for i in range(len(self.node_model_names))
             ],
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1575,13 +1575,13 @@ class RestrainByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_property_id(data.get('propertyId'))\
-            .with_node_model_names([
+            .with_node_model_names(None if data.get('nodeModelNames') is None else [
                 data.get('nodeModelNames')[i]
-                for i in range(len(data.get('nodeModelNames')) if data.get('nodeModelNames') else 0)
+                for i in range(len(data.get('nodeModelNames')))
             ])\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1592,11 +1592,11 @@ class RestrainByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "nodeModelNames": None if self.node_model_names is None else [
                 self.node_model_names[i]
-                for i in range(len(self.node_model_names) if self.node_model_names else 0)
+                for i in range(len(self.node_model_names))
             ],
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1881,9 +1881,9 @@ class ResetRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_property_id(data.get('propertyId'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1893,7 +1893,7 @@ class ResetRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1954,9 +1954,9 @@ class ResetByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_property_id(data.get('propertyId'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1967,7 +1967,7 @@ class ResetByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

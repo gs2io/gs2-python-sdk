@@ -1228,9 +1228,9 @@ class Account(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_password(data.get('password'))\
             .with_time_offset(data.get('timeOffset'))\
-            .with_ban_statuses([
+            .with_ban_statuses(None if data.get('banStatuses') is None else [
                 BanStatus.from_dict(data.get('banStatuses')[i])
-                for i in range(len(data.get('banStatuses')) if data.get('banStatuses') else 0)
+                for i in range(len(data.get('banStatuses')))
             ])\
             .with_banned(data.get('banned'))\
             .with_last_authenticated_at(data.get('lastAuthenticatedAt'))\
@@ -1245,7 +1245,7 @@ class Account(core.Gs2Model):
             "timeOffset": self.time_offset,
             "banStatuses": None if self.ban_statuses is None else [
                 self.ban_statuses[i].to_dict() if self.ban_statuses[i] else None
-                for i in range(len(self.ban_statuses) if self.ban_statuses else 0)
+                for i in range(len(self.ban_statuses))
             ],
             "banned": self.banned,
             "lastAuthenticatedAt": self.last_authenticated_at,

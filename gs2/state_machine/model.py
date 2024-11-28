@@ -181,9 +181,9 @@ class RandomStatus(core.Gs2Model):
             return None
         return RandomStatus()\
             .with_seed(data.get('seed'))\
-            .with_used([
+            .with_used(None if data.get('used') is None else [
                 RandomUsed.from_dict(data.get('used')[i])
-                for i in range(len(data.get('used')) if data.get('used') else 0)
+                for i in range(len(data.get('used')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -191,7 +191,7 @@ class RandomStatus(core.Gs2Model):
             "seed": self.seed,
             "used": None if self.used is None else [
                 self.used[i].to_dict() if self.used[i] else None
-                for i in range(len(self.used) if self.used else 0)
+                for i in range(len(self.used))
             ],
         }
 
@@ -342,12 +342,27 @@ class Event(core.Gs2Model):
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -382,6 +397,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -389,6 +407,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -642,13 +663,13 @@ class Status(core.Gs2Model):
             .with_enable_speculative_execution(data.get('enableSpeculativeExecution'))\
             .with_state_machine_definition(data.get('stateMachineDefinition'))\
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
-            .with_stacks([
+            .with_stacks(None if data.get('stacks') is None else [
                 StackEntry.from_dict(data.get('stacks')[i])
-                for i in range(len(data.get('stacks')) if data.get('stacks') else 0)
+                for i in range(len(data.get('stacks')))
             ])\
-            .with_variables([
+            .with_variables(None if data.get('variables') is None else [
                 Variable.from_dict(data.get('variables')[i])
-                for i in range(len(data.get('variables')) if data.get('variables') else 0)
+                for i in range(len(data.get('variables')))
             ])\
             .with_status(data.get('status'))\
             .with_last_error(data.get('lastError'))\
@@ -667,11 +688,11 @@ class Status(core.Gs2Model):
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
             "stacks": None if self.stacks is None else [
                 self.stacks[i].to_dict() if self.stacks[i] else None
-                for i in range(len(self.stacks) if self.stacks else 0)
+                for i in range(len(self.stacks))
             ],
             "variables": None if self.variables is None else [
                 self.variables[i].to_dict() if self.variables[i] else None
-                for i in range(len(self.variables) if self.variables else 0)
+                for i in range(len(self.variables))
             ],
             "status": self.status,
             "lastError": self.last_error,

@@ -21,12 +21,27 @@ from gs2 import core
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -61,6 +76,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -68,6 +86,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -407,13 +428,13 @@ class AcquireActionRate(core.Gs2Model):
         return AcquireActionRate()\
             .with_name(data.get('name'))\
             .with_mode(data.get('mode'))\
-            .with_rates([
+            .with_rates(None if data.get('rates') is None else [
                 data.get('rates')[i]
-                for i in range(len(data.get('rates')) if data.get('rates') else 0)
+                for i in range(len(data.get('rates')))
             ])\
-            .with_big_rates([
+            .with_big_rates(None if data.get('bigRates') is None else [
                 data.get('bigRates')[i]
-                for i in range(len(data.get('bigRates')) if data.get('bigRates') else 0)
+                for i in range(len(data.get('bigRates')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -422,11 +443,11 @@ class AcquireActionRate(core.Gs2Model):
             "mode": self.mode,
             "rates": None if self.rates is None else [
                 self.rates[i]
-                for i in range(len(self.rates) if self.rates else 0)
+                for i in range(len(self.rates))
             ],
             "bigRates": None if self.big_rates is None else [
                 self.big_rates[i]
-                for i in range(len(self.big_rates) if self.big_rates else 0)
+                for i in range(len(self.big_rates))
             ],
         }
 
@@ -803,18 +824,18 @@ class GradeModel(core.Gs2Model):
             .with_grade_model_id(data.get('gradeModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_default_grades([
+            .with_default_grades(None if data.get('defaultGrades') is None else [
                 DefaultGradeModel.from_dict(data.get('defaultGrades')[i])
-                for i in range(len(data.get('defaultGrades')) if data.get('defaultGrades') else 0)
+                for i in range(len(data.get('defaultGrades')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_grade_entries([
+            .with_grade_entries(None if data.get('gradeEntries') is None else [
                 GradeEntryModel.from_dict(data.get('gradeEntries')[i])
-                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+                for i in range(len(data.get('gradeEntries')))
             ])\
-            .with_acquire_action_rates([
+            .with_acquire_action_rates(None if data.get('acquireActionRates') is None else [
                 AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
-                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+                for i in range(len(data.get('acquireActionRates')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -824,16 +845,16 @@ class GradeModel(core.Gs2Model):
             "metadata": self.metadata,
             "defaultGrades": None if self.default_grades is None else [
                 self.default_grades[i].to_dict() if self.default_grades[i] else None
-                for i in range(len(self.default_grades) if self.default_grades else 0)
+                for i in range(len(self.default_grades))
             ],
             "experienceModelId": self.experience_model_id,
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
-                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+                for i in range(len(self.grade_entries))
             ],
             "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
-                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+                for i in range(len(self.acquire_action_rates))
             ],
         }
 
@@ -973,18 +994,18 @@ class GradeModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_default_grades([
+            .with_default_grades(None if data.get('defaultGrades') is None else [
                 DefaultGradeModel.from_dict(data.get('defaultGrades')[i])
-                for i in range(len(data.get('defaultGrades')) if data.get('defaultGrades') else 0)
+                for i in range(len(data.get('defaultGrades')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_grade_entries([
+            .with_grade_entries(None if data.get('gradeEntries') is None else [
                 GradeEntryModel.from_dict(data.get('gradeEntries')[i])
-                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+                for i in range(len(data.get('gradeEntries')))
             ])\
-            .with_acquire_action_rates([
+            .with_acquire_action_rates(None if data.get('acquireActionRates') is None else [
                 AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
-                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+                for i in range(len(data.get('acquireActionRates')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -998,16 +1019,16 @@ class GradeModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "defaultGrades": None if self.default_grades is None else [
                 self.default_grades[i].to_dict() if self.default_grades[i] else None
-                for i in range(len(self.default_grades) if self.default_grades else 0)
+                for i in range(len(self.default_grades))
             ],
             "experienceModelId": self.experience_model_id,
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
-                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+                for i in range(len(self.grade_entries))
             ],
             "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
-                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+                for i in range(len(self.acquire_action_rates))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

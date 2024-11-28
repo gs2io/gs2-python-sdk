@@ -563,13 +563,13 @@ class Resource(core.Gs2Model):
             .with_response(data.get('response'))\
             .with_rollback_context(data.get('rollbackContext'))\
             .with_rollback_request(data.get('rollbackRequest'))\
-            .with_rollback_after([
+            .with_rollback_after(None if data.get('rollbackAfter') is None else [
                 data.get('rollbackAfter')[i]
-                for i in range(len(data.get('rollbackAfter')) if data.get('rollbackAfter') else 0)
+                for i in range(len(data.get('rollbackAfter')))
             ])\
-            .with_output_fields([
+            .with_output_fields(None if data.get('outputFields') is None else [
                 OutputField.from_dict(data.get('outputFields')[i])
-                for i in range(len(data.get('outputFields')) if data.get('outputFields') else 0)
+                for i in range(len(data.get('outputFields')))
             ])\
             .with_work_id(data.get('workId'))\
             .with_created_at(data.get('createdAt'))
@@ -585,11 +585,11 @@ class Resource(core.Gs2Model):
             "rollbackRequest": self.rollback_request,
             "rollbackAfter": None if self.rollback_after is None else [
                 self.rollback_after[i]
-                for i in range(len(self.rollback_after) if self.rollback_after else 0)
+                for i in range(len(self.rollback_after))
             ],
             "outputFields": None if self.output_fields is None else [
                 self.output_fields[i].to_dict() if self.output_fields[i] else None
-                for i in range(len(self.output_fields) if self.output_fields else 0)
+                for i in range(len(self.output_fields))
             ],
             "workId": self.work_id,
             "createdAt": self.created_at,

@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -265,9 +266,9 @@ class DescribeProgressesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeProgressesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Progress.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -275,7 +276,7 @@ class DescribeProgressesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -346,9 +347,9 @@ class DescribeOutputsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeOutputsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Output.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -356,7 +357,7 @@ class DescribeOutputsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -534,9 +535,9 @@ class DescribeNewsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNewsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 News.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_content_hash(data.get('contentHash'))\
             .with_template_hash(data.get('templateHash'))
@@ -545,7 +546,7 @@ class DescribeNewsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "contentHash": self.content_hash,
             "templateHash": self.template_hash,
@@ -588,9 +589,9 @@ class DescribeNewsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNewsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 News.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_content_hash(data.get('contentHash'))\
             .with_template_hash(data.get('templateHash'))
@@ -599,7 +600,7 @@ class DescribeNewsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "contentHash": self.content_hash,
             "templateHash": self.template_hash,
@@ -642,9 +643,9 @@ class WantGrantResult(core.Gs2Result):
         if data is None:
             return None
         return WantGrantResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SetCookieRequestEntry.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_browser_url(data.get('browserUrl'))\
             .with_zip_url(data.get('zipUrl'))
@@ -653,7 +654,7 @@ class WantGrantResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "browserUrl": self.browser_url,
             "zipUrl": self.zip_url,
@@ -696,9 +697,9 @@ class WantGrantByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return WantGrantByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SetCookieRequestEntry.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_browser_url(data.get('browserUrl'))\
             .with_zip_url(data.get('zipUrl'))
@@ -707,7 +708,7 @@ class WantGrantByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "browserUrl": self.browser_url,
             "zipUrl": self.zip_url,

@@ -793,9 +793,9 @@ class CreateExperienceModelMasterRequest(core.Gs2Request):
             .with_default_rank_cap(data.get('defaultRankCap'))\
             .with_max_rank_cap(data.get('maxRankCap'))\
             .with_rank_threshold_name(data.get('rankThresholdName'))\
-            .with_acquire_action_rates([
+            .with_acquire_action_rates(None if data.get('acquireActionRates') is None else [
                 AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
-                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+                for i in range(len(data.get('acquireActionRates')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -810,7 +810,7 @@ class CreateExperienceModelMasterRequest(core.Gs2Request):
             "rankThresholdName": self.rank_threshold_name,
             "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
-                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+                for i in range(len(self.acquire_action_rates))
             ],
         }
 
@@ -934,9 +934,9 @@ class UpdateExperienceModelMasterRequest(core.Gs2Request):
             .with_default_rank_cap(data.get('defaultRankCap'))\
             .with_max_rank_cap(data.get('maxRankCap'))\
             .with_rank_threshold_name(data.get('rankThresholdName'))\
-            .with_acquire_action_rates([
+            .with_acquire_action_rates(None if data.get('acquireActionRates') is None else [
                 AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
-                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+                for i in range(len(data.get('acquireActionRates')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -951,7 +951,7 @@ class UpdateExperienceModelMasterRequest(core.Gs2Request):
             "rankThresholdName": self.rank_threshold_name,
             "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
-                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+                for i in range(len(self.acquire_action_rates))
             ],
         }
 
@@ -1180,9 +1180,9 @@ class CreateThresholdMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1193,7 +1193,7 @@ class CreateThresholdMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -1293,9 +1293,9 @@ class UpdateThresholdMasterRequest(core.Gs2Request):
             .with_threshold_name(data.get('thresholdName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1306,7 +1306,7 @@ class UpdateThresholdMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -3250,9 +3250,9 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
             .with_experience_name(data.get('experienceName'))\
             .with_property_id(data.get('propertyId'))\
             .with_rate_name(data.get('rateName'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_base_rate(data.get('baseRate'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -3266,7 +3266,7 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "baseRate": self.base_rate,
             "timeOffsetToken": self.time_offset_token,

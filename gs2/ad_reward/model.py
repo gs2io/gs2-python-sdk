@@ -223,16 +223,16 @@ class UnityAd(core.Gs2Model):
         if data is None:
             return None
         return UnityAd()\
-            .with_keys([
+            .with_keys(None if data.get('keys') is None else [
                 data.get('keys')[i]
-                for i in range(len(data.get('keys')) if data.get('keys') else 0)
+                for i in range(len(data.get('keys')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "keys": None if self.keys is None else [
                 self.keys[i]
-                for i in range(len(self.keys) if self.keys else 0)
+                for i in range(len(self.keys))
             ],
         }
 
@@ -263,16 +263,16 @@ class AdMob(core.Gs2Model):
         if data is None:
             return None
         return AdMob()\
-            .with_allow_ad_unit_ids([
+            .with_allow_ad_unit_ids(None if data.get('allowAdUnitIds') is None else [
                 data.get('allowAdUnitIds')[i]
-                for i in range(len(data.get('allowAdUnitIds')) if data.get('allowAdUnitIds') else 0)
+                for i in range(len(data.get('allowAdUnitIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "allowAdUnitIds": None if self.allow_ad_unit_ids is None else [
                 self.allow_ad_unit_ids[i]
-                for i in range(len(self.allow_ad_unit_ids) if self.allow_ad_unit_ids else 0)
+                for i in range(len(self.allow_ad_unit_ids))
             ],
         }
 
@@ -535,9 +535,9 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_admob(AdMob.from_dict(data.get('admob')))\
             .with_unity_ad(UnityAd.from_dict(data.get('unityAd')))\
-            .with_app_lovin_maxes([
+            .with_app_lovin_maxes(None if data.get('appLovinMaxes') is None else [
                 AppLovinMax.from_dict(data.get('appLovinMaxes')[i])
-                for i in range(len(data.get('appLovinMaxes')) if data.get('appLovinMaxes') else 0)
+                for i in range(len(data.get('appLovinMaxes')))
             ])\
             .with_acquire_point_script(ScriptSetting.from_dict(data.get('acquirePointScript')))\
             .with_consume_point_script(ScriptSetting.from_dict(data.get('consumePointScript')))\
@@ -556,7 +556,7 @@ class Namespace(core.Gs2Model):
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
             "appLovinMaxes": None if self.app_lovin_maxes is None else [
                 self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
-                for i in range(len(self.app_lovin_maxes) if self.app_lovin_maxes else 0)
+                for i in range(len(self.app_lovin_maxes))
             ],
             "acquirePointScript": self.acquire_point_script.to_dict() if self.acquire_point_script else None,
             "consumePointScript": self.consume_point_script.to_dict() if self.consume_point_script else None,

@@ -213,12 +213,27 @@ class LogSetting(core.Gs2Model):
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -253,6 +268,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -260,6 +278,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -304,9 +325,9 @@ class RankingReward(core.Gs2Model):
         return RankingReward()\
             .with_threshold_rank(data.get('thresholdRank'))\
             .with_metadata(data.get('metadata'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -315,7 +336,7 @@ class RankingReward(core.Gs2Model):
             "metadata": self.metadata,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
         }
 
@@ -954,13 +975,13 @@ class Subscribe(core.Gs2Model):
             .with_subscribe_id(data.get('subscribeId'))\
             .with_ranking_name(data.get('rankingName'))\
             .with_user_id(data.get('userId'))\
-            .with_target_user_ids([
+            .with_target_user_ids(None if data.get('targetUserIds') is None else [
                 data.get('targetUserIds')[i]
-                for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
+                for i in range(len(data.get('targetUserIds')))
             ])\
-            .with_from_user_ids([
+            .with_from_user_ids(None if data.get('fromUserIds') is None else [
                 data.get('fromUserIds')[i]
-                for i in range(len(data.get('fromUserIds')) if data.get('fromUserIds') else 0)
+                for i in range(len(data.get('fromUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -973,11 +994,11 @@ class Subscribe(core.Gs2Model):
             "userId": self.user_id,
             "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
-                for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
+                for i in range(len(self.target_user_ids))
             ],
             "fromUserIds": None if self.from_user_ids is None else [
                 self.from_user_ids[i]
-                for i in range(len(self.from_user_ids) if self.from_user_ids else 0)
+                for i in range(len(self.from_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -2034,9 +2055,9 @@ class ClusterRankingModelMaster(core.Gs2Model):
             .with_score_ttl_days(data.get('scoreTtlDays'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
-            .with_ranking_rewards([
+            .with_ranking_rewards(None if data.get('rankingRewards') is None else [
                 RankingReward.from_dict(data.get('rankingRewards')[i])
-                for i in range(len(data.get('rankingRewards')) if data.get('rankingRewards') else 0)
+                for i in range(len(data.get('rankingRewards')))
             ])\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_created_at(data.get('createdAt'))\
@@ -2058,7 +2079,7 @@ class ClusterRankingModelMaster(core.Gs2Model):
             "entryPeriodEventId": self.entry_period_event_id,
             "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
-                for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
+                for i in range(len(self.ranking_rewards))
             ],
             "accessPeriodEventId": self.access_period_event_id,
             "createdAt": self.created_at,
@@ -2207,9 +2228,9 @@ class ClusterRankingModel(core.Gs2Model):
             .with_sum(data.get('sum'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
-            .with_ranking_rewards([
+            .with_ranking_rewards(None if data.get('rankingRewards') is None else [
                 RankingReward.from_dict(data.get('rankingRewards')[i])
-                for i in range(len(data.get('rankingRewards')) if data.get('rankingRewards') else 0)
+                for i in range(len(data.get('rankingRewards')))
             ])\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
 
@@ -2226,7 +2247,7 @@ class ClusterRankingModel(core.Gs2Model):
             "entryPeriodEventId": self.entry_period_event_id,
             "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
-                for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
+                for i in range(len(self.ranking_rewards))
             ],
             "accessPeriodEventId": self.access_period_event_id,
         }
@@ -2887,9 +2908,9 @@ class GlobalRankingModelMaster(core.Gs2Model):
             .with_sum(data.get('sum'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
-            .with_ranking_rewards([
+            .with_ranking_rewards(None if data.get('rankingRewards') is None else [
                 RankingReward.from_dict(data.get('rankingRewards')[i])
-                for i in range(len(data.get('rankingRewards')) if data.get('rankingRewards') else 0)
+                for i in range(len(data.get('rankingRewards')))
             ])\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
             .with_created_at(data.get('createdAt'))\
@@ -2909,7 +2930,7 @@ class GlobalRankingModelMaster(core.Gs2Model):
             "entryPeriodEventId": self.entry_period_event_id,
             "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
-                for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
+                for i in range(len(self.ranking_rewards))
             ],
             "accessPeriodEventId": self.access_period_event_id,
             "createdAt": self.created_at,
@@ -3052,9 +3073,9 @@ class GlobalRankingModel(core.Gs2Model):
             .with_sum(data.get('sum'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
-            .with_ranking_rewards([
+            .with_ranking_rewards(None if data.get('rankingRewards') is None else [
                 RankingReward.from_dict(data.get('rankingRewards')[i])
-                for i in range(len(data.get('rankingRewards')) if data.get('rankingRewards') else 0)
+                for i in range(len(data.get('rankingRewards')))
             ])\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
 
@@ -3070,7 +3091,7 @@ class GlobalRankingModel(core.Gs2Model):
             "entryPeriodEventId": self.entry_period_event_id,
             "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
-                for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
+                for i in range(len(self.ranking_rewards))
             ],
             "accessPeriodEventId": self.access_period_event_id,
         }

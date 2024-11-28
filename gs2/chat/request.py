@@ -808,9 +808,9 @@ class CreateRoomRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_password(data.get('password'))\
-            .with_white_list_user_ids([
+            .with_white_list_user_ids(None if data.get('whiteListUserIds') is None else [
                 data.get('whiteListUserIds')[i]
-                for i in range(len(data.get('whiteListUserIds')) if data.get('whiteListUserIds') else 0)
+                for i in range(len(data.get('whiteListUserIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -822,7 +822,7 @@ class CreateRoomRequest(core.Gs2Request):
             "password": self.password,
             "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
-                for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
+                for i in range(len(self.white_list_user_ids))
             ],
         }
 
@@ -895,9 +895,9 @@ class CreateRoomFromBackendRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_metadata(data.get('metadata'))\
             .with_password(data.get('password'))\
-            .with_white_list_user_ids([
+            .with_white_list_user_ids(None if data.get('whiteListUserIds') is None else [
                 data.get('whiteListUserIds')[i]
-                for i in range(len(data.get('whiteListUserIds')) if data.get('whiteListUserIds') else 0)
+                for i in range(len(data.get('whiteListUserIds')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -910,7 +910,7 @@ class CreateRoomFromBackendRequest(core.Gs2Request):
             "password": self.password,
             "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
-                for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
+                for i in range(len(self.white_list_user_ids))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1021,9 +1021,9 @@ class UpdateRoomRequest(core.Gs2Request):
             .with_room_name(data.get('roomName'))\
             .with_metadata(data.get('metadata'))\
             .with_password(data.get('password'))\
-            .with_white_list_user_ids([
+            .with_white_list_user_ids(None if data.get('whiteListUserIds') is None else [
                 data.get('whiteListUserIds')[i]
-                for i in range(len(data.get('whiteListUserIds')) if data.get('whiteListUserIds') else 0)
+                for i in range(len(data.get('whiteListUserIds')))
             ])\
             .with_access_token(data.get('accessToken'))
 
@@ -1035,7 +1035,7 @@ class UpdateRoomRequest(core.Gs2Request):
             "password": self.password,
             "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
-                for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
+                for i in range(len(self.white_list_user_ids))
             ],
             "accessToken": self.access_token,
         }
@@ -1108,9 +1108,9 @@ class UpdateRoomFromBackendRequest(core.Gs2Request):
             .with_room_name(data.get('roomName'))\
             .with_metadata(data.get('metadata'))\
             .with_password(data.get('password'))\
-            .with_white_list_user_ids([
+            .with_white_list_user_ids(None if data.get('whiteListUserIds') is None else [
                 data.get('whiteListUserIds')[i]
-                for i in range(len(data.get('whiteListUserIds')) if data.get('whiteListUserIds') else 0)
+                for i in range(len(data.get('whiteListUserIds')))
             ])\
             .with_user_id(data.get('userId'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -1123,7 +1123,7 @@ class UpdateRoomFromBackendRequest(core.Gs2Request):
             "password": self.password,
             "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
-                for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
+                for i in range(len(self.white_list_user_ids))
             ],
             "userId": self.user_id,
             "timeOffsetToken": self.time_offset_token,
@@ -2123,9 +2123,9 @@ class SubscribeRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_room_name(data.get('roomName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_notification_types([
+            .with_notification_types(None if data.get('notificationTypes') is None else [
                 NotificationType.from_dict(data.get('notificationTypes')[i])
-                for i in range(len(data.get('notificationTypes')) if data.get('notificationTypes') else 0)
+                for i in range(len(data.get('notificationTypes')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2135,7 +2135,7 @@ class SubscribeRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
-                for i in range(len(self.notification_types) if self.notification_types else 0)
+                for i in range(len(self.notification_types))
             ],
         }
 
@@ -2196,9 +2196,9 @@ class SubscribeByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_room_name(data.get('roomName'))\
             .with_user_id(data.get('userId'))\
-            .with_notification_types([
+            .with_notification_types(None if data.get('notificationTypes') is None else [
                 NotificationType.from_dict(data.get('notificationTypes')[i])
-                for i in range(len(data.get('notificationTypes')) if data.get('notificationTypes') else 0)
+                for i in range(len(data.get('notificationTypes')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2209,7 +2209,7 @@ class SubscribeByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
-                for i in range(len(self.notification_types) if self.notification_types else 0)
+                for i in range(len(self.notification_types))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2373,9 +2373,9 @@ class UpdateNotificationTypeRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_room_name(data.get('roomName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_notification_types([
+            .with_notification_types(None if data.get('notificationTypes') is None else [
                 NotificationType.from_dict(data.get('notificationTypes')[i])
-                for i in range(len(data.get('notificationTypes')) if data.get('notificationTypes') else 0)
+                for i in range(len(data.get('notificationTypes')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2385,7 +2385,7 @@ class UpdateNotificationTypeRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
-                for i in range(len(self.notification_types) if self.notification_types else 0)
+                for i in range(len(self.notification_types))
             ],
         }
 
@@ -2446,9 +2446,9 @@ class UpdateNotificationTypeByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_room_name(data.get('roomName'))\
             .with_user_id(data.get('userId'))\
-            .with_notification_types([
+            .with_notification_types(None if data.get('notificationTypes') is None else [
                 NotificationType.from_dict(data.get('notificationTypes')[i])
-                for i in range(len(data.get('notificationTypes')) if data.get('notificationTypes') else 0)
+                for i in range(len(data.get('notificationTypes')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2459,7 +2459,7 @@ class UpdateNotificationTypeByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
-                for i in range(len(self.notification_types) if self.notification_types else 0)
+                for i in range(len(self.notification_types))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

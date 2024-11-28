@@ -749,9 +749,9 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_reward_interval_minutes(data.get('rewardIntervalMinutes'))\
             .with_default_maximum_idle_minutes(data.get('defaultMaximumIdleMinutes'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireActionList.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_idle_period_schedule_id(data.get('idlePeriodScheduleId'))\
             .with_receive_period_schedule_id(data.get('receivePeriodScheduleId'))
@@ -766,7 +766,7 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             "defaultMaximumIdleMinutes": self.default_maximum_idle_minutes,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "idlePeriodScheduleId": self.idle_period_schedule_id,
             "receivePeriodScheduleId": self.receive_period_schedule_id,
@@ -890,9 +890,9 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_reward_interval_minutes(data.get('rewardIntervalMinutes'))\
             .with_default_maximum_idle_minutes(data.get('defaultMaximumIdleMinutes'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireActionList.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_idle_period_schedule_id(data.get('idlePeriodScheduleId'))\
             .with_receive_period_schedule_id(data.get('receivePeriodScheduleId'))
@@ -907,7 +907,7 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             "defaultMaximumIdleMinutes": self.default_maximum_idle_minutes,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "idlePeriodScheduleId": self.idle_period_schedule_id,
             "receivePeriodScheduleId": self.receive_period_schedule_id,
@@ -1432,9 +1432,9 @@ class ReceiveRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_category_name(data.get('categoryName'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1444,7 +1444,7 @@ class ReceiveRequest(core.Gs2Request):
             "categoryName": self.category_name,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1505,9 +1505,9 @@ class ReceiveByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_category_name(data.get('categoryName'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1518,7 +1518,7 @@ class ReceiveByUserIdRequest(core.Gs2Request):
             "categoryName": self.category_name,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

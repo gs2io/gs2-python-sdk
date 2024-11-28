@@ -796,9 +796,9 @@ class PushByUserIdRequest(core.Gs2Request):
         return PushByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_jobs([
+            .with_jobs(None if data.get('jobs') is None else [
                 JobEntry.from_dict(data.get('jobs')[i])
-                for i in range(len(data.get('jobs')) if data.get('jobs') else 0)
+                for i in range(len(data.get('jobs')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -808,7 +808,7 @@ class PushByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "jobs": None if self.jobs is None else [
                 self.jobs[i].to_dict() if self.jobs[i] else None
-                for i in range(len(self.jobs) if self.jobs else 0)
+                for i in range(len(self.jobs))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

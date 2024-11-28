@@ -942,17 +942,17 @@ class CreateGatheringRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_player(Player.from_dict(data.get('player')))\
-            .with_attribute_ranges([
+            .with_attribute_ranges(None if data.get('attributeRanges') is None else [
                 AttributeRange.from_dict(data.get('attributeRanges')[i])
-                for i in range(len(data.get('attributeRanges')) if data.get('attributeRanges') else 0)
+                for i in range(len(data.get('attributeRanges')))
             ])\
-            .with_capacity_of_roles([
+            .with_capacity_of_roles(None if data.get('capacityOfRoles') is None else [
                 CapacityOfRole.from_dict(data.get('capacityOfRoles')[i])
-                for i in range(len(data.get('capacityOfRoles')) if data.get('capacityOfRoles') else 0)
+                for i in range(len(data.get('capacityOfRoles')))
             ])\
-            .with_allow_user_ids([
+            .with_allow_user_ids(None if data.get('allowUserIds') is None else [
                 data.get('allowUserIds')[i]
-                for i in range(len(data.get('allowUserIds')) if data.get('allowUserIds') else 0)
+                for i in range(len(data.get('allowUserIds')))
             ])\
             .with_expires_at(data.get('expiresAt'))\
             .with_expires_at_time_span(TimeSpan.from_dict(data.get('expiresAtTimeSpan')))
@@ -964,15 +964,15 @@ class CreateGatheringRequest(core.Gs2Request):
             "player": self.player.to_dict() if self.player else None,
             "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
-                for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
+                for i in range(len(self.attribute_ranges))
             ],
             "capacityOfRoles": None if self.capacity_of_roles is None else [
                 self.capacity_of_roles[i].to_dict() if self.capacity_of_roles[i] else None
-                for i in range(len(self.capacity_of_roles) if self.capacity_of_roles else 0)
+                for i in range(len(self.capacity_of_roles))
             ],
             "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
-                for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
+                for i in range(len(self.allow_user_ids))
             ],
             "expiresAt": self.expires_at,
             "expiresAtTimeSpan": self.expires_at_time_span.to_dict() if self.expires_at_time_span else None,
@@ -1055,17 +1055,17 @@ class CreateGatheringByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_player(Player.from_dict(data.get('player')))\
-            .with_attribute_ranges([
+            .with_attribute_ranges(None if data.get('attributeRanges') is None else [
                 AttributeRange.from_dict(data.get('attributeRanges')[i])
-                for i in range(len(data.get('attributeRanges')) if data.get('attributeRanges') else 0)
+                for i in range(len(data.get('attributeRanges')))
             ])\
-            .with_capacity_of_roles([
+            .with_capacity_of_roles(None if data.get('capacityOfRoles') is None else [
                 CapacityOfRole.from_dict(data.get('capacityOfRoles')[i])
-                for i in range(len(data.get('capacityOfRoles')) if data.get('capacityOfRoles') else 0)
+                for i in range(len(data.get('capacityOfRoles')))
             ])\
-            .with_allow_user_ids([
+            .with_allow_user_ids(None if data.get('allowUserIds') is None else [
                 data.get('allowUserIds')[i]
-                for i in range(len(data.get('allowUserIds')) if data.get('allowUserIds') else 0)
+                for i in range(len(data.get('allowUserIds')))
             ])\
             .with_expires_at(data.get('expiresAt'))\
             .with_expires_at_time_span(TimeSpan.from_dict(data.get('expiresAtTimeSpan')))\
@@ -1078,15 +1078,15 @@ class CreateGatheringByUserIdRequest(core.Gs2Request):
             "player": self.player.to_dict() if self.player else None,
             "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
-                for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
+                for i in range(len(self.attribute_ranges))
             ],
             "capacityOfRoles": None if self.capacity_of_roles is None else [
                 self.capacity_of_roles[i].to_dict() if self.capacity_of_roles[i] else None
-                for i in range(len(self.capacity_of_roles) if self.capacity_of_roles else 0)
+                for i in range(len(self.capacity_of_roles))
             ],
             "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
-                for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
+                for i in range(len(self.allow_user_ids))
             ],
             "expiresAt": self.expires_at,
             "expiresAtTimeSpan": self.expires_at_time_span.to_dict() if self.expires_at_time_span else None,
@@ -1145,9 +1145,9 @@ class UpdateGatheringRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_gathering_name(data.get('gatheringName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_attribute_ranges([
+            .with_attribute_ranges(None if data.get('attributeRanges') is None else [
                 AttributeRange.from_dict(data.get('attributeRanges')[i])
-                for i in range(len(data.get('attributeRanges')) if data.get('attributeRanges') else 0)
+                for i in range(len(data.get('attributeRanges')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1157,7 +1157,7 @@ class UpdateGatheringRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
-                for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
+                for i in range(len(self.attribute_ranges))
             ],
         }
 
@@ -1218,9 +1218,9 @@ class UpdateGatheringByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_gathering_name(data.get('gatheringName'))\
             .with_user_id(data.get('userId'))\
-            .with_attribute_ranges([
+            .with_attribute_ranges(None if data.get('attributeRanges') is None else [
                 AttributeRange.from_dict(data.get('attributeRanges')[i])
-                for i in range(len(data.get('attributeRanges')) if data.get('attributeRanges') else 0)
+                for i in range(len(data.get('attributeRanges')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1231,7 +1231,7 @@ class UpdateGatheringByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "attributeRanges": None if self.attribute_ranges is None else [
                 self.attribute_ranges[i].to_dict() if self.attribute_ranges[i] else None
-                for i in range(len(self.attribute_ranges) if self.attribute_ranges else 0)
+                for i in range(len(self.attribute_ranges))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -3882,9 +3882,9 @@ class PutResultRequest(core.Gs2Request):
         return PutResultRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_rating_name(data.get('ratingName'))\
-            .with_game_results([
+            .with_game_results(None if data.get('gameResults') is None else [
                 GameResult.from_dict(data.get('gameResults')[i])
-                for i in range(len(data.get('gameResults')) if data.get('gameResults') else 0)
+                for i in range(len(data.get('gameResults')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -3893,7 +3893,7 @@ class PutResultRequest(core.Gs2Request):
             "ratingName": self.rating_name,
             "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
-                for i in range(len(self.game_results) if self.game_results else 0)
+                for i in range(len(self.game_results))
             ],
         }
 
@@ -4160,9 +4160,9 @@ class VoteRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_ballot_body(data.get('ballotBody'))\
             .with_ballot_signature(data.get('ballotSignature'))\
-            .with_game_results([
+            .with_game_results(None if data.get('gameResults') is None else [
                 GameResult.from_dict(data.get('gameResults')[i])
-                for i in range(len(data.get('gameResults')) if data.get('gameResults') else 0)
+                for i in range(len(data.get('gameResults')))
             ])\
             .with_key_id(data.get('keyId'))
 
@@ -4173,7 +4173,7 @@ class VoteRequest(core.Gs2Request):
             "ballotSignature": self.ballot_signature,
             "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
-                for i in range(len(self.game_results) if self.game_results else 0)
+                for i in range(len(self.game_results))
             ],
             "keyId": self.key_id,
         }
@@ -4223,13 +4223,13 @@ class VoteMultipleRequest(core.Gs2Request):
             return None
         return VoteMultipleRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_signed_ballots([
+            .with_signed_ballots(None if data.get('signedBallots') is None else [
                 SignedBallot.from_dict(data.get('signedBallots')[i])
-                for i in range(len(data.get('signedBallots')) if data.get('signedBallots') else 0)
+                for i in range(len(data.get('signedBallots')))
             ])\
-            .with_game_results([
+            .with_game_results(None if data.get('gameResults') is None else [
                 GameResult.from_dict(data.get('gameResults')[i])
-                for i in range(len(data.get('gameResults')) if data.get('gameResults') else 0)
+                for i in range(len(data.get('gameResults')))
             ])\
             .with_key_id(data.get('keyId'))
 
@@ -4238,11 +4238,11 @@ class VoteMultipleRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "signedBallots": None if self.signed_ballots is None else [
                 self.signed_ballots[i].to_dict() if self.signed_ballots[i] else None
-                for i in range(len(self.signed_ballots) if self.signed_ballots else 0)
+                for i in range(len(self.signed_ballots))
             ],
             "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
-                for i in range(len(self.game_results) if self.game_results else 0)
+                for i in range(len(self.game_results))
             ],
             "keyId": self.key_id,
         }

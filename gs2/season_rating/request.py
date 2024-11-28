@@ -895,9 +895,9 @@ class CreateSeasonModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_tiers([
+            .with_tiers(None if data.get('tiers') is None else [
                 TierModel.from_dict(data.get('tiers')[i])
-                for i in range(len(data.get('tiers')) if data.get('tiers') else 0)
+                for i in range(len(data.get('tiers')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))
@@ -910,7 +910,7 @@ class CreateSeasonModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "tiers": None if self.tiers is None else [
                 self.tiers[i].to_dict() if self.tiers[i] else None
-                for i in range(len(self.tiers) if self.tiers else 0)
+                for i in range(len(self.tiers))
             ],
             "experienceModelId": self.experience_model_id,
             "challengePeriodEventId": self.challenge_period_event_id,
@@ -1022,9 +1022,9 @@ class UpdateSeasonModelMasterRequest(core.Gs2Request):
             .with_season_name(data.get('seasonName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_tiers([
+            .with_tiers(None if data.get('tiers') is None else [
                 TierModel.from_dict(data.get('tiers')[i])
-                for i in range(len(data.get('tiers')) if data.get('tiers') else 0)
+                for i in range(len(data.get('tiers')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))
@@ -1037,7 +1037,7 @@ class UpdateSeasonModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "tiers": None if self.tiers is None else [
                 self.tiers[i].to_dict() if self.tiers[i] else None
-                for i in range(len(self.tiers) if self.tiers else 0)
+                for i in range(len(self.tiers))
             ],
             "experienceModelId": self.experience_model_id,
             "challengePeriodEventId": self.challenge_period_event_id,
@@ -1524,9 +1524,9 @@ class VoteRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_ballot_body(data.get('ballotBody'))\
             .with_ballot_signature(data.get('ballotSignature'))\
-            .with_game_results([
+            .with_game_results(None if data.get('gameResults') is None else [
                 GameResult.from_dict(data.get('gameResults')[i])
-                for i in range(len(data.get('gameResults')) if data.get('gameResults') else 0)
+                for i in range(len(data.get('gameResults')))
             ])\
             .with_key_id(data.get('keyId'))
 
@@ -1537,7 +1537,7 @@ class VoteRequest(core.Gs2Request):
             "ballotSignature": self.ballot_signature,
             "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
-                for i in range(len(self.game_results) if self.game_results else 0)
+                for i in range(len(self.game_results))
             ],
             "keyId": self.key_id,
         }
@@ -1587,13 +1587,13 @@ class VoteMultipleRequest(core.Gs2Request):
             return None
         return VoteMultipleRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_signed_ballots([
+            .with_signed_ballots(None if data.get('signedBallots') is None else [
                 SignedBallot.from_dict(data.get('signedBallots')[i])
-                for i in range(len(data.get('signedBallots')) if data.get('signedBallots') else 0)
+                for i in range(len(data.get('signedBallots')))
             ])\
-            .with_game_results([
+            .with_game_results(None if data.get('gameResults') is None else [
                 GameResult.from_dict(data.get('gameResults')[i])
-                for i in range(len(data.get('gameResults')) if data.get('gameResults') else 0)
+                for i in range(len(data.get('gameResults')))
             ])\
             .with_key_id(data.get('keyId'))
 
@@ -1602,11 +1602,11 @@ class VoteMultipleRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "signedBallots": None if self.signed_ballots is None else [
                 self.signed_ballots[i].to_dict() if self.signed_ballots[i] else None
-                for i in range(len(self.signed_ballots) if self.signed_ballots else 0)
+                for i in range(len(self.signed_ballots))
             ],
             "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
-                for i in range(len(self.game_results) if self.game_results else 0)
+                for i in range(len(self.game_results))
             ],
             "keyId": self.key_id,
         }

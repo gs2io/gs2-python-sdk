@@ -436,9 +436,9 @@ class WantRoomRequest(core.Gs2Request):
         return WantRoomRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_name(data.get('name'))\
-            .with_notification_user_ids([
+            .with_notification_user_ids(None if data.get('notificationUserIds') is None else [
                 data.get('notificationUserIds')[i]
-                for i in range(len(data.get('notificationUserIds')) if data.get('notificationUserIds') else 0)
+                for i in range(len(data.get('notificationUserIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -447,7 +447,7 @@ class WantRoomRequest(core.Gs2Request):
             "name": self.name,
             "notificationUserIds": None if self.notification_user_ids is None else [
                 self.notification_user_ids[i]
-                for i in range(len(self.notification_user_ids) if self.notification_user_ids else 0)
+                for i in range(len(self.notification_user_ids))
             ],
         }
 

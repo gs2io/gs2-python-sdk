@@ -583,9 +583,9 @@ class BigInventory(core.Gs2Model):
             .with_inventory_id(data.get('inventoryId'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_user_id(data.get('userId'))\
-            .with_big_items([
+            .with_big_items(None if data.get('bigItems') is None else [
                 BigItem.from_dict(data.get('bigItems')[i])
-                for i in range(len(data.get('bigItems')) if data.get('bigItems') else 0)
+                for i in range(len(data.get('bigItems')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
@@ -597,7 +597,7 @@ class BigInventory(core.Gs2Model):
             "userId": self.user_id,
             "bigItems": None if self.big_items is None else [
                 self.big_items[i].to_dict() if self.big_items[i] else None
-                for i in range(len(self.big_items) if self.big_items else 0)
+                for i in range(len(self.big_items))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -871,9 +871,9 @@ class SimpleInventory(core.Gs2Model):
             .with_inventory_id(data.get('inventoryId'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_user_id(data.get('userId'))\
-            .with_simple_items([
+            .with_simple_items(None if data.get('simpleItems') is None else [
                 SimpleItem.from_dict(data.get('simpleItems')[i])
-                for i in range(len(data.get('simpleItems')) if data.get('simpleItems') else 0)
+                for i in range(len(data.get('simpleItems')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -886,7 +886,7 @@ class SimpleInventory(core.Gs2Model):
             "userId": self.user_id,
             "simpleItems": None if self.simple_items is None else [
                 self.simple_items[i].to_dict() if self.simple_items[i] else None
-                for i in range(len(self.simple_items) if self.simple_items else 0)
+                for i in range(len(self.simple_items))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1211,9 +1211,9 @@ class ItemSet(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_item_name(data.get('itemName'))\
             .with_count(data.get('count'))\
-            .with_reference_of([
+            .with_reference_of(None if data.get('referenceOf') is None else [
                 data.get('referenceOf')[i]
-                for i in range(len(data.get('referenceOf')) if data.get('referenceOf') else 0)
+                for i in range(len(data.get('referenceOf')))
             ])\
             .with_sort_value(data.get('sortValue'))\
             .with_expires_at(data.get('expiresAt'))\
@@ -1230,7 +1230,7 @@ class ItemSet(core.Gs2Model):
             "count": self.count,
             "referenceOf": None if self.reference_of is None else [
                 self.reference_of[i]
-                for i in range(len(self.reference_of) if self.reference_of else 0)
+                for i in range(len(self.reference_of))
             ],
             "sortValue": self.sort_value,
             "expiresAt": self.expires_at,
@@ -1830,9 +1830,9 @@ class BigInventoryModel(core.Gs2Model):
             .with_inventory_model_id(data.get('inventoryModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_big_item_models([
+            .with_big_item_models(None if data.get('bigItemModels') is None else [
                 BigItemModel.from_dict(data.get('bigItemModels')[i])
-                for i in range(len(data.get('bigItemModels')) if data.get('bigItemModels') else 0)
+                for i in range(len(data.get('bigItemModels')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1842,7 +1842,7 @@ class BigInventoryModel(core.Gs2Model):
             "metadata": self.metadata,
             "bigItemModels": None if self.big_item_models is None else [
                 self.big_item_models[i].to_dict() if self.big_item_models[i] else None
-                for i in range(len(self.big_item_models) if self.big_item_models else 0)
+                for i in range(len(self.big_item_models))
             ],
         }
 
@@ -2335,9 +2335,9 @@ class SimpleInventoryModel(core.Gs2Model):
             .with_inventory_model_id(data.get('inventoryModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_simple_item_models([
+            .with_simple_item_models(None if data.get('simpleItemModels') is None else [
                 SimpleItemModel.from_dict(data.get('simpleItemModels')[i])
-                for i in range(len(data.get('simpleItemModels')) if data.get('simpleItemModels') else 0)
+                for i in range(len(data.get('simpleItemModels')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2347,7 +2347,7 @@ class SimpleInventoryModel(core.Gs2Model):
             "metadata": self.metadata,
             "simpleItemModels": None if self.simple_item_models is None else [
                 self.simple_item_models[i].to_dict() if self.simple_item_models[i] else None
-                for i in range(len(self.simple_item_models) if self.simple_item_models else 0)
+                for i in range(len(self.simple_item_models))
             ],
         }
 
@@ -2907,9 +2907,9 @@ class InventoryModel(core.Gs2Model):
             .with_initial_capacity(data.get('initialCapacity'))\
             .with_max_capacity(data.get('maxCapacity'))\
             .with_protect_referenced_item(data.get('protectReferencedItem'))\
-            .with_item_models([
+            .with_item_models(None if data.get('itemModels') is None else [
                 ItemModel.from_dict(data.get('itemModels')[i])
-                for i in range(len(data.get('itemModels')) if data.get('itemModels') else 0)
+                for i in range(len(data.get('itemModels')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2922,7 +2922,7 @@ class InventoryModel(core.Gs2Model):
             "protectReferencedItem": self.protect_referenced_item,
             "itemModels": None if self.item_models is None else [
                 self.item_models[i].to_dict() if self.item_models[i] else None
-                for i in range(len(self.item_models) if self.item_models else 0)
+                for i in range(len(self.item_models))
             ],
         }
 

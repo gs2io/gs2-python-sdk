@@ -6304,9 +6304,9 @@ class AcquireSimpleItemsByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_user_id(data.get('userId'))\
-            .with_acquire_counts([
+            .with_acquire_counts(None if data.get('acquireCounts') is None else [
                 AcquireCount.from_dict(data.get('acquireCounts')[i])
-                for i in range(len(data.get('acquireCounts')) if data.get('acquireCounts') else 0)
+                for i in range(len(data.get('acquireCounts')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -6317,7 +6317,7 @@ class AcquireSimpleItemsByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "acquireCounts": None if self.acquire_counts is None else [
                 self.acquire_counts[i].to_dict() if self.acquire_counts[i] else None
-                for i in range(len(self.acquire_counts) if self.acquire_counts else 0)
+                for i in range(len(self.acquire_counts))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -6374,9 +6374,9 @@ class ConsumeSimpleItemsRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_consume_counts([
+            .with_consume_counts(None if data.get('consumeCounts') is None else [
                 ConsumeCount.from_dict(data.get('consumeCounts')[i])
-                for i in range(len(data.get('consumeCounts')) if data.get('consumeCounts') else 0)
+                for i in range(len(data.get('consumeCounts')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -6386,7 +6386,7 @@ class ConsumeSimpleItemsRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "consumeCounts": None if self.consume_counts is None else [
                 self.consume_counts[i].to_dict() if self.consume_counts[i] else None
-                for i in range(len(self.consume_counts) if self.consume_counts else 0)
+                for i in range(len(self.consume_counts))
             ],
         }
 
@@ -6447,9 +6447,9 @@ class ConsumeSimpleItemsByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_user_id(data.get('userId'))\
-            .with_consume_counts([
+            .with_consume_counts(None if data.get('consumeCounts') is None else [
                 ConsumeCount.from_dict(data.get('consumeCounts')[i])
-                for i in range(len(data.get('consumeCounts')) if data.get('consumeCounts') else 0)
+                for i in range(len(data.get('consumeCounts')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -6460,7 +6460,7 @@ class ConsumeSimpleItemsByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "consumeCounts": None if self.consume_counts is None else [
                 self.consume_counts[i].to_dict() if self.consume_counts[i] else None
-                for i in range(len(self.consume_counts) if self.consume_counts else 0)
+                for i in range(len(self.consume_counts))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -6522,9 +6522,9 @@ class SetSimpleItemsByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_inventory_name(data.get('inventoryName'))\
             .with_user_id(data.get('userId'))\
-            .with_counts([
+            .with_counts(None if data.get('counts') is None else [
                 HeldCount.from_dict(data.get('counts')[i])
-                for i in range(len(data.get('counts')) if data.get('counts') else 0)
+                for i in range(len(data.get('counts')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -6535,7 +6535,7 @@ class SetSimpleItemsByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "counts": None if self.counts is None else [
                 self.counts[i].to_dict() if self.counts[i] else None
-                for i in range(len(self.counts) if self.counts else 0)
+                for i in range(len(self.counts))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeVersionModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeVersionModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 VersionModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeVersionModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -660,16 +661,16 @@ class DescribeVersionModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeVersionModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 VersionModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -739,9 +740,9 @@ class DescribeAcceptVersionsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeAcceptVersionsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 AcceptVersion.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -749,7 +750,7 @@ class DescribeAcceptVersionsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -786,9 +787,9 @@ class DescribeAcceptVersionsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeAcceptVersionsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 AcceptVersion.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -796,7 +797,7 @@ class DescribeAcceptVersionsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1043,13 +1044,13 @@ class CheckVersionResult(core.Gs2Result):
             return None
         return CheckVersionResult()\
             .with_project_token(data.get('projectToken'))\
-            .with_warnings([
+            .with_warnings(None if data.get('warnings') is None else [
                 Status.from_dict(data.get('warnings')[i])
-                for i in range(len(data.get('warnings')) if data.get('warnings') else 0)
+                for i in range(len(data.get('warnings')))
             ])\
-            .with_errors([
+            .with_errors(None if data.get('errors') is None else [
                 Status.from_dict(data.get('errors')[i])
-                for i in range(len(data.get('errors')) if data.get('errors') else 0)
+                for i in range(len(data.get('errors')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1057,11 +1058,11 @@ class CheckVersionResult(core.Gs2Result):
             "projectToken": self.project_token,
             "warnings": None if self.warnings is None else [
                 self.warnings[i].to_dict() if self.warnings[i] else None
-                for i in range(len(self.warnings) if self.warnings else 0)
+                for i in range(len(self.warnings))
             ],
             "errors": None if self.errors is None else [
                 self.errors[i].to_dict() if self.errors[i] else None
-                for i in range(len(self.errors) if self.errors else 0)
+                for i in range(len(self.errors))
             ],
         }
 
@@ -1103,13 +1104,13 @@ class CheckVersionByUserIdResult(core.Gs2Result):
             return None
         return CheckVersionByUserIdResult()\
             .with_project_token(data.get('projectToken'))\
-            .with_warnings([
+            .with_warnings(None if data.get('warnings') is None else [
                 Status.from_dict(data.get('warnings')[i])
-                for i in range(len(data.get('warnings')) if data.get('warnings') else 0)
+                for i in range(len(data.get('warnings')))
             ])\
-            .with_errors([
+            .with_errors(None if data.get('errors') is None else [
                 Status.from_dict(data.get('errors')[i])
-                for i in range(len(data.get('errors')) if data.get('errors') else 0)
+                for i in range(len(data.get('errors')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1117,11 +1118,11 @@ class CheckVersionByUserIdResult(core.Gs2Result):
             "projectToken": self.project_token,
             "warnings": None if self.warnings is None else [
                 self.warnings[i].to_dict() if self.warnings[i] else None
-                for i in range(len(self.warnings) if self.warnings else 0)
+                for i in range(len(self.warnings))
             ],
             "errors": None if self.errors is None else [
                 self.errors[i].to_dict() if self.errors[i] else None
-                for i in range(len(self.errors) if self.errors else 0)
+                for i in range(len(self.errors))
             ],
         }
 

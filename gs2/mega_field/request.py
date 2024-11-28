@@ -1363,9 +1363,9 @@ class FetchPositionRequest(core.Gs2Request):
             .with_access_token(data.get('accessToken'))\
             .with_area_model_name(data.get('areaModelName'))\
             .with_layer_model_name(data.get('layerModelName'))\
-            .with_user_ids([
+            .with_user_ids(None if data.get('userIds') is None else [
                 data.get('userIds')[i]
-                for i in range(len(data.get('userIds')) if data.get('userIds') else 0)
+                for i in range(len(data.get('userIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1376,7 +1376,7 @@ class FetchPositionRequest(core.Gs2Request):
             "layerModelName": self.layer_model_name,
             "userIds": None if self.user_ids is None else [
                 self.user_ids[i]
-                for i in range(len(self.user_ids) if self.user_ids else 0)
+                for i in range(len(self.user_ids))
             ],
         }
 
@@ -1432,9 +1432,9 @@ class FetchPositionFromSystemRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_area_model_name(data.get('areaModelName'))\
             .with_layer_model_name(data.get('layerModelName'))\
-            .with_user_ids([
+            .with_user_ids(None if data.get('userIds') is None else [
                 data.get('userIds')[i]
-                for i in range(len(data.get('userIds')) if data.get('userIds') else 0)
+                for i in range(len(data.get('userIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1444,7 +1444,7 @@ class FetchPositionFromSystemRequest(core.Gs2Request):
             "layerModelName": self.layer_model_name,
             "userIds": None if self.user_ids is None else [
                 self.user_ids[i]
-                for i in range(len(self.user_ids) if self.user_ids else 0)
+                for i in range(len(self.user_ids))
             ],
         }
 
@@ -1671,9 +1671,9 @@ class ActionRequest(core.Gs2Request):
             .with_area_model_name(data.get('areaModelName'))\
             .with_layer_model_name(data.get('layerModelName'))\
             .with_position(MyPosition.from_dict(data.get('position')))\
-            .with_scopes([
+            .with_scopes(None if data.get('scopes') is None else [
                 Scope.from_dict(data.get('scopes')[i])
-                for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
+                for i in range(len(data.get('scopes')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1685,7 +1685,7 @@ class ActionRequest(core.Gs2Request):
             "position": self.position.to_dict() if self.position else None,
             "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
-                for i in range(len(self.scopes) if self.scopes else 0)
+                for i in range(len(self.scopes))
             ],
         }
 
@@ -1758,9 +1758,9 @@ class ActionByUserIdRequest(core.Gs2Request):
             .with_area_model_name(data.get('areaModelName'))\
             .with_layer_model_name(data.get('layerModelName'))\
             .with_position(MyPosition.from_dict(data.get('position')))\
-            .with_scopes([
+            .with_scopes(None if data.get('scopes') is None else [
                 Scope.from_dict(data.get('scopes')[i])
-                for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
+                for i in range(len(data.get('scopes')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1773,7 +1773,7 @@ class ActionByUserIdRequest(core.Gs2Request):
             "position": self.position.to_dict() if self.position else None,
             "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
-                for i in range(len(self.scopes) if self.scopes else 0)
+                for i in range(len(self.scopes))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

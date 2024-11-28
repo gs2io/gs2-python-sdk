@@ -846,13 +846,13 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
-            .with_additional_scopes([
+            .with_additional_scopes(None if data.get('additionalScopes') is None else [
                 Scope.from_dict(data.get('additionalScopes')[i])
-                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+                for i in range(len(data.get('additionalScopes')))
             ])\
-            .with_ignore_user_ids([
+            .with_ignore_user_ids(None if data.get('ignoreUserIds') is None else [
                 data.get('ignoreUserIds')[i]
-                for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
+                for i in range(len(data.get('ignoreUserIds')))
             ])\
             .with_generation(data.get('generation'))
 
@@ -876,11 +876,11 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             "calculateIntervalMinutes": self.calculate_interval_minutes,
             "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
-                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+                for i in range(len(self.additional_scopes))
             ],
             "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
-                for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
+                for i in range(len(self.ignore_user_ids))
             ],
             "generation": self.generation,
         }
@@ -1063,13 +1063,13 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
-            .with_additional_scopes([
+            .with_additional_scopes(None if data.get('additionalScopes') is None else [
                 Scope.from_dict(data.get('additionalScopes')[i])
-                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+                for i in range(len(data.get('additionalScopes')))
             ])\
-            .with_ignore_user_ids([
+            .with_ignore_user_ids(None if data.get('ignoreUserIds') is None else [
                 data.get('ignoreUserIds')[i]
-                for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
+                for i in range(len(data.get('ignoreUserIds')))
             ])\
             .with_generation(data.get('generation'))
 
@@ -1093,11 +1093,11 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             "calculateIntervalMinutes": self.calculate_interval_minutes,
             "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
-                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+                for i in range(len(self.additional_scopes))
             ],
             "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
-                for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
+                for i in range(len(self.ignore_user_ids))
             ],
             "generation": self.generation,
         }

@@ -318,9 +318,9 @@ class Subscribe(core.Gs2Model):
             .with_subscribe_id(data.get('subscribeId'))\
             .with_user_id(data.get('userId'))\
             .with_room_name(data.get('roomName'))\
-            .with_notification_types([
+            .with_notification_types(None if data.get('notificationTypes') is None else [
                 NotificationType.from_dict(data.get('notificationTypes')[i])
-                for i in range(len(data.get('notificationTypes')) if data.get('notificationTypes') else 0)
+                for i in range(len(data.get('notificationTypes')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
@@ -332,7 +332,7 @@ class Subscribe(core.Gs2Model):
             "roomName": self.room_name,
             "notificationTypes": None if self.notification_types is None else [
                 self.notification_types[i].to_dict() if self.notification_types[i] else None
-                for i in range(len(self.notification_types) if self.notification_types else 0)
+                for i in range(len(self.notification_types))
             ],
             "createdAt": self.created_at,
             "revision": self.revision,
@@ -615,9 +615,9 @@ class Room(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_metadata(data.get('metadata'))\
             .with_password(data.get('password'))\
-            .with_white_list_user_ids([
+            .with_white_list_user_ids(None if data.get('whiteListUserIds') is None else [
                 data.get('whiteListUserIds')[i]
-                for i in range(len(data.get('whiteListUserIds')) if data.get('whiteListUserIds') else 0)
+                for i in range(len(data.get('whiteListUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -632,7 +632,7 @@ class Room(core.Gs2Model):
             "password": self.password,
             "whiteListUserIds": None if self.white_list_user_ids is None else [
                 self.white_list_user_ids[i]
-                for i in range(len(self.white_list_user_ids) if self.white_list_user_ids else 0)
+                for i in range(len(self.white_list_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

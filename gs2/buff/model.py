@@ -711,9 +711,9 @@ class BuffTargetAction(core.Gs2Model):
         return BuffTargetAction()\
             .with_target_action_name(data.get('targetActionName'))\
             .with_target_field_name(data.get('targetFieldName'))\
-            .with_condition_grns([
+            .with_condition_grns(None if data.get('conditionGrns') is None else [
                 BuffTargetGrn.from_dict(data.get('conditionGrns')[i])
-                for i in range(len(data.get('conditionGrns')) if data.get('conditionGrns') else 0)
+                for i in range(len(data.get('conditionGrns')))
             ])\
             .with_rate(data.get('rate'))
 
@@ -723,7 +723,7 @@ class BuffTargetAction(core.Gs2Model):
             "targetFieldName": self.target_field_name,
             "conditionGrns": None if self.condition_grns is None else [
                 self.condition_grns[i].to_dict() if self.condition_grns[i] else None
-                for i in range(len(self.condition_grns) if self.condition_grns else 0)
+                for i in range(len(self.condition_grns))
             ],
             "rate": self.rate,
         }
@@ -772,9 +772,9 @@ class BuffTargetModel(core.Gs2Model):
         return BuffTargetModel()\
             .with_target_model_name(data.get('targetModelName'))\
             .with_target_field_name(data.get('targetFieldName'))\
-            .with_condition_grns([
+            .with_condition_grns(None if data.get('conditionGrns') is None else [
                 BuffTargetGrn.from_dict(data.get('conditionGrns')[i])
-                for i in range(len(data.get('conditionGrns')) if data.get('conditionGrns') else 0)
+                for i in range(len(data.get('conditionGrns')))
             ])\
             .with_rate(data.get('rate'))
 
@@ -784,7 +784,7 @@ class BuffTargetModel(core.Gs2Model):
             "targetFieldName": self.target_field_name,
             "conditionGrns": None if self.condition_grns is None else [
                 self.condition_grns[i].to_dict() if self.condition_grns[i] else None
-                for i in range(len(self.condition_grns) if self.condition_grns else 0)
+                for i in range(len(self.condition_grns))
             ],
             "rate": self.rate,
         }

@@ -259,6 +259,339 @@ class Config(core.Gs2Model):
         }
 
 
+class VerifyActionResult(core.Gs2Model):
+    action: str = None
+    verify_request: str = None
+    status_code: int = None
+    verify_result: str = None
+
+    def with_action(self, action: str) -> VerifyActionResult:
+        self.action = action
+        return self
+
+    def with_verify_request(self, verify_request: str) -> VerifyActionResult:
+        self.verify_request = verify_request
+        return self
+
+    def with_status_code(self, status_code: int) -> VerifyActionResult:
+        self.status_code = status_code
+        return self
+
+    def with_verify_result(self, verify_result: str) -> VerifyActionResult:
+        self.verify_result = verify_result
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyActionResult]:
+        if data is None:
+            return None
+        return VerifyActionResult()\
+            .with_action(data.get('action'))\
+            .with_verify_request(data.get('verifyRequest'))\
+            .with_status_code(data.get('statusCode'))\
+            .with_verify_result(data.get('verifyResult'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "verifyRequest": self.verify_request,
+            "statusCode": self.status_code,
+            "verifyResult": self.verify_result,
+        }
+
+
+class ConsumeActionResult(core.Gs2Model):
+    action: str = None
+    consume_request: str = None
+    status_code: int = None
+    consume_result: str = None
+
+    def with_action(self, action: str) -> ConsumeActionResult:
+        self.action = action
+        return self
+
+    def with_consume_request(self, consume_request: str) -> ConsumeActionResult:
+        self.consume_request = consume_request
+        return self
+
+    def with_status_code(self, status_code: int) -> ConsumeActionResult:
+        self.status_code = status_code
+        return self
+
+    def with_consume_result(self, consume_result: str) -> ConsumeActionResult:
+        self.consume_result = consume_result
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ConsumeActionResult]:
+        if data is None:
+            return None
+        return ConsumeActionResult()\
+            .with_action(data.get('action'))\
+            .with_consume_request(data.get('consumeRequest'))\
+            .with_status_code(data.get('statusCode'))\
+            .with_consume_result(data.get('consumeResult'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "consumeRequest": self.consume_request,
+            "statusCode": self.status_code,
+            "consumeResult": self.consume_result,
+        }
+
+
+class AcquireActionResult(core.Gs2Model):
+    action: str = None
+    acquire_request: str = None
+    status_code: int = None
+    acquire_result: str = None
+
+    def with_action(self, action: str) -> AcquireActionResult:
+        self.action = action
+        return self
+
+    def with_acquire_request(self, acquire_request: str) -> AcquireActionResult:
+        self.acquire_request = acquire_request
+        return self
+
+    def with_status_code(self, status_code: int) -> AcquireActionResult:
+        self.status_code = status_code
+        return self
+
+    def with_acquire_result(self, acquire_result: str) -> AcquireActionResult:
+        self.acquire_result = acquire_result
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AcquireActionResult]:
+        if data is None:
+            return None
+        return AcquireActionResult()\
+            .with_action(data.get('action'))\
+            .with_acquire_request(data.get('acquireRequest'))\
+            .with_status_code(data.get('statusCode'))\
+            .with_acquire_result(data.get('acquireResult'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "acquireRequest": self.acquire_request,
+            "statusCode": self.status_code,
+            "acquireResult": self.acquire_result,
+        }
+
+
+class TransactionResult(core.Gs2Model):
+    transaction_result_id: str = None
+    user_id: str = None
+    transaction_id: str = None
+    verify_results: List[VerifyActionResult] = None
+    consume_results: List[ConsumeActionResult] = None
+    acquire_results: List[AcquireActionResult] = None
+    created_at: int = None
+    revision: int = None
+
+    def with_transaction_result_id(self, transaction_result_id: str) -> TransactionResult:
+        self.transaction_result_id = transaction_result_id
+        return self
+
+    def with_user_id(self, user_id: str) -> TransactionResult:
+        self.user_id = user_id
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> TransactionResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_verify_results(self, verify_results: List[VerifyActionResult]) -> TransactionResult:
+        self.verify_results = verify_results
+        return self
+
+    def with_consume_results(self, consume_results: List[ConsumeActionResult]) -> TransactionResult:
+        self.consume_results = consume_results
+        return self
+
+    def with_acquire_results(self, acquire_results: List[AcquireActionResult]) -> TransactionResult:
+        self.acquire_results = acquire_results
+        return self
+
+    def with_created_at(self, created_at: int) -> TransactionResult:
+        self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> TransactionResult:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+        transaction_id,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:distributor:{namespaceName}:user:{userId}:transaction:result:{transactionId}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+            transactionId=transaction_id,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):distributor:(?P<namespaceName>.+):user:(?P<userId>.+):transaction:result:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):distributor:(?P<namespaceName>.+):user:(?P<userId>.+):transaction:result:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):distributor:(?P<namespaceName>.+):user:(?P<userId>.+):transaction:result:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):distributor:(?P<namespaceName>.+):user:(?P<userId>.+):transaction:result:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    @classmethod
+    def get_transaction_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):distributor:(?P<namespaceName>.+):user:(?P<userId>.+):transaction:result:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('transaction_id')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TransactionResult]:
+        if data is None:
+            return None
+        return TransactionResult()\
+            .with_transaction_result_id(data.get('transactionResultId'))\
+            .with_user_id(data.get('userId'))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_verify_results(None if data.get('verifyResults') is None else [
+                VerifyActionResult.from_dict(data.get('verifyResults')[i])
+                for i in range(len(data.get('verifyResults')))
+            ])\
+            .with_consume_results(None if data.get('consumeResults') is None else [
+                ConsumeActionResult.from_dict(data.get('consumeResults')[i])
+                for i in range(len(data.get('consumeResults')))
+            ])\
+            .with_acquire_results(None if data.get('acquireResults') is None else [
+                AcquireActionResult.from_dict(data.get('acquireResults')[i])
+                for i in range(len(data.get('acquireResults')))
+            ])\
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "transactionResultId": self.transaction_result_id,
+            "userId": self.user_id,
+            "transactionId": self.transaction_id,
+            "verifyResults": None if self.verify_results is None else [
+                self.verify_results[i].to_dict() if self.verify_results[i] else None
+                for i in range(len(self.verify_results))
+            ],
+            "consumeResults": None if self.consume_results is None else [
+                self.consume_results[i].to_dict() if self.consume_results[i] else None
+                for i in range(len(self.consume_results))
+            ],
+            "acquireResults": None if self.acquire_results is None else [
+                self.acquire_results[i].to_dict() if self.acquire_results[i] else None
+                for i in range(len(self.acquire_results))
+            ],
+            "createdAt": self.created_at,
+            "revision": self.revision,
+        }
+
+
 class VerifyAction(core.Gs2Model):
     action: str = None
     request: str = None
@@ -548,30 +881,30 @@ class StampSheetResult(core.Gs2Model):
             .with_stamp_sheet_result_id(data.get('stampSheetResultId'))\
             .with_user_id(data.get('userId'))\
             .with_transaction_id(data.get('transactionId'))\
-            .with_verify_task_requests([
+            .with_verify_task_requests(None if data.get('verifyTaskRequests') is None else [
                 VerifyAction.from_dict(data.get('verifyTaskRequests')[i])
-                for i in range(len(data.get('verifyTaskRequests')) if data.get('verifyTaskRequests') else 0)
+                for i in range(len(data.get('verifyTaskRequests')))
             ])\
-            .with_task_requests([
+            .with_task_requests(None if data.get('taskRequests') is None else [
                 ConsumeAction.from_dict(data.get('taskRequests')[i])
-                for i in range(len(data.get('taskRequests')) if data.get('taskRequests') else 0)
+                for i in range(len(data.get('taskRequests')))
             ])\
             .with_sheet_request(AcquireAction.from_dict(data.get('sheetRequest')))\
-            .with_verify_task_result_codes([
+            .with_verify_task_result_codes(None if data.get('verifyTaskResultCodes') is None else [
                 data.get('verifyTaskResultCodes')[i]
-                for i in range(len(data.get('verifyTaskResultCodes')) if data.get('verifyTaskResultCodes') else 0)
+                for i in range(len(data.get('verifyTaskResultCodes')))
             ])\
-            .with_verify_task_results([
+            .with_verify_task_results(None if data.get('verifyTaskResults') is None else [
                 data.get('verifyTaskResults')[i]
-                for i in range(len(data.get('verifyTaskResults')) if data.get('verifyTaskResults') else 0)
+                for i in range(len(data.get('verifyTaskResults')))
             ])\
-            .with_task_result_codes([
+            .with_task_result_codes(None if data.get('taskResultCodes') is None else [
                 data.get('taskResultCodes')[i]
-                for i in range(len(data.get('taskResultCodes')) if data.get('taskResultCodes') else 0)
+                for i in range(len(data.get('taskResultCodes')))
             ])\
-            .with_task_results([
+            .with_task_results(None if data.get('taskResults') is None else [
                 data.get('taskResults')[i]
-                for i in range(len(data.get('taskResults')) if data.get('taskResults') else 0)
+                for i in range(len(data.get('taskResults')))
             ])\
             .with_sheet_result_code(data.get('sheetResultCode'))\
             .with_sheet_result(data.get('sheetResult'))\
@@ -586,28 +919,28 @@ class StampSheetResult(core.Gs2Model):
             "transactionId": self.transaction_id,
             "verifyTaskRequests": None if self.verify_task_requests is None else [
                 self.verify_task_requests[i].to_dict() if self.verify_task_requests[i] else None
-                for i in range(len(self.verify_task_requests) if self.verify_task_requests else 0)
+                for i in range(len(self.verify_task_requests))
             ],
             "taskRequests": None if self.task_requests is None else [
                 self.task_requests[i].to_dict() if self.task_requests[i] else None
-                for i in range(len(self.task_requests) if self.task_requests else 0)
+                for i in range(len(self.task_requests))
             ],
             "sheetRequest": self.sheet_request.to_dict() if self.sheet_request else None,
             "verifyTaskResultCodes": None if self.verify_task_result_codes is None else [
                 self.verify_task_result_codes[i]
-                for i in range(len(self.verify_task_result_codes) if self.verify_task_result_codes else 0)
+                for i in range(len(self.verify_task_result_codes))
             ],
             "verifyTaskResults": None if self.verify_task_results is None else [
                 self.verify_task_results[i]
-                for i in range(len(self.verify_task_results) if self.verify_task_results else 0)
+                for i in range(len(self.verify_task_results))
             ],
             "taskResultCodes": None if self.task_result_codes is None else [
                 self.task_result_codes[i]
-                for i in range(len(self.task_result_codes) if self.task_result_codes else 0)
+                for i in range(len(self.task_result_codes))
             ],
             "taskResults": None if self.task_results is None else [
                 self.task_results[i]
-                for i in range(len(self.task_results) if self.task_results else 0)
+                for i in range(len(self.task_results))
             ],
             "sheetResultCode": self.sheet_result_code,
             "sheetResult": self.sheet_result,
@@ -806,9 +1139,9 @@ class DistributorModel(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_inbox_namespace_id(data.get('inboxNamespaceId'))\
-            .with_white_list_target_ids([
+            .with_white_list_target_ids(None if data.get('whiteListTargetIds') is None else [
                 data.get('whiteListTargetIds')[i]
-                for i in range(len(data.get('whiteListTargetIds')) if data.get('whiteListTargetIds') else 0)
+                for i in range(len(data.get('whiteListTargetIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -819,7 +1152,7 @@ class DistributorModel(core.Gs2Model):
             "inboxNamespaceId": self.inbox_namespace_id,
             "whiteListTargetIds": None if self.white_list_target_ids is None else [
                 self.white_list_target_ids[i]
-                for i in range(len(self.white_list_target_ids) if self.white_list_target_ids else 0)
+                for i in range(len(self.white_list_target_ids))
             ],
         }
 
@@ -950,9 +1283,9 @@ class DistributorModelMaster(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_inbox_namespace_id(data.get('inboxNamespaceId'))\
-            .with_white_list_target_ids([
+            .with_white_list_target_ids(None if data.get('whiteListTargetIds') is None else [
                 data.get('whiteListTargetIds')[i]
-                for i in range(len(data.get('whiteListTargetIds')) if data.get('whiteListTargetIds') else 0)
+                for i in range(len(data.get('whiteListTargetIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -967,7 +1300,7 @@ class DistributorModelMaster(core.Gs2Model):
             "inboxNamespaceId": self.inbox_namespace_id,
             "whiteListTargetIds": None if self.white_list_target_ids is None else [
                 self.white_list_target_ids[i]
-                for i in range(len(self.white_list_target_ids) if self.white_list_target_ids else 0)
+                for i in range(len(self.white_list_target_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -981,6 +1314,7 @@ class Namespace(core.Gs2Model):
     description: str = None
     assume_user_id: str = None
     auto_run_stamp_sheet_notification: NotificationSetting = None
+    auto_run_transaction_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1004,6 +1338,10 @@ class Namespace(core.Gs2Model):
 
     def with_auto_run_stamp_sheet_notification(self, auto_run_stamp_sheet_notification: NotificationSetting) -> Namespace:
         self.auto_run_stamp_sheet_notification = auto_run_stamp_sheet_notification
+        return self
+
+    def with_auto_run_transaction_notification(self, auto_run_transaction_notification: NotificationSetting) -> Namespace:
+        self.auto_run_transaction_notification = auto_run_transaction_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1089,6 +1427,7 @@ class Namespace(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_assume_user_id(data.get('assumeUserId'))\
             .with_auto_run_stamp_sheet_notification(NotificationSetting.from_dict(data.get('autoRunStampSheetNotification')))\
+            .with_auto_run_transaction_notification(NotificationSetting.from_dict(data.get('autoRunTransactionNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1101,6 +1440,7 @@ class Namespace(core.Gs2Model):
             "description": self.description,
             "assumeUserId": self.assume_user_id,
             "autoRunStampSheetNotification": self.auto_run_stamp_sheet_notification.to_dict() if self.auto_run_stamp_sheet_notification else None,
+            "autoRunTransactionNotification": self.auto_run_transaction_notification.to_dict() if self.auto_run_transaction_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

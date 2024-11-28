@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -516,9 +517,9 @@ class DescribeFormModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeFormModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FormModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -526,7 +527,7 @@ class DescribeFormModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -694,16 +695,16 @@ class DescribeMoldModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeMoldModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 MoldModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -773,9 +774,9 @@ class DescribeMoldModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeMoldModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 MoldModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -783,7 +784,7 @@ class DescribeMoldModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -951,16 +952,16 @@ class DescribePropertyFormModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribePropertyFormModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 PropertyFormModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1030,9 +1031,9 @@ class DescribePropertyFormModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribePropertyFormModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 PropertyFormModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1040,7 +1041,7 @@ class DescribePropertyFormModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1349,9 +1350,9 @@ class DescribeMoldsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeMoldsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Mold.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1359,7 +1360,7 @@ class DescribeMoldsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1396,9 +1397,9 @@ class DescribeMoldsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeMoldsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Mold.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1406,7 +1407,7 @@ class DescribeMoldsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1901,9 +1902,9 @@ class DescribeFormsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeFormsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Form.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1911,7 +1912,7 @@ class DescribeFormsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1948,9 +1949,9 @@ class DescribeFormsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeFormsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Form.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1958,7 +1959,7 @@ class DescribeFormsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2329,6 +2330,9 @@ class AcquireActionsToFormPropertiesResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: Form) -> AcquireActionsToFormPropertiesResult:
         self.item = item
@@ -2352,6 +2356,18 @@ class AcquireActionsToFormPropertiesResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireActionsToFormPropertiesResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> AcquireActionsToFormPropertiesResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> AcquireActionsToFormPropertiesResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> AcquireActionsToFormPropertiesResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -2378,7 +2394,10 @@ class AcquireActionsToFormPropertiesResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2388,6 +2407,9 @@ class AcquireActionsToFormPropertiesResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -2508,6 +2530,9 @@ class AcquireActionToFormPropertiesByStampSheetResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: Form) -> AcquireActionToFormPropertiesByStampSheetResult:
         self.item = item
@@ -2531,6 +2556,18 @@ class AcquireActionToFormPropertiesByStampSheetResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireActionToFormPropertiesByStampSheetResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> AcquireActionToFormPropertiesByStampSheetResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> AcquireActionToFormPropertiesByStampSheetResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> AcquireActionToFormPropertiesByStampSheetResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -2557,7 +2594,10 @@ class AcquireActionToFormPropertiesByStampSheetResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2567,6 +2607,9 @@ class AcquireActionToFormPropertiesByStampSheetResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -2656,9 +2699,9 @@ class DescribePropertyFormsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribePropertyFormsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 PropertyForm.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2666,7 +2709,7 @@ class DescribePropertyFormsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2703,9 +2746,9 @@ class DescribePropertyFormsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribePropertyFormsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 PropertyForm.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2713,7 +2756,7 @@ class DescribePropertyFormsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2999,6 +3042,9 @@ class AcquireActionsToPropertyFormPropertiesResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: PropertyForm) -> AcquireActionsToPropertyFormPropertiesResult:
         self.item = item
@@ -3018,6 +3064,18 @@ class AcquireActionsToPropertyFormPropertiesResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireActionsToPropertyFormPropertiesResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> AcquireActionsToPropertyFormPropertiesResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> AcquireActionsToPropertyFormPropertiesResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> AcquireActionsToPropertyFormPropertiesResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -3043,7 +3101,10 @@ class AcquireActionsToPropertyFormPropertiesResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3052,6 +3113,9 @@ class AcquireActionsToPropertyFormPropertiesResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -3143,6 +3207,9 @@ class AcquireActionToPropertyFormPropertiesByStampSheetResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: PropertyForm) -> AcquireActionToPropertyFormPropertiesByStampSheetResult:
         self.item = item
@@ -3162,6 +3229,18 @@ class AcquireActionToPropertyFormPropertiesByStampSheetResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> AcquireActionToPropertyFormPropertiesByStampSheetResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> AcquireActionToPropertyFormPropertiesByStampSheetResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> AcquireActionToPropertyFormPropertiesByStampSheetResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> AcquireActionToPropertyFormPropertiesByStampSheetResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -3187,7 +3266,10 @@ class AcquireActionToPropertyFormPropertiesByStampSheetResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3196,4 +3278,7 @@ class AcquireActionToPropertyFormPropertiesByStampSheetResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }

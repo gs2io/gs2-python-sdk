@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeAccountsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeAccountsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Account.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeAccountsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -778,9 +779,9 @@ class AuthenticationResult(core.Gs2Result):
             return None
         return AuthenticationResult()\
             .with_item(Account.from_dict(data.get('item')))\
-            .with_ban_statuses([
+            .with_ban_statuses(None if data.get('banStatuses') is None else [
                 BanStatus.from_dict(data.get('banStatuses')[i])
-                for i in range(len(data.get('banStatuses')) if data.get('banStatuses') else 0)
+                for i in range(len(data.get('banStatuses')))
             ])\
             .with_body(data.get('body'))\
             .with_signature(data.get('signature'))
@@ -790,7 +791,7 @@ class AuthenticationResult(core.Gs2Result):
             "item": self.item.to_dict() if self.item else None,
             "banStatuses": None if self.ban_statuses is None else [
                 self.ban_statuses[i].to_dict() if self.ban_statuses[i] else None
-                for i in range(len(self.ban_statuses) if self.ban_statuses else 0)
+                for i in range(len(self.ban_statuses))
             ],
             "body": self.body,
             "signature": self.signature,
@@ -828,9 +829,9 @@ class DescribeTakeOversResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeTakeOversResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 TakeOver.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -838,7 +839,7 @@ class DescribeTakeOversResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -875,9 +876,9 @@ class DescribeTakeOversByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeTakeOversByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 TakeOver.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -885,7 +886,7 @@ class DescribeTakeOversByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1398,9 +1399,9 @@ class DescribePlatformIdsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribePlatformIdsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 PlatformId.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1408,7 +1409,7 @@ class DescribePlatformIdsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1445,9 +1446,9 @@ class DescribePlatformIdsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribePlatformIdsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 PlatformId.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1455,7 +1456,7 @@ class DescribePlatformIdsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1861,16 +1862,16 @@ class DescribeTakeOverTypeModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeTakeOverTypeModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 TakeOverTypeModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1940,9 +1941,9 @@ class DescribeTakeOverTypeModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeTakeOverTypeModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 TakeOverTypeModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1950,7 +1951,7 @@ class DescribeTakeOverTypeModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

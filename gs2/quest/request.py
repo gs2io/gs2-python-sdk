@@ -1076,30 +1076,30 @@ class CreateQuestModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_contents([
+            .with_contents(None if data.get('contents') is None else [
                 Contents.from_dict(data.get('contents')[i])
-                for i in range(len(data.get('contents')) if data.get('contents') else 0)
+                for i in range(len(data.get('contents')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
-            .with_first_complete_acquire_actions([
+            .with_first_complete_acquire_actions(None if data.get('firstCompleteAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('firstCompleteAcquireActions')[i])
-                for i in range(len(data.get('firstCompleteAcquireActions')) if data.get('firstCompleteAcquireActions') else 0)
+                for i in range(len(data.get('firstCompleteAcquireActions')))
             ])\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
-            .with_failed_acquire_actions([
+            .with_failed_acquire_actions(None if data.get('failedAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('failedAcquireActions')[i])
-                for i in range(len(data.get('failedAcquireActions')) if data.get('failedAcquireActions') else 0)
+                for i in range(len(data.get('failedAcquireActions')))
             ])\
-            .with_premise_quest_names([
+            .with_premise_quest_names(None if data.get('premiseQuestNames') is None else [
                 data.get('premiseQuestNames')[i]
-                for i in range(len(data.get('premiseQuestNames')) if data.get('premiseQuestNames') else 0)
+                for i in range(len(data.get('premiseQuestNames')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1111,28 +1111,28 @@ class CreateQuestModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "contents": None if self.contents is None else [
                 self.contents[i].to_dict() if self.contents[i] else None
-                for i in range(len(self.contents) if self.contents else 0)
+                for i in range(len(self.contents))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "firstCompleteAcquireActions": None if self.first_complete_acquire_actions is None else [
                 self.first_complete_acquire_actions[i].to_dict() if self.first_complete_acquire_actions[i] else None
-                for i in range(len(self.first_complete_acquire_actions) if self.first_complete_acquire_actions else 0)
+                for i in range(len(self.first_complete_acquire_actions))
             ],
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "failedAcquireActions": None if self.failed_acquire_actions is None else [
                 self.failed_acquire_actions[i].to_dict() if self.failed_acquire_actions[i] else None
-                for i in range(len(self.failed_acquire_actions) if self.failed_acquire_actions else 0)
+                for i in range(len(self.failed_acquire_actions))
             ],
             "premiseQuestNames": None if self.premise_quest_names is None else [
                 self.premise_quest_names[i]
-                for i in range(len(self.premise_quest_names) if self.premise_quest_names else 0)
+                for i in range(len(self.premise_quest_names))
             ],
         }
 
@@ -1275,30 +1275,30 @@ class UpdateQuestModelMasterRequest(core.Gs2Request):
             .with_quest_name(data.get('questName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_contents([
+            .with_contents(None if data.get('contents') is None else [
                 Contents.from_dict(data.get('contents')[i])
-                for i in range(len(data.get('contents')) if data.get('contents') else 0)
+                for i in range(len(data.get('contents')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
-            .with_first_complete_acquire_actions([
+            .with_first_complete_acquire_actions(None if data.get('firstCompleteAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('firstCompleteAcquireActions')[i])
-                for i in range(len(data.get('firstCompleteAcquireActions')) if data.get('firstCompleteAcquireActions') else 0)
+                for i in range(len(data.get('firstCompleteAcquireActions')))
             ])\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
-            .with_failed_acquire_actions([
+            .with_failed_acquire_actions(None if data.get('failedAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('failedAcquireActions')[i])
-                for i in range(len(data.get('failedAcquireActions')) if data.get('failedAcquireActions') else 0)
+                for i in range(len(data.get('failedAcquireActions')))
             ])\
-            .with_premise_quest_names([
+            .with_premise_quest_names(None if data.get('premiseQuestNames') is None else [
                 data.get('premiseQuestNames')[i]
-                for i in range(len(data.get('premiseQuestNames')) if data.get('premiseQuestNames') else 0)
+                for i in range(len(data.get('premiseQuestNames')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1310,28 +1310,28 @@ class UpdateQuestModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "contents": None if self.contents is None else [
                 self.contents[i].to_dict() if self.contents[i] else None
-                for i in range(len(self.contents) if self.contents else 0)
+                for i in range(len(self.contents))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "firstCompleteAcquireActions": None if self.first_complete_acquire_actions is None else [
                 self.first_complete_acquire_actions[i].to_dict() if self.first_complete_acquire_actions[i] else None
-                for i in range(len(self.first_complete_acquire_actions) if self.first_complete_acquire_actions else 0)
+                for i in range(len(self.first_complete_acquire_actions))
             ],
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "failedAcquireActions": None if self.failed_acquire_actions is None else [
                 self.failed_acquire_actions[i].to_dict() if self.failed_acquire_actions[i] else None
-                for i in range(len(self.failed_acquire_actions) if self.failed_acquire_actions else 0)
+                for i in range(len(self.failed_acquire_actions))
             ],
             "premiseQuestNames": None if self.premise_quest_names is None else [
                 self.premise_quest_names[i]
-                for i in range(len(self.premise_quest_names) if self.premise_quest_names else 0)
+                for i in range(len(self.premise_quest_names))
             ],
         }
 
@@ -1670,9 +1670,9 @@ class CreateProgressByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_quest_model_id(data.get('questModelId'))\
             .with_force(data.get('force'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1684,7 +1684,7 @@ class CreateProgressByUserIdRequest(core.Gs2Request):
             "force": self.force,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1846,9 +1846,9 @@ class StartRequest(core.Gs2Request):
             .with_quest_name(data.get('questName'))\
             .with_access_token(data.get('accessToken'))\
             .with_force(data.get('force'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1860,7 +1860,7 @@ class StartRequest(core.Gs2Request):
             "force": self.force,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1933,9 +1933,9 @@ class StartByUserIdRequest(core.Gs2Request):
             .with_quest_name(data.get('questName'))\
             .with_user_id(data.get('userId'))\
             .with_force(data.get('force'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1948,7 +1948,7 @@ class StartByUserIdRequest(core.Gs2Request):
             "force": self.force,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2009,14 +2009,14 @@ class EndRequest(core.Gs2Request):
         return EndRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_rewards([
+            .with_rewards(None if data.get('rewards') is None else [
                 Reward.from_dict(data.get('rewards')[i])
-                for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
+                for i in range(len(data.get('rewards')))
             ])\
             .with_is_complete(data.get('isComplete'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2025,12 +2025,12 @@ class EndRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
-                for i in range(len(self.rewards) if self.rewards else 0)
+                for i in range(len(self.rewards))
             ],
             "isComplete": self.is_complete,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -2095,14 +2095,14 @@ class EndByUserIdRequest(core.Gs2Request):
         return EndByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_rewards([
+            .with_rewards(None if data.get('rewards') is None else [
                 Reward.from_dict(data.get('rewards')[i])
-                for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
+                for i in range(len(data.get('rewards')))
             ])\
             .with_is_complete(data.get('isComplete'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2112,12 +2112,12 @@ class EndByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
-                for i in range(len(self.rewards) if self.rewards else 0)
+                for i in range(len(self.rewards))
             ],
             "isComplete": self.is_complete,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

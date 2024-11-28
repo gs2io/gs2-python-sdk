@@ -413,9 +413,9 @@ class RecoverValueTable(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -425,7 +425,7 @@ class RecoverValueTable(core.Gs2Model):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -474,9 +474,9 @@ class RecoverIntervalTable(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -486,7 +486,7 @@ class RecoverIntervalTable(core.Gs2Model):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -535,9 +535,9 @@ class MaxStaminaTable(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -547,7 +547,7 @@ class MaxStaminaTable(core.Gs2Model):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -921,9 +921,9 @@ class RecoverValueTableMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -938,7 +938,7 @@ class RecoverValueTableMaster(core.Gs2Model):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1072,9 +1072,9 @@ class RecoverIntervalTableMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1089,7 +1089,7 @@ class RecoverIntervalTableMaster(core.Gs2Model):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1223,9 +1223,9 @@ class MaxStaminaTableMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1240,7 +1240,7 @@ class MaxStaminaTableMaster(core.Gs2Model):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

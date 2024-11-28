@@ -800,9 +800,9 @@ class PrepareUploadRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_content_type(data.get('contentType'))\
             .with_scope(data.get('scope'))\
-            .with_allow_user_ids([
+            .with_allow_user_ids(None if data.get('allowUserIds') is None else [
                 data.get('allowUserIds')[i]
-                for i in range(len(data.get('allowUserIds')) if data.get('allowUserIds') else 0)
+                for i in range(len(data.get('allowUserIds')))
             ])\
             .with_update_if_exists(data.get('updateIfExists'))
 
@@ -815,7 +815,7 @@ class PrepareUploadRequest(core.Gs2Request):
             "scope": self.scope,
             "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
-                for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
+                for i in range(len(self.allow_user_ids))
             ],
             "updateIfExists": self.update_if_exists,
         }
@@ -894,9 +894,9 @@ class PrepareUploadByUserIdRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_content_type(data.get('contentType'))\
             .with_scope(data.get('scope'))\
-            .with_allow_user_ids([
+            .with_allow_user_ids(None if data.get('allowUserIds') is None else [
                 data.get('allowUserIds')[i]
-                for i in range(len(data.get('allowUserIds')) if data.get('allowUserIds') else 0)
+                for i in range(len(data.get('allowUserIds')))
             ])\
             .with_update_if_exists(data.get('updateIfExists'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -910,7 +910,7 @@ class PrepareUploadByUserIdRequest(core.Gs2Request):
             "scope": self.scope,
             "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
-                for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
+                for i in range(len(self.allow_user_ids))
             ],
             "updateIfExists": self.update_if_exists,
             "timeOffsetToken": self.time_offset_token,
@@ -974,9 +974,9 @@ class UpdateDataObjectRequest(core.Gs2Request):
             .with_data_object_name(data.get('dataObjectName'))\
             .with_access_token(data.get('accessToken'))\
             .with_scope(data.get('scope'))\
-            .with_allow_user_ids([
+            .with_allow_user_ids(None if data.get('allowUserIds') is None else [
                 data.get('allowUserIds')[i]
-                for i in range(len(data.get('allowUserIds')) if data.get('allowUserIds') else 0)
+                for i in range(len(data.get('allowUserIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -987,7 +987,7 @@ class UpdateDataObjectRequest(core.Gs2Request):
             "scope": self.scope,
             "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
-                for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
+                for i in range(len(self.allow_user_ids))
             ],
         }
 
@@ -1054,9 +1054,9 @@ class UpdateDataObjectByUserIdRequest(core.Gs2Request):
             .with_data_object_name(data.get('dataObjectName'))\
             .with_user_id(data.get('userId'))\
             .with_scope(data.get('scope'))\
-            .with_allow_user_ids([
+            .with_allow_user_ids(None if data.get('allowUserIds') is None else [
                 data.get('allowUserIds')[i]
-                for i in range(len(data.get('allowUserIds')) if data.get('allowUserIds') else 0)
+                for i in range(len(data.get('allowUserIds')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1068,7 +1068,7 @@ class UpdateDataObjectByUserIdRequest(core.Gs2Request):
             "scope": self.scope,
             "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
-                for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
+                for i in range(len(self.allow_user_ids))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

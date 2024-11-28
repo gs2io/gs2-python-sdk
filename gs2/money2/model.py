@@ -655,9 +655,9 @@ class WithdrawEvent(core.Gs2Model):
             return None
         return WithdrawEvent()\
             .with_slot(data.get('slot'))\
-            .with_withdraw_details([
+            .with_withdraw_details(None if data.get('withdrawDetails') is None else [
                 DepositTransaction.from_dict(data.get('withdrawDetails')[i])
-                for i in range(len(data.get('withdrawDetails')) if data.get('withdrawDetails') else 0)
+                for i in range(len(data.get('withdrawDetails')))
             ])\
             .with_status(WalletSummary.from_dict(data.get('status')))
 
@@ -666,7 +666,7 @@ class WithdrawEvent(core.Gs2Model):
             "slot": self.slot,
             "withdrawDetails": None if self.withdraw_details is None else [
                 self.withdraw_details[i].to_dict() if self.withdraw_details[i] else None
-                for i in range(len(self.withdraw_details) if self.withdraw_details else 0)
+                for i in range(len(self.withdraw_details))
             ],
             "status": self.status.to_dict() if self.status else None,
         }
@@ -709,9 +709,9 @@ class DepositEvent(core.Gs2Model):
             return None
         return DepositEvent()\
             .with_slot(data.get('slot'))\
-            .with_deposit_transactions([
+            .with_deposit_transactions(None if data.get('depositTransactions') is None else [
                 DepositTransaction.from_dict(data.get('depositTransactions')[i])
-                for i in range(len(data.get('depositTransactions')) if data.get('depositTransactions') else 0)
+                for i in range(len(data.get('depositTransactions')))
             ])\
             .with_status(WalletSummary.from_dict(data.get('status')))
 
@@ -720,7 +720,7 @@ class DepositEvent(core.Gs2Model):
             "slot": self.slot,
             "depositTransactions": None if self.deposit_transactions is None else [
                 self.deposit_transactions[i].to_dict() if self.deposit_transactions[i] else None
-                for i in range(len(self.deposit_transactions) if self.deposit_transactions else 0)
+                for i in range(len(self.deposit_transactions))
             ],
             "status": self.status.to_dict() if self.status else None,
         }
@@ -1717,9 +1717,9 @@ class Wallet(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_slot(data.get('slot'))\
             .with_summary(WalletSummary.from_dict(data.get('summary')))\
-            .with_deposit_transactions([
+            .with_deposit_transactions(None if data.get('depositTransactions') is None else [
                 DepositTransaction.from_dict(data.get('depositTransactions')[i])
-                for i in range(len(data.get('depositTransactions')) if data.get('depositTransactions') else 0)
+                for i in range(len(data.get('depositTransactions')))
             ])\
             .with_shared_free_currency(data.get('sharedFreeCurrency'))\
             .with_created_at(data.get('createdAt'))\
@@ -1734,7 +1734,7 @@ class Wallet(core.Gs2Model):
             "summary": self.summary.to_dict() if self.summary else None,
             "depositTransactions": None if self.deposit_transactions is None else [
                 self.deposit_transactions[i].to_dict() if self.deposit_transactions[i] else None
-                for i in range(len(self.deposit_transactions) if self.deposit_transactions else 0)
+                for i in range(len(self.deposit_transactions))
             ],
             "sharedFreeCurrency": self.shared_free_currency,
             "createdAt": self.created_at,

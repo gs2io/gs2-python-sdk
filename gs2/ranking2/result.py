@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -477,16 +478,16 @@ class DescribeGlobalRankingModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGlobalRankingModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 GlobalRankingModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -556,9 +557,9 @@ class DescribeGlobalRankingModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGlobalRankingModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 GlobalRankingModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -566,7 +567,7 @@ class DescribeGlobalRankingModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -739,9 +740,9 @@ class DescribeGlobalRankingScoresResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGlobalRankingScoresResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 GlobalRankingScore.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -749,7 +750,7 @@ class DescribeGlobalRankingScoresResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -786,9 +787,9 @@ class DescribeGlobalRankingScoresByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGlobalRankingScoresByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 GlobalRankingScore.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -796,7 +797,7 @@ class DescribeGlobalRankingScoresByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1112,9 +1113,9 @@ class DescribeGlobalRankingReceivedRewardsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGlobalRankingReceivedRewardsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 GlobalRankingReceivedReward.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1122,7 +1123,7 @@ class DescribeGlobalRankingReceivedRewardsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1159,9 +1160,9 @@ class DescribeGlobalRankingReceivedRewardsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGlobalRankingReceivedRewardsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 GlobalRankingReceivedReward.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1169,7 +1170,7 @@ class DescribeGlobalRankingReceivedRewardsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1250,6 +1251,9 @@ class ReceiveGlobalRankingReceivedRewardResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: GlobalRankingModel) -> ReceiveGlobalRankingReceivedRewardResult:
         self.item = item
@@ -1275,6 +1279,18 @@ class ReceiveGlobalRankingReceivedRewardResult(core.Gs2Result):
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveGlobalRankingReceivedRewardResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveGlobalRankingReceivedRewardResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveGlobalRankingReceivedRewardResult:
+        self.transaction_result = transaction_result
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1295,26 +1311,32 @@ class ReceiveGlobalRankingReceivedRewardResult(core.Gs2Result):
             return None
         return ReceiveGlobalRankingReceivedRewardResult()\
             .with_item(GlobalRankingModel.from_dict(data.get('item')))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1325,6 +1347,9 @@ class ReceiveGlobalRankingReceivedRewardByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: GlobalRankingModel) -> ReceiveGlobalRankingReceivedRewardByUserIdResult:
         self.item = item
@@ -1350,6 +1375,18 @@ class ReceiveGlobalRankingReceivedRewardByUserIdResult(core.Gs2Result):
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveGlobalRankingReceivedRewardByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveGlobalRankingReceivedRewardByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveGlobalRankingReceivedRewardByUserIdResult:
+        self.transaction_result = transaction_result
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1370,26 +1407,32 @@ class ReceiveGlobalRankingReceivedRewardByUserIdResult(core.Gs2Result):
             return None
         return ReceiveGlobalRankingReceivedRewardByUserIdResult()\
             .with_item(GlobalRankingModel.from_dict(data.get('item')))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1567,9 +1610,9 @@ class DescribeGlobalRankingsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGlobalRankingsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 GlobalRankingData.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1577,7 +1620,7 @@ class DescribeGlobalRankingsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1614,9 +1657,9 @@ class DescribeGlobalRankingsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeGlobalRankingsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 GlobalRankingData.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1624,7 +1667,7 @@ class DescribeGlobalRankingsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1724,16 +1767,16 @@ class DescribeClusterRankingModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeClusterRankingModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ClusterRankingModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1803,9 +1846,9 @@ class DescribeClusterRankingModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeClusterRankingModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ClusterRankingModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1813,7 +1856,7 @@ class DescribeClusterRankingModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1986,9 +2029,9 @@ class DescribeClusterRankingScoresResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeClusterRankingScoresResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ClusterRankingScore.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1996,7 +2039,7 @@ class DescribeClusterRankingScoresResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2033,9 +2076,9 @@ class DescribeClusterRankingScoresByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeClusterRankingScoresByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ClusterRankingScore.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2043,7 +2086,7 @@ class DescribeClusterRankingScoresByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2359,9 +2402,9 @@ class DescribeClusterRankingReceivedRewardsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeClusterRankingReceivedRewardsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ClusterRankingReceivedReward.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2369,7 +2412,7 @@ class DescribeClusterRankingReceivedRewardsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2406,9 +2449,9 @@ class DescribeClusterRankingReceivedRewardsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeClusterRankingReceivedRewardsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ClusterRankingReceivedReward.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2416,7 +2459,7 @@ class DescribeClusterRankingReceivedRewardsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2497,6 +2540,9 @@ class ReceiveClusterRankingReceivedRewardResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: ClusterRankingModel) -> ReceiveClusterRankingReceivedRewardResult:
         self.item = item
@@ -2522,6 +2568,18 @@ class ReceiveClusterRankingReceivedRewardResult(core.Gs2Result):
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveClusterRankingReceivedRewardResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveClusterRankingReceivedRewardResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveClusterRankingReceivedRewardResult:
+        self.transaction_result = transaction_result
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -2542,26 +2600,32 @@ class ReceiveClusterRankingReceivedRewardResult(core.Gs2Result):
             return None
         return ReceiveClusterRankingReceivedRewardResult()\
             .with_item(ClusterRankingModel.from_dict(data.get('item')))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -2572,6 +2636,9 @@ class ReceiveClusterRankingReceivedRewardByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: ClusterRankingModel) -> ReceiveClusterRankingReceivedRewardByUserIdResult:
         self.item = item
@@ -2597,6 +2664,18 @@ class ReceiveClusterRankingReceivedRewardByUserIdResult(core.Gs2Result):
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveClusterRankingReceivedRewardByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveClusterRankingReceivedRewardByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveClusterRankingReceivedRewardByUserIdResult:
+        self.transaction_result = transaction_result
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -2617,26 +2696,32 @@ class ReceiveClusterRankingReceivedRewardByUserIdResult(core.Gs2Result):
             return None
         return ReceiveClusterRankingReceivedRewardByUserIdResult()\
             .with_item(ClusterRankingModel.from_dict(data.get('item')))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -2814,9 +2899,9 @@ class DescribeClusterRankingsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeClusterRankingsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ClusterRankingData.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2824,7 +2909,7 @@ class DescribeClusterRankingsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2861,9 +2946,9 @@ class DescribeClusterRankingsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeClusterRankingsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ClusterRankingData.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -2871,7 +2956,7 @@ class DescribeClusterRankingsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -2971,16 +3056,16 @@ class DescribeSubscribeRankingModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribeRankingModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SubscribeRankingModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -3050,9 +3135,9 @@ class DescribeSubscribeRankingModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribeRankingModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SubscribeRankingModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -3060,7 +3145,7 @@ class DescribeSubscribeRankingModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -3233,9 +3318,9 @@ class DescribeSubscribesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SubscribeUser.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -3243,7 +3328,7 @@ class DescribeSubscribesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -3280,9 +3365,9 @@ class DescribeSubscribesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SubscribeUser.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -3290,7 +3375,7 @@ class DescribeSubscribesByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -3395,9 +3480,9 @@ class DescribeSubscribeRankingScoresResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribeRankingScoresResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SubscribeRankingScore.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -3405,7 +3490,7 @@ class DescribeSubscribeRankingScoresResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -3442,9 +3527,9 @@ class DescribeSubscribeRankingScoresByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribeRankingScoresByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SubscribeRankingScore.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -3452,7 +3537,7 @@ class DescribeSubscribeRankingScoresByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -3768,9 +3853,9 @@ class DescribeSubscribeRankingsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribeRankingsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SubscribeRankingData.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -3778,7 +3863,7 @@ class DescribeSubscribeRankingsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -3815,9 +3900,9 @@ class DescribeSubscribeRankingsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribeRankingsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SubscribeRankingData.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -3825,7 +3910,7 @@ class DescribeSubscribeRankingsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

@@ -784,9 +784,9 @@ class CreateFormModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotModel.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -797,7 +797,7 @@ class CreateFormModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
         }
 
@@ -897,9 +897,9 @@ class UpdateFormModelMasterRequest(core.Gs2Request):
             .with_form_model_name(data.get('formModelName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotModel.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -910,7 +910,7 @@ class UpdateFormModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
         }
 
@@ -1510,9 +1510,9 @@ class CreatePropertyFormModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotModel.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1523,7 +1523,7 @@ class CreatePropertyFormModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
         }
 
@@ -1623,9 +1623,9 @@ class UpdatePropertyFormModelMasterRequest(core.Gs2Request):
             .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotModel.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1636,7 +1636,7 @@ class UpdatePropertyFormModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
         }
 
@@ -3038,9 +3038,9 @@ class SetFormByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 Slot.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -3052,7 +3052,7 @@ class SetFormByUserIdRequest(core.Gs2Request):
             "index": self.index,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -3120,9 +3120,9 @@ class SetFormWithSignatureRequest(core.Gs2Request):
             .with_access_token(data.get('accessToken'))\
             .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotWithSignature.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])\
             .with_key_id(data.get('keyId'))
 
@@ -3134,7 +3134,7 @@ class SetFormWithSignatureRequest(core.Gs2Request):
             "index": self.index,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
             "keyId": self.key_id,
         }
@@ -3208,9 +3208,9 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
             .with_mold_model_name(data.get('moldModelName'))\
             .with_index(data.get('index'))\
             .with_acquire_action(AcquireAction.from_dict(data.get('acquireAction')))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -3223,7 +3223,7 @@ class AcquireActionsToFormPropertiesRequest(core.Gs2Request):
             "acquireAction": self.acquire_action.to_dict() if self.acquire_action else None,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -3899,9 +3899,9 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 Slot.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -3913,7 +3913,7 @@ class SetPropertyFormByUserIdRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -3981,9 +3981,9 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
             .with_access_token(data.get('accessToken'))\
             .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotWithSignature.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])\
             .with_key_id(data.get('keyId'))
 
@@ -3995,7 +3995,7 @@ class SetPropertyFormWithSignatureRequest(core.Gs2Request):
             "propertyId": self.property_id,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
             "keyId": self.key_id,
         }
@@ -4069,9 +4069,9 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
             .with_property_form_model_name(data.get('propertyFormModelName'))\
             .with_property_id(data.get('propertyId'))\
             .with_acquire_action(AcquireAction.from_dict(data.get('acquireAction')))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -4084,7 +4084,7 @@ class AcquireActionsToPropertyFormPropertiesRequest(core.Gs2Request):
             "acquireAction": self.acquire_action.to_dict() if self.acquire_action else None,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

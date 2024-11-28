@@ -1275,9 +1275,9 @@ class QueryInGameLogRequest(core.Gs2Request):
         return QueryInGameLogRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_tags([
+            .with_tags(None if data.get('tags') is None else [
                 InGameLogTag.from_dict(data.get('tags')[i])
-                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+                for i in range(len(data.get('tags')))
             ])\
             .with_begin(data.get('begin'))\
             .with_end(data.get('end'))\
@@ -1292,7 +1292,7 @@ class QueryInGameLogRequest(core.Gs2Request):
             "userId": self.user_id,
             "tags": None if self.tags is None else [
                 self.tags[i].to_dict() if self.tags[i] else None
-                for i in range(len(self.tags) if self.tags else 0)
+                for i in range(len(self.tags))
             ],
             "begin": self.begin,
             "end": self.end,
@@ -1353,9 +1353,9 @@ class SendInGameLogRequest(core.Gs2Request):
         return SendInGameLogRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_tags([
+            .with_tags(None if data.get('tags') is None else [
                 InGameLogTag.from_dict(data.get('tags')[i])
-                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+                for i in range(len(data.get('tags')))
             ])\
             .with_payload(data.get('payload'))
 
@@ -1365,7 +1365,7 @@ class SendInGameLogRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "tags": None if self.tags is None else [
                 self.tags[i].to_dict() if self.tags[i] else None
-                for i in range(len(self.tags) if self.tags else 0)
+                for i in range(len(self.tags))
             ],
             "payload": self.payload,
         }
@@ -1426,9 +1426,9 @@ class SendInGameLogByUserIdRequest(core.Gs2Request):
         return SendInGameLogByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_tags([
+            .with_tags(None if data.get('tags') is None else [
                 InGameLogTag.from_dict(data.get('tags')[i])
-                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+                for i in range(len(data.get('tags')))
             ])\
             .with_payload(data.get('payload'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -1439,7 +1439,7 @@ class SendInGameLogByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "tags": None if self.tags is None else [
                 self.tags[i].to_dict() if self.tags[i] else None
-                for i in range(len(self.tags) if self.tags else 0)
+                for i in range(len(self.tags))
             ],
             "payload": self.payload,
             "timeOffsetToken": self.time_offset_token,

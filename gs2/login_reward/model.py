@@ -76,12 +76,27 @@ class ScriptSetting(core.Gs2Model):
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -116,6 +131,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -123,6 +141,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -534,9 +555,9 @@ class ReceiveStatus(core.Gs2Model):
             .with_receive_status_id(data.get('receiveStatusId'))\
             .with_bonus_model_name(data.get('bonusModelName'))\
             .with_user_id(data.get('userId'))\
-            .with_received_steps([
+            .with_received_steps(None if data.get('receivedSteps') is None else [
                 data.get('receivedSteps')[i]
-                for i in range(len(data.get('receivedSteps')) if data.get('receivedSteps') else 0)
+                for i in range(len(data.get('receivedSteps')))
             ])\
             .with_last_received_at(data.get('lastReceivedAt'))\
             .with_created_at(data.get('createdAt'))\
@@ -550,7 +571,7 @@ class ReceiveStatus(core.Gs2Model):
             "userId": self.user_id,
             "receivedSteps": None if self.received_steps is None else [
                 self.received_steps[i]
-                for i in range(len(self.received_steps) if self.received_steps else 0)
+                for i in range(len(self.received_steps))
             ],
             "lastReceivedAt": self.last_received_at,
             "createdAt": self.created_at,
@@ -585,16 +606,16 @@ class Reward(core.Gs2Model):
         if data is None:
             return None
         return Reward()\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
         }
 
@@ -737,18 +758,18 @@ class BonusModel(core.Gs2Model):
             .with_period_event_id(data.get('periodEventId'))\
             .with_reset_hour(data.get('resetHour'))\
             .with_repeat(data.get('repeat'))\
-            .with_rewards([
+            .with_rewards(None if data.get('rewards') is None else [
                 Reward.from_dict(data.get('rewards')[i])
-                for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
+                for i in range(len(data.get('rewards')))
             ])\
             .with_missed_receive_relief(data.get('missedReceiveRelief'))\
-            .with_missed_receive_relief_verify_actions([
+            .with_missed_receive_relief_verify_actions(None if data.get('missedReceiveReliefVerifyActions') is None else [
                 VerifyAction.from_dict(data.get('missedReceiveReliefVerifyActions')[i])
-                for i in range(len(data.get('missedReceiveReliefVerifyActions')) if data.get('missedReceiveReliefVerifyActions') else 0)
+                for i in range(len(data.get('missedReceiveReliefVerifyActions')))
             ])\
-            .with_missed_receive_relief_consume_actions([
+            .with_missed_receive_relief_consume_actions(None if data.get('missedReceiveReliefConsumeActions') is None else [
                 ConsumeAction.from_dict(data.get('missedReceiveReliefConsumeActions')[i])
-                for i in range(len(data.get('missedReceiveReliefConsumeActions')) if data.get('missedReceiveReliefConsumeActions') else 0)
+                for i in range(len(data.get('missedReceiveReliefConsumeActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -762,16 +783,16 @@ class BonusModel(core.Gs2Model):
             "repeat": self.repeat,
             "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
-                for i in range(len(self.rewards) if self.rewards else 0)
+                for i in range(len(self.rewards))
             ],
             "missedReceiveRelief": self.missed_receive_relief,
             "missedReceiveReliefVerifyActions": None if self.missed_receive_relief_verify_actions is None else [
                 self.missed_receive_relief_verify_actions[i].to_dict() if self.missed_receive_relief_verify_actions[i] else None
-                for i in range(len(self.missed_receive_relief_verify_actions) if self.missed_receive_relief_verify_actions else 0)
+                for i in range(len(self.missed_receive_relief_verify_actions))
             ],
             "missedReceiveReliefConsumeActions": None if self.missed_receive_relief_consume_actions is None else [
                 self.missed_receive_relief_consume_actions[i].to_dict() if self.missed_receive_relief_consume_actions[i] else None
-                for i in range(len(self.missed_receive_relief_consume_actions) if self.missed_receive_relief_consume_actions else 0)
+                for i in range(len(self.missed_receive_relief_consume_actions))
             ],
         }
 
@@ -1019,18 +1040,18 @@ class BonusModelMaster(core.Gs2Model):
             .with_period_event_id(data.get('periodEventId'))\
             .with_reset_hour(data.get('resetHour'))\
             .with_repeat(data.get('repeat'))\
-            .with_rewards([
+            .with_rewards(None if data.get('rewards') is None else [
                 Reward.from_dict(data.get('rewards')[i])
-                for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
+                for i in range(len(data.get('rewards')))
             ])\
             .with_missed_receive_relief(data.get('missedReceiveRelief'))\
-            .with_missed_receive_relief_verify_actions([
+            .with_missed_receive_relief_verify_actions(None if data.get('missedReceiveReliefVerifyActions') is None else [
                 VerifyAction.from_dict(data.get('missedReceiveReliefVerifyActions')[i])
-                for i in range(len(data.get('missedReceiveReliefVerifyActions')) if data.get('missedReceiveReliefVerifyActions') else 0)
+                for i in range(len(data.get('missedReceiveReliefVerifyActions')))
             ])\
-            .with_missed_receive_relief_consume_actions([
+            .with_missed_receive_relief_consume_actions(None if data.get('missedReceiveReliefConsumeActions') is None else [
                 ConsumeAction.from_dict(data.get('missedReceiveReliefConsumeActions')[i])
-                for i in range(len(data.get('missedReceiveReliefConsumeActions')) if data.get('missedReceiveReliefConsumeActions') else 0)
+                for i in range(len(data.get('missedReceiveReliefConsumeActions')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1048,16 +1069,16 @@ class BonusModelMaster(core.Gs2Model):
             "repeat": self.repeat,
             "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
-                for i in range(len(self.rewards) if self.rewards else 0)
+                for i in range(len(self.rewards))
             ],
             "missedReceiveRelief": self.missed_receive_relief,
             "missedReceiveReliefVerifyActions": None if self.missed_receive_relief_verify_actions is None else [
                 self.missed_receive_relief_verify_actions[i].to_dict() if self.missed_receive_relief_verify_actions[i] else None
-                for i in range(len(self.missed_receive_relief_verify_actions) if self.missed_receive_relief_verify_actions else 0)
+                for i in range(len(self.missed_receive_relief_verify_actions))
             ],
             "missedReceiveReliefConsumeActions": None if self.missed_receive_relief_consume_actions is None else [
                 self.missed_receive_relief_consume_actions[i].to_dict() if self.missed_receive_relief_consume_actions[i] else None
-                for i in range(len(self.missed_receive_relief_consume_actions) if self.missed_receive_relief_consume_actions else 0)
+                for i in range(len(self.missed_receive_relief_consume_actions))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

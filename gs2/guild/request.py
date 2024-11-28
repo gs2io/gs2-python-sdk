@@ -882,9 +882,9 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
             .with_default_maximum_member_count(data.get('defaultMaximumMemberCount'))\
             .with_maximum_member_count(data.get('maximumMemberCount'))\
             .with_inactivity_period_days(data.get('inactivityPeriodDays'))\
-            .with_roles([
+            .with_roles(None if data.get('roles') is None else [
                 RoleModel.from_dict(data.get('roles')[i])
-                for i in range(len(data.get('roles')) if data.get('roles') else 0)
+                for i in range(len(data.get('roles')))
             ])\
             .with_guild_master_role(data.get('guildMasterRole'))\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
@@ -903,7 +903,7 @@ class CreateGuildModelMasterRequest(core.Gs2Request):
             "inactivityPeriodDays": self.inactivity_period_days,
             "roles": None if self.roles is None else [
                 self.roles[i].to_dict() if self.roles[i] else None
-                for i in range(len(self.roles) if self.roles else 0)
+                for i in range(len(self.roles))
             ],
             "guildMasterRole": self.guild_master_role,
             "guildMemberDefaultRole": self.guild_member_default_role,
@@ -1051,9 +1051,9 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
             .with_default_maximum_member_count(data.get('defaultMaximumMemberCount'))\
             .with_maximum_member_count(data.get('maximumMemberCount'))\
             .with_inactivity_period_days(data.get('inactivityPeriodDays'))\
-            .with_roles([
+            .with_roles(None if data.get('roles') is None else [
                 RoleModel.from_dict(data.get('roles')[i])
-                for i in range(len(data.get('roles')) if data.get('roles') else 0)
+                for i in range(len(data.get('roles')))
             ])\
             .with_guild_master_role(data.get('guildMasterRole'))\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
@@ -1072,7 +1072,7 @@ class UpdateGuildModelMasterRequest(core.Gs2Request):
             "inactivityPeriodDays": self.inactivity_period_days,
             "roles": None if self.roles is None else [
                 self.roles[i].to_dict() if self.roles[i] else None
-                for i in range(len(self.roles) if self.roles else 0)
+                for i in range(len(self.roles))
             ],
             "guildMasterRole": self.guild_master_role,
             "guildMemberDefaultRole": self.guild_member_default_role,
@@ -1306,29 +1306,29 @@ class SearchGuildsRequest(core.Gs2Request):
             .with_guild_model_name(data.get('guildModelName'))\
             .with_access_token(data.get('accessToken'))\
             .with_display_name(data.get('displayName'))\
-            .with_attributes1([
+            .with_attributes1(None if data.get('attributes1') is None else [
                 data.get('attributes1')[i]
-                for i in range(len(data.get('attributes1')) if data.get('attributes1') else 0)
+                for i in range(len(data.get('attributes1')))
             ])\
-            .with_attributes2([
+            .with_attributes2(None if data.get('attributes2') is None else [
                 data.get('attributes2')[i]
-                for i in range(len(data.get('attributes2')) if data.get('attributes2') else 0)
+                for i in range(len(data.get('attributes2')))
             ])\
-            .with_attributes3([
+            .with_attributes3(None if data.get('attributes3') is None else [
                 data.get('attributes3')[i]
-                for i in range(len(data.get('attributes3')) if data.get('attributes3') else 0)
+                for i in range(len(data.get('attributes3')))
             ])\
-            .with_attributes4([
+            .with_attributes4(None if data.get('attributes4') is None else [
                 data.get('attributes4')[i]
-                for i in range(len(data.get('attributes4')) if data.get('attributes4') else 0)
+                for i in range(len(data.get('attributes4')))
             ])\
-            .with_attributes5([
+            .with_attributes5(None if data.get('attributes5') is None else [
                 data.get('attributes5')[i]
-                for i in range(len(data.get('attributes5')) if data.get('attributes5') else 0)
+                for i in range(len(data.get('attributes5')))
             ])\
-            .with_join_policies([
+            .with_join_policies(None if data.get('joinPolicies') is None else [
                 data.get('joinPolicies')[i]
-                for i in range(len(data.get('joinPolicies')) if data.get('joinPolicies') else 0)
+                for i in range(len(data.get('joinPolicies')))
             ])\
             .with_include_full_members_guild(data.get('includeFullMembersGuild'))\
             .with_order_by(data.get('orderBy'))\
@@ -1343,27 +1343,27 @@ class SearchGuildsRequest(core.Gs2Request):
             "displayName": self.display_name,
             "attributes1": None if self.attributes1 is None else [
                 self.attributes1[i]
-                for i in range(len(self.attributes1) if self.attributes1 else 0)
+                for i in range(len(self.attributes1))
             ],
             "attributes2": None if self.attributes2 is None else [
                 self.attributes2[i]
-                for i in range(len(self.attributes2) if self.attributes2 else 0)
+                for i in range(len(self.attributes2))
             ],
             "attributes3": None if self.attributes3 is None else [
                 self.attributes3[i]
-                for i in range(len(self.attributes3) if self.attributes3 else 0)
+                for i in range(len(self.attributes3))
             ],
             "attributes4": None if self.attributes4 is None else [
                 self.attributes4[i]
-                for i in range(len(self.attributes4) if self.attributes4 else 0)
+                for i in range(len(self.attributes4))
             ],
             "attributes5": None if self.attributes5 is None else [
                 self.attributes5[i]
-                for i in range(len(self.attributes5) if self.attributes5 else 0)
+                for i in range(len(self.attributes5))
             ],
             "joinPolicies": None if self.join_policies is None else [
                 self.join_policies[i]
-                for i in range(len(self.join_policies) if self.join_policies else 0)
+                for i in range(len(self.join_policies))
             ],
             "includeFullMembersGuild": self.include_full_members_guild,
             "orderBy": self.order_by,
@@ -1479,29 +1479,29 @@ class SearchGuildsByUserIdRequest(core.Gs2Request):
             .with_guild_model_name(data.get('guildModelName'))\
             .with_user_id(data.get('userId'))\
             .with_display_name(data.get('displayName'))\
-            .with_attributes1([
+            .with_attributes1(None if data.get('attributes1') is None else [
                 data.get('attributes1')[i]
-                for i in range(len(data.get('attributes1')) if data.get('attributes1') else 0)
+                for i in range(len(data.get('attributes1')))
             ])\
-            .with_attributes2([
+            .with_attributes2(None if data.get('attributes2') is None else [
                 data.get('attributes2')[i]
-                for i in range(len(data.get('attributes2')) if data.get('attributes2') else 0)
+                for i in range(len(data.get('attributes2')))
             ])\
-            .with_attributes3([
+            .with_attributes3(None if data.get('attributes3') is None else [
                 data.get('attributes3')[i]
-                for i in range(len(data.get('attributes3')) if data.get('attributes3') else 0)
+                for i in range(len(data.get('attributes3')))
             ])\
-            .with_attributes4([
+            .with_attributes4(None if data.get('attributes4') is None else [
                 data.get('attributes4')[i]
-                for i in range(len(data.get('attributes4')) if data.get('attributes4') else 0)
+                for i in range(len(data.get('attributes4')))
             ])\
-            .with_attributes5([
+            .with_attributes5(None if data.get('attributes5') is None else [
                 data.get('attributes5')[i]
-                for i in range(len(data.get('attributes5')) if data.get('attributes5') else 0)
+                for i in range(len(data.get('attributes5')))
             ])\
-            .with_join_policies([
+            .with_join_policies(None if data.get('joinPolicies') is None else [
                 data.get('joinPolicies')[i]
-                for i in range(len(data.get('joinPolicies')) if data.get('joinPolicies') else 0)
+                for i in range(len(data.get('joinPolicies')))
             ])\
             .with_include_full_members_guild(data.get('includeFullMembersGuild'))\
             .with_order_by(data.get('orderBy'))\
@@ -1517,27 +1517,27 @@ class SearchGuildsByUserIdRequest(core.Gs2Request):
             "displayName": self.display_name,
             "attributes1": None if self.attributes1 is None else [
                 self.attributes1[i]
-                for i in range(len(self.attributes1) if self.attributes1 else 0)
+                for i in range(len(self.attributes1))
             ],
             "attributes2": None if self.attributes2 is None else [
                 self.attributes2[i]
-                for i in range(len(self.attributes2) if self.attributes2 else 0)
+                for i in range(len(self.attributes2))
             ],
             "attributes3": None if self.attributes3 is None else [
                 self.attributes3[i]
-                for i in range(len(self.attributes3) if self.attributes3 else 0)
+                for i in range(len(self.attributes3))
             ],
             "attributes4": None if self.attributes4 is None else [
                 self.attributes4[i]
-                for i in range(len(self.attributes4) if self.attributes4 else 0)
+                for i in range(len(self.attributes4))
             ],
             "attributes5": None if self.attributes5 is None else [
                 self.attributes5[i]
-                for i in range(len(self.attributes5) if self.attributes5 else 0)
+                for i in range(len(self.attributes5))
             ],
             "joinPolicies": None if self.join_policies is None else [
                 self.join_policies[i]
-                for i in range(len(self.join_policies) if self.join_policies else 0)
+                for i in range(len(self.join_policies))
             ],
             "includeFullMembersGuild": self.include_full_members_guild,
             "orderBy": self.order_by,
@@ -1645,9 +1645,9 @@ class CreateGuildRequest(core.Gs2Request):
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
             .with_join_policy(data.get('joinPolicy'))\
-            .with_custom_roles([
+            .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
-                for i in range(len(data.get('customRoles')) if data.get('customRoles') else 0)
+                for i in range(len(data.get('customRoles')))
             ])\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))
 
@@ -1665,7 +1665,7 @@ class CreateGuildRequest(core.Gs2Request):
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
-                for i in range(len(self.custom_roles) if self.custom_roles else 0)
+                for i in range(len(self.custom_roles))
             ],
             "guildMemberDefaultRole": self.guild_member_default_role,
         }
@@ -1774,9 +1774,9 @@ class CreateGuildByUserIdRequest(core.Gs2Request):
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
             .with_join_policy(data.get('joinPolicy'))\
-            .with_custom_roles([
+            .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
-                for i in range(len(data.get('customRoles')) if data.get('customRoles') else 0)
+                for i in range(len(data.get('customRoles')))
             ])\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -1795,7 +1795,7 @@ class CreateGuildByUserIdRequest(core.Gs2Request):
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
-                for i in range(len(self.custom_roles) if self.custom_roles else 0)
+                for i in range(len(self.custom_roles))
             ],
             "guildMemberDefaultRole": self.guild_member_default_role,
             "timeOffsetToken": self.time_offset_token,
@@ -2021,9 +2021,9 @@ class UpdateGuildRequest(core.Gs2Request):
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
             .with_join_policy(data.get('joinPolicy'))\
-            .with_custom_roles([
+            .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
-                for i in range(len(data.get('customRoles')) if data.get('customRoles') else 0)
+                for i in range(len(data.get('customRoles')))
             ])\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))
 
@@ -2041,7 +2041,7 @@ class UpdateGuildRequest(core.Gs2Request):
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
-                for i in range(len(self.custom_roles) if self.custom_roles else 0)
+                for i in range(len(self.custom_roles))
             ],
             "guildMemberDefaultRole": self.guild_member_default_role,
         }
@@ -2145,9 +2145,9 @@ class UpdateGuildByGuildNameRequest(core.Gs2Request):
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
             .with_join_policy(data.get('joinPolicy'))\
-            .with_custom_roles([
+            .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
-                for i in range(len(data.get('customRoles')) if data.get('customRoles') else 0)
+                for i in range(len(data.get('customRoles')))
             ])\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))
 
@@ -2165,7 +2165,7 @@ class UpdateGuildByGuildNameRequest(core.Gs2Request):
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
-                for i in range(len(self.custom_roles) if self.custom_roles else 0)
+                for i in range(len(self.custom_roles))
             ],
             "guildMemberDefaultRole": self.guild_member_default_role,
         }
@@ -2484,9 +2484,9 @@ class BatchUpdateMemberRoleRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_guild_model_name(data.get('guildModelName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_members([
+            .with_members(None if data.get('members') is None else [
                 Member.from_dict(data.get('members')[i])
-                for i in range(len(data.get('members')) if data.get('members') else 0)
+                for i in range(len(data.get('members')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2496,7 +2496,7 @@ class BatchUpdateMemberRoleRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "members": None if self.members is None else [
                 self.members[i].to_dict() if self.members[i] else None
-                for i in range(len(self.members) if self.members else 0)
+                for i in range(len(self.members))
             ],
         }
 
@@ -2552,9 +2552,9 @@ class BatchUpdateMemberRoleByGuildNameRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_guild_model_name(data.get('guildModelName'))\
             .with_guild_name(data.get('guildName'))\
-            .with_members([
+            .with_members(None if data.get('members') is None else [
                 Member.from_dict(data.get('members')[i])
-                for i in range(len(data.get('members')) if data.get('members') else 0)
+                for i in range(len(data.get('members')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2564,7 +2564,7 @@ class BatchUpdateMemberRoleByGuildNameRequest(core.Gs2Request):
             "guildName": self.guild_name,
             "members": None if self.members is None else [
                 self.members[i].to_dict() if self.members[i] else None
-                for i in range(len(self.members) if self.members else 0)
+                for i in range(len(self.members))
             ],
         }
 

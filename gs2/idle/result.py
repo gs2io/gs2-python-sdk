@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeCategoryModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeCategoryModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 CategoryModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeCategoryModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -660,16 +661,16 @@ class DescribeCategoryModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeCategoryModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 CategoryModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -739,9 +740,9 @@ class DescribeStatusesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStatusesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Status.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -749,7 +750,7 @@ class DescribeStatusesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -786,9 +787,9 @@ class DescribeStatusesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStatusesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Status.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -796,7 +797,7 @@ class DescribeStatusesByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -901,9 +902,9 @@ class PredictionResult(core.Gs2Result):
         if data is None:
             return None
         return PredictionResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 AcquireAction.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_status(Status.from_dict(data.get('status')))
 
@@ -911,7 +912,7 @@ class PredictionResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "status": self.status.to_dict() if self.status else None,
         }
@@ -948,9 +949,9 @@ class PredictionByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return PredictionByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 AcquireAction.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_status(Status.from_dict(data.get('status')))
 
@@ -958,7 +959,7 @@ class PredictionByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "status": self.status.to_dict() if self.status else None,
         }
@@ -971,6 +972,9 @@ class ReceiveResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_items(self, items: List[AcquireAction]) -> ReceiveResult:
         self.items = items
@@ -996,6 +1000,18 @@ class ReceiveResult(core.Gs2Result):
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveResult:
+        self.transaction_result = transaction_result
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1015,27 +1031,33 @@ class ReceiveResult(core.Gs2Result):
         if data is None:
             return None
         return ReceiveResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 AcquireAction.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_status(Status.from_dict(data.get('status')))\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "status": self.status.to_dict() if self.status else None,
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1046,6 +1068,9 @@ class ReceiveByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_items(self, items: List[AcquireAction]) -> ReceiveByUserIdResult:
         self.items = items
@@ -1071,6 +1096,18 @@ class ReceiveByUserIdResult(core.Gs2Result):
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveByUserIdResult:
+        self.transaction_result = transaction_result
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1090,27 +1127,33 @@ class ReceiveByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return ReceiveByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 AcquireAction.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_status(Status.from_dict(data.get('status')))\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "status": self.status.to_dict() if self.status else None,
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1373,6 +1416,9 @@ class ReceiveByStampSheetResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_items(self, items: List[AcquireAction]) -> ReceiveByStampSheetResult:
         self.items = items
@@ -1398,6 +1444,18 @@ class ReceiveByStampSheetResult(core.Gs2Result):
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
         return self
 
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveByStampSheetResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveByStampSheetResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveByStampSheetResult:
+        self.transaction_result = transaction_result
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1417,27 +1475,33 @@ class ReceiveByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return ReceiveByStampSheetResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 AcquireAction.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_status(Status.from_dict(data.get('status')))\
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "status": self.status.to_dict() if self.status else None,
             "transactionId": self.transaction_id,
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 

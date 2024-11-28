@@ -325,24 +325,24 @@ class View(core.Gs2Model):
         if data is None:
             return None
         return View()\
-            .with_contents([
+            .with_contents(None if data.get('contents') is None else [
                 Content.from_dict(data.get('contents')[i])
-                for i in range(len(data.get('contents')) if data.get('contents') else 0)
+                for i in range(len(data.get('contents')))
             ])\
-            .with_remove_contents([
+            .with_remove_contents(None if data.get('removeContents') is None else [
                 Content.from_dict(data.get('removeContents')[i])
-                for i in range(len(data.get('removeContents')) if data.get('removeContents') else 0)
+                for i in range(len(data.get('removeContents')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "contents": None if self.contents is None else [
                 self.contents[i].to_dict() if self.contents[i] else None
-                for i in range(len(self.contents) if self.contents else 0)
+                for i in range(len(self.contents))
             ],
             "removeContents": None if self.remove_contents is None else [
                 self.remove_contents[i].to_dict() if self.remove_contents[i] else None
-                for i in range(len(self.remove_contents) if self.remove_contents else 0)
+                for i in range(len(self.remove_contents))
             ],
         }
 

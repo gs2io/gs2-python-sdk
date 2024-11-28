@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeBonusModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBonusModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BonusModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeBonusModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -796,16 +797,16 @@ class DescribeBonusModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBonusModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BonusModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -851,6 +852,9 @@ class ReceiveResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: ReceiveStatus) -> ReceiveResult:
         self.item = item
@@ -874,6 +878,18 @@ class ReceiveResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ReceiveResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -900,7 +916,10 @@ class ReceiveResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -910,6 +929,9 @@ class ReceiveResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -920,6 +942,9 @@ class ReceiveByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: ReceiveStatus) -> ReceiveByUserIdResult:
         self.item = item
@@ -943,6 +968,18 @@ class ReceiveByUserIdResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> ReceiveByUserIdResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> ReceiveByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> ReceiveByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> ReceiveByUserIdResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -969,7 +1006,10 @@ class ReceiveByUserIdResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -979,6 +1019,9 @@ class ReceiveByUserIdResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -989,6 +1032,9 @@ class MissedReceiveResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: ReceiveStatus) -> MissedReceiveResult:
         self.item = item
@@ -1012,6 +1058,18 @@ class MissedReceiveResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> MissedReceiveResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> MissedReceiveResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> MissedReceiveResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> MissedReceiveResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1038,7 +1096,10 @@ class MissedReceiveResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1048,6 +1109,9 @@ class MissedReceiveResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1058,6 +1122,9 @@ class MissedReceiveByUserIdResult(core.Gs2Result):
     stamp_sheet: str = None
     stamp_sheet_encryption_key_id: str = None
     auto_run_stamp_sheet: bool = None
+    atomic_commit: bool = None
+    transaction: str = None
+    transaction_result: TransactionResult = None
 
     def with_item(self, item: ReceiveStatus) -> MissedReceiveByUserIdResult:
         self.item = item
@@ -1081,6 +1148,18 @@ class MissedReceiveByUserIdResult(core.Gs2Result):
 
     def with_auto_run_stamp_sheet(self, auto_run_stamp_sheet: bool) -> MissedReceiveByUserIdResult:
         self.auto_run_stamp_sheet = auto_run_stamp_sheet
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> MissedReceiveByUserIdResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction(self, transaction: str) -> MissedReceiveByUserIdResult:
+        self.transaction = transaction
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> MissedReceiveByUserIdResult:
+        self.transaction_result = transaction_result
         return self
 
     def get(self, key, default=None):
@@ -1107,7 +1186,10 @@ class MissedReceiveByUserIdResult(core.Gs2Result):
             .with_transaction_id(data.get('transactionId'))\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_stamp_sheet_encryption_key_id(data.get('stampSheetEncryptionKeyId'))\
-            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))
+            .with_auto_run_stamp_sheet(data.get('autoRunStampSheet'))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction(data.get('transaction'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1117,6 +1199,9 @@ class MissedReceiveByUserIdResult(core.Gs2Result):
             "stampSheet": self.stamp_sheet,
             "stampSheetEncryptionKeyId": self.stamp_sheet_encryption_key_id,
             "autoRunStampSheet": self.auto_run_stamp_sheet,
+            "atomicCommit": self.atomic_commit,
+            "transaction": self.transaction,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
         }
 
 
@@ -1151,9 +1236,9 @@ class DescribeReceiveStatusesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeReceiveStatusesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ReceiveStatus.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1161,7 +1246,7 @@ class DescribeReceiveStatusesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1198,9 +1283,9 @@ class DescribeReceiveStatusesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeReceiveStatusesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 ReceiveStatus.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1208,7 +1293,7 @@ class DescribeReceiveStatusesByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

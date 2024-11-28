@@ -752,18 +752,18 @@ class CreateBonusModelMasterRequest(core.Gs2Request):
             .with_period_event_id(data.get('periodEventId'))\
             .with_reset_hour(data.get('resetHour'))\
             .with_repeat(data.get('repeat'))\
-            .with_rewards([
+            .with_rewards(None if data.get('rewards') is None else [
                 Reward.from_dict(data.get('rewards')[i])
-                for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
+                for i in range(len(data.get('rewards')))
             ])\
             .with_missed_receive_relief(data.get('missedReceiveRelief'))\
-            .with_missed_receive_relief_verify_actions([
+            .with_missed_receive_relief_verify_actions(None if data.get('missedReceiveReliefVerifyActions') is None else [
                 VerifyAction.from_dict(data.get('missedReceiveReliefVerifyActions')[i])
-                for i in range(len(data.get('missedReceiveReliefVerifyActions')) if data.get('missedReceiveReliefVerifyActions') else 0)
+                for i in range(len(data.get('missedReceiveReliefVerifyActions')))
             ])\
-            .with_missed_receive_relief_consume_actions([
+            .with_missed_receive_relief_consume_actions(None if data.get('missedReceiveReliefConsumeActions') is None else [
                 ConsumeAction.from_dict(data.get('missedReceiveReliefConsumeActions')[i])
-                for i in range(len(data.get('missedReceiveReliefConsumeActions')) if data.get('missedReceiveReliefConsumeActions') else 0)
+                for i in range(len(data.get('missedReceiveReliefConsumeActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -778,16 +778,16 @@ class CreateBonusModelMasterRequest(core.Gs2Request):
             "repeat": self.repeat,
             "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
-                for i in range(len(self.rewards) if self.rewards else 0)
+                for i in range(len(self.rewards))
             ],
             "missedReceiveRelief": self.missed_receive_relief,
             "missedReceiveReliefVerifyActions": None if self.missed_receive_relief_verify_actions is None else [
                 self.missed_receive_relief_verify_actions[i].to_dict() if self.missed_receive_relief_verify_actions[i] else None
-                for i in range(len(self.missed_receive_relief_verify_actions) if self.missed_receive_relief_verify_actions else 0)
+                for i in range(len(self.missed_receive_relief_verify_actions))
             ],
             "missedReceiveReliefConsumeActions": None if self.missed_receive_relief_consume_actions is None else [
                 self.missed_receive_relief_consume_actions[i].to_dict() if self.missed_receive_relief_consume_actions[i] else None
-                for i in range(len(self.missed_receive_relief_consume_actions) if self.missed_receive_relief_consume_actions else 0)
+                for i in range(len(self.missed_receive_relief_consume_actions))
             ],
         }
 
@@ -926,18 +926,18 @@ class UpdateBonusModelMasterRequest(core.Gs2Request):
             .with_period_event_id(data.get('periodEventId'))\
             .with_reset_hour(data.get('resetHour'))\
             .with_repeat(data.get('repeat'))\
-            .with_rewards([
+            .with_rewards(None if data.get('rewards') is None else [
                 Reward.from_dict(data.get('rewards')[i])
-                for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
+                for i in range(len(data.get('rewards')))
             ])\
             .with_missed_receive_relief(data.get('missedReceiveRelief'))\
-            .with_missed_receive_relief_verify_actions([
+            .with_missed_receive_relief_verify_actions(None if data.get('missedReceiveReliefVerifyActions') is None else [
                 VerifyAction.from_dict(data.get('missedReceiveReliefVerifyActions')[i])
-                for i in range(len(data.get('missedReceiveReliefVerifyActions')) if data.get('missedReceiveReliefVerifyActions') else 0)
+                for i in range(len(data.get('missedReceiveReliefVerifyActions')))
             ])\
-            .with_missed_receive_relief_consume_actions([
+            .with_missed_receive_relief_consume_actions(None if data.get('missedReceiveReliefConsumeActions') is None else [
                 ConsumeAction.from_dict(data.get('missedReceiveReliefConsumeActions')[i])
-                for i in range(len(data.get('missedReceiveReliefConsumeActions')) if data.get('missedReceiveReliefConsumeActions') else 0)
+                for i in range(len(data.get('missedReceiveReliefConsumeActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -952,16 +952,16 @@ class UpdateBonusModelMasterRequest(core.Gs2Request):
             "repeat": self.repeat,
             "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
-                for i in range(len(self.rewards) if self.rewards else 0)
+                for i in range(len(self.rewards))
             ],
             "missedReceiveRelief": self.missed_receive_relief,
             "missedReceiveReliefVerifyActions": None if self.missed_receive_relief_verify_actions is None else [
                 self.missed_receive_relief_verify_actions[i].to_dict() if self.missed_receive_relief_verify_actions[i] else None
-                for i in range(len(self.missed_receive_relief_verify_actions) if self.missed_receive_relief_verify_actions else 0)
+                for i in range(len(self.missed_receive_relief_verify_actions))
             ],
             "missedReceiveReliefConsumeActions": None if self.missed_receive_relief_consume_actions is None else [
                 self.missed_receive_relief_consume_actions[i].to_dict() if self.missed_receive_relief_consume_actions[i] else None
-                for i in range(len(self.missed_receive_relief_consume_actions) if self.missed_receive_relief_consume_actions else 0)
+                for i in range(len(self.missed_receive_relief_consume_actions))
             ],
         }
 
@@ -1297,9 +1297,9 @@ class ReceiveRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_bonus_model_name(data.get('bonusModelName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1309,7 +1309,7 @@ class ReceiveRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1370,9 +1370,9 @@ class ReceiveByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_bonus_model_name(data.get('bonusModelName'))\
             .with_user_id(data.get('userId'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1383,7 +1383,7 @@ class ReceiveByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1446,9 +1446,9 @@ class MissedReceiveRequest(core.Gs2Request):
             .with_bonus_model_name(data.get('bonusModelName'))\
             .with_access_token(data.get('accessToken'))\
             .with_step_number(data.get('stepNumber'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1459,7 +1459,7 @@ class MissedReceiveRequest(core.Gs2Request):
             "stepNumber": self.step_number,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1526,9 +1526,9 @@ class MissedReceiveByUserIdRequest(core.Gs2Request):
             .with_bonus_model_name(data.get('bonusModelName'))\
             .with_user_id(data.get('userId'))\
             .with_step_number(data.get('stepNumber'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1540,7 +1540,7 @@ class MissedReceiveByUserIdRequest(core.Gs2Request):
             "stepNumber": self.step_number,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

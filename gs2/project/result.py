@@ -18,15 +18,362 @@ from ..core.model import *
 from .model import *
 
 
-class DescribeNamespacesResult(core.Gs2Result):
-    items: List[Namespace] = None
+class CreateAccountResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> CreateAccountResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateAccountResult]:
+        if data is None:
+            return None
+        return CreateAccountResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> VerifyResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyResult]:
+        if data is None:
+            return None
+        return VerifyResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class SignInResult(core.Gs2Result):
+    item: Account = None
+    account_token: str = None
+
+    def with_item(self, item: Account) -> SignInResult:
+        self.item = item
+        return self
+
+    def with_account_token(self, account_token: str) -> SignInResult:
+        self.account_token = account_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SignInResult]:
+        if data is None:
+            return None
+        return SignInResult()\
+            .with_item(Account.from_dict(data.get('item')))\
+            .with_account_token(data.get('accountToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "accountToken": self.account_token,
+        }
+
+
+class ForgetResult(core.Gs2Result):
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ForgetResult]:
+        if data is None:
+            return None
+        return ForgetResult()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
+class IssuePasswordResult(core.Gs2Result):
+    new_password: str = None
+
+    def with_new_password(self, new_password: str) -> IssuePasswordResult:
+        self.new_password = new_password
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IssuePasswordResult]:
+        if data is None:
+            return None
+        return IssuePasswordResult()\
+            .with_new_password(data.get('newPassword'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "newPassword": self.new_password,
+        }
+
+
+class UpdateAccountResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> UpdateAccountResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateAccountResult]:
+        if data is None:
+            return None
+        return UpdateAccountResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class EnableMfaResult(core.Gs2Result):
+    item: Account = None
+    challenge_token: str = None
+
+    def with_item(self, item: Account) -> EnableMfaResult:
+        self.item = item
+        return self
+
+    def with_challenge_token(self, challenge_token: str) -> EnableMfaResult:
+        self.challenge_token = challenge_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EnableMfaResult]:
+        if data is None:
+            return None
+        return EnableMfaResult()\
+            .with_item(Account.from_dict(data.get('item')))\
+            .with_challenge_token(data.get('challengeToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "challengeToken": self.challenge_token,
+        }
+
+
+class ChallengeMfaResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> ChallengeMfaResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ChallengeMfaResult]:
+        if data is None:
+            return None
+        return ChallengeMfaResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DisableMfaResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> DisableMfaResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DisableMfaResult]:
+        if data is None:
+            return None
+        return DisableMfaResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteAccountResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> DeleteAccountResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteAccountResult]:
+        if data is None:
+            return None
+        return DeleteAccountResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeProjectsResult(core.Gs2Result):
+    items: List[Project] = None
     next_page_token: str = None
 
-    def with_items(self, items: List[Namespace]) -> DescribeNamespacesResult:
+    def with_items(self, items: List[Project]) -> DescribeProjectsResult:
         self.items = items
         return self
 
-    def with_next_page_token(self, next_page_token: str) -> DescribeNamespacesResult:
+    def with_next_page_token(self, next_page_token: str) -> DescribeProjectsResult:
         self.next_page_token = next_page_token
         return self
 
@@ -45,12 +392,12 @@ class DescribeNamespacesResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[DescribeNamespacesResult]:
+    ) -> Optional[DescribeProjectsResult]:
         if data is None:
             return None
-        return DescribeNamespacesResult()\
+        return DescribeProjectsResult()\
             .with_items(None if data.get('items') is None else [
-                Namespace.from_dict(data.get('items')[i])
+                Project.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
@@ -65,10 +412,10 @@ class DescribeNamespacesResult(core.Gs2Result):
         }
 
 
-class CreateNamespaceResult(core.Gs2Result):
-    item: Namespace = None
+class CreateProjectResult(core.Gs2Result):
+    item: Project = None
 
-    def with_item(self, item: Namespace) -> CreateNamespaceResult:
+    def with_item(self, item: Project) -> CreateProjectResult:
         self.item = item
         return self
 
@@ -87,11 +434,11 @@ class CreateNamespaceResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[CreateNamespaceResult]:
+    ) -> Optional[CreateProjectResult]:
         if data is None:
             return None
-        return CreateNamespaceResult()\
-            .with_item(Namespace.from_dict(data.get('item')))
+        return CreateProjectResult()\
+            .with_item(Project.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -99,44 +446,10 @@ class CreateNamespaceResult(core.Gs2Result):
         }
 
 
-class GetNamespaceStatusResult(core.Gs2Result):
-    status: str = None
+class GetProjectResult(core.Gs2Result):
+    item: Project = None
 
-    def with_status(self, status: str) -> GetNamespaceStatusResult:
-        self.status = status
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetNamespaceStatusResult]:
-        if data is None:
-            return None
-        return GetNamespaceStatusResult()\
-            .with_status(data.get('status'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "status": self.status,
-        }
-
-
-class GetNamespaceResult(core.Gs2Result):
-    item: Namespace = None
-
-    def with_item(self, item: Namespace) -> GetNamespaceResult:
+    def with_item(self, item: Project) -> GetProjectResult:
         self.item = item
         return self
 
@@ -155,11 +468,11 @@ class GetNamespaceResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[GetNamespaceResult]:
+    ) -> Optional[GetProjectResult]:
         if data is None:
             return None
-        return GetNamespaceResult()\
-            .with_item(Namespace.from_dict(data.get('item')))
+        return GetProjectResult()\
+            .with_item(Project.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -167,10 +480,106 @@ class GetNamespaceResult(core.Gs2Result):
         }
 
 
-class UpdateNamespaceResult(core.Gs2Result):
-    item: Namespace = None
+class GetProjectTokenResult(core.Gs2Result):
+    item: Project = None
+    owner_id: str = None
+    project_token: str = None
 
-    def with_item(self, item: Namespace) -> UpdateNamespaceResult:
+    def with_item(self, item: Project) -> GetProjectTokenResult:
+        self.item = item
+        return self
+
+    def with_owner_id(self, owner_id: str) -> GetProjectTokenResult:
+        self.owner_id = owner_id
+        return self
+
+    def with_project_token(self, project_token: str) -> GetProjectTokenResult:
+        self.project_token = project_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetProjectTokenResult]:
+        if data is None:
+            return None
+        return GetProjectTokenResult()\
+            .with_item(Project.from_dict(data.get('item')))\
+            .with_owner_id(data.get('ownerId'))\
+            .with_project_token(data.get('projectToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "ownerId": self.owner_id,
+            "projectToken": self.project_token,
+        }
+
+
+class GetProjectTokenByIdentifierResult(core.Gs2Result):
+    item: Project = None
+    owner_id: str = None
+    project_token: str = None
+
+    def with_item(self, item: Project) -> GetProjectTokenByIdentifierResult:
+        self.item = item
+        return self
+
+    def with_owner_id(self, owner_id: str) -> GetProjectTokenByIdentifierResult:
+        self.owner_id = owner_id
+        return self
+
+    def with_project_token(self, project_token: str) -> GetProjectTokenByIdentifierResult:
+        self.project_token = project_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetProjectTokenByIdentifierResult]:
+        if data is None:
+            return None
+        return GetProjectTokenByIdentifierResult()\
+            .with_item(Project.from_dict(data.get('item')))\
+            .with_owner_id(data.get('ownerId'))\
+            .with_project_token(data.get('projectToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "ownerId": self.owner_id,
+            "projectToken": self.project_token,
+        }
+
+
+class UpdateProjectResult(core.Gs2Result):
+    item: Project = None
+
+    def with_item(self, item: Project) -> UpdateProjectResult:
         self.item = item
         return self
 
@@ -189,11 +598,11 @@ class UpdateNamespaceResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[UpdateNamespaceResult]:
+    ) -> Optional[UpdateProjectResult]:
         if data is None:
             return None
-        return UpdateNamespaceResult()\
-            .with_item(Namespace.from_dict(data.get('item')))
+        return UpdateProjectResult()\
+            .with_item(Project.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -201,10 +610,10 @@ class UpdateNamespaceResult(core.Gs2Result):
         }
 
 
-class DeleteNamespaceResult(core.Gs2Result):
-    item: Namespace = None
+class ActivateRegionResult(core.Gs2Result):
+    item: Project = None
 
-    def with_item(self, item: Namespace) -> DeleteNamespaceResult:
+    def with_item(self, item: Project) -> ActivateRegionResult:
         self.item = item
         return self
 
@@ -223,11 +632,11 @@ class DeleteNamespaceResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[DeleteNamespaceResult]:
+    ) -> Optional[ActivateRegionResult]:
         if data is None:
             return None
-        return DeleteNamespaceResult()\
-            .with_item(Namespace.from_dict(data.get('item')))
+        return ActivateRegionResult()\
+            .with_item(Project.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -235,7 +644,12 @@ class DeleteNamespaceResult(core.Gs2Result):
         }
 
 
-class DumpUserDataByUserIdResult(core.Gs2Result):
+class WaitActivateRegionResult(core.Gs2Result):
+    item: Project = None
+
+    def with_item(self, item: Project) -> WaitActivateRegionResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -252,20 +666,509 @@ class DumpUserDataByUserIdResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[DumpUserDataByUserIdResult]:
+    ) -> Optional[WaitActivateRegionResult]:
         if data is None:
             return None
-        return DumpUserDataByUserIdResult()\
+        return WaitActivateRegionResult()\
+            .with_item(Project.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
-class CheckDumpUserDataByUserIdResult(core.Gs2Result):
+class DeleteProjectResult(core.Gs2Result):
+    item: Project = None
+
+    def with_item(self, item: Project) -> DeleteProjectResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteProjectResult]:
+        if data is None:
+            return None
+        return DeleteProjectResult()\
+            .with_item(Project.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeBillingMethodsResult(core.Gs2Result):
+    items: List[BillingMethod] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[BillingMethod]) -> DescribeBillingMethodsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeBillingMethodsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBillingMethodsResult]:
+        if data is None:
+            return None
+        return DescribeBillingMethodsResult()\
+            .with_items(None if data.get('items') is None else [
+                BillingMethod.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateBillingMethodResult(core.Gs2Result):
+    item: BillingMethod = None
+
+    def with_item(self, item: BillingMethod) -> CreateBillingMethodResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateBillingMethodResult]:
+        if data is None:
+            return None
+        return CreateBillingMethodResult()\
+            .with_item(BillingMethod.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetBillingMethodResult(core.Gs2Result):
+    item: BillingMethod = None
+
+    def with_item(self, item: BillingMethod) -> GetBillingMethodResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBillingMethodResult]:
+        if data is None:
+            return None
+        return GetBillingMethodResult()\
+            .with_item(BillingMethod.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateBillingMethodResult(core.Gs2Result):
+    item: BillingMethod = None
+
+    def with_item(self, item: BillingMethod) -> UpdateBillingMethodResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateBillingMethodResult]:
+        if data is None:
+            return None
+        return UpdateBillingMethodResult()\
+            .with_item(BillingMethod.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteBillingMethodResult(core.Gs2Result):
+    item: BillingMethod = None
+
+    def with_item(self, item: BillingMethod) -> DeleteBillingMethodResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteBillingMethodResult]:
+        if data is None:
+            return None
+        return DeleteBillingMethodResult()\
+            .with_item(BillingMethod.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeReceiptsResult(core.Gs2Result):
+    items: List[Receipt] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[Receipt]) -> DescribeReceiptsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeReceiptsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeReceiptsResult]:
+        if data is None:
+            return None
+        return DescribeReceiptsResult()\
+            .with_items(None if data.get('items') is None else [
+                Receipt.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeBillingsResult(core.Gs2Result):
+    items: List[Billing] = None
+
+    def with_items(self, items: List[Billing]) -> DescribeBillingsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeBillingsResult]:
+        if data is None:
+            return None
+        return DescribeBillingsResult()\
+            .with_items(None if data.get('items') is None else [
+                Billing.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+        }
+
+
+class DescribeDumpProgressesResult(core.Gs2Result):
+    items: List[DumpProgress] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[DumpProgress]) -> DescribeDumpProgressesResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeDumpProgressesResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeDumpProgressesResult]:
+        if data is None:
+            return None
+        return DescribeDumpProgressesResult()\
+            .with_items(None if data.get('items') is None else [
+                DumpProgress.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetDumpProgressResult(core.Gs2Result):
+    item: DumpProgress = None
+
+    def with_item(self, item: DumpProgress) -> GetDumpProgressResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetDumpProgressResult]:
+        if data is None:
+            return None
+        return GetDumpProgressResult()\
+            .with_item(DumpProgress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class WaitDumpUserDataResult(core.Gs2Result):
+    item: DumpProgress = None
+
+    def with_item(self, item: DumpProgress) -> WaitDumpUserDataResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[WaitDumpUserDataResult]:
+        if data is None:
+            return None
+        return WaitDumpUserDataResult()\
+            .with_item(DumpProgress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ArchiveDumpUserDataResult(core.Gs2Result):
+    item: DumpProgress = None
+
+    def with_item(self, item: DumpProgress) -> ArchiveDumpUserDataResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ArchiveDumpUserDataResult]:
+        if data is None:
+            return None
+        return ArchiveDumpUserDataResult()\
+            .with_item(DumpProgress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DumpUserDataResult(core.Gs2Result):
+    item: DumpProgress = None
+
+    def with_item(self, item: DumpProgress) -> DumpUserDataResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DumpUserDataResult]:
+        if data is None:
+            return None
+        return DumpUserDataResult()\
+            .with_item(DumpProgress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetDumpUserDataResult(core.Gs2Result):
     url: str = None
 
-    def with_url(self, url: str) -> CheckDumpUserDataByUserIdResult:
+    def with_url(self, url: str) -> GetDumpUserDataResult:
         self.url = url
         return self
 
@@ -284,10 +1187,10 @@ class CheckDumpUserDataByUserIdResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[CheckDumpUserDataByUserIdResult]:
+    ) -> Optional[GetDumpUserDataResult]:
         if data is None:
             return None
-        return CheckDumpUserDataByUserIdResult()\
+        return GetDumpUserDataResult()\
             .with_url(data.get('url'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -296,7 +1199,17 @@ class CheckDumpUserDataByUserIdResult(core.Gs2Result):
         }
 
 
-class CleanUserDataByUserIdResult(core.Gs2Result):
+class DescribeCleanProgressesResult(core.Gs2Result):
+    items: List[CleanProgress] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[CleanProgress]) -> DescribeCleanProgressesResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeCleanProgressesResult:
+        self.next_page_token = next_page_token
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -313,17 +1226,32 @@ class CleanUserDataByUserIdResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[CleanUserDataByUserIdResult]:
+    ) -> Optional[DescribeCleanProgressesResult]:
         if data is None:
             return None
-        return CleanUserDataByUserIdResult()\
+        return DescribeCleanProgressesResult()\
+            .with_items(None if data.get('items') is None else [
+                CleanProgress.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
         }
 
 
-class CheckCleanUserDataByUserIdResult(core.Gs2Result):
+class GetCleanProgressResult(core.Gs2Result):
+    item: CleanProgress = None
+
+    def with_item(self, item: CleanProgress) -> GetCleanProgressResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -340,25 +1268,210 @@ class CheckCleanUserDataByUserIdResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[CheckCleanUserDataByUserIdResult]:
+    ) -> Optional[GetCleanProgressResult]:
         if data is None:
             return None
-        return CheckCleanUserDataByUserIdResult()\
+        return GetCleanProgressResult()\
+            .with_item(CleanProgress.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
-class PrepareImportUserDataByUserIdResult(core.Gs2Result):
+class WaitCleanUserDataResult(core.Gs2Result):
+    item: CleanProgress = None
+
+    def with_item(self, item: CleanProgress) -> WaitCleanUserDataResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[WaitCleanUserDataResult]:
+        if data is None:
+            return None
+        return WaitCleanUserDataResult()\
+            .with_item(CleanProgress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class CleanUserDataResult(core.Gs2Result):
+    item: CleanProgress = None
+
+    def with_item(self, item: CleanProgress) -> CleanUserDataResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CleanUserDataResult]:
+        if data is None:
+            return None
+        return CleanUserDataResult()\
+            .with_item(CleanProgress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeImportProgressesResult(core.Gs2Result):
+    items: List[ImportProgress] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[ImportProgress]) -> DescribeImportProgressesResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeImportProgressesResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeImportProgressesResult]:
+        if data is None:
+            return None
+        return DescribeImportProgressesResult()\
+            .with_items(None if data.get('items') is None else [
+                ImportProgress.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetImportProgressResult(core.Gs2Result):
+    item: ImportProgress = None
+
+    def with_item(self, item: ImportProgress) -> GetImportProgressResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetImportProgressResult]:
+        if data is None:
+            return None
+        return GetImportProgressResult()\
+            .with_item(ImportProgress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class WaitImportUserDataResult(core.Gs2Result):
+    item: ImportProgress = None
+
+    def with_item(self, item: ImportProgress) -> WaitImportUserDataResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[WaitImportUserDataResult]:
+        if data is None:
+            return None
+        return WaitImportUserDataResult()\
+            .with_item(ImportProgress.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class PrepareImportUserDataResult(core.Gs2Result):
     upload_token: str = None
     upload_url: str = None
 
-    def with_upload_token(self, upload_token: str) -> PrepareImportUserDataByUserIdResult:
+    def with_upload_token(self, upload_token: str) -> PrepareImportUserDataResult:
         self.upload_token = upload_token
         return self
 
-    def with_upload_url(self, upload_url: str) -> PrepareImportUserDataByUserIdResult:
+    def with_upload_url(self, upload_url: str) -> PrepareImportUserDataResult:
         self.upload_url = upload_url
         return self
 
@@ -377,10 +1490,10 @@ class PrepareImportUserDataByUserIdResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[PrepareImportUserDataByUserIdResult]:
+    ) -> Optional[PrepareImportUserDataResult]:
         if data is None:
             return None
-        return PrepareImportUserDataByUserIdResult()\
+        return PrepareImportUserDataResult()\
             .with_upload_token(data.get('uploadToken'))\
             .with_upload_url(data.get('uploadUrl'))
 
@@ -391,111 +1504,10 @@ class PrepareImportUserDataByUserIdResult(core.Gs2Result):
         }
 
 
-class ImportUserDataByUserIdResult(core.Gs2Result):
+class ImportUserDataResult(core.Gs2Result):
+    item: ImportProgress = None
 
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[ImportUserDataByUserIdResult]:
-        if data is None:
-            return None
-        return ImportUserDataByUserIdResult()\
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-        }
-
-
-class CheckImportUserDataByUserIdResult(core.Gs2Result):
-    url: str = None
-
-    def with_url(self, url: str) -> CheckImportUserDataByUserIdResult:
-        self.url = url
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[CheckImportUserDataByUserIdResult]:
-        if data is None:
-            return None
-        return CheckImportUserDataByUserIdResult()\
-            .with_url(data.get('url'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "url": self.url,
-        }
-
-
-class DescribeCategoryModelsResult(core.Gs2Result):
-    items: List[CategoryModel] = None
-
-    def with_items(self, items: List[CategoryModel]) -> DescribeCategoryModelsResult:
-        self.items = items
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeCategoryModelsResult]:
-        if data is None:
-            return None
-        return DescribeCategoryModelsResult()\
-            .with_items(None if data.get('items') is None else [
-                CategoryModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-        }
-
-
-class GetCategoryModelResult(core.Gs2Result):
-    item: CategoryModel = None
-
-    def with_item(self, item: CategoryModel) -> GetCategoryModelResult:
+    def with_item(self, item: ImportProgress) -> ImportUserDataResult:
         self.item = item
         return self
 
@@ -514,11 +1526,11 @@ class GetCategoryModelResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[GetCategoryModelResult]:
+    ) -> Optional[ImportUserDataResult]:
         if data is None:
             return None
-        return GetCategoryModelResult()\
-            .with_item(CategoryModel.from_dict(data.get('item')))
+        return ImportUserDataResult()\
+            .with_item(ImportProgress.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -526,15 +1538,15 @@ class GetCategoryModelResult(core.Gs2Result):
         }
 
 
-class DescribeCategoryModelMastersResult(core.Gs2Result):
-    items: List[CategoryModelMaster] = None
+class DescribeImportErrorLogsResult(core.Gs2Result):
+    items: List[ImportErrorLog] = None
     next_page_token: str = None
 
-    def with_items(self, items: List[CategoryModelMaster]) -> DescribeCategoryModelMastersResult:
+    def with_items(self, items: List[ImportErrorLog]) -> DescribeImportErrorLogsResult:
         self.items = items
         return self
 
-    def with_next_page_token(self, next_page_token: str) -> DescribeCategoryModelMastersResult:
+    def with_next_page_token(self, next_page_token: str) -> DescribeImportErrorLogsResult:
         self.next_page_token = next_page_token
         return self
 
@@ -553,12 +1565,12 @@ class DescribeCategoryModelMastersResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[DescribeCategoryModelMastersResult]:
+    ) -> Optional[DescribeImportErrorLogsResult]:
         if data is None:
             return None
-        return DescribeCategoryModelMastersResult()\
+        return DescribeImportErrorLogsResult()\
             .with_items(None if data.get('items') is None else [
-                CategoryModelMaster.from_dict(data.get('items')[i])
+                ImportErrorLog.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
@@ -573,10 +1585,10 @@ class DescribeCategoryModelMastersResult(core.Gs2Result):
         }
 
 
-class CreateCategoryModelMasterResult(core.Gs2Result):
-    item: CategoryModelMaster = None
+class GetImportErrorLogResult(core.Gs2Result):
+    item: ImportErrorLog = None
 
-    def with_item(self, item: CategoryModelMaster) -> CreateCategoryModelMasterResult:
+    def with_item(self, item: ImportErrorLog) -> GetImportErrorLogResult:
         self.item = item
         return self
 
@@ -595,1001 +1607,13 @@ class CreateCategoryModelMasterResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[CreateCategoryModelMasterResult]:
+    ) -> Optional[GetImportErrorLogResult]:
         if data is None:
             return None
-        return CreateCategoryModelMasterResult()\
-            .with_item(CategoryModelMaster.from_dict(data.get('item')))
+        return GetImportErrorLogResult()\
+            .with_item(ImportErrorLog.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class GetCategoryModelMasterResult(core.Gs2Result):
-    item: CategoryModelMaster = None
-
-    def with_item(self, item: CategoryModelMaster) -> GetCategoryModelMasterResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetCategoryModelMasterResult]:
-        if data is None:
-            return None
-        return GetCategoryModelMasterResult()\
-            .with_item(CategoryModelMaster.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class UpdateCategoryModelMasterResult(core.Gs2Result):
-    item: CategoryModelMaster = None
-
-    def with_item(self, item: CategoryModelMaster) -> UpdateCategoryModelMasterResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[UpdateCategoryModelMasterResult]:
-        if data is None:
-            return None
-        return UpdateCategoryModelMasterResult()\
-            .with_item(CategoryModelMaster.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class DeleteCategoryModelMasterResult(core.Gs2Result):
-    item: CategoryModelMaster = None
-
-    def with_item(self, item: CategoryModelMaster) -> DeleteCategoryModelMasterResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DeleteCategoryModelMasterResult]:
-        if data is None:
-            return None
-        return DeleteCategoryModelMasterResult()\
-            .with_item(CategoryModelMaster.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class SubscribeResult(core.Gs2Result):
-    item: SubscribeUser = None
-
-    def with_item(self, item: SubscribeUser) -> SubscribeResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[SubscribeResult]:
-        if data is None:
-            return None
-        return SubscribeResult()\
-            .with_item(SubscribeUser.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class SubscribeByUserIdResult(core.Gs2Result):
-    item: SubscribeUser = None
-
-    def with_item(self, item: SubscribeUser) -> SubscribeByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[SubscribeByUserIdResult]:
-        if data is None:
-            return None
-        return SubscribeByUserIdResult()\
-            .with_item(SubscribeUser.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class DescribeScoresResult(core.Gs2Result):
-    items: List[Score] = None
-    next_page_token: str = None
-
-    def with_items(self, items: List[Score]) -> DescribeScoresResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribeScoresResult:
-        self.next_page_token = next_page_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeScoresResult]:
-        if data is None:
-            return None
-        return DescribeScoresResult()\
-            .with_items(None if data.get('items') is None else [
-                Score.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-            "nextPageToken": self.next_page_token,
-        }
-
-
-class DescribeScoresByUserIdResult(core.Gs2Result):
-    items: List[Score] = None
-    next_page_token: str = None
-
-    def with_items(self, items: List[Score]) -> DescribeScoresByUserIdResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribeScoresByUserIdResult:
-        self.next_page_token = next_page_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeScoresByUserIdResult]:
-        if data is None:
-            return None
-        return DescribeScoresByUserIdResult()\
-            .with_items(None if data.get('items') is None else [
-                Score.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-            "nextPageToken": self.next_page_token,
-        }
-
-
-class GetScoreResult(core.Gs2Result):
-    item: Score = None
-
-    def with_item(self, item: Score) -> GetScoreResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetScoreResult]:
-        if data is None:
-            return None
-        return GetScoreResult()\
-            .with_item(Score.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class GetScoreByUserIdResult(core.Gs2Result):
-    item: Score = None
-
-    def with_item(self, item: Score) -> GetScoreByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetScoreByUserIdResult]:
-        if data is None:
-            return None
-        return GetScoreByUserIdResult()\
-            .with_item(Score.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class DescribeRankingsResult(core.Gs2Result):
-    items: List[Ranking] = None
-    next_page_token: str = None
-
-    def with_items(self, items: List[Ranking]) -> DescribeRankingsResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribeRankingsResult:
-        self.next_page_token = next_page_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeRankingsResult]:
-        if data is None:
-            return None
-        return DescribeRankingsResult()\
-            .with_items(None if data.get('items') is None else [
-                Ranking.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-            "nextPageToken": self.next_page_token,
-        }
-
-
-class DescribeRankingssByUserIdResult(core.Gs2Result):
-    items: List[Ranking] = None
-    next_page_token: str = None
-
-    def with_items(self, items: List[Ranking]) -> DescribeRankingssByUserIdResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribeRankingssByUserIdResult:
-        self.next_page_token = next_page_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeRankingssByUserIdResult]:
-        if data is None:
-            return None
-        return DescribeRankingssByUserIdResult()\
-            .with_items(None if data.get('items') is None else [
-                Ranking.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-            "nextPageToken": self.next_page_token,
-        }
-
-
-class DescribeNearRankingsResult(core.Gs2Result):
-    items: List[Ranking] = None
-
-    def with_items(self, items: List[Ranking]) -> DescribeNearRankingsResult:
-        self.items = items
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeNearRankingsResult]:
-        if data is None:
-            return None
-        return DescribeNearRankingsResult()\
-            .with_items(None if data.get('items') is None else [
-                Ranking.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-        }
-
-
-class GetRankingResult(core.Gs2Result):
-    item: Ranking = None
-
-    def with_item(self, item: Ranking) -> GetRankingResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetRankingResult]:
-        if data is None:
-            return None
-        return GetRankingResult()\
-            .with_item(Ranking.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class GetRankingByUserIdResult(core.Gs2Result):
-    item: Ranking = None
-
-    def with_item(self, item: Ranking) -> GetRankingByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetRankingByUserIdResult]:
-        if data is None:
-            return None
-        return GetRankingByUserIdResult()\
-            .with_item(Ranking.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class PutScoreResult(core.Gs2Result):
-    item: Score = None
-
-    def with_item(self, item: Score) -> PutScoreResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[PutScoreResult]:
-        if data is None:
-            return None
-        return PutScoreResult()\
-            .with_item(Score.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class PutScoreByUserIdResult(core.Gs2Result):
-    item: Score = None
-
-    def with_item(self, item: Score) -> PutScoreByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[PutScoreByUserIdResult]:
-        if data is None:
-            return None
-        return PutScoreByUserIdResult()\
-            .with_item(Score.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class CalcRankingResult(core.Gs2Result):
-    processing: bool = None
-
-    def with_processing(self, processing: bool) -> CalcRankingResult:
-        self.processing = processing
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[CalcRankingResult]:
-        if data is None:
-            return None
-        return CalcRankingResult()\
-            .with_processing(data.get('processing'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "processing": self.processing,
-        }
-
-
-class ExportMasterResult(core.Gs2Result):
-    item: CurrentRankingMaster = None
-
-    def with_item(self, item: CurrentRankingMaster) -> ExportMasterResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[ExportMasterResult]:
-        if data is None:
-            return None
-        return ExportMasterResult()\
-            .with_item(CurrentRankingMaster.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class GetCurrentRankingMasterResult(core.Gs2Result):
-    item: CurrentRankingMaster = None
-
-    def with_item(self, item: CurrentRankingMaster) -> GetCurrentRankingMasterResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetCurrentRankingMasterResult]:
-        if data is None:
-            return None
-        return GetCurrentRankingMasterResult()\
-            .with_item(CurrentRankingMaster.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class UpdateCurrentRankingMasterResult(core.Gs2Result):
-    item: CurrentRankingMaster = None
-
-    def with_item(self, item: CurrentRankingMaster) -> UpdateCurrentRankingMasterResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentRankingMasterResult]:
-        if data is None:
-            return None
-        return UpdateCurrentRankingMasterResult()\
-            .with_item(CurrentRankingMaster.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class UpdateCurrentRankingMasterFromGitHubResult(core.Gs2Result):
-    item: CurrentRankingMaster = None
-
-    def with_item(self, item: CurrentRankingMaster) -> UpdateCurrentRankingMasterFromGitHubResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[UpdateCurrentRankingMasterFromGitHubResult]:
-        if data is None:
-            return None
-        return UpdateCurrentRankingMasterFromGitHubResult()\
-            .with_item(CurrentRankingMaster.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class GetSubscribeResult(core.Gs2Result):
-    item: SubscribeUser = None
-
-    def with_item(self, item: SubscribeUser) -> GetSubscribeResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetSubscribeResult]:
-        if data is None:
-            return None
-        return GetSubscribeResult()\
-            .with_item(SubscribeUser.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class GetSubscribeByUserIdResult(core.Gs2Result):
-    item: SubscribeUser = None
-
-    def with_item(self, item: SubscribeUser) -> GetSubscribeByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[GetSubscribeByUserIdResult]:
-        if data is None:
-            return None
-        return GetSubscribeByUserIdResult()\
-            .with_item(SubscribeUser.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class UnsubscribeResult(core.Gs2Result):
-    item: SubscribeUser = None
-
-    def with_item(self, item: SubscribeUser) -> UnsubscribeResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[UnsubscribeResult]:
-        if data is None:
-            return None
-        return UnsubscribeResult()\
-            .with_item(SubscribeUser.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class UnsubscribeByUserIdResult(core.Gs2Result):
-    item: SubscribeUser = None
-
-    def with_item(self, item: SubscribeUser) -> UnsubscribeByUserIdResult:
-        self.item = item
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[UnsubscribeByUserIdResult]:
-        if data is None:
-            return None
-        return UnsubscribeByUserIdResult()\
-            .with_item(SubscribeUser.from_dict(data.get('item')))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "item": self.item.to_dict() if self.item else None,
-        }
-
-
-class DescribeSubscribesByCategoryNameResult(core.Gs2Result):
-    items: List[SubscribeUser] = None
-
-    def with_items(self, items: List[SubscribeUser]) -> DescribeSubscribesByCategoryNameResult:
-        self.items = items
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeSubscribesByCategoryNameResult]:
-        if data is None:
-            return None
-        return DescribeSubscribesByCategoryNameResult()\
-            .with_items(None if data.get('items') is None else [
-                SubscribeUser.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-        }
-
-
-class DescribeSubscribesByCategoryNameAndUserIdResult(core.Gs2Result):
-    items: List[SubscribeUser] = None
-
-    def with_items(self, items: List[SubscribeUser]) -> DescribeSubscribesByCategoryNameAndUserIdResult:
-        self.items = items
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeSubscribesByCategoryNameAndUserIdResult]:
-        if data is None:
-            return None
-        return DescribeSubscribesByCategoryNameAndUserIdResult()\
-            .with_items(None if data.get('items') is None else [
-                SubscribeUser.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
         }

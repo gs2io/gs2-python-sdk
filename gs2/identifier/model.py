@@ -160,9 +160,9 @@ class AttachSecurityPolicy(core.Gs2Model):
             return None
         return AttachSecurityPolicy()\
             .with_user_id(data.get('userId'))\
-            .with_security_policy_ids([
+            .with_security_policy_ids(None if data.get('securityPolicyIds') is None else [
                 data.get('securityPolicyIds')[i]
-                for i in range(len(data.get('securityPolicyIds')) if data.get('securityPolicyIds') else 0)
+                for i in range(len(data.get('securityPolicyIds')))
             ])\
             .with_attached_at(data.get('attachedAt'))\
             .with_revision(data.get('revision'))
@@ -172,7 +172,7 @@ class AttachSecurityPolicy(core.Gs2Model):
             "userId": self.user_id,
             "securityPolicyIds": None if self.security_policy_ids is None else [
                 self.security_policy_ids[i]
-                for i in range(len(self.security_policy_ids) if self.security_policy_ids else 0)
+                for i in range(len(self.security_policy_ids))
             ],
             "attachedAt": self.attached_at,
             "revision": self.revision,

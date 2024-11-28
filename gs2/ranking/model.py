@@ -399,13 +399,13 @@ class GlobalRankingSetting(core.Gs2Model):
             .with_unique_by_user_id(data.get('uniqueByUserId'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
             .with_calculate_fixed_timing(FixedTiming.from_dict(data.get('calculateFixedTiming')))\
-            .with_additional_scopes([
+            .with_additional_scopes(None if data.get('additionalScopes') is None else [
                 Scope.from_dict(data.get('additionalScopes')[i])
-                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+                for i in range(len(data.get('additionalScopes')))
             ])\
-            .with_ignore_user_ids([
+            .with_ignore_user_ids(None if data.get('ignoreUserIds') is None else [
                 data.get('ignoreUserIds')[i]
-                for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
+                for i in range(len(data.get('ignoreUserIds')))
             ])\
             .with_generation(data.get('generation'))
 
@@ -416,11 +416,11 @@ class GlobalRankingSetting(core.Gs2Model):
             "calculateFixedTiming": self.calculate_fixed_timing.to_dict() if self.calculate_fixed_timing else None,
             "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
-                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+                for i in range(len(self.additional_scopes))
             ],
             "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
-                for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
+                for i in range(len(self.ignore_user_ids))
             ],
             "generation": self.generation,
         }
@@ -934,13 +934,13 @@ class Subscribe(core.Gs2Model):
             .with_subscribe_id(data.get('subscribeId'))\
             .with_category_name(data.get('categoryName'))\
             .with_user_id(data.get('userId'))\
-            .with_target_user_ids([
+            .with_target_user_ids(None if data.get('targetUserIds') is None else [
                 data.get('targetUserIds')[i]
-                for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
+                for i in range(len(data.get('targetUserIds')))
             ])\
-            .with_subscribed_user_ids([
+            .with_subscribed_user_ids(None if data.get('subscribedUserIds') is None else [
                 data.get('subscribedUserIds')[i]
-                for i in range(len(data.get('subscribedUserIds')) if data.get('subscribedUserIds') else 0)
+                for i in range(len(data.get('subscribedUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
@@ -952,11 +952,11 @@ class Subscribe(core.Gs2Model):
             "userId": self.user_id,
             "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
-                for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
+                for i in range(len(self.target_user_ids))
             ],
             "subscribedUserIds": None if self.subscribed_user_ids is None else [
                 self.subscribed_user_ids[i]
-                for i in range(len(self.subscribed_user_ids) if self.subscribed_user_ids else 0)
+                for i in range(len(self.subscribed_user_ids))
             ],
             "createdAt": self.created_at,
             "revision": self.revision,
@@ -1165,13 +1165,13 @@ class CategoryModelMaster(core.Gs2Model):
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
-            .with_additional_scopes([
+            .with_additional_scopes(None if data.get('additionalScopes') is None else [
                 Scope.from_dict(data.get('additionalScopes')[i])
-                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+                for i in range(len(data.get('additionalScopes')))
             ])\
-            .with_ignore_user_ids([
+            .with_ignore_user_ids(None if data.get('ignoreUserIds') is None else [
                 data.get('ignoreUserIds')[i]
-                for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
+                for i in range(len(data.get('ignoreUserIds')))
             ])\
             .with_generation(data.get('generation'))\
             .with_created_at(data.get('createdAt'))\
@@ -1198,11 +1198,11 @@ class CategoryModelMaster(core.Gs2Model):
             "calculateIntervalMinutes": self.calculate_interval_minutes,
             "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
-                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+                for i in range(len(self.additional_scopes))
             ],
             "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
-                for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
+                for i in range(len(self.ignore_user_ids))
             ],
             "generation": self.generation,
             "createdAt": self.created_at,
@@ -1392,13 +1392,13 @@ class CategoryModel(core.Gs2Model):
             .with_calculate_fixed_timing_hour(data.get('calculateFixedTimingHour'))\
             .with_calculate_fixed_timing_minute(data.get('calculateFixedTimingMinute'))\
             .with_calculate_interval_minutes(data.get('calculateIntervalMinutes'))\
-            .with_additional_scopes([
+            .with_additional_scopes(None if data.get('additionalScopes') is None else [
                 Scope.from_dict(data.get('additionalScopes')[i])
-                for i in range(len(data.get('additionalScopes')) if data.get('additionalScopes') else 0)
+                for i in range(len(data.get('additionalScopes')))
             ])\
-            .with_ignore_user_ids([
+            .with_ignore_user_ids(None if data.get('ignoreUserIds') is None else [
                 data.get('ignoreUserIds')[i]
-                for i in range(len(data.get('ignoreUserIds')) if data.get('ignoreUserIds') else 0)
+                for i in range(len(data.get('ignoreUserIds')))
             ])\
             .with_generation(data.get('generation'))
 
@@ -1421,11 +1421,11 @@ class CategoryModel(core.Gs2Model):
             "calculateIntervalMinutes": self.calculate_interval_minutes,
             "additionalScopes": None if self.additional_scopes is None else [
                 self.additional_scopes[i].to_dict() if self.additional_scopes[i] else None
-                for i in range(len(self.additional_scopes) if self.additional_scopes else 0)
+                for i in range(len(self.additional_scopes))
             ],
             "ignoreUserIds": None if self.ignore_user_ids is None else [
                 self.ignore_user_ids[i]
-                for i in range(len(self.ignore_user_ids) if self.ignore_user_ids else 0)
+                for i in range(len(self.ignore_user_ids))
             ],
             "generation": self.generation,
         }
@@ -1538,9 +1538,9 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_last_calculated_ats([
+            .with_last_calculated_ats(None if data.get('lastCalculatedAts') is None else [
                 CalculatedAt.from_dict(data.get('lastCalculatedAts')[i])
-                for i in range(len(data.get('lastCalculatedAts')) if data.get('lastCalculatedAts') else 0)
+                for i in range(len(data.get('lastCalculatedAts')))
             ])\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
@@ -1554,7 +1554,7 @@ class Namespace(core.Gs2Model):
             "description": self.description,
             "lastCalculatedAts": None if self.last_calculated_ats is None else [
                 self.last_calculated_ats[i].to_dict() if self.last_calculated_ats[i] else None
-                for i in range(len(self.last_calculated_ats) if self.last_calculated_ats else 0)
+                for i in range(len(self.last_calculated_ats))
             ],
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,

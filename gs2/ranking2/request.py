@@ -812,9 +812,9 @@ class CreateGlobalRankingModelMasterRequest(core.Gs2Request):
             .with_maximum_value(data.get('maximumValue'))\
             .with_sum(data.get('sum'))\
             .with_order_direction(data.get('orderDirection'))\
-            .with_ranking_rewards([
+            .with_ranking_rewards(None if data.get('rankingRewards') is None else [
                 RankingReward.from_dict(data.get('rankingRewards')[i])
-                for i in range(len(data.get('rankingRewards')) if data.get('rankingRewards') else 0)
+                for i in range(len(data.get('rankingRewards')))
             ])\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
@@ -831,7 +831,7 @@ class CreateGlobalRankingModelMasterRequest(core.Gs2Request):
             "orderDirection": self.order_direction,
             "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
-                for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
+                for i in range(len(self.ranking_rewards))
             ],
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
@@ -967,9 +967,9 @@ class UpdateGlobalRankingModelMasterRequest(core.Gs2Request):
             .with_maximum_value(data.get('maximumValue'))\
             .with_sum(data.get('sum'))\
             .with_order_direction(data.get('orderDirection'))\
-            .with_ranking_rewards([
+            .with_ranking_rewards(None if data.get('rankingRewards') is None else [
                 RankingReward.from_dict(data.get('rankingRewards')[i])
-                for i in range(len(data.get('rankingRewards')) if data.get('rankingRewards') else 0)
+                for i in range(len(data.get('rankingRewards')))
             ])\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
@@ -986,7 +986,7 @@ class UpdateGlobalRankingModelMasterRequest(core.Gs2Request):
             "orderDirection": self.order_direction,
             "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
-                for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
+                for i in range(len(self.ranking_rewards))
             ],
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
@@ -2059,9 +2059,9 @@ class ReceiveGlobalRankingReceivedRewardRequest(core.Gs2Request):
             .with_access_token(data.get('accessToken'))\
             .with_ranking_name(data.get('rankingName'))\
             .with_season(data.get('season'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2072,7 +2072,7 @@ class ReceiveGlobalRankingReceivedRewardRequest(core.Gs2Request):
             "season": self.season,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -2139,9 +2139,9 @@ class ReceiveGlobalRankingReceivedRewardByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_ranking_name(data.get('rankingName'))\
             .with_season(data.get('season'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2153,7 +2153,7 @@ class ReceiveGlobalRankingReceivedRewardByUserIdRequest(core.Gs2Request):
             "season": self.season,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -2889,9 +2889,9 @@ class CreateClusterRankingModelMasterRequest(core.Gs2Request):
             .with_sum(data.get('sum'))\
             .with_score_ttl_days(data.get('scoreTtlDays'))\
             .with_order_direction(data.get('orderDirection'))\
-            .with_ranking_rewards([
+            .with_ranking_rewards(None if data.get('rankingRewards') is None else [
                 RankingReward.from_dict(data.get('rankingRewards')[i])
-                for i in range(len(data.get('rankingRewards')) if data.get('rankingRewards') else 0)
+                for i in range(len(data.get('rankingRewards')))
             ])\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
@@ -2910,7 +2910,7 @@ class CreateClusterRankingModelMasterRequest(core.Gs2Request):
             "orderDirection": self.order_direction,
             "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
-                for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
+                for i in range(len(self.ranking_rewards))
             ],
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
@@ -3058,9 +3058,9 @@ class UpdateClusterRankingModelMasterRequest(core.Gs2Request):
             .with_sum(data.get('sum'))\
             .with_score_ttl_days(data.get('scoreTtlDays'))\
             .with_order_direction(data.get('orderDirection'))\
-            .with_ranking_rewards([
+            .with_ranking_rewards(None if data.get('rankingRewards') is None else [
                 RankingReward.from_dict(data.get('rankingRewards')[i])
-                for i in range(len(data.get('rankingRewards')) if data.get('rankingRewards') else 0)
+                for i in range(len(data.get('rankingRewards')))
             ])\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
@@ -3079,7 +3079,7 @@ class UpdateClusterRankingModelMasterRequest(core.Gs2Request):
             "orderDirection": self.order_direction,
             "rankingRewards": None if self.ranking_rewards is None else [
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
-                for i in range(len(self.ranking_rewards) if self.ranking_rewards else 0)
+                for i in range(len(self.ranking_rewards))
             ],
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
@@ -4263,9 +4263,9 @@ class ReceiveClusterRankingReceivedRewardRequest(core.Gs2Request):
             .with_ranking_name(data.get('rankingName'))\
             .with_cluster_name(data.get('clusterName'))\
             .with_season(data.get('season'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -4277,7 +4277,7 @@ class ReceiveClusterRankingReceivedRewardRequest(core.Gs2Request):
             "season": self.season,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -4350,9 +4350,9 @@ class ReceiveClusterRankingReceivedRewardByUserIdRequest(core.Gs2Request):
             .with_ranking_name(data.get('rankingName'))\
             .with_cluster_name(data.get('clusterName'))\
             .with_season(data.get('season'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -4365,7 +4365,7 @@ class ReceiveClusterRankingReceivedRewardByUserIdRequest(core.Gs2Request):
             "season": self.season,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

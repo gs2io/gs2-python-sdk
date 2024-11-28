@@ -227,9 +227,9 @@ class Room(core.Gs2Model):
             .with_ip_address(data.get('ipAddress'))\
             .with_port(data.get('port'))\
             .with_encryption_key(data.get('encryptionKey'))\
-            .with_notification_user_ids([
+            .with_notification_user_ids(None if data.get('notificationUserIds') is None else [
                 data.get('notificationUserIds')[i]
-                for i in range(len(data.get('notificationUserIds')) if data.get('notificationUserIds') else 0)
+                for i in range(len(data.get('notificationUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -244,7 +244,7 @@ class Room(core.Gs2Model):
             "encryptionKey": self.encryption_key,
             "notificationUserIds": None if self.notification_user_ids is None else [
                 self.notification_user_ids[i]
-                for i in range(len(self.notification_user_ids) if self.notification_user_ids else 0)
+                for i in range(len(self.notification_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

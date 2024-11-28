@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeStaminaModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStaminaModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 StaminaModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeStaminaModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -665,9 +666,9 @@ class DescribeMaxStaminaTableMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeMaxStaminaTableMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 MaxStaminaTableMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -675,7 +676,7 @@ class DescribeMaxStaminaTableMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -848,9 +849,9 @@ class DescribeRecoverIntervalTableMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRecoverIntervalTableMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RecoverIntervalTableMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -858,7 +859,7 @@ class DescribeRecoverIntervalTableMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1031,9 +1032,9 @@ class DescribeRecoverValueTableMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRecoverValueTableMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RecoverValueTableMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1041,7 +1042,7 @@ class DescribeRecoverValueTableMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1345,16 +1346,16 @@ class DescribeStaminaModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStaminaModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 StaminaModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1424,9 +1425,9 @@ class DescribeStaminasResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStaminasResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Stamina.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1434,7 +1435,7 @@ class DescribeStaminasResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1471,9 +1472,9 @@ class DescribeStaminasByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeStaminasByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Stamina.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1481,7 +1482,7 @@ class DescribeStaminasByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

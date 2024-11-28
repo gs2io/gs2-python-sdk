@@ -351,9 +351,9 @@ class InGameLog(core.Gs2Model):
             .with_timestamp(data.get('timestamp'))\
             .with_request_id(data.get('requestId'))\
             .with_user_id(data.get('userId'))\
-            .with_tags([
+            .with_tags(None if data.get('tags') is None else [
                 InGameLogTag.from_dict(data.get('tags')[i])
-                for i in range(len(data.get('tags')) if data.get('tags') else 0)
+                for i in range(len(data.get('tags')))
             ])\
             .with_payload(data.get('payload'))
 
@@ -364,7 +364,7 @@ class InGameLog(core.Gs2Model):
             "userId": self.user_id,
             "tags": None if self.tags is None else [
                 self.tags[i].to_dict() if self.tags[i] else None
-                for i in range(len(self.tags) if self.tags else 0)
+                for i in range(len(self.tags))
             ],
             "payload": self.payload,
         }
@@ -776,9 +776,9 @@ class IssueStampSheetLog(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_action(data.get('action'))\
             .with_args(data.get('args'))\
-            .with_tasks([
+            .with_tasks(None if data.get('tasks') is None else [
                 data.get('tasks')[i]
-                for i in range(len(data.get('tasks')) if data.get('tasks') else 0)
+                for i in range(len(data.get('tasks')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -792,7 +792,7 @@ class IssueStampSheetLog(core.Gs2Model):
             "args": self.args,
             "tasks": None if self.tasks is None else [
                 self.tasks[i]
-                for i in range(len(self.tasks) if self.tasks else 0)
+                for i in range(len(self.tasks))
             ],
         }
 

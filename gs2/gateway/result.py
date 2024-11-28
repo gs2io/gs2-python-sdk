@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeWebSocketSessionsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeWebSocketSessionsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 WebSocketSession.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeWebSocketSessionsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -529,9 +530,9 @@ class DescribeWebSocketSessionsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeWebSocketSessionsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 WebSocketSession.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -539,7 +540,7 @@ class DescribeWebSocketSessionsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -645,9 +646,9 @@ class SendNotificationResult(core.Gs2Result):
             return None
         return SendNotificationResult()\
             .with_protocol(data.get('protocol'))\
-            .with_send_connection_ids([
+            .with_send_connection_ids(None if data.get('sendConnectionIds') is None else [
                 data.get('sendConnectionIds')[i]
-                for i in range(len(data.get('sendConnectionIds')) if data.get('sendConnectionIds') else 0)
+                for i in range(len(data.get('sendConnectionIds')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -655,7 +656,7 @@ class SendNotificationResult(core.Gs2Result):
             "protocol": self.protocol,
             "sendConnectionIds": None if self.send_connection_ids is None else [
                 self.send_connection_ids[i]
-                for i in range(len(self.send_connection_ids) if self.send_connection_ids else 0)
+                for i in range(len(self.send_connection_ids))
             ],
         }
 
@@ -686,16 +687,16 @@ class DisconnectByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DisconnectByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 WebSocketSession.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 

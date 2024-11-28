@@ -930,9 +930,9 @@ class DepositByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_slot(data.get('slot'))\
-            .with_deposit_transactions([
+            .with_deposit_transactions(None if data.get('depositTransactions') is None else [
                 DepositTransaction.from_dict(data.get('depositTransactions')[i])
-                for i in range(len(data.get('depositTransactions')) if data.get('depositTransactions') else 0)
+                for i in range(len(data.get('depositTransactions')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -943,7 +943,7 @@ class DepositByUserIdRequest(core.Gs2Request):
             "slot": self.slot,
             "depositTransactions": None if self.deposit_transactions is None else [
                 self.deposit_transactions[i].to_dict() if self.deposit_transactions[i] else None
-                for i in range(len(self.deposit_transactions) if self.deposit_transactions else 0)
+                for i in range(len(self.deposit_transactions))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

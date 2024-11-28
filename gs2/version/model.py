@@ -804,9 +804,9 @@ class VersionModel(core.Gs2Model):
             .with_current_version(Version.from_dict(data.get('currentVersion')))\
             .with_warning_version(Version.from_dict(data.get('warningVersion')))\
             .with_error_version(Version.from_dict(data.get('errorVersion')))\
-            .with_schedule_versions([
+            .with_schedule_versions(None if data.get('scheduleVersions') is None else [
                 ScheduleVersion.from_dict(data.get('scheduleVersions')[i])
-                for i in range(len(data.get('scheduleVersions')) if data.get('scheduleVersions') else 0)
+                for i in range(len(data.get('scheduleVersions')))
             ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))
@@ -823,7 +823,7 @@ class VersionModel(core.Gs2Model):
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
             "scheduleVersions": None if self.schedule_versions is None else [
                 self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
-                for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
+                for i in range(len(self.schedule_versions))
             ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
@@ -990,9 +990,9 @@ class VersionModelMaster(core.Gs2Model):
             .with_current_version(Version.from_dict(data.get('currentVersion')))\
             .with_warning_version(Version.from_dict(data.get('warningVersion')))\
             .with_error_version(Version.from_dict(data.get('errorVersion')))\
-            .with_schedule_versions([
+            .with_schedule_versions(None if data.get('scheduleVersions') is None else [
                 ScheduleVersion.from_dict(data.get('scheduleVersions')[i])
-                for i in range(len(data.get('scheduleVersions')) if data.get('scheduleVersions') else 0)
+                for i in range(len(data.get('scheduleVersions')))
             ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))\
@@ -1013,7 +1013,7 @@ class VersionModelMaster(core.Gs2Model):
             "errorVersion": self.error_version.to_dict() if self.error_version else None,
             "scheduleVersions": None if self.schedule_versions is None else [
                 self.schedule_versions[i].to_dict() if self.schedule_versions[i] else None
-                for i in range(len(self.schedule_versions) if self.schedule_versions else 0)
+                for i in range(len(self.schedule_versions))
             ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,

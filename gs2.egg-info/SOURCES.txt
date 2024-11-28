@@ -229,6 +229,12 @@ src/gs2/news/request.py
 src/gs2/news/rest.py
 src/gs2/news/result.py
 src/gs2/news/web_socket.py
+src/gs2/project/__init__.py
+src/gs2/project/model.py
+src/gs2/project/request.py
+src/gs2/project/rest.py
+src/gs2/project/result.py
+src/gs2/project/web_socket.py
 src/gs2/quest/__init__.py
 src/gs2/quest/model.py
 src/gs2/quest/request.py

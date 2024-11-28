@@ -234,12 +234,27 @@ class NotificationSetting(core.Gs2Model):
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -274,6 +289,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -281,6 +299,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -1103,15 +1124,15 @@ class Guild(core.Gs2Model):
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
             .with_join_policy(data.get('joinPolicy'))\
-            .with_custom_roles([
+            .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
-                for i in range(len(data.get('customRoles')) if data.get('customRoles') else 0)
+                for i in range(len(data.get('customRoles')))
             ])\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
             .with_current_maximum_member_count(data.get('currentMaximumMemberCount'))\
-            .with_members([
+            .with_members(None if data.get('members') is None else [
                 Member.from_dict(data.get('members')[i])
-                for i in range(len(data.get('members')) if data.get('members') else 0)
+                for i in range(len(data.get('members')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1131,13 +1152,13 @@ class Guild(core.Gs2Model):
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
-                for i in range(len(self.custom_roles) if self.custom_roles else 0)
+                for i in range(len(self.custom_roles))
             ],
             "guildMemberDefaultRole": self.guild_member_default_role,
             "currentMaximumMemberCount": self.current_maximum_member_count,
             "members": None if self.members is None else [
                 self.members[i].to_dict() if self.members[i] else None
-                for i in range(len(self.members) if self.members else 0)
+                for i in range(len(self.members))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1271,9 +1292,9 @@ class SendBox(core.Gs2Model):
             .with_send_box_id(data.get('sendBoxId'))\
             .with_user_id(data.get('userId'))\
             .with_guild_model_name(data.get('guildModelName'))\
-            .with_target_guild_names([
+            .with_target_guild_names(None if data.get('targetGuildNames') is None else [
                 data.get('targetGuildNames')[i]
-                for i in range(len(data.get('targetGuildNames')) if data.get('targetGuildNames') else 0)
+                for i in range(len(data.get('targetGuildNames')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1286,7 +1307,7 @@ class SendBox(core.Gs2Model):
             "guildModelName": self.guild_model_name,
             "targetGuildNames": None if self.target_guild_names is None else [
                 self.target_guild_names[i]
-                for i in range(len(self.target_guild_names) if self.target_guild_names else 0)
+                for i in range(len(self.target_guild_names))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1414,9 +1435,9 @@ class Inbox(core.Gs2Model):
         return Inbox()\
             .with_inbox_id(data.get('inboxId'))\
             .with_guild_name(data.get('guildName'))\
-            .with_from_user_ids([
+            .with_from_user_ids(None if data.get('fromUserIds') is None else [
                 data.get('fromUserIds')[i]
-                for i in range(len(data.get('fromUserIds')) if data.get('fromUserIds') else 0)
+                for i in range(len(data.get('fromUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1428,7 +1449,7 @@ class Inbox(core.Gs2Model):
             "guildName": self.guild_name,
             "fromUserIds": None if self.from_user_ids is None else [
                 self.from_user_ids[i]
-                for i in range(len(self.from_user_ids) if self.from_user_ids else 0)
+                for i in range(len(self.from_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1578,9 +1599,9 @@ class GuildModel(core.Gs2Model):
             .with_default_maximum_member_count(data.get('defaultMaximumMemberCount'))\
             .with_maximum_member_count(data.get('maximumMemberCount'))\
             .with_inactivity_period_days(data.get('inactivityPeriodDays'))\
-            .with_roles([
+            .with_roles(None if data.get('roles') is None else [
                 RoleModel.from_dict(data.get('roles')[i])
-                for i in range(len(data.get('roles')) if data.get('roles') else 0)
+                for i in range(len(data.get('roles')))
             ])\
             .with_guild_master_role(data.get('guildMasterRole'))\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
@@ -1598,7 +1619,7 @@ class GuildModel(core.Gs2Model):
             "inactivityPeriodDays": self.inactivity_period_days,
             "roles": None if self.roles is None else [
                 self.roles[i].to_dict() if self.roles[i] else None
-                for i in range(len(self.roles) if self.roles else 0)
+                for i in range(len(self.roles))
             ],
             "guildMasterRole": self.guild_master_role,
             "guildMemberDefaultRole": self.guild_member_default_role,
@@ -1771,9 +1792,9 @@ class GuildModelMaster(core.Gs2Model):
             .with_default_maximum_member_count(data.get('defaultMaximumMemberCount'))\
             .with_maximum_member_count(data.get('maximumMemberCount'))\
             .with_inactivity_period_days(data.get('inactivityPeriodDays'))\
-            .with_roles([
+            .with_roles(None if data.get('roles') is None else [
                 RoleModel.from_dict(data.get('roles')[i])
-                for i in range(len(data.get('roles')) if data.get('roles') else 0)
+                for i in range(len(data.get('roles')))
             ])\
             .with_guild_master_role(data.get('guildMasterRole'))\
             .with_guild_member_default_role(data.get('guildMemberDefaultRole'))\
@@ -1795,7 +1816,7 @@ class GuildModelMaster(core.Gs2Model):
             "inactivityPeriodDays": self.inactivity_period_days,
             "roles": None if self.roles is None else [
                 self.roles[i].to_dict() if self.roles[i] else None
-                for i in range(len(self.roles) if self.roles else 0)
+                for i in range(len(self.roles))
             ],
             "guildMasterRole": self.guild_master_role,
             "guildMemberDefaultRole": self.guild_member_default_role,

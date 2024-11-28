@@ -337,9 +337,9 @@ class DeadLetterJob(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_script_id(data.get('scriptId'))\
             .with_args(data.get('args'))\
-            .with_result([
+            .with_result(None if data.get('result') is None else [
                 JobResultBody.from_dict(data.get('result')[i])
-                for i in range(len(data.get('result')) if data.get('result') else 0)
+                for i in range(len(data.get('result')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
@@ -353,7 +353,7 @@ class DeadLetterJob(core.Gs2Model):
             "args": self.args,
             "result": None if self.result is None else [
                 self.result[i].to_dict() if self.result[i] else None
-                for i in range(len(self.result) if self.result else 0)
+                for i in range(len(self.result))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

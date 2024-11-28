@@ -16,7 +16,7 @@
 
 from __future__ import annotations
 from abc import abstractmethod
-from typing import Optional, Dict, Any, Generic, TypeVar, Callable
+from typing import Optional, Dict, Any, Generic, TypeVar, Callable, List
 
 
 class Gs2Constant(object):
@@ -294,3 +294,276 @@ class AsyncResult(Generic[T]):
     @property
     def error(self) -> Optional[Exception]:
         return self._error
+
+
+class VerifyActionResult(Gs2Model):
+    action: str = None
+    verify_request: str = None
+    status_code: int = None
+    verify_result: str = None
+
+    def with_action(self, action: str) -> VerifyActionResult:
+        self.action = action
+        return self
+
+    def with_verify_request(self, verify_request: str) -> VerifyActionResult:
+        self.verify_request = verify_request
+        return self
+
+    def with_status_code(self, status_code: int) -> VerifyActionResult:
+        self.status_code = status_code
+        return self
+
+    def with_verify_result(self, verify_result: str) -> VerifyActionResult:
+        self.verify_result = verify_result
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+            data: Dict[str, Any],
+    ) -> Optional[VerifyActionResult]:
+        if data is None:
+            return None
+        return VerifyActionResult() \
+            .with_action(data.get('action')) \
+            .with_verify_request(data.get('verifyRequest')) \
+            .with_status_code(data.get('statusCode')) \
+            .with_verify_result(data.get('verifyResult'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "verifyRequest": self.verify_request,
+            "statusCode": self.status_code,
+            "verifyResult": self.verify_result,
+        }
+
+
+class ConsumeActionResult(Gs2Model):
+    action: str = None
+    consume_request: str = None
+    status_code: int = None
+    consume_result: str = None
+
+    def with_action(self, action: str) -> ConsumeActionResult:
+        self.action = action
+        return self
+
+    def with_consume_request(self, consume_request: str) -> ConsumeActionResult:
+        self.consume_request = consume_request
+        return self
+
+    def with_status_code(self, status_code: int) -> ConsumeActionResult:
+        self.status_code = status_code
+        return self
+
+    def with_consume_result(self, consume_result: str) -> ConsumeActionResult:
+        self.consume_result = consume_result
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+            data: Dict[str, Any],
+    ) -> Optional[ConsumeActionResult]:
+        if data is None:
+            return None
+        return ConsumeActionResult() \
+            .with_action(data.get('action')) \
+            .with_consume_request(data.get('consumeRequest')) \
+            .with_status_code(data.get('statusCode')) \
+            .with_consume_result(data.get('consumeResult'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "consumeRequest": self.consume_request,
+            "statusCode": self.status_code,
+            "consumeResult": self.consume_result,
+        }
+
+
+class AcquireActionResult(Gs2Model):
+    action: str = None
+    acquire_request: str = None
+    status_code: int = None
+    acquire_result: str = None
+
+    def with_action(self, action: str) -> AcquireActionResult:
+        self.action = action
+        return self
+
+    def with_acquire_request(self, acquire_request: str) -> AcquireActionResult:
+        self.acquire_request = acquire_request
+        return self
+
+    def with_status_code(self, status_code: int) -> AcquireActionResult:
+        self.status_code = status_code
+        return self
+
+    def with_acquire_result(self, acquire_result: str) -> AcquireActionResult:
+        self.acquire_result = acquire_result
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+            data: Dict[str, Any],
+    ) -> Optional[AcquireActionResult]:
+        if data is None:
+            return None
+        return AcquireActionResult() \
+            .with_action(data.get('action')) \
+            .with_acquire_request(data.get('acquireRequest')) \
+            .with_status_code(data.get('statusCode')) \
+            .with_acquire_result(data.get('acquireResult'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "acquireRequest": self.acquire_request,
+            "statusCode": self.status_code,
+            "acquireResult": self.acquire_result,
+        }
+
+
+class TransactionResult(Gs2Model):
+    transaction_id: str = None
+    verify_results: List[VerifyActionResult] = None
+    consume_results: List[ConsumeActionResult] = None
+    acquire_results: List[AcquireActionResult] = None
+
+    def with_transaction_id(self, transaction_id: str) -> TransactionResult:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_verify_results(self, verify_results: List[VerifyActionResult]) -> TransactionResult:
+        self.verify_results = verify_results
+        return self
+
+    def with_consume_results(self, consume_results: List[ConsumeActionResult]) -> TransactionResult:
+        self.consume_results = consume_results
+        return self
+
+    def with_acquire_results(self, acquire_results: List[AcquireActionResult]) -> TransactionResult:
+        self.acquire_results = acquire_results
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+            data: Dict[str, Any],
+    ) -> Optional[TransactionResult]:
+        if data is None:
+            return None
+        return TransactionResult() \
+            .with_transaction_id(data.get('transactionId')) \
+            .with_verify_results([
+            VerifyActionResult.from_dict(data.get('verifyResults')[i])
+            for i in range(len(data.get('verifyResults')) if data.get('verifyResults') else 0)
+        ]) \
+            .with_consume_results([
+            ConsumeActionResult.from_dict(data.get('consumeResults')[i])
+            for i in range(len(data.get('consumeResults')) if data.get('consumeResults') else 0)
+        ]) \
+            .with_acquire_results([
+            AcquireActionResult.from_dict(data.get('acquireResults')[i])
+            for i in range(len(data.get('acquireResults')) if data.get('acquireResults') else 0)
+        ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "transactionId": self.transaction_id,
+            "verifyResults": None if self.verify_results is None else [
+                self.verify_results[i].to_dict() if self.verify_results[i] else None
+                for i in range(len(self.verify_results) if self.verify_results else 0)
+            ],
+            "consumeResults": None if self.consume_results is None else [
+                self.consume_results[i].to_dict() if self.consume_results[i] else None
+                for i in range(len(self.consume_results) if self.consume_results else 0)
+            ],
+            "acquireResults": None if self.acquire_results is None else [
+                self.acquire_results[i].to_dict() if self.acquire_results[i] else None
+                for i in range(len(self.acquire_results) if self.acquire_results else 0)
+            ],
+        }
+
+
+class ResultMetadata(Gs2Model):
+    uncommitted: str = None
+
+    def with_uncommitted(self, uncommitted: str) -> ResultMetadata:
+        self.uncommitted = uncommitted
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+            data: Dict[str, Any],
+    ) -> Optional[ResultMetadata]:
+        if data is None:
+            return None
+        return ResultMetadata() \
+            .with_uncommitted(data.get('uncommitted'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uncommitted": self.uncommitted,
+        }
+

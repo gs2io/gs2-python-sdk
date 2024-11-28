@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -477,16 +478,16 @@ class DescribeBalanceParameterModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBalanceParameterModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BalanceParameterModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -556,9 +557,9 @@ class DescribeBalanceParameterModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBalanceParameterModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BalanceParameterModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -566,7 +567,7 @@ class DescribeBalanceParameterModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -734,16 +735,16 @@ class DescribeRarityParameterModelsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRarityParameterModelsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RarityParameterModel.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -813,9 +814,9 @@ class DescribeRarityParameterModelMastersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRarityParameterModelMastersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RarityParameterModelMaster.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -823,7 +824,7 @@ class DescribeRarityParameterModelMastersResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1132,9 +1133,9 @@ class DescribeBalanceParameterStatusesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBalanceParameterStatusesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BalanceParameterStatus.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1142,7 +1143,7 @@ class DescribeBalanceParameterStatusesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1179,9 +1180,9 @@ class DescribeBalanceParameterStatusesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBalanceParameterStatusesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BalanceParameterStatus.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1189,7 +1190,7 @@ class DescribeBalanceParameterStatusesByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1492,9 +1493,9 @@ class DescribeRarityParameterStatusesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRarityParameterStatusesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RarityParameterStatus.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1502,7 +1503,7 @@ class DescribeRarityParameterStatusesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1539,9 +1540,9 @@ class DescribeRarityParameterStatusesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRarityParameterStatusesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 RarityParameterStatus.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1549,7 +1550,7 @@ class DescribeRarityParameterStatusesByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

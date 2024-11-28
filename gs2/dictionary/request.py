@@ -1111,9 +1111,9 @@ class AddEntriesByUserIdRequest(core.Gs2Request):
         return AddEntriesByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_entry_model_names([
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
                 data.get('entryModelNames')[i]
-                for i in range(len(data.get('entryModelNames')) if data.get('entryModelNames') else 0)
+                for i in range(len(data.get('entryModelNames')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1123,7 +1123,7 @@ class AddEntriesByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "entryModelNames": None if self.entry_model_names is None else [
                 self.entry_model_names[i]
-                for i in range(len(self.entry_model_names) if self.entry_model_names else 0)
+                for i in range(len(self.entry_model_names))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1588,9 +1588,9 @@ class DeleteEntriesRequest(core.Gs2Request):
         return DeleteEntriesRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_entry_model_names([
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
                 data.get('entryModelNames')[i]
-                for i in range(len(data.get('entryModelNames')) if data.get('entryModelNames') else 0)
+                for i in range(len(data.get('entryModelNames')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1599,7 +1599,7 @@ class DeleteEntriesRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "entryModelNames": None if self.entry_model_names is None else [
                 self.entry_model_names[i]
-                for i in range(len(self.entry_model_names) if self.entry_model_names else 0)
+                for i in range(len(self.entry_model_names))
             ],
         }
 
@@ -1654,9 +1654,9 @@ class DeleteEntriesByUserIdRequest(core.Gs2Request):
         return DeleteEntriesByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_entry_model_names([
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
                 data.get('entryModelNames')[i]
-                for i in range(len(data.get('entryModelNames')) if data.get('entryModelNames') else 0)
+                for i in range(len(data.get('entryModelNames')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1666,7 +1666,7 @@ class DeleteEntriesByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "entryModelNames": None if self.entry_model_names is None else [
                 self.entry_model_names[i]
-                for i in range(len(self.entry_model_names) if self.entry_model_names else 0)
+                for i in range(len(self.entry_model_names))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

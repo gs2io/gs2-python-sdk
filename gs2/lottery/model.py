@@ -21,12 +21,27 @@ from gs2 import core
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -61,6 +76,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -68,6 +86,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -377,9 +398,9 @@ class BoxItems(core.Gs2Model):
             .with_box_id(data.get('boxId'))\
             .with_prize_table_name(data.get('prizeTableName'))\
             .with_user_id(data.get('userId'))\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 BoxItem.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -389,7 +410,7 @@ class BoxItems(core.Gs2Model):
             "userId": self.user_id,
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -436,9 +457,9 @@ class BoxItem(core.Gs2Model):
             return None
         return BoxItem()\
             .with_prize_id(data.get('prizeId'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_remaining(data.get('remaining'))\
             .with_initial(data.get('initial'))
@@ -448,7 +469,7 @@ class BoxItem(core.Gs2Model):
             "prizeId": self.prize_id,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "remaining": self.remaining,
             "initial": self.initial,
@@ -487,9 +508,9 @@ class DrawnPrize(core.Gs2Model):
             return None
         return DrawnPrize()\
             .with_prize_id(data.get('prizeId'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -497,7 +518,7 @@ class DrawnPrize(core.Gs2Model):
             "prizeId": self.prize_id,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
         }
 
@@ -696,9 +717,9 @@ class Prize(core.Gs2Model):
         return Prize()\
             .with_prize_id(data.get('prizeId'))\
             .with_type(data.get('type'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_drawn_limit(data.get('drawnLimit'))\
             .with_limit_fail_over_prize_id(data.get('limitFailOverPrizeId'))\
@@ -711,7 +732,7 @@ class Prize(core.Gs2Model):
             "type": self.type,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "drawnLimit": self.drawn_limit,
             "limitFailOverPrizeId": self.limit_fail_over_prize_id,
@@ -944,9 +965,9 @@ class PrizeTable(core.Gs2Model):
             .with_prize_table_id(data.get('prizeTableId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_prizes([
+            .with_prizes(None if data.get('prizes') is None else [
                 Prize.from_dict(data.get('prizes')[i])
-                for i in range(len(data.get('prizes')) if data.get('prizes') else 0)
+                for i in range(len(data.get('prizes')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -956,7 +977,7 @@ class PrizeTable(core.Gs2Model):
             "metadata": self.metadata,
             "prizes": None if self.prizes is None else [
                 self.prizes[i].to_dict() if self.prizes[i] else None
-                for i in range(len(self.prizes) if self.prizes else 0)
+                for i in range(len(self.prizes))
             ],
         }
 
@@ -1212,9 +1233,9 @@ class PrizeTableMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
-            .with_prizes([
+            .with_prizes(None if data.get('prizes') is None else [
                 Prize.from_dict(data.get('prizes')[i])
-                for i in range(len(data.get('prizes')) if data.get('prizes') else 0)
+                for i in range(len(data.get('prizes')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1228,7 +1249,7 @@ class PrizeTableMaster(core.Gs2Model):
             "description": self.description,
             "prizes": None if self.prizes is None else [
                 self.prizes[i].to_dict() if self.prizes[i] else None
-                for i in range(len(self.prizes) if self.prizes else 0)
+                for i in range(len(self.prizes))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

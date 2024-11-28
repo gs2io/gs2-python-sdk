@@ -76,12 +76,27 @@ class ScriptSetting(core.Gs2Model):
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -116,6 +131,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -123,6 +141,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -461,17 +482,17 @@ class RandomDisplayItemModel(core.Gs2Model):
         return RandomDisplayItemModel()\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_stock(data.get('stock'))\
             .with_weight(data.get('weight'))
@@ -482,15 +503,15 @@ class RandomDisplayItemModel(core.Gs2Model):
             "metadata": self.metadata,
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "stock": self.stock,
             "weight": self.weight,
@@ -561,17 +582,17 @@ class RandomDisplayItem(core.Gs2Model):
             .with_showcase_name(data.get('showcaseName'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_current_purchase_count(data.get('currentPurchaseCount'))\
             .with_maximum_purchase_count(data.get('maximumPurchaseCount'))
@@ -583,15 +604,15 @@ class RandomDisplayItem(core.Gs2Model):
             "metadata": self.metadata,
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "currentPurchaseCount": self.current_purchase_count,
             "maximumPurchaseCount": self.maximum_purchase_count,
@@ -759,9 +780,9 @@ class RandomShowcase(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_maximum_number_of_choice(data.get('maximumNumberOfChoice'))\
-            .with_display_items([
+            .with_display_items(None if data.get('displayItems') is None else [
                 RandomDisplayItemModel.from_dict(data.get('displayItems')[i])
-                for i in range(len(data.get('displayItems')) if data.get('displayItems') else 0)
+                for i in range(len(data.get('displayItems')))
             ])\
             .with_base_timestamp(data.get('baseTimestamp'))\
             .with_reset_interval_hours(data.get('resetIntervalHours'))\
@@ -775,7 +796,7 @@ class RandomShowcase(core.Gs2Model):
             "maximumNumberOfChoice": self.maximum_number_of_choice,
             "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
-                for i in range(len(self.display_items) if self.display_items else 0)
+                for i in range(len(self.display_items))
             ],
             "baseTimestamp": self.base_timestamp,
             "resetIntervalHours": self.reset_interval_hours,
@@ -924,9 +945,9 @@ class RandomShowcaseMaster(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_maximum_number_of_choice(data.get('maximumNumberOfChoice'))\
-            .with_display_items([
+            .with_display_items(None if data.get('displayItems') is None else [
                 RandomDisplayItemModel.from_dict(data.get('displayItems')[i])
-                for i in range(len(data.get('displayItems')) if data.get('displayItems') else 0)
+                for i in range(len(data.get('displayItems')))
             ])\
             .with_base_timestamp(data.get('baseTimestamp'))\
             .with_reset_interval_hours(data.get('resetIntervalHours'))\
@@ -944,7 +965,7 @@ class RandomShowcaseMaster(core.Gs2Model):
             "maximumNumberOfChoice": self.maximum_number_of_choice,
             "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
-                for i in range(len(self.display_items) if self.display_items else 0)
+                for i in range(len(self.display_items))
             ],
             "baseTimestamp": self.base_timestamp,
             "resetIntervalHours": self.reset_interval_hours,
@@ -1198,9 +1219,9 @@ class Showcase(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_sales_period_event_id(data.get('salesPeriodEventId'))\
-            .with_display_items([
+            .with_display_items(None if data.get('displayItems') is None else [
                 DisplayItem.from_dict(data.get('displayItems')[i])
-                for i in range(len(data.get('displayItems')) if data.get('displayItems') else 0)
+                for i in range(len(data.get('displayItems')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1211,7 +1232,7 @@ class Showcase(core.Gs2Model):
             "salesPeriodEventId": self.sales_period_event_id,
             "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
-                for i in range(len(self.display_items) if self.display_items else 0)
+                for i in range(len(self.display_items))
             ],
         }
 
@@ -1254,9 +1275,9 @@ class SalesItemGroup(core.Gs2Model):
         return SalesItemGroup()\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_sales_items([
+            .with_sales_items(None if data.get('salesItems') is None else [
                 SalesItem.from_dict(data.get('salesItems')[i])
-                for i in range(len(data.get('salesItems')) if data.get('salesItems') else 0)
+                for i in range(len(data.get('salesItems')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1265,7 +1286,7 @@ class SalesItemGroup(core.Gs2Model):
             "metadata": self.metadata,
             "salesItems": None if self.sales_items is None else [
                 self.sales_items[i].to_dict() if self.sales_items[i] else None
-                for i in range(len(self.sales_items) if self.sales_items else 0)
+                for i in range(len(self.sales_items))
             ],
         }
 
@@ -1318,17 +1339,17 @@ class SalesItem(core.Gs2Model):
         return SalesItem()\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1337,15 +1358,15 @@ class SalesItem(core.Gs2Model):
             "metadata": self.metadata,
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
         }
 
@@ -1560,9 +1581,9 @@ class ShowcaseMaster(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_sales_period_event_id(data.get('salesPeriodEventId'))\
-            .with_display_items([
+            .with_display_items(None if data.get('displayItems') is None else [
                 DisplayItemMaster.from_dict(data.get('displayItems')[i])
-                for i in range(len(data.get('displayItems')) if data.get('displayItems') else 0)
+                for i in range(len(data.get('displayItems')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1577,7 +1598,7 @@ class ShowcaseMaster(core.Gs2Model):
             "salesPeriodEventId": self.sales_period_event_id,
             "displayItems": None if self.display_items is None else [
                 self.display_items[i].to_dict() if self.display_items[i] else None
-                for i in range(len(self.display_items) if self.display_items else 0)
+                for i in range(len(self.display_items))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1705,9 +1726,9 @@ class SalesItemGroupMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_sales_item_names([
+            .with_sales_item_names(None if data.get('salesItemNames') is None else [
                 data.get('salesItemNames')[i]
-                for i in range(len(data.get('salesItemNames')) if data.get('salesItemNames') else 0)
+                for i in range(len(data.get('salesItemNames')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1721,7 +1742,7 @@ class SalesItemGroupMaster(core.Gs2Model):
             "metadata": self.metadata,
             "salesItemNames": None if self.sales_item_names is None else [
                 self.sales_item_names[i]
-                for i in range(len(self.sales_item_names) if self.sales_item_names else 0)
+                for i in range(len(self.sales_item_names))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1859,17 +1880,17 @@ class SalesItemMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1883,15 +1904,15 @@ class SalesItemMaster(core.Gs2Model):
             "metadata": self.metadata,
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

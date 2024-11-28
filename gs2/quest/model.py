@@ -21,12 +21,27 @@ from gs2 import core
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -61,6 +76,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -68,6 +86,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -544,30 +565,30 @@ class QuestModel(core.Gs2Model):
             .with_quest_model_id(data.get('questModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_contents([
+            .with_contents(None if data.get('contents') is None else [
                 Contents.from_dict(data.get('contents')[i])
-                for i in range(len(data.get('contents')) if data.get('contents') else 0)
+                for i in range(len(data.get('contents')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
-            .with_first_complete_acquire_actions([
+            .with_first_complete_acquire_actions(None if data.get('firstCompleteAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('firstCompleteAcquireActions')[i])
-                for i in range(len(data.get('firstCompleteAcquireActions')) if data.get('firstCompleteAcquireActions') else 0)
+                for i in range(len(data.get('firstCompleteAcquireActions')))
             ])\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
-            .with_failed_acquire_actions([
+            .with_failed_acquire_actions(None if data.get('failedAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('failedAcquireActions')[i])
-                for i in range(len(data.get('failedAcquireActions')) if data.get('failedAcquireActions') else 0)
+                for i in range(len(data.get('failedAcquireActions')))
             ])\
-            .with_premise_quest_names([
+            .with_premise_quest_names(None if data.get('premiseQuestNames') is None else [
                 data.get('premiseQuestNames')[i]
-                for i in range(len(data.get('premiseQuestNames')) if data.get('premiseQuestNames') else 0)
+                for i in range(len(data.get('premiseQuestNames')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -577,28 +598,28 @@ class QuestModel(core.Gs2Model):
             "metadata": self.metadata,
             "contents": None if self.contents is None else [
                 self.contents[i].to_dict() if self.contents[i] else None
-                for i in range(len(self.contents) if self.contents else 0)
+                for i in range(len(self.contents))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "firstCompleteAcquireActions": None if self.first_complete_acquire_actions is None else [
                 self.first_complete_acquire_actions[i].to_dict() if self.first_complete_acquire_actions[i] else None
-                for i in range(len(self.first_complete_acquire_actions) if self.first_complete_acquire_actions else 0)
+                for i in range(len(self.first_complete_acquire_actions))
             ],
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "failedAcquireActions": None if self.failed_acquire_actions is None else [
                 self.failed_acquire_actions[i].to_dict() if self.failed_acquire_actions[i] else None
-                for i in range(len(self.failed_acquire_actions) if self.failed_acquire_actions else 0)
+                for i in range(len(self.failed_acquire_actions))
             ],
             "premiseQuestNames": None if self.premise_quest_names is None else [
                 self.premise_quest_names[i]
-                for i in range(len(self.premise_quest_names) if self.premise_quest_names else 0)
+                for i in range(len(self.premise_quest_names))
             ],
         }
 
@@ -707,9 +728,9 @@ class QuestGroupModel(core.Gs2Model):
             .with_quest_group_model_id(data.get('questGroupModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_quests([
+            .with_quests(None if data.get('quests') is None else [
                 QuestModel.from_dict(data.get('quests')[i])
-                for i in range(len(data.get('quests')) if data.get('quests') else 0)
+                for i in range(len(data.get('quests')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))
 
@@ -720,7 +741,7 @@ class QuestGroupModel(core.Gs2Model):
             "metadata": self.metadata,
             "quests": None if self.quests is None else [
                 self.quests[i].to_dict() if self.quests[i] else None
-                for i in range(len(self.quests) if self.quests else 0)
+                for i in range(len(self.quests))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
         }
@@ -852,9 +873,9 @@ class CompletedQuestList(core.Gs2Model):
             .with_completed_quest_list_id(data.get('completedQuestListId'))\
             .with_user_id(data.get('userId'))\
             .with_quest_group_name(data.get('questGroupName'))\
-            .with_complete_quest_names([
+            .with_complete_quest_names(None if data.get('completeQuestNames') is None else [
                 data.get('completeQuestNames')[i]
-                for i in range(len(data.get('completeQuestNames')) if data.get('completeQuestNames') else 0)
+                for i in range(len(data.get('completeQuestNames')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -867,7 +888,7 @@ class CompletedQuestList(core.Gs2Model):
             "questGroupName": self.quest_group_name,
             "completeQuestNames": None if self.complete_quest_names is None else [
                 self.complete_quest_names[i]
-                for i in range(len(self.complete_quest_names) if self.complete_quest_names else 0)
+                for i in range(len(self.complete_quest_names))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1011,13 +1032,13 @@ class Progress(core.Gs2Model):
             .with_transaction_id(data.get('transactionId'))\
             .with_quest_model_id(data.get('questModelId'))\
             .with_random_seed(data.get('randomSeed'))\
-            .with_rewards([
+            .with_rewards(None if data.get('rewards') is None else [
                 Reward.from_dict(data.get('rewards')[i])
-                for i in range(len(data.get('rewards')) if data.get('rewards') else 0)
+                for i in range(len(data.get('rewards')))
             ])\
-            .with_failed_rewards([
+            .with_failed_rewards(None if data.get('failedRewards') is None else [
                 Reward.from_dict(data.get('failedRewards')[i])
-                for i in range(len(data.get('failedRewards')) if data.get('failedRewards') else 0)
+                for i in range(len(data.get('failedRewards')))
             ])\
             .with_metadata(data.get('metadata'))\
             .with_created_at(data.get('createdAt'))\
@@ -1033,11 +1054,11 @@ class Progress(core.Gs2Model):
             "randomSeed": self.random_seed,
             "rewards": None if self.rewards is None else [
                 self.rewards[i].to_dict() if self.rewards[i] else None
-                for i in range(len(self.rewards) if self.rewards else 0)
+                for i in range(len(self.rewards))
             ],
             "failedRewards": None if self.failed_rewards is None else [
                 self.failed_rewards[i].to_dict() if self.failed_rewards[i] else None
-                for i in range(len(self.failed_rewards) if self.failed_rewards else 0)
+                for i in range(len(self.failed_rewards))
             ],
             "metadata": self.metadata,
             "createdAt": self.created_at,
@@ -1138,9 +1159,9 @@ class Contents(core.Gs2Model):
             return None
         return Contents()\
             .with_metadata(data.get('metadata'))\
-            .with_complete_acquire_actions([
+            .with_complete_acquire_actions(None if data.get('completeAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('completeAcquireActions')[i])
-                for i in range(len(data.get('completeAcquireActions')) if data.get('completeAcquireActions') else 0)
+                for i in range(len(data.get('completeAcquireActions')))
             ])\
             .with_weight(data.get('weight'))
 
@@ -1149,7 +1170,7 @@ class Contents(core.Gs2Model):
             "metadata": self.metadata,
             "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
-                for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
+                for i in range(len(self.complete_acquire_actions))
             ],
             "weight": self.weight,
         }
@@ -1407,30 +1428,30 @@ class QuestModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_contents([
+            .with_contents(None if data.get('contents') is None else [
                 Contents.from_dict(data.get('contents')[i])
-                for i in range(len(data.get('contents')) if data.get('contents') else 0)
+                for i in range(len(data.get('contents')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
-            .with_first_complete_acquire_actions([
+            .with_first_complete_acquire_actions(None if data.get('firstCompleteAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('firstCompleteAcquireActions')[i])
-                for i in range(len(data.get('firstCompleteAcquireActions')) if data.get('firstCompleteAcquireActions') else 0)
+                for i in range(len(data.get('firstCompleteAcquireActions')))
             ])\
-            .with_verify_actions([
+            .with_verify_actions(None if data.get('verifyActions') is None else [
                 VerifyAction.from_dict(data.get('verifyActions')[i])
-                for i in range(len(data.get('verifyActions')) if data.get('verifyActions') else 0)
+                for i in range(len(data.get('verifyActions')))
             ])\
-            .with_consume_actions([
+            .with_consume_actions(None if data.get('consumeActions') is None else [
                 ConsumeAction.from_dict(data.get('consumeActions')[i])
-                for i in range(len(data.get('consumeActions')) if data.get('consumeActions') else 0)
+                for i in range(len(data.get('consumeActions')))
             ])\
-            .with_failed_acquire_actions([
+            .with_failed_acquire_actions(None if data.get('failedAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('failedAcquireActions')[i])
-                for i in range(len(data.get('failedAcquireActions')) if data.get('failedAcquireActions') else 0)
+                for i in range(len(data.get('failedAcquireActions')))
             ])\
-            .with_premise_quest_names([
+            .with_premise_quest_names(None if data.get('premiseQuestNames') is None else [
                 data.get('premiseQuestNames')[i]
-                for i in range(len(data.get('premiseQuestNames')) if data.get('premiseQuestNames') else 0)
+                for i in range(len(data.get('premiseQuestNames')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1445,28 +1466,28 @@ class QuestModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "contents": None if self.contents is None else [
                 self.contents[i].to_dict() if self.contents[i] else None
-                for i in range(len(self.contents) if self.contents else 0)
+                for i in range(len(self.contents))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "firstCompleteAcquireActions": None if self.first_complete_acquire_actions is None else [
                 self.first_complete_acquire_actions[i].to_dict() if self.first_complete_acquire_actions[i] else None
-                for i in range(len(self.first_complete_acquire_actions) if self.first_complete_acquire_actions else 0)
+                for i in range(len(self.first_complete_acquire_actions))
             ],
             "verifyActions": None if self.verify_actions is None else [
                 self.verify_actions[i].to_dict() if self.verify_actions[i] else None
-                for i in range(len(self.verify_actions) if self.verify_actions else 0)
+                for i in range(len(self.verify_actions))
             ],
             "consumeActions": None if self.consume_actions is None else [
                 self.consume_actions[i].to_dict() if self.consume_actions[i] else None
-                for i in range(len(self.consume_actions) if self.consume_actions else 0)
+                for i in range(len(self.consume_actions))
             ],
             "failedAcquireActions": None if self.failed_acquire_actions is None else [
                 self.failed_acquire_actions[i].to_dict() if self.failed_acquire_actions[i] else None
-                for i in range(len(self.failed_acquire_actions) if self.failed_acquire_actions else 0)
+                for i in range(len(self.failed_acquire_actions))
             ],
             "premiseQuestNames": None if self.premise_quest_names is None else [
                 self.premise_quest_names[i]
-                for i in range(len(self.premise_quest_names) if self.premise_quest_names else 0)
+                for i in range(len(self.premise_quest_names))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

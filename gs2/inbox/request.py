@@ -896,9 +896,9 @@ class SendMessageByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_metadata(data.get('metadata'))\
-            .with_read_acquire_actions([
+            .with_read_acquire_actions(None if data.get('readAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('readAcquireActions')[i])
-                for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
+                for i in range(len(data.get('readAcquireActions')))
             ])\
             .with_expires_at(data.get('expiresAt'))\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
@@ -911,7 +911,7 @@ class SendMessageByUserIdRequest(core.Gs2Request):
             "metadata": self.metadata,
             "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
-                for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
+                for i in range(len(self.read_acquire_actions))
             ],
             "expiresAt": self.expires_at,
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
@@ -1297,9 +1297,9 @@ class ReadMessageRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_message_name(data.get('messageName'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1309,7 +1309,7 @@ class ReadMessageRequest(core.Gs2Request):
             "messageName": self.message_name,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -1370,9 +1370,9 @@ class ReadMessageByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_message_name(data.get('messageName'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1383,7 +1383,7 @@ class ReadMessageByUserIdRequest(core.Gs2Request):
             "messageName": self.message_name,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1904,9 +1904,9 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_read_acquire_actions([
+            .with_read_acquire_actions(None if data.get('readAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('readAcquireActions')[i])
-                for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
+                for i in range(len(data.get('readAcquireActions')))
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_expires_at(data.get('expiresAt'))\
@@ -1919,7 +1919,7 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
-                for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
+                for i in range(len(self.read_acquire_actions))
             ],
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
@@ -2031,9 +2031,9 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_global_message_name(data.get('globalMessageName'))\
             .with_metadata(data.get('metadata'))\
-            .with_read_acquire_actions([
+            .with_read_acquire_actions(None if data.get('readAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('readAcquireActions')[i])
-                for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
+                for i in range(len(data.get('readAcquireActions')))
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_expires_at(data.get('expiresAt'))\
@@ -2046,7 +2046,7 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
-                for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
+                for i in range(len(self.read_acquire_actions))
             ],
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
@@ -2276,9 +2276,9 @@ class UpdateReceivedByUserIdRequest(core.Gs2Request):
         return UpdateReceivedByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_received_global_message_names([
+            .with_received_global_message_names(None if data.get('receivedGlobalMessageNames') is None else [
                 data.get('receivedGlobalMessageNames')[i]
-                for i in range(len(data.get('receivedGlobalMessageNames')) if data.get('receivedGlobalMessageNames') else 0)
+                for i in range(len(data.get('receivedGlobalMessageNames')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2288,7 +2288,7 @@ class UpdateReceivedByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "receivedGlobalMessageNames": None if self.received_global_message_names is None else [
                 self.received_global_message_names[i]
-                for i in range(len(self.received_global_message_names) if self.received_global_message_names else 0)
+                for i in range(len(self.received_global_message_names))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

@@ -195,9 +195,9 @@ class CompleteRequest(core.Gs2Request):
             .with_mission_group_name(data.get('missionGroupName'))\
             .with_mission_task_name(data.get('missionTaskName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -208,7 +208,7 @@ class CompleteRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -275,9 +275,9 @@ class CompleteByUserIdRequest(core.Gs2Request):
             .with_mission_group_name(data.get('missionGroupName'))\
             .with_mission_task_name(data.get('missionTaskName'))\
             .with_user_id(data.get('userId'))\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -289,7 +289,7 @@ class CompleteByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -351,13 +351,13 @@ class BatchCompleteRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_mission_group_name(data.get('missionGroupName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_mission_task_names([
+            .with_mission_task_names(None if data.get('missionTaskNames') is None else [
                 data.get('missionTaskNames')[i]
-                for i in range(len(data.get('missionTaskNames')) if data.get('missionTaskNames') else 0)
+                for i in range(len(data.get('missionTaskNames')))
             ])\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -367,11 +367,11 @@ class BatchCompleteRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "missionTaskNames": None if self.mission_task_names is None else [
                 self.mission_task_names[i]
-                for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
+                for i in range(len(self.mission_task_names))
             ],
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
         }
 
@@ -437,13 +437,13 @@ class BatchCompleteByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_mission_group_name(data.get('missionGroupName'))\
             .with_user_id(data.get('userId'))\
-            .with_mission_task_names([
+            .with_mission_task_names(None if data.get('missionTaskNames') is None else [
                 data.get('missionTaskNames')[i]
-                for i in range(len(data.get('missionTaskNames')) if data.get('missionTaskNames') else 0)
+                for i in range(len(data.get('missionTaskNames')))
             ])\
-            .with_config([
+            .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
-                for i in range(len(data.get('config')) if data.get('config') else 0)
+                for i in range(len(data.get('config')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -454,11 +454,11 @@ class BatchCompleteByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "missionTaskNames": None if self.mission_task_names is None else [
                 self.mission_task_names[i]
-                for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
+                for i in range(len(self.mission_task_names))
             ],
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
-                for i in range(len(self.config) if self.config else 0)
+                for i in range(len(self.config))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -589,9 +589,9 @@ class BatchReceiveByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_mission_group_name(data.get('missionGroupName'))\
             .with_user_id(data.get('userId'))\
-            .with_mission_task_names([
+            .with_mission_task_names(None if data.get('missionTaskNames') is None else [
                 data.get('missionTaskNames')[i]
-                for i in range(len(data.get('missionTaskNames')) if data.get('missionTaskNames') else 0)
+                for i in range(len(data.get('missionTaskNames')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -602,7 +602,7 @@ class BatchReceiveByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "missionTaskNames": None if self.mission_task_names is None else [
                 self.mission_task_names[i]
-                for i in range(len(self.mission_task_names) if self.mission_task_names else 0)
+                for i in range(len(self.mission_task_names))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -1284,9 +1284,9 @@ class CreateCounterModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
-            .with_scopes([
+            .with_scopes(None if data.get('scopes') is None else [
                 CounterScopeModel.from_dict(data.get('scopes')[i])
-                for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
+                for i in range(len(data.get('scopes')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))
 
@@ -1298,7 +1298,7 @@ class CreateCounterModelMasterRequest(core.Gs2Request):
             "description": self.description,
             "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
-                for i in range(len(self.scopes) if self.scopes else 0)
+                for i in range(len(self.scopes))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
         }
@@ -1404,9 +1404,9 @@ class UpdateCounterModelMasterRequest(core.Gs2Request):
             .with_counter_name(data.get('counterName'))\
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
-            .with_scopes([
+            .with_scopes(None if data.get('scopes') is None else [
                 CounterScopeModel.from_dict(data.get('scopes')[i])
-                for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
+                for i in range(len(data.get('scopes')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))
 
@@ -1418,7 +1418,7 @@ class UpdateCounterModelMasterRequest(core.Gs2Request):
             "description": self.description,
             "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
-                for i in range(len(self.scopes) if self.scopes else 0)
+                for i in range(len(self.scopes))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
         }
@@ -2697,9 +2697,9 @@ class SetCounterByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_counter_name(data.get('counterName'))\
             .with_user_id(data.get('userId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 ScopedValue.from_dict(data.get('values')[i])
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2710,7 +2710,7 @@ class SetCounterByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "values": None if self.values is None else [
                 self.values[i].to_dict() if self.values[i] else None
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
             "timeOffsetToken": self.time_offset_token,
         }
@@ -3955,13 +3955,13 @@ class CreateMissionTaskModelMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_verify_complete_type(data.get('verifyCompleteType'))\
             .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
-            .with_verify_complete_consume_actions([
+            .with_verify_complete_consume_actions(None if data.get('verifyCompleteConsumeActions') is None else [
                 VerifyAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
-                for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
+                for i in range(len(data.get('verifyCompleteConsumeActions')))
             ])\
-            .with_complete_acquire_actions([
+            .with_complete_acquire_actions(None if data.get('completeAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('completeAcquireActions')[i])
-                for i in range(len(data.get('completeAcquireActions')) if data.get('completeAcquireActions') else 0)
+                for i in range(len(data.get('completeAcquireActions')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_premise_mission_task_name(data.get('premiseMissionTaskName'))\
@@ -3980,11 +3980,11 @@ class CreateMissionTaskModelMasterRequest(core.Gs2Request):
             "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
             "verifyCompleteConsumeActions": None if self.verify_complete_consume_actions is None else [
                 self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
-                for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
+                for i in range(len(self.verify_complete_consume_actions))
             ],
             "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
-                for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
+                for i in range(len(self.complete_acquire_actions))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "premiseMissionTaskName": self.premise_mission_task_name,
@@ -4144,13 +4144,13 @@ class UpdateMissionTaskModelMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_verify_complete_type(data.get('verifyCompleteType'))\
             .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
-            .with_verify_complete_consume_actions([
+            .with_verify_complete_consume_actions(None if data.get('verifyCompleteConsumeActions') is None else [
                 VerifyAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
-                for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
+                for i in range(len(data.get('verifyCompleteConsumeActions')))
             ])\
-            .with_complete_acquire_actions([
+            .with_complete_acquire_actions(None if data.get('completeAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('completeAcquireActions')[i])
-                for i in range(len(data.get('completeAcquireActions')) if data.get('completeAcquireActions') else 0)
+                for i in range(len(data.get('completeAcquireActions')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_premise_mission_task_name(data.get('premiseMissionTaskName'))\
@@ -4169,11 +4169,11 @@ class UpdateMissionTaskModelMasterRequest(core.Gs2Request):
             "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
             "verifyCompleteConsumeActions": None if self.verify_complete_consume_actions is None else [
                 self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
-                for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
+                for i in range(len(self.verify_complete_consume_actions))
             ],
             "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
-                for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
+                for i in range(len(self.complete_acquire_actions))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "premiseMissionTaskName": self.premise_mission_task_name,

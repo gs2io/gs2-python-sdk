@@ -566,9 +566,9 @@ class BlackList(core.Gs2Model):
         return BlackList()\
             .with_black_list_id(data.get('blackListId'))\
             .with_user_id(data.get('userId'))\
-            .with_target_user_ids([
+            .with_target_user_ids(None if data.get('targetUserIds') is None else [
                 data.get('targetUserIds')[i]
-                for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
+                for i in range(len(data.get('targetUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -580,7 +580,7 @@ class BlackList(core.Gs2Model):
             "userId": self.user_id,
             "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
-                for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
+                for i in range(len(self.target_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -696,9 +696,9 @@ class Inbox(core.Gs2Model):
         return Inbox()\
             .with_inbox_id(data.get('inboxId'))\
             .with_user_id(data.get('userId'))\
-            .with_from_user_ids([
+            .with_from_user_ids(None if data.get('fromUserIds') is None else [
                 data.get('fromUserIds')[i]
-                for i in range(len(data.get('fromUserIds')) if data.get('fromUserIds') else 0)
+                for i in range(len(data.get('fromUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -710,7 +710,7 @@ class Inbox(core.Gs2Model):
             "userId": self.user_id,
             "fromUserIds": None if self.from_user_ids is None else [
                 self.from_user_ids[i]
-                for i in range(len(self.from_user_ids) if self.from_user_ids else 0)
+                for i in range(len(self.from_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -826,9 +826,9 @@ class SendBox(core.Gs2Model):
         return SendBox()\
             .with_send_box_id(data.get('sendBoxId'))\
             .with_user_id(data.get('userId'))\
-            .with_target_user_ids([
+            .with_target_user_ids(None if data.get('targetUserIds') is None else [
                 data.get('targetUserIds')[i]
-                for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
+                for i in range(len(data.get('targetUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -840,7 +840,7 @@ class SendBox(core.Gs2Model):
             "userId": self.user_id,
             "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
-                for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
+                for i in range(len(self.target_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -956,9 +956,9 @@ class Friend(core.Gs2Model):
         return Friend()\
             .with_friend_id(data.get('friendId'))\
             .with_user_id(data.get('userId'))\
-            .with_target_user_ids([
+            .with_target_user_ids(None if data.get('targetUserIds') is None else [
                 data.get('targetUserIds')[i]
-                for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
+                for i in range(len(data.get('targetUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -970,7 +970,7 @@ class Friend(core.Gs2Model):
             "userId": self.user_id,
             "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
-                for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
+                for i in range(len(self.target_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1086,9 +1086,9 @@ class Follow(core.Gs2Model):
         return Follow()\
             .with_follow_id(data.get('followId'))\
             .with_user_id(data.get('userId'))\
-            .with_target_user_ids([
+            .with_target_user_ids(None if data.get('targetUserIds') is None else [
                 data.get('targetUserIds')[i]
-                for i in range(len(data.get('targetUserIds')) if data.get('targetUserIds') else 0)
+                for i in range(len(data.get('targetUserIds')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1100,7 +1100,7 @@ class Follow(core.Gs2Model):
             "userId": self.user_id,
             "targetUserIds": None if self.target_user_ids is None else [
                 self.target_user_ids[i]
-                for i in range(len(self.target_user_ids) if self.target_user_ids else 0)
+                for i in range(len(self.target_user_ids))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -265,9 +266,9 @@ class DescribeScriptsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeScriptsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Script.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -275,7 +276,7 @@ class DescribeScriptsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -547,9 +548,9 @@ class InvokeScriptResult(core.Gs2Result):
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
-            .with_output([
+            .with_output(None if data.get('output') is None else [
                 data.get('output')[i]
-                for i in range(len(data.get('output')) if data.get('output') else 0)
+                for i in range(len(data.get('output')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -562,7 +563,7 @@ class InvokeScriptResult(core.Gs2Result):
             "charged": self.charged,
             "output": None if self.output is None else [
                 self.output[i]
-                for i in range(len(self.output) if self.output else 0)
+                for i in range(len(self.output))
             ],
         }
 
@@ -629,9 +630,9 @@ class DebugInvokeResult(core.Gs2Result):
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
-            .with_output([
+            .with_output(None if data.get('output') is None else [
                 data.get('output')[i]
-                for i in range(len(data.get('output')) if data.get('output') else 0)
+                for i in range(len(data.get('output')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -644,7 +645,7 @@ class DebugInvokeResult(core.Gs2Result):
             "charged": self.charged,
             "output": None if self.output is None else [
                 self.output[i]
-                for i in range(len(self.output) if self.output else 0)
+                for i in range(len(self.output))
             ],
         }
 
@@ -711,9 +712,9 @@ class InvokeByStampSheetResult(core.Gs2Result):
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
-            .with_output([
+            .with_output(None if data.get('output') is None else [
                 data.get('output')[i]
-                for i in range(len(data.get('output')) if data.get('output') else 0)
+                for i in range(len(data.get('output')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -726,6 +727,6 @@ class InvokeByStampSheetResult(core.Gs2Result):
             "charged": self.charged,
             "output": None if self.output is None else [
                 self.output[i]
-                for i in range(len(self.output) if self.output else 0)
+                for i in range(len(self.output))
             ],
         }

@@ -21,12 +21,27 @@ from gs2 import core
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -61,6 +76,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -68,6 +86,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -708,13 +729,13 @@ class MissionTaskModelMaster(core.Gs2Model):
             .with_description(data.get('description'))\
             .with_verify_complete_type(data.get('verifyCompleteType'))\
             .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
-            .with_verify_complete_consume_actions([
+            .with_verify_complete_consume_actions(None if data.get('verifyCompleteConsumeActions') is None else [
                 VerifyAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
-                for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
+                for i in range(len(data.get('verifyCompleteConsumeActions')))
             ])\
-            .with_complete_acquire_actions([
+            .with_complete_acquire_actions(None if data.get('completeAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('completeAcquireActions')[i])
-                for i in range(len(data.get('completeAcquireActions')) if data.get('completeAcquireActions') else 0)
+                for i in range(len(data.get('completeAcquireActions')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_premise_mission_task_name(data.get('premiseMissionTaskName'))\
@@ -735,11 +756,11 @@ class MissionTaskModelMaster(core.Gs2Model):
             "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
             "verifyCompleteConsumeActions": None if self.verify_complete_consume_actions is None else [
                 self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
-                for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
+                for i in range(len(self.verify_complete_consume_actions))
             ],
             "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
-                for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
+                for i in range(len(self.complete_acquire_actions))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "premiseMissionTaskName": self.premise_mission_task_name,
@@ -905,13 +926,13 @@ class MissionTaskModel(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_verify_complete_type(data.get('verifyCompleteType'))\
             .with_target_counter(TargetCounterModel.from_dict(data.get('targetCounter')))\
-            .with_verify_complete_consume_actions([
+            .with_verify_complete_consume_actions(None if data.get('verifyCompleteConsumeActions') is None else [
                 VerifyAction.from_dict(data.get('verifyCompleteConsumeActions')[i])
-                for i in range(len(data.get('verifyCompleteConsumeActions')) if data.get('verifyCompleteConsumeActions') else 0)
+                for i in range(len(data.get('verifyCompleteConsumeActions')))
             ])\
-            .with_complete_acquire_actions([
+            .with_complete_acquire_actions(None if data.get('completeAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('completeAcquireActions')[i])
-                for i in range(len(data.get('completeAcquireActions')) if data.get('completeAcquireActions') else 0)
+                for i in range(len(data.get('completeAcquireActions')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_premise_mission_task_name(data.get('premiseMissionTaskName'))\
@@ -928,11 +949,11 @@ class MissionTaskModel(core.Gs2Model):
             "targetCounter": self.target_counter.to_dict() if self.target_counter else None,
             "verifyCompleteConsumeActions": None if self.verify_complete_consume_actions is None else [
                 self.verify_complete_consume_actions[i].to_dict() if self.verify_complete_consume_actions[i] else None
-                for i in range(len(self.verify_complete_consume_actions) if self.verify_complete_consume_actions else 0)
+                for i in range(len(self.verify_complete_consume_actions))
             ],
             "completeAcquireActions": None if self.complete_acquire_actions is None else [
                 self.complete_acquire_actions[i].to_dict() if self.complete_acquire_actions[i] else None
-                for i in range(len(self.complete_acquire_actions) if self.complete_acquire_actions else 0)
+                for i in range(len(self.complete_acquire_actions))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "premiseMissionTaskName": self.premise_mission_task_name,
@@ -1066,9 +1087,9 @@ class MissionGroupModel(core.Gs2Model):
             .with_mission_group_id(data.get('missionGroupId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_tasks([
+            .with_tasks(None if data.get('tasks') is None else [
                 MissionTaskModel.from_dict(data.get('tasks')[i])
-                for i in range(len(data.get('tasks')) if data.get('tasks') else 0)
+                for i in range(len(data.get('tasks')))
             ])\
             .with_reset_type(data.get('resetType'))\
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
@@ -1083,7 +1104,7 @@ class MissionGroupModel(core.Gs2Model):
             "metadata": self.metadata,
             "tasks": None if self.tasks is None else [
                 self.tasks[i].to_dict() if self.tasks[i] else None
-                for i in range(len(self.tasks) if self.tasks else 0)
+                for i in range(len(self.tasks))
             ],
             "resetType": self.reset_type,
             "resetDayOfMonth": self.reset_day_of_month,
@@ -1197,9 +1218,9 @@ class CounterModel(core.Gs2Model):
             .with_counter_id(data.get('counterId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_scopes([
+            .with_scopes(None if data.get('scopes') is None else [
                 CounterScopeModel.from_dict(data.get('scopes')[i])
-                for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
+                for i in range(len(data.get('scopes')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))
 
@@ -1210,7 +1231,7 @@ class CounterModel(core.Gs2Model):
             "metadata": self.metadata,
             "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
-                for i in range(len(self.scopes) if self.scopes else 0)
+                for i in range(len(self.scopes))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
         }
@@ -1426,9 +1447,9 @@ class Counter(core.Gs2Model):
             .with_counter_id(data.get('counterId'))\
             .with_user_id(data.get('userId'))\
             .with_name(data.get('name'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 ScopedValue.from_dict(data.get('values')[i])
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1441,7 +1462,7 @@ class Counter(core.Gs2Model):
             "name": self.name,
             "values": None if self.values is None else [
                 self.values[i].to_dict() if self.values[i] else None
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1984,9 +2005,9 @@ class CounterModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
-            .with_scopes([
+            .with_scopes(None if data.get('scopes') is None else [
                 CounterScopeModel.from_dict(data.get('scopes')[i])
-                for i in range(len(data.get('scopes')) if data.get('scopes') else 0)
+                for i in range(len(data.get('scopes')))
             ])\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
             .with_created_at(data.get('createdAt'))\
@@ -2001,7 +2022,7 @@ class CounterModelMaster(core.Gs2Model):
             "description": self.description,
             "scopes": None if self.scopes is None else [
                 self.scopes[i].to_dict() if self.scopes[i] else None
-                for i in range(len(self.scopes) if self.scopes else 0)
+                for i in range(len(self.scopes))
             ],
             "challengePeriodEventId": self.challenge_period_event_id,
             "createdAt": self.created_at,
@@ -2194,13 +2215,13 @@ class Complete(core.Gs2Model):
             .with_complete_id(data.get('completeId'))\
             .with_user_id(data.get('userId'))\
             .with_mission_group_name(data.get('missionGroupName'))\
-            .with_completed_mission_task_names([
+            .with_completed_mission_task_names(None if data.get('completedMissionTaskNames') is None else [
                 data.get('completedMissionTaskNames')[i]
-                for i in range(len(data.get('completedMissionTaskNames')) if data.get('completedMissionTaskNames') else 0)
+                for i in range(len(data.get('completedMissionTaskNames')))
             ])\
-            .with_received_mission_task_names([
+            .with_received_mission_task_names(None if data.get('receivedMissionTaskNames') is None else [
                 data.get('receivedMissionTaskNames')[i]
-                for i in range(len(data.get('receivedMissionTaskNames')) if data.get('receivedMissionTaskNames') else 0)
+                for i in range(len(data.get('receivedMissionTaskNames')))
             ])\
             .with_next_reset_at(data.get('nextResetAt'))\
             .with_created_at(data.get('createdAt'))\
@@ -2214,11 +2235,11 @@ class Complete(core.Gs2Model):
             "missionGroupName": self.mission_group_name,
             "completedMissionTaskNames": None if self.completed_mission_task_names is None else [
                 self.completed_mission_task_names[i]
-                for i in range(len(self.completed_mission_task_names) if self.completed_mission_task_names else 0)
+                for i in range(len(self.completed_mission_task_names))
             ],
             "receivedMissionTaskNames": None if self.received_mission_task_names is None else [
                 self.received_mission_task_names[i]
-                for i in range(len(self.received_mission_task_names) if self.received_mission_task_names else 0)
+                for i in range(len(self.received_mission_task_names))
             ],
             "nextResetAt": self.next_reset_at,
             "createdAt": self.created_at,

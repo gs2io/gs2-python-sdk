@@ -19,18 +19,1972 @@ from .request import *
 from .result import *
 
 
-class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
+class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
 
-    def _describe_namespaces(
+    def _create_account(
         self,
-        request: DescribeNamespacesRequest,
-        callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
+        request: CreateAccountRequest,
+        callback: Callable[[AsyncResult[CreateAccountResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
+            service='project',
             region=self.session.region,
-        ) + "/"
+        ) + "/account"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.email is not None:
+            body["email"] = request.email
+        if request.full_name is not None:
+            body["fullName"] = request.full_name
+        if request.company_name is not None:
+            body["companyName"] = request.company_name
+        if request.password is not None:
+            body["password"] = request.password
+        if request.lang is not None:
+            body["lang"] = request.lang
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateAccountResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_account(
+        self,
+        request: CreateAccountRequest,
+    ) -> CreateAccountResult:
+        async_result = []
+        with timeout(30):
+            self._create_account(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_account_async(
+        self,
+        request: CreateAccountRequest,
+    ) -> CreateAccountResult:
+        async_result = []
+        self._create_account(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify(
+        self,
+        request: VerifyRequest,
+        callback: Callable[[AsyncResult[VerifyResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.verify_token is not None:
+            body["verifyToken"] = request.verify_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify(
+        self,
+        request: VerifyRequest,
+    ) -> VerifyResult:
+        async_result = []
+        with timeout(30):
+            self._verify(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_async(
+        self,
+        request: VerifyRequest,
+    ) -> VerifyResult:
+        async_result = []
+        self._verify(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _sign_in(
+        self,
+        request: SignInRequest,
+        callback: Callable[[AsyncResult[SignInResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/signIn"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.email is not None:
+            body["email"] = request.email
+        if request.password is not None:
+            body["password"] = request.password
+        if request.otp is not None:
+            body["otp"] = request.otp
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SignInResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def sign_in(
+        self,
+        request: SignInRequest,
+    ) -> SignInResult:
+        async_result = []
+        with timeout(30):
+            self._sign_in(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sign_in_async(
+        self,
+        request: SignInRequest,
+    ) -> SignInResult:
+        async_result = []
+        self._sign_in(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _forget(
+        self,
+        request: ForgetRequest,
+        callback: Callable[[AsyncResult[ForgetResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/forget"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.email is not None:
+            body["email"] = request.email
+        if request.lang is not None:
+            body["lang"] = request.lang
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ForgetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def forget(
+        self,
+        request: ForgetRequest,
+    ) -> ForgetResult:
+        async_result = []
+        with timeout(30):
+            self._forget(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def forget_async(
+        self,
+        request: ForgetRequest,
+    ) -> ForgetResult:
+        async_result = []
+        self._forget(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _issue_password(
+        self,
+        request: IssuePasswordRequest,
+        callback: Callable[[AsyncResult[IssuePasswordResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/password/issue"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.issue_password_token is not None:
+            body["issuePasswordToken"] = request.issue_password_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=IssuePasswordResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def issue_password(
+        self,
+        request: IssuePasswordRequest,
+    ) -> IssuePasswordResult:
+        async_result = []
+        with timeout(30):
+            self._issue_password(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def issue_password_async(
+        self,
+        request: IssuePasswordRequest,
+    ) -> IssuePasswordResult:
+        async_result = []
+        self._issue_password(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_account(
+        self,
+        request: UpdateAccountRequest,
+        callback: Callable[[AsyncResult[UpdateAccountResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.email is not None:
+            body["email"] = request.email
+        if request.full_name is not None:
+            body["fullName"] = request.full_name
+        if request.company_name is not None:
+            body["companyName"] = request.company_name
+        if request.password is not None:
+            body["password"] = request.password
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateAccountResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_account(
+        self,
+        request: UpdateAccountRequest,
+    ) -> UpdateAccountResult:
+        async_result = []
+        with timeout(30):
+            self._update_account(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_account_async(
+        self,
+        request: UpdateAccountRequest,
+    ) -> UpdateAccountResult:
+        async_result = []
+        self._update_account(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _enable_mfa(
+        self,
+        request: EnableMfaRequest,
+        callback: Callable[[AsyncResult[EnableMfaResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/mfa"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=EnableMfaResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def enable_mfa(
+        self,
+        request: EnableMfaRequest,
+    ) -> EnableMfaResult:
+        async_result = []
+        with timeout(30):
+            self._enable_mfa(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def enable_mfa_async(
+        self,
+        request: EnableMfaRequest,
+    ) -> EnableMfaResult:
+        async_result = []
+        self._enable_mfa(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _challenge_mfa(
+        self,
+        request: ChallengeMfaRequest,
+        callback: Callable[[AsyncResult[ChallengeMfaResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/mfa/challenge"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+        if request.passcode is not None:
+            body["passcode"] = request.passcode
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ChallengeMfaResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def challenge_mfa(
+        self,
+        request: ChallengeMfaRequest,
+    ) -> ChallengeMfaResult:
+        async_result = []
+        with timeout(30):
+            self._challenge_mfa(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def challenge_mfa_async(
+        self,
+        request: ChallengeMfaRequest,
+    ) -> ChallengeMfaResult:
+        async_result = []
+        self._challenge_mfa(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _disable_mfa(
+        self,
+        request: DisableMfaRequest,
+        callback: Callable[[AsyncResult[DisableMfaResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/mfa"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DisableMfaResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def disable_mfa(
+        self,
+        request: DisableMfaRequest,
+    ) -> DisableMfaResult:
+        async_result = []
+        with timeout(30):
+            self._disable_mfa(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def disable_mfa_async(
+        self,
+        request: DisableMfaRequest,
+    ) -> DisableMfaResult:
+        async_result = []
+        self._disable_mfa(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_account(
+        self,
+        request: DeleteAccountRequest,
+        callback: Callable[[AsyncResult[DeleteAccountResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteAccountResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_account(
+        self,
+        request: DeleteAccountRequest,
+    ) -> DeleteAccountResult:
+        async_result = []
+        with timeout(30):
+            self._delete_account(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_account_async(
+        self,
+        request: DeleteAccountRequest,
+    ) -> DeleteAccountResult:
+        async_result = []
+        self._delete_account(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_projects(
+        self,
+        request: DescribeProjectsRequest,
+        callback: Callable[[AsyncResult[DescribeProjectsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeProjectsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_projects(
+        self,
+        request: DescribeProjectsRequest,
+    ) -> DescribeProjectsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_projects(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_projects_async(
+        self,
+        request: DescribeProjectsRequest,
+    ) -> DescribeProjectsResult:
+        async_result = []
+        self._describe_projects(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_project(
+        self,
+        request: CreateProjectRequest,
+        callback: Callable[[AsyncResult[CreateProjectResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.plan is not None:
+            body["plan"] = request.plan
+        if request.currency is not None:
+            body["currency"] = request.currency
+        if request.activate_region_name is not None:
+            body["activateRegionName"] = request.activate_region_name
+        if request.billing_method_name is not None:
+            body["billingMethodName"] = request.billing_method_name
+        if request.enable_event_bridge is not None:
+            body["enableEventBridge"] = request.enable_event_bridge
+        if request.event_bridge_aws_account_id is not None:
+            body["eventBridgeAwsAccountId"] = request.event_bridge_aws_account_id
+        if request.event_bridge_aws_region is not None:
+            body["eventBridgeAwsRegion"] = request.event_bridge_aws_region
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateProjectResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_project(
+        self,
+        request: CreateProjectRequest,
+    ) -> CreateProjectResult:
+        async_result = []
+        with timeout(30):
+            self._create_project(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_project_async(
+        self,
+        request: CreateProjectRequest,
+    ) -> CreateProjectResult:
+        async_result = []
+        self._create_project(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_project(
+        self,
+        request: GetProjectRequest,
+        callback: Callable[[AsyncResult[GetProjectResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/{projectName}".format(
+            projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetProjectResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_project(
+        self,
+        request: GetProjectRequest,
+    ) -> GetProjectResult:
+        async_result = []
+        with timeout(30):
+            self._get_project(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_project_async(
+        self,
+        request: GetProjectRequest,
+    ) -> GetProjectResult:
+        async_result = []
+        self._get_project(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_project_token(
+        self,
+        request: GetProjectTokenRequest,
+        callback: Callable[[AsyncResult[GetProjectTokenResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/project/{projectName}/projectToken".format(
+            projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=GetProjectTokenResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_project_token(
+        self,
+        request: GetProjectTokenRequest,
+    ) -> GetProjectTokenResult:
+        async_result = []
+        with timeout(30):
+            self._get_project_token(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_project_token_async(
+        self,
+        request: GetProjectTokenRequest,
+    ) -> GetProjectTokenResult:
+        async_result = []
+        self._get_project_token(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_project_token_by_identifier(
+        self,
+        request: GetProjectTokenByIdentifierRequest,
+        callback: Callable[[AsyncResult[GetProjectTokenByIdentifierResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/{accountName}/project/{projectName}/user/{userName}/projectToken".format(
+            accountName=request.account_name if request.account_name is not None and request.account_name != '' else 'null',
+            projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
+            userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.password is not None:
+            body["password"] = request.password
+        if request.otp is not None:
+            body["otp"] = request.otp
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=GetProjectTokenByIdentifierResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_project_token_by_identifier(
+        self,
+        request: GetProjectTokenByIdentifierRequest,
+    ) -> GetProjectTokenByIdentifierResult:
+        async_result = []
+        with timeout(30):
+            self._get_project_token_by_identifier(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_project_token_by_identifier_async(
+        self,
+        request: GetProjectTokenByIdentifierRequest,
+    ) -> GetProjectTokenByIdentifierResult:
+        async_result = []
+        self._get_project_token_by_identifier(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_project(
+        self,
+        request: UpdateProjectRequest,
+        callback: Callable[[AsyncResult[UpdateProjectResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/{projectName}".format(
+            projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+        if request.description is not None:
+            body["description"] = request.description
+        if request.plan is not None:
+            body["plan"] = request.plan
+        if request.billing_method_name is not None:
+            body["billingMethodName"] = request.billing_method_name
+        if request.enable_event_bridge is not None:
+            body["enableEventBridge"] = request.enable_event_bridge
+        if request.event_bridge_aws_account_id is not None:
+            body["eventBridgeAwsAccountId"] = request.event_bridge_aws_account_id
+        if request.event_bridge_aws_region is not None:
+            body["eventBridgeAwsRegion"] = request.event_bridge_aws_region
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateProjectResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_project(
+        self,
+        request: UpdateProjectRequest,
+    ) -> UpdateProjectResult:
+        async_result = []
+        with timeout(30):
+            self._update_project(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_project_async(
+        self,
+        request: UpdateProjectRequest,
+    ) -> UpdateProjectResult:
+        async_result = []
+        self._update_project(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _activate_region(
+        self,
+        request: ActivateRegionRequest,
+        callback: Callable[[AsyncResult[ActivateRegionResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/{projectName}/region/{regionName}/activate".format(
+            projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
+            regionName=request.region_name if request.region_name is not None and request.region_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=ActivateRegionResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def activate_region(
+        self,
+        request: ActivateRegionRequest,
+    ) -> ActivateRegionResult:
+        async_result = []
+        with timeout(30):
+            self._activate_region(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def activate_region_async(
+        self,
+        request: ActivateRegionRequest,
+    ) -> ActivateRegionResult:
+        async_result = []
+        self._activate_region(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _wait_activate_region(
+        self,
+        request: WaitActivateRegionRequest,
+        callback: Callable[[AsyncResult[WaitActivateRegionResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/{projectName}/region/{regionName}/activate/wait".format(
+            projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
+            regionName=request.region_name if request.region_name is not None and request.region_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=WaitActivateRegionResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def wait_activate_region(
+        self,
+        request: WaitActivateRegionRequest,
+    ) -> WaitActivateRegionResult:
+        async_result = []
+        with timeout(30):
+            self._wait_activate_region(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def wait_activate_region_async(
+        self,
+        request: WaitActivateRegionRequest,
+    ) -> WaitActivateRegionResult:
+        async_result = []
+        self._wait_activate_region(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_project(
+        self,
+        request: DeleteProjectRequest,
+        callback: Callable[[AsyncResult[DeleteProjectResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/{projectName}".format(
+            projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteProjectResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_project(
+        self,
+        request: DeleteProjectRequest,
+    ) -> DeleteProjectResult:
+        async_result = []
+        with timeout(30):
+            self._delete_project(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_project_async(
+        self,
+        request: DeleteProjectRequest,
+    ) -> DeleteProjectResult:
+        async_result = []
+        self._delete_project(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_billing_methods(
+        self,
+        request: DescribeBillingMethodsRequest,
+        callback: Callable[[AsyncResult[DescribeBillingMethodsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/billingMethod"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeBillingMethodsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_billing_methods(
+        self,
+        request: DescribeBillingMethodsRequest,
+    ) -> DescribeBillingMethodsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_billing_methods(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_billing_methods_async(
+        self,
+        request: DescribeBillingMethodsRequest,
+    ) -> DescribeBillingMethodsResult:
+        async_result = []
+        self._describe_billing_methods(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_billing_method(
+        self,
+        request: CreateBillingMethodRequest,
+        callback: Callable[[AsyncResult[CreateBillingMethodResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/billingMethod"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+        if request.description is not None:
+            body["description"] = request.description
+        if request.method_type is not None:
+            body["methodType"] = request.method_type
+        if request.card_customer_id is not None:
+            body["cardCustomerId"] = request.card_customer_id
+        if request.partner_id is not None:
+            body["partnerId"] = request.partner_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateBillingMethodResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_billing_method(
+        self,
+        request: CreateBillingMethodRequest,
+    ) -> CreateBillingMethodResult:
+        async_result = []
+        with timeout(30):
+            self._create_billing_method(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_billing_method_async(
+        self,
+        request: CreateBillingMethodRequest,
+    ) -> CreateBillingMethodResult:
+        async_result = []
+        self._create_billing_method(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_billing_method(
+        self,
+        request: GetBillingMethodRequest,
+        callback: Callable[[AsyncResult[GetBillingMethodResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/billingMethod/{billingMethodName}".format(
+            billingMethodName=request.billing_method_name if request.billing_method_name is not None and request.billing_method_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetBillingMethodResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_billing_method(
+        self,
+        request: GetBillingMethodRequest,
+    ) -> GetBillingMethodResult:
+        async_result = []
+        with timeout(30):
+            self._get_billing_method(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_billing_method_async(
+        self,
+        request: GetBillingMethodRequest,
+    ) -> GetBillingMethodResult:
+        async_result = []
+        self._get_billing_method(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_billing_method(
+        self,
+        request: UpdateBillingMethodRequest,
+        callback: Callable[[AsyncResult[UpdateBillingMethodResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/billingMethod/{billingMethodName}".format(
+            billingMethodName=request.billing_method_name if request.billing_method_name is not None and request.billing_method_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            body["accountToken"] = request.account_token
+        if request.description is not None:
+            body["description"] = request.description
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateBillingMethodResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_billing_method(
+        self,
+        request: UpdateBillingMethodRequest,
+    ) -> UpdateBillingMethodResult:
+        async_result = []
+        with timeout(30):
+            self._update_billing_method(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_billing_method_async(
+        self,
+        request: UpdateBillingMethodRequest,
+    ) -> UpdateBillingMethodResult:
+        async_result = []
+        self._update_billing_method(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_billing_method(
+        self,
+        request: DeleteBillingMethodRequest,
+        callback: Callable[[AsyncResult[DeleteBillingMethodResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/billingMethod/{billingMethodName}".format(
+            billingMethodName=request.billing_method_name if request.billing_method_name is not None and request.billing_method_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteBillingMethodResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_billing_method(
+        self,
+        request: DeleteBillingMethodRequest,
+    ) -> DeleteBillingMethodResult:
+        async_result = []
+        with timeout(30):
+            self._delete_billing_method(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_billing_method_async(
+        self,
+        request: DeleteBillingMethodRequest,
+    ) -> DeleteBillingMethodResult:
+        async_result = []
+        self._delete_billing_method(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_receipts(
+        self,
+        request: DescribeReceiptsRequest,
+        callback: Callable[[AsyncResult[DescribeReceiptsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/receipt"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeReceiptsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_receipts(
+        self,
+        request: DescribeReceiptsRequest,
+    ) -> DescribeReceiptsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_receipts(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_receipts_async(
+        self,
+        request: DescribeReceiptsRequest,
+    ) -> DescribeReceiptsResult:
+        async_result = []
+        self._describe_receipts(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_billings(
+        self,
+        request: DescribeBillingsRequest,
+        callback: Callable[[AsyncResult[DescribeBillingsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/billing/{projectName}/{year}/{month}".format(
+            projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
+            year=request.year if request.year is not None and request.year != '' else 'null',
+            month=request.month if request.month is not None and request.month != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.account_token is not None:
+            query_strings["accountToken"] = request.account_token
+        if request.region is not None:
+            query_strings["region"] = request.region
+        if request.service is not None:
+            query_strings["service"] = request.service
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeBillingsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_billings(
+        self,
+        request: DescribeBillingsRequest,
+    ) -> DescribeBillingsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_billings(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_billings_async(
+        self,
+        request: DescribeBillingsRequest,
+    ) -> DescribeBillingsResult:
+        async_result = []
+        self._describe_billings(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_dump_progresses(
+        self,
+        request: DescribeDumpProgressesRequest,
+        callback: Callable[[AsyncResult[DescribeDumpProgressesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/dump/progress"
 
         headers = self._create_authorized_headers()
         query_strings = {
@@ -46,7 +2000,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='GET',
-            result_type=DescribeNamespacesResult,
+            result_type=DescribeDumpProgressesResult,
             callback=callback,
             headers=headers,
             query_strings=query_strings,
@@ -57,13 +2011,13 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def describe_namespaces(
+    def describe_dump_progresses(
         self,
-        request: DescribeNamespacesRequest,
-    ) -> DescribeNamespacesResult:
+        request: DescribeDumpProgressesRequest,
+    ) -> DescribeDumpProgressesResult:
         async_result = []
         with timeout(30):
-            self._describe_namespaces(
+            self._describe_dump_progresses(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -74,12 +2028,12 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def describe_namespaces_async(
+    async def describe_dump_progresses_async(
         self,
-        request: DescribeNamespacesRequest,
-    ) -> DescribeNamespacesResult:
+        request: DescribeDumpProgressesRequest,
+    ) -> DescribeDumpProgressesResult:
         async_result = []
-        self._describe_namespaces(
+        self._describe_dump_progresses(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -94,40 +2048,180 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _create_namespace(
+    def _get_dump_progress(
         self,
-        request: CreateNamespaceRequest,
-        callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
+        request: GetDumpProgressRequest,
+        callback: Callable[[AsyncResult[GetDumpProgressResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
+            service='project',
             region=self.session.region,
-        ) + "/"
+        ) + "/account/me/project/dump/progress/{transactionId}".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetDumpProgressResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_dump_progress(
+        self,
+        request: GetDumpProgressRequest,
+    ) -> GetDumpProgressResult:
+        async_result = []
+        with timeout(30):
+            self._get_dump_progress(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_dump_progress_async(
+        self,
+        request: GetDumpProgressRequest,
+    ) -> GetDumpProgressResult:
+        async_result = []
+        self._get_dump_progress(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _wait_dump_user_data(
+        self,
+        request: WaitDumpUserDataRequest,
+        callback: Callable[[AsyncResult[WaitDumpUserDataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/dump/progress/{transactionId}/wait".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+        )
 
         headers = self._create_authorized_headers()
         body = {
             'contextStack': request.context_stack,
         }
-        if request.name is not None:
-            body["name"] = request.name
-        if request.description is not None:
-            body["description"] = request.description
-        if request.assume_user_id is not None:
-            body["assumeUserId"] = request.assume_user_id
-        if request.auto_run_stamp_sheet_notification is not None:
-            body["autoRunStampSheetNotification"] = request.auto_run_stamp_sheet_notification.to_dict()
-        if request.auto_run_transaction_notification is not None:
-            body["autoRunTransactionNotification"] = request.auto_run_transaction_notification.to_dict()
-        if request.log_setting is not None:
-            body["logSetting"] = request.log_setting.to_dict()
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.microservice_name is not None:
+            body["microserviceName"] = request.microservice_name
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=WaitDumpUserDataResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def wait_dump_user_data(
+        self,
+        request: WaitDumpUserDataRequest,
+    ) -> WaitDumpUserDataResult:
+        async_result = []
+        with timeout(30):
+            self._wait_dump_user_data(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def wait_dump_user_data_async(
+        self,
+        request: WaitDumpUserDataRequest,
+    ) -> WaitDumpUserDataResult:
+        async_result = []
+        self._wait_dump_user_data(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _archive_dump_user_data(
+        self,
+        request: ArchiveDumpUserDataRequest,
+        callback: Callable[[AsyncResult[ArchiveDumpUserDataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/dump/progress/{transactionId}/archive".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
         _job = rest.NetworkJob(
             url=url,
             method='POST',
-            result_type=CreateNamespaceResult,
+            result_type=ArchiveDumpUserDataResult,
             callback=callback,
             headers=headers,
             body=body,
@@ -138,13 +2232,13 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def create_namespace(
+    def archive_dump_user_data(
         self,
-        request: CreateNamespaceRequest,
-    ) -> CreateNamespaceResult:
+        request: ArchiveDumpUserDataRequest,
+    ) -> ArchiveDumpUserDataResult:
         async_result = []
         with timeout(30):
-            self._create_namespace(
+            self._archive_dump_user_data(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -155,12 +2249,12 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def create_namespace_async(
+    async def archive_dump_user_data_async(
         self,
-        request: CreateNamespaceRequest,
-    ) -> CreateNamespaceResult:
+        request: ArchiveDumpUserDataRequest,
+    ) -> ArchiveDumpUserDataResult:
         async_result = []
-        self._create_namespace(
+        self._archive_dump_user_data(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -175,182 +2269,34 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _get_namespace_status(
+    def _dump_user_data(
         self,
-        request: GetNamespaceStatusRequest,
-        callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
+        request: DumpUserDataRequest,
+        callback: Callable[[AsyncResult[DumpUserDataResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
+            service='project',
             region=self.session.region,
-        ) + "/{namespaceName}/status".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetNamespaceStatusResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_namespace_status(
-        self,
-        request: GetNamespaceStatusRequest,
-    ) -> GetNamespaceStatusResult:
-        async_result = []
-        with timeout(30):
-            self._get_namespace_status(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_namespace_status_async(
-        self,
-        request: GetNamespaceStatusRequest,
-    ) -> GetNamespaceStatusResult:
-        async_result = []
-        self._get_namespace_status(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_namespace(
-        self,
-        request: GetNamespaceRequest,
-        callback: Callable[[AsyncResult[GetNamespaceResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetNamespaceResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_namespace(
-        self,
-        request: GetNamespaceRequest,
-    ) -> GetNamespaceResult:
-        async_result = []
-        with timeout(30):
-            self._get_namespace(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_namespace_async(
-        self,
-        request: GetNamespaceRequest,
-    ) -> GetNamespaceResult:
-        async_result = []
-        self._get_namespace(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _update_namespace(
-        self,
-        request: UpdateNamespaceRequest,
-        callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        ) + "/account/me/project/dump/{userId}".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
         body = {
             'contextStack': request.context_stack,
         }
-        if request.description is not None:
-            body["description"] = request.description
-        if request.assume_user_id is not None:
-            body["assumeUserId"] = request.assume_user_id
-        if request.auto_run_stamp_sheet_notification is not None:
-            body["autoRunStampSheetNotification"] = request.auto_run_stamp_sheet_notification.to_dict()
-        if request.auto_run_transaction_notification is not None:
-            body["autoRunTransactionNotification"] = request.auto_run_transaction_notification.to_dict()
-        if request.log_setting is not None:
-            body["logSetting"] = request.log_setting.to_dict()
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
         _job = rest.NetworkJob(
             url=url,
-            method='PUT',
-            result_type=UpdateNamespaceResult,
+            method='POST',
+            result_type=DumpUserDataResult,
             callback=callback,
             headers=headers,
             body=body,
@@ -361,13 +2307,13 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def update_namespace(
+    def dump_user_data(
         self,
-        request: UpdateNamespaceRequest,
-    ) -> UpdateNamespaceResult:
+        request: DumpUserDataRequest,
+    ) -> DumpUserDataResult:
         async_result = []
         with timeout(30):
-            self._update_namespace(
+            self._dump_user_data(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -378,12 +2324,12 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def update_namespace_async(
+    async def dump_user_data_async(
         self,
-        request: UpdateNamespaceRequest,
-    ) -> UpdateNamespaceResult:
+        request: DumpUserDataRequest,
+    ) -> DumpUserDataResult:
         async_result = []
-        self._update_namespace(
+        self._dump_user_data(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -398,17 +2344,17 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _delete_namespace(
+    def _get_dump_user_data(
         self,
-        request: DeleteNamespaceRequest,
-        callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
+        request: GetDumpUserDataRequest,
+        callback: Callable[[AsyncResult[GetDumpUserDataResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
+            service='project',
             region=self.session.region,
-        ) + "/{namespaceName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        ) + "/account/me/project/dump/{transactionId}".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -420,8 +2366,8 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             headers["X-GS2-REQUEST-ID"] = request.request_id
         _job = rest.NetworkJob(
             url=url,
-            method='DELETE',
-            result_type=DeleteNamespaceResult,
+            method='GET',
+            result_type=GetDumpUserDataResult,
             callback=callback,
             headers=headers,
             query_strings=query_strings,
@@ -432,13 +2378,13 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def delete_namespace(
+    def get_dump_user_data(
         self,
-        request: DeleteNamespaceRequest,
-    ) -> DeleteNamespaceResult:
+        request: GetDumpUserDataRequest,
+    ) -> GetDumpUserDataResult:
         async_result = []
         with timeout(30):
-            self._delete_namespace(
+            self._get_dump_user_data(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -449,12 +2395,12 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def delete_namespace_async(
+    async def get_dump_user_data_async(
         self,
-        request: DeleteNamespaceRequest,
-    ) -> DeleteNamespaceResult:
+        request: GetDumpUserDataRequest,
+    ) -> GetDumpUserDataResult:
         async_result = []
-        self._delete_namespace(
+        self._get_dump_user_data(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -469,17 +2415,690 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_distributor_model_masters(
+    def _describe_clean_progresses(
         self,
-        request: DescribeDistributorModelMastersRequest,
-        callback: Callable[[AsyncResult[DescribeDistributorModelMastersResult]], None],
+        request: DescribeCleanProgressesRequest,
+        callback: Callable[[AsyncResult[DescribeCleanProgressesResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
+            service='project',
             region=self.session.region,
-        ) + "/{namespaceName}/master/distributor".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        ) + "/account/me/project/clean/progress"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeCleanProgressesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_clean_progresses(
+        self,
+        request: DescribeCleanProgressesRequest,
+    ) -> DescribeCleanProgressesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_clean_progresses(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_clean_progresses_async(
+        self,
+        request: DescribeCleanProgressesRequest,
+    ) -> DescribeCleanProgressesResult:
+        async_result = []
+        self._describe_clean_progresses(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_clean_progress(
+        self,
+        request: GetCleanProgressRequest,
+        callback: Callable[[AsyncResult[GetCleanProgressResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/clean/progress/{transactionId}".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetCleanProgressResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_clean_progress(
+        self,
+        request: GetCleanProgressRequest,
+    ) -> GetCleanProgressResult:
+        async_result = []
+        with timeout(30):
+            self._get_clean_progress(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_clean_progress_async(
+        self,
+        request: GetCleanProgressRequest,
+    ) -> GetCleanProgressResult:
+        async_result = []
+        self._get_clean_progress(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _wait_clean_user_data(
+        self,
+        request: WaitCleanUserDataRequest,
+        callback: Callable[[AsyncResult[WaitCleanUserDataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/clean/progress/{transactionId}/wait".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.microservice_name is not None:
+            body["microserviceName"] = request.microservice_name
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=WaitCleanUserDataResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def wait_clean_user_data(
+        self,
+        request: WaitCleanUserDataRequest,
+    ) -> WaitCleanUserDataResult:
+        async_result = []
+        with timeout(30):
+            self._wait_clean_user_data(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def wait_clean_user_data_async(
+        self,
+        request: WaitCleanUserDataRequest,
+    ) -> WaitCleanUserDataResult:
+        async_result = []
+        self._wait_clean_user_data(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _clean_user_data(
+        self,
+        request: CleanUserDataRequest,
+        callback: Callable[[AsyncResult[CleanUserDataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/clean/{userId}".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CleanUserDataResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def clean_user_data(
+        self,
+        request: CleanUserDataRequest,
+    ) -> CleanUserDataResult:
+        async_result = []
+        with timeout(30):
+            self._clean_user_data(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def clean_user_data_async(
+        self,
+        request: CleanUserDataRequest,
+    ) -> CleanUserDataResult:
+        async_result = []
+        self._clean_user_data(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_import_progresses(
+        self,
+        request: DescribeImportProgressesRequest,
+        callback: Callable[[AsyncResult[DescribeImportProgressesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/import/progress"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeImportProgressesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_import_progresses(
+        self,
+        request: DescribeImportProgressesRequest,
+    ) -> DescribeImportProgressesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_import_progresses(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_import_progresses_async(
+        self,
+        request: DescribeImportProgressesRequest,
+    ) -> DescribeImportProgressesResult:
+        async_result = []
+        self._describe_import_progresses(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_import_progress(
+        self,
+        request: GetImportProgressRequest,
+        callback: Callable[[AsyncResult[GetImportProgressResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/import/progress/{transactionId}".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetImportProgressResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_import_progress(
+        self,
+        request: GetImportProgressRequest,
+    ) -> GetImportProgressResult:
+        async_result = []
+        with timeout(30):
+            self._get_import_progress(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_import_progress_async(
+        self,
+        request: GetImportProgressRequest,
+    ) -> GetImportProgressResult:
+        async_result = []
+        self._get_import_progress(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _wait_import_user_data(
+        self,
+        request: WaitImportUserDataRequest,
+        callback: Callable[[AsyncResult[WaitImportUserDataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/import/progress/{transactionId}/wait".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.microservice_name is not None:
+            body["microserviceName"] = request.microservice_name
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=WaitImportUserDataResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def wait_import_user_data(
+        self,
+        request: WaitImportUserDataRequest,
+    ) -> WaitImportUserDataResult:
+        async_result = []
+        with timeout(30):
+            self._wait_import_user_data(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def wait_import_user_data_async(
+        self,
+        request: WaitImportUserDataRequest,
+    ) -> WaitImportUserDataResult:
+        async_result = []
+        self._wait_import_user_data(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _prepare_import_user_data(
+        self,
+        request: PrepareImportUserDataRequest,
+        callback: Callable[[AsyncResult[PrepareImportUserDataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/import/{userId}/prepare".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PrepareImportUserDataResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def prepare_import_user_data(
+        self,
+        request: PrepareImportUserDataRequest,
+    ) -> PrepareImportUserDataResult:
+        async_result = []
+        with timeout(30):
+            self._prepare_import_user_data(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def prepare_import_user_data_async(
+        self,
+        request: PrepareImportUserDataRequest,
+    ) -> PrepareImportUserDataResult:
+        async_result = []
+        self._prepare_import_user_data(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _import_user_data(
+        self,
+        request: ImportUserDataRequest,
+        callback: Callable[[AsyncResult[ImportUserDataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/import/{userId}".format(
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ImportUserDataResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def import_user_data(
+        self,
+        request: ImportUserDataRequest,
+    ) -> ImportUserDataResult:
+        async_result = []
+        with timeout(30):
+            self._import_user_data(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def import_user_data_async(
+        self,
+        request: ImportUserDataRequest,
+    ) -> ImportUserDataResult:
+        async_result = []
+        self._import_user_data(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_import_error_logs(
+        self,
+        request: DescribeImportErrorLogsRequest,
+        callback: Callable[[AsyncResult[DescribeImportErrorLogsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/account/me/project/import/progress/{transactionId}/log".format(
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -496,7 +3115,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         _job = rest.NetworkJob(
             url=url,
             method='GET',
-            result_type=DescribeDistributorModelMastersResult,
+            result_type=DescribeImportErrorLogsResult,
             callback=callback,
             headers=headers,
             query_strings=query_strings,
@@ -507,13 +3126,13 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def describe_distributor_model_masters(
+    def describe_import_error_logs(
         self,
-        request: DescribeDistributorModelMastersRequest,
-    ) -> DescribeDistributorModelMastersResult:
+        request: DescribeImportErrorLogsRequest,
+    ) -> DescribeImportErrorLogsResult:
         async_result = []
         with timeout(30):
-            self._describe_distributor_model_masters(
+            self._describe_import_error_logs(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -524,12 +3143,12 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def describe_distributor_model_masters_async(
+    async def describe_import_error_logs_async(
         self,
-        request: DescribeDistributorModelMastersRequest,
-    ) -> DescribeDistributorModelMastersResult:
+        request: DescribeImportErrorLogsRequest,
+    ) -> DescribeImportErrorLogsResult:
         async_result = []
-        self._describe_distributor_model_masters(
+        self._describe_import_error_logs(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -544,2292 +3163,18 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _create_distributor_model_master(
+    def _get_import_error_log(
         self,
-        request: CreateDistributorModelMasterRequest,
-        callback: Callable[[AsyncResult[CreateDistributorModelMasterResult]], None],
+        request: GetImportErrorLogRequest,
+        callback: Callable[[AsyncResult[GetImportErrorLogResult]], None],
         is_blocking: bool,
     ):
         url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
+            service='project',
             region=self.session.region,
-        ) + "/{namespaceName}/master/distributor".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.name is not None:
-            body["name"] = request.name
-        if request.description is not None:
-            body["description"] = request.description
-        if request.metadata is not None:
-            body["metadata"] = request.metadata
-        if request.inbox_namespace_id is not None:
-            body["inboxNamespaceId"] = request.inbox_namespace_id
-        if request.white_list_target_ids is not None:
-            body["whiteListTargetIds"] = [
-                item
-                for item in request.white_list_target_ids
-            ]
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=CreateDistributorModelMasterResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def create_distributor_model_master(
-        self,
-        request: CreateDistributorModelMasterRequest,
-    ) -> CreateDistributorModelMasterResult:
-        async_result = []
-        with timeout(30):
-            self._create_distributor_model_master(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def create_distributor_model_master_async(
-        self,
-        request: CreateDistributorModelMasterRequest,
-    ) -> CreateDistributorModelMasterResult:
-        async_result = []
-        self._create_distributor_model_master(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_distributor_model_master(
-        self,
-        request: GetDistributorModelMasterRequest,
-        callback: Callable[[AsyncResult[GetDistributorModelMasterResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/master/distributor/{distributorName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            distributorName=request.distributor_name if request.distributor_name is not None and request.distributor_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetDistributorModelMasterResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_distributor_model_master(
-        self,
-        request: GetDistributorModelMasterRequest,
-    ) -> GetDistributorModelMasterResult:
-        async_result = []
-        with timeout(30):
-            self._get_distributor_model_master(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_distributor_model_master_async(
-        self,
-        request: GetDistributorModelMasterRequest,
-    ) -> GetDistributorModelMasterResult:
-        async_result = []
-        self._get_distributor_model_master(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _update_distributor_model_master(
-        self,
-        request: UpdateDistributorModelMasterRequest,
-        callback: Callable[[AsyncResult[UpdateDistributorModelMasterResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/master/distributor/{distributorName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            distributorName=request.distributor_name if request.distributor_name is not None and request.distributor_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.description is not None:
-            body["description"] = request.description
-        if request.metadata is not None:
-            body["metadata"] = request.metadata
-        if request.inbox_namespace_id is not None:
-            body["inboxNamespaceId"] = request.inbox_namespace_id
-        if request.white_list_target_ids is not None:
-            body["whiteListTargetIds"] = [
-                item
-                for item in request.white_list_target_ids
-            ]
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='PUT',
-            result_type=UpdateDistributorModelMasterResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def update_distributor_model_master(
-        self,
-        request: UpdateDistributorModelMasterRequest,
-    ) -> UpdateDistributorModelMasterResult:
-        async_result = []
-        with timeout(30):
-            self._update_distributor_model_master(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def update_distributor_model_master_async(
-        self,
-        request: UpdateDistributorModelMasterRequest,
-    ) -> UpdateDistributorModelMasterResult:
-        async_result = []
-        self._update_distributor_model_master(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _delete_distributor_model_master(
-        self,
-        request: DeleteDistributorModelMasterRequest,
-        callback: Callable[[AsyncResult[DeleteDistributorModelMasterResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/master/distributor/{distributorName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            distributorName=request.distributor_name if request.distributor_name is not None and request.distributor_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='DELETE',
-            result_type=DeleteDistributorModelMasterResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def delete_distributor_model_master(
-        self,
-        request: DeleteDistributorModelMasterRequest,
-    ) -> DeleteDistributorModelMasterResult:
-        async_result = []
-        with timeout(30):
-            self._delete_distributor_model_master(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def delete_distributor_model_master_async(
-        self,
-        request: DeleteDistributorModelMasterRequest,
-    ) -> DeleteDistributorModelMasterResult:
-        async_result = []
-        self._delete_distributor_model_master(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _describe_distributor_models(
-        self,
-        request: DescribeDistributorModelsRequest,
-        callback: Callable[[AsyncResult[DescribeDistributorModelsResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/distributor".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=DescribeDistributorModelsResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def describe_distributor_models(
-        self,
-        request: DescribeDistributorModelsRequest,
-    ) -> DescribeDistributorModelsResult:
-        async_result = []
-        with timeout(30):
-            self._describe_distributor_models(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_distributor_models_async(
-        self,
-        request: DescribeDistributorModelsRequest,
-    ) -> DescribeDistributorModelsResult:
-        async_result = []
-        self._describe_distributor_models(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_distributor_model(
-        self,
-        request: GetDistributorModelRequest,
-        callback: Callable[[AsyncResult[GetDistributorModelResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/distributor/{distributorName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            distributorName=request.distributor_name if request.distributor_name is not None and request.distributor_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetDistributorModelResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_distributor_model(
-        self,
-        request: GetDistributorModelRequest,
-    ) -> GetDistributorModelResult:
-        async_result = []
-        with timeout(30):
-            self._get_distributor_model(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_distributor_model_async(
-        self,
-        request: GetDistributorModelRequest,
-    ) -> GetDistributorModelResult:
-        async_result = []
-        self._get_distributor_model(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _export_master(
-        self,
-        request: ExportMasterRequest,
-        callback: Callable[[AsyncResult[ExportMasterResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/master/export".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=ExportMasterResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def export_master(
-        self,
-        request: ExportMasterRequest,
-    ) -> ExportMasterResult:
-        async_result = []
-        with timeout(30):
-            self._export_master(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def export_master_async(
-        self,
-        request: ExportMasterRequest,
-    ) -> ExportMasterResult:
-        async_result = []
-        self._export_master(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_current_distributor_master(
-        self,
-        request: GetCurrentDistributorMasterRequest,
-        callback: Callable[[AsyncResult[GetCurrentDistributorMasterResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/master".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetCurrentDistributorMasterResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_current_distributor_master(
-        self,
-        request: GetCurrentDistributorMasterRequest,
-    ) -> GetCurrentDistributorMasterResult:
-        async_result = []
-        with timeout(30):
-            self._get_current_distributor_master(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_current_distributor_master_async(
-        self,
-        request: GetCurrentDistributorMasterRequest,
-    ) -> GetCurrentDistributorMasterResult:
-        async_result = []
-        self._get_current_distributor_master(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _update_current_distributor_master(
-        self,
-        request: UpdateCurrentDistributorMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentDistributorMasterResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/master".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.settings is not None:
-            body["settings"] = request.settings
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='PUT',
-            result_type=UpdateCurrentDistributorMasterResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def update_current_distributor_master(
-        self,
-        request: UpdateCurrentDistributorMasterRequest,
-    ) -> UpdateCurrentDistributorMasterResult:
-        async_result = []
-        with timeout(30):
-            self._update_current_distributor_master(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def update_current_distributor_master_async(
-        self,
-        request: UpdateCurrentDistributorMasterRequest,
-    ) -> UpdateCurrentDistributorMasterResult:
-        async_result = []
-        self._update_current_distributor_master(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _update_current_distributor_master_from_git_hub(
-        self,
-        request: UpdateCurrentDistributorMasterFromGitHubRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentDistributorMasterFromGitHubResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/master/from_git_hub".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.checkout_setting is not None:
-            body["checkoutSetting"] = request.checkout_setting.to_dict()
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='PUT',
-            result_type=UpdateCurrentDistributorMasterFromGitHubResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def update_current_distributor_master_from_git_hub(
-        self,
-        request: UpdateCurrentDistributorMasterFromGitHubRequest,
-    ) -> UpdateCurrentDistributorMasterFromGitHubResult:
-        async_result = []
-        with timeout(30):
-            self._update_current_distributor_master_from_git_hub(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def update_current_distributor_master_from_git_hub_async(
-        self,
-        request: UpdateCurrentDistributorMasterFromGitHubRequest,
-    ) -> UpdateCurrentDistributorMasterFromGitHubResult:
-        async_result = []
-        self._update_current_distributor_master_from_git_hub(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _distribute(
-        self,
-        request: DistributeRequest,
-        callback: Callable[[AsyncResult[DistributeResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/distribute/{distributorName}".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            distributorName=request.distributor_name if request.distributor_name is not None and request.distributor_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-        if request.distribute_resource is not None:
-            body["distributeResource"] = request.distribute_resource.to_dict()
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=DistributeResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def distribute(
-        self,
-        request: DistributeRequest,
-    ) -> DistributeResult:
-        async_result = []
-        with timeout(30):
-            self._distribute(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def distribute_async(
-        self,
-        request: DistributeRequest,
-    ) -> DistributeResult:
-        async_result = []
-        self._distribute(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _distribute_without_overflow_process(
-        self,
-        request: DistributeWithoutOverflowProcessRequest,
-        callback: Callable[[AsyncResult[DistributeWithoutOverflowProcessResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/distribute"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-        if request.distribute_resource is not None:
-            body["distributeResource"] = request.distribute_resource.to_dict()
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=DistributeWithoutOverflowProcessResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def distribute_without_overflow_process(
-        self,
-        request: DistributeWithoutOverflowProcessRequest,
-    ) -> DistributeWithoutOverflowProcessResult:
-        async_result = []
-        with timeout(30):
-            self._distribute_without_overflow_process(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def distribute_without_overflow_process_async(
-        self,
-        request: DistributeWithoutOverflowProcessRequest,
-    ) -> DistributeWithoutOverflowProcessResult:
-        async_result = []
-        self._distribute_without_overflow_process(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_verify_task(
-        self,
-        request: RunVerifyTaskRequest,
-        callback: Callable[[AsyncResult[RunVerifyTaskResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/distribute/stamp/verifyTask/run".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.verify_task is not None:
-            body["verifyTask"] = request.verify_task
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunVerifyTaskResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_verify_task(
-        self,
-        request: RunVerifyTaskRequest,
-    ) -> RunVerifyTaskResult:
-        async_result = []
-        with timeout(30):
-            self._run_verify_task(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_verify_task_async(
-        self,
-        request: RunVerifyTaskRequest,
-    ) -> RunVerifyTaskResult:
-        async_result = []
-        self._run_verify_task(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_stamp_task(
-        self,
-        request: RunStampTaskRequest,
-        callback: Callable[[AsyncResult[RunStampTaskResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/distribute/stamp/task/run".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_task is not None:
-            body["stampTask"] = request.stamp_task
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunStampTaskResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_stamp_task(
-        self,
-        request: RunStampTaskRequest,
-    ) -> RunStampTaskResult:
-        async_result = []
-        with timeout(30):
-            self._run_stamp_task(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_stamp_task_async(
-        self,
-        request: RunStampTaskRequest,
-    ) -> RunStampTaskResult:
-        async_result = []
-        self._run_stamp_task(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_stamp_sheet(
-        self,
-        request: RunStampSheetRequest,
-        callback: Callable[[AsyncResult[RunStampSheetResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/distribute/stamp/sheet/run".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_sheet is not None:
-            body["stampSheet"] = request.stamp_sheet
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunStampSheetResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_stamp_sheet(
-        self,
-        request: RunStampSheetRequest,
-    ) -> RunStampSheetResult:
-        async_result = []
-        with timeout(30):
-            self._run_stamp_sheet(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_stamp_sheet_async(
-        self,
-        request: RunStampSheetRequest,
-    ) -> RunStampSheetResult:
-        async_result = []
-        self._run_stamp_sheet(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_stamp_sheet_express(
-        self,
-        request: RunStampSheetExpressRequest,
-        callback: Callable[[AsyncResult[RunStampSheetExpressResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/distribute/stamp/run".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_sheet is not None:
-            body["stampSheet"] = request.stamp_sheet
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunStampSheetExpressResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_stamp_sheet_express(
-        self,
-        request: RunStampSheetExpressRequest,
-    ) -> RunStampSheetExpressResult:
-        async_result = []
-        with timeout(30):
-            self._run_stamp_sheet_express(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_stamp_sheet_express_async(
-        self,
-        request: RunStampSheetExpressRequest,
-    ) -> RunStampSheetExpressResult:
-        async_result = []
-        self._run_stamp_sheet_express(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_verify_task_without_namespace(
-        self,
-        request: RunVerifyTaskWithoutNamespaceRequest,
-        callback: Callable[[AsyncResult[RunVerifyTaskWithoutNamespaceResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/stamp/verifyTask/run"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.verify_task is not None:
-            body["verifyTask"] = request.verify_task
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunVerifyTaskWithoutNamespaceResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_verify_task_without_namespace(
-        self,
-        request: RunVerifyTaskWithoutNamespaceRequest,
-    ) -> RunVerifyTaskWithoutNamespaceResult:
-        async_result = []
-        with timeout(30):
-            self._run_verify_task_without_namespace(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_verify_task_without_namespace_async(
-        self,
-        request: RunVerifyTaskWithoutNamespaceRequest,
-    ) -> RunVerifyTaskWithoutNamespaceResult:
-        async_result = []
-        self._run_verify_task_without_namespace(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_stamp_task_without_namespace(
-        self,
-        request: RunStampTaskWithoutNamespaceRequest,
-        callback: Callable[[AsyncResult[RunStampTaskWithoutNamespaceResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/stamp/task/run"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_task is not None:
-            body["stampTask"] = request.stamp_task
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunStampTaskWithoutNamespaceResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_stamp_task_without_namespace(
-        self,
-        request: RunStampTaskWithoutNamespaceRequest,
-    ) -> RunStampTaskWithoutNamespaceResult:
-        async_result = []
-        with timeout(30):
-            self._run_stamp_task_without_namespace(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_stamp_task_without_namespace_async(
-        self,
-        request: RunStampTaskWithoutNamespaceRequest,
-    ) -> RunStampTaskWithoutNamespaceResult:
-        async_result = []
-        self._run_stamp_task_without_namespace(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_stamp_sheet_without_namespace(
-        self,
-        request: RunStampSheetWithoutNamespaceRequest,
-        callback: Callable[[AsyncResult[RunStampSheetWithoutNamespaceResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/stamp/sheet/run"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_sheet is not None:
-            body["stampSheet"] = request.stamp_sheet
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunStampSheetWithoutNamespaceResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_stamp_sheet_without_namespace(
-        self,
-        request: RunStampSheetWithoutNamespaceRequest,
-    ) -> RunStampSheetWithoutNamespaceResult:
-        async_result = []
-        with timeout(30):
-            self._run_stamp_sheet_without_namespace(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_stamp_sheet_without_namespace_async(
-        self,
-        request: RunStampSheetWithoutNamespaceRequest,
-    ) -> RunStampSheetWithoutNamespaceResult:
-        async_result = []
-        self._run_stamp_sheet_without_namespace(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_stamp_sheet_express_without_namespace(
-        self,
-        request: RunStampSheetExpressWithoutNamespaceRequest,
-        callback: Callable[[AsyncResult[RunStampSheetExpressWithoutNamespaceResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/stamp/run"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_sheet is not None:
-            body["stampSheet"] = request.stamp_sheet
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunStampSheetExpressWithoutNamespaceResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_stamp_sheet_express_without_namespace(
-        self,
-        request: RunStampSheetExpressWithoutNamespaceRequest,
-    ) -> RunStampSheetExpressWithoutNamespaceResult:
-        async_result = []
-        with timeout(30):
-            self._run_stamp_sheet_express_without_namespace(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_stamp_sheet_express_without_namespace_async(
-        self,
-        request: RunStampSheetExpressWithoutNamespaceRequest,
-    ) -> RunStampSheetExpressWithoutNamespaceResult:
-        async_result = []
-        self._run_stamp_sheet_express_without_namespace(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _set_transaction_default_config(
-        self,
-        request: SetTransactionDefaultConfigRequest,
-        callback: Callable[[AsyncResult[SetTransactionDefaultConfigResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/transaction/user/me/config"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.config is not None:
-            body["config"] = [
-                item.to_dict()
-                for item in request.config
-            ]
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.access_token:
-            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=SetTransactionDefaultConfigResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def set_transaction_default_config(
-        self,
-        request: SetTransactionDefaultConfigRequest,
-    ) -> SetTransactionDefaultConfigResult:
-        async_result = []
-        with timeout(30):
-            self._set_transaction_default_config(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def set_transaction_default_config_async(
-        self,
-        request: SetTransactionDefaultConfigRequest,
-    ) -> SetTransactionDefaultConfigResult:
-        async_result = []
-        self._set_transaction_default_config(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _set_transaction_default_config_by_user_id(
-        self,
-        request: SetTransactionDefaultConfigByUserIdRequest,
-        callback: Callable[[AsyncResult[SetTransactionDefaultConfigByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/transaction/user/{userId}/config".format(
-            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.config is not None:
-            body["config"] = [
-                item.to_dict()
-                for item in request.config
-            ]
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=SetTransactionDefaultConfigByUserIdResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def set_transaction_default_config_by_user_id(
-        self,
-        request: SetTransactionDefaultConfigByUserIdRequest,
-    ) -> SetTransactionDefaultConfigByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._set_transaction_default_config_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def set_transaction_default_config_by_user_id_async(
-        self,
-        request: SetTransactionDefaultConfigByUserIdRequest,
-    ) -> SetTransactionDefaultConfigByUserIdResult:
-        async_result = []
-        self._set_transaction_default_config_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _freeze_master_data(
-        self,
-        request: FreezeMasterDataRequest,
-        callback: Callable[[AsyncResult[FreezeMasterDataResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/me/masterdata/freeze".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.access_token:
-            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=FreezeMasterDataResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def freeze_master_data(
-        self,
-        request: FreezeMasterDataRequest,
-    ) -> FreezeMasterDataResult:
-        async_result = []
-        with timeout(30):
-            self._freeze_master_data(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def freeze_master_data_async(
-        self,
-        request: FreezeMasterDataRequest,
-    ) -> FreezeMasterDataResult:
-        async_result = []
-        self._freeze_master_data(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _freeze_master_data_by_user_id(
-        self,
-        request: FreezeMasterDataByUserIdRequest,
-        callback: Callable[[AsyncResult[FreezeMasterDataByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/masterdata/freeze".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=FreezeMasterDataByUserIdResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def freeze_master_data_by_user_id(
-        self,
-        request: FreezeMasterDataByUserIdRequest,
-    ) -> FreezeMasterDataByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._freeze_master_data_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def freeze_master_data_by_user_id_async(
-        self,
-        request: FreezeMasterDataByUserIdRequest,
-    ) -> FreezeMasterDataByUserIdResult:
-        async_result = []
-        self._freeze_master_data_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _if_expression_by_user_id(
-        self,
-        request: IfExpressionByUserIdRequest,
-        callback: Callable[[AsyncResult[IfExpressionByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/expression/if".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-        if request.condition is not None:
-            body["condition"] = request.condition.to_dict()
-        if request.true_actions is not None:
-            body["trueActions"] = [
-                item.to_dict()
-                for item in request.true_actions
-            ]
-        if request.false_actions is not None:
-            body["falseActions"] = [
-                item.to_dict()
-                for item in request.false_actions
-            ]
-        if request.multiply_value_specifying_quantity is not None:
-            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=IfExpressionByUserIdResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def if_expression_by_user_id(
-        self,
-        request: IfExpressionByUserIdRequest,
-    ) -> IfExpressionByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._if_expression_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def if_expression_by_user_id_async(
-        self,
-        request: IfExpressionByUserIdRequest,
-    ) -> IfExpressionByUserIdResult:
-        async_result = []
-        self._if_expression_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _and_expression_by_user_id(
-        self,
-        request: AndExpressionByUserIdRequest,
-        callback: Callable[[AsyncResult[AndExpressionByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/expression/and".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-        if request.actions is not None:
-            body["actions"] = [
-                item.to_dict()
-                for item in request.actions
-            ]
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=AndExpressionByUserIdResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def and_expression_by_user_id(
-        self,
-        request: AndExpressionByUserIdRequest,
-    ) -> AndExpressionByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._and_expression_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def and_expression_by_user_id_async(
-        self,
-        request: AndExpressionByUserIdRequest,
-    ) -> AndExpressionByUserIdResult:
-        async_result = []
-        self._and_expression_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _or_expression_by_user_id(
-        self,
-        request: OrExpressionByUserIdRequest,
-        callback: Callable[[AsyncResult[OrExpressionByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/expression/or".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-        if request.actions is not None:
-            body["actions"] = [
-                item.to_dict()
-                for item in request.actions
-            ]
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=OrExpressionByUserIdResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def or_expression_by_user_id(
-        self,
-        request: OrExpressionByUserIdRequest,
-    ) -> OrExpressionByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._or_expression_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def or_expression_by_user_id_async(
-        self,
-        request: OrExpressionByUserIdRequest,
-    ) -> OrExpressionByUserIdResult:
-        async_result = []
-        self._or_expression_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _if_expression_by_stamp_task(
-        self,
-        request: IfExpressionByStampTaskRequest,
-        callback: Callable[[AsyncResult[IfExpressionByStampTaskResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/stamp/expression/if"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_task is not None:
-            body["stampTask"] = request.stamp_task
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=IfExpressionByStampTaskResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def if_expression_by_stamp_task(
-        self,
-        request: IfExpressionByStampTaskRequest,
-    ) -> IfExpressionByStampTaskResult:
-        async_result = []
-        with timeout(30):
-            self._if_expression_by_stamp_task(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def if_expression_by_stamp_task_async(
-        self,
-        request: IfExpressionByStampTaskRequest,
-    ) -> IfExpressionByStampTaskResult:
-        async_result = []
-        self._if_expression_by_stamp_task(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _and_expression_by_stamp_task(
-        self,
-        request: AndExpressionByStampTaskRequest,
-        callback: Callable[[AsyncResult[AndExpressionByStampTaskResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/stamp/expression/and"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_task is not None:
-            body["stampTask"] = request.stamp_task
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=AndExpressionByStampTaskResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def and_expression_by_stamp_task(
-        self,
-        request: AndExpressionByStampTaskRequest,
-    ) -> AndExpressionByStampTaskResult:
-        async_result = []
-        with timeout(30):
-            self._and_expression_by_stamp_task(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def and_expression_by_stamp_task_async(
-        self,
-        request: AndExpressionByStampTaskRequest,
-    ) -> AndExpressionByStampTaskResult:
-        async_result = []
-        self._and_expression_by_stamp_task(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _or_expression_by_stamp_task(
-        self,
-        request: OrExpressionByStampTaskRequest,
-        callback: Callable[[AsyncResult[OrExpressionByStampTaskResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/stamp/expression/or"
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.stamp_task is not None:
-            body["stampTask"] = request.stamp_task
-        if request.key_id is not None:
-            body["keyId"] = request.key_id
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=OrExpressionByStampTaskResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def or_expression_by_stamp_task(
-        self,
-        request: OrExpressionByStampTaskRequest,
-    ) -> OrExpressionByStampTaskResult:
-        async_result = []
-        with timeout(30):
-            self._or_expression_by_stamp_task(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def or_expression_by_stamp_task_async(
-        self,
-        request: OrExpressionByStampTaskRequest,
-    ) -> OrExpressionByStampTaskResult:
-        async_result = []
-        self._or_expression_by_stamp_task(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_stamp_sheet_result(
-        self,
-        request: GetStampSheetResultRequest,
-        callback: Callable[[AsyncResult[GetStampSheetResultResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/me/stampSheet/{transactionId}/result".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        ) + "/account/me/project/import/progress/{transactionId}/log/{errorLogName}".format(
             transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+            errorLogName=request.error_log_name if request.error_log_name is not None and request.error_log_name != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
@@ -2839,12 +3184,10 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.access_token:
-            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
         _job = rest.NetworkJob(
             url=url,
             method='GET',
-            result_type=GetStampSheetResultResult,
+            result_type=GetImportErrorLogResult,
             callback=callback,
             headers=headers,
             query_strings=query_strings,
@@ -2855,13 +3198,13 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             is_blocking=is_blocking,
         )
 
-    def get_stamp_sheet_result(
+    def get_import_error_log(
         self,
-        request: GetStampSheetResultRequest,
-    ) -> GetStampSheetResultResult:
+        request: GetImportErrorLogRequest,
+    ) -> GetImportErrorLogResult:
         async_result = []
         with timeout(30):
-            self._get_stamp_sheet_result(
+            self._get_import_error_log(
                 request,
                 lambda result: async_result.append(result),
                 is_blocking=True,
@@ -2872,315 +3215,12 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         return async_result[0].result
 
 
-    async def get_stamp_sheet_result_async(
+    async def get_import_error_log_async(
         self,
-        request: GetStampSheetResultRequest,
-    ) -> GetStampSheetResultResult:
+        request: GetImportErrorLogRequest,
+    ) -> GetImportErrorLogResult:
         async_result = []
-        self._get_stamp_sheet_result(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_stamp_sheet_result_by_user_id(
-        self,
-        request: GetStampSheetResultByUserIdRequest,
-        callback: Callable[[AsyncResult[GetStampSheetResultByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/stampSheet/{transactionId}/result".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetStampSheetResultByUserIdResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_stamp_sheet_result_by_user_id(
-        self,
-        request: GetStampSheetResultByUserIdRequest,
-    ) -> GetStampSheetResultByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._get_stamp_sheet_result_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_stamp_sheet_result_by_user_id_async(
-        self,
-        request: GetStampSheetResultByUserIdRequest,
-    ) -> GetStampSheetResultByUserIdResult:
-        async_result = []
-        self._get_stamp_sheet_result_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _run_transaction(
-        self,
-        request: RunTransactionRequest,
-        callback: Callable[[AsyncResult[RunTransactionResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/system/{ownerId}/{namespaceName}/user/{userId}/transaction/run".format(
-            ownerId=request.owner_id if request.owner_id is not None and request.owner_id != '' else 'null',
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        body = {
-            'contextStack': request.context_stack,
-        }
-        if request.transaction is not None:
-            body["transaction"] = request.transaction
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.duplication_avoider:
-            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='POST',
-            result_type=RunTransactionResult,
-            callback=callback,
-            headers=headers,
-            body=body,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def run_transaction(
-        self,
-        request: RunTransactionRequest,
-    ) -> RunTransactionResult:
-        async_result = []
-        with timeout(30):
-            self._run_transaction(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def run_transaction_async(
-        self,
-        request: RunTransactionRequest,
-    ) -> RunTransactionResult:
-        async_result = []
-        self._run_transaction(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_transaction_result(
-        self,
-        request: GetTransactionResultRequest,
-        callback: Callable[[AsyncResult[GetTransactionResultResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/me/transaction/{transactionId}/result".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.access_token:
-            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetTransactionResultResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_transaction_result(
-        self,
-        request: GetTransactionResultRequest,
-    ) -> GetTransactionResultResult:
-        async_result = []
-        with timeout(30):
-            self._get_transaction_result(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_transaction_result_async(
-        self,
-        request: GetTransactionResultRequest,
-    ) -> GetTransactionResultResult:
-        async_result = []
-        self._get_transaction_result(
-            request,
-            lambda result: async_result.append(result),
-            is_blocking=False,
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _get_transaction_result_by_user_id(
-        self,
-        request: GetTransactionResultByUserIdRequest,
-        callback: Callable[[AsyncResult[GetTransactionResultByUserIdResult]], None],
-        is_blocking: bool,
-    ):
-        url = Gs2Constant.ENDPOINT_HOST.format(
-            service='distributor',
-            region=self.session.region,
-        ) + "/{namespaceName}/user/{userId}/transaction/{transactionId}/result".format(
-            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
-            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
-            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
-        )
-
-        headers = self._create_authorized_headers()
-        query_strings = {
-            'contextStack': request.context_stack,
-        }
-
-        if request.request_id:
-            headers["X-GS2-REQUEST-ID"] = request.request_id
-        if request.time_offset_token:
-            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
-        _job = rest.NetworkJob(
-            url=url,
-            method='GET',
-            result_type=GetTransactionResultByUserIdResult,
-            callback=callback,
-            headers=headers,
-            query_strings=query_strings,
-        )
-
-        self.session.send(
-            job=_job,
-            is_blocking=is_blocking,
-        )
-
-    def get_transaction_result_by_user_id(
-        self,
-        request: GetTransactionResultByUserIdRequest,
-    ) -> GetTransactionResultByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._get_transaction_result_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-                is_blocking=True,
-            )
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def get_transaction_result_by_user_id_async(
-        self,
-        request: GetTransactionResultByUserIdRequest,
-    ) -> GetTransactionResultByUserIdResult:
-        async_result = []
-        self._get_transaction_result_by_user_id(
+        self._get_import_error_log(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

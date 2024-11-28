@@ -145,9 +145,9 @@ class Vote(core.Gs2Model):
             .with_vote_id(data.get('voteId'))\
             .with_season_name(data.get('seasonName'))\
             .with_session_name(data.get('sessionName'))\
-            .with_written_ballots([
+            .with_written_ballots(None if data.get('writtenBallots') is None else [
                 WrittenBallot.from_dict(data.get('writtenBallots')[i])
-                for i in range(len(data.get('writtenBallots')) if data.get('writtenBallots') else 0)
+                for i in range(len(data.get('writtenBallots')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -160,7 +160,7 @@ class Vote(core.Gs2Model):
             "sessionName": self.session_name,
             "writtenBallots": None if self.written_ballots is None else [
                 self.written_ballots[i].to_dict() if self.written_ballots[i] else None
-                for i in range(len(self.written_ballots) if self.written_ballots else 0)
+                for i in range(len(self.written_ballots))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -200,9 +200,9 @@ class WrittenBallot(core.Gs2Model):
             return None
         return WrittenBallot()\
             .with_ballot(Ballot.from_dict(data.get('ballot')))\
-            .with_game_results([
+            .with_game_results(None if data.get('gameResults') is None else [
                 GameResult.from_dict(data.get('gameResults')[i])
-                for i in range(len(data.get('gameResults')) if data.get('gameResults') else 0)
+                for i in range(len(data.get('gameResults')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -210,7 +210,7 @@ class WrittenBallot(core.Gs2Model):
             "ballot": self.ballot.to_dict() if self.ballot else None,
             "gameResults": None if self.game_results is None else [
                 self.game_results[i].to_dict() if self.game_results[i] else None
-                for i in range(len(self.game_results) if self.game_results else 0)
+                for i in range(len(self.game_results))
             ],
         }
 
@@ -518,8 +518,23 @@ class ScriptSetting(core.Gs2Model):
 
 
 class TransactionSetting(core.Gs2Model):
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     queue_namespace_id: str = None
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
+        return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
         self.distributor_namespace_id = distributor_namespace_id
@@ -548,11 +563,17 @@ class TransactionSetting(core.Gs2Model):
         if data is None:
             return None
         return TransactionSetting()\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "queueNamespaceId": self.queue_namespace_id,
         }
@@ -813,9 +834,9 @@ class SeasonModel(core.Gs2Model):
             .with_season_model_id(data.get('seasonModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_tiers([
+            .with_tiers(None if data.get('tiers') is None else [
                 TierModel.from_dict(data.get('tiers')[i])
-                for i in range(len(data.get('tiers')) if data.get('tiers') else 0)
+                for i in range(len(data.get('tiers')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))
@@ -827,7 +848,7 @@ class SeasonModel(core.Gs2Model):
             "metadata": self.metadata,
             "tiers": None if self.tiers is None else [
                 self.tiers[i].to_dict() if self.tiers[i] else None
-                for i in range(len(self.tiers) if self.tiers else 0)
+                for i in range(len(self.tiers))
             ],
             "experienceModelId": self.experience_model_id,
             "challengePeriodEventId": self.challenge_period_event_id,
@@ -964,9 +985,9 @@ class SeasonModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
             .with_description(data.get('description'))\
-            .with_tiers([
+            .with_tiers(None if data.get('tiers') is None else [
                 TierModel.from_dict(data.get('tiers')[i])
-                for i in range(len(data.get('tiers')) if data.get('tiers') else 0)
+                for i in range(len(data.get('tiers')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
             .with_challenge_period_event_id(data.get('challengePeriodEventId'))\
@@ -982,7 +1003,7 @@ class SeasonModelMaster(core.Gs2Model):
             "description": self.description,
             "tiers": None if self.tiers is None else [
                 self.tiers[i].to_dict() if self.tiers[i] else None
-                for i in range(len(self.tiers) if self.tiers else 0)
+                for i in range(len(self.tiers))
             ],
             "experienceModelId": self.experience_model_id,
             "challengePeriodEventId": self.challenge_period_event_id,

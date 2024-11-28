@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -482,9 +483,9 @@ class DescribeRoomsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeRoomsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Room.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -492,7 +493,7 @@ class DescribeRoomsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -762,16 +763,16 @@ class DescribeMessagesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeMessagesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Message.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -802,16 +803,16 @@ class DescribeMessagesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeMessagesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Message.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -842,16 +843,16 @@ class DescribeLatestMessagesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeLatestMessagesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Message.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -882,16 +883,16 @@ class DescribeLatestMessagesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeLatestMessagesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Message.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1097,9 +1098,9 @@ class DescribeSubscribesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Subscribe.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1107,7 +1108,7 @@ class DescribeSubscribesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1144,9 +1145,9 @@ class DescribeSubscribesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribesByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Subscribe.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1154,7 +1155,7 @@ class DescribeSubscribesByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1191,9 +1192,9 @@ class DescribeSubscribesByRoomNameResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSubscribesByRoomNameResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Subscribe.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1201,7 +1202,7 @@ class DescribeSubscribesByRoomNameResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

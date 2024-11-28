@@ -55,12 +55,27 @@ class LogSetting(core.Gs2Model):
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -95,6 +110,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -102,6 +120,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -613,9 +634,9 @@ class Status(core.Gs2Model):
             .with_status_id(data.get('statusId'))\
             .with_user_id(data.get('userId'))\
             .with_property_id(data.get('propertyId'))\
-            .with_released_node_names([
+            .with_released_node_names(None if data.get('releasedNodeNames') is None else [
                 data.get('releasedNodeNames')[i]
-                for i in range(len(data.get('releasedNodeNames')) if data.get('releasedNodeNames') else 0)
+                for i in range(len(data.get('releasedNodeNames')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -628,7 +649,7 @@ class Status(core.Gs2Model):
             "propertyId": self.property_id,
             "releasedNodeNames": None if self.released_node_names is None else [
                 self.released_node_names[i]
-                for i in range(len(self.released_node_names) if self.released_node_names else 0)
+                for i in range(len(self.released_node_names))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -771,18 +792,18 @@ class NodeModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_release_verify_actions([
+            .with_release_verify_actions(None if data.get('releaseVerifyActions') is None else [
                 VerifyAction.from_dict(data.get('releaseVerifyActions')[i])
-                for i in range(len(data.get('releaseVerifyActions')) if data.get('releaseVerifyActions') else 0)
+                for i in range(len(data.get('releaseVerifyActions')))
             ])\
-            .with_release_consume_actions([
+            .with_release_consume_actions(None if data.get('releaseConsumeActions') is None else [
                 ConsumeAction.from_dict(data.get('releaseConsumeActions')[i])
-                for i in range(len(data.get('releaseConsumeActions')) if data.get('releaseConsumeActions') else 0)
+                for i in range(len(data.get('releaseConsumeActions')))
             ])\
             .with_restrain_return_rate(data.get('restrainReturnRate'))\
-            .with_premise_node_names([
+            .with_premise_node_names(None if data.get('premiseNodeNames') is None else [
                 data.get('premiseNodeNames')[i]
-                for i in range(len(data.get('premiseNodeNames')) if data.get('premiseNodeNames') else 0)
+                for i in range(len(data.get('premiseNodeNames')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -796,16 +817,16 @@ class NodeModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "releaseVerifyActions": None if self.release_verify_actions is None else [
                 self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
-                for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
+                for i in range(len(self.release_verify_actions))
             ],
             "releaseConsumeActions": None if self.release_consume_actions is None else [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
-                for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
+                for i in range(len(self.release_consume_actions))
             ],
             "restrainReturnRate": self.restrain_return_rate,
             "premiseNodeNames": None if self.premise_node_names is None else [
                 self.premise_node_names[i]
-                for i in range(len(self.premise_node_names) if self.premise_node_names else 0)
+                for i in range(len(self.premise_node_names))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -932,22 +953,22 @@ class NodeModel(core.Gs2Model):
             .with_node_model_id(data.get('nodeModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_release_verify_actions([
+            .with_release_verify_actions(None if data.get('releaseVerifyActions') is None else [
                 VerifyAction.from_dict(data.get('releaseVerifyActions')[i])
-                for i in range(len(data.get('releaseVerifyActions')) if data.get('releaseVerifyActions') else 0)
+                for i in range(len(data.get('releaseVerifyActions')))
             ])\
-            .with_release_consume_actions([
+            .with_release_consume_actions(None if data.get('releaseConsumeActions') is None else [
                 ConsumeAction.from_dict(data.get('releaseConsumeActions')[i])
-                for i in range(len(data.get('releaseConsumeActions')) if data.get('releaseConsumeActions') else 0)
+                for i in range(len(data.get('releaseConsumeActions')))
             ])\
-            .with_return_acquire_actions([
+            .with_return_acquire_actions(None if data.get('returnAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('returnAcquireActions')[i])
-                for i in range(len(data.get('returnAcquireActions')) if data.get('returnAcquireActions') else 0)
+                for i in range(len(data.get('returnAcquireActions')))
             ])\
             .with_restrain_return_rate(data.get('restrainReturnRate'))\
-            .with_premise_node_names([
+            .with_premise_node_names(None if data.get('premiseNodeNames') is None else [
                 data.get('premiseNodeNames')[i]
-                for i in range(len(data.get('premiseNodeNames')) if data.get('premiseNodeNames') else 0)
+                for i in range(len(data.get('premiseNodeNames')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -957,20 +978,20 @@ class NodeModel(core.Gs2Model):
             "metadata": self.metadata,
             "releaseVerifyActions": None if self.release_verify_actions is None else [
                 self.release_verify_actions[i].to_dict() if self.release_verify_actions[i] else None
-                for i in range(len(self.release_verify_actions) if self.release_verify_actions else 0)
+                for i in range(len(self.release_verify_actions))
             ],
             "releaseConsumeActions": None if self.release_consume_actions is None else [
                 self.release_consume_actions[i].to_dict() if self.release_consume_actions[i] else None
-                for i in range(len(self.release_consume_actions) if self.release_consume_actions else 0)
+                for i in range(len(self.release_consume_actions))
             ],
             "returnAcquireActions": None if self.return_acquire_actions is None else [
                 self.return_acquire_actions[i].to_dict() if self.return_acquire_actions[i] else None
-                for i in range(len(self.return_acquire_actions) if self.return_acquire_actions else 0)
+                for i in range(len(self.return_acquire_actions))
             ],
             "restrainReturnRate": self.restrain_return_rate,
             "premiseNodeNames": None if self.premise_node_names is None else [
                 self.premise_node_names[i]
-                for i in range(len(self.premise_node_names) if self.premise_node_names else 0)
+                for i in range(len(self.premise_node_names))
             ],
         }
 

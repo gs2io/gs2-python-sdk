@@ -1403,9 +1403,9 @@ class ReportRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_status_name(data.get('statusName'))\
-            .with_events([
+            .with_events(None if data.get('events') is None else [
                 Event.from_dict(data.get('events')[i])
-                for i in range(len(data.get('events')) if data.get('events') else 0)
+                for i in range(len(data.get('events')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1415,7 +1415,7 @@ class ReportRequest(core.Gs2Request):
             "statusName": self.status_name,
             "events": None if self.events is None else [
                 self.events[i].to_dict() if self.events[i] else None
-                for i in range(len(self.events) if self.events else 0)
+                for i in range(len(self.events))
             ],
         }
 
@@ -1476,9 +1476,9 @@ class ReportByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_status_name(data.get('statusName'))\
-            .with_events([
+            .with_events(None if data.get('events') is None else [
                 Event.from_dict(data.get('events')[i])
-                for i in range(len(data.get('events')) if data.get('events') else 0)
+                for i in range(len(data.get('events')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1489,7 +1489,7 @@ class ReportByUserIdRequest(core.Gs2Request):
             "statusName": self.status_name,
             "events": None if self.events is None else [
                 self.events[i].to_dict() if self.events[i] else None
-                for i in range(len(self.events) if self.events else 0)
+                for i in range(len(self.events))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

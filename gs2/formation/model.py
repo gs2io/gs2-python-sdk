@@ -21,12 +21,27 @@ from gs2 import core
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -61,6 +76,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -68,6 +86,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -623,9 +644,9 @@ class PropertyForm(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_name(data.get('name'))\
             .with_property_id(data.get('propertyId'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 Slot.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -639,7 +660,7 @@ class PropertyForm(core.Gs2Model):
             "propertyId": self.property_id,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -785,9 +806,9 @@ class Form(core.Gs2Model):
             .with_form_id(data.get('formId'))\
             .with_name(data.get('name'))\
             .with_index(data.get('index'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 Slot.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -800,7 +821,7 @@ class Form(core.Gs2Model):
             "index": self.index,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1155,9 +1176,9 @@ class PropertyFormModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotModel.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1171,7 +1192,7 @@ class PropertyFormModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1278,9 +1299,9 @@ class PropertyFormModel(core.Gs2Model):
             .with_property_form_model_id(data.get('propertyFormModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotModel.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1290,7 +1311,7 @@ class PropertyFormModel(core.Gs2Model):
             "metadata": self.metadata,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
         }
 
@@ -1691,9 +1712,9 @@ class FormModelMaster(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotModel.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1707,7 +1728,7 @@ class FormModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1814,9 +1835,9 @@ class FormModel(core.Gs2Model):
             .with_form_model_id(data.get('formModelId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_slots([
+            .with_slots(None if data.get('slots') is None else [
                 SlotModel.from_dict(data.get('slots')[i])
-                for i in range(len(data.get('slots')) if data.get('slots') else 0)
+                for i in range(len(data.get('slots')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1826,7 +1847,7 @@ class FormModel(core.Gs2Model):
             "metadata": self.metadata,
             "slots": None if self.slots is None else [
                 self.slots[i].to_dict() if self.slots[i] else None
-                for i in range(len(self.slots) if self.slots else 0)
+                for i in range(len(self.slots))
             ],
         }
 

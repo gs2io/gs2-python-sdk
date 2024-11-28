@@ -728,18 +728,18 @@ class CreateGradeModelMasterRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_default_grades([
+            .with_default_grades(None if data.get('defaultGrades') is None else [
                 DefaultGradeModel.from_dict(data.get('defaultGrades')[i])
-                for i in range(len(data.get('defaultGrades')) if data.get('defaultGrades') else 0)
+                for i in range(len(data.get('defaultGrades')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_grade_entries([
+            .with_grade_entries(None if data.get('gradeEntries') is None else [
                 GradeEntryModel.from_dict(data.get('gradeEntries')[i])
-                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+                for i in range(len(data.get('gradeEntries')))
             ])\
-            .with_acquire_action_rates([
+            .with_acquire_action_rates(None if data.get('acquireActionRates') is None else [
                 AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
-                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+                for i in range(len(data.get('acquireActionRates')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -750,16 +750,16 @@ class CreateGradeModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "defaultGrades": None if self.default_grades is None else [
                 self.default_grades[i].to_dict() if self.default_grades[i] else None
-                for i in range(len(self.default_grades) if self.default_grades else 0)
+                for i in range(len(self.default_grades))
             ],
             "experienceModelId": self.experience_model_id,
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
-                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+                for i in range(len(self.grade_entries))
             ],
             "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
-                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+                for i in range(len(self.acquire_action_rates))
             ],
         }
 
@@ -874,18 +874,18 @@ class UpdateGradeModelMasterRequest(core.Gs2Request):
             .with_grade_name(data.get('gradeName'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_default_grades([
+            .with_default_grades(None if data.get('defaultGrades') is None else [
                 DefaultGradeModel.from_dict(data.get('defaultGrades')[i])
-                for i in range(len(data.get('defaultGrades')) if data.get('defaultGrades') else 0)
+                for i in range(len(data.get('defaultGrades')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_grade_entries([
+            .with_grade_entries(None if data.get('gradeEntries') is None else [
                 GradeEntryModel.from_dict(data.get('gradeEntries')[i])
-                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+                for i in range(len(data.get('gradeEntries')))
             ])\
-            .with_acquire_action_rates([
+            .with_acquire_action_rates(None if data.get('acquireActionRates') is None else [
                 AcquireActionRate.from_dict(data.get('acquireActionRates')[i])
-                for i in range(len(data.get('acquireActionRates')) if data.get('acquireActionRates') else 0)
+                for i in range(len(data.get('acquireActionRates')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -896,16 +896,16 @@ class UpdateGradeModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "defaultGrades": None if self.default_grades is None else [
                 self.default_grades[i].to_dict() if self.default_grades[i] else None
-                for i in range(len(self.default_grades) if self.default_grades else 0)
+                for i in range(len(self.default_grades))
             ],
             "experienceModelId": self.experience_model_id,
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
-                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+                for i in range(len(self.grade_entries))
             ],
             "acquireActionRates": None if self.acquire_action_rates is None else [
                 self.acquire_action_rates[i].to_dict() if self.acquire_action_rates[i] else None
-                for i in range(len(self.acquire_action_rates) if self.acquire_action_rates else 0)
+                for i in range(len(self.acquire_action_rates))
             ],
         }
 
@@ -2314,9 +2314,9 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
             .with_grade_name(data.get('gradeName'))\
             .with_property_id(data.get('propertyId'))\
             .with_rate_name(data.get('rateName'))\
-            .with_acquire_actions([
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
-                for i in range(len(data.get('acquireActions')) if data.get('acquireActions') else 0)
+                for i in range(len(data.get('acquireActions')))
             ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -2329,7 +2329,7 @@ class MultiplyAcquireActionsByUserIdRequest(core.Gs2Request):
             "rateName": self.rate_name,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
-                for i in range(len(self.acquire_actions) if self.acquire_actions else 0)
+                for i in range(len(self.acquire_actions))
             ],
             "timeOffsetToken": self.time_offset_token,
         }

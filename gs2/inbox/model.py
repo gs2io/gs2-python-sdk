@@ -21,12 +21,27 @@ from gs2 import core
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -61,6 +76,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -68,6 +86,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -525,9 +546,9 @@ class Received(core.Gs2Model):
         return Received()\
             .with_received_id(data.get('receivedId'))\
             .with_user_id(data.get('userId'))\
-            .with_received_global_message_names([
+            .with_received_global_message_names(None if data.get('receivedGlobalMessageNames') is None else [
                 data.get('receivedGlobalMessageNames')[i]
-                for i in range(len(data.get('receivedGlobalMessageNames')) if data.get('receivedGlobalMessageNames') else 0)
+                for i in range(len(data.get('receivedGlobalMessageNames')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -539,7 +560,7 @@ class Received(core.Gs2Model):
             "userId": self.user_id,
             "receivedGlobalMessageNames": None if self.received_global_message_names is None else [
                 self.received_global_message_names[i]
-                for i in range(len(self.received_global_message_names) if self.received_global_message_names else 0)
+                for i in range(len(self.received_global_message_names))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -661,9 +682,9 @@ class GlobalMessage(core.Gs2Model):
             .with_global_message_id(data.get('globalMessageId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_read_acquire_actions([
+            .with_read_acquire_actions(None if data.get('readAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('readAcquireActions')[i])
-                for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
+                for i in range(len(data.get('readAcquireActions')))
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_expires_at(data.get('expiresAt'))\
@@ -676,7 +697,7 @@ class GlobalMessage(core.Gs2Model):
             "metadata": self.metadata,
             "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
-                for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
+                for i in range(len(self.read_acquire_actions))
             ],
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
@@ -808,9 +829,9 @@ class GlobalMessageMaster(core.Gs2Model):
             .with_global_message_id(data.get('globalMessageId'))\
             .with_name(data.get('name'))\
             .with_metadata(data.get('metadata'))\
-            .with_read_acquire_actions([
+            .with_read_acquire_actions(None if data.get('readAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('readAcquireActions')[i])
-                for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
+                for i in range(len(data.get('readAcquireActions')))
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_expires_at(data.get('expiresAt'))\
@@ -825,7 +846,7 @@ class GlobalMessageMaster(core.Gs2Model):
             "metadata": self.metadata,
             "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
-                for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
+                for i in range(len(self.read_acquire_actions))
             ],
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
@@ -1062,9 +1083,9 @@ class Message(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_metadata(data.get('metadata'))\
             .with_is_read(data.get('isRead'))\
-            .with_read_acquire_actions([
+            .with_read_acquire_actions(None if data.get('readAcquireActions') is None else [
                 AcquireAction.from_dict(data.get('readAcquireActions')[i])
-                for i in range(len(data.get('readAcquireActions')) if data.get('readAcquireActions') else 0)
+                for i in range(len(data.get('readAcquireActions')))
             ])\
             .with_received_at(data.get('receivedAt'))\
             .with_read_at(data.get('readAt'))\
@@ -1080,7 +1101,7 @@ class Message(core.Gs2Model):
             "isRead": self.is_read,
             "readAcquireActions": None if self.read_acquire_actions is None else [
                 self.read_acquire_actions[i].to_dict() if self.read_acquire_actions[i] else None
-                for i in range(len(self.read_acquire_actions) if self.read_acquire_actions else 0)
+                for i in range(len(self.read_acquire_actions))
             ],
             "receivedAt": self.received_at,
             "readAt": self.read_at,

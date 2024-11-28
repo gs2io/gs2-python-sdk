@@ -21,12 +21,27 @@ from gs2 import core
 
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
 
     def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
         self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -61,6 +76,9 @@ class TransactionSetting(core.Gs2Model):
             return None
         return TransactionSetting()\
             .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -68,6 +86,9 @@ class TransactionSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -771,9 +792,9 @@ class UnleashRateModelMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
             .with_grade_model_id(data.get('gradeModelId'))\
-            .with_grade_entries([
+            .with_grade_entries(None if data.get('gradeEntries') is None else [
                 UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
-                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+                for i in range(len(data.get('gradeEntries')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -789,7 +810,7 @@ class UnleashRateModelMaster(core.Gs2Model):
             "gradeModelId": self.grade_model_id,
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
-                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+                for i in range(len(self.grade_entries))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -914,9 +935,9 @@ class UnleashRateModel(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
             .with_grade_model_id(data.get('gradeModelId'))\
-            .with_grade_entries([
+            .with_grade_entries(None if data.get('gradeEntries') is None else [
                 UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
-                for i in range(len(data.get('gradeEntries')) if data.get('gradeEntries') else 0)
+                for i in range(len(data.get('gradeEntries')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -929,7 +950,7 @@ class UnleashRateModel(core.Gs2Model):
             "gradeModelId": self.grade_model_id,
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
-                for i in range(len(self.grade_entries) if self.grade_entries else 0)
+                for i in range(len(self.grade_entries))
             ],
         }
 
@@ -1082,14 +1103,14 @@ class RateModelMaster(core.Gs2Model):
             .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
             .with_acquire_experience_suffix(data.get('acquireExperienceSuffix'))\
             .with_material_inventory_model_id(data.get('materialInventoryModelId'))\
-            .with_acquire_experience_hierarchy([
+            .with_acquire_experience_hierarchy(None if data.get('acquireExperienceHierarchy') is None else [
                 data.get('acquireExperienceHierarchy')[i]
-                for i in range(len(data.get('acquireExperienceHierarchy')) if data.get('acquireExperienceHierarchy') else 0)
+                for i in range(len(data.get('acquireExperienceHierarchy')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_bonus_rates([
+            .with_bonus_rates(None if data.get('bonusRates') is None else [
                 BonusRate.from_dict(data.get('bonusRates')[i])
-                for i in range(len(data.get('bonusRates')) if data.get('bonusRates') else 0)
+                for i in range(len(data.get('bonusRates')))
             ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1106,12 +1127,12 @@ class RateModelMaster(core.Gs2Model):
             "materialInventoryModelId": self.material_inventory_model_id,
             "acquireExperienceHierarchy": None if self.acquire_experience_hierarchy is None else [
                 self.acquire_experience_hierarchy[i]
-                for i in range(len(self.acquire_experience_hierarchy) if self.acquire_experience_hierarchy else 0)
+                for i in range(len(self.acquire_experience_hierarchy))
             ],
             "experienceModelId": self.experience_model_id,
             "bonusRates": None if self.bonus_rates is None else [
                 self.bonus_rates[i].to_dict() if self.bonus_rates[i] else None
-                for i in range(len(self.bonus_rates) if self.bonus_rates else 0)
+                for i in range(len(self.bonus_rates))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1252,14 +1273,14 @@ class RateModel(core.Gs2Model):
             .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
             .with_acquire_experience_suffix(data.get('acquireExperienceSuffix'))\
             .with_material_inventory_model_id(data.get('materialInventoryModelId'))\
-            .with_acquire_experience_hierarchy([
+            .with_acquire_experience_hierarchy(None if data.get('acquireExperienceHierarchy') is None else [
                 data.get('acquireExperienceHierarchy')[i]
-                for i in range(len(data.get('acquireExperienceHierarchy')) if data.get('acquireExperienceHierarchy') else 0)
+                for i in range(len(data.get('acquireExperienceHierarchy')))
             ])\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_bonus_rates([
+            .with_bonus_rates(None if data.get('bonusRates') is None else [
                 BonusRate.from_dict(data.get('bonusRates')[i])
-                for i in range(len(data.get('bonusRates')) if data.get('bonusRates') else 0)
+                for i in range(len(data.get('bonusRates')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1273,12 +1294,12 @@ class RateModel(core.Gs2Model):
             "materialInventoryModelId": self.material_inventory_model_id,
             "acquireExperienceHierarchy": None if self.acquire_experience_hierarchy is None else [
                 self.acquire_experience_hierarchy[i]
-                for i in range(len(self.acquire_experience_hierarchy) if self.acquire_experience_hierarchy else 0)
+                for i in range(len(self.acquire_experience_hierarchy))
             ],
             "experienceModelId": self.experience_model_id,
             "bonusRates": None if self.bonus_rates is None else [
                 self.bonus_rates[i].to_dict() if self.bonus_rates[i] else None
-                for i in range(len(self.bonus_rates) if self.bonus_rates else 0)
+                for i in range(len(self.bonus_rates))
             ],
         }
 

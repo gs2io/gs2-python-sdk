@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -48,9 +49,9 @@ class DescribeNamespacesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeNamespacesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Namespace.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -58,7 +59,7 @@ class DescribeNamespacesResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -686,9 +687,9 @@ class DescribeFriendsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeFriendsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FriendUser.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -696,7 +697,7 @@ class DescribeFriendsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -733,9 +734,9 @@ class DescribeFriendsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeFriendsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FriendUser.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -743,7 +744,7 @@ class DescribeFriendsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -780,9 +781,9 @@ class DescribeBlackListResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBlackListResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 data.get('items')[i]
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -790,7 +791,7 @@ class DescribeBlackListResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i]
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -827,9 +828,9 @@ class DescribeBlackListByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBlackListByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 data.get('items')[i]
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -837,7 +838,7 @@ class DescribeBlackListByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i]
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1010,9 +1011,9 @@ class DescribeFollowsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeFollowsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FollowUser.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1020,7 +1021,7 @@ class DescribeFollowsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1057,9 +1058,9 @@ class DescribeFollowsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeFollowsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FollowUser.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1067,7 +1068,7 @@ class DescribeFollowsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1444,9 +1445,9 @@ class DescribeSendRequestsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSendRequestsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FriendRequest.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1454,7 +1455,7 @@ class DescribeSendRequestsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1491,9 +1492,9 @@ class DescribeSendRequestsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSendRequestsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FriendRequest.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1501,7 +1502,7 @@ class DescribeSendRequestsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1742,9 +1743,9 @@ class DescribeReceiveRequestsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeReceiveRequestsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FriendRequest.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1752,7 +1753,7 @@ class DescribeReceiveRequestsResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -1789,9 +1790,9 @@ class DescribeReceiveRequestsByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeReceiveRequestsByUserIdResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 FriendRequest.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
@@ -1799,7 +1800,7 @@ class DescribeReceiveRequestsByUserIdResult(core.Gs2Result):
         return {
             "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }

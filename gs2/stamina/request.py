@@ -1067,9 +1067,9 @@ class CreateMaxStaminaTableMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1081,7 +1081,7 @@ class CreateMaxStaminaTableMasterRequest(core.Gs2Request):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -1187,9 +1187,9 @@ class UpdateMaxStaminaTableMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1201,7 +1201,7 @@ class UpdateMaxStaminaTableMasterRequest(core.Gs2Request):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -1357,9 +1357,9 @@ class CreateRecoverIntervalTableMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1371,7 +1371,7 @@ class CreateRecoverIntervalTableMasterRequest(core.Gs2Request):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -1477,9 +1477,9 @@ class UpdateRecoverIntervalTableMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1491,7 +1491,7 @@ class UpdateRecoverIntervalTableMasterRequest(core.Gs2Request):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -1647,9 +1647,9 @@ class CreateRecoverValueTableMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1661,7 +1661,7 @@ class CreateRecoverValueTableMasterRequest(core.Gs2Request):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 
@@ -1767,9 +1767,9 @@ class UpdateRecoverValueTableMasterRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
             .with_experience_model_id(data.get('experienceModelId'))\
-            .with_values([
+            .with_values(None if data.get('values') is None else [
                 data.get('values')[i]
-                for i in range(len(data.get('values')) if data.get('values') else 0)
+                for i in range(len(data.get('values')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1781,7 +1781,7 @@ class UpdateRecoverValueTableMasterRequest(core.Gs2Request):
             "experienceModelId": self.experience_model_id,
             "values": None if self.values is None else [
                 self.values[i]
-                for i in range(len(self.values) if self.values else 0)
+                for i in range(len(self.values))
             ],
         }
 

@@ -348,9 +348,9 @@ class DataObject(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_user_id(data.get('userId'))\
             .with_scope(data.get('scope'))\
-            .with_allow_user_ids([
+            .with_allow_user_ids(None if data.get('allowUserIds') is None else [
                 data.get('allowUserIds')[i]
-                for i in range(len(data.get('allowUserIds')) if data.get('allowUserIds') else 0)
+                for i in range(len(data.get('allowUserIds')))
             ])\
             .with_status(data.get('status'))\
             .with_generation(data.get('generation'))\
@@ -367,7 +367,7 @@ class DataObject(core.Gs2Model):
             "scope": self.scope,
             "allowUserIds": None if self.allow_user_ids is None else [
                 self.allow_user_ids[i]
-                for i in range(len(self.allow_user_ids) if self.allow_user_ids else 0)
+                for i in range(len(self.allow_user_ids))
             ],
             "status": self.status,
             "generation": self.generation,
