@@ -110,15 +110,15 @@ class BlockingPolicyModel(core.Gs2Model):
         if data is None:
             return None
         return BlockingPolicyModel()\
-            .with_pass_services([
+            .with_pass_services(None if data.get('passServices') is None else [
                 data.get('passServices')[i]
-                for i in range(len(data.get('passServices')) if data.get('passServices') else 0)
+                for i in range(len(data.get('passServices')))
             ])\
             .with_default_restriction(data.get('defaultRestriction'))\
             .with_location_detection(data.get('locationDetection'))\
-            .with_locations([
+            .with_locations(None if data.get('locations') is None else [
                 data.get('locations')[i]
-                for i in range(len(data.get('locations')) if data.get('locations') else 0)
+                for i in range(len(data.get('locations')))
             ])\
             .with_location_restriction(data.get('locationRestriction'))\
             .with_anonymous_ip_detection(data.get('anonymousIpDetection'))\
@@ -128,9 +128,9 @@ class BlockingPolicyModel(core.Gs2Model):
             .with_reputation_ip_detection(data.get('reputationIpDetection'))\
             .with_reputation_ip_restriction(data.get('reputationIpRestriction'))\
             .with_ip_addresses_detection(data.get('ipAddressesDetection'))\
-            .with_ip_addresses([
+            .with_ip_addresses(None if data.get('ipAddresses') is None else [
                 data.get('ipAddresses')[i]
-                for i in range(len(data.get('ipAddresses')) if data.get('ipAddresses') else 0)
+                for i in range(len(data.get('ipAddresses')))
             ])\
             .with_ip_address_restriction(data.get('ipAddressRestriction'))
 
@@ -138,13 +138,13 @@ class BlockingPolicyModel(core.Gs2Model):
         return {
             "passServices": None if self.pass_services is None else [
                 self.pass_services[i]
-                for i in range(len(self.pass_services) if self.pass_services else 0)
+                for i in range(len(self.pass_services))
             ],
             "defaultRestriction": self.default_restriction,
             "locationDetection": self.location_detection,
             "locations": None if self.locations is None else [
                 self.locations[i]
-                for i in range(len(self.locations) if self.locations else 0)
+                for i in range(len(self.locations))
             ],
             "locationRestriction": self.location_restriction,
             "anonymousIpDetection": self.anonymous_ip_detection,
@@ -156,7 +156,7 @@ class BlockingPolicyModel(core.Gs2Model):
             "ipAddressesDetection": self.ip_addresses_detection,
             "ipAddresses": None if self.ip_addresses is None else [
                 self.ip_addresses[i]
-                for i in range(len(self.ip_addresses) if self.ip_addresses else 0)
+                for i in range(len(self.ip_addresses))
             ],
             "ipAddressRestriction": self.ip_address_restriction,
         }
