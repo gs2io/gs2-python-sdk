@@ -871,6 +871,74 @@ class AcceptByUserIdResult(core.Gs2Result):
         }
 
 
+class RejectResult(core.Gs2Result):
+    item: AcceptVersion = None
+
+    def with_item(self, item: AcceptVersion) -> RejectResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RejectResult]:
+        if data is None:
+            return None
+        return RejectResult()\
+            .with_item(AcceptVersion.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class RejectByUserIdResult(core.Gs2Result):
+    item: AcceptVersion = None
+
+    def with_item(self, item: AcceptVersion) -> RejectByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RejectByUserIdResult]:
+        if data is None:
+            return None
+        return RejectByUserIdResult()\
+            .with_item(AcceptVersion.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class GetAcceptVersionResult(core.Gs2Result):
     item: AcceptVersion = None
 

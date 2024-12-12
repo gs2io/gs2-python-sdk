@@ -1801,6 +1801,595 @@ class VerifyEntryByStampTaskRequest(core.Gs2Request):
         }
 
 
+class DescribeLikesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeLikesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeLikesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeLikesRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeLikesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeLikesRequest]:
+        if data is None:
+            return None
+        return DescribeLikesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeLikesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    page_token: str = None
+    limit: int = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeLikesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeLikesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeLikesByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeLikesByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeLikesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeLikesByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeLikesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class AddLikesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    entry_model_names: List[str] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AddLikesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> AddLikesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_entry_model_names(self, entry_model_names: List[str]) -> AddLikesRequest:
+        self.entry_model_names = entry_model_names
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddLikesRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddLikesRequest]:
+        if data is None:
+            return None
+        return AddLikesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
+                data.get('entryModelNames')[i]
+                for i in range(len(data.get('entryModelNames')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "entryModelNames": None if self.entry_model_names is None else [
+                self.entry_model_names[i]
+                for i in range(len(self.entry_model_names))
+            ],
+        }
+
+
+class AddLikesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    entry_model_names: List[str] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AddLikesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AddLikesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_entry_model_names(self, entry_model_names: List[str]) -> AddLikesByUserIdRequest:
+        self.entry_model_names = entry_model_names
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> AddLikesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddLikesByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddLikesByUserIdRequest]:
+        if data is None:
+            return None
+        return AddLikesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
+                data.get('entryModelNames')[i]
+                for i in range(len(data.get('entryModelNames')))
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "entryModelNames": None if self.entry_model_names is None else [
+                self.entry_model_names[i]
+                for i in range(len(self.entry_model_names))
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class GetLikeRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    entry_model_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetLikeRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetLikeRequest:
+        self.access_token = access_token
+        return self
+
+    def with_entry_model_name(self, entry_model_name: str) -> GetLikeRequest:
+        self.entry_model_name = entry_model_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetLikeRequest]:
+        if data is None:
+            return None
+        return GetLikeRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_entry_model_name(data.get('entryModelName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "entryModelName": self.entry_model_name,
+        }
+
+
+class GetLikeByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    entry_model_name: str = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetLikeByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetLikeByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_entry_model_name(self, entry_model_name: str) -> GetLikeByUserIdRequest:
+        self.entry_model_name = entry_model_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetLikeByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetLikeByUserIdRequest]:
+        if data is None:
+            return None
+        return GetLikeByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_entry_model_name(data.get('entryModelName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "entryModelName": self.entry_model_name,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class ResetLikesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ResetLikesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> ResetLikesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetLikesRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetLikesRequest]:
+        if data is None:
+            return None
+        return ResetLikesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+        }
+
+
+class ResetLikesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ResetLikesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> ResetLikesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> ResetLikesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetLikesByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetLikesByUserIdRequest]:
+        if data is None:
+            return None
+        return ResetLikesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class DeleteLikesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    entry_model_names: List[str] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteLikesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DeleteLikesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_entry_model_names(self, entry_model_names: List[str]) -> DeleteLikesRequest:
+        self.entry_model_names = entry_model_names
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteLikesRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteLikesRequest]:
+        if data is None:
+            return None
+        return DeleteLikesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
+                data.get('entryModelNames')[i]
+                for i in range(len(data.get('entryModelNames')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "entryModelNames": None if self.entry_model_names is None else [
+                self.entry_model_names[i]
+                for i in range(len(self.entry_model_names))
+            ],
+        }
+
+
+class DeleteLikesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    entry_model_names: List[str] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteLikesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DeleteLikesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_entry_model_names(self, entry_model_names: List[str]) -> DeleteLikesByUserIdRequest:
+        self.entry_model_names = entry_model_names
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DeleteLikesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteLikesByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteLikesByUserIdRequest]:
+        if data is None:
+            return None
+        return DeleteLikesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
+                data.get('entryModelNames')[i]
+                for i in range(len(data.get('entryModelNames')))
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "entryModelNames": None if self.entry_model_names is None else [
+                self.entry_model_names[i]
+                for i in range(len(self.entry_model_names))
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class ExportMasterRequest(core.Gs2Request):
 
     context_stack: str = None

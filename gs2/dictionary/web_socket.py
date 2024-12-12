@@ -2674,6 +2674,800 @@ class Gs2DictionaryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_likes(
+        self,
+        request: DescribeLikesRequest,
+        callback: Callable[[AsyncResult[DescribeLikesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='describeLikes',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeLikesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_likes(
+        self,
+        request: DescribeLikesRequest,
+    ) -> DescribeLikesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_likes(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_likes_async(
+        self,
+        request: DescribeLikesRequest,
+    ) -> DescribeLikesResult:
+        async_result = []
+        self._describe_likes(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_likes_by_user_id(
+        self,
+        request: DescribeLikesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeLikesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='describeLikesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeLikesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_likes_by_user_id(
+        self,
+        request: DescribeLikesByUserIdRequest,
+    ) -> DescribeLikesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_likes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_likes_by_user_id_async(
+        self,
+        request: DescribeLikesByUserIdRequest,
+    ) -> DescribeLikesByUserIdResult:
+        async_result = []
+        self._describe_likes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _add_likes(
+        self,
+        request: AddLikesRequest,
+        callback: Callable[[AsyncResult[AddLikesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='addLikes',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.entry_model_names is not None:
+            body["entryModelNames"] = [
+                item
+                for item in request.entry_model_names
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AddLikesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def add_likes(
+        self,
+        request: AddLikesRequest,
+    ) -> AddLikesResult:
+        async_result = []
+        with timeout(30):
+            self._add_likes(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def add_likes_async(
+        self,
+        request: AddLikesRequest,
+    ) -> AddLikesResult:
+        async_result = []
+        self._add_likes(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _add_likes_by_user_id(
+        self,
+        request: AddLikesByUserIdRequest,
+        callback: Callable[[AsyncResult[AddLikesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='addLikesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.entry_model_names is not None:
+            body["entryModelNames"] = [
+                item
+                for item in request.entry_model_names
+            ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AddLikesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def add_likes_by_user_id(
+        self,
+        request: AddLikesByUserIdRequest,
+    ) -> AddLikesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._add_likes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def add_likes_by_user_id_async(
+        self,
+        request: AddLikesByUserIdRequest,
+    ) -> AddLikesByUserIdResult:
+        async_result = []
+        self._add_likes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_like(
+        self,
+        request: GetLikeRequest,
+        callback: Callable[[AsyncResult[GetLikeResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='getLike',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.entry_model_name is not None:
+            body["entryModelName"] = request.entry_model_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetLikeResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_like(
+        self,
+        request: GetLikeRequest,
+    ) -> GetLikeResult:
+        async_result = []
+        with timeout(30):
+            self._get_like(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_like_async(
+        self,
+        request: GetLikeRequest,
+    ) -> GetLikeResult:
+        async_result = []
+        self._get_like(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_like_by_user_id(
+        self,
+        request: GetLikeByUserIdRequest,
+        callback: Callable[[AsyncResult[GetLikeByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='getLikeByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.entry_model_name is not None:
+            body["entryModelName"] = request.entry_model_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetLikeByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_like_by_user_id(
+        self,
+        request: GetLikeByUserIdRequest,
+    ) -> GetLikeByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_like_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_like_by_user_id_async(
+        self,
+        request: GetLikeByUserIdRequest,
+    ) -> GetLikeByUserIdResult:
+        async_result = []
+        self._get_like_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _reset_likes(
+        self,
+        request: ResetLikesRequest,
+        callback: Callable[[AsyncResult[ResetLikesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='resetLikes',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ResetLikesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_likes(
+        self,
+        request: ResetLikesRequest,
+    ) -> ResetLikesResult:
+        async_result = []
+        with timeout(30):
+            self._reset_likes(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_likes_async(
+        self,
+        request: ResetLikesRequest,
+    ) -> ResetLikesResult:
+        async_result = []
+        self._reset_likes(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _reset_likes_by_user_id(
+        self,
+        request: ResetLikesByUserIdRequest,
+        callback: Callable[[AsyncResult[ResetLikesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='resetLikesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ResetLikesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_likes_by_user_id(
+        self,
+        request: ResetLikesByUserIdRequest,
+    ) -> ResetLikesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._reset_likes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_likes_by_user_id_async(
+        self,
+        request: ResetLikesByUserIdRequest,
+    ) -> ResetLikesByUserIdResult:
+        async_result = []
+        self._reset_likes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_likes(
+        self,
+        request: DeleteLikesRequest,
+        callback: Callable[[AsyncResult[DeleteLikesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='deleteLikes',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.entry_model_names is not None:
+            body["entryModelNames"] = [
+                item
+                for item in request.entry_model_names
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteLikesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_likes(
+        self,
+        request: DeleteLikesRequest,
+    ) -> DeleteLikesResult:
+        async_result = []
+        with timeout(30):
+            self._delete_likes(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_likes_async(
+        self,
+        request: DeleteLikesRequest,
+    ) -> DeleteLikesResult:
+        async_result = []
+        self._delete_likes(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_likes_by_user_id(
+        self,
+        request: DeleteLikesByUserIdRequest,
+        callback: Callable[[AsyncResult[DeleteLikesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="dictionary",
+            component='like',
+            function='deleteLikesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.entry_model_names is not None:
+            body["entryModelNames"] = [
+                item
+                for item in request.entry_model_names
+            ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteLikesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_likes_by_user_id(
+        self,
+        request: DeleteLikesByUserIdRequest,
+    ) -> DeleteLikesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._delete_likes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_likes_by_user_id_async(
+        self,
+        request: DeleteLikesByUserIdRequest,
+    ) -> DeleteLikesByUserIdResult:
+        async_result = []
+        self._delete_likes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _export_master(
         self,
         request: ExportMasterRequest,

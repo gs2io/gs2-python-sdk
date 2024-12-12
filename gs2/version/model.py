@@ -527,6 +527,7 @@ class AcceptVersion(core.Gs2Model):
     version_name: str = None
     user_id: str = None
     version: Version = None
+    status: str = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -545,6 +546,10 @@ class AcceptVersion(core.Gs2Model):
 
     def with_version(self, version: Version) -> AcceptVersion:
         self.version = version
+        return self
+
+    def with_status(self, status: str) -> AcceptVersion:
+        self.status = status
         return self
 
     def with_created_at(self, created_at: int) -> AcceptVersion:
@@ -649,6 +654,7 @@ class AcceptVersion(core.Gs2Model):
             .with_version_name(data.get('versionName'))\
             .with_user_id(data.get('userId'))\
             .with_version(Version.from_dict(data.get('version')))\
+            .with_status(data.get('status'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -659,6 +665,7 @@ class AcceptVersion(core.Gs2Model):
             "versionName": self.version_name,
             "userId": self.user_id,
             "version": self.version.to_dict() if self.version else None,
+            "status": self.status,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -677,6 +684,7 @@ class VersionModel(core.Gs2Model):
     schedule_versions: List[ScheduleVersion] = None
     need_signature: bool = None
     signature_key_id: str = None
+    approve_requirement: str = None
 
     def with_version_model_id(self, version_model_id: str) -> VersionModel:
         self.version_model_id = version_model_id
@@ -720,6 +728,10 @@ class VersionModel(core.Gs2Model):
 
     def with_signature_key_id(self, signature_key_id: str) -> VersionModel:
         self.signature_key_id = signature_key_id
+        return self
+
+    def with_approve_requirement(self, approve_requirement: str) -> VersionModel:
+        self.approve_requirement = approve_requirement
         return self
 
     @classmethod
@@ -809,7 +821,8 @@ class VersionModel(core.Gs2Model):
                 for i in range(len(data.get('scheduleVersions')))
             ])\
             .with_need_signature(data.get('needSignature'))\
-            .with_signature_key_id(data.get('signatureKeyId'))
+            .with_signature_key_id(data.get('signatureKeyId'))\
+            .with_approve_requirement(data.get('approveRequirement'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -827,6 +840,7 @@ class VersionModel(core.Gs2Model):
             ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
+            "approveRequirement": self.approve_requirement,
         }
 
 
@@ -843,6 +857,7 @@ class VersionModelMaster(core.Gs2Model):
     schedule_versions: List[ScheduleVersion] = None
     need_signature: bool = None
     signature_key_id: str = None
+    approve_requirement: str = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -893,6 +908,10 @@ class VersionModelMaster(core.Gs2Model):
 
     def with_signature_key_id(self, signature_key_id: str) -> VersionModelMaster:
         self.signature_key_id = signature_key_id
+        return self
+
+    def with_approve_requirement(self, approve_requirement: str) -> VersionModelMaster:
+        self.approve_requirement = approve_requirement
         return self
 
     def with_created_at(self, created_at: int) -> VersionModelMaster:
@@ -996,6 +1015,7 @@ class VersionModelMaster(core.Gs2Model):
             ])\
             .with_need_signature(data.get('needSignature'))\
             .with_signature_key_id(data.get('signatureKeyId'))\
+            .with_approve_requirement(data.get('approveRequirement'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -1017,6 +1037,7 @@ class VersionModelMaster(core.Gs2Model):
             ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
+            "approveRequirement": self.approve_requirement,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,

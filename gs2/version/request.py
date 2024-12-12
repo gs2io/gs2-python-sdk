@@ -690,6 +690,7 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
     schedule_versions: List[ScheduleVersion] = None
     need_signature: bool = None
     signature_key_id: str = None
+    approve_requirement: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateVersionModelMasterRequest:
         self.namespace_name = namespace_name
@@ -739,6 +740,10 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
         self.signature_key_id = signature_key_id
         return self
 
+    def with_approve_requirement(self, approve_requirement: str) -> CreateVersionModelMasterRequest:
+        self.approve_requirement = approve_requirement
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -772,7 +777,8 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
                 for i in range(len(data.get('scheduleVersions')))
             ])\
             .with_need_signature(data.get('needSignature'))\
-            .with_signature_key_id(data.get('signatureKeyId'))
+            .with_signature_key_id(data.get('signatureKeyId'))\
+            .with_approve_requirement(data.get('approveRequirement'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -791,6 +797,7 @@ class CreateVersionModelMasterRequest(core.Gs2Request):
             ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
+            "approveRequirement": self.approve_requirement,
         }
 
 
@@ -852,6 +859,7 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
     schedule_versions: List[ScheduleVersion] = None
     need_signature: bool = None
     signature_key_id: str = None
+    approve_requirement: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateVersionModelMasterRequest:
         self.namespace_name = namespace_name
@@ -901,6 +909,10 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
         self.signature_key_id = signature_key_id
         return self
 
+    def with_approve_requirement(self, approve_requirement: str) -> UpdateVersionModelMasterRequest:
+        self.approve_requirement = approve_requirement
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -934,7 +946,8 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
                 for i in range(len(data.get('scheduleVersions')))
             ])\
             .with_need_signature(data.get('needSignature'))\
-            .with_signature_key_id(data.get('signatureKeyId'))
+            .with_signature_key_id(data.get('signatureKeyId'))\
+            .with_approve_requirement(data.get('approveRequirement'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -953,6 +966,7 @@ class UpdateVersionModelMasterRequest(core.Gs2Request):
             ],
             "needSignature": self.need_signature,
             "signatureKeyId": self.signature_key_id,
+            "approveRequirement": self.approve_requirement,
         }
 
 
@@ -1314,6 +1328,137 @@ class AcceptByUserIdRequest(core.Gs2Request):
         if data is None:
             return None
         return AcceptByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_version_name(data.get('versionName'))\
+            .with_user_id(data.get('userId'))\
+            .with_version(Version.from_dict(data.get('version')))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "versionName": self.version_name,
+            "userId": self.user_id,
+            "version": self.version.to_dict() if self.version else None,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class RejectRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    version_name: str = None
+    access_token: str = None
+    version: Version = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RejectRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_version_name(self, version_name: str) -> RejectRequest:
+        self.version_name = version_name
+        return self
+
+    def with_access_token(self, access_token: str) -> RejectRequest:
+        self.access_token = access_token
+        return self
+
+    def with_version(self, version: Version) -> RejectRequest:
+        self.version = version
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RejectRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RejectRequest]:
+        if data is None:
+            return None
+        return RejectRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_version_name(data.get('versionName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_version(Version.from_dict(data.get('version')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "versionName": self.version_name,
+            "accessToken": self.access_token,
+            "version": self.version.to_dict() if self.version else None,
+        }
+
+
+class RejectByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    version_name: str = None
+    user_id: str = None
+    version: Version = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RejectByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_version_name(self, version_name: str) -> RejectByUserIdRequest:
+        self.version_name = version_name
+        return self
+
+    def with_user_id(self, user_id: str) -> RejectByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_version(self, version: Version) -> RejectByUserIdRequest:
+        self.version = version
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> RejectByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RejectByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RejectByUserIdRequest]:
+        if data is None:
+            return None
+        return RejectByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_version_name(data.get('versionName'))\
             .with_user_id(data.get('userId'))\

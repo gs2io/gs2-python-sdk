@@ -309,6 +309,121 @@ class CurrentEntryMaster(core.Gs2Model):
         }
 
 
+class Like(core.Gs2Model):
+    like_id: str = None
+    user_id: str = None
+    name: str = None
+
+    def with_like_id(self, like_id: str) -> Like:
+        self.like_id = like_id
+        return self
+
+    def with_user_id(self, user_id: str) -> Like:
+        self.user_id = user_id
+        return self
+
+    def with_name(self, name: str) -> Like:
+        self.name = name
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        user_id,
+        entry_model_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:dictionary:{namespaceName}:user:{userId}:like:{entryModelName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            userId=user_id,
+            entryModelName=entry_model_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):like:(?P<entryModelName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):like:(?P<entryModelName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):like:(?P<entryModelName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_user_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):like:(?P<entryModelName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('user_id')
+
+    @classmethod
+    def get_entry_model_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):dictionary:(?P<namespaceName>.+):user:(?P<userId>.+):like:(?P<entryModelName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('entry_model_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Like]:
+        if data is None:
+            return None
+        return Like()\
+            .with_like_id(data.get('likeId'))\
+            .with_user_id(data.get('userId'))\
+            .with_name(data.get('name'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "likeId": self.like_id,
+            "userId": self.user_id,
+            "name": self.name,
+        }
+
+
 class Entry(core.Gs2Model):
     entry_id: str = None
     user_id: str = None
