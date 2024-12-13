@@ -1551,6 +1551,125 @@ class FreezeMasterDataByUserIdRequest(core.Gs2Request):
         }
 
 
+class SignFreezeMasterDataTimestampRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    timestamp: int = None
+    key_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SignFreezeMasterDataTimestampRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_timestamp(self, timestamp: int) -> SignFreezeMasterDataTimestampRequest:
+        self.timestamp = timestamp
+        return self
+
+    def with_key_id(self, key_id: str) -> SignFreezeMasterDataTimestampRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SignFreezeMasterDataTimestampRequest]:
+        if data is None:
+            return None
+        return SignFreezeMasterDataTimestampRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_timestamp(data.get('timestamp'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "timestamp": self.timestamp,
+            "keyId": self.key_id,
+        }
+
+
+class FreezeMasterDataBySignedTimestampRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    body: str = None
+    signature: str = None
+    key_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> FreezeMasterDataBySignedTimestampRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> FreezeMasterDataBySignedTimestampRequest:
+        self.access_token = access_token
+        return self
+
+    def with_body(self, body: str) -> FreezeMasterDataBySignedTimestampRequest:
+        self.body = body
+        return self
+
+    def with_signature(self, signature: str) -> FreezeMasterDataBySignedTimestampRequest:
+        self.signature = signature
+        return self
+
+    def with_key_id(self, key_id: str) -> FreezeMasterDataBySignedTimestampRequest:
+        self.key_id = key_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> FreezeMasterDataBySignedTimestampRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FreezeMasterDataBySignedTimestampRequest]:
+        if data is None:
+            return None
+        return FreezeMasterDataBySignedTimestampRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_body(data.get('body'))\
+            .with_signature(data.get('signature'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "body": self.body,
+            "signature": self.signature,
+            "keyId": self.key_id,
+        }
+
+
 class IfExpressionByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

@@ -2344,6 +2344,162 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _sign_freeze_master_data_timestamp(
+        self,
+        request: SignFreezeMasterDataTimestampRequest,
+        callback: Callable[[AsyncResult[SignFreezeMasterDataTimestampResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/masterdata/freeze/timestamp".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.timestamp is not None:
+            body["timestamp"] = request.timestamp
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=SignFreezeMasterDataTimestampResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def sign_freeze_master_data_timestamp(
+        self,
+        request: SignFreezeMasterDataTimestampRequest,
+    ) -> SignFreezeMasterDataTimestampResult:
+        async_result = []
+        with timeout(30):
+            self._sign_freeze_master_data_timestamp(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def sign_freeze_master_data_timestamp_async(
+        self,
+        request: SignFreezeMasterDataTimestampRequest,
+    ) -> SignFreezeMasterDataTimestampResult:
+        async_result = []
+        self._sign_freeze_master_data_timestamp(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _freeze_master_data_by_signed_timestamp(
+        self,
+        request: FreezeMasterDataBySignedTimestampRequest,
+        callback: Callable[[AsyncResult[FreezeMasterDataBySignedTimestampResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/masterdata/freeze/timestamp".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.body is not None:
+            body["body"] = request.body
+        if request.signature is not None:
+            body["signature"] = request.signature
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=FreezeMasterDataBySignedTimestampResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def freeze_master_data_by_signed_timestamp(
+        self,
+        request: FreezeMasterDataBySignedTimestampRequest,
+    ) -> FreezeMasterDataBySignedTimestampResult:
+        async_result = []
+        with timeout(30):
+            self._freeze_master_data_by_signed_timestamp(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def freeze_master_data_by_signed_timestamp_async(
+        self,
+        request: FreezeMasterDataBySignedTimestampRequest,
+    ) -> FreezeMasterDataBySignedTimestampResult:
+        async_result = []
+        self._freeze_master_data_by_signed_timestamp(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _if_expression_by_user_id(
         self,
         request: IfExpressionByUserIdRequest,
