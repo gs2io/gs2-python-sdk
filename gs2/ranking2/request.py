@@ -738,6 +738,7 @@ class CreateGlobalRankingModelMasterRequest(core.Gs2Request):
     sum: bool = None
     order_direction: str = None
     ranking_rewards: List[RankingReward] = None
+    reward_calculation_index: str = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
 
@@ -775,6 +776,10 @@ class CreateGlobalRankingModelMasterRequest(core.Gs2Request):
 
     def with_ranking_rewards(self, ranking_rewards: List[RankingReward]) -> CreateGlobalRankingModelMasterRequest:
         self.ranking_rewards = ranking_rewards
+        return self
+
+    def with_reward_calculation_index(self, reward_calculation_index: str) -> CreateGlobalRankingModelMasterRequest:
+        self.reward_calculation_index = reward_calculation_index
         return self
 
     def with_entry_period_event_id(self, entry_period_event_id: str) -> CreateGlobalRankingModelMasterRequest:
@@ -816,6 +821,7 @@ class CreateGlobalRankingModelMasterRequest(core.Gs2Request):
                 RankingReward.from_dict(data.get('rankingRewards')[i])
                 for i in range(len(data.get('rankingRewards')))
             ])\
+            .with_reward_calculation_index(data.get('rewardCalculationIndex'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
 
@@ -833,6 +839,7 @@ class CreateGlobalRankingModelMasterRequest(core.Gs2Request):
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards))
             ],
+            "rewardCalculationIndex": self.reward_calculation_index,
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
         }
@@ -893,6 +900,7 @@ class UpdateGlobalRankingModelMasterRequest(core.Gs2Request):
     sum: bool = None
     order_direction: str = None
     ranking_rewards: List[RankingReward] = None
+    reward_calculation_index: str = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
 
@@ -930,6 +938,10 @@ class UpdateGlobalRankingModelMasterRequest(core.Gs2Request):
 
     def with_ranking_rewards(self, ranking_rewards: List[RankingReward]) -> UpdateGlobalRankingModelMasterRequest:
         self.ranking_rewards = ranking_rewards
+        return self
+
+    def with_reward_calculation_index(self, reward_calculation_index: str) -> UpdateGlobalRankingModelMasterRequest:
+        self.reward_calculation_index = reward_calculation_index
         return self
 
     def with_entry_period_event_id(self, entry_period_event_id: str) -> UpdateGlobalRankingModelMasterRequest:
@@ -971,6 +983,7 @@ class UpdateGlobalRankingModelMasterRequest(core.Gs2Request):
                 RankingReward.from_dict(data.get('rankingRewards')[i])
                 for i in range(len(data.get('rankingRewards')))
             ])\
+            .with_reward_calculation_index(data.get('rewardCalculationIndex'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
 
@@ -988,6 +1001,7 @@ class UpdateGlobalRankingModelMasterRequest(core.Gs2Request):
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards))
             ],
+            "rewardCalculationIndex": self.reward_calculation_index,
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
         }
@@ -2805,6 +2819,7 @@ class CreateClusterRankingModelMasterRequest(core.Gs2Request):
     score_ttl_days: int = None
     order_direction: str = None
     ranking_rewards: List[RankingReward] = None
+    reward_calculation_index: str = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
 
@@ -2852,6 +2867,10 @@ class CreateClusterRankingModelMasterRequest(core.Gs2Request):
         self.ranking_rewards = ranking_rewards
         return self
 
+    def with_reward_calculation_index(self, reward_calculation_index: str) -> CreateClusterRankingModelMasterRequest:
+        self.reward_calculation_index = reward_calculation_index
+        return self
+
     def with_entry_period_event_id(self, entry_period_event_id: str) -> CreateClusterRankingModelMasterRequest:
         self.entry_period_event_id = entry_period_event_id
         return self
@@ -2893,6 +2912,7 @@ class CreateClusterRankingModelMasterRequest(core.Gs2Request):
                 RankingReward.from_dict(data.get('rankingRewards')[i])
                 for i in range(len(data.get('rankingRewards')))
             ])\
+            .with_reward_calculation_index(data.get('rewardCalculationIndex'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
 
@@ -2912,6 +2932,7 @@ class CreateClusterRankingModelMasterRequest(core.Gs2Request):
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards))
             ],
+            "rewardCalculationIndex": self.reward_calculation_index,
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
         }
@@ -2974,6 +2995,7 @@ class UpdateClusterRankingModelMasterRequest(core.Gs2Request):
     score_ttl_days: int = None
     order_direction: str = None
     ranking_rewards: List[RankingReward] = None
+    reward_calculation_index: str = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
 
@@ -3021,6 +3043,10 @@ class UpdateClusterRankingModelMasterRequest(core.Gs2Request):
         self.ranking_rewards = ranking_rewards
         return self
 
+    def with_reward_calculation_index(self, reward_calculation_index: str) -> UpdateClusterRankingModelMasterRequest:
+        self.reward_calculation_index = reward_calculation_index
+        return self
+
     def with_entry_period_event_id(self, entry_period_event_id: str) -> UpdateClusterRankingModelMasterRequest:
         self.entry_period_event_id = entry_period_event_id
         return self
@@ -3062,6 +3088,7 @@ class UpdateClusterRankingModelMasterRequest(core.Gs2Request):
                 RankingReward.from_dict(data.get('rankingRewards')[i])
                 for i in range(len(data.get('rankingRewards')))
             ])\
+            .with_reward_calculation_index(data.get('rewardCalculationIndex'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))
 
@@ -3081,6 +3108,7 @@ class UpdateClusterRankingModelMasterRequest(core.Gs2Request):
                 self.ranking_rewards[i].to_dict() if self.ranking_rewards[i] else None
                 for i in range(len(self.ranking_rewards))
             ],
+            "rewardCalculationIndex": self.reward_calculation_index,
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
         }

@@ -2513,6 +2513,80 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _batch_execute_api(
+        self,
+        request: BatchExecuteApiRequest,
+        callback: Callable[[AsyncResult[BatchExecuteApiResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='distribute',
+            function='batchExecuteApi',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.request_payloads is not None:
+            body["requestPayloads"] = [
+                item.to_dict()
+                for item in request.request_payloads
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=BatchExecuteApiResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def batch_execute_api(
+        self,
+        request: BatchExecuteApiRequest,
+    ) -> BatchExecuteApiResult:
+        async_result = []
+        with timeout(30):
+            self._batch_execute_api(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def batch_execute_api_async(
+        self,
+        request: BatchExecuteApiRequest,
+    ) -> BatchExecuteApiResult:
+        async_result = []
+        self._batch_execute_api(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _if_expression_by_user_id(
         self,
         request: IfExpressionByUserIdRequest,

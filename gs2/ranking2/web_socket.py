@@ -1234,6 +1234,8 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.ranking_rewards
             ]
+        if request.reward_calculation_index is not None:
+            body["rewardCalculationIndex"] = request.reward_calculation_index
         if request.entry_period_event_id is not None:
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
@@ -1401,6 +1403,8 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.ranking_rewards
             ]
+        if request.reward_calculation_index is not None:
+            body["rewardCalculationIndex"] = request.reward_calculation_index
         if request.entry_period_event_id is not None:
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
@@ -3741,6 +3745,8 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.ranking_rewards
             ]
+        if request.reward_calculation_index is not None:
+            body["rewardCalculationIndex"] = request.reward_calculation_index
         if request.entry_period_event_id is not None:
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:
@@ -3912,6 +3918,8 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.ranking_rewards
             ]
+        if request.reward_calculation_index is not None:
+            body["rewardCalculationIndex"] = request.reward_calculation_index
         if request.entry_period_event_id is not None:
             body["entryPeriodEventId"] = request.entry_period_event_id
         if request.access_period_event_id is not None:

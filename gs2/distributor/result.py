@@ -1388,6 +1388,46 @@ class FreezeMasterDataBySignedTimestampResult(core.Gs2Result):
         }
 
 
+class BatchExecuteApiResult(core.Gs2Result):
+    results: List[BatchResultPayload] = None
+
+    def with_results(self, results: List[BatchResultPayload]) -> BatchExecuteApiResult:
+        self.results = results
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchExecuteApiResult]:
+        if data is None:
+            return None
+        return BatchExecuteApiResult()\
+            .with_results(None if data.get('results') is None else [
+                BatchResultPayload.from_dict(data.get('results')[i])
+                for i in range(len(data.get('results')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "results": None if self.results is None else [
+                self.results[i].to_dict() if self.results[i] else None
+                for i in range(len(self.results))
+            ],
+        }
+
+
 class IfExpressionByUserIdResult(core.Gs2Result):
 
     def get(self, key, default=None):

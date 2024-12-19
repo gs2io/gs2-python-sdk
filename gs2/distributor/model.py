@@ -715,6 +715,109 @@ class AcquireAction(core.Gs2Model):
         }
 
 
+class BatchResultPayload(core.Gs2Model):
+    request_id: str = None
+    status_code: int = None
+    result_payload: str = None
+
+    def with_request_id(self, request_id: str) -> BatchResultPayload:
+        self.request_id = request_id
+        return self
+
+    def with_status_code(self, status_code: int) -> BatchResultPayload:
+        self.status_code = status_code
+        return self
+
+    def with_result_payload(self, result_payload: str) -> BatchResultPayload:
+        self.result_payload = result_payload
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchResultPayload]:
+        if data is None:
+            return None
+        return BatchResultPayload()\
+            .with_request_id(data.get('requestId'))\
+            .with_status_code(data.get('statusCode'))\
+            .with_result_payload(data.get('resultPayload'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "requestId": self.request_id,
+            "statusCode": self.status_code,
+            "resultPayload": self.result_payload,
+        }
+
+
+class BatchRequestPayload(core.Gs2Model):
+    request_id: str = None
+    service: str = None
+    method_name: str = None
+    parameter: str = None
+
+    def with_request_id(self, request_id: str) -> BatchRequestPayload:
+        self.request_id = request_id
+        return self
+
+    def with_service(self, service: str) -> BatchRequestPayload:
+        self.service = service
+        return self
+
+    def with_method_name(self, method_name: str) -> BatchRequestPayload:
+        self.method_name = method_name
+        return self
+
+    def with_parameter(self, parameter: str) -> BatchRequestPayload:
+        self.parameter = parameter
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchRequestPayload]:
+        if data is None:
+            return None
+        return BatchRequestPayload()\
+            .with_request_id(data.get('requestId'))\
+            .with_service(data.get('service'))\
+            .with_method_name(data.get('methodName'))\
+            .with_parameter(data.get('parameter'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "requestId": self.request_id,
+            "service": self.service,
+            "methodName": self.method_name,
+            "parameter": self.parameter,
+        }
+
+
 class StampSheetResult(core.Gs2Model):
     stamp_sheet_result_id: str = None
     user_id: str = None

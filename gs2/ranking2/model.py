@@ -483,6 +483,7 @@ class SubscribeRankingData(core.Gs2Model):
     scorer_user_id: str = None
     score: int = None
     metadata: str = None
+    invert_created_at: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -521,6 +522,10 @@ class SubscribeRankingData(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> SubscribeRankingData:
         self.metadata = metadata
+        return self
+
+    def with_invert_created_at(self, invert_created_at: int) -> SubscribeRankingData:
+        self.invert_created_at = invert_created_at
         return self
 
     def with_created_at(self, created_at: int) -> SubscribeRankingData:
@@ -654,6 +659,7 @@ class SubscribeRankingData(core.Gs2Model):
             .with_scorer_user_id(data.get('scorerUserId'))\
             .with_score(data.get('score'))\
             .with_metadata(data.get('metadata'))\
+            .with_invert_created_at(data.get('invertCreatedAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -669,6 +675,7 @@ class SubscribeRankingData(core.Gs2Model):
             "scorerUserId": self.scorer_user_id,
             "score": self.score,
             "metadata": self.metadata,
+            "invertCreatedAt": self.invert_created_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -1341,6 +1348,7 @@ class ClusterRankingData(core.Gs2Model):
     rank: int = None
     score: int = None
     metadata: str = None
+    invert_created_at: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -1379,6 +1387,10 @@ class ClusterRankingData(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> ClusterRankingData:
         self.metadata = metadata
+        return self
+
+    def with_invert_created_at(self, invert_created_at: int) -> ClusterRankingData:
+        self.invert_created_at = invert_created_at
         return self
 
     def with_created_at(self, created_at: int) -> ClusterRankingData:
@@ -1512,6 +1524,7 @@ class ClusterRankingData(core.Gs2Model):
             .with_rank(data.get('rank'))\
             .with_score(data.get('score'))\
             .with_metadata(data.get('metadata'))\
+            .with_invert_created_at(data.get('invertCreatedAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -1527,6 +1540,7 @@ class ClusterRankingData(core.Gs2Model):
             "rank": self.rank,
             "score": self.score,
             "metadata": self.metadata,
+            "invertCreatedAt": self.invert_created_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -1902,6 +1916,7 @@ class ClusterRankingModelMaster(core.Gs2Model):
     entry_period_event_id: str = None
     ranking_rewards: List[RankingReward] = None
     access_period_event_id: str = None
+    reward_calculation_index: str = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -1956,6 +1971,10 @@ class ClusterRankingModelMaster(core.Gs2Model):
 
     def with_access_period_event_id(self, access_period_event_id: str) -> ClusterRankingModelMaster:
         self.access_period_event_id = access_period_event_id
+        return self
+
+    def with_reward_calculation_index(self, reward_calculation_index: str) -> ClusterRankingModelMaster:
+        self.reward_calculation_index = reward_calculation_index
         return self
 
     def with_created_at(self, created_at: int) -> ClusterRankingModelMaster:
@@ -2060,6 +2079,7 @@ class ClusterRankingModelMaster(core.Gs2Model):
                 for i in range(len(data.get('rankingRewards')))
             ])\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
+            .with_reward_calculation_index(data.get('rewardCalculationIndex'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -2082,6 +2102,7 @@ class ClusterRankingModelMaster(core.Gs2Model):
                 for i in range(len(self.ranking_rewards))
             ],
             "accessPeriodEventId": self.access_period_event_id,
+            "rewardCalculationIndex": self.reward_calculation_index,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -2100,6 +2121,7 @@ class ClusterRankingModel(core.Gs2Model):
     entry_period_event_id: str = None
     ranking_rewards: List[RankingReward] = None
     access_period_event_id: str = None
+    reward_calculation_index: str = None
 
     def with_cluster_ranking_model_id(self, cluster_ranking_model_id: str) -> ClusterRankingModel:
         self.cluster_ranking_model_id = cluster_ranking_model_id
@@ -2143,6 +2165,10 @@ class ClusterRankingModel(core.Gs2Model):
 
     def with_access_period_event_id(self, access_period_event_id: str) -> ClusterRankingModel:
         self.access_period_event_id = access_period_event_id
+        return self
+
+    def with_reward_calculation_index(self, reward_calculation_index: str) -> ClusterRankingModel:
+        self.reward_calculation_index = reward_calculation_index
         return self
 
     @classmethod
@@ -2232,7 +2258,8 @@ class ClusterRankingModel(core.Gs2Model):
                 RankingReward.from_dict(data.get('rankingRewards')[i])
                 for i in range(len(data.get('rankingRewards')))
             ])\
-            .with_access_period_event_id(data.get('accessPeriodEventId'))
+            .with_access_period_event_id(data.get('accessPeriodEventId'))\
+            .with_reward_calculation_index(data.get('rewardCalculationIndex'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2250,6 +2277,7 @@ class ClusterRankingModel(core.Gs2Model):
                 for i in range(len(self.ranking_rewards))
             ],
             "accessPeriodEventId": self.access_period_event_id,
+            "rewardCalculationIndex": self.reward_calculation_index,
         }
 
 
@@ -2262,6 +2290,7 @@ class GlobalRankingData(core.Gs2Model):
     rank: int = None
     score: int = None
     metadata: str = None
+    invert_created_at: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -2296,6 +2325,10 @@ class GlobalRankingData(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> GlobalRankingData:
         self.metadata = metadata
+        return self
+
+    def with_invert_created_at(self, invert_created_at: int) -> GlobalRankingData:
+        self.invert_created_at = invert_created_at
         return self
 
     def with_created_at(self, created_at: int) -> GlobalRankingData:
@@ -2416,6 +2449,7 @@ class GlobalRankingData(core.Gs2Model):
             .with_rank(data.get('rank'))\
             .with_score(data.get('score'))\
             .with_metadata(data.get('metadata'))\
+            .with_invert_created_at(data.get('invertCreatedAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -2430,6 +2464,7 @@ class GlobalRankingData(core.Gs2Model):
             "rank": self.rank,
             "score": self.score,
             "metadata": self.metadata,
+            "invertCreatedAt": self.invert_created_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -2765,6 +2800,7 @@ class GlobalRankingModelMaster(core.Gs2Model):
     entry_period_event_id: str = None
     ranking_rewards: List[RankingReward] = None
     access_period_event_id: str = None
+    reward_calculation_index: str = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -2811,6 +2847,10 @@ class GlobalRankingModelMaster(core.Gs2Model):
 
     def with_access_period_event_id(self, access_period_event_id: str) -> GlobalRankingModelMaster:
         self.access_period_event_id = access_period_event_id
+        return self
+
+    def with_reward_calculation_index(self, reward_calculation_index: str) -> GlobalRankingModelMaster:
+        self.reward_calculation_index = reward_calculation_index
         return self
 
     def with_created_at(self, created_at: int) -> GlobalRankingModelMaster:
@@ -2913,6 +2953,7 @@ class GlobalRankingModelMaster(core.Gs2Model):
                 for i in range(len(data.get('rankingRewards')))
             ])\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
+            .with_reward_calculation_index(data.get('rewardCalculationIndex'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -2933,6 +2974,7 @@ class GlobalRankingModelMaster(core.Gs2Model):
                 for i in range(len(self.ranking_rewards))
             ],
             "accessPeriodEventId": self.access_period_event_id,
+            "rewardCalculationIndex": self.reward_calculation_index,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -2950,6 +2992,7 @@ class GlobalRankingModel(core.Gs2Model):
     entry_period_event_id: str = None
     ranking_rewards: List[RankingReward] = None
     access_period_event_id: str = None
+    reward_calculation_index: str = None
 
     def with_global_ranking_model_id(self, global_ranking_model_id: str) -> GlobalRankingModel:
         self.global_ranking_model_id = global_ranking_model_id
@@ -2989,6 +3032,10 @@ class GlobalRankingModel(core.Gs2Model):
 
     def with_access_period_event_id(self, access_period_event_id: str) -> GlobalRankingModel:
         self.access_period_event_id = access_period_event_id
+        return self
+
+    def with_reward_calculation_index(self, reward_calculation_index: str) -> GlobalRankingModel:
+        self.reward_calculation_index = reward_calculation_index
         return self
 
     @classmethod
@@ -3077,7 +3124,8 @@ class GlobalRankingModel(core.Gs2Model):
                 RankingReward.from_dict(data.get('rankingRewards')[i])
                 for i in range(len(data.get('rankingRewards')))
             ])\
-            .with_access_period_event_id(data.get('accessPeriodEventId'))
+            .with_access_period_event_id(data.get('accessPeriodEventId'))\
+            .with_reward_calculation_index(data.get('rewardCalculationIndex'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3094,6 +3142,7 @@ class GlobalRankingModel(core.Gs2Model):
                 for i in range(len(self.ranking_rewards))
             ],
             "accessPeriodEventId": self.access_period_event_id,
+            "rewardCalculationIndex": self.reward_calculation_index,
         }
 
 

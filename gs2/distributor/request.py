@@ -1670,6 +1670,48 @@ class FreezeMasterDataBySignedTimestampRequest(core.Gs2Request):
         }
 
 
+class BatchExecuteApiRequest(core.Gs2Request):
+
+    context_stack: str = None
+    request_payloads: List[BatchRequestPayload] = None
+
+    def with_request_payloads(self, request_payloads: List[BatchRequestPayload]) -> BatchExecuteApiRequest:
+        self.request_payloads = request_payloads
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchExecuteApiRequest]:
+        if data is None:
+            return None
+        return BatchExecuteApiRequest()\
+            .with_request_payloads(None if data.get('requestPayloads') is None else [
+                BatchRequestPayload.from_dict(data.get('requestPayloads')[i])
+                for i in range(len(data.get('requestPayloads')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "requestPayloads": None if self.request_payloads is None else [
+                self.request_payloads[i].to_dict() if self.request_payloads[i] else None
+                for i in range(len(self.request_payloads))
+            ],
+        }
+
+
 class IfExpressionByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
