@@ -2976,6 +2976,81 @@ class GetFormWithSignatureByUserIdRequest(core.Gs2Request):
         }
 
 
+class SetFormRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    mold_model_name: str = None
+    index: int = None
+    slots: List[Slot] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetFormRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> SetFormRequest:
+        self.access_token = access_token
+        return self
+
+    def with_mold_model_name(self, mold_model_name: str) -> SetFormRequest:
+        self.mold_model_name = mold_model_name
+        return self
+
+    def with_index(self, index: int) -> SetFormRequest:
+        self.index = index
+        return self
+
+    def with_slots(self, slots: List[Slot]) -> SetFormRequest:
+        self.slots = slots
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetFormRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetFormRequest]:
+        if data is None:
+            return None
+        return SetFormRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_mold_model_name(data.get('moldModelName'))\
+            .with_index(data.get('index'))\
+            .with_slots(None if data.get('slots') is None else [
+                Slot.from_dict(data.get('slots')[i])
+                for i in range(len(data.get('slots')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "moldModelName": self.mold_model_name,
+            "index": self.index,
+            "slots": None if self.slots is None else [
+                self.slots[i].to_dict() if self.slots[i] else None
+                for i in range(len(self.slots))
+            ],
+        }
+
+
 class SetFormByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

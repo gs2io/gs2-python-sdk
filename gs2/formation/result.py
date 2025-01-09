@@ -2213,6 +2213,61 @@ class GetFormWithSignatureByUserIdResult(core.Gs2Result):
         }
 
 
+class SetFormResult(core.Gs2Result):
+    item: Form = None
+    mold: Mold = None
+    mold_model: MoldModel = None
+    form_model: FormModel = None
+
+    def with_item(self, item: Form) -> SetFormResult:
+        self.item = item
+        return self
+
+    def with_mold(self, mold: Mold) -> SetFormResult:
+        self.mold = mold
+        return self
+
+    def with_mold_model(self, mold_model: MoldModel) -> SetFormResult:
+        self.mold_model = mold_model
+        return self
+
+    def with_form_model(self, form_model: FormModel) -> SetFormResult:
+        self.form_model = form_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetFormResult]:
+        if data is None:
+            return None
+        return SetFormResult()\
+            .with_item(Form.from_dict(data.get('item')))\
+            .with_mold(Mold.from_dict(data.get('mold')))\
+            .with_mold_model(MoldModel.from_dict(data.get('moldModel')))\
+            .with_form_model(FormModel.from_dict(data.get('formModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "mold": self.mold.to_dict() if self.mold else None,
+            "moldModel": self.mold_model.to_dict() if self.mold_model else None,
+            "formModel": self.form_model.to_dict() if self.form_model else None,
+        }
+
+
 class SetFormByUserIdResult(core.Gs2Result):
     item: Form = None
     mold: Mold = None
