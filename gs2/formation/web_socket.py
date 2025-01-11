@@ -5428,6 +5428,92 @@ class Gs2FormationWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _set_property_form(
+        self,
+        request: SetPropertyFormRequest,
+        callback: Callable[[AsyncResult[SetPropertyFormResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="formation",
+            component='propertyForm',
+            function='setPropertyForm',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.property_form_model_name is not None:
+            body["propertyFormModelName"] = request.property_form_model_name
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.slots is not None:
+            body["slots"] = [
+                item.to_dict()
+                for item in request.slots
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=SetPropertyFormResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def set_property_form(
+        self,
+        request: SetPropertyFormRequest,
+    ) -> SetPropertyFormResult:
+        async_result = []
+        with timeout(30):
+            self._set_property_form(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def set_property_form_async(
+        self,
+        request: SetPropertyFormRequest,
+    ) -> SetPropertyFormResult:
+        async_result = []
+        self._set_property_form(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _set_property_form_by_user_id(
         self,
         request: SetPropertyFormByUserIdRequest,

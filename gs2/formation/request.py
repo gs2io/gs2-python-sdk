@@ -3912,6 +3912,81 @@ class GetPropertyFormWithSignatureByUserIdRequest(core.Gs2Request):
         }
 
 
+class SetPropertyFormRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    property_form_model_name: str = None
+    property_id: str = None
+    slots: List[Slot] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> SetPropertyFormRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> SetPropertyFormRequest:
+        self.access_token = access_token
+        return self
+
+    def with_property_form_model_name(self, property_form_model_name: str) -> SetPropertyFormRequest:
+        self.property_form_model_name = property_form_model_name
+        return self
+
+    def with_property_id(self, property_id: str) -> SetPropertyFormRequest:
+        self.property_id = property_id
+        return self
+
+    def with_slots(self, slots: List[Slot]) -> SetPropertyFormRequest:
+        self.slots = slots
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> SetPropertyFormRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetPropertyFormRequest]:
+        if data is None:
+            return None
+        return SetPropertyFormRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_property_form_model_name(data.get('propertyFormModelName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_slots(None if data.get('slots') is None else [
+                Slot.from_dict(data.get('slots')[i])
+                for i in range(len(data.get('slots')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "propertyFormModelName": self.property_form_model_name,
+            "propertyId": self.property_id,
+            "slots": None if self.slots is None else [
+                self.slots[i].to_dict() if self.slots[i] else None
+                for i in range(len(self.slots))
+            ],
+        }
+
+
 class SetPropertyFormByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

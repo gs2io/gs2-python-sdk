@@ -3009,6 +3009,47 @@ class GetPropertyFormWithSignatureByUserIdResult(core.Gs2Result):
         }
 
 
+class SetPropertyFormResult(core.Gs2Result):
+    item: PropertyForm = None
+    property_form_model: PropertyFormModel = None
+
+    def with_item(self, item: PropertyForm) -> SetPropertyFormResult:
+        self.item = item
+        return self
+
+    def with_property_form_model(self, property_form_model: PropertyFormModel) -> SetPropertyFormResult:
+        self.property_form_model = property_form_model
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SetPropertyFormResult]:
+        if data is None:
+            return None
+        return SetPropertyFormResult()\
+            .with_item(PropertyForm.from_dict(data.get('item')))\
+            .with_property_form_model(PropertyFormModel.from_dict(data.get('propertyFormModel')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "propertyFormModel": self.property_form_model.to_dict() if self.property_form_model else None,
+        }
+
+
 class SetPropertyFormByUserIdResult(core.Gs2Result):
     item: PropertyForm = None
     property_form_model: PropertyFormModel = None
