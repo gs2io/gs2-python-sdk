@@ -419,6 +419,7 @@ class IgnoreUser(core.Gs2Model):
 class SendMemberRequest(core.Gs2Model):
     user_id: str = None
     target_guild_name: str = None
+    metadata: str = None
 
     def with_user_id(self, user_id: str) -> SendMemberRequest:
         self.user_id = user_id
@@ -426,6 +427,10 @@ class SendMemberRequest(core.Gs2Model):
 
     def with_target_guild_name(self, target_guild_name: str) -> SendMemberRequest:
         self.target_guild_name = target_guild_name
+        return self
+
+    def with_metadata(self, metadata: str) -> SendMemberRequest:
+        self.metadata = metadata
         return self
 
     @classmethod
@@ -455,18 +460,21 @@ class SendMemberRequest(core.Gs2Model):
             return None
         return SendMemberRequest()\
             .with_user_id(data.get('userId'))\
-            .with_target_guild_name(data.get('targetGuildName'))
+            .with_target_guild_name(data.get('targetGuildName'))\
+            .with_metadata(data.get('metadata'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "targetGuildName": self.target_guild_name,
+            "metadata": self.metadata,
         }
 
 
 class ReceiveMemberRequest(core.Gs2Model):
     user_id: str = None
     target_guild_name: str = None
+    metadata: str = None
 
     def with_user_id(self, user_id: str) -> ReceiveMemberRequest:
         self.user_id = user_id
@@ -474,6 +482,10 @@ class ReceiveMemberRequest(core.Gs2Model):
 
     def with_target_guild_name(self, target_guild_name: str) -> ReceiveMemberRequest:
         self.target_guild_name = target_guild_name
+        return self
+
+    def with_metadata(self, metadata: str) -> ReceiveMemberRequest:
+        self.metadata = metadata
         return self
 
     @classmethod
@@ -503,18 +515,21 @@ class ReceiveMemberRequest(core.Gs2Model):
             return None
         return ReceiveMemberRequest()\
             .with_user_id(data.get('userId'))\
-            .with_target_guild_name(data.get('targetGuildName'))
+            .with_target_guild_name(data.get('targetGuildName'))\
+            .with_metadata(data.get('metadata'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "targetGuildName": self.target_guild_name,
+            "metadata": self.metadata,
         }
 
 
 class Member(core.Gs2Model):
     user_id: str = None
     role_name: str = None
+    metadata: str = None
     joined_at: int = None
 
     def with_user_id(self, user_id: str) -> Member:
@@ -523,6 +538,10 @@ class Member(core.Gs2Model):
 
     def with_role_name(self, role_name: str) -> Member:
         self.role_name = role_name
+        return self
+
+    def with_metadata(self, metadata: str) -> Member:
+        self.metadata = metadata
         return self
 
     def with_joined_at(self, joined_at: int) -> Member:
@@ -550,12 +569,14 @@ class Member(core.Gs2Model):
         return Member()\
             .with_user_id(data.get('userId'))\
             .with_role_name(data.get('roleName'))\
+            .with_metadata(data.get('metadata'))\
             .with_joined_at(data.get('joinedAt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "roleName": self.role_name,
+            "metadata": self.metadata,
             "joinedAt": self.joined_at,
         }
 
@@ -951,6 +972,7 @@ class Guild(core.Gs2Model):
     attribute3: int = None
     attribute4: int = None
     attribute5: int = None
+    metadata: str = None
     join_policy: str = None
     custom_roles: List[RoleModel] = None
     guild_member_default_role: str = None
@@ -994,6 +1016,10 @@ class Guild(core.Gs2Model):
 
     def with_attribute5(self, attribute5: int) -> Guild:
         self.attribute5 = attribute5
+        return self
+
+    def with_metadata(self, metadata: str) -> Guild:
+        self.metadata = metadata
         return self
 
     def with_join_policy(self, join_policy: str) -> Guild:
@@ -1123,6 +1149,7 @@ class Guild(core.Gs2Model):
             .with_attribute3(data.get('attribute3'))\
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
+            .with_metadata(data.get('metadata'))\
             .with_join_policy(data.get('joinPolicy'))\
             .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
@@ -1149,6 +1176,7 @@ class Guild(core.Gs2Model):
             "attribute3": self.attribute3,
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
+            "metadata": self.metadata,
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
@@ -1319,6 +1347,7 @@ class Inbox(core.Gs2Model):
     inbox_id: str = None
     guild_name: str = None
     from_user_ids: List[str] = None
+    receive_member_requests: List[ReceiveMemberRequest] = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -1333,6 +1362,10 @@ class Inbox(core.Gs2Model):
 
     def with_from_user_ids(self, from_user_ids: List[str]) -> Inbox:
         self.from_user_ids = from_user_ids
+        return self
+
+    def with_receive_member_requests(self, receive_member_requests: List[ReceiveMemberRequest]) -> Inbox:
+        self.receive_member_requests = receive_member_requests
         return self
 
     def with_created_at(self, created_at: int) -> Inbox:
@@ -1439,6 +1472,10 @@ class Inbox(core.Gs2Model):
                 data.get('fromUserIds')[i]
                 for i in range(len(data.get('fromUserIds')))
             ])\
+            .with_receive_member_requests(None if data.get('receiveMemberRequests') is None else [
+                ReceiveMemberRequest.from_dict(data.get('receiveMemberRequests')[i])
+                for i in range(len(data.get('receiveMemberRequests')))
+            ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -1450,6 +1487,10 @@ class Inbox(core.Gs2Model):
             "fromUserIds": None if self.from_user_ids is None else [
                 self.from_user_ids[i]
                 for i in range(len(self.from_user_ids))
+            ],
+            "receiveMemberRequests": None if self.receive_member_requests is None else [
+                self.receive_member_requests[i].to_dict() if self.receive_member_requests[i] else None
+                for i in range(len(self.receive_member_requests))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

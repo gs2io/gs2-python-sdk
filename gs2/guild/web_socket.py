@@ -1851,6 +1851,10 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["attribute4"] = request.attribute4
         if request.attribute5 is not None:
             body["attribute5"] = request.attribute5
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.member_metadata is not None:
+            body["memberMetadata"] = request.member_metadata
         if request.join_policy is not None:
             body["joinPolicy"] = request.join_policy
         if request.custom_roles is not None:
@@ -1951,6 +1955,10 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["attribute4"] = request.attribute4
         if request.attribute5 is not None:
             body["attribute5"] = request.attribute5
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.member_metadata is not None:
+            body["memberMetadata"] = request.member_metadata
         if request.join_policy is not None:
             body["joinPolicy"] = request.join_policy
         if request.custom_roles is not None:
@@ -2209,6 +2217,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["attribute4"] = request.attribute4
         if request.attribute5 is not None:
             body["attribute5"] = request.attribute5
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
         if request.join_policy is not None:
             body["joinPolicy"] = request.join_policy
         if request.custom_roles is not None:
@@ -2309,6 +2319,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["attribute4"] = request.attribute4
         if request.attribute5 is not None:
             body["attribute5"] = request.attribute5
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
         if request.join_policy is not None:
             body["joinPolicy"] = request.join_policy
         if request.custom_roles is not None:
@@ -2849,6 +2861,172 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> BatchUpdateMemberRoleByGuildNameResult:
         async_result = []
         self._batch_update_member_role_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_member_metadata(
+        self,
+        request: UpdateMemberMetadataRequest,
+        callback: Callable[[AsyncResult[UpdateMemberMetadataResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='updateMemberMetadata',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateMemberMetadataResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_member_metadata(
+        self,
+        request: UpdateMemberMetadataRequest,
+    ) -> UpdateMemberMetadataResult:
+        async_result = []
+        with timeout(30):
+            self._update_member_metadata(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_member_metadata_async(
+        self,
+        request: UpdateMemberMetadataRequest,
+    ) -> UpdateMemberMetadataResult:
+        async_result = []
+        self._update_member_metadata(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_member_metadata_by_user_id(
+        self,
+        request: UpdateMemberMetadataByUserIdRequest,
+        callback: Callable[[AsyncResult[UpdateMemberMetadataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="guild",
+            component='guild',
+            function='updateMemberMetadataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.guild_model_name is not None:
+            body["guildModelName"] = request.guild_model_name
+        if request.guild_name is not None:
+            body["guildName"] = request.guild_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateMemberMetadataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_member_metadata_by_user_id(
+        self,
+        request: UpdateMemberMetadataByUserIdRequest,
+    ) -> UpdateMemberMetadataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._update_member_metadata_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_member_metadata_by_user_id_async(
+        self,
+        request: UpdateMemberMetadataByUserIdRequest,
+    ) -> UpdateMemberMetadataByUserIdResult:
+        async_result = []
+        self._update_member_metadata_by_user_id(
             request,
             lambda result: async_result.append(result),
         )
@@ -6256,6 +6434,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["guildModelName"] = request.guild_model_name
         if request.target_guild_name is not None:
             body["targetGuildName"] = request.target_guild_name
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -6337,6 +6517,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["guildModelName"] = request.guild_model_name
         if request.target_guild_name is not None:
             body["targetGuildName"] = request.target_guild_name
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

@@ -3982,6 +3982,82 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _delete_counter(
+        self,
+        request: DeleteCounterRequest,
+        callback: Callable[[AsyncResult[DeleteCounterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/counter/{counterName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            counterName=request.counter_name if request.counter_name is not None and request.counter_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteCounterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_counter(
+        self,
+        request: DeleteCounterRequest,
+    ) -> DeleteCounterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_counter(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_counter_async(
+        self,
+        request: DeleteCounterRequest,
+    ) -> DeleteCounterResult:
+        async_result = []
+        self._delete_counter(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_counter_by_user_id(
         self,
         request: DeleteCounterByUserIdRequest,

@@ -1211,6 +1211,74 @@ class BatchUpdateMemberRoleByGuildNameResult(core.Gs2Result):
         }
 
 
+class UpdateMemberMetadataResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> UpdateMemberMetadataResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateMemberMetadataResult]:
+        if data is None:
+            return None
+        return UpdateMemberMetadataResult()\
+            .with_item(Guild.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateMemberMetadataByUserIdResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> UpdateMemberMetadataByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateMemberMetadataByUserIdResult]:
+        if data is None:
+            return None
+        return UpdateMemberMetadataByUserIdResult()\
+            .with_item(Guild.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteGuildResult(core.Gs2Result):
     item: Guild = None
 

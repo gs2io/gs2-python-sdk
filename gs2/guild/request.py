@@ -1559,6 +1559,8 @@ class CreateGuildRequest(core.Gs2Request):
     attribute3: int = None
     attribute4: int = None
     attribute5: int = None
+    metadata: str = None
+    member_metadata: str = None
     join_policy: str = None
     custom_roles: List[RoleModel] = None
     guild_member_default_role: str = None
@@ -1598,6 +1600,14 @@ class CreateGuildRequest(core.Gs2Request):
 
     def with_attribute5(self, attribute5: int) -> CreateGuildRequest:
         self.attribute5 = attribute5
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateGuildRequest:
+        self.metadata = metadata
+        return self
+
+    def with_member_metadata(self, member_metadata: str) -> CreateGuildRequest:
+        self.member_metadata = member_metadata
         return self
 
     def with_join_policy(self, join_policy: str) -> CreateGuildRequest:
@@ -1644,6 +1654,8 @@ class CreateGuildRequest(core.Gs2Request):
             .with_attribute3(data.get('attribute3'))\
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
+            .with_metadata(data.get('metadata'))\
+            .with_member_metadata(data.get('memberMetadata'))\
             .with_join_policy(data.get('joinPolicy'))\
             .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
@@ -1662,6 +1674,8 @@ class CreateGuildRequest(core.Gs2Request):
             "attribute3": self.attribute3,
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
+            "metadata": self.metadata,
+            "memberMetadata": self.member_metadata,
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
@@ -1683,6 +1697,8 @@ class CreateGuildByUserIdRequest(core.Gs2Request):
     attribute3: int = None
     attribute4: int = None
     attribute5: int = None
+    metadata: str = None
+    member_metadata: str = None
     join_policy: str = None
     custom_roles: List[RoleModel] = None
     guild_member_default_role: str = None
@@ -1723,6 +1739,14 @@ class CreateGuildByUserIdRequest(core.Gs2Request):
 
     def with_attribute5(self, attribute5: int) -> CreateGuildByUserIdRequest:
         self.attribute5 = attribute5
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateGuildByUserIdRequest:
+        self.metadata = metadata
+        return self
+
+    def with_member_metadata(self, member_metadata: str) -> CreateGuildByUserIdRequest:
+        self.member_metadata = member_metadata
         return self
 
     def with_join_policy(self, join_policy: str) -> CreateGuildByUserIdRequest:
@@ -1773,6 +1797,8 @@ class CreateGuildByUserIdRequest(core.Gs2Request):
             .with_attribute3(data.get('attribute3'))\
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
+            .with_metadata(data.get('metadata'))\
+            .with_member_metadata(data.get('memberMetadata'))\
             .with_join_policy(data.get('joinPolicy'))\
             .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
@@ -1792,6 +1818,8 @@ class CreateGuildByUserIdRequest(core.Gs2Request):
             "attribute3": self.attribute3,
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
+            "metadata": self.metadata,
+            "memberMetadata": self.member_metadata,
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
@@ -1935,6 +1963,7 @@ class UpdateGuildRequest(core.Gs2Request):
     attribute3: int = None
     attribute4: int = None
     attribute5: int = None
+    metadata: str = None
     join_policy: str = None
     custom_roles: List[RoleModel] = None
     guild_member_default_role: str = None
@@ -1974,6 +2003,10 @@ class UpdateGuildRequest(core.Gs2Request):
 
     def with_attribute5(self, attribute5: int) -> UpdateGuildRequest:
         self.attribute5 = attribute5
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateGuildRequest:
+        self.metadata = metadata
         return self
 
     def with_join_policy(self, join_policy: str) -> UpdateGuildRequest:
@@ -2020,6 +2053,7 @@ class UpdateGuildRequest(core.Gs2Request):
             .with_attribute3(data.get('attribute3'))\
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
+            .with_metadata(data.get('metadata'))\
             .with_join_policy(data.get('joinPolicy'))\
             .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
@@ -2038,6 +2072,7 @@ class UpdateGuildRequest(core.Gs2Request):
             "attribute3": self.attribute3,
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
+            "metadata": self.metadata,
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
@@ -2059,6 +2094,7 @@ class UpdateGuildByGuildNameRequest(core.Gs2Request):
     attribute3: int = None
     attribute4: int = None
     attribute5: int = None
+    metadata: str = None
     join_policy: str = None
     custom_roles: List[RoleModel] = None
     guild_member_default_role: str = None
@@ -2098,6 +2134,10 @@ class UpdateGuildByGuildNameRequest(core.Gs2Request):
 
     def with_attribute5(self, attribute5: int) -> UpdateGuildByGuildNameRequest:
         self.attribute5 = attribute5
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateGuildByGuildNameRequest:
+        self.metadata = metadata
         return self
 
     def with_join_policy(self, join_policy: str) -> UpdateGuildByGuildNameRequest:
@@ -2144,6 +2184,7 @@ class UpdateGuildByGuildNameRequest(core.Gs2Request):
             .with_attribute3(data.get('attribute3'))\
             .with_attribute4(data.get('attribute4'))\
             .with_attribute5(data.get('attribute5'))\
+            .with_metadata(data.get('metadata'))\
             .with_join_policy(data.get('joinPolicy'))\
             .with_custom_roles(None if data.get('customRoles') is None else [
                 RoleModel.from_dict(data.get('customRoles')[i])
@@ -2162,6 +2203,7 @@ class UpdateGuildByGuildNameRequest(core.Gs2Request):
             "attribute3": self.attribute3,
             "attribute4": self.attribute4,
             "attribute5": self.attribute5,
+            "metadata": self.metadata,
             "joinPolicy": self.join_policy,
             "customRoles": None if self.custom_roles is None else [
                 self.custom_roles[i].to_dict() if self.custom_roles[i] else None
@@ -2566,6 +2608,151 @@ class BatchUpdateMemberRoleByGuildNameRequest(core.Gs2Request):
                 self.members[i].to_dict() if self.members[i] else None
                 for i in range(len(self.members))
             ],
+        }
+
+
+class UpdateMemberMetadataRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    access_token: str = None
+    metadata: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateMemberMetadataRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> UpdateMemberMetadataRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> UpdateMemberMetadataRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_access_token(self, access_token: str) -> UpdateMemberMetadataRequest:
+        self.access_token = access_token
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateMemberMetadataRequest:
+        self.metadata = metadata
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateMemberMetadataRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateMemberMetadataRequest]:
+        if data is None:
+            return None
+        return UpdateMemberMetadataRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_metadata(data.get('metadata'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "accessToken": self.access_token,
+            "metadata": self.metadata,
+        }
+
+
+class UpdateMemberMetadataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    user_id: str = None
+    metadata: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_user_id(self, user_id: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.metadata = metadata
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateMemberMetadataByUserIdRequest]:
+        if data is None:
+            return None
+        return UpdateMemberMetadataByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_user_id(data.get('userId'))\
+            .with_metadata(data.get('metadata'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "userId": self.user_id,
+            "metadata": self.metadata,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 
@@ -5078,6 +5265,7 @@ class SendRequestRequest(core.Gs2Request):
     access_token: str = None
     guild_model_name: str = None
     target_guild_name: str = None
+    metadata: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SendRequestRequest:
@@ -5094,6 +5282,10 @@ class SendRequestRequest(core.Gs2Request):
 
     def with_target_guild_name(self, target_guild_name: str) -> SendRequestRequest:
         self.target_guild_name = target_guild_name
+        return self
+
+    def with_metadata(self, metadata: str) -> SendRequestRequest:
+        self.metadata = metadata
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> SendRequestRequest:
@@ -5122,7 +5314,8 @@ class SendRequestRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_guild_model_name(data.get('guildModelName'))\
-            .with_target_guild_name(data.get('targetGuildName'))
+            .with_target_guild_name(data.get('targetGuildName'))\
+            .with_metadata(data.get('metadata'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -5130,6 +5323,7 @@ class SendRequestRequest(core.Gs2Request):
             "accessToken": self.access_token,
             "guildModelName": self.guild_model_name,
             "targetGuildName": self.target_guild_name,
+            "metadata": self.metadata,
         }
 
 
@@ -5140,6 +5334,7 @@ class SendRequestByUserIdRequest(core.Gs2Request):
     user_id: str = None
     guild_model_name: str = None
     target_guild_name: str = None
+    metadata: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -5157,6 +5352,10 @@ class SendRequestByUserIdRequest(core.Gs2Request):
 
     def with_target_guild_name(self, target_guild_name: str) -> SendRequestByUserIdRequest:
         self.target_guild_name = target_guild_name
+        return self
+
+    def with_metadata(self, metadata: str) -> SendRequestByUserIdRequest:
+        self.metadata = metadata
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> SendRequestByUserIdRequest:
@@ -5190,6 +5389,7 @@ class SendRequestByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_guild_model_name(data.get('guildModelName'))\
             .with_target_guild_name(data.get('targetGuildName'))\
+            .with_metadata(data.get('metadata'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -5198,6 +5398,7 @@ class SendRequestByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "guildModelName": self.guild_model_name,
             "targetGuildName": self.target_guild_name,
+            "metadata": self.metadata,
             "timeOffsetToken": self.time_offset_token,
         }
 

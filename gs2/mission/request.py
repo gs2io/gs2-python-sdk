@@ -3155,6 +3155,61 @@ class VerifyCounterValueByUserIdRequest(core.Gs2Request):
         }
 
 
+class DeleteCounterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    counter_name: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteCounterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DeleteCounterRequest:
+        self.access_token = access_token
+        return self
+
+    def with_counter_name(self, counter_name: str) -> DeleteCounterRequest:
+        self.counter_name = counter_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DeleteCounterRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteCounterRequest]:
+        if data is None:
+            return None
+        return DeleteCounterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_counter_name(data.get('counterName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "counterName": self.counter_name,
+        }
+
+
 class DeleteCounterByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

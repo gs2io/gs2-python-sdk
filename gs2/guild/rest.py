@@ -1835,6 +1835,10 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             body["attribute4"] = request.attribute4
         if request.attribute5 is not None:
             body["attribute5"] = request.attribute5
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.member_metadata is not None:
+            body["memberMetadata"] = request.member_metadata
         if request.join_policy is not None:
             body["joinPolicy"] = request.join_policy
         if request.custom_roles is not None:
@@ -1933,6 +1937,10 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             body["attribute4"] = request.attribute4
         if request.attribute5 is not None:
             body["attribute5"] = request.attribute5
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.member_metadata is not None:
+            body["memberMetadata"] = request.member_metadata
         if request.join_policy is not None:
             body["joinPolicy"] = request.join_policy
         if request.custom_roles is not None:
@@ -2181,6 +2189,8 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             body["attribute4"] = request.attribute4
         if request.attribute5 is not None:
             body["attribute5"] = request.attribute5
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
         if request.join_policy is not None:
             body["joinPolicy"] = request.join_policy
         if request.custom_roles is not None:
@@ -2279,6 +2289,8 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             body["attribute4"] = request.attribute4
         if request.attribute5 is not None:
             body["attribute5"] = request.attribute5
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
         if request.join_policy is not None:
             body["joinPolicy"] = request.join_policy
         if request.custom_roles is not None:
@@ -2801,6 +2813,165 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
     ) -> BatchUpdateMemberRoleByGuildNameResult:
         async_result = []
         self._batch_update_member_role_by_guild_name(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_member_metadata(
+        self,
+        request: UpdateMemberMetadataRequest,
+        callback: Callable[[AsyncResult[UpdateMemberMetadataResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='guild',
+            region=self.session.region,
+        ) + "/{namespaceName}/guild/{guildModelName}/guild/{guildName}/member/me/metadata".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            guildModelName=request.guild_model_name if request.guild_model_name is not None and request.guild_model_name != '' else 'null',
+            guildName=request.guild_name if request.guild_name is not None and request.guild_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateMemberMetadataResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_member_metadata(
+        self,
+        request: UpdateMemberMetadataRequest,
+    ) -> UpdateMemberMetadataResult:
+        async_result = []
+        with timeout(30):
+            self._update_member_metadata(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_member_metadata_async(
+        self,
+        request: UpdateMemberMetadataRequest,
+    ) -> UpdateMemberMetadataResult:
+        async_result = []
+        self._update_member_metadata(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_member_metadata_by_user_id(
+        self,
+        request: UpdateMemberMetadataByUserIdRequest,
+        callback: Callable[[AsyncResult[UpdateMemberMetadataByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='guild',
+            region=self.session.region,
+        ) + "/{namespaceName}/guild/{guildModelName}/guild/{guildName}/member/{userId}/metadata".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            guildModelName=request.guild_model_name if request.guild_model_name is not None and request.guild_model_name != '' else 'null',
+            guildName=request.guild_name if request.guild_name is not None and request.guild_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateMemberMetadataByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_member_metadata_by_user_id(
+        self,
+        request: UpdateMemberMetadataByUserIdRequest,
+    ) -> UpdateMemberMetadataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._update_member_metadata_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_member_metadata_by_user_id_async(
+        self,
+        request: UpdateMemberMetadataByUserIdRequest,
+    ) -> UpdateMemberMetadataByUserIdResult:
+        async_result = []
+        self._update_member_metadata_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
@@ -6105,6 +6276,8 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -6183,6 +6356,8 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
