@@ -287,6 +287,47 @@ class PlatformUser(core.Gs2Model):
         }
 
 
+class ScopeValue(core.Gs2Model):
+    key: str = None
+    value: str = None
+
+    def with_key(self, key: str) -> ScopeValue:
+        self.key = key
+        return self
+
+    def with_value(self, value: str) -> ScopeValue:
+        self.value = value
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ScopeValue]:
+        if data is None:
+            return None
+        return ScopeValue()\
+            .with_key(data.get('key'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "key": self.key,
+            "value": self.value,
+        }
+
+
 class OpenIdConnectSetting(core.Gs2Model):
     configuration_path: str = None
     client_id: str = None
@@ -295,6 +336,8 @@ class OpenIdConnectSetting(core.Gs2Model):
     apple_key_id: str = None
     apple_private_key_pem: str = None
     done_endpoint_url: str = None
+    additional_scope_values: List[ScopeValue] = None
+    additional_return_values: List[str] = None
 
     def with_configuration_path(self, configuration_path: str) -> OpenIdConnectSetting:
         self.configuration_path = configuration_path
@@ -324,6 +367,14 @@ class OpenIdConnectSetting(core.Gs2Model):
         self.done_endpoint_url = done_endpoint_url
         return self
 
+    def with_additional_scope_values(self, additional_scope_values: List[ScopeValue]) -> OpenIdConnectSetting:
+        self.additional_scope_values = additional_scope_values
+        return self
+
+    def with_additional_return_values(self, additional_return_values: List[str]) -> OpenIdConnectSetting:
+        self.additional_return_values = additional_return_values
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -349,7 +400,15 @@ class OpenIdConnectSetting(core.Gs2Model):
             .with_apple_team_id(data.get('appleTeamId'))\
             .with_apple_key_id(data.get('appleKeyId'))\
             .with_apple_private_key_pem(data.get('applePrivateKeyPem'))\
-            .with_done_endpoint_url(data.get('doneEndpointUrl'))
+            .with_done_endpoint_url(data.get('doneEndpointUrl'))\
+            .with_additional_scope_values(None if data.get('additionalScopeValues') is None else [
+                ScopeValue.from_dict(data.get('additionalScopeValues')[i])
+                for i in range(len(data.get('additionalScopeValues')))
+            ])\
+            .with_additional_return_values(None if data.get('additionalReturnValues') is None else [
+                data.get('additionalReturnValues')[i]
+                for i in range(len(data.get('additionalReturnValues')))
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -360,6 +419,14 @@ class OpenIdConnectSetting(core.Gs2Model):
             "appleKeyId": self.apple_key_id,
             "applePrivateKeyPem": self.apple_private_key_pem,
             "doneEndpointUrl": self.done_endpoint_url,
+            "additionalScopeValues": None if self.additional_scope_values is None else [
+                self.additional_scope_values[i].to_dict() if self.additional_scope_values[i] else None
+                for i in range(len(self.additional_scope_values))
+            ],
+            "additionalReturnValues": None if self.additional_return_values is None else [
+                self.additional_return_values[i]
+                for i in range(len(self.additional_return_values))
+            ],
         }
 
 
