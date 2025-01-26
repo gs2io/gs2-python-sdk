@@ -930,6 +930,164 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _evaluate_complete(
+        self,
+        request: EvaluateCompleteRequest,
+        callback: Callable[[AsyncResult[EvaluateCompleteResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='complete',
+            function='evaluateComplete',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.mission_group_name is not None:
+            body["missionGroupName"] = request.mission_group_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=EvaluateCompleteResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def evaluate_complete(
+        self,
+        request: EvaluateCompleteRequest,
+    ) -> EvaluateCompleteResult:
+        async_result = []
+        with timeout(30):
+            self._evaluate_complete(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def evaluate_complete_async(
+        self,
+        request: EvaluateCompleteRequest,
+    ) -> EvaluateCompleteResult:
+        async_result = []
+        self._evaluate_complete(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _evaluate_complete_by_user_id(
+        self,
+        request: EvaluateCompleteByUserIdRequest,
+        callback: Callable[[AsyncResult[EvaluateCompleteByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='complete',
+            function='evaluateCompleteByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.mission_group_name is not None:
+            body["missionGroupName"] = request.mission_group_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=EvaluateCompleteByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def evaluate_complete_by_user_id(
+        self,
+        request: EvaluateCompleteByUserIdRequest,
+    ) -> EvaluateCompleteByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._evaluate_complete_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def evaluate_complete_by_user_id_async(
+        self,
+        request: EvaluateCompleteByUserIdRequest,
+    ) -> EvaluateCompleteByUserIdResult:
+        async_result = []
+        self._evaluate_complete_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_complete_by_user_id(
         self,
         request: DeleteCompleteByUserIdRequest,
@@ -1968,6 +2126,10 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["resetDayOfWeek"] = request.reset_day_of_week
         if request.reset_hour is not None:
             body["resetHour"] = request.reset_hour
+        if request.anchor_timestamp is not None:
+            body["anchorTimestamp"] = request.anchor_timestamp
+        if request.days is not None:
+            body["days"] = request.days
         if request.complete_notification_namespace_id is not None:
             body["completeNotificationNamespaceId"] = request.complete_notification_namespace_id
 
@@ -2128,6 +2290,10 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["resetDayOfWeek"] = request.reset_day_of_week
         if request.reset_hour is not None:
             body["resetHour"] = request.reset_hour
+        if request.anchor_timestamp is not None:
+            body["anchorTimestamp"] = request.anchor_timestamp
+        if request.days is not None:
+            body["days"] = request.days
         if request.complete_notification_namespace_id is not None:
             body["completeNotificationNamespaceId"] = request.complete_notification_namespace_id
 

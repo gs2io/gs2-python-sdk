@@ -973,6 +973,8 @@ class MissionGroupModel(core.Gs2Model):
     reset_day_of_week: str = None
     reset_hour: int = None
     complete_notification_namespace_id: str = None
+    anchor_timestamp: int = None
+    days: int = None
 
     def with_mission_group_id(self, mission_group_id: str) -> MissionGroupModel:
         self.mission_group_id = mission_group_id
@@ -1008,6 +1010,14 @@ class MissionGroupModel(core.Gs2Model):
 
     def with_complete_notification_namespace_id(self, complete_notification_namespace_id: str) -> MissionGroupModel:
         self.complete_notification_namespace_id = complete_notification_namespace_id
+        return self
+
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> MissionGroupModel:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> MissionGroupModel:
+        self.days = days
         return self
 
     @classmethod
@@ -1095,7 +1105,9 @@ class MissionGroupModel(core.Gs2Model):
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
             .with_reset_hour(data.get('resetHour'))\
-            .with_complete_notification_namespace_id(data.get('completeNotificationNamespaceId'))
+            .with_complete_notification_namespace_id(data.get('completeNotificationNamespaceId'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1111,6 +1123,8 @@ class MissionGroupModel(core.Gs2Model):
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
             "completeNotificationNamespaceId": self.complete_notification_namespace_id,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
         }
 
 
@@ -1647,6 +1661,8 @@ class MissionGroupModelMaster(core.Gs2Model):
     reset_day_of_month: int = None
     reset_day_of_week: str = None
     reset_hour: int = None
+    anchor_timestamp: int = None
+    days: int = None
     complete_notification_namespace_id: str = None
     created_at: int = None
     updated_at: int = None
@@ -1682,6 +1698,14 @@ class MissionGroupModelMaster(core.Gs2Model):
 
     def with_reset_hour(self, reset_hour: int) -> MissionGroupModelMaster:
         self.reset_hour = reset_hour
+        return self
+
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> MissionGroupModelMaster:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> MissionGroupModelMaster:
+        self.days = days
         return self
 
     def with_complete_notification_namespace_id(self, complete_notification_namespace_id: str) -> MissionGroupModelMaster:
@@ -1782,6 +1806,8 @@ class MissionGroupModelMaster(core.Gs2Model):
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
             .with_reset_hour(data.get('resetHour'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))\
             .with_complete_notification_namespace_id(data.get('completeNotificationNamespaceId'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1797,6 +1823,8 @@ class MissionGroupModelMaster(core.Gs2Model):
             "resetDayOfMonth": self.reset_day_of_month,
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
             "completeNotificationNamespaceId": self.complete_notification_namespace_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
@@ -1812,6 +1840,8 @@ class CounterScopeModel(core.Gs2Model):
     reset_hour: int = None
     condition_name: str = None
     condition: VerifyAction = None
+    anchor_timestamp: int = None
+    days: int = None
 
     def with_scope_type(self, scope_type: str) -> CounterScopeModel:
         self.scope_type = scope_type
@@ -1841,6 +1871,14 @@ class CounterScopeModel(core.Gs2Model):
         self.condition = condition
         return self
 
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> CounterScopeModel:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> CounterScopeModel:
+        self.days = days
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1866,7 +1904,9 @@ class CounterScopeModel(core.Gs2Model):
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
             .with_reset_hour(data.get('resetHour'))\
             .with_condition_name(data.get('conditionName'))\
-            .with_condition(VerifyAction.from_dict(data.get('condition')))
+            .with_condition(VerifyAction.from_dict(data.get('condition')))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1877,6 +1917,8 @@ class CounterScopeModel(core.Gs2Model):
             "resetHour": self.reset_hour,
             "conditionName": self.condition_name,
             "condition": self.condition.to_dict() if self.condition else None,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
         }
 
 

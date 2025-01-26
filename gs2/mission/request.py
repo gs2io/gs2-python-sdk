@@ -784,6 +784,123 @@ class GetCompleteByUserIdRequest(core.Gs2Request):
         }
 
 
+class EvaluateCompleteRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    mission_group_name: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> EvaluateCompleteRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> EvaluateCompleteRequest:
+        self.access_token = access_token
+        return self
+
+    def with_mission_group_name(self, mission_group_name: str) -> EvaluateCompleteRequest:
+        self.mission_group_name = mission_group_name
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> EvaluateCompleteRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EvaluateCompleteRequest]:
+        if data is None:
+            return None
+        return EvaluateCompleteRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_mission_group_name(data.get('missionGroupName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "missionGroupName": self.mission_group_name,
+        }
+
+
+class EvaluateCompleteByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    mission_group_name: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> EvaluateCompleteByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> EvaluateCompleteByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_mission_group_name(self, mission_group_name: str) -> EvaluateCompleteByUserIdRequest:
+        self.mission_group_name = mission_group_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> EvaluateCompleteByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> EvaluateCompleteByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EvaluateCompleteByUserIdRequest]:
+        if data is None:
+            return None
+        return EvaluateCompleteByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_mission_group_name(data.get('missionGroupName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "missionGroupName": self.mission_group_name,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DeleteCompleteByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1528,6 +1645,8 @@ class CreateMissionGroupModelMasterRequest(core.Gs2Request):
     reset_day_of_month: int = None
     reset_day_of_week: str = None
     reset_hour: int = None
+    anchor_timestamp: int = None
+    days: int = None
     complete_notification_namespace_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateMissionGroupModelMasterRequest:
@@ -1562,6 +1681,14 @@ class CreateMissionGroupModelMasterRequest(core.Gs2Request):
         self.reset_hour = reset_hour
         return self
 
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> CreateMissionGroupModelMasterRequest:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> CreateMissionGroupModelMasterRequest:
+        self.days = days
+        return self
+
     def with_complete_notification_namespace_id(self, complete_notification_namespace_id: str) -> CreateMissionGroupModelMasterRequest:
         self.complete_notification_namespace_id = complete_notification_namespace_id
         return self
@@ -1593,6 +1720,8 @@ class CreateMissionGroupModelMasterRequest(core.Gs2Request):
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
             .with_reset_hour(data.get('resetHour'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))\
             .with_complete_notification_namespace_id(data.get('completeNotificationNamespaceId'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1605,6 +1734,8 @@ class CreateMissionGroupModelMasterRequest(core.Gs2Request):
             "resetDayOfMonth": self.reset_day_of_month,
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
             "completeNotificationNamespaceId": self.complete_notification_namespace_id,
         }
 
@@ -1663,6 +1794,8 @@ class UpdateMissionGroupModelMasterRequest(core.Gs2Request):
     reset_day_of_month: int = None
     reset_day_of_week: str = None
     reset_hour: int = None
+    anchor_timestamp: int = None
+    days: int = None
     complete_notification_namespace_id: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateMissionGroupModelMasterRequest:
@@ -1697,6 +1830,14 @@ class UpdateMissionGroupModelMasterRequest(core.Gs2Request):
         self.reset_hour = reset_hour
         return self
 
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> UpdateMissionGroupModelMasterRequest:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> UpdateMissionGroupModelMasterRequest:
+        self.days = days
+        return self
+
     def with_complete_notification_namespace_id(self, complete_notification_namespace_id: str) -> UpdateMissionGroupModelMasterRequest:
         self.complete_notification_namespace_id = complete_notification_namespace_id
         return self
@@ -1728,6 +1869,8 @@ class UpdateMissionGroupModelMasterRequest(core.Gs2Request):
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
             .with_reset_hour(data.get('resetHour'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))\
             .with_complete_notification_namespace_id(data.get('completeNotificationNamespaceId'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1740,6 +1883,8 @@ class UpdateMissionGroupModelMasterRequest(core.Gs2Request):
             "resetDayOfMonth": self.reset_day_of_month,
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
             "completeNotificationNamespaceId": self.complete_notification_namespace_id,
         }
 

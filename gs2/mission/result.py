@@ -586,6 +586,74 @@ class GetCompleteByUserIdResult(core.Gs2Result):
         }
 
 
+class EvaluateCompleteResult(core.Gs2Result):
+    item: Complete = None
+
+    def with_item(self, item: Complete) -> EvaluateCompleteResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EvaluateCompleteResult]:
+        if data is None:
+            return None
+        return EvaluateCompleteResult()\
+            .with_item(Complete.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class EvaluateCompleteByUserIdResult(core.Gs2Result):
+    item: Complete = None
+
+    def with_item(self, item: Complete) -> EvaluateCompleteByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[EvaluateCompleteByUserIdResult]:
+        if data is None:
+            return None
+        return EvaluateCompleteByUserIdResult()\
+            .with_item(Complete.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteCompleteByUserIdResult(core.Gs2Result):
     item: Complete = None
 

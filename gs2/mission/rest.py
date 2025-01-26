@@ -901,6 +901,159 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _evaluate_complete(
+        self,
+        request: EvaluateCompleteRequest,
+        callback: Callable[[AsyncResult[EvaluateCompleteResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/complete/group/{missionGroupName}/eval".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            missionGroupName=request.mission_group_name if request.mission_group_name is not None and request.mission_group_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=EvaluateCompleteResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def evaluate_complete(
+        self,
+        request: EvaluateCompleteRequest,
+    ) -> EvaluateCompleteResult:
+        async_result = []
+        with timeout(30):
+            self._evaluate_complete(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def evaluate_complete_async(
+        self,
+        request: EvaluateCompleteRequest,
+    ) -> EvaluateCompleteResult:
+        async_result = []
+        self._evaluate_complete(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _evaluate_complete_by_user_id(
+        self,
+        request: EvaluateCompleteByUserIdRequest,
+        callback: Callable[[AsyncResult[EvaluateCompleteByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/complete/group/{missionGroupName}/eval".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            missionGroupName=request.mission_group_name if request.mission_group_name is not None and request.mission_group_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=EvaluateCompleteByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def evaluate_complete_by_user_id(
+        self,
+        request: EvaluateCompleteByUserIdRequest,
+    ) -> EvaluateCompleteByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._evaluate_complete_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def evaluate_complete_by_user_id_async(
+        self,
+        request: EvaluateCompleteByUserIdRequest,
+    ) -> EvaluateCompleteByUserIdResult:
+        async_result = []
+        self._evaluate_complete_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_complete_by_user_id(
         self,
         request: DeleteCompleteByUserIdRequest,
@@ -1921,6 +2074,10 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             body["resetDayOfWeek"] = request.reset_day_of_week
         if request.reset_hour is not None:
             body["resetHour"] = request.reset_hour
+        if request.anchor_timestamp is not None:
+            body["anchorTimestamp"] = request.anchor_timestamp
+        if request.days is not None:
+            body["days"] = request.days
         if request.complete_notification_namespace_id is not None:
             body["completeNotificationNamespaceId"] = request.complete_notification_namespace_id
 
@@ -2079,6 +2236,10 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             body["resetDayOfWeek"] = request.reset_day_of_week
         if request.reset_hour is not None:
             body["resetHour"] = request.reset_hour
+        if request.anchor_timestamp is not None:
+            body["anchorTimestamp"] = request.anchor_timestamp
+        if request.days is not None:
+            body["days"] = request.days
         if request.complete_notification_namespace_id is not None:
             body["completeNotificationNamespaceId"] = request.complete_notification_namespace_id
 
