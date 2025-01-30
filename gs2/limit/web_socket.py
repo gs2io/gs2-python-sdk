@@ -2201,6 +2201,10 @@ class Gs2LimitWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["resetDayOfWeek"] = request.reset_day_of_week
         if request.reset_hour is not None:
             body["resetHour"] = request.reset_hour
+        if request.anchor_timestamp is not None:
+            body["anchorTimestamp"] = request.anchor_timestamp
+        if request.days is not None:
+            body["days"] = request.days
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2359,6 +2363,10 @@ class Gs2LimitWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["resetDayOfWeek"] = request.reset_day_of_week
         if request.reset_hour is not None:
             body["resetHour"] = request.reset_hour
+        if request.anchor_timestamp is not None:
+            body["anchorTimestamp"] = request.anchor_timestamp
+        if request.days is not None:
+            body["days"] = request.days
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

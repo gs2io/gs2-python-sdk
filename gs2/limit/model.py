@@ -27,6 +27,8 @@ class LimitModel(core.Gs2Model):
     reset_day_of_month: int = None
     reset_day_of_week: str = None
     reset_hour: int = None
+    anchor_timestamp: int = None
+    days: int = None
 
     def with_limit_model_id(self, limit_model_id: str) -> LimitModel:
         self.limit_model_id = limit_model_id
@@ -54,6 +56,14 @@ class LimitModel(core.Gs2Model):
 
     def with_reset_hour(self, reset_hour: int) -> LimitModel:
         self.reset_hour = reset_hour
+        return self
+
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> LimitModel:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> LimitModel:
+        self.days = days
         return self
 
     @classmethod
@@ -136,7 +146,9 @@ class LimitModel(core.Gs2Model):
             .with_reset_type(data.get('resetType'))\
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
-            .with_reset_hour(data.get('resetHour'))
+            .with_reset_hour(data.get('resetHour'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -147,6 +159,8 @@ class LimitModel(core.Gs2Model):
             "resetDayOfMonth": self.reset_day_of_month,
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
         }
 
 
@@ -353,6 +367,8 @@ class LimitModelMaster(core.Gs2Model):
     reset_day_of_month: int = None
     reset_day_of_week: str = None
     reset_hour: int = None
+    anchor_timestamp: int = None
+    days: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -387,6 +403,14 @@ class LimitModelMaster(core.Gs2Model):
 
     def with_reset_hour(self, reset_hour: int) -> LimitModelMaster:
         self.reset_hour = reset_hour
+        return self
+
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> LimitModelMaster:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> LimitModelMaster:
+        self.days = days
         return self
 
     def with_created_at(self, created_at: int) -> LimitModelMaster:
@@ -483,6 +507,8 @@ class LimitModelMaster(core.Gs2Model):
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
             .with_reset_hour(data.get('resetHour'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -497,6 +523,8 @@ class LimitModelMaster(core.Gs2Model):
             "resetDayOfMonth": self.reset_day_of_month,
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,

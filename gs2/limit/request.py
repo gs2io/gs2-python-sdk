@@ -1549,6 +1549,8 @@ class CreateLimitModelMasterRequest(core.Gs2Request):
     reset_day_of_month: int = None
     reset_day_of_week: str = None
     reset_hour: int = None
+    anchor_timestamp: int = None
+    days: int = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateLimitModelMasterRequest:
         self.namespace_name = namespace_name
@@ -1582,6 +1584,14 @@ class CreateLimitModelMasterRequest(core.Gs2Request):
         self.reset_hour = reset_hour
         return self
 
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> CreateLimitModelMasterRequest:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> CreateLimitModelMasterRequest:
+        self.days = days
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1608,7 +1618,9 @@ class CreateLimitModelMasterRequest(core.Gs2Request):
             .with_reset_type(data.get('resetType'))\
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
-            .with_reset_hour(data.get('resetHour'))
+            .with_reset_hour(data.get('resetHour'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1620,6 +1632,8 @@ class CreateLimitModelMasterRequest(core.Gs2Request):
             "resetDayOfMonth": self.reset_day_of_month,
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
         }
 
 
@@ -1677,6 +1691,8 @@ class UpdateLimitModelMasterRequest(core.Gs2Request):
     reset_day_of_month: int = None
     reset_day_of_week: str = None
     reset_hour: int = None
+    anchor_timestamp: int = None
+    days: int = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateLimitModelMasterRequest:
         self.namespace_name = namespace_name
@@ -1710,6 +1726,14 @@ class UpdateLimitModelMasterRequest(core.Gs2Request):
         self.reset_hour = reset_hour
         return self
 
+    def with_anchor_timestamp(self, anchor_timestamp: int) -> UpdateLimitModelMasterRequest:
+        self.anchor_timestamp = anchor_timestamp
+        return self
+
+    def with_days(self, days: int) -> UpdateLimitModelMasterRequest:
+        self.days = days
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -1736,7 +1760,9 @@ class UpdateLimitModelMasterRequest(core.Gs2Request):
             .with_reset_type(data.get('resetType'))\
             .with_reset_day_of_month(data.get('resetDayOfMonth'))\
             .with_reset_day_of_week(data.get('resetDayOfWeek'))\
-            .with_reset_hour(data.get('resetHour'))
+            .with_reset_hour(data.get('resetHour'))\
+            .with_anchor_timestamp(data.get('anchorTimestamp'))\
+            .with_days(data.get('days'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1748,6 +1774,8 @@ class UpdateLimitModelMasterRequest(core.Gs2Request):
             "resetDayOfMonth": self.reset_day_of_month,
             "resetDayOfWeek": self.reset_day_of_week,
             "resetHour": self.reset_hour,
+            "anchorTimestamp": self.anchor_timestamp,
+            "days": self.days,
         }
 
 

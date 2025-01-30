@@ -3300,6 +3300,149 @@ class VerifyCounterValueByUserIdRequest(core.Gs2Request):
         }
 
 
+class ResetCounterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    counter_name: str = None
+    scopes: List[ScopedValue] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ResetCounterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> ResetCounterRequest:
+        self.access_token = access_token
+        return self
+
+    def with_counter_name(self, counter_name: str) -> ResetCounterRequest:
+        self.counter_name = counter_name
+        return self
+
+    def with_scopes(self, scopes: List[ScopedValue]) -> ResetCounterRequest:
+        self.scopes = scopes
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetCounterRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetCounterRequest]:
+        if data is None:
+            return None
+        return ResetCounterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_scopes(None if data.get('scopes') is None else [
+                ScopedValue.from_dict(data.get('scopes')[i])
+                for i in range(len(data.get('scopes')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "counterName": self.counter_name,
+            "scopes": None if self.scopes is None else [
+                self.scopes[i].to_dict() if self.scopes[i] else None
+                for i in range(len(self.scopes))
+            ],
+        }
+
+
+class ResetCounterByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    counter_name: str = None
+    scopes: List[ScopedValue] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ResetCounterByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> ResetCounterByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_counter_name(self, counter_name: str) -> ResetCounterByUserIdRequest:
+        self.counter_name = counter_name
+        return self
+
+    def with_scopes(self, scopes: List[ScopedValue]) -> ResetCounterByUserIdRequest:
+        self.scopes = scopes
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> ResetCounterByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ResetCounterByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetCounterByUserIdRequest]:
+        if data is None:
+            return None
+        return ResetCounterByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_counter_name(data.get('counterName'))\
+            .with_scopes(None if data.get('scopes') is None else [
+                ScopedValue.from_dict(data.get('scopes')[i])
+                for i in range(len(data.get('scopes')))
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "counterName": self.counter_name,
+            "scopes": None if self.scopes is None else [
+                self.scopes[i].to_dict() if self.scopes[i] else None
+                for i in range(len(self.scopes))
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DeleteCounterRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -3536,6 +3679,49 @@ class DecreaseByStampTaskRequest(core.Gs2Request):
         if data is None:
             return None
         return DecreaseByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class ResetByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> ResetByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> ResetByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetByStampTaskRequest]:
+        if data is None:
+            return None
+        return ResetByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 

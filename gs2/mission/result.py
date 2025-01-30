@@ -2103,6 +2103,74 @@ class VerifyCounterValueByUserIdResult(core.Gs2Result):
         }
 
 
+class ResetCounterResult(core.Gs2Result):
+    item: Counter = None
+
+    def with_item(self, item: Counter) -> ResetCounterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetCounterResult]:
+        if data is None:
+            return None
+        return ResetCounterResult()\
+            .with_item(Counter.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ResetCounterByUserIdResult(core.Gs2Result):
+    item: Counter = None
+
+    def with_item(self, item: Counter) -> ResetCounterByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetCounterByUserIdResult]:
+        if data is None:
+            return None
+        return ResetCounterByUserIdResult()\
+            .with_item(Counter.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteCounterResult(core.Gs2Result):
     item: Counter = None
 
@@ -2322,6 +2390,47 @@ class DecreaseByStampTaskResult(core.Gs2Result):
                 self.changed_completes[i].to_dict() if self.changed_completes[i] else None
                 for i in range(len(self.changed_completes))
             ],
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class ResetByStampTaskResult(core.Gs2Result):
+    item: Counter = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Counter) -> ResetByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> ResetByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ResetByStampTaskResult]:
+        if data is None:
+            return None
+        return ResetByStampTaskResult()\
+            .with_item(Counter.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 

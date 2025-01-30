@@ -4221,6 +4221,174 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _reset_counter(
+        self,
+        request: ResetCounterRequest,
+        callback: Callable[[AsyncResult[ResetCounterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='counter',
+            function='resetCounter',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.counter_name is not None:
+            body["counterName"] = request.counter_name
+        if request.scopes is not None:
+            body["scopes"] = [
+                item.to_dict()
+                for item in request.scopes
+            ]
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ResetCounterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_counter(
+        self,
+        request: ResetCounterRequest,
+    ) -> ResetCounterResult:
+        async_result = []
+        with timeout(30):
+            self._reset_counter(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_counter_async(
+        self,
+        request: ResetCounterRequest,
+    ) -> ResetCounterResult:
+        async_result = []
+        self._reset_counter(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _reset_counter_by_user_id(
+        self,
+        request: ResetCounterByUserIdRequest,
+        callback: Callable[[AsyncResult[ResetCounterByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='counter',
+            function='resetCounterByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.counter_name is not None:
+            body["counterName"] = request.counter_name
+        if request.scopes is not None:
+            body["scopes"] = [
+                item.to_dict()
+                for item in request.scopes
+            ]
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ResetCounterByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_counter_by_user_id(
+        self,
+        request: ResetCounterByUserIdRequest,
+    ) -> ResetCounterByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._reset_counter_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_counter_by_user_id_async(
+        self,
+        request: ResetCounterByUserIdRequest,
+    ) -> ResetCounterByUserIdResult:
+        async_result = []
+        self._reset_counter_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_counter(
         self,
         request: DeleteCounterRequest,
@@ -4585,6 +4753,79 @@ class Gs2MissionWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DecreaseByStampTaskResult:
         async_result = []
         self._decrease_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _reset_by_stamp_task(
+        self,
+        request: ResetByStampTaskRequest,
+        callback: Callable[[AsyncResult[ResetByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="mission",
+            component='counter',
+            function='resetByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ResetByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def reset_by_stamp_task(
+        self,
+        request: ResetByStampTaskRequest,
+    ) -> ResetByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._reset_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def reset_by_stamp_task_async(
+        self,
+        request: ResetByStampTaskRequest,
+    ) -> ResetByStampTaskResult:
+        async_result = []
+        self._reset_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )
