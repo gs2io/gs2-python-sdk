@@ -1735,6 +1735,8 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["triggerStrategy"] = request.trigger_strategy
         if request.ttl is not None:
             body["ttl"] = request.ttl
+        if request.event_id is not None:
+            body["eventId"] = request.event_id
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

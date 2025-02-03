@@ -1237,6 +1237,7 @@ class TriggerByUserIdRequest(core.Gs2Request):
     user_id: str = None
     trigger_strategy: str = None
     ttl: int = None
+    event_id: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1258,6 +1259,10 @@ class TriggerByUserIdRequest(core.Gs2Request):
 
     def with_ttl(self, ttl: int) -> TriggerByUserIdRequest:
         self.ttl = ttl
+        return self
+
+    def with_event_id(self, event_id: str) -> TriggerByUserIdRequest:
+        self.event_id = event_id
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> TriggerByUserIdRequest:
@@ -1292,6 +1297,7 @@ class TriggerByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_trigger_strategy(data.get('triggerStrategy'))\
             .with_ttl(data.get('ttl'))\
+            .with_event_id(data.get('eventId'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1301,6 +1307,7 @@ class TriggerByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "triggerStrategy": self.trigger_strategy,
             "ttl": self.ttl,
+            "eventId": self.event_id,
             "timeOffsetToken": self.time_offset_token,
         }
 

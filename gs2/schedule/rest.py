@@ -1718,6 +1718,8 @@ class Gs2ScheduleRestClient(rest.AbstractGs2RestClient):
             body["triggerStrategy"] = request.trigger_strategy
         if request.ttl is not None:
             body["ttl"] = request.ttl
+        if request.event_id is not None:
+            body["eventId"] = request.event_id
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
