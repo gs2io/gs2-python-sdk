@@ -70,6 +70,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     transaction_setting: TransactionSetting = None
     exchange_script: ScriptSetting = None
     incremental_exchange_script: ScriptSetting = None
+    acquire_await_script: ScriptSetting = None
     log_setting: LogSetting = None
     queue_namespace_id: str = None
     key_id: str = None
@@ -100,6 +101,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_incremental_exchange_script(self, incremental_exchange_script: ScriptSetting) -> CreateNamespaceRequest:
         self.incremental_exchange_script = incremental_exchange_script
+        return self
+
+    def with_acquire_await_script(self, acquire_await_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.acquire_await_script = acquire_await_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -140,6 +145,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_incremental_exchange_script(ScriptSetting.from_dict(data.get('incrementalExchangeScript')))\
+            .with_acquire_await_script(ScriptSetting.from_dict(data.get('acquireAwaitScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))
@@ -153,6 +159,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "incrementalExchangeScript": self.incremental_exchange_script.to_dict() if self.incremental_exchange_script else None,
+            "acquireAwaitScript": self.acquire_await_script.to_dict() if self.acquire_await_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
@@ -241,6 +248,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     transaction_setting: TransactionSetting = None
     exchange_script: ScriptSetting = None
     incremental_exchange_script: ScriptSetting = None
+    acquire_await_script: ScriptSetting = None
     log_setting: LogSetting = None
     queue_namespace_id: str = None
     key_id: str = None
@@ -271,6 +279,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_incremental_exchange_script(self, incremental_exchange_script: ScriptSetting) -> UpdateNamespaceRequest:
         self.incremental_exchange_script = incremental_exchange_script
+        return self
+
+    def with_acquire_await_script(self, acquire_await_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.acquire_await_script = acquire_await_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -311,6 +323,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_incremental_exchange_script(ScriptSetting.from_dict(data.get('incrementalExchangeScript')))\
+            .with_acquire_await_script(ScriptSetting.from_dict(data.get('acquireAwaitScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))
@@ -324,6 +337,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "incrementalExchangeScript": self.incremental_exchange_script.to_dict() if self.incremental_exchange_script else None,
+            "acquireAwaitScript": self.acquire_await_script.to_dict() if self.acquire_await_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,

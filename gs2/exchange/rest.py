@@ -123,6 +123,8 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
             body["exchangeScript"] = request.exchange_script.to_dict()
         if request.incremental_exchange_script is not None:
             body["incrementalExchangeScript"] = request.incremental_exchange_script.to_dict()
+        if request.acquire_await_script is not None:
+            body["acquireAwaitScript"] = request.acquire_await_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
         if request.queue_namespace_id is not None:
@@ -354,6 +356,8 @@ class Gs2ExchangeRestClient(rest.AbstractGs2RestClient):
             body["exchangeScript"] = request.exchange_script.to_dict()
         if request.incremental_exchange_script is not None:
             body["incrementalExchangeScript"] = request.incremental_exchange_script.to_dict()
+        if request.acquire_await_script is not None:
+            body["acquireAwaitScript"] = request.acquire_await_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
         if request.queue_namespace_id is not None:

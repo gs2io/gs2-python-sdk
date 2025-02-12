@@ -1492,6 +1492,7 @@ class Namespace(core.Gs2Model):
     transaction_setting: TransactionSetting = None
     exchange_script: ScriptSetting = None
     incremental_exchange_script: ScriptSetting = None
+    acquire_await_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1529,6 +1530,10 @@ class Namespace(core.Gs2Model):
 
     def with_incremental_exchange_script(self, incremental_exchange_script: ScriptSetting) -> Namespace:
         self.incremental_exchange_script = incremental_exchange_script
+        return self
+
+    def with_acquire_await_script(self, acquire_await_script: ScriptSetting) -> Namespace:
+        self.acquire_await_script = acquire_await_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1625,6 +1630,7 @@ class Namespace(core.Gs2Model):
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_incremental_exchange_script(ScriptSetting.from_dict(data.get('incrementalExchangeScript')))\
+            .with_acquire_await_script(ScriptSetting.from_dict(data.get('acquireAwaitScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1642,6 +1648,7 @@ class Namespace(core.Gs2Model):
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "incrementalExchangeScript": self.incremental_exchange_script.to_dict() if self.incremental_exchange_script else None,
+            "acquireAwaitScript": self.acquire_await_script.to_dict() if self.acquire_await_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
