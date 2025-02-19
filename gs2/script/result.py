@@ -491,6 +491,8 @@ class InvokeScriptResult(core.Gs2Result):
     result: str = None
     transaction: Transaction = None
     random_status: RandomStatus = None
+    atomic_commit: bool = None
+    transaction_result: TransactionResult = None
     execute_time: int = None
     charged: int = None
     output: List[str] = None
@@ -509,6 +511,14 @@ class InvokeScriptResult(core.Gs2Result):
 
     def with_random_status(self, random_status: RandomStatus) -> InvokeScriptResult:
         self.random_status = random_status
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> InvokeScriptResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> InvokeScriptResult:
+        self.transaction_result = transaction_result
         return self
 
     def with_execute_time(self, execute_time: int) -> InvokeScriptResult:
@@ -546,6 +556,8 @@ class InvokeScriptResult(core.Gs2Result):
             .with_result(data.get('result'))\
             .with_transaction(Transaction.from_dict(data.get('transaction')))\
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
             .with_output(None if data.get('output') is None else [
@@ -559,6 +571,8 @@ class InvokeScriptResult(core.Gs2Result):
             "result": self.result,
             "transaction": self.transaction.to_dict() if self.transaction else None,
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
+            "atomicCommit": self.atomic_commit,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
             "executeTime": self.execute_time,
             "charged": self.charged,
             "output": None if self.output is None else [
@@ -573,6 +587,8 @@ class DebugInvokeResult(core.Gs2Result):
     result: str = None
     transaction: Transaction = None
     random_status: RandomStatus = None
+    atomic_commit: bool = None
+    transaction_result: TransactionResult = None
     execute_time: int = None
     charged: int = None
     output: List[str] = None
@@ -591,6 +607,14 @@ class DebugInvokeResult(core.Gs2Result):
 
     def with_random_status(self, random_status: RandomStatus) -> DebugInvokeResult:
         self.random_status = random_status
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> DebugInvokeResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> DebugInvokeResult:
+        self.transaction_result = transaction_result
         return self
 
     def with_execute_time(self, execute_time: int) -> DebugInvokeResult:
@@ -628,6 +652,8 @@ class DebugInvokeResult(core.Gs2Result):
             .with_result(data.get('result'))\
             .with_transaction(Transaction.from_dict(data.get('transaction')))\
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
             .with_output(None if data.get('output') is None else [
@@ -641,6 +667,8 @@ class DebugInvokeResult(core.Gs2Result):
             "result": self.result,
             "transaction": self.transaction.to_dict() if self.transaction else None,
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
+            "atomicCommit": self.atomic_commit,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
             "executeTime": self.execute_time,
             "charged": self.charged,
             "output": None if self.output is None else [
@@ -655,6 +683,8 @@ class InvokeByStampSheetResult(core.Gs2Result):
     result: str = None
     transaction: Transaction = None
     random_status: RandomStatus = None
+    atomic_commit: bool = None
+    transaction_result: TransactionResult = None
     execute_time: int = None
     charged: int = None
     output: List[str] = None
@@ -673,6 +703,14 @@ class InvokeByStampSheetResult(core.Gs2Result):
 
     def with_random_status(self, random_status: RandomStatus) -> InvokeByStampSheetResult:
         self.random_status = random_status
+        return self
+
+    def with_atomic_commit(self, atomic_commit: bool) -> InvokeByStampSheetResult:
+        self.atomic_commit = atomic_commit
+        return self
+
+    def with_transaction_result(self, transaction_result: TransactionResult) -> InvokeByStampSheetResult:
+        self.transaction_result = transaction_result
         return self
 
     def with_execute_time(self, execute_time: int) -> InvokeByStampSheetResult:
@@ -710,6 +748,8 @@ class InvokeByStampSheetResult(core.Gs2Result):
             .with_result(data.get('result'))\
             .with_transaction(Transaction.from_dict(data.get('transaction')))\
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
+            .with_atomic_commit(data.get('atomicCommit'))\
+            .with_transaction_result(TransactionResult.from_dict(data.get('transactionResult')))\
             .with_execute_time(data.get('executeTime'))\
             .with_charged(data.get('charged'))\
             .with_output(None if data.get('output') is None else [
@@ -723,6 +763,8 @@ class InvokeByStampSheetResult(core.Gs2Result):
             "result": self.result,
             "transaction": self.transaction.to_dict() if self.transaction else None,
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
+            "atomicCommit": self.atomic_commit,
+            "transactionResult": self.transaction_result.to_dict() if self.transaction_result else None,
             "executeTime": self.execute_time,
             "charged": self.charged,
             "output": None if self.output is None else [

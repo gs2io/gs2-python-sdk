@@ -1866,6 +1866,177 @@ class Gs2InboxRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _batch_read_messages(
+        self,
+        request: BatchReadMessagesRequest,
+        callback: Callable[[AsyncResult[BatchReadMessagesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inbox',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/messages/read/batch".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.message_names is not None:
+            body["messageNames"] = [
+                item
+                for item in request.message_names
+            ]
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=BatchReadMessagesResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def batch_read_messages(
+        self,
+        request: BatchReadMessagesRequest,
+    ) -> BatchReadMessagesResult:
+        async_result = []
+        with timeout(30):
+            self._batch_read_messages(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def batch_read_messages_async(
+        self,
+        request: BatchReadMessagesRequest,
+    ) -> BatchReadMessagesResult:
+        async_result = []
+        self._batch_read_messages(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _batch_read_messages_by_user_id(
+        self,
+        request: BatchReadMessagesByUserIdRequest,
+        callback: Callable[[AsyncResult[BatchReadMessagesByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inbox',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/messages/read/batch".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.message_names is not None:
+            body["messageNames"] = [
+                item
+                for item in request.message_names
+            ]
+        if request.config is not None:
+            body["config"] = [
+                item.to_dict()
+                for item in request.config
+            ]
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=BatchReadMessagesByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def batch_read_messages_by_user_id(
+        self,
+        request: BatchReadMessagesByUserIdRequest,
+    ) -> BatchReadMessagesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._batch_read_messages_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def batch_read_messages_by_user_id_async(
+        self,
+        request: BatchReadMessagesByUserIdRequest,
+    ) -> BatchReadMessagesByUserIdResult:
+        async_result = []
+        self._batch_read_messages_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_message(
         self,
         request: DeleteMessageRequest,

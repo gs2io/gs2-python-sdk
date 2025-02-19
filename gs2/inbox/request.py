@@ -1389,6 +1389,161 @@ class ReadMessageByUserIdRequest(core.Gs2Request):
         }
 
 
+class BatchReadMessagesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    message_names: List[str] = None
+    config: List[Config] = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> BatchReadMessagesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> BatchReadMessagesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_message_names(self, message_names: List[str]) -> BatchReadMessagesRequest:
+        self.message_names = message_names
+        return self
+
+    def with_config(self, config: List[Config]) -> BatchReadMessagesRequest:
+        self.config = config
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BatchReadMessagesRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchReadMessagesRequest]:
+        if data is None:
+            return None
+        return BatchReadMessagesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_message_names(None if data.get('messageNames') is None else [
+                data.get('messageNames')[i]
+                for i in range(len(data.get('messageNames')))
+            ])\
+            .with_config(None if data.get('config') is None else [
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "messageNames": None if self.message_names is None else [
+                self.message_names[i]
+                for i in range(len(self.message_names))
+            ],
+            "config": None if self.config is None else [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config))
+            ],
+        }
+
+
+class BatchReadMessagesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    message_names: List[str] = None
+    config: List[Config] = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> BatchReadMessagesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> BatchReadMessagesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_message_names(self, message_names: List[str]) -> BatchReadMessagesByUserIdRequest:
+        self.message_names = message_names
+        return self
+
+    def with_config(self, config: List[Config]) -> BatchReadMessagesByUserIdRequest:
+        self.config = config
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> BatchReadMessagesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> BatchReadMessagesByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[BatchReadMessagesByUserIdRequest]:
+        if data is None:
+            return None
+        return BatchReadMessagesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_message_names(None if data.get('messageNames') is None else [
+                data.get('messageNames')[i]
+                for i in range(len(data.get('messageNames')))
+            ])\
+            .with_config(None if data.get('config') is None else [
+                Config.from_dict(data.get('config')[i])
+                for i in range(len(data.get('config')))
+            ])\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "messageNames": None if self.message_names is None else [
+                self.message_names[i]
+                for i in range(len(self.message_names))
+            ],
+            "config": None if self.config is None else [
+                self.config[i].to_dict() if self.config[i] else None
+                for i in range(len(self.config))
+            ],
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DeleteMessageRequest(core.Gs2Request):
 
     context_stack: str = None
