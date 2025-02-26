@@ -1331,6 +1331,7 @@ class Namespace(core.Gs2Model):
     authentication_script: ScriptSetting = None
     create_take_over_script: ScriptSetting = None
     do_take_over_script: ScriptSetting = None
+    ban_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1370,6 +1371,10 @@ class Namespace(core.Gs2Model):
 
     def with_do_take_over_script(self, do_take_over_script: ScriptSetting) -> Namespace:
         self.do_take_over_script = do_take_over_script
+        return self
+
+    def with_ban_script(self, ban_script: ScriptSetting) -> Namespace:
+        self.ban_script = ban_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1459,6 +1464,7 @@ class Namespace(core.Gs2Model):
             .with_authentication_script(ScriptSetting.from_dict(data.get('authenticationScript')))\
             .with_create_take_over_script(ScriptSetting.from_dict(data.get('createTakeOverScript')))\
             .with_do_take_over_script(ScriptSetting.from_dict(data.get('doTakeOverScript')))\
+            .with_ban_script(ScriptSetting.from_dict(data.get('banScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1475,6 +1481,7 @@ class Namespace(core.Gs2Model):
             "authenticationScript": self.authentication_script.to_dict() if self.authentication_script else None,
             "createTakeOverScript": self.create_take_over_script.to_dict() if self.create_take_over_script else None,
             "doTakeOverScript": self.do_take_over_script.to_dict() if self.do_take_over_script else None,
+            "banScript": self.ban_script.to_dict() if self.ban_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

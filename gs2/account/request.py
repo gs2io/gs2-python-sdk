@@ -71,6 +71,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     authentication_script: ScriptSetting = None
     create_take_over_script: ScriptSetting = None
     do_take_over_script: ScriptSetting = None
+    ban_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -105,6 +106,10 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.do_take_over_script = do_take_over_script
         return self
 
+    def with_ban_script(self, ban_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.ban_script = ban_script
+        return self
+
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
         self.log_setting = log_setting
         return self
@@ -136,6 +141,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_authentication_script(ScriptSetting.from_dict(data.get('authenticationScript')))\
             .with_create_take_over_script(ScriptSetting.from_dict(data.get('createTakeOverScript')))\
             .with_do_take_over_script(ScriptSetting.from_dict(data.get('doTakeOverScript')))\
+            .with_ban_script(ScriptSetting.from_dict(data.get('banScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -148,6 +154,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "authenticationScript": self.authentication_script.to_dict() if self.authentication_script else None,
             "createTakeOverScript": self.create_take_over_script.to_dict() if self.create_take_over_script else None,
             "doTakeOverScript": self.do_take_over_script.to_dict() if self.do_take_over_script else None,
+            "banScript": self.ban_script.to_dict() if self.ban_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -234,6 +241,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     authentication_script: ScriptSetting = None
     create_take_over_script: ScriptSetting = None
     do_take_over_script: ScriptSetting = None
+    ban_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -262,6 +270,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_do_take_over_script(self, do_take_over_script: ScriptSetting) -> UpdateNamespaceRequest:
         self.do_take_over_script = do_take_over_script
+        return self
+
+    def with_ban_script(self, ban_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.ban_script = ban_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -294,6 +306,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_authentication_script(ScriptSetting.from_dict(data.get('authenticationScript')))\
             .with_create_take_over_script(ScriptSetting.from_dict(data.get('createTakeOverScript')))\
             .with_do_take_over_script(ScriptSetting.from_dict(data.get('doTakeOverScript')))\
+            .with_ban_script(ScriptSetting.from_dict(data.get('banScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -305,6 +318,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "authenticationScript": self.authentication_script.to_dict() if self.authentication_script else None,
             "createTakeOverScript": self.create_take_over_script.to_dict() if self.create_take_over_script else None,
             "doTakeOverScript": self.do_take_over_script.to_dict() if self.do_take_over_script else None,
+            "banScript": self.ban_script.to_dict() if self.ban_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

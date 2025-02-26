@@ -128,6 +128,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["createTakeOverScript"] = request.create_take_over_script.to_dict()
         if request.do_take_over_script is not None:
             body["doTakeOverScript"] = request.do_take_over_script.to_dict()
+        if request.ban_script is not None:
+            body["banScript"] = request.ban_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -355,6 +357,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["createTakeOverScript"] = request.create_take_over_script.to_dict()
         if request.do_take_over_script is not None:
             body["doTakeOverScript"] = request.do_take_over_script.to_dict()
+        if request.ban_script is not None:
+            body["banScript"] = request.ban_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

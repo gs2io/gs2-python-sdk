@@ -4244,7 +4244,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}".format(
+        ) + "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}/raw".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             moldModelName=request.mold_model_name if request.mold_model_name is not None and request.mold_model_name != '' else 'null',
             index=request.index if request.index is not None and request.index != '' else 'null',
@@ -5342,7 +5342,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
-        ) + "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}".format(
+        ) + "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}/raw".format(
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             propertyFormModelName=request.property_form_model_name if request.property_form_model_name is not None and request.property_form_model_name != '' else 'null',
             propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
