@@ -482,6 +482,54 @@ class GitHubCheckoutSetting(core.Gs2Model):
         }
 
 
+class GooglePlayRealtimeNotificationMessage(core.Gs2Model):
+    data: str = None
+    message_id: str = None
+    publish_time: str = None
+
+    def with_data(self, data: str) -> GooglePlayRealtimeNotificationMessage:
+        self.data = data
+        return self
+
+    def with_message_id(self, message_id: str) -> GooglePlayRealtimeNotificationMessage:
+        self.message_id = message_id
+        return self
+
+    def with_publish_time(self, publish_time: str) -> GooglePlayRealtimeNotificationMessage:
+        self.publish_time = publish_time
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GooglePlayRealtimeNotificationMessage]:
+        if data is None:
+            return None
+        return GooglePlayRealtimeNotificationMessage()\
+            .with_data(data.get('data'))\
+            .with_message_id(data.get('messageId'))\
+            .with_publish_time(data.get('publishTime'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "data": self.data,
+            "messageId": self.message_id,
+            "publishTime": self.publish_time,
+        }
+
+
 class GooglePlayContent(core.Gs2Model):
     product_id: str = None
 
@@ -615,6 +663,61 @@ class AppleAppStoreVerifyReceiptEvent(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "environment": self.environment,
+        }
+
+
+class RefundEvent(core.Gs2Model):
+    content_name: str = None
+    platform: str = None
+    apple_app_store_refund_event: AppleAppStoreVerifyReceiptEvent = None
+    google_play_refund_event: GooglePlayVerifyReceiptEvent = None
+
+    def with_content_name(self, content_name: str) -> RefundEvent:
+        self.content_name = content_name
+        return self
+
+    def with_platform(self, platform: str) -> RefundEvent:
+        self.platform = platform
+        return self
+
+    def with_apple_app_store_refund_event(self, apple_app_store_refund_event: AppleAppStoreVerifyReceiptEvent) -> RefundEvent:
+        self.apple_app_store_refund_event = apple_app_store_refund_event
+        return self
+
+    def with_google_play_refund_event(self, google_play_refund_event: GooglePlayVerifyReceiptEvent) -> RefundEvent:
+        self.google_play_refund_event = google_play_refund_event
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RefundEvent]:
+        if data is None:
+            return None
+        return RefundEvent()\
+            .with_content_name(data.get('contentName'))\
+            .with_platform(data.get('platform'))\
+            .with_apple_app_store_refund_event(AppleAppStoreVerifyReceiptEvent.from_dict(data.get('appleAppStoreRefundEvent')))\
+            .with_google_play_refund_event(GooglePlayVerifyReceiptEvent.from_dict(data.get('googlePlayRefundEvent')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "contentName": self.content_name,
+            "platform": self.platform,
+            "appleAppStoreRefundEvent": self.apple_app_store_refund_event.to_dict() if self.apple_app_store_refund_event else None,
+            "googlePlayRefundEvent": self.google_play_refund_event.to_dict() if self.google_play_refund_event else None,
         }
 
 
@@ -921,6 +1024,7 @@ class FakeSetting(core.Gs2Model):
 class GooglePlaySetting(core.Gs2Model):
     package_name: str = None
     public_key: str = None
+    credentials_j_s_o_n: str = None
 
     def with_package_name(self, package_name: str) -> GooglePlaySetting:
         self.package_name = package_name
@@ -928,6 +1032,10 @@ class GooglePlaySetting(core.Gs2Model):
 
     def with_public_key(self, public_key: str) -> GooglePlaySetting:
         self.public_key = public_key
+        return self
+
+    def with_credentials_j_s_o_n(self, credentials_j_s_o_n: str) -> GooglePlaySetting:
+        self.credentials_j_s_o_n = credentials_j_s_o_n
         return self
 
     def get(self, key, default=None):
@@ -950,20 +1058,37 @@ class GooglePlaySetting(core.Gs2Model):
             return None
         return GooglePlaySetting()\
             .with_package_name(data.get('packageName'))\
-            .with_public_key(data.get('publicKey'))
+            .with_public_key(data.get('publicKey'))\
+            .with_credentials_j_s_o_n(data.get('credentialsJSON'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "packageName": self.package_name,
             "publicKey": self.public_key,
+            "credentialsJSON": self.credentials_j_s_o_n,
         }
 
 
 class AppleAppStoreSetting(core.Gs2Model):
     bundle_id: str = None
+    team_id: str = None
+    key_id: str = None
+    private_key_pem: str = None
 
     def with_bundle_id(self, bundle_id: str) -> AppleAppStoreSetting:
         self.bundle_id = bundle_id
+        return self
+
+    def with_team_id(self, team_id: str) -> AppleAppStoreSetting:
+        self.team_id = team_id
+        return self
+
+    def with_key_id(self, key_id: str) -> AppleAppStoreSetting:
+        self.key_id = key_id
+        return self
+
+    def with_private_key_pem(self, private_key_pem: str) -> AppleAppStoreSetting:
+        self.private_key_pem = private_key_pem
         return self
 
     def get(self, key, default=None):
@@ -985,11 +1110,17 @@ class AppleAppStoreSetting(core.Gs2Model):
         if data is None:
             return None
         return AppleAppStoreSetting()\
-            .with_bundle_id(data.get('bundleId'))
+            .with_bundle_id(data.get('bundleId'))\
+            .with_team_id(data.get('teamId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_private_key_pem(data.get('privateKeyPem'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "bundleId": self.bundle_id,
+            "teamId": self.team_id,
+            "keyId": self.key_id,
+            "privateKeyPem": self.private_key_pem,
         }
 
 
@@ -1435,6 +1566,158 @@ class StoreContentModel(core.Gs2Model):
         }
 
 
+class SubscribeTransaction(core.Gs2Model):
+    subscribe_transaction_id: str = None
+    transaction_id: str = None
+    store: str = None
+    user_id: str = None
+    status: str = None
+    status_detail: str = None
+    expires_at: int = None
+    created_at: int = None
+    updated_at: int = None
+    revision: int = None
+
+    def with_subscribe_transaction_id(self, subscribe_transaction_id: str) -> SubscribeTransaction:
+        self.subscribe_transaction_id = subscribe_transaction_id
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> SubscribeTransaction:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_store(self, store: str) -> SubscribeTransaction:
+        self.store = store
+        return self
+
+    def with_user_id(self, user_id: str) -> SubscribeTransaction:
+        self.user_id = user_id
+        return self
+
+    def with_status(self, status: str) -> SubscribeTransaction:
+        self.status = status
+        return self
+
+    def with_status_detail(self, status_detail: str) -> SubscribeTransaction:
+        self.status_detail = status_detail
+        return self
+
+    def with_expires_at(self, expires_at: int) -> SubscribeTransaction:
+        self.expires_at = expires_at
+        return self
+
+    def with_created_at(self, created_at: int) -> SubscribeTransaction:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> SubscribeTransaction:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> SubscribeTransaction:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        transaction_id,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:money2:{namespaceName}:subscriptionTransaction:{transactionId}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            transactionId=transaction_id,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_transaction_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('transaction_id')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubscribeTransaction]:
+        if data is None:
+            return None
+        return SubscribeTransaction()\
+            .with_subscribe_transaction_id(data.get('subscribeTransactionId'))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_store(data.get('store'))\
+            .with_user_id(data.get('userId'))\
+            .with_status(data.get('status'))\
+            .with_status_detail(data.get('statusDetail'))\
+            .with_expires_at(data.get('expiresAt'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "subscribeTransactionId": self.subscribe_transaction_id,
+            "transactionId": self.transaction_id,
+            "store": self.store,
+            "userId": self.user_id,
+            "status": self.status,
+            "statusDetail": self.status_detail,
+            "expiresAt": self.expires_at,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+        }
+
+
 class Event(core.Gs2Model):
     event_id: str = None
     transaction_id: str = None
@@ -1443,6 +1726,7 @@ class Event(core.Gs2Model):
     verify_receipt_event: VerifyReceiptEvent = None
     deposit_event: DepositEvent = None
     withdraw_event: WithdrawEvent = None
+    refund_event: RefundEvent = None
     created_at: int = None
     revision: int = None
 
@@ -1472,6 +1756,10 @@ class Event(core.Gs2Model):
 
     def with_withdraw_event(self, withdraw_event: WithdrawEvent) -> Event:
         self.withdraw_event = withdraw_event
+        return self
+
+    def with_refund_event(self, refund_event: RefundEvent) -> Event:
+        self.refund_event = refund_event
         return self
 
     def with_created_at(self, created_at: int) -> Event:
@@ -1563,6 +1851,7 @@ class Event(core.Gs2Model):
             .with_verify_receipt_event(VerifyReceiptEvent.from_dict(data.get('verifyReceiptEvent')))\
             .with_deposit_event(DepositEvent.from_dict(data.get('depositEvent')))\
             .with_withdraw_event(WithdrawEvent.from_dict(data.get('withdrawEvent')))\
+            .with_refund_event(RefundEvent.from_dict(data.get('refundEvent')))\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
@@ -1575,6 +1864,7 @@ class Event(core.Gs2Model):
             "verifyReceiptEvent": self.verify_receipt_event.to_dict() if self.verify_receipt_event else None,
             "depositEvent": self.deposit_event.to_dict() if self.deposit_event else None,
             "withdrawEvent": self.withdraw_event.to_dict() if self.withdraw_event else None,
+            "refundEvent": self.refund_event.to_dict() if self.refund_event else None,
             "createdAt": self.created_at,
             "revision": self.revision,
         }
