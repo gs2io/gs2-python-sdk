@@ -1071,7 +1071,7 @@ class GooglePlaySetting(core.Gs2Model):
 
 class AppleAppStoreSetting(core.Gs2Model):
     bundle_id: str = None
-    team_id: str = None
+    issuer_id: str = None
     key_id: str = None
     private_key_pem: str = None
 
@@ -1079,8 +1079,8 @@ class AppleAppStoreSetting(core.Gs2Model):
         self.bundle_id = bundle_id
         return self
 
-    def with_team_id(self, team_id: str) -> AppleAppStoreSetting:
-        self.team_id = team_id
+    def with_issuer_id(self, issuer_id: str) -> AppleAppStoreSetting:
+        self.issuer_id = issuer_id
         return self
 
     def with_key_id(self, key_id: str) -> AppleAppStoreSetting:
@@ -1111,14 +1111,14 @@ class AppleAppStoreSetting(core.Gs2Model):
             return None
         return AppleAppStoreSetting()\
             .with_bundle_id(data.get('bundleId'))\
-            .with_team_id(data.get('teamId'))\
+            .with_issuer_id(data.get('issuerId'))\
             .with_key_id(data.get('keyId'))\
             .with_private_key_pem(data.get('privateKeyPem'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "bundleId": self.bundle_id,
-            "teamId": self.team_id,
+            "issuerId": self.issuer_id,
             "keyId": self.key_id,
             "privateKeyPem": self.private_key_pem,
         }
