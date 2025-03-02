@@ -70,6 +70,11 @@ class CreateNamespaceRequest(core.Gs2Request):
     platform_setting: PlatformSetting = None
     deposit_balance_script: ScriptSetting = None
     withdraw_balance_script: ScriptSetting = None
+    subscribe_script: str = None
+    renew_script: str = None
+    unsubscribe_script: str = None
+    take_over_script: ScriptSetting = None
+    change_subscription_status_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -98,6 +103,26 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_withdraw_balance_script(self, withdraw_balance_script: ScriptSetting) -> CreateNamespaceRequest:
         self.withdraw_balance_script = withdraw_balance_script
+        return self
+
+    def with_subscribe_script(self, subscribe_script: str) -> CreateNamespaceRequest:
+        self.subscribe_script = subscribe_script
+        return self
+
+    def with_renew_script(self, renew_script: str) -> CreateNamespaceRequest:
+        self.renew_script = renew_script
+        return self
+
+    def with_unsubscribe_script(self, unsubscribe_script: str) -> CreateNamespaceRequest:
+        self.unsubscribe_script = unsubscribe_script
+        return self
+
+    def with_take_over_script(self, take_over_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.take_over_script = take_over_script
+        return self
+
+    def with_change_subscription_status_notification(self, change_subscription_status_notification: NotificationSetting) -> CreateNamespaceRequest:
+        self.change_subscription_status_notification = change_subscription_status_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -130,6 +155,11 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
             .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
             .with_withdraw_balance_script(ScriptSetting.from_dict(data.get('withdrawBalanceScript')))\
+            .with_subscribe_script(data.get('subscribeScript'))\
+            .with_renew_script(data.get('renewScript'))\
+            .with_unsubscribe_script(data.get('unsubscribeScript'))\
+            .with_take_over_script(ScriptSetting.from_dict(data.get('takeOverScript')))\
+            .with_change_subscription_status_notification(NotificationSetting.from_dict(data.get('changeSubscriptionStatusNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -141,6 +171,11 @@ class CreateNamespaceRequest(core.Gs2Request):
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
             "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
             "withdrawBalanceScript": self.withdraw_balance_script.to_dict() if self.withdraw_balance_script else None,
+            "subscribeScript": self.subscribe_script,
+            "renewScript": self.renew_script,
+            "unsubscribeScript": self.unsubscribe_script,
+            "takeOverScript": self.take_over_script.to_dict() if self.take_over_script else None,
+            "changeSubscriptionStatusNotification": self.change_subscription_status_notification.to_dict() if self.change_subscription_status_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -226,6 +261,11 @@ class UpdateNamespaceRequest(core.Gs2Request):
     platform_setting: PlatformSetting = None
     deposit_balance_script: ScriptSetting = None
     withdraw_balance_script: ScriptSetting = None
+    subscribe_script: str = None
+    renew_script: str = None
+    unsubscribe_script: str = None
+    take_over_script: ScriptSetting = None
+    change_subscription_status_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -250,6 +290,26 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_withdraw_balance_script(self, withdraw_balance_script: ScriptSetting) -> UpdateNamespaceRequest:
         self.withdraw_balance_script = withdraw_balance_script
+        return self
+
+    def with_subscribe_script(self, subscribe_script: str) -> UpdateNamespaceRequest:
+        self.subscribe_script = subscribe_script
+        return self
+
+    def with_renew_script(self, renew_script: str) -> UpdateNamespaceRequest:
+        self.renew_script = renew_script
+        return self
+
+    def with_unsubscribe_script(self, unsubscribe_script: str) -> UpdateNamespaceRequest:
+        self.unsubscribe_script = unsubscribe_script
+        return self
+
+    def with_take_over_script(self, take_over_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.take_over_script = take_over_script
+        return self
+
+    def with_change_subscription_status_notification(self, change_subscription_status_notification: NotificationSetting) -> UpdateNamespaceRequest:
+        self.change_subscription_status_notification = change_subscription_status_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -281,6 +341,11 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
             .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
             .with_withdraw_balance_script(ScriptSetting.from_dict(data.get('withdrawBalanceScript')))\
+            .with_subscribe_script(data.get('subscribeScript'))\
+            .with_renew_script(data.get('renewScript'))\
+            .with_unsubscribe_script(data.get('unsubscribeScript'))\
+            .with_take_over_script(ScriptSetting.from_dict(data.get('takeOverScript')))\
+            .with_change_subscription_status_notification(NotificationSetting.from_dict(data.get('changeSubscriptionStatusNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -291,6 +356,11 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
             "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
             "withdrawBalanceScript": self.withdraw_balance_script.to_dict() if self.withdraw_balance_script else None,
+            "subscribeScript": self.subscribe_script,
+            "renewScript": self.renew_script,
+            "unsubscribeScript": self.unsubscribe_script,
+            "takeOverScript": self.take_over_script.to_dict() if self.take_over_script else None,
+            "changeSubscriptionStatusNotification": self.change_subscription_status_notification.to_dict() if self.change_subscription_status_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -1675,6 +1745,240 @@ class GetSubscriptionStatusByUserIdRequest(core.Gs2Request):
         }
 
 
+class AllocateSubscriptionStatusRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    receipt: Receipt = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AllocateSubscriptionStatusRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> AllocateSubscriptionStatusRequest:
+        self.access_token = access_token
+        return self
+
+    def with_receipt(self, receipt: Receipt) -> AllocateSubscriptionStatusRequest:
+        self.receipt = receipt
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AllocateSubscriptionStatusRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AllocateSubscriptionStatusRequest]:
+        if data is None:
+            return None
+        return AllocateSubscriptionStatusRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_receipt(Receipt.from_dict(data.get('receipt')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "receipt": self.receipt.to_dict() if self.receipt else None,
+        }
+
+
+class AllocateSubscriptionStatusByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    receipt: Receipt = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AllocateSubscriptionStatusByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AllocateSubscriptionStatusByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_receipt(self, receipt: Receipt) -> AllocateSubscriptionStatusByUserIdRequest:
+        self.receipt = receipt
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> AllocateSubscriptionStatusByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AllocateSubscriptionStatusByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AllocateSubscriptionStatusByUserIdRequest]:
+        if data is None:
+            return None
+        return AllocateSubscriptionStatusByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_receipt(Receipt.from_dict(data.get('receipt')))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "receipt": self.receipt.to_dict() if self.receipt else None,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class TakeoverSubscriptionStatusRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    receipt: Receipt = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> TakeoverSubscriptionStatusRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> TakeoverSubscriptionStatusRequest:
+        self.access_token = access_token
+        return self
+
+    def with_receipt(self, receipt: Receipt) -> TakeoverSubscriptionStatusRequest:
+        self.receipt = receipt
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> TakeoverSubscriptionStatusRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TakeoverSubscriptionStatusRequest]:
+        if data is None:
+            return None
+        return TakeoverSubscriptionStatusRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_receipt(Receipt.from_dict(data.get('receipt')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "receipt": self.receipt.to_dict() if self.receipt else None,
+        }
+
+
+class TakeoverSubscriptionStatusByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    receipt: Receipt = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> TakeoverSubscriptionStatusByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> TakeoverSubscriptionStatusByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_receipt(self, receipt: Receipt) -> TakeoverSubscriptionStatusByUserIdRequest:
+        self.receipt = receipt
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> TakeoverSubscriptionStatusByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> TakeoverSubscriptionStatusByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TakeoverSubscriptionStatusByUserIdRequest]:
+        if data is None:
+            return None
+        return TakeoverSubscriptionStatusByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_receipt(Receipt.from_dict(data.get('receipt')))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "receipt": self.receipt.to_dict() if self.receipt else None,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DescribeStoreContentModelsRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2170,6 +2474,7 @@ class CreateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
     metadata: str = None
     schedule_namespace_id: str = None
     trigger_name: str = None
+    reallocate_span_days: int = None
     apple_app_store: AppleAppStoreSubscriptionContent = None
     google_play: GooglePlaySubscriptionContent = None
 
@@ -2195,6 +2500,10 @@ class CreateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
 
     def with_trigger_name(self, trigger_name: str) -> CreateStoreSubscriptionContentModelMasterRequest:
         self.trigger_name = trigger_name
+        return self
+
+    def with_reallocate_span_days(self, reallocate_span_days: int) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.reallocate_span_days = reallocate_span_days
         return self
 
     def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> CreateStoreSubscriptionContentModelMasterRequest:
@@ -2230,6 +2539,7 @@ class CreateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
             .with_trigger_name(data.get('triggerName'))\
+            .with_reallocate_span_days(data.get('reallocateSpanDays'))\
             .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
             .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))
 
@@ -2241,6 +2551,7 @@ class CreateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "scheduleNamespaceId": self.schedule_namespace_id,
             "triggerName": self.trigger_name,
+            "reallocateSpanDays": self.reallocate_span_days,
             "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
             "googlePlay": self.google_play.to_dict() if self.google_play else None,
         }
@@ -2298,6 +2609,7 @@ class UpdateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
     metadata: str = None
     schedule_namespace_id: str = None
     trigger_name: str = None
+    reallocate_span_days: int = None
     apple_app_store: AppleAppStoreSubscriptionContent = None
     google_play: GooglePlaySubscriptionContent = None
 
@@ -2323,6 +2635,10 @@ class UpdateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
 
     def with_trigger_name(self, trigger_name: str) -> UpdateStoreSubscriptionContentModelMasterRequest:
         self.trigger_name = trigger_name
+        return self
+
+    def with_reallocate_span_days(self, reallocate_span_days: int) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.reallocate_span_days = reallocate_span_days
         return self
 
     def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> UpdateStoreSubscriptionContentModelMasterRequest:
@@ -2358,6 +2674,7 @@ class UpdateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
             .with_trigger_name(data.get('triggerName'))\
+            .with_reallocate_span_days(data.get('reallocateSpanDays'))\
             .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
             .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))
 
@@ -2369,6 +2686,7 @@ class UpdateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "scheduleNamespaceId": self.schedule_namespace_id,
             "triggerName": self.trigger_name,
+            "reallocateSpanDays": self.reallocate_span_days,
             "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
             "googlePlay": self.google_play.to_dict() if self.google_play else None,
         }

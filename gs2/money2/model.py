@@ -351,6 +351,54 @@ class LogSetting(core.Gs2Model):
         }
 
 
+class NotificationSetting(core.Gs2Model):
+    gateway_namespace_id: str = None
+    enable_transfer_mobile_notification: bool = None
+    sound: str = None
+
+    def with_gateway_namespace_id(self, gateway_namespace_id: str) -> NotificationSetting:
+        self.gateway_namespace_id = gateway_namespace_id
+        return self
+
+    def with_enable_transfer_mobile_notification(self, enable_transfer_mobile_notification: bool) -> NotificationSetting:
+        self.enable_transfer_mobile_notification = enable_transfer_mobile_notification
+        return self
+
+    def with_sound(self, sound: str) -> NotificationSetting:
+        self.sound = sound
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[NotificationSetting]:
+        if data is None:
+            return None
+        return NotificationSetting()\
+            .with_gateway_namespace_id(data.get('gatewayNamespaceId'))\
+            .with_enable_transfer_mobile_notification(data.get('enableTransferMobileNotification'))\
+            .with_sound(data.get('sound'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "gatewayNamespaceId": self.gateway_namespace_id,
+            "enableTransferMobileNotification": self.enable_transfer_mobile_notification,
+            "sound": self.sound,
+        }
+
+
 class ScriptSetting(core.Gs2Model):
     trigger_script_id: str = None
     done_trigger_target_type: str = None
@@ -1379,6 +1427,7 @@ class StoreSubscriptionContentModelMaster(core.Gs2Model):
     metadata: str = None
     schedule_namespace_id: str = None
     trigger_name: str = None
+    reallocate_span_days: int = None
     apple_app_store: AppleAppStoreSubscriptionContent = None
     google_play: GooglePlaySubscriptionContent = None
     created_at: int = None
@@ -1407,6 +1456,10 @@ class StoreSubscriptionContentModelMaster(core.Gs2Model):
 
     def with_trigger_name(self, trigger_name: str) -> StoreSubscriptionContentModelMaster:
         self.trigger_name = trigger_name
+        return self
+
+    def with_reallocate_span_days(self, reallocate_span_days: int) -> StoreSubscriptionContentModelMaster:
+        self.reallocate_span_days = reallocate_span_days
         return self
 
     def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> StoreSubscriptionContentModelMaster:
@@ -1509,6 +1562,7 @@ class StoreSubscriptionContentModelMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
             .with_trigger_name(data.get('triggerName'))\
+            .with_reallocate_span_days(data.get('reallocateSpanDays'))\
             .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
             .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))\
             .with_created_at(data.get('createdAt'))\
@@ -1523,6 +1577,7 @@ class StoreSubscriptionContentModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "scheduleNamespaceId": self.schedule_namespace_id,
             "triggerName": self.trigger_name,
+            "reallocateSpanDays": self.reallocate_span_days,
             "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
             "googlePlay": self.google_play.to_dict() if self.google_play else None,
             "createdAt": self.created_at,
@@ -1537,6 +1592,7 @@ class StoreSubscriptionContentModel(core.Gs2Model):
     metadata: str = None
     schedule_namespace_id: str = None
     trigger_name: str = None
+    reallocate_span_days: int = None
     apple_app_store: AppleAppStoreSubscriptionContent = None
     google_play: GooglePlaySubscriptionContent = None
 
@@ -1558,6 +1614,10 @@ class StoreSubscriptionContentModel(core.Gs2Model):
 
     def with_trigger_name(self, trigger_name: str) -> StoreSubscriptionContentModel:
         self.trigger_name = trigger_name
+        return self
+
+    def with_reallocate_span_days(self, reallocate_span_days: int) -> StoreSubscriptionContentModel:
+        self.reallocate_span_days = reallocate_span_days
         return self
 
     def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> StoreSubscriptionContentModel:
@@ -1647,6 +1707,7 @@ class StoreSubscriptionContentModel(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
             .with_trigger_name(data.get('triggerName'))\
+            .with_reallocate_span_days(data.get('reallocateSpanDays'))\
             .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
             .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))
 
@@ -1657,6 +1718,7 @@ class StoreSubscriptionContentModel(core.Gs2Model):
             "metadata": self.metadata,
             "scheduleNamespaceId": self.schedule_namespace_id,
             "triggerName": self.trigger_name,
+            "reallocateSpanDays": self.reallocate_span_days,
             "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
             "googlePlay": self.google_play.to_dict() if self.google_play else None,
         }
@@ -2007,6 +2069,7 @@ class SubscribeTransaction(core.Gs2Model):
     user_id: str = None
     status_detail: str = None
     expires_at: int = None
+    last_allocated_at: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -2037,6 +2100,10 @@ class SubscribeTransaction(core.Gs2Model):
 
     def with_expires_at(self, expires_at: int) -> SubscribeTransaction:
         self.expires_at = expires_at
+        return self
+
+    def with_last_allocated_at(self, last_allocated_at: int) -> SubscribeTransaction:
+        self.last_allocated_at = last_allocated_at
         return self
 
     def with_created_at(self, created_at: int) -> SubscribeTransaction:
@@ -2144,6 +2211,7 @@ class SubscribeTransaction(core.Gs2Model):
             .with_user_id(data.get('userId'))\
             .with_status_detail(data.get('statusDetail'))\
             .with_expires_at(data.get('expiresAt'))\
+            .with_last_allocated_at(data.get('lastAllocatedAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -2157,6 +2225,7 @@ class SubscribeTransaction(core.Gs2Model):
             "userId": self.user_id,
             "statusDetail": self.status_detail,
             "expiresAt": self.expires_at,
+            "lastAllocatedAt": self.last_allocated_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -2487,6 +2556,11 @@ class Namespace(core.Gs2Model):
     platform_setting: PlatformSetting = None
     deposit_balance_script: ScriptSetting = None
     withdraw_balance_script: ScriptSetting = None
+    subscribe_script: str = None
+    renew_script: str = None
+    unsubscribe_script: str = None
+    take_over_script: ScriptSetting = None
+    change_subscription_status_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -2522,6 +2596,26 @@ class Namespace(core.Gs2Model):
 
     def with_withdraw_balance_script(self, withdraw_balance_script: ScriptSetting) -> Namespace:
         self.withdraw_balance_script = withdraw_balance_script
+        return self
+
+    def with_subscribe_script(self, subscribe_script: str) -> Namespace:
+        self.subscribe_script = subscribe_script
+        return self
+
+    def with_renew_script(self, renew_script: str) -> Namespace:
+        self.renew_script = renew_script
+        return self
+
+    def with_unsubscribe_script(self, unsubscribe_script: str) -> Namespace:
+        self.unsubscribe_script = unsubscribe_script
+        return self
+
+    def with_take_over_script(self, take_over_script: ScriptSetting) -> Namespace:
+        self.take_over_script = take_over_script
+        return self
+
+    def with_change_subscription_status_notification(self, change_subscription_status_notification: NotificationSetting) -> Namespace:
+        self.change_subscription_status_notification = change_subscription_status_notification
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -2610,6 +2704,11 @@ class Namespace(core.Gs2Model):
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
             .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
             .with_withdraw_balance_script(ScriptSetting.from_dict(data.get('withdrawBalanceScript')))\
+            .with_subscribe_script(data.get('subscribeScript'))\
+            .with_renew_script(data.get('renewScript'))\
+            .with_unsubscribe_script(data.get('unsubscribeScript'))\
+            .with_take_over_script(ScriptSetting.from_dict(data.get('takeOverScript')))\
+            .with_change_subscription_status_notification(NotificationSetting.from_dict(data.get('changeSubscriptionStatusNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -2625,6 +2724,11 @@ class Namespace(core.Gs2Model):
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
             "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
             "withdrawBalanceScript": self.withdraw_balance_script.to_dict() if self.withdraw_balance_script else None,
+            "subscribeScript": self.subscribe_script,
+            "renewScript": self.renew_script,
+            "unsubscribeScript": self.unsubscribe_script,
+            "takeOverScript": self.take_over_script.to_dict() if self.take_over_script else None,
+            "changeSubscriptionStatusNotification": self.change_subscription_status_notification.to_dict() if self.change_subscription_status_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

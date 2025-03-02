@@ -1168,6 +1168,142 @@ class GetSubscriptionStatusByUserIdResult(core.Gs2Result):
         }
 
 
+class AllocateSubscriptionStatusResult(core.Gs2Result):
+    item: SubscriptionStatus = None
+
+    def with_item(self, item: SubscriptionStatus) -> AllocateSubscriptionStatusResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AllocateSubscriptionStatusResult]:
+        if data is None:
+            return None
+        return AllocateSubscriptionStatusResult()\
+            .with_item(SubscriptionStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class AllocateSubscriptionStatusByUserIdResult(core.Gs2Result):
+    item: SubscriptionStatus = None
+
+    def with_item(self, item: SubscriptionStatus) -> AllocateSubscriptionStatusByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AllocateSubscriptionStatusByUserIdResult]:
+        if data is None:
+            return None
+        return AllocateSubscriptionStatusByUserIdResult()\
+            .with_item(SubscriptionStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class TakeoverSubscriptionStatusResult(core.Gs2Result):
+    item: SubscriptionStatus = None
+
+    def with_item(self, item: SubscriptionStatus) -> TakeoverSubscriptionStatusResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TakeoverSubscriptionStatusResult]:
+        if data is None:
+            return None
+        return TakeoverSubscriptionStatusResult()\
+            .with_item(SubscriptionStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class TakeoverSubscriptionStatusByUserIdResult(core.Gs2Result):
+    item: SubscriptionStatus = None
+
+    def with_item(self, item: SubscriptionStatus) -> TakeoverSubscriptionStatusByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TakeoverSubscriptionStatusByUserIdResult]:
+        if data is None:
+            return None
+        return TakeoverSubscriptionStatusByUserIdResult()\
+            .with_item(SubscriptionStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DescribeStoreContentModelsResult(core.Gs2Result):
     items: List[StoreContentModel] = None
 

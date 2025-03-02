@@ -126,6 +126,16 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["depositBalanceScript"] = request.deposit_balance_script.to_dict()
         if request.withdraw_balance_script is not None:
             body["withdrawBalanceScript"] = request.withdraw_balance_script.to_dict()
+        if request.subscribe_script is not None:
+            body["subscribeScript"] = request.subscribe_script
+        if request.renew_script is not None:
+            body["renewScript"] = request.renew_script
+        if request.unsubscribe_script is not None:
+            body["unsubscribeScript"] = request.unsubscribe_script
+        if request.take_over_script is not None:
+            body["takeOverScript"] = request.take_over_script.to_dict()
+        if request.change_subscription_status_notification is not None:
+            body["changeSubscriptionStatusNotification"] = request.change_subscription_status_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -351,6 +361,16 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["depositBalanceScript"] = request.deposit_balance_script.to_dict()
         if request.withdraw_balance_script is not None:
             body["withdrawBalanceScript"] = request.withdraw_balance_script.to_dict()
+        if request.subscribe_script is not None:
+            body["subscribeScript"] = request.subscribe_script
+        if request.renew_script is not None:
+            body["renewScript"] = request.renew_script
+        if request.unsubscribe_script is not None:
+            body["unsubscribeScript"] = request.unsubscribe_script
+        if request.take_over_script is not None:
+            body["takeOverScript"] = request.take_over_script.to_dict()
+        if request.change_subscription_status_notification is not None:
+            body["changeSubscriptionStatusNotification"] = request.change_subscription_status_notification.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -2394,6 +2414,322 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _allocate_subscription_status(
+        self,
+        request: AllocateSubscriptionStatusRequest,
+        callback: Callable[[AsyncResult[AllocateSubscriptionStatusResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='subscriptionStatus',
+            function='allocateSubscriptionStatus',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.receipt is not None:
+            body["receipt"] = request.receipt.to_dict()
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AllocateSubscriptionStatusResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def allocate_subscription_status(
+        self,
+        request: AllocateSubscriptionStatusRequest,
+    ) -> AllocateSubscriptionStatusResult:
+        async_result = []
+        with timeout(30):
+            self._allocate_subscription_status(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def allocate_subscription_status_async(
+        self,
+        request: AllocateSubscriptionStatusRequest,
+    ) -> AllocateSubscriptionStatusResult:
+        async_result = []
+        self._allocate_subscription_status(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _allocate_subscription_status_by_user_id(
+        self,
+        request: AllocateSubscriptionStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[AllocateSubscriptionStatusByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='subscriptionStatus',
+            function='allocateSubscriptionStatusByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.receipt is not None:
+            body["receipt"] = request.receipt.to_dict()
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=AllocateSubscriptionStatusByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def allocate_subscription_status_by_user_id(
+        self,
+        request: AllocateSubscriptionStatusByUserIdRequest,
+    ) -> AllocateSubscriptionStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._allocate_subscription_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def allocate_subscription_status_by_user_id_async(
+        self,
+        request: AllocateSubscriptionStatusByUserIdRequest,
+    ) -> AllocateSubscriptionStatusByUserIdResult:
+        async_result = []
+        self._allocate_subscription_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _takeover_subscription_status(
+        self,
+        request: TakeoverSubscriptionStatusRequest,
+        callback: Callable[[AsyncResult[TakeoverSubscriptionStatusResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='subscriptionStatus',
+            function='takeoverSubscriptionStatus',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.receipt is not None:
+            body["receipt"] = request.receipt.to_dict()
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=TakeoverSubscriptionStatusResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def takeover_subscription_status(
+        self,
+        request: TakeoverSubscriptionStatusRequest,
+    ) -> TakeoverSubscriptionStatusResult:
+        async_result = []
+        with timeout(30):
+            self._takeover_subscription_status(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def takeover_subscription_status_async(
+        self,
+        request: TakeoverSubscriptionStatusRequest,
+    ) -> TakeoverSubscriptionStatusResult:
+        async_result = []
+        self._takeover_subscription_status(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _takeover_subscription_status_by_user_id(
+        self,
+        request: TakeoverSubscriptionStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[TakeoverSubscriptionStatusByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='subscriptionStatus',
+            function='takeoverSubscriptionStatusByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.receipt is not None:
+            body["receipt"] = request.receipt.to_dict()
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=TakeoverSubscriptionStatusByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def takeover_subscription_status_by_user_id(
+        self,
+        request: TakeoverSubscriptionStatusByUserIdRequest,
+    ) -> TakeoverSubscriptionStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._takeover_subscription_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def takeover_subscription_status_by_user_id_async(
+        self,
+        request: TakeoverSubscriptionStatusByUserIdRequest,
+    ) -> TakeoverSubscriptionStatusByUserIdResult:
+        async_result = []
+        self._takeover_subscription_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_store_content_models(
         self,
         request: DescribeStoreContentModelsRequest,
@@ -3169,6 +3505,8 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["scheduleNamespaceId"] = request.schedule_namespace_id
         if request.trigger_name is not None:
             body["triggerName"] = request.trigger_name
+        if request.reallocate_span_days is not None:
+            body["reallocateSpanDays"] = request.reallocate_span_days
         if request.apple_app_store is not None:
             body["appleAppStore"] = request.apple_app_store.to_dict()
         if request.google_play is not None:
@@ -3327,6 +3665,8 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["scheduleNamespaceId"] = request.schedule_namespace_id
         if request.trigger_name is not None:
             body["triggerName"] = request.trigger_name
+        if request.reallocate_span_days is not None:
+            body["reallocateSpanDays"] = request.reallocate_span_days
         if request.apple_app_store is not None:
             body["appleAppStore"] = request.apple_app_store.to_dict()
         if request.google_play is not None:
