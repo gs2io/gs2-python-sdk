@@ -2436,7 +2436,7 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if request.access_token is not None:
             body["accessToken"] = request.access_token
         if request.receipt is not None:
-            body["receipt"] = request.receipt.to_dict()
+            body["receipt"] = request.receipt
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2515,7 +2515,7 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if request.user_id is not None:
             body["userId"] = request.user_id
         if request.receipt is not None:
-            body["receipt"] = request.receipt.to_dict()
+            body["receipt"] = request.receipt
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
@@ -2594,7 +2594,7 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if request.access_token is not None:
             body["accessToken"] = request.access_token
         if request.receipt is not None:
-            body["receipt"] = request.receipt.to_dict()
+            body["receipt"] = request.receipt
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -2673,7 +2673,7 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if request.user_id is not None:
             body["userId"] = request.user_id
         if request.receipt is not None:
-            body["receipt"] = request.receipt.to_dict()
+            body["receipt"] = request.receipt
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

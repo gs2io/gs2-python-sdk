@@ -1750,7 +1750,7 @@ class AllocateSubscriptionStatusRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    receipt: Receipt = None
+    receipt: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> AllocateSubscriptionStatusRequest:
@@ -1761,7 +1761,7 @@ class AllocateSubscriptionStatusRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_receipt(self, receipt: Receipt) -> AllocateSubscriptionStatusRequest:
+    def with_receipt(self, receipt: str) -> AllocateSubscriptionStatusRequest:
         self.receipt = receipt
         return self
 
@@ -1790,13 +1790,13 @@ class AllocateSubscriptionStatusRequest(core.Gs2Request):
         return AllocateSubscriptionStatusRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_receipt(Receipt.from_dict(data.get('receipt')))
+            .with_receipt(data.get('receipt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "receipt": self.receipt.to_dict() if self.receipt else None,
+            "receipt": self.receipt,
         }
 
 
@@ -1805,7 +1805,7 @@ class AllocateSubscriptionStatusByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    receipt: Receipt = None
+    receipt: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1817,7 +1817,7 @@ class AllocateSubscriptionStatusByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_receipt(self, receipt: Receipt) -> AllocateSubscriptionStatusByUserIdRequest:
+    def with_receipt(self, receipt: str) -> AllocateSubscriptionStatusByUserIdRequest:
         self.receipt = receipt
         return self
 
@@ -1850,14 +1850,14 @@ class AllocateSubscriptionStatusByUserIdRequest(core.Gs2Request):
         return AllocateSubscriptionStatusByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_receipt(Receipt.from_dict(data.get('receipt')))\
+            .with_receipt(data.get('receipt'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "receipt": self.receipt.to_dict() if self.receipt else None,
+            "receipt": self.receipt,
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -1867,7 +1867,7 @@ class TakeoverSubscriptionStatusRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    receipt: Receipt = None
+    receipt: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> TakeoverSubscriptionStatusRequest:
@@ -1878,7 +1878,7 @@ class TakeoverSubscriptionStatusRequest(core.Gs2Request):
         self.access_token = access_token
         return self
 
-    def with_receipt(self, receipt: Receipt) -> TakeoverSubscriptionStatusRequest:
+    def with_receipt(self, receipt: str) -> TakeoverSubscriptionStatusRequest:
         self.receipt = receipt
         return self
 
@@ -1907,13 +1907,13 @@ class TakeoverSubscriptionStatusRequest(core.Gs2Request):
         return TakeoverSubscriptionStatusRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_receipt(Receipt.from_dict(data.get('receipt')))
+            .with_receipt(data.get('receipt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
-            "receipt": self.receipt.to_dict() if self.receipt else None,
+            "receipt": self.receipt,
         }
 
 
@@ -1922,7 +1922,7 @@ class TakeoverSubscriptionStatusByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
-    receipt: Receipt = None
+    receipt: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1934,7 +1934,7 @@ class TakeoverSubscriptionStatusByUserIdRequest(core.Gs2Request):
         self.user_id = user_id
         return self
 
-    def with_receipt(self, receipt: Receipt) -> TakeoverSubscriptionStatusByUserIdRequest:
+    def with_receipt(self, receipt: str) -> TakeoverSubscriptionStatusByUserIdRequest:
         self.receipt = receipt
         return self
 
@@ -1967,14 +1967,14 @@ class TakeoverSubscriptionStatusByUserIdRequest(core.Gs2Request):
         return TakeoverSubscriptionStatusByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
-            .with_receipt(Receipt.from_dict(data.get('receipt')))\
+            .with_receipt(data.get('receipt'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
-            "receipt": self.receipt.to_dict() if self.receipt else None,
+            "receipt": self.receipt,
             "timeOffsetToken": self.time_offset_token,
         }
 

@@ -2400,7 +2400,7 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             'contextStack': request.context_stack,
         }
         if request.receipt is not None:
-            body["receipt"] = request.receipt.to_dict()
+            body["receipt"] = request.receipt
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2478,7 +2478,7 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             'contextStack': request.context_stack,
         }
         if request.receipt is not None:
-            body["receipt"] = request.receipt.to_dict()
+            body["receipt"] = request.receipt
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2555,7 +2555,7 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             'contextStack': request.context_stack,
         }
         if request.receipt is not None:
-            body["receipt"] = request.receipt.to_dict()
+            body["receipt"] = request.receipt
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2633,7 +2633,7 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             'contextStack': request.context_stack,
         }
         if request.receipt is not None:
-            body["receipt"] = request.receipt.to_dict()
+            body["receipt"] = request.receipt
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
