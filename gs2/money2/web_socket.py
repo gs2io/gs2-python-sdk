@@ -2090,6 +2090,310 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_subscription_statuses(
+        self,
+        request: DescribeSubscriptionStatusesRequest,
+        callback: Callable[[AsyncResult[DescribeSubscriptionStatusesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='subscriptionStatus',
+            function='describeSubscriptionStatuses',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeSubscriptionStatusesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_subscription_statuses(
+        self,
+        request: DescribeSubscriptionStatusesRequest,
+    ) -> DescribeSubscriptionStatusesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_subscription_statuses(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_subscription_statuses_async(
+        self,
+        request: DescribeSubscriptionStatusesRequest,
+    ) -> DescribeSubscriptionStatusesResult:
+        async_result = []
+        self._describe_subscription_statuses(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_subscription_statuses_by_user_id(
+        self,
+        request: DescribeSubscriptionStatusesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeSubscriptionStatusesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='subscriptionStatus',
+            function='describeSubscriptionStatusesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeSubscriptionStatusesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_subscription_statuses_by_user_id(
+        self,
+        request: DescribeSubscriptionStatusesByUserIdRequest,
+    ) -> DescribeSubscriptionStatusesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_subscription_statuses_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_subscription_statuses_by_user_id_async(
+        self,
+        request: DescribeSubscriptionStatusesByUserIdRequest,
+    ) -> DescribeSubscriptionStatusesByUserIdResult:
+        async_result = []
+        self._describe_subscription_statuses_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_subscription_status(
+        self,
+        request: GetSubscriptionStatusRequest,
+        callback: Callable[[AsyncResult[GetSubscriptionStatusResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='subscriptionStatus',
+            function='getSubscriptionStatus',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.content_name is not None:
+            body["contentName"] = request.content_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetSubscriptionStatusResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_subscription_status(
+        self,
+        request: GetSubscriptionStatusRequest,
+    ) -> GetSubscriptionStatusResult:
+        async_result = []
+        with timeout(30):
+            self._get_subscription_status(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_subscription_status_async(
+        self,
+        request: GetSubscriptionStatusRequest,
+    ) -> GetSubscriptionStatusResult:
+        async_result = []
+        self._get_subscription_status(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_subscription_status_by_user_id(
+        self,
+        request: GetSubscriptionStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[GetSubscriptionStatusByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='subscriptionStatus',
+            function='getSubscriptionStatusByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.content_name is not None:
+            body["contentName"] = request.content_name
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetSubscriptionStatusByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_subscription_status_by_user_id(
+        self,
+        request: GetSubscriptionStatusByUserIdRequest,
+    ) -> GetSubscriptionStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_subscription_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_subscription_status_by_user_id_async(
+        self,
+        request: GetSubscriptionStatusByUserIdRequest,
+    ) -> GetSubscriptionStatusByUserIdResult:
+        async_result = []
+        self._get_subscription_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_store_content_models(
         self,
         request: DescribeStoreContentModelsRequest,
@@ -2604,6 +2908,541 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteStoreContentModelMasterResult:
         async_result = []
         self._delete_store_content_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_store_subscription_content_models(
+        self,
+        request: DescribeStoreSubscriptionContentModelsRequest,
+        callback: Callable[[AsyncResult[DescribeStoreSubscriptionContentModelsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='storeSubscriptionContentModel',
+            function='describeStoreSubscriptionContentModels',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeStoreSubscriptionContentModelsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_store_subscription_content_models(
+        self,
+        request: DescribeStoreSubscriptionContentModelsRequest,
+    ) -> DescribeStoreSubscriptionContentModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_store_subscription_content_models(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_store_subscription_content_models_async(
+        self,
+        request: DescribeStoreSubscriptionContentModelsRequest,
+    ) -> DescribeStoreSubscriptionContentModelsResult:
+        async_result = []
+        self._describe_store_subscription_content_models(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_store_subscription_content_model(
+        self,
+        request: GetStoreSubscriptionContentModelRequest,
+        callback: Callable[[AsyncResult[GetStoreSubscriptionContentModelResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='storeSubscriptionContentModel',
+            function='getStoreSubscriptionContentModel',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.content_name is not None:
+            body["contentName"] = request.content_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetStoreSubscriptionContentModelResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_store_subscription_content_model(
+        self,
+        request: GetStoreSubscriptionContentModelRequest,
+    ) -> GetStoreSubscriptionContentModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_store_subscription_content_model(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_store_subscription_content_model_async(
+        self,
+        request: GetStoreSubscriptionContentModelRequest,
+    ) -> GetStoreSubscriptionContentModelResult:
+        async_result = []
+        self._get_store_subscription_content_model(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_store_subscription_content_model_masters(
+        self,
+        request: DescribeStoreSubscriptionContentModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeStoreSubscriptionContentModelMastersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='storeSubscriptionContentModelMaster',
+            function='describeStoreSubscriptionContentModelMasters',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeStoreSubscriptionContentModelMastersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_store_subscription_content_model_masters(
+        self,
+        request: DescribeStoreSubscriptionContentModelMastersRequest,
+    ) -> DescribeStoreSubscriptionContentModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_store_subscription_content_model_masters(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_store_subscription_content_model_masters_async(
+        self,
+        request: DescribeStoreSubscriptionContentModelMastersRequest,
+    ) -> DescribeStoreSubscriptionContentModelMastersResult:
+        async_result = []
+        self._describe_store_subscription_content_model_masters(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_store_subscription_content_model_master(
+        self,
+        request: CreateStoreSubscriptionContentModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateStoreSubscriptionContentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='storeSubscriptionContentModelMaster',
+            function='createStoreSubscriptionContentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.schedule_namespace_id is not None:
+            body["scheduleNamespaceId"] = request.schedule_namespace_id
+        if request.trigger_name is not None:
+            body["triggerName"] = request.trigger_name
+        if request.apple_app_store is not None:
+            body["appleAppStore"] = request.apple_app_store.to_dict()
+        if request.google_play is not None:
+            body["googlePlay"] = request.google_play.to_dict()
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateStoreSubscriptionContentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_store_subscription_content_model_master(
+        self,
+        request: CreateStoreSubscriptionContentModelMasterRequest,
+    ) -> CreateStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_store_subscription_content_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_store_subscription_content_model_master_async(
+        self,
+        request: CreateStoreSubscriptionContentModelMasterRequest,
+    ) -> CreateStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        self._create_store_subscription_content_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_store_subscription_content_model_master(
+        self,
+        request: GetStoreSubscriptionContentModelMasterRequest,
+        callback: Callable[[AsyncResult[GetStoreSubscriptionContentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='storeSubscriptionContentModelMaster',
+            function='getStoreSubscriptionContentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.content_name is not None:
+            body["contentName"] = request.content_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetStoreSubscriptionContentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_store_subscription_content_model_master(
+        self,
+        request: GetStoreSubscriptionContentModelMasterRequest,
+    ) -> GetStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_store_subscription_content_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_store_subscription_content_model_master_async(
+        self,
+        request: GetStoreSubscriptionContentModelMasterRequest,
+    ) -> GetStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        self._get_store_subscription_content_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_store_subscription_content_model_master(
+        self,
+        request: UpdateStoreSubscriptionContentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateStoreSubscriptionContentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='storeSubscriptionContentModelMaster',
+            function='updateStoreSubscriptionContentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.content_name is not None:
+            body["contentName"] = request.content_name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.schedule_namespace_id is not None:
+            body["scheduleNamespaceId"] = request.schedule_namespace_id
+        if request.trigger_name is not None:
+            body["triggerName"] = request.trigger_name
+        if request.apple_app_store is not None:
+            body["appleAppStore"] = request.apple_app_store.to_dict()
+        if request.google_play is not None:
+            body["googlePlay"] = request.google_play.to_dict()
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateStoreSubscriptionContentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_store_subscription_content_model_master(
+        self,
+        request: UpdateStoreSubscriptionContentModelMasterRequest,
+    ) -> UpdateStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_store_subscription_content_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_store_subscription_content_model_master_async(
+        self,
+        request: UpdateStoreSubscriptionContentModelMasterRequest,
+    ) -> UpdateStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        self._update_store_subscription_content_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_store_subscription_content_model_master(
+        self,
+        request: DeleteStoreSubscriptionContentModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteStoreSubscriptionContentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='storeSubscriptionContentModelMaster',
+            function='deleteStoreSubscriptionContentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.content_name is not None:
+            body["contentName"] = request.content_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteStoreSubscriptionContentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_store_subscription_content_model_master(
+        self,
+        request: DeleteStoreSubscriptionContentModelMasterRequest,
+    ) -> DeleteStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_store_subscription_content_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_store_subscription_content_model_master_async(
+        self,
+        request: DeleteStoreSubscriptionContentModelMasterRequest,
+    ) -> DeleteStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        self._delete_store_subscription_content_model_master(
             request,
             lambda result: async_result.append(result),
         )

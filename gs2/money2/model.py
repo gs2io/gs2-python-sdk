@@ -530,6 +530,74 @@ class GooglePlayRealtimeNotificationMessage(core.Gs2Model):
         }
 
 
+class GooglePlaySubscriptionContent(core.Gs2Model):
+    product_id: str = None
+
+    def with_product_id(self, product_id: str) -> GooglePlaySubscriptionContent:
+        self.product_id = product_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GooglePlaySubscriptionContent]:
+        if data is None:
+            return None
+        return GooglePlaySubscriptionContent()\
+            .with_product_id(data.get('productId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "productId": self.product_id,
+        }
+
+
+class AppleAppStoreSubscriptionContent(core.Gs2Model):
+    subscription_group_identifier: str = None
+
+    def with_subscription_group_identifier(self, subscription_group_identifier: str) -> AppleAppStoreSubscriptionContent:
+        self.subscription_group_identifier = subscription_group_identifier
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AppleAppStoreSubscriptionContent]:
+        if data is None:
+            return None
+        return AppleAppStoreSubscriptionContent()\
+            .with_subscription_group_identifier(data.get('subscriptionGroupIdentifier'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "subscriptionGroupIdentifier": self.subscription_group_identifier,
+        }
+
+
 class GooglePlayContent(core.Gs2Model):
     product_id: str = None
 
@@ -1304,6 +1372,296 @@ class CurrentModelMaster(core.Gs2Model):
         }
 
 
+class StoreSubscriptionContentModelMaster(core.Gs2Model):
+    store_subscription_content_model_id: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    schedule_namespace_id: str = None
+    trigger_name: str = None
+    apple_app_store: AppleAppStoreSubscriptionContent = None
+    google_play: GooglePlaySubscriptionContent = None
+    created_at: int = None
+    updated_at: int = None
+    revision: int = None
+
+    def with_store_subscription_content_model_id(self, store_subscription_content_model_id: str) -> StoreSubscriptionContentModelMaster:
+        self.store_subscription_content_model_id = store_subscription_content_model_id
+        return self
+
+    def with_name(self, name: str) -> StoreSubscriptionContentModelMaster:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> StoreSubscriptionContentModelMaster:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> StoreSubscriptionContentModelMaster:
+        self.metadata = metadata
+        return self
+
+    def with_schedule_namespace_id(self, schedule_namespace_id: str) -> StoreSubscriptionContentModelMaster:
+        self.schedule_namespace_id = schedule_namespace_id
+        return self
+
+    def with_trigger_name(self, trigger_name: str) -> StoreSubscriptionContentModelMaster:
+        self.trigger_name = trigger_name
+        return self
+
+    def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> StoreSubscriptionContentModelMaster:
+        self.apple_app_store = apple_app_store
+        return self
+
+    def with_google_play(self, google_play: GooglePlaySubscriptionContent) -> StoreSubscriptionContentModelMaster:
+        self.google_play = google_play
+        return self
+
+    def with_created_at(self, created_at: int) -> StoreSubscriptionContentModelMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> StoreSubscriptionContentModelMaster:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> StoreSubscriptionContentModelMaster:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        content_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:money2:{namespaceName}:master:subscription:content:{contentName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            contentName=content_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):master:subscription:content:(?P<contentName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):master:subscription:content:(?P<contentName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):master:subscription:content:(?P<contentName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_content_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):master:subscription:content:(?P<contentName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('content_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[StoreSubscriptionContentModelMaster]:
+        if data is None:
+            return None
+        return StoreSubscriptionContentModelMaster()\
+            .with_store_subscription_content_model_id(data.get('storeSubscriptionContentModelId'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
+            .with_trigger_name(data.get('triggerName'))\
+            .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
+            .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "storeSubscriptionContentModelId": self.store_subscription_content_model_id,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "scheduleNamespaceId": self.schedule_namespace_id,
+            "triggerName": self.trigger_name,
+            "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
+            "googlePlay": self.google_play.to_dict() if self.google_play else None,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+        }
+
+
+class StoreSubscriptionContentModel(core.Gs2Model):
+    store_subscription_content_model_id: str = None
+    name: str = None
+    metadata: str = None
+    schedule_namespace_id: str = None
+    trigger_name: str = None
+    apple_app_store: AppleAppStoreSubscriptionContent = None
+    google_play: GooglePlaySubscriptionContent = None
+
+    def with_store_subscription_content_model_id(self, store_subscription_content_model_id: str) -> StoreSubscriptionContentModel:
+        self.store_subscription_content_model_id = store_subscription_content_model_id
+        return self
+
+    def with_name(self, name: str) -> StoreSubscriptionContentModel:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> StoreSubscriptionContentModel:
+        self.metadata = metadata
+        return self
+
+    def with_schedule_namespace_id(self, schedule_namespace_id: str) -> StoreSubscriptionContentModel:
+        self.schedule_namespace_id = schedule_namespace_id
+        return self
+
+    def with_trigger_name(self, trigger_name: str) -> StoreSubscriptionContentModel:
+        self.trigger_name = trigger_name
+        return self
+
+    def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> StoreSubscriptionContentModel:
+        self.apple_app_store = apple_app_store
+        return self
+
+    def with_google_play(self, google_play: GooglePlaySubscriptionContent) -> StoreSubscriptionContentModel:
+        self.google_play = google_play
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        content_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:money2:{namespaceName}:model:subscription:content:{contentName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            contentName=content_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):model:subscription:content:(?P<contentName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):model:subscription:content:(?P<contentName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):model:subscription:content:(?P<contentName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_content_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):model:subscription:content:(?P<contentName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('content_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[StoreSubscriptionContentModel]:
+        if data is None:
+            return None
+        return StoreSubscriptionContentModel()\
+            .with_store_subscription_content_model_id(data.get('storeSubscriptionContentModelId'))\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
+            .with_trigger_name(data.get('triggerName'))\
+            .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
+            .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "storeSubscriptionContentModelId": self.store_subscription_content_model_id,
+            "name": self.name,
+            "metadata": self.metadata,
+            "scheduleNamespaceId": self.schedule_namespace_id,
+            "triggerName": self.trigger_name,
+            "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
+            "googlePlay": self.google_play.to_dict() if self.google_play else None,
+        }
+
+
 class StoreContentModelMaster(core.Gs2Model):
     store_content_model_id: str = None
     name: str = None
@@ -1566,12 +1924,87 @@ class StoreContentModel(core.Gs2Model):
         }
 
 
+class SubscriptionStatus(core.Gs2Model):
+    user_id: str = None
+    content_name: str = None
+    status: str = None
+    expires_at: int = None
+    detail: List[SubscribeTransaction] = None
+
+    def with_user_id(self, user_id: str) -> SubscriptionStatus:
+        self.user_id = user_id
+        return self
+
+    def with_content_name(self, content_name: str) -> SubscriptionStatus:
+        self.content_name = content_name
+        return self
+
+    def with_status(self, status: str) -> SubscriptionStatus:
+        self.status = status
+        return self
+
+    def with_expires_at(self, expires_at: int) -> SubscriptionStatus:
+        self.expires_at = expires_at
+        return self
+
+    def with_detail(self, detail: List[SubscribeTransaction]) -> SubscriptionStatus:
+        self.detail = detail
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+    ):
+        return ''.format(
+        )
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SubscriptionStatus]:
+        if data is None:
+            return None
+        return SubscriptionStatus()\
+            .with_user_id(data.get('userId'))\
+            .with_content_name(data.get('contentName'))\
+            .with_status(data.get('status'))\
+            .with_expires_at(data.get('expiresAt'))\
+            .with_detail(None if data.get('detail') is None else [
+                SubscribeTransaction.from_dict(data.get('detail')[i])
+                for i in range(len(data.get('detail')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "contentName": self.content_name,
+            "status": self.status,
+            "expiresAt": self.expires_at,
+            "detail": None if self.detail is None else [
+                self.detail[i].to_dict() if self.detail[i] else None
+                for i in range(len(self.detail))
+            ],
+        }
+
+
 class SubscribeTransaction(core.Gs2Model):
     subscribe_transaction_id: str = None
+    content_name: str = None
     transaction_id: str = None
     store: str = None
     user_id: str = None
-    status: str = None
     status_detail: str = None
     expires_at: int = None
     created_at: int = None
@@ -1580,6 +2013,10 @@ class SubscribeTransaction(core.Gs2Model):
 
     def with_subscribe_transaction_id(self, subscribe_transaction_id: str) -> SubscribeTransaction:
         self.subscribe_transaction_id = subscribe_transaction_id
+        return self
+
+    def with_content_name(self, content_name: str) -> SubscribeTransaction:
+        self.content_name = content_name
         return self
 
     def with_transaction_id(self, transaction_id: str) -> SubscribeTransaction:
@@ -1592,10 +2029,6 @@ class SubscribeTransaction(core.Gs2Model):
 
     def with_user_id(self, user_id: str) -> SubscribeTransaction:
         self.user_id = user_id
-        return self
-
-    def with_status(self, status: str) -> SubscribeTransaction:
-        self.status = status
         return self
 
     def with_status_detail(self, status_detail: str) -> SubscribeTransaction:
@@ -1624,12 +2057,14 @@ class SubscribeTransaction(core.Gs2Model):
         region,
         owner_id,
         namespace_name,
+        content_name,
         transaction_id,
     ):
-        return 'grn:gs2:{region}:{ownerId}:money2:{namespaceName}:subscriptionTransaction:{transactionId}'.format(
+        return 'grn:gs2:{region}:{ownerId}:money2:{namespaceName}:subscriptionTransaction:{contentName}:{transactionId}'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
+            contentName=content_name,
             transactionId=transaction_id,
         )
 
@@ -1638,7 +2073,7 @@ class SubscribeTransaction(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<transactionId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<contentName>.+):(?P<transactionId>.+)', grn)
         if match is None:
             return None
         return match.group('region')
@@ -1648,7 +2083,7 @@ class SubscribeTransaction(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<transactionId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<contentName>.+):(?P<transactionId>.+)', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -1658,17 +2093,27 @@ class SubscribeTransaction(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<transactionId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<contentName>.+):(?P<transactionId>.+)', grn)
         if match is None:
             return None
         return match.group('namespace_name')
+
+    @classmethod
+    def get_content_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<contentName>.+):(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('content_name')
 
     @classmethod
     def get_transaction_id_from_grn(
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<transactionId>.+)', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):subscriptionTransaction:(?P<contentName>.+):(?P<transactionId>.+)', grn)
         if match is None:
             return None
         return match.group('transaction_id')
@@ -1693,10 +2138,10 @@ class SubscribeTransaction(core.Gs2Model):
             return None
         return SubscribeTransaction()\
             .with_subscribe_transaction_id(data.get('subscribeTransactionId'))\
+            .with_content_name(data.get('contentName'))\
             .with_transaction_id(data.get('transactionId'))\
             .with_store(data.get('store'))\
             .with_user_id(data.get('userId'))\
-            .with_status(data.get('status'))\
             .with_status_detail(data.get('statusDetail'))\
             .with_expires_at(data.get('expiresAt'))\
             .with_created_at(data.get('createdAt'))\
@@ -1706,10 +2151,10 @@ class SubscribeTransaction(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "subscribeTransactionId": self.subscribe_transaction_id,
+            "contentName": self.content_name,
             "transactionId": self.transaction_id,
             "store": self.store,
             "userId": self.user_id,
-            "status": self.status,
             "statusDetail": self.status_detail,
             "expiresAt": self.expires_at,
             "createdAt": self.created_at,

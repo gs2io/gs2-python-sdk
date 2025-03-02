@@ -1475,6 +1475,206 @@ class VerifyReceiptByStampTaskRequest(core.Gs2Request):
         }
 
 
+class DescribeSubscriptionStatusesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeSubscriptionStatusesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> DescribeSubscriptionStatusesRequest:
+        self.access_token = access_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSubscriptionStatusesRequest]:
+        if data is None:
+            return None
+        return DescribeSubscriptionStatusesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+        }
+
+
+class DescribeSubscriptionStatusesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeSubscriptionStatusesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeSubscriptionStatusesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeSubscriptionStatusesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeSubscriptionStatusesByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeSubscriptionStatusesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class GetSubscriptionStatusRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    content_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetSubscriptionStatusRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> GetSubscriptionStatusRequest:
+        self.access_token = access_token
+        return self
+
+    def with_content_name(self, content_name: str) -> GetSubscriptionStatusRequest:
+        self.content_name = content_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSubscriptionStatusRequest]:
+        if data is None:
+            return None
+        return GetSubscriptionStatusRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_content_name(data.get('contentName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "contentName": self.content_name,
+        }
+
+
+class GetSubscriptionStatusByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    content_name: str = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetSubscriptionStatusByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> GetSubscriptionStatusByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_content_name(self, content_name: str) -> GetSubscriptionStatusByUserIdRequest:
+        self.content_name = content_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> GetSubscriptionStatusByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetSubscriptionStatusByUserIdRequest]:
+        if data is None:
+            return None
+        return GetSubscriptionStatusByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_content_name(data.get('contentName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "contentName": self.content_name,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DescribeStoreContentModelsRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1822,6 +2022,391 @@ class DeleteStoreContentModelMasterRequest(core.Gs2Request):
         if data is None:
             return None
         return DeleteStoreContentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_content_name(data.get('contentName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "contentName": self.content_name,
+        }
+
+
+class DescribeStoreSubscriptionContentModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeStoreSubscriptionContentModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeStoreSubscriptionContentModelsRequest]:
+        if data is None:
+            return None
+        return DescribeStoreSubscriptionContentModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetStoreSubscriptionContentModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    content_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetStoreSubscriptionContentModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_content_name(self, content_name: str) -> GetStoreSubscriptionContentModelRequest:
+        self.content_name = content_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetStoreSubscriptionContentModelRequest]:
+        if data is None:
+            return None
+        return GetStoreSubscriptionContentModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_content_name(data.get('contentName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "contentName": self.content_name,
+        }
+
+
+class DescribeStoreSubscriptionContentModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeStoreSubscriptionContentModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeStoreSubscriptionContentModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeStoreSubscriptionContentModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeStoreSubscriptionContentModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribeStoreSubscriptionContentModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name: str = None
+    description: str = None
+    metadata: str = None
+    schedule_namespace_id: str = None
+    trigger_name: str = None
+    apple_app_store: AppleAppStoreSubscriptionContent = None
+    google_play: GooglePlaySubscriptionContent = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name(self, name: str) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.name = name
+        return self
+
+    def with_description(self, description: str) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_schedule_namespace_id(self, schedule_namespace_id: str) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.schedule_namespace_id = schedule_namespace_id
+        return self
+
+    def with_trigger_name(self, trigger_name: str) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.trigger_name = trigger_name
+        return self
+
+    def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.apple_app_store = apple_app_store
+        return self
+
+    def with_google_play(self, google_play: GooglePlaySubscriptionContent) -> CreateStoreSubscriptionContentModelMasterRequest:
+        self.google_play = google_play
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateStoreSubscriptionContentModelMasterRequest]:
+        if data is None:
+            return None
+        return CreateStoreSubscriptionContentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
+            .with_trigger_name(data.get('triggerName'))\
+            .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
+            .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "name": self.name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "scheduleNamespaceId": self.schedule_namespace_id,
+            "triggerName": self.trigger_name,
+            "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
+            "googlePlay": self.google_play.to_dict() if self.google_play else None,
+        }
+
+
+class GetStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    content_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetStoreSubscriptionContentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_content_name(self, content_name: str) -> GetStoreSubscriptionContentModelMasterRequest:
+        self.content_name = content_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetStoreSubscriptionContentModelMasterRequest]:
+        if data is None:
+            return None
+        return GetStoreSubscriptionContentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_content_name(data.get('contentName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "contentName": self.content_name,
+        }
+
+
+class UpdateStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    content_name: str = None
+    description: str = None
+    metadata: str = None
+    schedule_namespace_id: str = None
+    trigger_name: str = None
+    apple_app_store: AppleAppStoreSubscriptionContent = None
+    google_play: GooglePlaySubscriptionContent = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_content_name(self, content_name: str) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.content_name = content_name
+        return self
+
+    def with_description(self, description: str) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.metadata = metadata
+        return self
+
+    def with_schedule_namespace_id(self, schedule_namespace_id: str) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.schedule_namespace_id = schedule_namespace_id
+        return self
+
+    def with_trigger_name(self, trigger_name: str) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.trigger_name = trigger_name
+        return self
+
+    def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.apple_app_store = apple_app_store
+        return self
+
+    def with_google_play(self, google_play: GooglePlaySubscriptionContent) -> UpdateStoreSubscriptionContentModelMasterRequest:
+        self.google_play = google_play
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateStoreSubscriptionContentModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateStoreSubscriptionContentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_content_name(data.get('contentName'))\
+            .with_description(data.get('description'))\
+            .with_metadata(data.get('metadata'))\
+            .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
+            .with_trigger_name(data.get('triggerName'))\
+            .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
+            .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "contentName": self.content_name,
+            "description": self.description,
+            "metadata": self.metadata,
+            "scheduleNamespaceId": self.schedule_namespace_id,
+            "triggerName": self.trigger_name,
+            "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
+            "googlePlay": self.google_play.to_dict() if self.google_play else None,
+        }
+
+
+class DeleteStoreSubscriptionContentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    content_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteStoreSubscriptionContentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_content_name(self, content_name: str) -> DeleteStoreSubscriptionContentModelMasterRequest:
+        self.content_name = content_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteStoreSubscriptionContentModelMasterRequest]:
+        if data is None:
+            return None
+        return DeleteStoreSubscriptionContentModelMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_content_name(data.get('contentName'))
 

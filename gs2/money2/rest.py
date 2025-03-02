@@ -2066,6 +2066,302 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_subscription_statuses(
+        self,
+        request: DescribeSubscriptionStatusesRequest,
+        callback: Callable[[AsyncResult[DescribeSubscriptionStatusesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/subscription".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSubscriptionStatusesResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_subscription_statuses(
+        self,
+        request: DescribeSubscriptionStatusesRequest,
+    ) -> DescribeSubscriptionStatusesResult:
+        async_result = []
+        with timeout(30):
+            self._describe_subscription_statuses(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_subscription_statuses_async(
+        self,
+        request: DescribeSubscriptionStatusesRequest,
+    ) -> DescribeSubscriptionStatusesResult:
+        async_result = []
+        self._describe_subscription_statuses(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_subscription_statuses_by_user_id(
+        self,
+        request: DescribeSubscriptionStatusesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeSubscriptionStatusesByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/subscription".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeSubscriptionStatusesByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_subscription_statuses_by_user_id(
+        self,
+        request: DescribeSubscriptionStatusesByUserIdRequest,
+    ) -> DescribeSubscriptionStatusesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_subscription_statuses_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_subscription_statuses_by_user_id_async(
+        self,
+        request: DescribeSubscriptionStatusesByUserIdRequest,
+    ) -> DescribeSubscriptionStatusesByUserIdResult:
+        async_result = []
+        self._describe_subscription_statuses_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_subscription_status(
+        self,
+        request: GetSubscriptionStatusRequest,
+        callback: Callable[[AsyncResult[GetSubscriptionStatusResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/subscription/{contentName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            contentName=request.content_name if request.content_name is not None and request.content_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSubscriptionStatusResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_subscription_status(
+        self,
+        request: GetSubscriptionStatusRequest,
+    ) -> GetSubscriptionStatusResult:
+        async_result = []
+        with timeout(30):
+            self._get_subscription_status(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_subscription_status_async(
+        self,
+        request: GetSubscriptionStatusRequest,
+    ) -> GetSubscriptionStatusResult:
+        async_result = []
+        self._get_subscription_status(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_subscription_status_by_user_id(
+        self,
+        request: GetSubscriptionStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[GetSubscriptionStatusByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/subscription/{contentName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            contentName=request.content_name if request.content_name is not None and request.content_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetSubscriptionStatusByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_subscription_status_by_user_id(
+        self,
+        request: GetSubscriptionStatusByUserIdRequest,
+    ) -> GetSubscriptionStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._get_subscription_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_subscription_status_by_user_id_async(
+        self,
+        request: GetSubscriptionStatusByUserIdRequest,
+    ) -> GetSubscriptionStatusByUserIdResult:
+        async_result = []
+        self._get_subscription_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_store_content_models(
         self,
         request: DescribeStoreContentModelsRequest,
@@ -2575,6 +2871,537 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
     ) -> DeleteStoreContentModelMasterResult:
         async_result = []
         self._delete_store_content_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_store_subscription_content_models(
+        self,
+        request: DescribeStoreSubscriptionContentModelsRequest,
+        callback: Callable[[AsyncResult[DescribeStoreSubscriptionContentModelsResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/model/subscription/content".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeStoreSubscriptionContentModelsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_store_subscription_content_models(
+        self,
+        request: DescribeStoreSubscriptionContentModelsRequest,
+    ) -> DescribeStoreSubscriptionContentModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_store_subscription_content_models(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_store_subscription_content_models_async(
+        self,
+        request: DescribeStoreSubscriptionContentModelsRequest,
+    ) -> DescribeStoreSubscriptionContentModelsResult:
+        async_result = []
+        self._describe_store_subscription_content_models(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_store_subscription_content_model(
+        self,
+        request: GetStoreSubscriptionContentModelRequest,
+        callback: Callable[[AsyncResult[GetStoreSubscriptionContentModelResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/model/subscription/content/{contentName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            contentName=request.content_name if request.content_name is not None and request.content_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetStoreSubscriptionContentModelResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_store_subscription_content_model(
+        self,
+        request: GetStoreSubscriptionContentModelRequest,
+    ) -> GetStoreSubscriptionContentModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_store_subscription_content_model(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_store_subscription_content_model_async(
+        self,
+        request: GetStoreSubscriptionContentModelRequest,
+    ) -> GetStoreSubscriptionContentModelResult:
+        async_result = []
+        self._get_store_subscription_content_model(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_store_subscription_content_model_masters(
+        self,
+        request: DescribeStoreSubscriptionContentModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeStoreSubscriptionContentModelMastersResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model/subscription".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeStoreSubscriptionContentModelMastersResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_store_subscription_content_model_masters(
+        self,
+        request: DescribeStoreSubscriptionContentModelMastersRequest,
+    ) -> DescribeStoreSubscriptionContentModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_store_subscription_content_model_masters(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_store_subscription_content_model_masters_async(
+        self,
+        request: DescribeStoreSubscriptionContentModelMastersRequest,
+    ) -> DescribeStoreSubscriptionContentModelMastersResult:
+        async_result = []
+        self._describe_store_subscription_content_model_masters(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_store_subscription_content_model_master(
+        self,
+        request: CreateStoreSubscriptionContentModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateStoreSubscriptionContentModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model/subscription".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.name is not None:
+            body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.schedule_namespace_id is not None:
+            body["scheduleNamespaceId"] = request.schedule_namespace_id
+        if request.trigger_name is not None:
+            body["triggerName"] = request.trigger_name
+        if request.apple_app_store is not None:
+            body["appleAppStore"] = request.apple_app_store.to_dict()
+        if request.google_play is not None:
+            body["googlePlay"] = request.google_play.to_dict()
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CreateStoreSubscriptionContentModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def create_store_subscription_content_model_master(
+        self,
+        request: CreateStoreSubscriptionContentModelMasterRequest,
+    ) -> CreateStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_store_subscription_content_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_store_subscription_content_model_master_async(
+        self,
+        request: CreateStoreSubscriptionContentModelMasterRequest,
+    ) -> CreateStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        self._create_store_subscription_content_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_store_subscription_content_model_master(
+        self,
+        request: GetStoreSubscriptionContentModelMasterRequest,
+        callback: Callable[[AsyncResult[GetStoreSubscriptionContentModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model/subscription/{contentName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            contentName=request.content_name if request.content_name is not None and request.content_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetStoreSubscriptionContentModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_store_subscription_content_model_master(
+        self,
+        request: GetStoreSubscriptionContentModelMasterRequest,
+    ) -> GetStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_store_subscription_content_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_store_subscription_content_model_master_async(
+        self,
+        request: GetStoreSubscriptionContentModelMasterRequest,
+    ) -> GetStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        self._get_store_subscription_content_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_store_subscription_content_model_master(
+        self,
+        request: UpdateStoreSubscriptionContentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateStoreSubscriptionContentModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model/subscription/{contentName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            contentName=request.content_name if request.content_name is not None and request.content_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.description is not None:
+            body["description"] = request.description
+        if request.metadata is not None:
+            body["metadata"] = request.metadata
+        if request.schedule_namespace_id is not None:
+            body["scheduleNamespaceId"] = request.schedule_namespace_id
+        if request.trigger_name is not None:
+            body["triggerName"] = request.trigger_name
+        if request.apple_app_store is not None:
+            body["appleAppStore"] = request.apple_app_store.to_dict()
+        if request.google_play is not None:
+            body["googlePlay"] = request.google_play.to_dict()
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=UpdateStoreSubscriptionContentModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def update_store_subscription_content_model_master(
+        self,
+        request: UpdateStoreSubscriptionContentModelMasterRequest,
+    ) -> UpdateStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_store_subscription_content_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_store_subscription_content_model_master_async(
+        self,
+        request: UpdateStoreSubscriptionContentModelMasterRequest,
+    ) -> UpdateStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        self._update_store_subscription_content_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_store_subscription_content_model_master(
+        self,
+        request: DeleteStoreSubscriptionContentModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteStoreSubscriptionContentModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/master/model/subscription/{contentName}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            contentName=request.content_name if request.content_name is not None and request.content_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=DeleteStoreSubscriptionContentModelMasterResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def delete_store_subscription_content_model_master(
+        self,
+        request: DeleteStoreSubscriptionContentModelMasterRequest,
+    ) -> DeleteStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_store_subscription_content_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_store_subscription_content_model_master_async(
+        self,
+        request: DeleteStoreSubscriptionContentModelMasterRequest,
+    ) -> DeleteStoreSubscriptionContentModelMasterResult:
+        async_result = []
+        self._delete_store_subscription_content_model_master(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
