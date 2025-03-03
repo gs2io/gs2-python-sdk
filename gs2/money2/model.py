@@ -2070,6 +2070,7 @@ class SubscribeTransaction(core.Gs2Model):
     status_detail: str = None
     expires_at: int = None
     last_allocated_at: int = None
+    last_take_over_at: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -2104,6 +2105,10 @@ class SubscribeTransaction(core.Gs2Model):
 
     def with_last_allocated_at(self, last_allocated_at: int) -> SubscribeTransaction:
         self.last_allocated_at = last_allocated_at
+        return self
+
+    def with_last_take_over_at(self, last_take_over_at: int) -> SubscribeTransaction:
+        self.last_take_over_at = last_take_over_at
         return self
 
     def with_created_at(self, created_at: int) -> SubscribeTransaction:
@@ -2212,6 +2217,7 @@ class SubscribeTransaction(core.Gs2Model):
             .with_status_detail(data.get('statusDetail'))\
             .with_expires_at(data.get('expiresAt'))\
             .with_last_allocated_at(data.get('lastAllocatedAt'))\
+            .with_last_take_over_at(data.get('lastTakeOverAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -2226,6 +2232,7 @@ class SubscribeTransaction(core.Gs2Model):
             "statusDetail": self.status_detail,
             "expiresAt": self.expires_at,
             "lastAllocatedAt": self.last_allocated_at,
+            "lastTakeOverAt": self.last_take_over_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
