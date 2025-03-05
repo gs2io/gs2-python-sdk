@@ -1024,6 +1024,8 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["args"] = request.args
         if request.random_status is not None:
             body["randomStatus"] = request.random_status.to_dict()
+        if request.force_use_distributor is not None:
+            body["forceUseDistributor"] = request.force_use_distributor
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

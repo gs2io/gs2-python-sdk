@@ -681,6 +681,7 @@ class InvokeScriptRequest(core.Gs2Request):
     user_id: str = None
     args: str = None
     random_status: RandomStatus = None
+    force_use_distributor: bool = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -698,6 +699,10 @@ class InvokeScriptRequest(core.Gs2Request):
 
     def with_random_status(self, random_status: RandomStatus) -> InvokeScriptRequest:
         self.random_status = random_status
+        return self
+
+    def with_force_use_distributor(self, force_use_distributor: bool) -> InvokeScriptRequest:
+        self.force_use_distributor = force_use_distributor
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> InvokeScriptRequest:
@@ -731,6 +736,7 @@ class InvokeScriptRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_args(data.get('args'))\
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
+            .with_force_use_distributor(data.get('forceUseDistributor'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -739,6 +745,7 @@ class InvokeScriptRequest(core.Gs2Request):
             "userId": self.user_id,
             "args": self.args,
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
+            "forceUseDistributor": self.force_use_distributor,
             "timeOffsetToken": self.time_offset_token,
         }
 

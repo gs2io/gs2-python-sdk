@@ -1140,7 +1140,6 @@ class FakeSetting(core.Gs2Model):
 class GooglePlaySetting(core.Gs2Model):
     package_name: str = None
     public_key: str = None
-    credentials_j_s_o_n: str = None
 
     def with_package_name(self, package_name: str) -> GooglePlaySetting:
         self.package_name = package_name
@@ -1148,10 +1147,6 @@ class GooglePlaySetting(core.Gs2Model):
 
     def with_public_key(self, public_key: str) -> GooglePlaySetting:
         self.public_key = public_key
-        return self
-
-    def with_credentials_j_s_o_n(self, credentials_j_s_o_n: str) -> GooglePlaySetting:
-        self.credentials_j_s_o_n = credentials_j_s_o_n
         return self
 
     def get(self, key, default=None):
@@ -1174,14 +1169,12 @@ class GooglePlaySetting(core.Gs2Model):
             return None
         return GooglePlaySetting()\
             .with_package_name(data.get('packageName'))\
-            .with_public_key(data.get('publicKey'))\
-            .with_credentials_j_s_o_n(data.get('credentialsJSON'))
+            .with_public_key(data.get('publicKey'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "packageName": self.package_name,
             "publicKey": self.public_key,
-            "credentialsJSON": self.credentials_j_s_o_n,
         }
 
 
@@ -1428,6 +1421,8 @@ class StoreSubscriptionContentModelMaster(core.Gs2Model):
     schedule_namespace_id: str = None
     trigger_name: str = None
     reallocate_span_days: int = None
+    trigger_extend_mode: str = None
+    rollup_hour: int = None
     apple_app_store: AppleAppStoreSubscriptionContent = None
     google_play: GooglePlaySubscriptionContent = None
     created_at: int = None
@@ -1460,6 +1455,14 @@ class StoreSubscriptionContentModelMaster(core.Gs2Model):
 
     def with_reallocate_span_days(self, reallocate_span_days: int) -> StoreSubscriptionContentModelMaster:
         self.reallocate_span_days = reallocate_span_days
+        return self
+
+    def with_trigger_extend_mode(self, trigger_extend_mode: str) -> StoreSubscriptionContentModelMaster:
+        self.trigger_extend_mode = trigger_extend_mode
+        return self
+
+    def with_rollup_hour(self, rollup_hour: int) -> StoreSubscriptionContentModelMaster:
+        self.rollup_hour = rollup_hour
         return self
 
     def with_apple_app_store(self, apple_app_store: AppleAppStoreSubscriptionContent) -> StoreSubscriptionContentModelMaster:
@@ -1563,6 +1566,8 @@ class StoreSubscriptionContentModelMaster(core.Gs2Model):
             .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
             .with_trigger_name(data.get('triggerName'))\
             .with_reallocate_span_days(data.get('reallocateSpanDays'))\
+            .with_trigger_extend_mode(data.get('triggerExtendMode'))\
+            .with_rollup_hour(data.get('rollupHour'))\
             .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
             .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))\
             .with_created_at(data.get('createdAt'))\
@@ -1578,6 +1583,8 @@ class StoreSubscriptionContentModelMaster(core.Gs2Model):
             "scheduleNamespaceId": self.schedule_namespace_id,
             "triggerName": self.trigger_name,
             "reallocateSpanDays": self.reallocate_span_days,
+            "triggerExtendMode": self.trigger_extend_mode,
+            "rollupHour": self.rollup_hour,
             "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
             "googlePlay": self.google_play.to_dict() if self.google_play else None,
             "createdAt": self.created_at,
@@ -1592,6 +1599,8 @@ class StoreSubscriptionContentModel(core.Gs2Model):
     metadata: str = None
     schedule_namespace_id: str = None
     trigger_name: str = None
+    trigger_extend_mode: str = None
+    rollup_hour: int = None
     reallocate_span_days: int = None
     apple_app_store: AppleAppStoreSubscriptionContent = None
     google_play: GooglePlaySubscriptionContent = None
@@ -1614,6 +1623,14 @@ class StoreSubscriptionContentModel(core.Gs2Model):
 
     def with_trigger_name(self, trigger_name: str) -> StoreSubscriptionContentModel:
         self.trigger_name = trigger_name
+        return self
+
+    def with_trigger_extend_mode(self, trigger_extend_mode: str) -> StoreSubscriptionContentModel:
+        self.trigger_extend_mode = trigger_extend_mode
+        return self
+
+    def with_rollup_hour(self, rollup_hour: int) -> StoreSubscriptionContentModel:
+        self.rollup_hour = rollup_hour
         return self
 
     def with_reallocate_span_days(self, reallocate_span_days: int) -> StoreSubscriptionContentModel:
@@ -1707,6 +1724,8 @@ class StoreSubscriptionContentModel(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_schedule_namespace_id(data.get('scheduleNamespaceId'))\
             .with_trigger_name(data.get('triggerName'))\
+            .with_trigger_extend_mode(data.get('triggerExtendMode'))\
+            .with_rollup_hour(data.get('rollupHour'))\
             .with_reallocate_span_days(data.get('reallocateSpanDays'))\
             .with_apple_app_store(AppleAppStoreSubscriptionContent.from_dict(data.get('appleAppStore')))\
             .with_google_play(GooglePlaySubscriptionContent.from_dict(data.get('googlePlay')))
@@ -1718,6 +1737,8 @@ class StoreSubscriptionContentModel(core.Gs2Model):
             "metadata": self.metadata,
             "scheduleNamespaceId": self.schedule_namespace_id,
             "triggerName": self.trigger_name,
+            "triggerExtendMode": self.trigger_extend_mode,
+            "rollupHour": self.rollup_hour,
             "reallocateSpanDays": self.reallocate_span_days,
             "appleAppStore": self.apple_app_store.to_dict() if self.apple_app_store else None,
             "googlePlay": self.google_play.to_dict() if self.google_play else None,

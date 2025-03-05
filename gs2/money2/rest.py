@@ -3460,6 +3460,10 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             body["scheduleNamespaceId"] = request.schedule_namespace_id
         if request.trigger_name is not None:
             body["triggerName"] = request.trigger_name
+        if request.trigger_extend_mode is not None:
+            body["triggerExtendMode"] = request.trigger_extend_mode
+        if request.rollup_hour is not None:
+            body["rollupHour"] = request.rollup_hour
         if request.reallocate_span_days is not None:
             body["reallocateSpanDays"] = request.reallocate_span_days
         if request.apple_app_store is not None:
@@ -3618,6 +3622,10 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             body["scheduleNamespaceId"] = request.schedule_namespace_id
         if request.trigger_name is not None:
             body["triggerName"] = request.trigger_name
+        if request.trigger_extend_mode is not None:
+            body["triggerExtendMode"] = request.trigger_extend_mode
+        if request.rollup_hour is not None:
+            body["rollupHour"] = request.rollup_hour
         if request.reallocate_span_days is not None:
             body["reallocateSpanDays"] = request.reallocate_span_days
         if request.apple_app_store is not None:
