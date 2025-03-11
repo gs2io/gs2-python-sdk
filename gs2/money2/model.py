@@ -1180,12 +1180,17 @@ class GooglePlaySetting(core.Gs2Model):
 
 class AppleAppStoreSetting(core.Gs2Model):
     bundle_id: str = None
+    shared_secret_key: str = None
     issuer_id: str = None
     key_id: str = None
     private_key_pem: str = None
 
     def with_bundle_id(self, bundle_id: str) -> AppleAppStoreSetting:
         self.bundle_id = bundle_id
+        return self
+
+    def with_shared_secret_key(self, shared_secret_key: str) -> AppleAppStoreSetting:
+        self.shared_secret_key = shared_secret_key
         return self
 
     def with_issuer_id(self, issuer_id: str) -> AppleAppStoreSetting:
@@ -1220,6 +1225,7 @@ class AppleAppStoreSetting(core.Gs2Model):
             return None
         return AppleAppStoreSetting()\
             .with_bundle_id(data.get('bundleId'))\
+            .with_shared_secret_key(data.get('sharedSecretKey'))\
             .with_issuer_id(data.get('issuerId'))\
             .with_key_id(data.get('keyId'))\
             .with_private_key_pem(data.get('privateKeyPem'))
@@ -1227,6 +1233,7 @@ class AppleAppStoreSetting(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "bundleId": self.bundle_id,
+            "sharedSecretKey": self.shared_secret_key,
             "issuerId": self.issuer_id,
             "keyId": self.key_id,
             "privateKeyPem": self.private_key_pem,
