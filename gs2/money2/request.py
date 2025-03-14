@@ -1979,6 +1979,184 @@ class TakeoverSubscriptionStatusByUserIdRequest(core.Gs2Request):
         }
 
 
+class DescribeRefundHistoriesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    page_token: str = None
+    limit: int = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeRefundHistoriesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> DescribeRefundHistoriesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeRefundHistoriesByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeRefundHistoriesByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeRefundHistoriesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRefundHistoriesByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeRefundHistoriesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class DescribeRefundHistoriesByDateRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    year: int = None
+    month: int = None
+    day: int = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeRefundHistoriesByDateRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_year(self, year: int) -> DescribeRefundHistoriesByDateRequest:
+        self.year = year
+        return self
+
+    def with_month(self, month: int) -> DescribeRefundHistoriesByDateRequest:
+        self.month = month
+        return self
+
+    def with_day(self, day: int) -> DescribeRefundHistoriesByDateRequest:
+        self.day = day
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeRefundHistoriesByDateRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeRefundHistoriesByDateRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRefundHistoriesByDateRequest]:
+        if data is None:
+            return None
+        return DescribeRefundHistoriesByDateRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_year(data.get('year'))\
+            .with_month(data.get('month'))\
+            .with_day(data.get('day'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "year": self.year,
+            "month": self.month,
+            "day": self.day,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetRefundHistoryRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    transaction_id: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetRefundHistoryRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> GetRefundHistoryRequest:
+        self.transaction_id = transaction_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetRefundHistoryRequest]:
+        if data is None:
+            return None
+        return GetRefundHistoryRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_transaction_id(data.get('transactionId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "transactionId": self.transaction_id,
+        }
+
+
 class DescribeStoreContentModelsRequest(core.Gs2Request):
 
     context_stack: str = None

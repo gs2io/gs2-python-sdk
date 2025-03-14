@@ -1304,6 +1304,134 @@ class TakeoverSubscriptionStatusByUserIdResult(core.Gs2Result):
         }
 
 
+class DescribeRefundHistoriesByUserIdResult(core.Gs2Result):
+    items: List[RefundHistory] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[RefundHistory]) -> DescribeRefundHistoriesByUserIdResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeRefundHistoriesByUserIdResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRefundHistoriesByUserIdResult]:
+        if data is None:
+            return None
+        return DescribeRefundHistoriesByUserIdResult()\
+            .with_items(None if data.get('items') is None else [
+                RefundHistory.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeRefundHistoriesByDateResult(core.Gs2Result):
+    items: List[RefundHistory] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[RefundHistory]) -> DescribeRefundHistoriesByDateResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeRefundHistoriesByDateResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeRefundHistoriesByDateResult]:
+        if data is None:
+            return None
+        return DescribeRefundHistoriesByDateResult()\
+            .with_items(None if data.get('items') is None else [
+                RefundHistory.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetRefundHistoryResult(core.Gs2Result):
+    item: RefundHistory = None
+
+    def with_item(self, item: RefundHistory) -> GetRefundHistoryResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetRefundHistoryResult]:
+        if data is None:
+            return None
+        return GetRefundHistoryResult()\
+            .with_item(RefundHistory.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DescribeStoreContentModelsResult(core.Gs2Result):
     items: List[StoreContentModel] = None
 

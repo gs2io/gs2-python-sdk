@@ -563,8 +563,9 @@ class Trigger(core.Gs2Model):
     trigger_id: str = None
     name: str = None
     user_id: str = None
-    created_at: int = None
+    triggered_at: int = None
     expires_at: int = None
+    created_at: int = None
     revision: int = None
 
     def with_trigger_id(self, trigger_id: str) -> Trigger:
@@ -579,12 +580,16 @@ class Trigger(core.Gs2Model):
         self.user_id = user_id
         return self
 
-    def with_created_at(self, created_at: int) -> Trigger:
-        self.created_at = created_at
+    def with_triggered_at(self, triggered_at: int) -> Trigger:
+        self.triggered_at = triggered_at
         return self
 
     def with_expires_at(self, expires_at: int) -> Trigger:
         self.expires_at = expires_at
+        return self
+
+    def with_created_at(self, created_at: int) -> Trigger:
+        self.created_at = created_at
         return self
 
     def with_revision(self, revision: int) -> Trigger:
@@ -680,8 +685,9 @@ class Trigger(core.Gs2Model):
             .with_trigger_id(data.get('triggerId'))\
             .with_name(data.get('name'))\
             .with_user_id(data.get('userId'))\
-            .with_created_at(data.get('createdAt'))\
+            .with_triggered_at(data.get('triggeredAt'))\
             .with_expires_at(data.get('expiresAt'))\
+            .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -689,8 +695,9 @@ class Trigger(core.Gs2Model):
             "triggerId": self.trigger_id,
             "name": self.name,
             "userId": self.user_id,
-            "createdAt": self.created_at,
+            "triggeredAt": self.triggered_at,
             "expiresAt": self.expires_at,
+            "createdAt": self.created_at,
             "revision": self.revision,
         }
 

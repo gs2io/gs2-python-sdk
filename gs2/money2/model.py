@@ -2014,6 +2014,144 @@ class StoreContentModel(core.Gs2Model):
         }
 
 
+class RefundHistory(core.Gs2Model):
+    refund_history_id: str = None
+    transaction_id: str = None
+    year: int = None
+    month: int = None
+    day: int = None
+    user_id: str = None
+    detail: RefundEvent = None
+    created_at: int = None
+
+    def with_refund_history_id(self, refund_history_id: str) -> RefundHistory:
+        self.refund_history_id = refund_history_id
+        return self
+
+    def with_transaction_id(self, transaction_id: str) -> RefundHistory:
+        self.transaction_id = transaction_id
+        return self
+
+    def with_year(self, year: int) -> RefundHistory:
+        self.year = year
+        return self
+
+    def with_month(self, month: int) -> RefundHistory:
+        self.month = month
+        return self
+
+    def with_day(self, day: int) -> RefundHistory:
+        self.day = day
+        return self
+
+    def with_user_id(self, user_id: str) -> RefundHistory:
+        self.user_id = user_id
+        return self
+
+    def with_detail(self, detail: RefundEvent) -> RefundHistory:
+        self.detail = detail
+        return self
+
+    def with_created_at(self, created_at: int) -> RefundHistory:
+        self.created_at = created_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        transaction_id,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:money2:{namespaceName}:refundHistory:{transactionId}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            transactionId=transaction_id,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):refundHistory:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):refundHistory:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):refundHistory:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_transaction_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):money2:(?P<namespaceName>.+):refundHistory:(?P<transactionId>.+)', grn)
+        if match is None:
+            return None
+        return match.group('transaction_id')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RefundHistory]:
+        if data is None:
+            return None
+        return RefundHistory()\
+            .with_refund_history_id(data.get('refundHistoryId'))\
+            .with_transaction_id(data.get('transactionId'))\
+            .with_year(data.get('year'))\
+            .with_month(data.get('month'))\
+            .with_day(data.get('day'))\
+            .with_user_id(data.get('userId'))\
+            .with_detail(RefundEvent.from_dict(data.get('detail')))\
+            .with_created_at(data.get('createdAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "refundHistoryId": self.refund_history_id,
+            "transactionId": self.transaction_id,
+            "year": self.year,
+            "month": self.month,
+            "day": self.day,
+            "userId": self.user_id,
+            "detail": self.detail.to_dict() if self.detail else None,
+            "createdAt": self.created_at,
+        }
+
+
 class SubscriptionStatus(core.Gs2Model):
     user_id: str = None
     content_name: str = None

@@ -2692,6 +2692,235 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_refund_histories_by_user_id(
+        self,
+        request: DescribeRefundHistoriesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeRefundHistoriesByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/refund/user/{userId}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeRefundHistoriesByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_refund_histories_by_user_id(
+        self,
+        request: DescribeRefundHistoriesByUserIdRequest,
+    ) -> DescribeRefundHistoriesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_refund_histories_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_refund_histories_by_user_id_async(
+        self,
+        request: DescribeRefundHistoriesByUserIdRequest,
+    ) -> DescribeRefundHistoriesByUserIdResult:
+        async_result = []
+        self._describe_refund_histories_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_refund_histories_by_date(
+        self,
+        request: DescribeRefundHistoriesByDateRequest,
+        callback: Callable[[AsyncResult[DescribeRefundHistoriesByDateResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/refund/date/{year}/{month}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            year=request.year if request.year is not None and request.year != '' else 'null',
+            month=request.month if request.month is not None and request.month != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.day is not None:
+            query_strings["day"] = request.day
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
+        if request.limit is not None:
+            query_strings["limit"] = request.limit
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=DescribeRefundHistoriesByDateResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def describe_refund_histories_by_date(
+        self,
+        request: DescribeRefundHistoriesByDateRequest,
+    ) -> DescribeRefundHistoriesByDateResult:
+        async_result = []
+        with timeout(30):
+            self._describe_refund_histories_by_date(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_refund_histories_by_date_async(
+        self,
+        request: DescribeRefundHistoriesByDateRequest,
+    ) -> DescribeRefundHistoriesByDateResult:
+        async_result = []
+        self._describe_refund_histories_by_date(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_refund_history(
+        self,
+        request: GetRefundHistoryRequest,
+        callback: Callable[[AsyncResult[GetRefundHistoryResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='money2',
+            region=self.session.region,
+        ) + "/{namespaceName}/refund/{transactionId}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetRefundHistoryResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_refund_history(
+        self,
+        request: GetRefundHistoryRequest,
+    ) -> GetRefundHistoryResult:
+        async_result = []
+        with timeout(30):
+            self._get_refund_history(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_refund_history_async(
+        self,
+        request: GetRefundHistoryRequest,
+    ) -> GetRefundHistoryResult:
+        async_result = []
+        self._get_refund_history(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_store_content_models(
         self,
         request: DescribeStoreContentModelsRequest,

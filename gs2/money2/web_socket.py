@@ -2730,6 +2730,239 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _describe_refund_histories_by_user_id(
+        self,
+        request: DescribeRefundHistoriesByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeRefundHistoriesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='refundHistory',
+            function='describeRefundHistoriesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeRefundHistoriesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_refund_histories_by_user_id(
+        self,
+        request: DescribeRefundHistoriesByUserIdRequest,
+    ) -> DescribeRefundHistoriesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_refund_histories_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_refund_histories_by_user_id_async(
+        self,
+        request: DescribeRefundHistoriesByUserIdRequest,
+    ) -> DescribeRefundHistoriesByUserIdResult:
+        async_result = []
+        self._describe_refund_histories_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_refund_histories_by_date(
+        self,
+        request: DescribeRefundHistoriesByDateRequest,
+        callback: Callable[[AsyncResult[DescribeRefundHistoriesByDateResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='refundHistory',
+            function='describeRefundHistoriesByDate',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.year is not None:
+            body["year"] = request.year
+        if request.month is not None:
+            body["month"] = request.month
+        if request.day is not None:
+            body["day"] = request.day
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeRefundHistoriesByDateResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_refund_histories_by_date(
+        self,
+        request: DescribeRefundHistoriesByDateRequest,
+    ) -> DescribeRefundHistoriesByDateResult:
+        async_result = []
+        with timeout(30):
+            self._describe_refund_histories_by_date(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_refund_histories_by_date_async(
+        self,
+        request: DescribeRefundHistoriesByDateRequest,
+    ) -> DescribeRefundHistoriesByDateResult:
+        async_result = []
+        self._describe_refund_histories_by_date(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_refund_history(
+        self,
+        request: GetRefundHistoryRequest,
+        callback: Callable[[AsyncResult[GetRefundHistoryResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="money2",
+            component='refundHistory',
+            function='getRefundHistory',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.transaction_id is not None:
+            body["transactionId"] = request.transaction_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetRefundHistoryResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_refund_history(
+        self,
+        request: GetRefundHistoryRequest,
+    ) -> GetRefundHistoryResult:
+        async_result = []
+        with timeout(30):
+            self._get_refund_history(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_refund_history_async(
+        self,
+        request: GetRefundHistoryRequest,
+    ) -> GetRefundHistoryResult:
+        async_result = []
+        self._get_refund_history(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_store_content_models(
         self,
         request: DescribeStoreContentModelsRequest,
