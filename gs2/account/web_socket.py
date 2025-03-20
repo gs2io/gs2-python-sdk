@@ -1482,6 +1482,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.include_last_authenticated_at is not None:
+            body["includeLastAuthenticatedAt"] = request.include_last_authenticated_at
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

@@ -1472,6 +1472,8 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.include_last_authenticated_at is not None:
+            query_strings["includeLastAuthenticatedAt"] = request.include_last_authenticated_at
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

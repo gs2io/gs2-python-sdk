@@ -541,6 +541,7 @@ class Await(core.Gs2Model):
     config: List[Config] = None
     acquirable_at: int = None
     exchanged_at: int = None
+    created_at: int = None
     revision: int = None
 
     def with_await_id(self, await_id: str) -> Await:
@@ -577,6 +578,10 @@ class Await(core.Gs2Model):
 
     def with_exchanged_at(self, exchanged_at: int) -> Await:
         self.exchanged_at = exchanged_at
+        return self
+
+    def with_created_at(self, created_at: int) -> Await:
+        self.created_at = created_at
         return self
 
     def with_revision(self, revision: int) -> Await:
@@ -681,6 +686,7 @@ class Await(core.Gs2Model):
             ])\
             .with_acquirable_at(data.get('acquirableAt'))\
             .with_exchanged_at(data.get('exchangedAt'))\
+            .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -697,6 +703,7 @@ class Await(core.Gs2Model):
             ],
             "acquirableAt": self.acquirable_at,
             "exchangedAt": self.exchanged_at,
+            "createdAt": self.created_at,
             "revision": self.revision,
         }
 
