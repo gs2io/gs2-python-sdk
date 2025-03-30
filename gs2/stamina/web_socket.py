@@ -4603,6 +4603,856 @@ class Gs2StaminaWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_stamina_value(
+        self,
+        request: VerifyStaminaValueRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaValueResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaValue',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaValueResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_value(
+        self,
+        request: VerifyStaminaValueRequest,
+    ) -> VerifyStaminaValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_value(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_value_async(
+        self,
+        request: VerifyStaminaValueRequest,
+    ) -> VerifyStaminaValueResult:
+        async_result = []
+        self._verify_stamina_value(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_value_by_user_id(
+        self,
+        request: VerifyStaminaValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaValueByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaValueByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaValueByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_value_by_user_id(
+        self,
+        request: VerifyStaminaValueByUserIdRequest,
+    ) -> VerifyStaminaValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_value_by_user_id_async(
+        self,
+        request: VerifyStaminaValueByUserIdRequest,
+    ) -> VerifyStaminaValueByUserIdResult:
+        async_result = []
+        self._verify_stamina_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_max_value(
+        self,
+        request: VerifyStaminaMaxValueRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaMaxValueResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaMaxValue',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaMaxValueResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_max_value(
+        self,
+        request: VerifyStaminaMaxValueRequest,
+    ) -> VerifyStaminaMaxValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_max_value(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_max_value_async(
+        self,
+        request: VerifyStaminaMaxValueRequest,
+    ) -> VerifyStaminaMaxValueResult:
+        async_result = []
+        self._verify_stamina_max_value(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_max_value_by_user_id(
+        self,
+        request: VerifyStaminaMaxValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaMaxValueByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaMaxValueByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaMaxValueByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_max_value_by_user_id(
+        self,
+        request: VerifyStaminaMaxValueByUserIdRequest,
+    ) -> VerifyStaminaMaxValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_max_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_max_value_by_user_id_async(
+        self,
+        request: VerifyStaminaMaxValueByUserIdRequest,
+    ) -> VerifyStaminaMaxValueByUserIdResult:
+        async_result = []
+        self._verify_stamina_max_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_interval_minutes(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaRecoverIntervalMinutes',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaRecoverIntervalMinutesResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_recover_interval_minutes(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_interval_minutes(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_interval_minutes_async(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesResult:
+        async_result = []
+        self._verify_stamina_recover_interval_minutes(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_interval_minutes_by_user_id(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaRecoverIntervalMinutesByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaRecoverIntervalMinutesByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_recover_interval_minutes_by_user_id(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_interval_minutes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_interval_minutes_by_user_id_async(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesByUserIdResult:
+        async_result = []
+        self._verify_stamina_recover_interval_minutes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_value(
+        self,
+        request: VerifyStaminaRecoverValueRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverValueResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaRecoverValue',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaRecoverValueResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_recover_value(
+        self,
+        request: VerifyStaminaRecoverValueRequest,
+    ) -> VerifyStaminaRecoverValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_value(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_value_async(
+        self,
+        request: VerifyStaminaRecoverValueRequest,
+    ) -> VerifyStaminaRecoverValueResult:
+        async_result = []
+        self._verify_stamina_recover_value(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_value_by_user_id(
+        self,
+        request: VerifyStaminaRecoverValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverValueByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaRecoverValueByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaRecoverValueByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_recover_value_by_user_id(
+        self,
+        request: VerifyStaminaRecoverValueByUserIdRequest,
+    ) -> VerifyStaminaRecoverValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_value_by_user_id_async(
+        self,
+        request: VerifyStaminaRecoverValueByUserIdRequest,
+    ) -> VerifyStaminaRecoverValueByUserIdResult:
+        async_result = []
+        self._verify_stamina_recover_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_overflow_value(
+        self,
+        request: VerifyStaminaOverflowValueRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaOverflowValueResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaOverflowValue',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaOverflowValueResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_overflow_value(
+        self,
+        request: VerifyStaminaOverflowValueRequest,
+    ) -> VerifyStaminaOverflowValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_overflow_value(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_overflow_value_async(
+        self,
+        request: VerifyStaminaOverflowValueRequest,
+    ) -> VerifyStaminaOverflowValueResult:
+        async_result = []
+        self._verify_stamina_overflow_value(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_overflow_value_by_user_id(
+        self,
+        request: VerifyStaminaOverflowValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaOverflowValueByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaOverflowValueByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.stamina_name is not None:
+            body["staminaName"] = request.stamina_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaOverflowValueByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_overflow_value_by_user_id(
+        self,
+        request: VerifyStaminaOverflowValueByUserIdRequest,
+    ) -> VerifyStaminaOverflowValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_overflow_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_overflow_value_by_user_id_async(
+        self,
+        request: VerifyStaminaOverflowValueByUserIdRequest,
+    ) -> VerifyStaminaOverflowValueByUserIdResult:
+        async_result = []
+        self._verify_stamina_overflow_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _recover_stamina_by_stamp_sheet(
         self,
         request: RecoverStaminaByStampSheetRequest,
@@ -5101,6 +5951,371 @@ class Gs2StaminaWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> ConsumeStaminaByStampTaskResult:
         async_result = []
         self._consume_stamina_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_value_by_stamp_task(
+        self,
+        request: VerifyStaminaValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaValueByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaValueByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaValueByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_value_by_stamp_task(
+        self,
+        request: VerifyStaminaValueByStampTaskRequest,
+    ) -> VerifyStaminaValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_value_by_stamp_task_async(
+        self,
+        request: VerifyStaminaValueByStampTaskRequest,
+    ) -> VerifyStaminaValueByStampTaskResult:
+        async_result = []
+        self._verify_stamina_value_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_max_value_by_stamp_task(
+        self,
+        request: VerifyStaminaMaxValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaMaxValueByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaMaxValueByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaMaxValueByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_max_value_by_stamp_task(
+        self,
+        request: VerifyStaminaMaxValueByStampTaskRequest,
+    ) -> VerifyStaminaMaxValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_max_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_max_value_by_stamp_task_async(
+        self,
+        request: VerifyStaminaMaxValueByStampTaskRequest,
+    ) -> VerifyStaminaMaxValueByStampTaskResult:
+        async_result = []
+        self._verify_stamina_max_value_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_interval_minutes_by_stamp_task(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaRecoverIntervalMinutesByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaRecoverIntervalMinutesByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_recover_interval_minutes_by_stamp_task(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_interval_minutes_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_interval_minutes_by_stamp_task_async(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesByStampTaskResult:
+        async_result = []
+        self._verify_stamina_recover_interval_minutes_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_value_by_stamp_task(
+        self,
+        request: VerifyStaminaRecoverValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverValueByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaRecoverValueByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaRecoverValueByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_recover_value_by_stamp_task(
+        self,
+        request: VerifyStaminaRecoverValueByStampTaskRequest,
+    ) -> VerifyStaminaRecoverValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_value_by_stamp_task_async(
+        self,
+        request: VerifyStaminaRecoverValueByStampTaskRequest,
+    ) -> VerifyStaminaRecoverValueByStampTaskResult:
+        async_result = []
+        self._verify_stamina_recover_value_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_overflow_value_by_stamp_task(
+        self,
+        request: VerifyStaminaOverflowValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaOverflowValueByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="stamina",
+            component='stamina',
+            function='verifyStaminaOverflowValueByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStaminaOverflowValueByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_stamina_overflow_value_by_stamp_task(
+        self,
+        request: VerifyStaminaOverflowValueByStampTaskRequest,
+    ) -> VerifyStaminaOverflowValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_overflow_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_overflow_value_by_stamp_task_async(
+        self,
+        request: VerifyStaminaOverflowValueByStampTaskRequest,
+    ) -> VerifyStaminaOverflowValueByStampTaskResult:
+        async_result = []
+        self._verify_stamina_overflow_value_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

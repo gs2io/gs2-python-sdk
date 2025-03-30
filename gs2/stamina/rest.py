@@ -4542,6 +4542,821 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_stamina_value(
+        self,
+        request: VerifyStaminaValueRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaValueResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/stamina/{staminaName}/value/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaValueResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_value(
+        self,
+        request: VerifyStaminaValueRequest,
+    ) -> VerifyStaminaValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_value(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_value_async(
+        self,
+        request: VerifyStaminaValueRequest,
+    ) -> VerifyStaminaValueResult:
+        async_result = []
+        self._verify_stamina_value(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_value_by_user_id(
+        self,
+        request: VerifyStaminaValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaValueByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/stamina/{staminaName}/value/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaValueByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_value_by_user_id(
+        self,
+        request: VerifyStaminaValueByUserIdRequest,
+    ) -> VerifyStaminaValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_value_by_user_id_async(
+        self,
+        request: VerifyStaminaValueByUserIdRequest,
+    ) -> VerifyStaminaValueByUserIdResult:
+        async_result = []
+        self._verify_stamina_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_max_value(
+        self,
+        request: VerifyStaminaMaxValueRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaMaxValueResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/stamina/{staminaName}/max/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaMaxValueResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_max_value(
+        self,
+        request: VerifyStaminaMaxValueRequest,
+    ) -> VerifyStaminaMaxValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_max_value(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_max_value_async(
+        self,
+        request: VerifyStaminaMaxValueRequest,
+    ) -> VerifyStaminaMaxValueResult:
+        async_result = []
+        self._verify_stamina_max_value(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_max_value_by_user_id(
+        self,
+        request: VerifyStaminaMaxValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaMaxValueByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/stamina/{staminaName}/max/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaMaxValueByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_max_value_by_user_id(
+        self,
+        request: VerifyStaminaMaxValueByUserIdRequest,
+    ) -> VerifyStaminaMaxValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_max_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_max_value_by_user_id_async(
+        self,
+        request: VerifyStaminaMaxValueByUserIdRequest,
+    ) -> VerifyStaminaMaxValueByUserIdResult:
+        async_result = []
+        self._verify_stamina_max_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_interval_minutes(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/stamina/{staminaName}/recover/interval/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaRecoverIntervalMinutesResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_recover_interval_minutes(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_interval_minutes(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_interval_minutes_async(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesResult:
+        async_result = []
+        self._verify_stamina_recover_interval_minutes(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_interval_minutes_by_user_id(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/stamina/{staminaName}/recover/interval/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaRecoverIntervalMinutesByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_recover_interval_minutes_by_user_id(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_interval_minutes_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_interval_minutes_by_user_id_async(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesByUserIdResult:
+        async_result = []
+        self._verify_stamina_recover_interval_minutes_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_value(
+        self,
+        request: VerifyStaminaRecoverValueRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverValueResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/stamina/{staminaName}/recover/value/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaRecoverValueResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_recover_value(
+        self,
+        request: VerifyStaminaRecoverValueRequest,
+    ) -> VerifyStaminaRecoverValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_value(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_value_async(
+        self,
+        request: VerifyStaminaRecoverValueRequest,
+    ) -> VerifyStaminaRecoverValueResult:
+        async_result = []
+        self._verify_stamina_recover_value(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_value_by_user_id(
+        self,
+        request: VerifyStaminaRecoverValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverValueByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/stamina/{staminaName}/recover/value/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaRecoverValueByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_recover_value_by_user_id(
+        self,
+        request: VerifyStaminaRecoverValueByUserIdRequest,
+    ) -> VerifyStaminaRecoverValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_value_by_user_id_async(
+        self,
+        request: VerifyStaminaRecoverValueByUserIdRequest,
+    ) -> VerifyStaminaRecoverValueByUserIdResult:
+        async_result = []
+        self._verify_stamina_recover_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_overflow_value(
+        self,
+        request: VerifyStaminaOverflowValueRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaOverflowValueResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/stamina/{staminaName}/overflow/value/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaOverflowValueResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_overflow_value(
+        self,
+        request: VerifyStaminaOverflowValueRequest,
+    ) -> VerifyStaminaOverflowValueResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_overflow_value(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_overflow_value_async(
+        self,
+        request: VerifyStaminaOverflowValueRequest,
+    ) -> VerifyStaminaOverflowValueResult:
+        async_result = []
+        self._verify_stamina_overflow_value(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_overflow_value_by_user_id(
+        self,
+        request: VerifyStaminaOverflowValueByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaOverflowValueByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/stamina/{staminaName}/overflow/value/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            staminaName=request.stamina_name if request.stamina_name is not None and request.stamina_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.value is not None:
+            body["value"] = request.value
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaOverflowValueByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_overflow_value_by_user_id(
+        self,
+        request: VerifyStaminaOverflowValueByUserIdRequest,
+    ) -> VerifyStaminaOverflowValueByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_overflow_value_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_overflow_value_by_user_id_async(
+        self,
+        request: VerifyStaminaOverflowValueByUserIdRequest,
+    ) -> VerifyStaminaOverflowValueByUserIdResult:
+        async_result = []
+        self._verify_stamina_overflow_value_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _recover_stamina_by_stamp_sheet(
         self,
         request: RecoverStaminaByStampSheetRequest,
@@ -5039,6 +5854,371 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
     ) -> ConsumeStaminaByStampTaskResult:
         async_result = []
         self._consume_stamina_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_value_by_stamp_task(
+        self,
+        request: VerifyStaminaValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaValueByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/stamina/value/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaValueByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_value_by_stamp_task(
+        self,
+        request: VerifyStaminaValueByStampTaskRequest,
+    ) -> VerifyStaminaValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_value_by_stamp_task_async(
+        self,
+        request: VerifyStaminaValueByStampTaskRequest,
+    ) -> VerifyStaminaValueByStampTaskResult:
+        async_result = []
+        self._verify_stamina_value_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_max_value_by_stamp_task(
+        self,
+        request: VerifyStaminaMaxValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaMaxValueByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/stamina/max/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaMaxValueByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_max_value_by_stamp_task(
+        self,
+        request: VerifyStaminaMaxValueByStampTaskRequest,
+    ) -> VerifyStaminaMaxValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_max_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_max_value_by_stamp_task_async(
+        self,
+        request: VerifyStaminaMaxValueByStampTaskRequest,
+    ) -> VerifyStaminaMaxValueByStampTaskResult:
+        async_result = []
+        self._verify_stamina_max_value_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_interval_minutes_by_stamp_task(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/stamina/recover/interval/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaRecoverIntervalMinutesByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_recover_interval_minutes_by_stamp_task(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_interval_minutes_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_interval_minutes_by_stamp_task_async(
+        self,
+        request: VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+    ) -> VerifyStaminaRecoverIntervalMinutesByStampTaskResult:
+        async_result = []
+        self._verify_stamina_recover_interval_minutes_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_recover_value_by_stamp_task(
+        self,
+        request: VerifyStaminaRecoverValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaRecoverValueByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/stamina/recover/value/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaRecoverValueByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_recover_value_by_stamp_task(
+        self,
+        request: VerifyStaminaRecoverValueByStampTaskRequest,
+    ) -> VerifyStaminaRecoverValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_recover_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_recover_value_by_stamp_task_async(
+        self,
+        request: VerifyStaminaRecoverValueByStampTaskRequest,
+    ) -> VerifyStaminaRecoverValueByStampTaskResult:
+        async_result = []
+        self._verify_stamina_recover_value_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_stamina_overflow_value_by_stamp_task(
+        self,
+        request: VerifyStaminaOverflowValueByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStaminaOverflowValueByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/stamina/overflow/value/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyStaminaOverflowValueByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_stamina_overflow_value_by_stamp_task(
+        self,
+        request: VerifyStaminaOverflowValueByStampTaskRequest,
+    ) -> VerifyStaminaOverflowValueByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_stamina_overflow_value_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_stamina_overflow_value_by_stamp_task_async(
+        self,
+        request: VerifyStaminaOverflowValueByStampTaskRequest,
+    ) -> VerifyStaminaOverflowValueByStampTaskResult:
+        async_result = []
+        self._verify_stamina_overflow_value_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

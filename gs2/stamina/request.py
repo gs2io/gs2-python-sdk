@@ -3398,6 +3398,801 @@ class DeleteStaminaByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyStaminaValueRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaValueRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyStaminaValueRequest:
+        self.access_token = access_token
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaValueRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaValueRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaValueRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaValueRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaValueRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaValueRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaValueRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyStaminaValueByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaValueByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyStaminaValueByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaValueByUserIdRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaValueByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaValueByUserIdRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaValueByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyStaminaValueByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaValueByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaValueByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaValueByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyStaminaMaxValueRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaMaxValueRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyStaminaMaxValueRequest:
+        self.access_token = access_token
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaMaxValueRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaMaxValueRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaMaxValueRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaMaxValueRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaMaxValueRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaMaxValueRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaMaxValueRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyStaminaMaxValueByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaMaxValueByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyStaminaMaxValueByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaMaxValueByUserIdRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaMaxValueByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaMaxValueByUserIdRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaMaxValueByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyStaminaMaxValueByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaMaxValueByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaMaxValueByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaMaxValueByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyStaminaRecoverIntervalMinutesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaRecoverIntervalMinutesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyStaminaRecoverIntervalMinutesRequest:
+        self.access_token = access_token
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaRecoverIntervalMinutesRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaRecoverIntervalMinutesRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaRecoverIntervalMinutesRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaRecoverIntervalMinutesRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaRecoverIntervalMinutesRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaRecoverIntervalMinutesRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaRecoverIntervalMinutesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyStaminaRecoverIntervalMinutesByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaRecoverIntervalMinutesByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyStaminaRecoverIntervalMinutesByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaRecoverIntervalMinutesByUserIdRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaRecoverIntervalMinutesByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaRecoverIntervalMinutesByUserIdRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaRecoverIntervalMinutesByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyStaminaRecoverIntervalMinutesByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaRecoverIntervalMinutesByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaRecoverIntervalMinutesByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaRecoverIntervalMinutesByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyStaminaRecoverValueRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaRecoverValueRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyStaminaRecoverValueRequest:
+        self.access_token = access_token
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaRecoverValueRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaRecoverValueRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaRecoverValueRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaRecoverValueRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaRecoverValueRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaRecoverValueRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaRecoverValueRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyStaminaRecoverValueByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaRecoverValueByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyStaminaRecoverValueByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaRecoverValueByUserIdRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaRecoverValueByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaRecoverValueByUserIdRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaRecoverValueByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyStaminaRecoverValueByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaRecoverValueByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaRecoverValueByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaRecoverValueByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyStaminaOverflowValueRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaOverflowValueRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyStaminaOverflowValueRequest:
+        self.access_token = access_token
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaOverflowValueRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaOverflowValueRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaOverflowValueRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaOverflowValueRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaOverflowValueRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaOverflowValueRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaOverflowValueRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+        }
+
+
+class VerifyStaminaOverflowValueByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    stamina_name: str = None
+    verify_type: str = None
+    value: int = None
+    multiply_value_specifying_quantity: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyStaminaOverflowValueByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyStaminaOverflowValueByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_stamina_name(self, stamina_name: str) -> VerifyStaminaOverflowValueByUserIdRequest:
+        self.stamina_name = stamina_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyStaminaOverflowValueByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_value(self, value: int) -> VerifyStaminaOverflowValueByUserIdRequest:
+        self.value = value
+        return self
+
+    def with_multiply_value_specifying_quantity(self, multiply_value_specifying_quantity: bool) -> VerifyStaminaOverflowValueByUserIdRequest:
+        self.multiply_value_specifying_quantity = multiply_value_specifying_quantity
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyStaminaOverflowValueByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyStaminaOverflowValueByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaOverflowValueByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaOverflowValueByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_stamina_name(data.get('staminaName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_value(data.get('value'))\
+            .with_multiply_value_specifying_quantity(data.get('multiplyValueSpecifyingQuantity'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "staminaName": self.stamina_name,
+            "verifyType": self.verify_type,
+            "value": self.value,
+            "multiplyValueSpecifyingQuantity": self.multiply_value_specifying_quantity,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class RecoverStaminaByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -3689,6 +4484,221 @@ class ConsumeStaminaByStampTaskRequest(core.Gs2Request):
         if data is None:
             return None
         return ConsumeStaminaByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyStaminaValueByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyStaminaValueByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyStaminaValueByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaValueByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaValueByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyStaminaMaxValueByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyStaminaMaxValueByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyStaminaMaxValueByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaMaxValueByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaMaxValueByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyStaminaRecoverIntervalMinutesByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyStaminaRecoverIntervalMinutesByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyStaminaRecoverIntervalMinutesByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaRecoverIntervalMinutesByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaRecoverIntervalMinutesByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyStaminaRecoverValueByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyStaminaRecoverValueByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyStaminaRecoverValueByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaRecoverValueByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaRecoverValueByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyStaminaOverflowValueByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyStaminaOverflowValueByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyStaminaOverflowValueByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStaminaOverflowValueByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyStaminaOverflowValueByStampTaskRequest()\
             .with_stamp_task(data.get('stampTask'))\
             .with_key_id(data.get('keyId'))
 
