@@ -684,6 +684,7 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
     metadata: str = None
     reward_interval_minutes: int = None
     default_maximum_idle_minutes: int = None
+    reward_reset_mode: str = None
     acquire_actions: List[AcquireActionList] = None
     idle_period_schedule_id: str = None
     receive_period_schedule_id: str = None
@@ -710,6 +711,10 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
 
     def with_default_maximum_idle_minutes(self, default_maximum_idle_minutes: int) -> CreateCategoryModelMasterRequest:
         self.default_maximum_idle_minutes = default_maximum_idle_minutes
+        return self
+
+    def with_reward_reset_mode(self, reward_reset_mode: str) -> CreateCategoryModelMasterRequest:
+        self.reward_reset_mode = reward_reset_mode
         return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireActionList]) -> CreateCategoryModelMasterRequest:
@@ -749,6 +754,7 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_reward_interval_minutes(data.get('rewardIntervalMinutes'))\
             .with_default_maximum_idle_minutes(data.get('defaultMaximumIdleMinutes'))\
+            .with_reward_reset_mode(data.get('rewardResetMode'))\
             .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireActionList.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')))
@@ -764,6 +770,7 @@ class CreateCategoryModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "rewardIntervalMinutes": self.reward_interval_minutes,
             "defaultMaximumIdleMinutes": self.default_maximum_idle_minutes,
+            "rewardResetMode": self.reward_reset_mode,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions))
@@ -825,6 +832,7 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
     metadata: str = None
     reward_interval_minutes: int = None
     default_maximum_idle_minutes: int = None
+    reward_reset_mode: str = None
     acquire_actions: List[AcquireActionList] = None
     idle_period_schedule_id: str = None
     receive_period_schedule_id: str = None
@@ -851,6 +859,10 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
 
     def with_default_maximum_idle_minutes(self, default_maximum_idle_minutes: int) -> UpdateCategoryModelMasterRequest:
         self.default_maximum_idle_minutes = default_maximum_idle_minutes
+        return self
+
+    def with_reward_reset_mode(self, reward_reset_mode: str) -> UpdateCategoryModelMasterRequest:
+        self.reward_reset_mode = reward_reset_mode
         return self
 
     def with_acquire_actions(self, acquire_actions: List[AcquireActionList]) -> UpdateCategoryModelMasterRequest:
@@ -890,6 +902,7 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_reward_interval_minutes(data.get('rewardIntervalMinutes'))\
             .with_default_maximum_idle_minutes(data.get('defaultMaximumIdleMinutes'))\
+            .with_reward_reset_mode(data.get('rewardResetMode'))\
             .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireActionList.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')))
@@ -905,6 +918,7 @@ class UpdateCategoryModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "rewardIntervalMinutes": self.reward_interval_minutes,
             "defaultMaximumIdleMinutes": self.default_maximum_idle_minutes,
+            "rewardResetMode": self.reward_reset_mode,
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions))

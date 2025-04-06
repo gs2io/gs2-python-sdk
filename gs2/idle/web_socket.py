@@ -1089,6 +1089,8 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["rewardIntervalMinutes"] = request.reward_interval_minutes
         if request.default_maximum_idle_minutes is not None:
             body["defaultMaximumIdleMinutes"] = request.default_maximum_idle_minutes
+        if request.reward_reset_mode is not None:
+            body["rewardResetMode"] = request.reward_reset_mode
         if request.acquire_actions is not None:
             body["acquireActions"] = [
                 item.to_dict()
@@ -1252,6 +1254,8 @@ class Gs2IdleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["rewardIntervalMinutes"] = request.reward_interval_minutes
         if request.default_maximum_idle_minutes is not None:
             body["defaultMaximumIdleMinutes"] = request.default_maximum_idle_minutes
+        if request.reward_reset_mode is not None:
+            body["rewardResetMode"] = request.reward_reset_mode
         if request.acquire_actions is not None:
             body["acquireActions"] = [
                 item.to_dict()

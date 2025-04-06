@@ -1017,8 +1017,6 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
             body["args"] = request.args
         if request.random_status is not None:
             body["randomStatus"] = request.random_status.to_dict()
-        if request.force_use_distributor is not None:
-            body["forceUseDistributor"] = request.force_use_distributor
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

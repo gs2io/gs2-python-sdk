@@ -2611,151 +2611,6 @@ class BatchUpdateMemberRoleByGuildNameRequest(core.Gs2Request):
         }
 
 
-class UpdateMemberMetadataRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    guild_model_name: str = None
-    guild_name: str = None
-    access_token: str = None
-    metadata: str = None
-    duplication_avoider: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> UpdateMemberMetadataRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_guild_model_name(self, guild_model_name: str) -> UpdateMemberMetadataRequest:
-        self.guild_model_name = guild_model_name
-        return self
-
-    def with_guild_name(self, guild_name: str) -> UpdateMemberMetadataRequest:
-        self.guild_name = guild_name
-        return self
-
-    def with_access_token(self, access_token: str) -> UpdateMemberMetadataRequest:
-        self.access_token = access_token
-        return self
-
-    def with_metadata(self, metadata: str) -> UpdateMemberMetadataRequest:
-        self.metadata = metadata
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateMemberMetadataRequest:
-        self.duplication_avoider = duplication_avoider
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[UpdateMemberMetadataRequest]:
-        if data is None:
-            return None
-        return UpdateMemberMetadataRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_guild_model_name(data.get('guildModelName'))\
-            .with_guild_name(data.get('guildName'))\
-            .with_access_token(data.get('accessToken'))\
-            .with_metadata(data.get('metadata'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "guildModelName": self.guild_model_name,
-            "guildName": self.guild_name,
-            "accessToken": self.access_token,
-            "metadata": self.metadata,
-        }
-
-
-class UpdateMemberMetadataByUserIdRequest(core.Gs2Request):
-
-    context_stack: str = None
-    namespace_name: str = None
-    guild_model_name: str = None
-    guild_name: str = None
-    user_id: str = None
-    metadata: str = None
-    time_offset_token: str = None
-    duplication_avoider: str = None
-
-    def with_namespace_name(self, namespace_name: str) -> UpdateMemberMetadataByUserIdRequest:
-        self.namespace_name = namespace_name
-        return self
-
-    def with_guild_model_name(self, guild_model_name: str) -> UpdateMemberMetadataByUserIdRequest:
-        self.guild_model_name = guild_model_name
-        return self
-
-    def with_guild_name(self, guild_name: str) -> UpdateMemberMetadataByUserIdRequest:
-        self.guild_name = guild_name
-        return self
-
-    def with_user_id(self, user_id: str) -> UpdateMemberMetadataByUserIdRequest:
-        self.user_id = user_id
-        return self
-
-    def with_metadata(self, metadata: str) -> UpdateMemberMetadataByUserIdRequest:
-        self.metadata = metadata
-        return self
-
-    def with_time_offset_token(self, time_offset_token: str) -> UpdateMemberMetadataByUserIdRequest:
-        self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateMemberMetadataByUserIdRequest:
-        self.duplication_avoider = duplication_avoider
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[UpdateMemberMetadataByUserIdRequest]:
-        if data is None:
-            return None
-        return UpdateMemberMetadataByUserIdRequest()\
-            .with_namespace_name(data.get('namespaceName'))\
-            .with_guild_model_name(data.get('guildModelName'))\
-            .with_guild_name(data.get('guildName'))\
-            .with_user_id(data.get('userId'))\
-            .with_metadata(data.get('metadata'))\
-            .with_time_offset_token(data.get('timeOffsetToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "namespaceName": self.namespace_name,
-            "guildModelName": self.guild_model_name,
-            "guildName": self.guild_name,
-            "userId": self.user_id,
-            "metadata": self.metadata,
-            "timeOffsetToken": self.time_offset_token,
-        }
-
-
 class DeleteGuildRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -4009,6 +3864,151 @@ class GetJoinedGuildByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "guildModelName": self.guild_model_name,
             "guildName": self.guild_name,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class UpdateMemberMetadataRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    access_token: str = None
+    metadata: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateMemberMetadataRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> UpdateMemberMetadataRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> UpdateMemberMetadataRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_access_token(self, access_token: str) -> UpdateMemberMetadataRequest:
+        self.access_token = access_token
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateMemberMetadataRequest:
+        self.metadata = metadata
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateMemberMetadataRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateMemberMetadataRequest]:
+        if data is None:
+            return None
+        return UpdateMemberMetadataRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_metadata(data.get('metadata'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "accessToken": self.access_token,
+            "metadata": self.metadata,
+        }
+
+
+class UpdateMemberMetadataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    guild_model_name: str = None
+    guild_name: str = None
+    user_id: str = None
+    metadata: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_guild_model_name(self, guild_model_name: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.guild_model_name = guild_model_name
+        return self
+
+    def with_guild_name(self, guild_name: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.guild_name = guild_name
+        return self
+
+    def with_user_id(self, user_id: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_metadata(self, metadata: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.metadata = metadata
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateMemberMetadataByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateMemberMetadataByUserIdRequest]:
+        if data is None:
+            return None
+        return UpdateMemberMetadataByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_guild_model_name(data.get('guildModelName'))\
+            .with_guild_name(data.get('guildName'))\
+            .with_user_id(data.get('userId'))\
+            .with_metadata(data.get('metadata'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "guildModelName": self.guild_model_name,
+            "guildName": self.guild_name,
+            "userId": self.user_id,
+            "metadata": self.metadata,
             "timeOffsetToken": self.time_offset_token,
         }
 
