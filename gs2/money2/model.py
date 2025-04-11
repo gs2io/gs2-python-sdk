@@ -144,6 +144,8 @@ class DailyTransactionHistory(core.Gs2Model):
     currency: str = None
     deposit_amount: float = None
     withdraw_amount: float = None
+    issue_count: int = None
+    consume_count: int = None
     updated_at: int = None
     revision: int = None
 
@@ -173,6 +175,14 @@ class DailyTransactionHistory(core.Gs2Model):
 
     def with_withdraw_amount(self, withdraw_amount: float) -> DailyTransactionHistory:
         self.withdraw_amount = withdraw_amount
+        return self
+
+    def with_issue_count(self, issue_count: int) -> DailyTransactionHistory:
+        self.issue_count = issue_count
+        return self
+
+    def with_consume_count(self, consume_count: int) -> DailyTransactionHistory:
+        self.consume_count = consume_count
         return self
 
     def with_updated_at(self, updated_at: int) -> DailyTransactionHistory:
@@ -300,6 +310,8 @@ class DailyTransactionHistory(core.Gs2Model):
             .with_currency(data.get('currency'))\
             .with_deposit_amount(data.get('depositAmount'))\
             .with_withdraw_amount(data.get('withdrawAmount'))\
+            .with_issue_count(data.get('issueCount'))\
+            .with_consume_count(data.get('consumeCount'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
 
@@ -312,6 +324,8 @@ class DailyTransactionHistory(core.Gs2Model):
             "currency": self.currency,
             "depositAmount": self.deposit_amount,
             "withdrawAmount": self.withdraw_amount,
+            "issueCount": self.issue_count,
+            "consumeCount": self.consume_count,
             "updatedAt": self.updated_at,
             "revision": self.revision,
         }
