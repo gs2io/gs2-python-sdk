@@ -748,8 +748,11 @@ class DebugInvokeRequest(core.Gs2Request):
     context_stack: str = None
     script: str = None
     args: str = None
+    user_id: str = None
     random_status: RandomStatus = None
     disable_string_number_to_number: bool = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
 
     def with_script(self, script: str) -> DebugInvokeRequest:
         self.script = script
@@ -759,12 +762,24 @@ class DebugInvokeRequest(core.Gs2Request):
         self.args = args
         return self
 
+    def with_user_id(self, user_id: str) -> DebugInvokeRequest:
+        self.user_id = user_id
+        return self
+
     def with_random_status(self, random_status: RandomStatus) -> DebugInvokeRequest:
         self.random_status = random_status
         return self
 
     def with_disable_string_number_to_number(self, disable_string_number_to_number: bool) -> DebugInvokeRequest:
         self.disable_string_number_to_number = disable_string_number_to_number
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DebugInvokeRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> DebugInvokeRequest:
+        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -788,15 +803,19 @@ class DebugInvokeRequest(core.Gs2Request):
         return DebugInvokeRequest()\
             .with_script(data.get('script'))\
             .with_args(data.get('args'))\
+            .with_user_id(data.get('userId'))\
             .with_random_status(RandomStatus.from_dict(data.get('randomStatus')))\
-            .with_disable_string_number_to_number(data.get('disableStringNumberToNumber'))
+            .with_disable_string_number_to_number(data.get('disableStringNumberToNumber'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "script": self.script,
             "args": self.args,
+            "userId": self.user_id,
             "randomStatus": self.random_status.to_dict() if self.random_status else None,
             "disableStringNumberToNumber": self.disable_string_number_to_number,
+            "timeOffsetToken": self.time_offset_token,
         }
 
 

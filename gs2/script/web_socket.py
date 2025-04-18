@@ -1101,13 +1101,19 @@ class Gs2ScriptWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["script"] = request.script
         if request.args is not None:
             body["args"] = request.args
+        if request.user_id is not None:
+            body["userId"] = request.user_id
         if request.random_status is not None:
             body["randomStatus"] = request.random_status.to_dict()
         if request.disable_string_number_to_number is not None:
             body["disableStringNumberToNumber"] = request.disable_string_number_to_number
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
 
         self.session.send(
             web_socket.NetworkJob(
