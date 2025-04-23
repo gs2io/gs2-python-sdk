@@ -1246,6 +1246,68 @@ class OpenMessageByUserIdRequest(core.Gs2Request):
         }
 
 
+class CloseMessageByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    message_name: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CloseMessageByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> CloseMessageByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_message_name(self, message_name: str) -> CloseMessageByUserIdRequest:
+        self.message_name = message_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CloseMessageByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CloseMessageByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CloseMessageByUserIdRequest]:
+        if data is None:
+            return None
+        return CloseMessageByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_message_name(data.get('messageName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "messageName": self.message_name,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class ReadMessageRequest(core.Gs2Request):
 
     context_stack: str = None
