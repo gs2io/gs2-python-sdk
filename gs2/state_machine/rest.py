@@ -27,6 +27,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -187,6 +189,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -258,6 +261,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -329,6 +333,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -416,6 +421,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -487,6 +493,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -560,6 +567,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -633,6 +641,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -706,6 +715,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -779,6 +789,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -852,6 +863,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -927,6 +939,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1001,6 +1014,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeStateMachineMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1076,6 +1090,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateStateMachineMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1151,6 +1166,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStateMachineMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1223,6 +1239,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteStateMachineMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1295,6 +1312,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeStatusesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1374,6 +1392,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeStatusesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1454,6 +1473,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1528,6 +1548,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStatusByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1603,6 +1624,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[StartStateMachineByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1683,6 +1705,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[StartStateMachineByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1756,6 +1779,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EmitResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1836,6 +1860,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EmitByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1917,6 +1942,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ReportResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -1998,6 +2024,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ReportByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -2080,6 +2107,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteStatusByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -2157,6 +2185,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExitStateMachineResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,
@@ -2233,6 +2262,7 @@ class Gs2StateMachineRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExitStateMachineByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='state-machine',
             region=self.session.region,

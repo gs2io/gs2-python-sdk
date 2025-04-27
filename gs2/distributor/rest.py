@@ -27,6 +27,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -181,6 +183,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -252,6 +255,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -323,6 +327,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -404,6 +409,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -475,6 +481,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeDistributorModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -550,6 +557,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateDistributorModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -634,6 +642,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetDistributorModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -706,6 +715,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateDistributorModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -789,6 +799,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteDistributorModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -861,6 +872,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeDistributorModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -932,6 +944,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetDistributorModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1004,6 +1017,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1075,6 +1089,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentDistributorMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1140,12 +1155,13 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_distributor_master(
+    def _pre_update_current_distributor_master(
         self,
-        request: UpdateCurrentDistributorMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentDistributorMasterResult]], None],
+        request: PreUpdateCurrentDistributorMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentDistributorMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1157,8 +1173,97 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentDistributorMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_distributor_master(
+        self,
+        request: PreUpdateCurrentDistributorMasterRequest,
+    ) -> PreUpdateCurrentDistributorMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_distributor_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_distributor_master_async(
+        self,
+        request: PreUpdateCurrentDistributorMasterRequest,
+    ) -> PreUpdateCurrentDistributorMasterResult:
+        async_result = []
+        self._pre_update_current_distributor_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_distributor_master(
+        self,
+        request: UpdateCurrentDistributorMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentDistributorMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_distributor_master(
+                PreUpdateCurrentDistributorMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='distributor',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1219,6 +1324,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentDistributorMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1292,6 +1398,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DistributeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1372,6 +1479,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DistributeWithoutOverflowProcessResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1449,6 +1557,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunVerifyTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1524,6 +1633,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1599,6 +1709,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1674,6 +1785,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunStampSheetExpressResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1749,6 +1861,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunVerifyTaskWithoutNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1822,6 +1935,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunStampTaskWithoutNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1895,6 +2009,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunStampSheetWithoutNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -1968,6 +2083,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunStampSheetExpressWithoutNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2041,6 +2157,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetTransactionDefaultConfigResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2119,6 +2236,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetTransactionDefaultConfigByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2199,6 +2317,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FreezeMasterDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2274,6 +2393,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FreezeMasterDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2350,6 +2470,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SignFreezeMasterDataTimestampResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2425,6 +2546,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FreezeMasterDataBySignedTimestampResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2506,6 +2628,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FreezeMasterDataByTimestampResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2583,6 +2706,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[BatchExecuteApiResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2657,6 +2781,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[IfExpressionByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2748,6 +2873,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AndExpressionByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2830,6 +2956,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[OrExpressionByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2912,6 +3039,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[IfExpressionByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -2985,6 +3113,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AndExpressionByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -3058,6 +3187,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[OrExpressionByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -3131,6 +3261,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStampSheetResultResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -3205,6 +3336,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStampSheetResultByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -3280,6 +3412,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunTransactionResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -3359,6 +3492,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetTransactionResultResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,
@@ -3433,6 +3567,7 @@ class Gs2DistributorRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetTransactionResultByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='distributor',
             region=self.session.region,

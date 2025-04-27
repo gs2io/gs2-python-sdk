@@ -27,6 +27,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -193,6 +195,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -264,6 +267,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -335,6 +339,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -424,6 +429,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -495,6 +501,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -568,6 +575,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -641,6 +649,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -714,6 +723,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -787,6 +797,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -860,6 +871,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -935,6 +947,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1009,6 +1022,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeWalletsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1086,6 +1100,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeWalletsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1164,6 +1179,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetWalletResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1238,6 +1254,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetWalletByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1313,6 +1330,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DepositByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1394,6 +1412,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WithdrawResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1474,6 +1493,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WithdrawByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1555,6 +1575,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DepositByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1628,6 +1649,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WithdrawByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1701,6 +1723,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeReceiptsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1786,6 +1809,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetByUserIdAndTransactionIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1861,6 +1885,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RecordReceiptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -1941,6 +1966,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RevertRecordReceiptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -2019,6 +2045,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RecordReceiptByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,
@@ -2092,6 +2119,7 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RevertRecordReceiptByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='money',
             region=self.session.region,

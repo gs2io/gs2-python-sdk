@@ -60,12 +60,43 @@ class DescribeStacksRequest(core.Gs2Request):
         }
 
 
+class PreCreateStackRequest(core.Gs2Request):
+
+    context_stack: str = None
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreCreateStackRequest]:
+        if data is None:
+            return None
+        return PreCreateStackRequest()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class CreateStackRequest(core.Gs2Request):
 
     context_stack: str = None
     name: str = None
     description: str = None
+    mode: str = None
     template: str = None
+    upload_token: str = None
 
     def with_name(self, name: str) -> CreateStackRequest:
         self.name = name
@@ -75,8 +106,16 @@ class CreateStackRequest(core.Gs2Request):
         self.description = description
         return self
 
+    def with_mode(self, mode: str) -> CreateStackRequest:
+        self.mode = mode
+        return self
+
     def with_template(self, template: str) -> CreateStackRequest:
         self.template = template
+        return self
+
+    def with_upload_token(self, upload_token: str) -> CreateStackRequest:
+        self.upload_token = upload_token
         return self
 
     def get(self, key, default=None):
@@ -100,13 +139,17 @@ class CreateStackRequest(core.Gs2Request):
         return CreateStackRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
-            .with_template(data.get('template'))
+            .with_mode(data.get('mode'))\
+            .with_template(data.get('template'))\
+            .with_upload_token(data.get('uploadToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
             "description": self.description,
+            "mode": self.mode,
             "template": self.template,
+            "uploadToken": self.upload_token,
         }
 
 
@@ -160,13 +203,52 @@ class CreateStackFromGitHubRequest(core.Gs2Request):
         }
 
 
+class PreValidateRequest(core.Gs2Request):
+
+    context_stack: str = None
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreValidateRequest]:
+        if data is None:
+            return None
+        return PreValidateRequest()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class ValidateRequest(core.Gs2Request):
 
     context_stack: str = None
+    mode: str = None
     template: str = None
+    upload_token: str = None
+
+    def with_mode(self, mode: str) -> ValidateRequest:
+        self.mode = mode
+        return self
 
     def with_template(self, template: str) -> ValidateRequest:
         self.template = template
+        return self
+
+    def with_upload_token(self, upload_token: str) -> ValidateRequest:
+        self.upload_token = upload_token
         return self
 
     def get(self, key, default=None):
@@ -188,11 +270,15 @@ class ValidateRequest(core.Gs2Request):
         if data is None:
             return None
         return ValidateRequest()\
-            .with_template(data.get('template'))
+            .with_mode(data.get('mode'))\
+            .with_template(data.get('template'))\
+            .with_upload_token(data.get('uploadToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "mode": self.mode,
             "template": self.template,
+            "uploadToken": self.upload_token,
         }
 
 
@@ -268,12 +354,50 @@ class GetStackRequest(core.Gs2Request):
         }
 
 
+class PreUpdateStackRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stack_name: str = None
+
+    def with_stack_name(self, stack_name: str) -> PreUpdateStackRequest:
+        self.stack_name = stack_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreUpdateStackRequest]:
+        if data is None:
+            return None
+        return PreUpdateStackRequest()\
+            .with_stack_name(data.get('stackName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stackName": self.stack_name,
+        }
+
+
 class UpdateStackRequest(core.Gs2Request):
 
     context_stack: str = None
     stack_name: str = None
     description: str = None
+    mode: str = None
     template: str = None
+    upload_token: str = None
 
     def with_stack_name(self, stack_name: str) -> UpdateStackRequest:
         self.stack_name = stack_name
@@ -283,8 +407,16 @@ class UpdateStackRequest(core.Gs2Request):
         self.description = description
         return self
 
+    def with_mode(self, mode: str) -> UpdateStackRequest:
+        self.mode = mode
+        return self
+
     def with_template(self, template: str) -> UpdateStackRequest:
         self.template = template
+        return self
+
+    def with_upload_token(self, upload_token: str) -> UpdateStackRequest:
+        self.upload_token = upload_token
         return self
 
     def get(self, key, default=None):
@@ -308,13 +440,53 @@ class UpdateStackRequest(core.Gs2Request):
         return UpdateStackRequest()\
             .with_stack_name(data.get('stackName'))\
             .with_description(data.get('description'))\
-            .with_template(data.get('template'))
+            .with_mode(data.get('mode'))\
+            .with_template(data.get('template'))\
+            .with_upload_token(data.get('uploadToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stackName": self.stack_name,
             "description": self.description,
+            "mode": self.mode,
             "template": self.template,
+            "uploadToken": self.upload_token,
+        }
+
+
+class PreChangeSetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stack_name: str = None
+
+    def with_stack_name(self, stack_name: str) -> PreChangeSetRequest:
+        self.stack_name = stack_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreChangeSetRequest]:
+        if data is None:
+            return None
+        return PreChangeSetRequest()\
+            .with_stack_name(data.get('stackName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stackName": self.stack_name,
         }
 
 
@@ -322,14 +494,24 @@ class ChangeSetRequest(core.Gs2Request):
 
     context_stack: str = None
     stack_name: str = None
+    mode: str = None
     template: str = None
+    upload_token: str = None
 
     def with_stack_name(self, stack_name: str) -> ChangeSetRequest:
         self.stack_name = stack_name
         return self
 
+    def with_mode(self, mode: str) -> ChangeSetRequest:
+        self.mode = mode
+        return self
+
     def with_template(self, template: str) -> ChangeSetRequest:
         self.template = template
+        return self
+
+    def with_upload_token(self, upload_token: str) -> ChangeSetRequest:
+        self.upload_token = upload_token
         return self
 
     def get(self, key, default=None):
@@ -352,12 +534,16 @@ class ChangeSetRequest(core.Gs2Request):
             return None
         return ChangeSetRequest()\
             .with_stack_name(data.get('stackName'))\
-            .with_template(data.get('template'))
+            .with_mode(data.get('mode'))\
+            .with_template(data.get('template'))\
+            .with_upload_token(data.get('uploadToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stackName": self.stack_name,
+            "mode": self.mode,
             "template": self.template,
+            "uploadToken": self.upload_token,
         }
 
 

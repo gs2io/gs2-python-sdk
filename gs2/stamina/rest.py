@@ -27,6 +27,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -177,6 +179,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -248,6 +251,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -319,6 +323,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -396,6 +401,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -467,6 +473,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -540,6 +547,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -613,6 +621,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -686,6 +695,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -759,6 +769,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -832,6 +843,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -907,6 +919,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -981,6 +994,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeStaminaModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1056,6 +1070,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateStaminaModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1149,6 +1164,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStaminaModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1221,6 +1237,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateStaminaModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1313,6 +1330,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteStaminaModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1385,6 +1403,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMaxStaminaTableMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1460,6 +1479,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateMaxStaminaTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1544,6 +1564,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMaxStaminaTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1616,6 +1637,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateMaxStaminaTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1699,6 +1721,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMaxStaminaTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1771,6 +1794,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeRecoverIntervalTableMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1846,6 +1870,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateRecoverIntervalTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -1930,6 +1955,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetRecoverIntervalTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2002,6 +2028,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateRecoverIntervalTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2085,6 +2112,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRecoverIntervalTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2157,6 +2185,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeRecoverValueTableMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2232,6 +2261,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateRecoverValueTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2316,6 +2346,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetRecoverValueTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2388,6 +2419,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateRecoverValueTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2471,6 +2503,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRecoverValueTableMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2543,6 +2576,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2614,6 +2648,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentStaminaMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2679,12 +2714,13 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_stamina_master(
+    def _pre_update_current_stamina_master(
         self,
-        request: UpdateCurrentStaminaMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentStaminaMasterResult]], None],
+        request: PreUpdateCurrentStaminaMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentStaminaMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2696,8 +2732,97 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentStaminaMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_stamina_master(
+        self,
+        request: PreUpdateCurrentStaminaMasterRequest,
+    ) -> PreUpdateCurrentStaminaMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_stamina_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_stamina_master_async(
+        self,
+        request: PreUpdateCurrentStaminaMasterRequest,
+    ) -> PreUpdateCurrentStaminaMasterResult:
+        async_result = []
+        self._pre_update_current_stamina_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_stamina_master(
+        self,
+        request: UpdateCurrentStaminaMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentStaminaMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_stamina_master(
+                PreUpdateCurrentStaminaMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='stamina',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2758,6 +2883,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentStaminaMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2831,6 +2957,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeStaminaModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2902,6 +3029,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStaminaModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -2974,6 +3102,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeStaminasResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3051,6 +3180,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeStaminasByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3129,6 +3259,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStaminaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3203,6 +3334,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStaminaByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3278,6 +3410,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateStaminaByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3363,6 +3496,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeStaminaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3441,6 +3575,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeStaminaByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3520,6 +3655,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ApplyStaminaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3596,6 +3732,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ApplyStaminaByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3673,6 +3810,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RecoverStaminaByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3752,6 +3890,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RaiseMaxValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3831,6 +3970,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseMaxValueResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3909,6 +4049,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseMaxValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -3988,6 +4129,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetMaxValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4067,6 +4209,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetRecoverIntervalByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4146,6 +4289,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetRecoverValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4225,6 +4369,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetMaxValueByStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4307,6 +4452,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetRecoverIntervalByStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4389,6 +4535,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetRecoverValueByStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4471,6 +4618,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteStaminaByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4548,6 +4696,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaValueResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4629,6 +4778,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4711,6 +4861,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaMaxValueResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4792,6 +4943,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaMaxValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4874,6 +5026,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -4955,6 +5108,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5037,6 +5191,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaRecoverValueResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5118,6 +5273,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaRecoverValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5200,6 +5356,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaOverflowValueResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5281,6 +5438,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaOverflowValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5363,6 +5521,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RecoverStaminaByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5436,6 +5595,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RaiseMaxValueByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5509,6 +5669,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseMaxValueByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5582,6 +5743,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetMaxValueByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5655,6 +5817,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetRecoverIntervalByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5728,6 +5891,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetRecoverValueByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5801,6 +5965,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeStaminaByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5874,6 +6039,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaValueByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -5947,6 +6113,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaMaxValueByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -6020,6 +6187,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaRecoverIntervalMinutesByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -6093,6 +6261,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaRecoverValueByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,
@@ -6166,6 +6335,7 @@ class Gs2StaminaRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyStaminaOverflowValueByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='stamina',
             region=self.session.region,

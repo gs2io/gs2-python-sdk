@@ -27,6 +27,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeStacksResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -94,12 +95,95 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_create_stack(
+        self,
+        request: PreCreateStackRequest,
+        callback: Callable[[AsyncResult[PreCreateStackResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='deploy',
+            region=self.session.region,
+        ) + "/stack/pre"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreCreateStackResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_create_stack(
+        self,
+        request: PreCreateStackRequest,
+    ) -> PreCreateStackResult:
+        async_result = []
+        with timeout(30):
+            self._pre_create_stack(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_create_stack_async(
+        self,
+        request: PreCreateStackRequest,
+    ) -> PreCreateStackResult:
+        async_result = []
+        self._pre_create_stack(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _create_stack(
         self,
         request: CreateStackRequest,
         callback: Callable[[AsyncResult[CreateStackResult]], None],
         is_blocking: bool,
     ):
+        if request.template is not None:
+            res = self.pre_create_stack(
+                PreCreateStackRequest() \
+                    .with_context_stack(request.context_stack) \
+            )
+            import requests
+            requests.put(res.upload_url, data=request.template, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.template = None
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -113,8 +197,12 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.template is not None:
             body["template"] = request.template
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -175,6 +263,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateStackFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -244,12 +333,95 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_validate(
+        self,
+        request: PreValidateRequest,
+        callback: Callable[[AsyncResult[PreValidateResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='deploy',
+            region=self.session.region,
+        ) + "/stack/validate/pre"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreValidateResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_validate(
+        self,
+        request: PreValidateRequest,
+    ) -> PreValidateResult:
+        async_result = []
+        with timeout(30):
+            self._pre_validate(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_validate_async(
+        self,
+        request: PreValidateRequest,
+    ) -> PreValidateResult:
+        async_result = []
+        self._pre_validate(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _validate(
         self,
         request: ValidateRequest,
         callback: Callable[[AsyncResult[ValidateResult]], None],
         is_blocking: bool,
     ):
+        if request.template is not None:
+            res = self.pre_validate(
+                PreValidateRequest() \
+                    .with_context_stack(request.context_stack) \
+            )
+            import requests
+            requests.put(res.upload_url, data=request.template, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.template = None
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -259,8 +431,12 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.template is not None:
             body["template"] = request.template
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -321,6 +497,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStackStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -392,6 +569,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetStackResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -457,12 +635,98 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_update_stack(
+        self,
+        request: PreUpdateStackRequest,
+        callback: Callable[[AsyncResult[PreUpdateStackResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='deploy',
+            region=self.session.region,
+        ) + "/stack/{stackName}/pre".format(
+            stackName=request.stack_name if request.stack_name is not None and request.stack_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='PUT',
+            result_type=PreUpdateStackResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_stack(
+        self,
+        request: PreUpdateStackRequest,
+    ) -> PreUpdateStackResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_stack(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_stack_async(
+        self,
+        request: PreUpdateStackRequest,
+    ) -> PreUpdateStackResult:
+        async_result = []
+        self._pre_update_stack(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _update_stack(
         self,
         request: UpdateStackRequest,
         callback: Callable[[AsyncResult[UpdateStackResult]], None],
         is_blocking: bool,
     ):
+        if request.template is not None:
+            res = self.pre_update_stack(
+                PreUpdateStackRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_stack_name(request.stack_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.template, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.template = None
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -476,8 +740,12 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         }
         if request.description is not None:
             body["description"] = request.description
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.template is not None:
             body["template"] = request.template
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -532,12 +800,98 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_change_set(
+        self,
+        request: PreChangeSetRequest,
+        callback: Callable[[AsyncResult[PreChangeSetResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='deploy',
+            region=self.session.region,
+        ) + "/stack/{stackName}/pre".format(
+            stackName=request.stack_name if request.stack_name is not None and request.stack_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreChangeSetResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_change_set(
+        self,
+        request: PreChangeSetRequest,
+    ) -> PreChangeSetResult:
+        async_result = []
+        with timeout(30):
+            self._pre_change_set(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_change_set_async(
+        self,
+        request: PreChangeSetRequest,
+    ) -> PreChangeSetResult:
+        async_result = []
+        self._pre_change_set(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _change_set(
         self,
         request: ChangeSetRequest,
         callback: Callable[[AsyncResult[ChangeSetResult]], None],
         is_blocking: bool,
     ):
+        if request.template is not None:
+            res = self.pre_change_set(
+                PreChangeSetRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_stack_name(request.stack_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.template, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.template = None
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -549,8 +903,12 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.template is not None:
             body["template"] = request.template
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -611,6 +969,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateStackFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -686,6 +1045,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteStackResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -757,6 +1117,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ForceDeleteStackResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -828,6 +1189,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteStackResourcesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -899,6 +1261,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteStackEntityResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -970,6 +1333,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeResourcesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -1045,6 +1409,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetResourceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -1117,6 +1482,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeEventsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -1192,6 +1558,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetEventResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -1264,6 +1631,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeOutputsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,
@@ -1339,6 +1707,7 @@ class Gs2DeployRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetOutputResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='deploy',
             region=self.session.region,

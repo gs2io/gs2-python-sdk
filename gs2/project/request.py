@@ -1434,11 +1434,16 @@ class GetDumpProgressRequest(core.Gs2Request):
 class WaitDumpUserDataRequest(core.Gs2Request):
 
     context_stack: str = None
+    owner_id: str = None
     transaction_id: str = None
     user_id: str = None
     microservice_name: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
+
+    def with_owner_id(self, owner_id: str) -> WaitDumpUserDataRequest:
+        self.owner_id = owner_id
+        return self
 
     def with_transaction_id(self, transaction_id: str) -> WaitDumpUserDataRequest:
         self.transaction_id = transaction_id
@@ -1479,6 +1484,7 @@ class WaitDumpUserDataRequest(core.Gs2Request):
         if data is None:
             return None
         return WaitDumpUserDataRequest()\
+            .with_owner_id(data.get('ownerId'))\
             .with_transaction_id(data.get('transactionId'))\
             .with_user_id(data.get('userId'))\
             .with_microservice_name(data.get('microserviceName'))\
@@ -1486,6 +1492,7 @@ class WaitDumpUserDataRequest(core.Gs2Request):
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "ownerId": self.owner_id,
             "transactionId": self.transaction_id,
             "userId": self.user_id,
             "microserviceName": self.microservice_name,
@@ -1496,7 +1503,12 @@ class WaitDumpUserDataRequest(core.Gs2Request):
 class ArchiveDumpUserDataRequest(core.Gs2Request):
 
     context_stack: str = None
+    owner_id: str = None
     transaction_id: str = None
+
+    def with_owner_id(self, owner_id: str) -> ArchiveDumpUserDataRequest:
+        self.owner_id = owner_id
+        return self
 
     def with_transaction_id(self, transaction_id: str) -> ArchiveDumpUserDataRequest:
         self.transaction_id = transaction_id
@@ -1521,10 +1533,12 @@ class ArchiveDumpUserDataRequest(core.Gs2Request):
         if data is None:
             return None
         return ArchiveDumpUserDataRequest()\
+            .with_owner_id(data.get('ownerId'))\
             .with_transaction_id(data.get('transactionId'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "ownerId": self.owner_id,
             "transactionId": self.transaction_id,
         }
 

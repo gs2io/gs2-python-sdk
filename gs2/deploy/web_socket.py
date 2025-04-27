@@ -95,6 +95,75 @@ class Gs2DeployWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_create_stack(
+        self,
+        request: PreCreateStackRequest,
+        callback: Callable[[AsyncResult[PreCreateStackResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="deploy",
+            component='stack',
+            function='preCreateStack',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PreCreateStackResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def pre_create_stack(
+        self,
+        request: PreCreateStackRequest,
+    ) -> PreCreateStackResult:
+        async_result = []
+        with timeout(30):
+            self._pre_create_stack(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_create_stack_async(
+        self,
+        request: PreCreateStackRequest,
+    ) -> PreCreateStackResult:
+        async_result = []
+        self._pre_create_stack(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _create_stack(
         self,
         request: CreateStackRequest,
@@ -116,8 +185,12 @@ class Gs2DeployWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.template is not None:
             body["template"] = request.template
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -245,6 +318,75 @@ class Gs2DeployWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_validate(
+        self,
+        request: PreValidateRequest,
+        callback: Callable[[AsyncResult[PreValidateResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="deploy",
+            component='stack',
+            function='preValidate',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PreValidateResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def pre_validate(
+        self,
+        request: PreValidateRequest,
+    ) -> PreValidateResult:
+        async_result = []
+        with timeout(30):
+            self._pre_validate(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_validate_async(
+        self,
+        request: PreValidateRequest,
+    ) -> PreValidateResult:
+        async_result = []
+        self._pre_validate(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _validate(
         self,
         request: ValidateRequest,
@@ -262,8 +404,12 @@ class Gs2DeployWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.template is not None:
             body["template"] = request.template
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -458,6 +604,77 @@ class Gs2DeployWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_update_stack(
+        self,
+        request: PreUpdateStackRequest,
+        callback: Callable[[AsyncResult[PreUpdateStackResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="deploy",
+            component='stack',
+            function='preUpdateStack',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stack_name is not None:
+            body["stackName"] = request.stack_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PreUpdateStackResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def pre_update_stack(
+        self,
+        request: PreUpdateStackRequest,
+    ) -> PreUpdateStackResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_stack(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_stack_async(
+        self,
+        request: PreUpdateStackRequest,
+    ) -> PreUpdateStackResult:
+        async_result = []
+        self._pre_update_stack(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _update_stack(
         self,
         request: UpdateStackRequest,
@@ -479,8 +696,12 @@ class Gs2DeployWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["stackName"] = request.stack_name
         if request.description is not None:
             body["description"] = request.description
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.template is not None:
             body["template"] = request.template
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -533,6 +754,77 @@ class Gs2DeployWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_change_set(
+        self,
+        request: PreChangeSetRequest,
+        callback: Callable[[AsyncResult[PreChangeSetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="deploy",
+            component='stack',
+            function='preChangeSet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stack_name is not None:
+            body["stackName"] = request.stack_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PreChangeSetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def pre_change_set(
+        self,
+        request: PreChangeSetRequest,
+    ) -> PreChangeSetResult:
+        async_result = []
+        with timeout(30):
+            self._pre_change_set(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_change_set_async(
+        self,
+        request: PreChangeSetRequest,
+    ) -> PreChangeSetResult:
+        async_result = []
+        self._pre_change_set(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _change_set(
         self,
         request: ChangeSetRequest,
@@ -552,8 +844,12 @@ class Gs2DeployWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.stack_name is not None:
             body["stackName"] = request.stack_name
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.template is not None:
             body["template"] = request.template
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

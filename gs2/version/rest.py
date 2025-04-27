@@ -27,6 +27,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -181,6 +183,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -252,6 +255,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -323,6 +327,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -404,6 +409,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -475,6 +481,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -548,6 +555,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -621,6 +629,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -694,6 +703,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -767,6 +777,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -840,6 +851,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -915,6 +927,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -989,6 +1002,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeVersionModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1064,6 +1078,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateVersionModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1162,6 +1177,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetVersionModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1234,6 +1250,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateVersionModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1331,6 +1348,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteVersionModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1403,6 +1421,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeVersionModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1474,6 +1493,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetVersionModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1546,6 +1566,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeAcceptVersionsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1623,6 +1644,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeAcceptVersionsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1702,6 +1724,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcceptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1781,6 +1804,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcceptByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1861,6 +1885,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RejectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -1940,6 +1965,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RejectByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2020,6 +2046,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetAcceptVersionResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2094,6 +2121,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetAcceptVersionByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2169,6 +2197,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteAcceptVersionResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2245,6 +2274,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteAcceptVersionByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2322,6 +2352,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckVersionResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2402,6 +2433,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckVersionByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2483,6 +2515,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CalculateSignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2557,6 +2590,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2628,6 +2662,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentVersionMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2693,12 +2728,13 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_version_master(
+    def _pre_update_current_version_master(
         self,
-        request: UpdateCurrentVersionMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentVersionMasterResult]], None],
+        request: PreUpdateCurrentVersionMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentVersionMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,
@@ -2710,8 +2746,97 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentVersionMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_version_master(
+        self,
+        request: PreUpdateCurrentVersionMasterRequest,
+    ) -> PreUpdateCurrentVersionMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_version_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_version_master_async(
+        self,
+        request: PreUpdateCurrentVersionMasterRequest,
+    ) -> PreUpdateCurrentVersionMasterResult:
+        async_result = []
+        self._pre_update_current_version_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_version_master(
+        self,
+        request: UpdateCurrentVersionMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentVersionMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_version_master(
+                PreUpdateCurrentVersionMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='version',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2772,6 +2897,7 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentVersionMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='version',
             region=self.session.region,

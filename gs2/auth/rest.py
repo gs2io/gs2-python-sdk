@@ -27,6 +27,7 @@ class Gs2AuthRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[LoginResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='auth',
             region=self.session.region,
@@ -102,6 +103,7 @@ class Gs2AuthRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[LoginBySignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='auth',
             region=self.session.region,
@@ -177,6 +179,7 @@ class Gs2AuthRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FederationResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='auth',
             region=self.session.region,
@@ -256,6 +259,7 @@ class Gs2AuthRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[IssueTimeOffsetTokenByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='auth',
             region=self.session.region,

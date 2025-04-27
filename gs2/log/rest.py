@@ -27,6 +27,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -189,6 +191,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -260,6 +263,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -331,6 +335,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -420,6 +425,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -491,6 +497,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[QueryAccessLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -580,6 +587,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CountAccessLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -669,6 +677,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[QueryIssueStampSheetLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -760,6 +769,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CountIssueStampSheetLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -851,6 +861,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[QueryExecuteStampSheetLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -942,6 +953,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CountExecuteStampSheetLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1033,6 +1045,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[QueryExecuteStampTaskLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1124,6 +1137,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CountExecuteStampTaskLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1215,6 +1229,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[QueryInGameLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1307,6 +1322,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SendInGameLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1389,6 +1405,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SendInGameLogByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1472,6 +1489,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[QueryAccessLogWithTelemetryResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1557,6 +1575,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeInsightsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1632,6 +1651,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateInsightResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1703,6 +1723,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetInsightResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,
@@ -1775,6 +1796,7 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteInsightResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='log',
             region=self.session.region,

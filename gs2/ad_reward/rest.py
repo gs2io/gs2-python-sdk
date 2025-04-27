@@ -27,6 +27,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -190,6 +192,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -261,6 +264,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -332,6 +336,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -422,6 +427,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -493,6 +499,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -566,6 +573,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -639,6 +647,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -712,6 +721,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -785,6 +795,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -858,6 +869,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -933,6 +945,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -1007,6 +1020,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPointResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -1080,6 +1094,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPointByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -1154,6 +1169,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquirePointByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -1232,6 +1248,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumePointResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -1309,6 +1326,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumePointByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -1387,6 +1405,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeletePointByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -1463,6 +1482,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumePointByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,
@@ -1536,6 +1556,7 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquirePointByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ad-reward',
             region=self.session.region,

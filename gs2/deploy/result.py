@@ -65,6 +65,47 @@ class DescribeStacksResult(core.Gs2Result):
         }
 
 
+class PreCreateStackResult(core.Gs2Result):
+    upload_token: str = None
+    upload_url: str = None
+
+    def with_upload_token(self, upload_token: str) -> PreCreateStackResult:
+        self.upload_token = upload_token
+        return self
+
+    def with_upload_url(self, upload_url: str) -> PreCreateStackResult:
+        self.upload_url = upload_url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreCreateStackResult]:
+        if data is None:
+            return None
+        return PreCreateStackResult()\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_upload_url(data.get('uploadUrl'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uploadToken": self.upload_token,
+            "uploadUrl": self.upload_url,
+        }
+
+
 class CreateStackResult(core.Gs2Result):
     item: Stack = None
 
@@ -130,6 +171,47 @@ class CreateStackFromGitHubResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class PreValidateResult(core.Gs2Result):
+    upload_token: str = None
+    upload_url: str = None
+
+    def with_upload_token(self, upload_token: str) -> PreValidateResult:
+        self.upload_token = upload_token
+        return self
+
+    def with_upload_url(self, upload_url: str) -> PreValidateResult:
+        self.upload_url = upload_url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreValidateResult]:
+        if data is None:
+            return None
+        return PreValidateResult()\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_upload_url(data.get('uploadUrl'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uploadToken": self.upload_token,
+            "uploadUrl": self.upload_url,
         }
 
 
@@ -228,6 +310,47 @@ class GetStackResult(core.Gs2Result):
         }
 
 
+class PreUpdateStackResult(core.Gs2Result):
+    upload_token: str = None
+    upload_url: str = None
+
+    def with_upload_token(self, upload_token: str) -> PreUpdateStackResult:
+        self.upload_token = upload_token
+        return self
+
+    def with_upload_url(self, upload_url: str) -> PreUpdateStackResult:
+        self.upload_url = upload_url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreUpdateStackResult]:
+        if data is None:
+            return None
+        return PreUpdateStackResult()\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_upload_url(data.get('uploadUrl'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uploadToken": self.upload_token,
+            "uploadUrl": self.upload_url,
+        }
+
+
 class UpdateStackResult(core.Gs2Result):
     item: Stack = None
 
@@ -259,6 +382,47 @@ class UpdateStackResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class PreChangeSetResult(core.Gs2Result):
+    upload_token: str = None
+    upload_url: str = None
+
+    def with_upload_token(self, upload_token: str) -> PreChangeSetResult:
+        self.upload_token = upload_token
+        return self
+
+    def with_upload_url(self, upload_url: str) -> PreChangeSetResult:
+        self.upload_url = upload_url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreChangeSetResult]:
+        if data is None:
+            return None
+        return PreChangeSetResult()\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_upload_url(data.get('uploadUrl'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uploadToken": self.upload_token,
+            "uploadUrl": self.upload_url,
         }
 
 

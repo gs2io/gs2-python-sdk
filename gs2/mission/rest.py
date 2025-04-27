@@ -27,6 +27,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeCompletesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -104,6 +105,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeCompletesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -182,6 +184,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CompleteResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -264,6 +267,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CompleteByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -347,6 +351,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[BatchCompleteResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -433,6 +438,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[BatchCompleteByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -520,6 +526,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ReceiveByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -598,6 +605,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[BatchReceiveByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -680,6 +688,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RevertReceiveByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -758,6 +767,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCompleteResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -832,6 +842,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCompleteByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -907,6 +918,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EvaluateCompleteResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -983,6 +995,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EvaluateCompleteByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1060,6 +1073,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteCompleteByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1137,6 +1151,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCompleteResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1216,6 +1231,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCompleteByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1296,6 +1312,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ReceiveByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1369,6 +1386,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[BatchReceiveByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1442,6 +1460,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RevertReceiveByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1515,6 +1534,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCompleteByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1588,6 +1608,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeCounterModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1663,6 +1684,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateCounterModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1747,6 +1769,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCounterModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1819,6 +1842,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCounterModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1902,6 +1926,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteCounterModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -1974,6 +1999,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMissionGroupModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2049,6 +2075,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateMissionGroupModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2140,6 +2167,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMissionGroupModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2212,6 +2240,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateMissionGroupModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2302,6 +2331,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMissionGroupModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2374,6 +2404,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2447,6 +2478,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2536,6 +2568,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2607,6 +2640,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2678,6 +2712,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2767,6 +2802,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2838,6 +2874,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2911,6 +2948,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -2984,6 +3022,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3057,6 +3096,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3130,6 +3170,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3203,6 +3244,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3278,6 +3320,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3352,6 +3395,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeCountersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3429,6 +3473,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeCountersByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3507,6 +3552,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[IncreaseCounterByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3586,6 +3632,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetCounterByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3668,6 +3715,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseCounterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3746,6 +3794,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseCounterByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3825,6 +3874,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCounterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3899,6 +3949,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCounterByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -3974,6 +4025,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCounterValueResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4061,6 +4113,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCounterValueByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4149,6 +4202,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ResetCounterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4230,6 +4284,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ResetCounterByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4312,6 +4367,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteCounterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4388,6 +4444,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteCounterByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4465,6 +4522,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[IncreaseByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4538,6 +4596,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4611,6 +4670,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4684,6 +4744,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ResetByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4757,6 +4818,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCounterValueByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4830,6 +4892,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4901,6 +4964,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentMissionMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4966,12 +5030,13 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_mission_master(
+    def _pre_update_current_mission_master(
         self,
-        request: UpdateCurrentMissionMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentMissionMasterResult]], None],
+        request: PreUpdateCurrentMissionMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentMissionMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -4983,8 +5048,97 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentMissionMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_mission_master(
+        self,
+        request: PreUpdateCurrentMissionMasterRequest,
+    ) -> PreUpdateCurrentMissionMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_mission_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_mission_master_async(
+        self,
+        request: PreUpdateCurrentMissionMasterRequest,
+    ) -> PreUpdateCurrentMissionMasterResult:
+        async_result = []
+        self._pre_update_current_mission_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_mission_master(
+        self,
+        request: UpdateCurrentMissionMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentMissionMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_mission_master(
+                PreUpdateCurrentMissionMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='mission',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -5045,6 +5199,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentMissionMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5118,6 +5273,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeCounterModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5189,6 +5345,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCounterModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5261,6 +5418,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMissionGroupModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5332,6 +5490,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMissionGroupModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5404,6 +5563,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMissionTaskModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5476,6 +5636,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMissionTaskModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5549,6 +5710,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMissionTaskModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5625,6 +5787,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateMissionTaskModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5727,6 +5890,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMissionTaskModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5800,6 +5964,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateMissionTaskModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,
@@ -5901,6 +6066,7 @@ class Gs2MissionRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMissionTaskModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='mission',
             region=self.session.region,

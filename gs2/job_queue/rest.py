@@ -27,6 +27,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -181,6 +183,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -252,6 +255,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -323,6 +327,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -404,6 +409,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -475,6 +481,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -548,6 +555,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -621,6 +629,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -694,6 +703,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -767,6 +777,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -840,6 +851,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -915,6 +927,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -989,6 +1002,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeJobsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1067,6 +1081,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetJobByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1142,6 +1157,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PushByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1223,6 +1239,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1298,6 +1315,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RunByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1374,6 +1392,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteJobResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1450,6 +1469,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteJobByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1527,6 +1547,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PushByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1600,6 +1621,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1673,6 +1695,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetJobResultResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,
@@ -1749,6 +1772,7 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetJobResultByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='job-queue',
             region=self.session.region,

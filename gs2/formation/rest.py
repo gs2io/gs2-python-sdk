@@ -27,6 +27,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -183,6 +185,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -254,6 +257,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -325,6 +329,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -408,6 +413,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -479,6 +485,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -552,6 +559,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -625,6 +633,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -698,6 +707,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -771,6 +781,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -844,6 +855,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -919,6 +931,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -993,6 +1006,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFormModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1065,6 +1079,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeFormModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1140,6 +1155,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateFormModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1222,6 +1238,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFormModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1294,6 +1311,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateFormModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1375,6 +1393,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteFormModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1447,6 +1466,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMoldModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1518,6 +1538,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMoldModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1590,6 +1611,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMoldModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1665,6 +1687,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateMoldModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1748,6 +1771,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMoldModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1820,6 +1844,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateMoldModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1902,6 +1927,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMoldModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -1974,6 +2000,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribePropertyFormModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2045,6 +2072,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPropertyFormModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2117,6 +2145,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribePropertyFormModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2192,6 +2221,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreatePropertyFormModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2274,6 +2304,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPropertyFormModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2346,6 +2377,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdatePropertyFormModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2427,6 +2459,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeletePropertyFormModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2499,6 +2532,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2570,6 +2604,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentFormMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2635,12 +2670,13 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_form_master(
+    def _pre_update_current_form_master(
         self,
-        request: UpdateCurrentFormMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentFormMasterResult]], None],
+        request: PreUpdateCurrentFormMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentFormMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2652,8 +2688,97 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentFormMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_form_master(
+        self,
+        request: PreUpdateCurrentFormMasterRequest,
+    ) -> PreUpdateCurrentFormMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_form_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_form_master_async(
+        self,
+        request: PreUpdateCurrentFormMasterRequest,
+    ) -> PreUpdateCurrentFormMasterResult:
+        async_result = []
+        self._pre_update_current_form_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_form_master(
+        self,
+        request: UpdateCurrentFormMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentFormMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_form_master(
+                PreUpdateCurrentFormMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='formation',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2714,6 +2839,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentFormMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2787,6 +2913,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMoldsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2864,6 +2991,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMoldsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -2942,6 +3070,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMoldResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3016,6 +3145,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMoldByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3091,6 +3221,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetMoldCapacityByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3170,6 +3301,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddMoldCapacityByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3249,6 +3381,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SubMoldCapacityResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3327,6 +3460,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SubMoldCapacityByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3406,6 +3540,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMoldResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3482,6 +3617,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMoldByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3559,6 +3695,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddCapacityByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3632,6 +3769,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SubCapacityByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3705,6 +3843,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetCapacityByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3778,6 +3917,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeFormsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3856,6 +3996,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeFormsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -3935,6 +4076,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFormResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4010,6 +4152,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFormByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4086,6 +4229,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFormWithSignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4163,6 +4307,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFormWithSignatureByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4241,6 +4386,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetFormResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4323,6 +4469,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetFormByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4406,6 +4553,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetFormWithSignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4490,6 +4638,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireActionsToFormPropertiesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4575,6 +4724,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteFormResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4652,6 +4802,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteFormByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4730,6 +4881,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireActionToFormPropertiesByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4803,6 +4955,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetFormByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4876,6 +5029,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribePropertyFormsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -4954,6 +5108,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribePropertyFormsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5033,6 +5188,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPropertyFormResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5108,6 +5264,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPropertyFormByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5184,6 +5341,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPropertyFormWithSignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5261,6 +5419,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPropertyFormWithSignatureByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5339,6 +5498,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetPropertyFormResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5421,6 +5581,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetPropertyFormByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5504,6 +5665,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetPropertyFormWithSignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5588,6 +5750,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireActionsToPropertyFormPropertiesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5673,6 +5836,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeletePropertyFormResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5750,6 +5914,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeletePropertyFormByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,
@@ -5828,6 +5993,7 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireActionToPropertyFormPropertiesByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='formation',
             region=self.session.region,

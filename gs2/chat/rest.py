@@ -27,6 +27,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -191,6 +193,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -262,6 +265,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -333,6 +337,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -424,6 +429,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -495,6 +501,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -568,6 +575,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -641,6 +649,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -714,6 +723,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -787,6 +797,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -860,6 +871,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -935,6 +947,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1009,6 +1022,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeRoomsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1084,6 +1098,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateRoomResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1170,6 +1185,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateRoomFromBackendResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1258,6 +1274,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetRoomResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1330,6 +1347,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateRoomResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1415,6 +1433,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateRoomFromBackendResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1502,6 +1521,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRoomResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1578,6 +1598,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRoomFromBackendResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1656,6 +1677,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMessagesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1736,6 +1758,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMessagesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1818,6 +1841,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeLatestMessagesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1896,6 +1920,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeLatestMessagesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -1976,6 +2001,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PostResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2058,6 +2084,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PostByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2141,6 +2168,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMessageResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2218,6 +2246,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMessageByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2297,6 +2326,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMessageResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2376,6 +2406,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2453,6 +2484,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2531,6 +2563,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribesByRoomNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2607,6 +2640,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SubscribeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2688,6 +2722,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SubscribeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2770,6 +2805,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2844,6 +2880,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -2919,6 +2956,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNotificationTypeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -3000,6 +3038,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNotificationTypeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -3082,6 +3121,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UnsubscribeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,
@@ -3158,6 +3198,7 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UnsubscribeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='chat',
             region=self.session.region,

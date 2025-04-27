@@ -27,6 +27,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -177,6 +179,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -248,6 +251,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -319,6 +323,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -396,6 +401,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -467,6 +473,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -540,6 +547,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -613,6 +621,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -686,6 +695,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -759,6 +769,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -832,6 +843,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -907,6 +919,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -981,6 +994,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeDataObjectsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1060,6 +1074,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeDataObjectsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1140,6 +1155,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareUploadResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1228,6 +1244,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareUploadByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1317,6 +1334,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateDataObjectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1400,6 +1418,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateDataObjectByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1484,6 +1503,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareReUploadResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1562,6 +1582,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareReUploadByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1641,6 +1662,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoneUploadResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1717,6 +1739,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoneUploadByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1794,6 +1817,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteDataObjectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1870,6 +1894,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteDataObjectByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -1947,6 +1972,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareDownloadResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2024,6 +2050,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareDownloadByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2102,6 +2129,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareDownloadByGenerationResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2180,6 +2208,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareDownloadByGenerationAndUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2259,6 +2288,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareDownloadOwnDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2335,6 +2365,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareDownloadByUserIdAndDataObjectNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2412,6 +2443,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareDownloadOwnDataByGenerationResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2489,6 +2521,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2567,6 +2600,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RestoreDataObjectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2640,6 +2674,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeDataObjectHistoriesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2718,6 +2753,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeDataObjectHistoriesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2797,6 +2833,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetDataObjectHistoryResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,
@@ -2872,6 +2909,7 @@ class Gs2DatastoreRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetDataObjectHistoryByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='datastore',
             region=self.session.region,

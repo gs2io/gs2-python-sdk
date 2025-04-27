@@ -27,6 +27,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -197,6 +199,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -268,6 +271,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -339,6 +343,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -436,6 +441,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -507,6 +513,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -580,6 +587,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -653,6 +661,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -726,6 +735,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -799,6 +809,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -872,6 +883,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -947,6 +959,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1021,6 +1034,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGuildModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1096,6 +1110,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGuildModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1194,6 +1209,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGuildModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1266,6 +1282,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateGuildModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1363,6 +1380,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteGuildModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1435,6 +1453,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGuildModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1506,6 +1525,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGuildModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1578,6 +1598,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SearchGuildsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1694,6 +1715,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SearchGuildsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1811,6 +1833,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGuildResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -1912,6 +1935,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGuildByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2014,6 +2038,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGuildResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2089,6 +2114,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGuildByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2165,6 +2191,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateGuildResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2264,6 +2291,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateGuildByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2362,6 +2390,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMemberResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2439,6 +2468,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMemberByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2515,6 +2545,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateMemberRoleResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2594,6 +2625,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateMemberRoleByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2672,6 +2704,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[BatchUpdateMemberRoleResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2753,6 +2786,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[BatchUpdateMemberRoleByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2833,6 +2867,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteGuildResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2909,6 +2944,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteGuildByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -2984,6 +3020,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[IncreaseMaximumCurrentMaximumMemberCountByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3061,6 +3098,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseMaximumCurrentMaximumMemberCountResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3139,6 +3177,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3216,6 +3255,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCurrentMaximumMemberCountResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3298,6 +3338,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCurrentMaximumMemberCountByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3379,6 +3420,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyIncludeMemberResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3458,6 +3500,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyIncludeMemberByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3538,6 +3581,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetMaximumCurrentMaximumMemberCountByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3615,6 +3659,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AssumeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3692,6 +3737,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AssumeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3770,6 +3816,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[IncreaseMaximumCurrentMaximumMemberCountByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3843,6 +3890,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecreaseMaximumCurrentMaximumMemberCountByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3916,6 +3964,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetMaximumCurrentMaximumMemberCountByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -3989,6 +4038,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyCurrentMaximumMemberCountByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4062,6 +4112,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyIncludeMemberByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4135,6 +4186,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeJoinedGuildsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4214,6 +4266,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeJoinedGuildsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4294,6 +4347,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetJoinedGuildResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4369,6 +4423,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetJoinedGuildByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4445,6 +4500,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateMemberMetadataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4524,6 +4580,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateMemberMetadataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4604,6 +4661,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WithdrawalResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4681,6 +4739,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WithdrawalByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4759,6 +4818,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetLastGuildMasterActivityResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4833,6 +4893,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetLastGuildMasterActivityByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4906,6 +4967,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PromoteSeniorMemberResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -4982,6 +5044,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PromoteSeniorMemberByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5057,6 +5120,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5128,6 +5192,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentGuildMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5193,12 +5258,13 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_guild_master(
+    def _pre_update_current_guild_master(
         self,
-        request: UpdateCurrentGuildMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentGuildMasterResult]], None],
+        request: PreUpdateCurrentGuildMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentGuildMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5210,8 +5276,97 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentGuildMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_guild_master(
+        self,
+        request: PreUpdateCurrentGuildMasterRequest,
+    ) -> PreUpdateCurrentGuildMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_guild_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_guild_master_async(
+        self,
+        request: PreUpdateCurrentGuildMasterRequest,
+    ) -> PreUpdateCurrentGuildMasterResult:
+        async_result = []
+        self._pre_update_current_guild_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_guild_master(
+        self,
+        request: UpdateCurrentGuildMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentGuildMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_guild_master(
+                PreUpdateCurrentGuildMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='guild',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -5272,6 +5427,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentGuildMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5345,6 +5501,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeReceiveRequestsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5423,6 +5580,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeReceiveRequestsByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5500,6 +5658,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetReceiveRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5575,6 +5734,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetReceiveRequestByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5649,6 +5809,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcceptRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5726,6 +5887,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcceptRequestByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5802,6 +5964,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RejectRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5879,6 +6042,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RejectRequestByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -5955,6 +6119,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSendRequestsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6033,6 +6198,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSendRequestsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6112,6 +6278,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSendRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6187,6 +6354,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSendRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6263,6 +6431,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SendRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6342,6 +6511,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SendRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6422,6 +6592,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6499,6 +6670,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6577,6 +6749,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeIgnoreUsersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6655,6 +6828,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeIgnoreUsersByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6732,6 +6906,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetIgnoreUserResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6807,6 +6982,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetIgnoreUserByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6883,6 +7059,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddIgnoreUserResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -6960,6 +7137,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddIgnoreUserByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -7038,6 +7216,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteIgnoreUserResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,
@@ -7115,6 +7294,7 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteIgnoreUserByGuildNameResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='guild',
             region=self.session.region,

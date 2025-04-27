@@ -2537,6 +2537,47 @@ class GetCurrentMissionMasterResult(core.Gs2Result):
         }
 
 
+class PreUpdateCurrentMissionMasterResult(core.Gs2Result):
+    upload_token: str = None
+    upload_url: str = None
+
+    def with_upload_token(self, upload_token: str) -> PreUpdateCurrentMissionMasterResult:
+        self.upload_token = upload_token
+        return self
+
+    def with_upload_url(self, upload_url: str) -> PreUpdateCurrentMissionMasterResult:
+        self.upload_url = upload_url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreUpdateCurrentMissionMasterResult]:
+        if data is None:
+            return None
+        return PreUpdateCurrentMissionMasterResult()\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_upload_url(data.get('uploadUrl'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uploadToken": self.upload_token,
+            "uploadUrl": self.upload_url,
+        }
+
+
 class UpdateCurrentMissionMasterResult(core.Gs2Result):
     item: CurrentMissionMaster = None
 

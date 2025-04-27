@@ -27,6 +27,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -177,6 +179,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -248,6 +251,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -319,6 +323,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -396,6 +401,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -467,6 +473,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -540,6 +547,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -613,6 +621,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -686,6 +695,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -759,6 +769,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -832,6 +843,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -907,6 +919,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -981,6 +994,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGlobalRankingModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1052,6 +1066,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGlobalRankingModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1124,6 +1139,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGlobalRankingModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1199,6 +1215,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGlobalRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1295,6 +1312,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGlobalRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1367,6 +1385,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateGlobalRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1462,6 +1481,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteGlobalRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1534,6 +1554,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGlobalRankingScoresResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1613,6 +1634,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGlobalRankingScoresByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1693,6 +1715,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PutGlobalRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1773,6 +1796,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PutGlobalRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1854,6 +1878,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGlobalRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -1930,6 +1955,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGlobalRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2007,6 +2033,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteGlobalRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2086,6 +2113,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyGlobalRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2169,6 +2197,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyGlobalRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2253,6 +2282,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyGlobalRankingScoreByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2326,6 +2356,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGlobalRankingReceivedRewardsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2407,6 +2438,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGlobalRankingReceivedRewardsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2489,6 +2521,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGlobalRankingReceivedRewardResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2567,6 +2600,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGlobalRankingReceivedRewardByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2646,6 +2680,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ReceiveGlobalRankingReceivedRewardResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2728,6 +2763,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ReceiveGlobalRankingReceivedRewardByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2811,6 +2847,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGlobalRankingReceivedRewardResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2887,6 +2924,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGlobalRankingReceivedRewardByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -2964,6 +3002,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteGlobalRankingReceivedRewardByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3043,6 +3082,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGlobalRankingReceivedRewardByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3116,6 +3156,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGlobalRankingsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3196,6 +3237,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGlobalRankingsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3277,6 +3319,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGlobalRankingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3353,6 +3396,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGlobalRankingByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3430,6 +3474,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeClusterRankingModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3501,6 +3546,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetClusterRankingModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3573,6 +3619,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeClusterRankingModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3648,6 +3695,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateClusterRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3748,6 +3796,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetClusterRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3820,6 +3869,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateClusterRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3919,6 +3969,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteClusterRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -3991,6 +4042,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeClusterRankingScoresResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4074,6 +4126,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeClusterRankingScoresByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4158,6 +4211,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PutClusterRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4239,6 +4293,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PutClusterRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4321,6 +4376,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetClusterRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4398,6 +4454,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetClusterRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4476,6 +4533,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteClusterRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4556,6 +4614,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyClusterRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4640,6 +4699,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyClusterRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4725,6 +4785,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyClusterRankingScoreByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4798,6 +4859,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeClusterRankingReceivedRewardsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4881,6 +4943,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeClusterRankingReceivedRewardsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -4965,6 +5028,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateClusterRankingReceivedRewardResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5044,6 +5108,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateClusterRankingReceivedRewardByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5124,6 +5189,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ReceiveClusterRankingReceivedRewardResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5207,6 +5273,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ReceiveClusterRankingReceivedRewardByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5291,6 +5358,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetClusterRankingReceivedRewardResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5368,6 +5436,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetClusterRankingReceivedRewardByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5446,6 +5515,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteClusterRankingReceivedRewardByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5526,6 +5596,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateClusterRankingReceivedRewardByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5599,6 +5670,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeClusterRankingsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5680,6 +5752,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeClusterRankingsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5762,6 +5835,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetClusterRankingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5839,6 +5913,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetClusterRankingByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5917,6 +5992,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribeRankingModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -5988,6 +6064,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeRankingModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6060,6 +6137,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribeRankingModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6135,6 +6213,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateSubscribeRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6226,6 +6305,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6298,6 +6378,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateSubscribeRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6388,6 +6469,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSubscribeRankingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6460,6 +6542,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6539,6 +6622,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6619,6 +6703,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddSubscribeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6696,6 +6781,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddSubscribeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6774,6 +6860,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribeRankingScoresResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6853,6 +6940,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribeRankingScoresByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -6933,6 +7021,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PutSubscribeRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7013,6 +7102,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PutSubscribeRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7094,6 +7184,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7170,6 +7261,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7247,6 +7339,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSubscribeRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7326,6 +7419,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifySubscribeRankingScoreResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7409,6 +7503,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifySubscribeRankingScoreByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7493,6 +7588,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifySubscribeRankingScoreByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7566,6 +7662,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribeRankingsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7646,6 +7743,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSubscribeRankingsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7727,6 +7825,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeRankingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7805,6 +7904,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeRankingByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7884,6 +7984,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -7955,6 +8056,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentRankingMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -8020,12 +8122,13 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_ranking_master(
+    def _pre_update_current_ranking_master(
         self,
-        request: UpdateCurrentRankingMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentRankingMasterResult]], None],
+        request: PreUpdateCurrentRankingMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentRankingMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -8037,8 +8140,97 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentRankingMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_ranking_master(
+        self,
+        request: PreUpdateCurrentRankingMasterRequest,
+    ) -> PreUpdateCurrentRankingMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_ranking_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_ranking_master_async(
+        self,
+        request: PreUpdateCurrentRankingMasterRequest,
+    ) -> PreUpdateCurrentRankingMasterResult:
+        async_result = []
+        self._pre_update_current_ranking_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_ranking_master(
+        self,
+        request: UpdateCurrentRankingMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentRankingMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_ranking_master(
+                PreUpdateCurrentRankingMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ranking2',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -8099,6 +8291,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentRankingMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -8172,6 +8365,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -8247,6 +8441,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSubscribeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -8323,6 +8518,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSubscribeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,
@@ -8400,6 +8596,7 @@ class Gs2Ranking2RestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSubscribeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='ranking2',
             region=self.session.region,

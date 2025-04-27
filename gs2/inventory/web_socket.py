@@ -4323,6 +4323,77 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _pre_update_current_item_model_master(
+        self,
+        request: PreUpdateCurrentItemModelMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentItemModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="inventory",
+            component='currentItemModelMaster',
+            function='preUpdateCurrentItemModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PreUpdateCurrentItemModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def pre_update_current_item_model_master(
+        self,
+        request: PreUpdateCurrentItemModelMasterRequest,
+    ) -> PreUpdateCurrentItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_item_model_master_async(
+        self,
+        request: PreUpdateCurrentItemModelMasterRequest,
+    ) -> PreUpdateCurrentItemModelMasterResult:
+        async_result = []
+        self._pre_update_current_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _update_current_item_model_master(
         self,
         request: UpdateCurrentItemModelMasterRequest,
@@ -4342,8 +4413,12 @@ class Gs2InventoryWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

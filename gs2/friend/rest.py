@@ -27,6 +27,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -203,6 +205,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -274,6 +277,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -345,6 +349,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -448,6 +453,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -519,6 +525,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -592,6 +599,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -665,6 +673,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -738,6 +747,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -811,6 +821,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -884,6 +895,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -959,6 +971,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1033,6 +1046,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetProfileResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1106,6 +1120,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetProfileByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1180,6 +1195,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateProfileResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1261,6 +1277,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateProfileByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1343,6 +1360,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteProfileByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1419,6 +1437,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateProfileByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1492,6 +1511,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeFriendsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1571,6 +1591,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeFriendsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1651,6 +1672,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBlackListResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1728,6 +1750,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBlackListByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1806,6 +1829,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RegisterBlackListResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1882,6 +1906,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RegisterBlackListByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -1959,6 +1984,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UnregisterBlackListResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2035,6 +2061,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UnregisterBlackListByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2112,6 +2139,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeFollowsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2191,6 +2219,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeFollowsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2271,6 +2300,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFollowResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2347,6 +2377,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFollowByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2424,6 +2455,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FollowResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2500,6 +2532,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FollowByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2577,6 +2610,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UnfollowResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2653,6 +2687,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UnfollowByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2730,6 +2765,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFriendResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2806,6 +2842,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFriendByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2883,6 +2920,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteFriendResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -2959,6 +2997,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteFriendByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3036,6 +3075,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSendRequestsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3113,6 +3153,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSendRequestsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3191,6 +3232,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSendRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3265,6 +3307,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSendRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3340,6 +3383,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SendRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3416,6 +3460,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SendRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3493,6 +3538,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3569,6 +3615,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3646,6 +3693,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeReceiveRequestsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3723,6 +3771,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeReceiveRequestsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3801,6 +3850,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetReceiveRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3875,6 +3925,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetReceiveRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -3950,6 +4001,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcceptRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -4026,6 +4078,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcceptRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -4103,6 +4156,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RejectRequestResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -4179,6 +4233,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RejectRequestByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,
@@ -4256,6 +4311,7 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPublicProfileResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='friend',
             region=self.session.region,

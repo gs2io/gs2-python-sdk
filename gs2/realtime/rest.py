@@ -27,6 +27,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -181,6 +183,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -252,6 +255,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -323,6 +327,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -404,6 +409,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -475,6 +481,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[NowResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -546,6 +553,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeRoomsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -621,6 +629,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WantRoomResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -699,6 +708,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetRoomResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,
@@ -771,6 +781,7 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRoomResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='realtime',
             region=self.session.region,

@@ -3013,18 +3013,64 @@ class GetCurrentModelMasterRequest(core.Gs2Request):
         }
 
 
+class PreUpdateCurrentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PreUpdateCurrentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreUpdateCurrentModelMasterRequest]:
+        if data is None:
+            return None
+        return PreUpdateCurrentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
 class UpdateCurrentModelMasterRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    mode: str = None
     settings: str = None
+    upload_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateCurrentModelMasterRequest:
         self.namespace_name = namespace_name
         return self
 
+    def with_mode(self, mode: str) -> UpdateCurrentModelMasterRequest:
+        self.mode = mode
+        return self
+
     def with_settings(self, settings: str) -> UpdateCurrentModelMasterRequest:
         self.settings = settings
+        return self
+
+    def with_upload_token(self, upload_token: str) -> UpdateCurrentModelMasterRequest:
+        self.upload_token = upload_token
         return self
 
     def get(self, key, default=None):
@@ -3047,12 +3093,16 @@ class UpdateCurrentModelMasterRequest(core.Gs2Request):
             return None
         return UpdateCurrentModelMasterRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_settings(data.get('settings'))
+            .with_mode(data.get('mode'))\
+            .with_settings(data.get('settings'))\
+            .with_upload_token(data.get('uploadToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "mode": self.mode,
             "settings": self.settings,
+            "uploadToken": self.upload_token,
         }
 
 

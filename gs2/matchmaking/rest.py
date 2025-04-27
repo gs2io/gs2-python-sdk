@@ -27,6 +27,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -209,6 +211,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -280,6 +283,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -351,6 +355,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -460,6 +465,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -531,6 +537,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -604,6 +611,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -677,6 +685,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -750,6 +759,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -823,6 +833,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -896,6 +907,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -971,6 +983,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1045,6 +1058,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGatheringsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1120,6 +1134,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGatheringResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1216,6 +1231,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGatheringByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1313,6 +1329,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateGatheringResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1394,6 +1411,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateGatheringByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1476,6 +1494,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoMatchmakingByPlayerResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1551,6 +1570,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoMatchmakingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1630,6 +1650,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoMatchmakingByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1710,6 +1731,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1786,6 +1808,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PingByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1863,6 +1886,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGatheringResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -1935,6 +1959,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CancelMatchmakingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2011,6 +2036,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CancelMatchmakingByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2088,6 +2114,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EarlyCompleteResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2164,6 +2191,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EarlyCompleteByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2241,6 +2269,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteGatheringResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2313,6 +2342,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeRatingModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2388,6 +2418,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateRatingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2469,6 +2500,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetRatingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2541,6 +2573,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateRatingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2621,6 +2654,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRatingModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2693,6 +2727,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeRatingModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2764,6 +2799,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetRatingModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2836,6 +2872,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2907,6 +2944,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2972,12 +3010,13 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_model_master(
+    def _pre_update_current_model_master(
         self,
-        request: UpdateCurrentModelMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
+        request: PreUpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -2989,8 +3028,97 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_model_master(
+        self,
+        request: PreUpdateCurrentModelMasterRequest,
+    ) -> PreUpdateCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_model_master_async(
+        self,
+        request: PreUpdateCurrentModelMasterRequest,
+    ) -> PreUpdateCurrentModelMasterResult:
+        async_result = []
+        self._pre_update_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_model_master(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_model_master(
+                PreUpdateCurrentModelMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='matchmaking',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3051,6 +3179,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentModelMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3124,6 +3253,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSeasonModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3195,6 +3325,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSeasonModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3267,6 +3398,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSeasonModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3342,6 +3474,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateSeasonModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3425,6 +3558,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSeasonModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3497,6 +3631,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateSeasonModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3579,6 +3714,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSeasonModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3651,6 +3787,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSeasonGatheringsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3729,6 +3866,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeMatchmakingSeasonGatheringsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3808,6 +3946,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoSeasonMatchmakingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3886,6 +4025,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoSeasonMatchmakingByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -3965,6 +4105,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSeasonGatheringResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4040,6 +4181,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyIncludeParticipantResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4121,6 +4263,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyIncludeParticipantByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4203,6 +4346,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSeasonGatheringResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4278,6 +4422,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyIncludeParticipantByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4351,6 +4496,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeJoinedSeasonGatheringsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4429,6 +4575,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeJoinedSeasonGatheringsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4508,6 +4655,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetJoinedSeasonGatheringResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4583,6 +4731,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetJoinedSeasonGatheringByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4659,6 +4808,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeRatingsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4736,6 +4886,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeRatingsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4814,6 +4965,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetRatingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4888,6 +5040,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetRatingByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -4963,6 +5116,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PutResultResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -5040,6 +5194,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteRatingResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -5117,6 +5272,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBallotResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -5196,6 +5352,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBallotByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -5276,6 +5433,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VoteResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -5358,6 +5516,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VoteMultipleResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,
@@ -5441,6 +5600,7 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CommitVoteResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='matchmaking',
             region=self.session.region,

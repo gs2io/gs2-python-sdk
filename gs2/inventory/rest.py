@@ -27,6 +27,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -189,6 +191,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -260,6 +263,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -331,6 +335,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -420,6 +425,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -491,6 +497,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -564,6 +571,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -637,6 +645,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -710,6 +719,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -783,6 +793,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -856,6 +867,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -931,6 +943,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1005,6 +1018,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeInventoryModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1080,6 +1094,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1163,6 +1178,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1235,6 +1251,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1317,6 +1334,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1389,6 +1407,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeInventoryModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1460,6 +1479,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetInventoryModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1532,6 +1552,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeItemModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1608,6 +1629,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1692,6 +1714,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1765,6 +1788,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1848,6 +1872,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1921,6 +1946,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeItemModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -1993,6 +2019,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetItemModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2066,6 +2093,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSimpleInventoryModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2141,6 +2169,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateSimpleInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2218,6 +2247,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSimpleInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2290,6 +2320,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateSimpleInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2366,6 +2397,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSimpleInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2438,6 +2470,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSimpleInventoryModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2509,6 +2542,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSimpleInventoryModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2581,6 +2615,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSimpleItemModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2657,6 +2692,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateSimpleItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2735,6 +2771,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSimpleItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2808,6 +2845,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateSimpleItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2885,6 +2923,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSimpleItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -2958,6 +2997,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSimpleItemModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3030,6 +3070,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSimpleItemModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3103,6 +3144,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBigInventoryModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3178,6 +3220,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateBigInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3255,6 +3298,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBigInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3327,6 +3371,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateBigInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3403,6 +3448,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteBigInventoryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3475,6 +3521,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBigInventoryModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3546,6 +3593,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBigInventoryModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3618,6 +3666,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBigItemModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3694,6 +3743,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateBigItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3772,6 +3822,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBigItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3845,6 +3896,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateBigItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3922,6 +3974,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteBigItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -3995,6 +4048,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBigItemModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4067,6 +4121,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBigItemModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4140,6 +4195,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4211,6 +4267,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4276,12 +4333,13 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_item_model_master(
+    def _pre_update_current_item_model_master(
         self,
-        request: UpdateCurrentItemModelMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentItemModelMasterResult]], None],
+        request: PreUpdateCurrentItemModelMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentItemModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4293,8 +4351,97 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentItemModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_item_model_master(
+        self,
+        request: PreUpdateCurrentItemModelMasterRequest,
+    ) -> PreUpdateCurrentItemModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_item_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_item_model_master_async(
+        self,
+        request: PreUpdateCurrentItemModelMasterRequest,
+    ) -> PreUpdateCurrentItemModelMasterResult:
+        async_result = []
+        self._pre_update_current_item_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_item_model_master(
+        self,
+        request: UpdateCurrentItemModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentItemModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_item_model_master(
+                PreUpdateCurrentItemModelMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='inventory',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -4355,6 +4502,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentItemModelMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4428,6 +4576,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeInventoriesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4505,6 +4654,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeInventoriesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4583,6 +4733,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetInventoryResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4657,6 +4808,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetInventoryByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4732,6 +4884,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddCapacityByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4811,6 +4964,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetCapacityByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4890,6 +5044,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteInventoryByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -4967,6 +5122,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyInventoryCurrentMaxCapacityResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5048,6 +5204,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyInventoryCurrentMaxCapacityByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5130,6 +5287,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyInventoryCurrentMaxCapacityByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5203,6 +5361,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddCapacityByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5276,6 +5435,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetCapacityByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5349,6 +5509,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeItemSetsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5427,6 +5588,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeItemSetsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5506,6 +5668,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetItemSetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5583,6 +5746,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetItemSetByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5661,6 +5825,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetItemWithSignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5740,6 +5905,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetItemWithSignatureByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5820,6 +5986,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireItemSetByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5906,6 +6073,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireItemSetWithGradeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -5988,6 +6156,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeItemSetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6069,6 +6238,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeItemSetByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6151,6 +6321,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteItemSetByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6231,6 +6402,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyItemSetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6315,6 +6487,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyItemSetByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6400,6 +6573,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireItemSetByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6473,6 +6647,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireItemSetWithGradeByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6546,6 +6721,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeItemSetByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6619,6 +6795,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyItemSetByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6692,6 +6869,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeReferenceOfResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6768,6 +6946,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeReferenceOfByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6845,6 +7024,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetReferenceOfResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -6922,6 +7102,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetReferenceOfByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7000,6 +7181,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyReferenceOfResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7080,6 +7262,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyReferenceOfByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7161,6 +7344,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddReferenceOfResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7241,6 +7425,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddReferenceOfByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7322,6 +7507,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteReferenceOfResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7401,6 +7587,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteReferenceOfByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7481,6 +7668,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddReferenceOfItemSetByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7554,6 +7742,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteReferenceOfItemSetByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7627,6 +7816,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyReferenceOfByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7700,6 +7890,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSimpleItemsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7778,6 +7969,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSimpleItemsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7857,6 +8049,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSimpleItemResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -7932,6 +8125,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSimpleItemByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8008,6 +8202,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSimpleItemWithSignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8085,6 +8280,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSimpleItemWithSignatureByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8163,6 +8359,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireSimpleItemsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8245,6 +8442,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeSimpleItemsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8326,6 +8524,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeSimpleItemsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8408,6 +8607,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetSimpleItemsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8490,6 +8690,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSimpleItemsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8567,6 +8768,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifySimpleItemResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8649,6 +8851,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifySimpleItemByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8732,6 +8935,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireSimpleItemsByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8805,6 +9009,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeSimpleItemsByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8878,6 +9083,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetSimpleItemsByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -8951,6 +9157,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifySimpleItemByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9024,6 +9231,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBigItemsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9102,6 +9310,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBigItemsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9181,6 +9390,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBigItemResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9256,6 +9466,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBigItemByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9332,6 +9543,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireBigItemByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9412,6 +9624,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeBigItemResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9491,6 +9704,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeBigItemByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9571,6 +9785,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetBigItemByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9651,6 +9866,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteBigItemByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9729,6 +9945,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyBigItemResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9811,6 +10028,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyBigItemByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9894,6 +10112,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AcquireBigItemByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -9967,6 +10186,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ConsumeBigItemByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -10040,6 +10260,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetBigItemByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,
@@ -10113,6 +10334,7 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyBigItemByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='inventory',
             region=self.session.region,

@@ -27,6 +27,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -177,6 +179,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -248,6 +251,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -319,6 +323,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -396,6 +401,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -467,6 +473,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeScriptsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -542,6 +549,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateScriptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -621,6 +629,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateScriptFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -700,6 +709,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetScriptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -772,6 +782,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateScriptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -850,6 +861,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateScriptFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -928,6 +940,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteScriptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -1000,6 +1013,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[InvokeScriptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -1081,6 +1095,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DebugInvokeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,
@@ -1164,6 +1179,7 @@ class Gs2ScriptRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[InvokeByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='script',
             region=self.session.region,

@@ -27,6 +27,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -175,6 +177,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -246,6 +249,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -317,6 +321,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -392,6 +397,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -463,6 +469,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeProgressesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -538,6 +545,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetProgressResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -610,6 +618,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeOutputsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -686,6 +695,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetOutputResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -759,6 +769,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareUpdateCurrentNewsMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -830,6 +841,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentNewsMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -903,6 +915,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareUpdateCurrentNewsMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -976,6 +989,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNewsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -1049,6 +1063,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNewsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -1123,6 +1138,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WantGrantResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,
@@ -1196,6 +1212,7 @@ class Gs2NewsRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WantGrantByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='news',
             region=self.session.region,

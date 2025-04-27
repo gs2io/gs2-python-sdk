@@ -2143,6 +2143,8 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
+        if request.owner_id is not None:
+            body["ownerId"] = request.owner_id
         if request.transaction_id is not None:
             body["transactionId"] = request.transaction_id
         if request.user_id is not None:
@@ -2222,6 +2224,8 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
+        if request.owner_id is not None:
+            body["ownerId"] = request.owner_id
         if request.transaction_id is not None:
             body["transactionId"] = request.transaction_id
 

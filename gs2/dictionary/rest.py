@@ -27,6 +27,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -179,6 +181,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -250,6 +253,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -321,6 +325,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -400,6 +405,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -471,6 +477,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -544,6 +551,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -617,6 +625,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -690,6 +699,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -763,6 +773,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -836,6 +847,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -911,6 +923,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -985,6 +998,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeEntryModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1056,6 +1070,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetEntryModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1128,6 +1143,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeEntryModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1203,6 +1219,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateEntryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1280,6 +1297,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetEntryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1352,6 +1370,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateEntryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1428,6 +1447,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteEntryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1500,6 +1520,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeEntriesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1577,6 +1598,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeEntriesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1655,6 +1677,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddEntriesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1736,6 +1759,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetEntryResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1810,6 +1834,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetEntryByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1885,6 +1910,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetEntryWithSignatureResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -1961,6 +1987,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetEntryWithSignatureByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2038,6 +2065,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ResetByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2114,6 +2142,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyEntryResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2191,6 +2220,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyEntryByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2269,6 +2299,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteEntriesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2349,6 +2380,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteEntriesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2430,6 +2462,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddEntriesByStampSheetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2503,6 +2536,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteEntriesByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2576,6 +2610,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyEntryByStampTaskResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2649,6 +2684,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeLikesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2726,6 +2762,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeLikesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2804,6 +2841,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddLikesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2884,6 +2922,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddLikesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -2965,6 +3004,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetLikeResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3039,6 +3079,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetLikeByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3114,6 +3155,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ResetLikesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3189,6 +3231,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ResetLikesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3265,6 +3308,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteLikesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3345,6 +3389,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteLikesByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3426,6 +3471,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3497,6 +3543,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentEntryMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3562,12 +3609,13 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_entry_master(
+    def _pre_update_current_entry_master(
         self,
-        request: UpdateCurrentEntryMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentEntryMasterResult]], None],
+        request: PreUpdateCurrentEntryMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentEntryMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,
@@ -3579,8 +3627,97 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentEntryMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_entry_master(
+        self,
+        request: PreUpdateCurrentEntryMasterRequest,
+    ) -> PreUpdateCurrentEntryMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_entry_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_entry_master_async(
+        self,
+        request: PreUpdateCurrentEntryMasterRequest,
+    ) -> PreUpdateCurrentEntryMasterResult:
+        async_result = []
+        self._pre_update_current_entry_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_entry_master(
+        self,
+        request: UpdateCurrentEntryMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentEntryMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_entry_master(
+                PreUpdateCurrentEntryMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='dictionary',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3641,6 +3778,7 @@ class Gs2DictionaryRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentEntryMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='dictionary',
             region=self.session.region,

@@ -27,6 +27,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -189,6 +191,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -260,6 +263,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -331,6 +335,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -418,6 +423,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -489,6 +495,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -562,6 +569,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -635,6 +643,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -708,6 +717,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -781,6 +791,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -854,6 +865,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -929,6 +941,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1003,6 +1016,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeAccountsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1078,6 +1092,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateAccountResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1149,6 +1164,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateTimeOffsetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1227,6 +1243,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateBannedResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1305,6 +1322,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AddBanResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1383,6 +1401,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[RemoveBanResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1460,6 +1479,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetAccountResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1536,6 +1556,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteAccountResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1612,6 +1633,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AuthenticationResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1692,6 +1714,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeTakeOversResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1769,6 +1792,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeTakeOversByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1847,6 +1871,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateTakeOverResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -1928,6 +1953,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateTakeOverByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2010,6 +2036,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateTakeOverOpenIdConnectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2089,6 +2116,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateTakeOverOpenIdConnectAndByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2169,6 +2197,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetTakeOverResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2243,6 +2272,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetTakeOverByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2318,6 +2348,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateTakeOverResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2398,6 +2429,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateTakeOverByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2479,6 +2511,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteTakeOverResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2555,6 +2588,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteTakeOverByUserIdentifierResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2630,6 +2664,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteTakeOverByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2707,6 +2742,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoTakeOverResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2783,6 +2819,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DoTakeOverOpenIdConnectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2857,6 +2894,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetAuthorizationUrlResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -2931,6 +2969,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribePlatformIdsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3008,6 +3047,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribePlatformIdsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3086,6 +3126,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreatePlatformIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3165,6 +3206,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreatePlatformIdByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3245,6 +3287,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPlatformIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3319,6 +3362,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPlatformIdByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3394,6 +3438,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FindPlatformIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3471,6 +3516,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[FindPlatformIdByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3549,6 +3595,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeletePlatformIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3627,6 +3674,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeletePlatformIdByUserIdentifierResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3702,6 +3750,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeletePlatformIdByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3779,6 +3828,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetDataOwnerByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3853,6 +3903,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteDataOwnerByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -3929,6 +3980,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeTakeOverTypeModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4000,6 +4052,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetTakeOverTypeModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4072,6 +4125,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeTakeOverTypeModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4147,6 +4201,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateTakeOverTypeModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4226,6 +4281,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetTakeOverTypeModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4298,6 +4354,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateTakeOverTypeModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4376,6 +4433,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteTakeOverTypeModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4448,6 +4506,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4519,6 +4578,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4584,12 +4644,13 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_model_master(
+    def _pre_update_current_model_master(
         self,
-        request: UpdateCurrentModelMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
+        request: PreUpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,
@@ -4601,8 +4662,97 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentModelMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_model_master(
+        self,
+        request: PreUpdateCurrentModelMasterRequest,
+    ) -> PreUpdateCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_model_master_async(
+        self,
+        request: PreUpdateCurrentModelMasterRequest,
+    ) -> PreUpdateCurrentModelMasterResult:
+        async_result = []
+        self._pre_update_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_model_master(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_model_master(
+                PreUpdateCurrentModelMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -4663,6 +4813,7 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentModelMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='account',
             region=self.session.region,

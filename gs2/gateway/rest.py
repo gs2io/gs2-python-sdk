@@ -27,6 +27,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -177,6 +179,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -248,6 +251,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -319,6 +323,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -396,6 +401,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -467,6 +473,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -540,6 +547,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -613,6 +621,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -686,6 +695,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -759,6 +769,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -832,6 +843,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -907,6 +919,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -981,6 +994,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeWebSocketSessionsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1058,6 +1072,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeWebSocketSessionsByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1136,6 +1151,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1213,6 +1229,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetUserIdByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1291,6 +1308,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SendNotificationResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1375,6 +1393,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DisconnectByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1451,6 +1470,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DisconnectAllResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1522,6 +1542,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetFirebaseTokenResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1599,6 +1620,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SetFirebaseTokenByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1677,6 +1699,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFirebaseTokenResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1750,6 +1773,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetFirebaseTokenByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1824,6 +1848,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteFirebaseTokenResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1899,6 +1924,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteFirebaseTokenByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,
@@ -1975,6 +2001,7 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SendMobileNotificationByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='gateway',
             region=self.session.region,

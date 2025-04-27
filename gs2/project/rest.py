@@ -27,6 +27,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateAccountResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -106,6 +107,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[VerifyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -177,6 +179,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[SignInResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -252,6 +255,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ForgetResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -325,6 +329,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[IssuePasswordResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -396,6 +401,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateAccountResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -475,6 +481,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EnableMfaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -546,6 +553,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ChallengeMfaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -619,6 +627,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DisableMfaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -690,6 +699,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteAccountResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -761,6 +771,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeProjectsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -836,6 +847,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateProjectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -925,6 +937,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetProjectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -998,6 +1011,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetProjectTokenResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1071,6 +1085,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetProjectTokenByIdentifierResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1148,6 +1163,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateProjectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1233,6 +1249,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ActivateRegionResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1307,6 +1324,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WaitActivateRegionResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1379,6 +1397,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteProjectResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1452,6 +1471,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBillingMethodsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1527,6 +1547,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateBillingMethodResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1606,6 +1627,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBillingMethodResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1679,6 +1701,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateBillingMethodResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1754,6 +1777,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteBillingMethodResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1827,6 +1851,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeReceiptsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1902,6 +1927,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBillingsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -1981,6 +2007,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeDumpProgressesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2054,6 +2081,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetDumpProgressResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2125,10 +2153,12 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WaitDumpUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
-        ) + "/account/me/project/dump/progress/{transactionId}/wait".format(
+        ) + "/system/{ownerId}/project/dump/progress/{transactionId}/wait".format(
+            ownerId=request.owner_id if request.owner_id is not None and request.owner_id != '' else 'null',
             transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
         )
 
@@ -2204,10 +2234,12 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ArchiveDumpUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
-        ) + "/account/me/project/dump/progress/{transactionId}/archive".format(
+        ) + "/system/{ownerId}/project/dump/progress/{transactionId}/archive".format(
+            ownerId=request.owner_id if request.owner_id is not None and request.owner_id != '' else 'null',
             transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
         )
 
@@ -2275,6 +2307,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2350,6 +2383,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetDumpUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2421,6 +2455,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeCleanProgressesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2494,6 +2529,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCleanProgressResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2565,6 +2601,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WaitCleanUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2644,6 +2681,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2719,6 +2757,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeImportProgressesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2792,6 +2831,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetImportProgressResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2863,6 +2903,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[WaitImportUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -2942,6 +2983,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -3017,6 +3059,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -3094,6 +3137,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeImportErrorLogsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
@@ -3169,6 +3213,7 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetImportErrorLogResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,

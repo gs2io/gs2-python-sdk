@@ -27,6 +27,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -175,6 +177,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -246,6 +249,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -317,6 +321,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -392,6 +397,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -463,6 +469,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[LockResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -543,6 +550,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[LockByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -624,6 +632,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UnlockResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -702,6 +711,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UnlockByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -781,6 +791,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMutexResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -855,6 +866,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetMutexByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,
@@ -930,6 +942,7 @@ class Gs2LockRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteMutexByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='lock',
             region=self.session.region,

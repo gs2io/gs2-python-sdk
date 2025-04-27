@@ -27,6 +27,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -177,6 +179,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -248,6 +251,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -319,6 +323,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -396,6 +401,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -467,6 +473,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -540,6 +547,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckDumpUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -613,6 +621,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -686,6 +695,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckCleanUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -759,6 +769,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[PrepareImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -832,6 +843,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -907,6 +919,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CheckImportUserDataByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -981,6 +994,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBuffEntryModelsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1052,6 +1066,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBuffEntryModelResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1124,6 +1139,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeBuffEntryModelMastersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1199,6 +1215,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateBuffEntryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1288,6 +1305,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetBuffEntryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1360,6 +1378,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateBuffEntryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1448,6 +1467,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteBuffEntryModelMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1520,6 +1540,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ApplyBuffResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1595,6 +1616,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ApplyBuffByUserIdResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1671,6 +1693,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ExportMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1742,6 +1765,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetCurrentBuffMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1807,12 +1831,13 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _update_current_buff_master(
+    def _pre_update_current_buff_master(
         self,
-        request: UpdateCurrentBuffMasterRequest,
-        callback: Callable[[AsyncResult[UpdateCurrentBuffMasterResult]], None],
+        request: PreUpdateCurrentBuffMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentBuffMasterResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,
@@ -1824,8 +1849,97 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=PreUpdateCurrentBuffMasterResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def pre_update_current_buff_master(
+        self,
+        request: PreUpdateCurrentBuffMasterRequest,
+    ) -> PreUpdateCurrentBuffMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_buff_master(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_buff_master_async(
+        self,
+        request: PreUpdateCurrentBuffMasterRequest,
+    ) -> PreUpdateCurrentBuffMasterResult:
+        async_result = []
+        self._pre_update_current_buff_master(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_buff_master(
+        self,
+        request: UpdateCurrentBuffMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentBuffMasterResult]], None],
+        is_blocking: bool,
+    ):
+        if request.settings is not None:
+            res = self.pre_update_current_buff_master(
+                PreUpdateCurrentBuffMasterRequest() \
+                    .with_context_stack(request.context_stack) \
+                    .with_namespace_name(request.namespace_name)
+            )
+            import requests
+            requests.put(res.upload_url, data=request.settings, headers={
+                'Content-Type': 'application/json',
+            })
+            request.mode = "preUpload"
+            request.upload_token = res.upload_token
+            request.settings = None
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='buff',
+            region=self.session.region,
+        ) + "/{namespaceName}/master".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.mode is not None:
+            body["mode"] = request.mode
         if request.settings is not None:
             body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1886,6 +2000,7 @@ class Gs2BuffRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateCurrentBuffMasterFromGitHubResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='buff',
             region=self.session.region,

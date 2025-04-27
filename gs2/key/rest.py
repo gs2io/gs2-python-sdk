@@ -27,6 +27,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeNamespacesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -100,6 +101,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -175,6 +177,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceStatusResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -246,6 +249,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -317,6 +321,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -392,6 +397,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteNamespaceResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -463,6 +469,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeKeysResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -538,6 +545,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateKeyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -613,6 +621,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateKeyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -687,6 +696,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetKeyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -759,6 +769,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteKeyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -831,6 +842,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EncryptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -905,6 +917,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DecryptResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -979,6 +992,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeGitHubApiKeysResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -1054,6 +1068,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateGitHubApiKeyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -1133,6 +1148,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateGitHubApiKeyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -1211,6 +1227,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetGitHubApiKeyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
@@ -1283,6 +1300,7 @@ class Gs2KeyRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteGitHubApiKeyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='key',
             region=self.session.region,
