@@ -1686,6 +1686,8 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["roomName"] = request.room_name
         if request.password is not None:
             body["password"] = request.password
+        if request.category is not None:
+            body["category"] = request.category
         if request.access_token is not None:
             body["accessToken"] = request.access_token
         if request.start_at is not None:
@@ -1769,6 +1771,8 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["roomName"] = request.room_name
         if request.password is not None:
             body["password"] = request.password
+        if request.category is not None:
+            body["category"] = request.category
         if request.user_id is not None:
             body["userId"] = request.user_id
         if request.start_at is not None:
@@ -1852,6 +1856,8 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["roomName"] = request.room_name
         if request.password is not None:
             body["password"] = request.password
+        if request.category is not None:
+            body["category"] = request.category
         if request.access_token is not None:
             body["accessToken"] = request.access_token
         if request.limit is not None:
@@ -1933,6 +1939,8 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["roomName"] = request.room_name
         if request.password is not None:
             body["password"] = request.password
+        if request.category is not None:
+            body["category"] = request.category
         if request.user_id is not None:
             body["userId"] = request.user_id
         if request.limit is not None:

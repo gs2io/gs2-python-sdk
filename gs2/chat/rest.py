@@ -1692,6 +1692,8 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         }
         if request.password is not None:
             query_strings["password"] = request.password
+        if request.category is not None:
+            query_strings["category"] = request.category
         if request.start_at is not None:
             query_strings["startAt"] = request.start_at
         if request.limit is not None:
@@ -1773,6 +1775,8 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         }
         if request.password is not None:
             query_strings["password"] = request.password
+        if request.category is not None:
+            query_strings["category"] = request.category
         if request.user_id is not None:
             query_strings["userId"] = request.user_id
         if request.start_at is not None:
@@ -1856,6 +1860,8 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         }
         if request.password is not None:
             query_strings["password"] = request.password
+        if request.category is not None:
+            query_strings["category"] = request.category
         if request.limit is not None:
             query_strings["limit"] = request.limit
 
@@ -1935,6 +1941,8 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
         }
         if request.password is not None:
             query_strings["password"] = request.password
+        if request.category is not None:
+            query_strings["category"] = request.category
         if request.user_id is not None:
             query_strings["userId"] = request.user_id
         if request.limit is not None:

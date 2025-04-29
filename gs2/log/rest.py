@@ -131,6 +131,8 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
             body["awsSecretAccessKey"] = request.aws_secret_access_key
         if request.firehose_stream_name is not None:
             body["firehoseStreamName"] = request.firehose_stream_name
+        if request.firehose_compress_data is not None:
+            body["firehoseCompressData"] = request.firehose_compress_data
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -365,6 +367,8 @@ class Gs2LogRestClient(rest.AbstractGs2RestClient):
             body["awsSecretAccessKey"] = request.aws_secret_access_key
         if request.firehose_stream_name is not None:
             body["firehoseStreamName"] = request.firehose_stream_name
+        if request.firehose_compress_data is not None:
+            body["firehoseCompressData"] = request.firehose_compress_data
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

@@ -940,6 +940,7 @@ class Namespace(core.Gs2Model):
     aws_access_key_id: str = None
     aws_secret_access_key: str = None
     firehose_stream_name: str = None
+    firehose_compress_data: str = None
     status: str = None
     created_at: int = None
     updated_at: int = None
@@ -987,6 +988,10 @@ class Namespace(core.Gs2Model):
 
     def with_firehose_stream_name(self, firehose_stream_name: str) -> Namespace:
         self.firehose_stream_name = firehose_stream_name
+        return self
+
+    def with_firehose_compress_data(self, firehose_compress_data: str) -> Namespace:
+        self.firehose_compress_data = firehose_compress_data
         return self
 
     def with_status(self, status: str) -> Namespace:
@@ -1078,6 +1083,7 @@ class Namespace(core.Gs2Model):
             .with_aws_access_key_id(data.get('awsAccessKeyId'))\
             .with_aws_secret_access_key(data.get('awsSecretAccessKey'))\
             .with_firehose_stream_name(data.get('firehoseStreamName'))\
+            .with_firehose_compress_data(data.get('firehoseCompressData'))\
             .with_status(data.get('status'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1096,6 +1102,7 @@ class Namespace(core.Gs2Model):
             "awsAccessKeyId": self.aws_access_key_id,
             "awsSecretAccessKey": self.aws_secret_access_key,
             "firehoseStreamName": self.firehose_stream_name,
+            "firehoseCompressData": self.firehose_compress_data,
             "status": self.status,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

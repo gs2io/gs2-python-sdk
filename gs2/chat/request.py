@@ -1253,6 +1253,7 @@ class DescribeMessagesRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     password: str = None
+    category: int = None
     access_token: str = None
     start_at: int = None
     limit: int = None
@@ -1267,6 +1268,10 @@ class DescribeMessagesRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> DescribeMessagesRequest:
         self.password = password
+        return self
+
+    def with_category(self, category: int) -> DescribeMessagesRequest:
+        self.category = category
         return self
 
     def with_access_token(self, access_token: str) -> DescribeMessagesRequest:
@@ -1303,6 +1308,7 @@ class DescribeMessagesRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_room_name(data.get('roomName'))\
             .with_password(data.get('password'))\
+            .with_category(data.get('category'))\
             .with_access_token(data.get('accessToken'))\
             .with_start_at(data.get('startAt'))\
             .with_limit(data.get('limit'))
@@ -1312,6 +1318,7 @@ class DescribeMessagesRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "roomName": self.room_name,
             "password": self.password,
+            "category": self.category,
             "accessToken": self.access_token,
             "startAt": self.start_at,
             "limit": self.limit,
@@ -1324,6 +1331,7 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     password: str = None
+    category: int = None
     user_id: str = None
     start_at: int = None
     limit: int = None
@@ -1339,6 +1347,10 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> DescribeMessagesByUserIdRequest:
         self.password = password
+        return self
+
+    def with_category(self, category: int) -> DescribeMessagesByUserIdRequest:
+        self.category = category
         return self
 
     def with_user_id(self, user_id: str) -> DescribeMessagesByUserIdRequest:
@@ -1379,6 +1391,7 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_room_name(data.get('roomName'))\
             .with_password(data.get('password'))\
+            .with_category(data.get('category'))\
             .with_user_id(data.get('userId'))\
             .with_start_at(data.get('startAt'))\
             .with_limit(data.get('limit'))\
@@ -1389,6 +1402,7 @@ class DescribeMessagesByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "roomName": self.room_name,
             "password": self.password,
+            "category": self.category,
             "userId": self.user_id,
             "startAt": self.start_at,
             "limit": self.limit,
@@ -1402,6 +1416,7 @@ class DescribeLatestMessagesRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     password: str = None
+    category: int = None
     access_token: str = None
     limit: int = None
 
@@ -1415,6 +1430,10 @@ class DescribeLatestMessagesRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> DescribeLatestMessagesRequest:
         self.password = password
+        return self
+
+    def with_category(self, category: int) -> DescribeLatestMessagesRequest:
+        self.category = category
         return self
 
     def with_access_token(self, access_token: str) -> DescribeLatestMessagesRequest:
@@ -1447,6 +1466,7 @@ class DescribeLatestMessagesRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_room_name(data.get('roomName'))\
             .with_password(data.get('password'))\
+            .with_category(data.get('category'))\
             .with_access_token(data.get('accessToken'))\
             .with_limit(data.get('limit'))
 
@@ -1455,6 +1475,7 @@ class DescribeLatestMessagesRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "roomName": self.room_name,
             "password": self.password,
+            "category": self.category,
             "accessToken": self.access_token,
             "limit": self.limit,
         }
@@ -1466,6 +1487,7 @@ class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     room_name: str = None
     password: str = None
+    category: int = None
     user_id: str = None
     limit: int = None
     time_offset_token: str = None
@@ -1480,6 +1502,10 @@ class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
 
     def with_password(self, password: str) -> DescribeLatestMessagesByUserIdRequest:
         self.password = password
+        return self
+
+    def with_category(self, category: int) -> DescribeLatestMessagesByUserIdRequest:
+        self.category = category
         return self
 
     def with_user_id(self, user_id: str) -> DescribeLatestMessagesByUserIdRequest:
@@ -1516,6 +1542,7 @@ class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_room_name(data.get('roomName'))\
             .with_password(data.get('password'))\
+            .with_category(data.get('category'))\
             .with_user_id(data.get('userId'))\
             .with_limit(data.get('limit'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -1525,6 +1552,7 @@ class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "roomName": self.room_name,
             "password": self.password,
+            "category": self.category,
             "userId": self.user_id,
             "limit": self.limit,
             "timeOffsetToken": self.time_offset_token,

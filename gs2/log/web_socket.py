@@ -132,6 +132,8 @@ class Gs2LogWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["awsSecretAccessKey"] = request.aws_secret_access_key
         if request.firehose_stream_name is not None:
             body["firehoseStreamName"] = request.firehose_stream_name
+        if request.firehose_compress_data is not None:
+            body["firehoseCompressData"] = request.firehose_compress_data
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -363,6 +365,8 @@ class Gs2LogWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["awsSecretAccessKey"] = request.aws_secret_access_key
         if request.firehose_stream_name is not None:
             body["firehoseStreamName"] = request.firehose_stream_name
+        if request.firehose_compress_data is not None:
+            body["firehoseCompressData"] = request.firehose_compress_data
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

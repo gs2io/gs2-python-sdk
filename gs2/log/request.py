@@ -73,6 +73,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     aws_access_key_id: str = None
     aws_secret_access_key: str = None
     firehose_stream_name: str = None
+    firehose_compress_data: str = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
         self.name = name
@@ -114,6 +115,10 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.firehose_stream_name = firehose_stream_name
         return self
 
+    def with_firehose_compress_data(self, firehose_compress_data: str) -> CreateNamespaceRequest:
+        self.firehose_compress_data = firehose_compress_data
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -142,7 +147,8 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_aws_region(data.get('awsRegion'))\
             .with_aws_access_key_id(data.get('awsAccessKeyId'))\
             .with_aws_secret_access_key(data.get('awsSecretAccessKey'))\
-            .with_firehose_stream_name(data.get('firehoseStreamName'))
+            .with_firehose_stream_name(data.get('firehoseStreamName'))\
+            .with_firehose_compress_data(data.get('firehoseCompressData'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -156,6 +162,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "awsAccessKeyId": self.aws_access_key_id,
             "awsSecretAccessKey": self.aws_secret_access_key,
             "firehoseStreamName": self.firehose_stream_name,
+            "firehoseCompressData": self.firehose_compress_data,
         }
 
 
@@ -244,6 +251,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     aws_access_key_id: str = None
     aws_secret_access_key: str = None
     firehose_stream_name: str = None
+    firehose_compress_data: str = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
         self.namespace_name = namespace_name
@@ -285,6 +293,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.firehose_stream_name = firehose_stream_name
         return self
 
+    def with_firehose_compress_data(self, firehose_compress_data: str) -> UpdateNamespaceRequest:
+        self.firehose_compress_data = firehose_compress_data
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -313,7 +325,8 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_aws_region(data.get('awsRegion'))\
             .with_aws_access_key_id(data.get('awsAccessKeyId'))\
             .with_aws_secret_access_key(data.get('awsSecretAccessKey'))\
-            .with_firehose_stream_name(data.get('firehoseStreamName'))
+            .with_firehose_stream_name(data.get('firehoseStreamName'))\
+            .with_firehose_compress_data(data.get('firehoseCompressData'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -327,6 +340,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "awsAccessKeyId": self.aws_access_key_id,
             "awsSecretAccessKey": self.aws_secret_access_key,
             "firehoseStreamName": self.firehose_stream_name,
+            "firehoseCompressData": self.firehose_compress_data,
         }
 
 
