@@ -1802,6 +1802,40 @@ class GetDataOwnerByUserIdResult(core.Gs2Result):
         }
 
 
+class UpdateDataOwnerByUserIdResult(core.Gs2Result):
+    item: DataOwner = None
+
+    def with_item(self, item: DataOwner) -> UpdateDataOwnerByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateDataOwnerByUserIdResult]:
+        if data is None:
+            return None
+        return UpdateDataOwnerByUserIdResult()\
+            .with_item(DataOwner.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteDataOwnerByUserIdResult(core.Gs2Result):
     item: DataOwner = None
 

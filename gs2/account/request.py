@@ -2886,6 +2886,68 @@ class GetDataOwnerByUserIdRequest(core.Gs2Request):
         }
 
 
+class UpdateDataOwnerByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    data_owner_name: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateDataOwnerByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> UpdateDataOwnerByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_data_owner_name(self, data_owner_name: str) -> UpdateDataOwnerByUserIdRequest:
+        self.data_owner_name = data_owner_name
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> UpdateDataOwnerByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> UpdateDataOwnerByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateDataOwnerByUserIdRequest]:
+        if data is None:
+            return None
+        return UpdateDataOwnerByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_data_owner_name(data.get('dataOwnerName'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "dataOwnerName": self.data_owner_name,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DeleteDataOwnerByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
