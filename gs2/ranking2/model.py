@@ -483,7 +483,7 @@ class SubscribeRankingData(core.Gs2Model):
     scorer_user_id: str = None
     score: int = None
     metadata: str = None
-    invert_created_at: int = None
+    invert_updated_at: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -524,8 +524,8 @@ class SubscribeRankingData(core.Gs2Model):
         self.metadata = metadata
         return self
 
-    def with_invert_created_at(self, invert_created_at: int) -> SubscribeRankingData:
-        self.invert_created_at = invert_created_at
+    def with_invert_updated_at(self, invert_updated_at: int) -> SubscribeRankingData:
+        self.invert_updated_at = invert_updated_at
         return self
 
     def with_created_at(self, created_at: int) -> SubscribeRankingData:
@@ -659,7 +659,7 @@ class SubscribeRankingData(core.Gs2Model):
             .with_scorer_user_id(data.get('scorerUserId'))\
             .with_score(data.get('score'))\
             .with_metadata(data.get('metadata'))\
-            .with_invert_created_at(data.get('invertCreatedAt'))\
+            .with_invert_updated_at(data.get('invertUpdatedAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -675,7 +675,7 @@ class SubscribeRankingData(core.Gs2Model):
             "scorerUserId": self.scorer_user_id,
             "score": self.score,
             "metadata": self.metadata,
-            "invertCreatedAt": self.invert_created_at,
+            "invertUpdatedAt": self.invert_updated_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -1348,7 +1348,7 @@ class ClusterRankingData(core.Gs2Model):
     rank: int = None
     score: int = None
     metadata: str = None
-    invert_created_at: int = None
+    invert_updated_at: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -1389,8 +1389,8 @@ class ClusterRankingData(core.Gs2Model):
         self.metadata = metadata
         return self
 
-    def with_invert_created_at(self, invert_created_at: int) -> ClusterRankingData:
-        self.invert_created_at = invert_created_at
+    def with_invert_updated_at(self, invert_updated_at: int) -> ClusterRankingData:
+        self.invert_updated_at = invert_updated_at
         return self
 
     def with_created_at(self, created_at: int) -> ClusterRankingData:
@@ -1524,7 +1524,7 @@ class ClusterRankingData(core.Gs2Model):
             .with_rank(data.get('rank'))\
             .with_score(data.get('score'))\
             .with_metadata(data.get('metadata'))\
-            .with_invert_created_at(data.get('invertCreatedAt'))\
+            .with_invert_updated_at(data.get('invertUpdatedAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -1540,7 +1540,7 @@ class ClusterRankingData(core.Gs2Model):
             "rank": self.rank,
             "score": self.score,
             "metadata": self.metadata,
-            "invertCreatedAt": self.invert_created_at,
+            "invertUpdatedAt": self.invert_updated_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -2290,7 +2290,7 @@ class GlobalRankingData(core.Gs2Model):
     rank: int = None
     score: int = None
     metadata: str = None
-    invert_created_at: int = None
+    invert_updated_at: int = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -2327,8 +2327,8 @@ class GlobalRankingData(core.Gs2Model):
         self.metadata = metadata
         return self
 
-    def with_invert_created_at(self, invert_created_at: int) -> GlobalRankingData:
-        self.invert_created_at = invert_created_at
+    def with_invert_updated_at(self, invert_updated_at: int) -> GlobalRankingData:
+        self.invert_updated_at = invert_updated_at
         return self
 
     def with_created_at(self, created_at: int) -> GlobalRankingData:
@@ -2449,7 +2449,7 @@ class GlobalRankingData(core.Gs2Model):
             .with_rank(data.get('rank'))\
             .with_score(data.get('score'))\
             .with_metadata(data.get('metadata'))\
-            .with_invert_created_at(data.get('invertCreatedAt'))\
+            .with_invert_updated_at(data.get('invertUpdatedAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -2464,7 +2464,7 @@ class GlobalRankingData(core.Gs2Model):
             "rank": self.rank,
             "score": self.score,
             "metadata": self.metadata,
-            "invertCreatedAt": self.invert_created_at,
+            "invertUpdatedAt": self.invert_updated_at,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
