@@ -29,6 +29,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeUsersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -102,6 +103,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateUserResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -175,6 +177,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateUserResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -248,6 +251,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetUserResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -319,6 +323,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteUserResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -390,6 +395,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeSecurityPoliciesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -463,6 +469,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeCommonSecurityPoliciesResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -536,6 +543,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateSecurityPolicyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -611,6 +619,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[UpdateSecurityPolicyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -686,6 +695,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetSecurityPolicyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -757,6 +767,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteSecurityPolicyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -828,6 +839,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeIdentifiersResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -903,6 +915,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[CreateIdentifierResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -974,6 +987,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetIdentifierResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1046,6 +1060,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeleteIdentifierResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1118,6 +1133,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DescribeAttachedGuardsResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1190,6 +1206,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AttachGuardResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1264,6 +1281,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DetachGuardResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1331,12 +1349,83 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _get_service_version(
+        self,
+        request: GetServiceVersionRequest,
+        callback: Callable[[AsyncResult[GetServiceVersionResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='identifier',
+            region=self.session.region,
+        ) + "/system/version"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetServiceVersionResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_service_version(
+        self,
+        request: GetServiceVersionRequest,
+    ) -> GetServiceVersionResult:
+        async_result = []
+        with timeout(30):
+            self._get_service_version(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_service_version_async(
+        self,
+        request: GetServiceVersionRequest,
+    ) -> GetServiceVersionResult:
+        async_result = []
+        self._get_service_version(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _create_password(
         self,
         request: CreatePasswordRequest,
         callback: Callable[[AsyncResult[CreatePasswordResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1410,6 +1499,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetPasswordResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1481,6 +1571,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[EnableMfaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1552,6 +1643,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[ChallengeMfaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1625,6 +1717,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DisableMfaResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1696,6 +1789,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DeletePasswordResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1767,6 +1861,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[GetHasSecurityPolicyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1838,6 +1933,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[AttachSecurityPolicyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1911,6 +2007,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[DetachSecurityPolicyResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -1983,6 +2080,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[LoginResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,
@@ -2056,6 +2154,7 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         callback: Callable[[AsyncResult[LoginByUserResult]], None],
         is_blocking: bool,
     ):
+
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='identifier',
             region=self.session.region,

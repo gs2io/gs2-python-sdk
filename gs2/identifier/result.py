@@ -16,6 +16,7 @@
 
 from __future__ import annotations
 
+from ..core.model import *
 from .model import *
 
 
@@ -50,17 +51,17 @@ class DescribeUsersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeUsersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 User.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -233,17 +234,17 @@ class DescribeSecurityPoliciesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeSecurityPoliciesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SecurityPolicy.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -280,17 +281,17 @@ class DescribeCommonSecurityPoliciesResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeCommonSecurityPoliciesResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SecurityPolicy.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -463,17 +464,17 @@ class DescribeIdentifiersResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeIdentifiersResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 Identifier.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])\
             .with_next_page_token(data.get('nextPageToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
             "nextPageToken": self.next_page_token,
         }
@@ -614,16 +615,16 @@ class DescribeAttachedGuardsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeAttachedGuardsResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 data.get('items')[i]
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i]
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -654,16 +655,16 @@ class AttachGuardResult(core.Gs2Result):
         if data is None:
             return None
         return AttachGuardResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 data.get('items')[i]
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i]
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -694,30 +695,25 @@ class DetachGuardResult(core.Gs2Result):
         if data is None:
             return None
         return DetachGuardResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 data.get('items')[i]
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i]
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
 
-class DescribePasswordsResult(core.Gs2Result):
-    items: List[Password] = None
-    next_page_token: str = None
+class GetServiceVersionResult(core.Gs2Result):
+    status: str = None
 
-    def with_items(self, items: List[Password]) -> DescribePasswordsResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribePasswordsResult:
-        self.next_page_token = next_page_token
+    def with_status(self, status: str) -> GetServiceVersionResult:
+        self.status = status
         return self
 
     def get(self, key, default=None):
@@ -735,23 +731,15 @@ class DescribePasswordsResult(core.Gs2Result):
     @staticmethod
     def from_dict(
         data: Dict[str, Any],
-    ) -> Optional[DescribePasswordsResult]:
+    ) -> Optional[GetServiceVersionResult]:
         if data is None:
             return None
-        return DescribePasswordsResult()\
-            .with_items([
-                Password.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
+        return GetServiceVersionResult()\
+            .with_status(data.get('status'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
-            ],
-            "nextPageToken": self.next_page_token,
+            "status": self.status,
         }
 
 
@@ -992,16 +980,16 @@ class GetHasSecurityPolicyResult(core.Gs2Result):
         if data is None:
             return None
         return GetHasSecurityPolicyResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SecurityPolicy.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1032,16 +1020,16 @@ class AttachSecurityPolicyResult(core.Gs2Result):
         if data is None:
             return None
         return AttachSecurityPolicyResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SecurityPolicy.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
@@ -1072,16 +1060,16 @@ class DetachSecurityPolicyResult(core.Gs2Result):
         if data is None:
             return None
         return DetachSecurityPolicyResult()\
-            .with_items([
+            .with_items(None if data.get('items') is None else [
                 SecurityPolicy.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')) if data.get('items') else 0)
+                for i in range(len(data.get('items')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "items": [
+            "items": None if self.items is None else [
                 self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items) if self.items else 0)
+                for i in range(len(self.items))
             ],
         }
 
