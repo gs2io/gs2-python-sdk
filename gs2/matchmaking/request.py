@@ -506,6 +506,35 @@ class DeleteNamespaceRequest(core.Gs2Request):
         }
 
 
+class GetServiceVersionRequest(core.Gs2Request):
+
+    context_stack: str = None
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetServiceVersionRequest]:
+        if data is None:
+            return None
+        return GetServiceVersionRequest()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class DumpUserDataByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
