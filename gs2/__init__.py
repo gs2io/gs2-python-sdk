@@ -14,6 +14,7 @@ from . import enhance
 from . import exchange
 from . import experience
 from . import formation
+from . import freeze
 from . import friend
 from . import gateway
 from . import grade

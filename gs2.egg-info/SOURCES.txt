@@ -97,6 +97,12 @@ src/gs2/formation/request.py
 src/gs2/formation/rest.py
 src/gs2/formation/result.py
 src/gs2/formation/web_socket.py
+src/gs2/freeze/__init__.py
+src/gs2/freeze/model.py
+src/gs2/freeze/request.py
+src/gs2/freeze/rest.py
+src/gs2/freeze/result.py
+src/gs2/freeze/web_socket.py
 src/gs2/friend/__init__.py
 src/gs2/friend/model.py
 src/gs2/friend/request.py
