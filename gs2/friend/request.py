@@ -2245,6 +2245,123 @@ class GetFriendByUserIdRequest(core.Gs2Request):
         }
 
 
+class AddFriendRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    target_user_id: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AddFriendRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> AddFriendRequest:
+        self.access_token = access_token
+        return self
+
+    def with_target_user_id(self, target_user_id: str) -> AddFriendRequest:
+        self.target_user_id = target_user_id
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddFriendRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddFriendRequest]:
+        if data is None:
+            return None
+        return AddFriendRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_target_user_id(data.get('targetUserId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "targetUserId": self.target_user_id,
+        }
+
+
+class AddFriendByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    target_user_id: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> AddFriendByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> AddFriendByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_target_user_id(self, target_user_id: str) -> AddFriendByUserIdRequest:
+        self.target_user_id = target_user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> AddFriendByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> AddFriendByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddFriendByUserIdRequest]:
+        if data is None:
+            return None
+        return AddFriendByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_target_user_id(data.get('targetUserId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "targetUserId": self.target_user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DeleteFriendRequest(core.Gs2Request):
 
     context_stack: str = None

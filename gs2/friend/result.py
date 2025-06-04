@@ -1380,6 +1380,74 @@ class GetFriendByUserIdResult(core.Gs2Result):
         }
 
 
+class AddFriendResult(core.Gs2Result):
+    item: FriendUser = None
+
+    def with_item(self, item: FriendUser) -> AddFriendResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddFriendResult]:
+        if data is None:
+            return None
+        return AddFriendResult()\
+            .with_item(FriendUser.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class AddFriendByUserIdResult(core.Gs2Result):
+    item: FriendUser = None
+
+    def with_item(self, item: FriendUser) -> AddFriendByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AddFriendByUserIdResult]:
+        if data is None:
+            return None
+        return AddFriendByUserIdResult()\
+            .with_item(FriendUser.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteFriendResult(core.Gs2Result):
     item: FriendUser = None
 
