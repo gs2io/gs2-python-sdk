@@ -76,6 +76,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     join_guild_script: ScriptSetting = None
     leave_guild_script: ScriptSetting = None
     change_role_script: ScriptSetting = None
+    delete_guild_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -130,6 +131,10 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.change_role_script = change_role_script
         return self
 
+    def with_delete_guild_script(self, delete_guild_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.delete_guild_script = delete_guild_script
+        return self
+
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
         self.log_setting = log_setting
         return self
@@ -166,6 +171,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_join_guild_script(ScriptSetting.from_dict(data.get('joinGuildScript')))\
             .with_leave_guild_script(ScriptSetting.from_dict(data.get('leaveGuildScript')))\
             .with_change_role_script(ScriptSetting.from_dict(data.get('changeRoleScript')))\
+            .with_delete_guild_script(ScriptSetting.from_dict(data.get('deleteGuildScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -183,6 +189,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "joinGuildScript": self.join_guild_script.to_dict() if self.join_guild_script else None,
             "leaveGuildScript": self.leave_guild_script.to_dict() if self.leave_guild_script else None,
             "changeRoleScript": self.change_role_script.to_dict() if self.change_role_script else None,
+            "deleteGuildScript": self.delete_guild_script.to_dict() if self.delete_guild_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -275,6 +282,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     join_guild_script: ScriptSetting = None
     leave_guild_script: ScriptSetting = None
     change_role_script: ScriptSetting = None
+    delete_guild_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -329,6 +337,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.change_role_script = change_role_script
         return self
 
+    def with_delete_guild_script(self, delete_guild_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.delete_guild_script = delete_guild_script
+        return self
+
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
         self.log_setting = log_setting
         return self
@@ -365,6 +377,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_join_guild_script(ScriptSetting.from_dict(data.get('joinGuildScript')))\
             .with_leave_guild_script(ScriptSetting.from_dict(data.get('leaveGuildScript')))\
             .with_change_role_script(ScriptSetting.from_dict(data.get('changeRoleScript')))\
+            .with_delete_guild_script(ScriptSetting.from_dict(data.get('deleteGuildScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -382,6 +395,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "joinGuildScript": self.join_guild_script.to_dict() if self.join_guild_script else None,
             "leaveGuildScript": self.leave_guild_script.to_dict() if self.leave_guild_script else None,
             "changeRoleScript": self.change_role_script.to_dict() if self.change_role_script else None,
+            "deleteGuildScript": self.delete_guild_script.to_dict() if self.delete_guild_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 

@@ -1885,6 +1885,7 @@ class Namespace(core.Gs2Model):
     join_guild_script: ScriptSetting = None
     leave_guild_script: ScriptSetting = None
     change_role_script: ScriptSetting = None
+    delete_guild_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1944,6 +1945,10 @@ class Namespace(core.Gs2Model):
 
     def with_change_role_script(self, change_role_script: ScriptSetting) -> Namespace:
         self.change_role_script = change_role_script
+        return self
+
+    def with_delete_guild_script(self, delete_guild_script: ScriptSetting) -> Namespace:
+        self.delete_guild_script = delete_guild_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -2038,6 +2043,7 @@ class Namespace(core.Gs2Model):
             .with_join_guild_script(ScriptSetting.from_dict(data.get('joinGuildScript')))\
             .with_leave_guild_script(ScriptSetting.from_dict(data.get('leaveGuildScript')))\
             .with_change_role_script(ScriptSetting.from_dict(data.get('changeRoleScript')))\
+            .with_delete_guild_script(ScriptSetting.from_dict(data.get('deleteGuildScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -2059,6 +2065,7 @@ class Namespace(core.Gs2Model):
             "joinGuildScript": self.join_guild_script.to_dict() if self.join_guild_script else None,
             "leaveGuildScript": self.leave_guild_script.to_dict() if self.leave_guild_script else None,
             "changeRoleScript": self.change_role_script.to_dict() if self.change_role_script else None,
+            "deleteGuildScript": self.delete_guild_script.to_dict() if self.delete_guild_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

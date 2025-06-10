@@ -138,6 +138,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["leaveGuildScript"] = request.leave_guild_script.to_dict()
         if request.change_role_script is not None:
             body["changeRoleScript"] = request.change_role_script.to_dict()
+        if request.delete_guild_script is not None:
+            body["deleteGuildScript"] = request.delete_guild_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -377,6 +379,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["leaveGuildScript"] = request.leave_guild_script.to_dict()
         if request.change_role_script is not None:
             body["changeRoleScript"] = request.change_role_script.to_dict()
+        if request.delete_guild_script is not None:
+            body["deleteGuildScript"] = request.delete_guild_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
