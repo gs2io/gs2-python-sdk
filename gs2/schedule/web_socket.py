@@ -1862,6 +1862,87 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _extend_trigger_by_user_id(
+        self,
+        request: ExtendTriggerByUserIdRequest,
+        callback: Callable[[AsyncResult[ExtendTriggerByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="schedule",
+            component='trigger',
+            function='extendTriggerByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.trigger_name is not None:
+            body["triggerName"] = request.trigger_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.extend_seconds is not None:
+            body["extendSeconds"] = request.extend_seconds
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ExtendTriggerByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def extend_trigger_by_user_id(
+        self,
+        request: ExtendTriggerByUserIdRequest,
+    ) -> ExtendTriggerByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._extend_trigger_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def extend_trigger_by_user_id_async(
+        self,
+        request: ExtendTriggerByUserIdRequest,
+    ) -> ExtendTriggerByUserIdResult:
+        async_result = []
+        self._extend_trigger_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _trigger_by_stamp_sheet(
         self,
         request: TriggerByStampSheetRequest,
@@ -1922,6 +2003,79 @@ class Gs2ScheduleWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> TriggerByStampSheetResult:
         async_result = []
         self._trigger_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _extend_trigger_by_stamp_sheet(
+        self,
+        request: ExtendTriggerByStampSheetRequest,
+        callback: Callable[[AsyncResult[ExtendTriggerByStampSheetResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="schedule",
+            component='trigger',
+            function='extendTriggerByStampSheet',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_sheet is not None:
+            body["stampSheet"] = request.stamp_sheet
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ExtendTriggerByStampSheetResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def extend_trigger_by_stamp_sheet(
+        self,
+        request: ExtendTriggerByStampSheetRequest,
+    ) -> ExtendTriggerByStampSheetResult:
+        async_result = []
+        with timeout(30):
+            self._extend_trigger_by_stamp_sheet(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def extend_trigger_by_stamp_sheet_async(
+        self,
+        request: ExtendTriggerByStampSheetRequest,
+    ) -> ExtendTriggerByStampSheetResult:
+        async_result = []
+        self._extend_trigger_by_stamp_sheet(
             request,
             lambda result: async_result.append(result),
         )

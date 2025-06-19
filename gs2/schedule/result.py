@@ -865,6 +865,40 @@ class TriggerByUserIdResult(core.Gs2Result):
         }
 
 
+class ExtendTriggerByUserIdResult(core.Gs2Result):
+    item: Trigger = None
+
+    def with_item(self, item: Trigger) -> ExtendTriggerByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExtendTriggerByUserIdResult]:
+        if data is None:
+            return None
+        return ExtendTriggerByUserIdResult()\
+            .with_item(Trigger.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class TriggerByStampSheetResult(core.Gs2Result):
     item: Trigger = None
 
@@ -891,6 +925,40 @@ class TriggerByStampSheetResult(core.Gs2Result):
         if data is None:
             return None
         return TriggerByStampSheetResult()\
+            .with_item(Trigger.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ExtendTriggerByStampSheetResult(core.Gs2Result):
+    item: Trigger = None
+
+    def with_item(self, item: Trigger) -> ExtendTriggerByStampSheetResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExtendTriggerByStampSheetResult]:
+        if data is None:
+            return None
+        return ExtendTriggerByStampSheetResult()\
             .with_item(Trigger.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:

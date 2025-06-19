@@ -1341,6 +1341,75 @@ class TriggerByUserIdRequest(core.Gs2Request):
         }
 
 
+class ExtendTriggerByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    trigger_name: str = None
+    user_id: str = None
+    extend_seconds: int = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ExtendTriggerByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_trigger_name(self, trigger_name: str) -> ExtendTriggerByUserIdRequest:
+        self.trigger_name = trigger_name
+        return self
+
+    def with_user_id(self, user_id: str) -> ExtendTriggerByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_extend_seconds(self, extend_seconds: int) -> ExtendTriggerByUserIdRequest:
+        self.extend_seconds = extend_seconds
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> ExtendTriggerByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ExtendTriggerByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExtendTriggerByUserIdRequest]:
+        if data is None:
+            return None
+        return ExtendTriggerByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_trigger_name(data.get('triggerName'))\
+            .with_user_id(data.get('userId'))\
+            .with_extend_seconds(data.get('extendSeconds'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "triggerName": self.trigger_name,
+            "userId": self.user_id,
+            "extendSeconds": self.extend_seconds,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class TriggerByStampSheetRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1374,6 +1443,49 @@ class TriggerByStampSheetRequest(core.Gs2Request):
         if data is None:
             return None
         return TriggerByStampSheetRequest()\
+            .with_stamp_sheet(data.get('stampSheet'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class ExtendTriggerByStampSheetRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_sheet: str = None
+    key_id: str = None
+
+    def with_stamp_sheet(self, stamp_sheet: str) -> ExtendTriggerByStampSheetRequest:
+        self.stamp_sheet = stamp_sheet
+        return self
+
+    def with_key_id(self, key_id: str) -> ExtendTriggerByStampSheetRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExtendTriggerByStampSheetRequest]:
+        if data is None:
+            return None
+        return ExtendTriggerByStampSheetRequest()\
             .with_stamp_sheet(data.get('stampSheet'))\
             .with_key_id(data.get('keyId'))
 
