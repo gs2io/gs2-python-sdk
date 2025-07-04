@@ -431,6 +431,7 @@ class TransactionResult(core.Gs2Model):
     verify_results: List[VerifyActionResult] = None
     consume_results: List[ConsumeActionResult] = None
     acquire_results: List[AcquireActionResult] = None
+    has_error: bool = None
     created_at: int = None
     revision: int = None
 
@@ -456,6 +457,10 @@ class TransactionResult(core.Gs2Model):
 
     def with_acquire_results(self, acquire_results: List[AcquireActionResult]) -> TransactionResult:
         self.acquire_results = acquire_results
+        return self
+
+    def with_has_error(self, has_error: bool) -> TransactionResult:
+        self.has_error = has_error
         return self
 
     def with_created_at(self, created_at: int) -> TransactionResult:
@@ -567,6 +572,7 @@ class TransactionResult(core.Gs2Model):
                 AcquireActionResult.from_dict(data.get('acquireResults')[i])
                 for i in range(len(data.get('acquireResults')))
             ])\
+            .with_has_error(data.get('hasError'))\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
@@ -587,6 +593,7 @@ class TransactionResult(core.Gs2Model):
                 self.acquire_results[i].to_dict() if self.acquire_results[i] else None
                 for i in range(len(self.acquire_results))
             ],
+            "hasError": self.has_error,
             "createdAt": self.created_at,
             "revision": self.revision,
         }
