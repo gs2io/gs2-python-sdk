@@ -1414,16 +1414,16 @@ class ClusterRankingData(core.Gs2Model):
         ranking_name,
         cluster_name,
         season,
-        user_id,
+        scorer_user_id,
     ):
-        return 'grn:gs2:{region}:{ownerId}:ranking2:{namespaceName}:cluster:{rankingName}:ranking:cluster:{clusterName}:{season}:user:{userId}:score'.format(
+        return 'grn:gs2:{region}:{ownerId}:ranking2:{namespaceName}:cluster:{rankingName}:ranking:cluster:{clusterName}:{season}:user:{scorerUserId}:score'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
             rankingName=ranking_name,
             clusterName=cluster_name,
             season=season,
-            userId=user_id,
+            scorerUserId=scorer_user_id,
         )
 
     @classmethod
@@ -1431,7 +1431,7 @@ class ClusterRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('region')
@@ -1441,7 +1441,7 @@ class ClusterRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -1451,7 +1451,7 @@ class ClusterRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -1461,7 +1461,7 @@ class ClusterRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('ranking_name')
@@ -1471,7 +1471,7 @@ class ClusterRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('cluster_name')
@@ -1481,20 +1481,20 @@ class ClusterRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('season')
 
     @classmethod
-    def get_user_id_from_grn(
+    def get_scorer_user_id_from_grn(
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):cluster:(?P<rankingName>.+):ranking:cluster:(?P<clusterName>.+):(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
-        return match.group('user_id')
+        return match.group('scorer_user_id')
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2351,15 +2351,15 @@ class GlobalRankingData(core.Gs2Model):
         namespace_name,
         ranking_name,
         season,
-        user_id,
+        scorer_user_id,
     ):
-        return 'grn:gs2:{region}:{ownerId}:ranking2:{namespaceName}:global:{rankingName}:ranking:global:{season}:user:{userId}:score'.format(
+        return 'grn:gs2:{region}:{ownerId}:ranking2:{namespaceName}:global:{rankingName}:ranking:global:{season}:user:{scorerUserId}:score'.format(
             region=region,
             ownerId=owner_id,
             namespaceName=namespace_name,
             rankingName=ranking_name,
             season=season,
-            userId=user_id,
+            scorerUserId=scorer_user_id,
         )
 
     @classmethod
@@ -2367,7 +2367,7 @@ class GlobalRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('region')
@@ -2377,7 +2377,7 @@ class GlobalRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('owner_id')
@@ -2387,7 +2387,7 @@ class GlobalRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('namespace_name')
@@ -2397,7 +2397,7 @@ class GlobalRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('ranking_name')
@@ -2407,20 +2407,20 @@ class GlobalRankingData(core.Gs2Model):
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
         return match.group('season')
 
     @classmethod
-    def get_user_id_from_grn(
+    def get_scorer_user_id_from_grn(
         cls,
         grn: str,
     ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<userId>.+):score', grn)
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):ranking2:(?P<namespaceName>.+):global:(?P<rankingName>.+):ranking:global:(?P<season>.+):user:(?P<scorerUserId>.+):score', grn)
         if match is None:
             return None
-        return match.group('user_id')
+        return match.group('scorer_user_id')
 
     def get(self, key, default=None):
         items = self.to_dict()
