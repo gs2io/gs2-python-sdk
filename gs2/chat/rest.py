@@ -1932,6 +1932,8 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
             query_strings["password"] = request.password
         if request.category is not None:
             query_strings["category"] = request.category
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
         if request.limit is not None:
             query_strings["limit"] = request.limit
 
@@ -2015,6 +2017,8 @@ class Gs2ChatRestClient(rest.AbstractGs2RestClient):
             query_strings["category"] = request.category
         if request.user_id is not None:
             query_strings["userId"] = request.user_id
+        if request.page_token is not None:
+            query_strings["pageToken"] = request.page_token
         if request.limit is not None:
             query_strings["limit"] = request.limit
 

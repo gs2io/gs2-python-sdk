@@ -1929,6 +1929,8 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["category"] = request.category
         if request.access_token is not None:
             body["accessToken"] = request.access_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
 
@@ -2012,6 +2014,8 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["category"] = request.category
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
         if request.limit is not None:
             body["limit"] = request.limit
         if request.time_offset_token is not None:

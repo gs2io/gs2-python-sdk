@@ -1447,6 +1447,7 @@ class DescribeLatestMessagesRequest(core.Gs2Request):
     password: str = None
     category: int = None
     access_token: str = None
+    page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeLatestMessagesRequest:
@@ -1467,6 +1468,10 @@ class DescribeLatestMessagesRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DescribeLatestMessagesRequest:
         self.access_token = access_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeLatestMessagesRequest:
+        self.page_token = page_token
         return self
 
     def with_limit(self, limit: int) -> DescribeLatestMessagesRequest:
@@ -1497,6 +1502,7 @@ class DescribeLatestMessagesRequest(core.Gs2Request):
             .with_password(data.get('password'))\
             .with_category(data.get('category'))\
             .with_access_token(data.get('accessToken'))\
+            .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1506,6 +1512,7 @@ class DescribeLatestMessagesRequest(core.Gs2Request):
             "password": self.password,
             "category": self.category,
             "accessToken": self.access_token,
+            "pageToken": self.page_token,
             "limit": self.limit,
         }
 
@@ -1518,6 +1525,7 @@ class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
     password: str = None
     category: int = None
     user_id: str = None
+    page_token: str = None
     limit: int = None
     time_offset_token: str = None
 
@@ -1539,6 +1547,10 @@ class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DescribeLatestMessagesByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeLatestMessagesByUserIdRequest:
+        self.page_token = page_token
         return self
 
     def with_limit(self, limit: int) -> DescribeLatestMessagesByUserIdRequest:
@@ -1573,6 +1585,7 @@ class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
             .with_password(data.get('password'))\
             .with_category(data.get('category'))\
             .with_user_id(data.get('userId'))\
+            .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -1583,6 +1596,7 @@ class DescribeLatestMessagesByUserIdRequest(core.Gs2Request):
             "password": self.password,
             "category": self.category,
             "userId": self.user_id,
+            "pageToken": self.page_token,
             "limit": self.limit,
             "timeOffsetToken": self.time_offset_token,
         }

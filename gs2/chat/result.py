@@ -853,9 +853,14 @@ class DescribeMessagesByUserIdResult(core.Gs2Result):
 
 class DescribeLatestMessagesResult(core.Gs2Result):
     items: List[Message] = None
+    next_page_token: str = None
 
     def with_items(self, items: List[Message]) -> DescribeLatestMessagesResult:
         self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeLatestMessagesResult:
+        self.next_page_token = next_page_token
         return self
 
     def get(self, key, default=None):
@@ -880,7 +885,8 @@ class DescribeLatestMessagesResult(core.Gs2Result):
             .with_items(None if data.get('items') is None else [
                 Message.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')))
-            ])
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -888,14 +894,20 @@ class DescribeLatestMessagesResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items))
             ],
+            "nextPageToken": self.next_page_token,
         }
 
 
 class DescribeLatestMessagesByUserIdResult(core.Gs2Result):
     items: List[Message] = None
+    next_page_token: str = None
 
     def with_items(self, items: List[Message]) -> DescribeLatestMessagesByUserIdResult:
         self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeLatestMessagesByUserIdResult:
+        self.next_page_token = next_page_token
         return self
 
     def get(self, key, default=None):
@@ -920,7 +932,8 @@ class DescribeLatestMessagesByUserIdResult(core.Gs2Result):
             .with_items(None if data.get('items') is None else [
                 Message.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')))
-            ])
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -928,6 +941,7 @@ class DescribeLatestMessagesByUserIdResult(core.Gs2Result):
                 self.items[i].to_dict() if self.items[i] else None
                 for i in range(len(self.items))
             ],
+            "nextPageToken": self.next_page_token,
         }
 
 
