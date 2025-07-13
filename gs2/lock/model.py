@@ -59,6 +59,7 @@ class Mutex(core.Gs2Model):
     property_id: str = None
     transaction_id: str = None
     created_at: int = None
+    ttl_at: int = None
     revision: int = None
 
     def with_mutex_id(self, mutex_id: str) -> Mutex:
@@ -79,6 +80,10 @@ class Mutex(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> Mutex:
         self.created_at = created_at
+        return self
+
+    def with_ttl_at(self, ttl_at: int) -> Mutex:
+        self.ttl_at = ttl_at
         return self
 
     def with_revision(self, revision: int) -> Mutex:
@@ -176,6 +181,7 @@ class Mutex(core.Gs2Model):
             .with_property_id(data.get('propertyId'))\
             .with_transaction_id(data.get('transactionId'))\
             .with_created_at(data.get('createdAt'))\
+            .with_ttl_at(data.get('ttlAt'))\
             .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -185,6 +191,7 @@ class Mutex(core.Gs2Model):
             "propertyId": self.property_id,
             "transactionId": self.transaction_id,
             "createdAt": self.created_at,
+            "ttlAt": self.ttl_at,
             "revision": self.revision,
         }
 
