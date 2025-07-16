@@ -420,6 +420,7 @@ class SendMemberRequest(core.Gs2Model):
     user_id: str = None
     target_guild_name: str = None
     metadata: str = None
+    created_at: int = None
 
     def with_user_id(self, user_id: str) -> SendMemberRequest:
         self.user_id = user_id
@@ -431,6 +432,10 @@ class SendMemberRequest(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> SendMemberRequest:
         self.metadata = metadata
+        return self
+
+    def with_created_at(self, created_at: int) -> SendMemberRequest:
+        self.created_at = created_at
         return self
 
     @classmethod
@@ -461,13 +466,15 @@ class SendMemberRequest(core.Gs2Model):
         return SendMemberRequest()\
             .with_user_id(data.get('userId'))\
             .with_target_guild_name(data.get('targetGuildName'))\
-            .with_metadata(data.get('metadata'))
+            .with_metadata(data.get('metadata'))\
+            .with_created_at(data.get('createdAt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "targetGuildName": self.target_guild_name,
             "metadata": self.metadata,
+            "createdAt": self.created_at,
         }
 
 
@@ -475,6 +482,7 @@ class ReceiveMemberRequest(core.Gs2Model):
     user_id: str = None
     target_guild_name: str = None
     metadata: str = None
+    created_at: int = None
 
     def with_user_id(self, user_id: str) -> ReceiveMemberRequest:
         self.user_id = user_id
@@ -486,6 +494,10 @@ class ReceiveMemberRequest(core.Gs2Model):
 
     def with_metadata(self, metadata: str) -> ReceiveMemberRequest:
         self.metadata = metadata
+        return self
+
+    def with_created_at(self, created_at: int) -> ReceiveMemberRequest:
+        self.created_at = created_at
         return self
 
     @classmethod
@@ -516,13 +528,15 @@ class ReceiveMemberRequest(core.Gs2Model):
         return ReceiveMemberRequest()\
             .with_user_id(data.get('userId'))\
             .with_target_guild_name(data.get('targetGuildName'))\
-            .with_metadata(data.get('metadata'))
+            .with_metadata(data.get('metadata'))\
+            .with_created_at(data.get('createdAt'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "targetGuildName": self.target_guild_name,
             "metadata": self.metadata,
+            "createdAt": self.created_at,
         }
 
 
@@ -1187,310 +1201,6 @@ class Guild(core.Gs2Model):
             "members": None if self.members is None else [
                 self.members[i].to_dict() if self.members[i] else None
                 for i in range(len(self.members))
-            ],
-            "createdAt": self.created_at,
-            "updatedAt": self.updated_at,
-            "revision": self.revision,
-        }
-
-
-class SendBox(core.Gs2Model):
-    send_box_id: str = None
-    user_id: str = None
-    guild_model_name: str = None
-    target_guild_names: List[str] = None
-    created_at: int = None
-    updated_at: int = None
-    revision: int = None
-
-    def with_send_box_id(self, send_box_id: str) -> SendBox:
-        self.send_box_id = send_box_id
-        return self
-
-    def with_user_id(self, user_id: str) -> SendBox:
-        self.user_id = user_id
-        return self
-
-    def with_guild_model_name(self, guild_model_name: str) -> SendBox:
-        self.guild_model_name = guild_model_name
-        return self
-
-    def with_target_guild_names(self, target_guild_names: List[str]) -> SendBox:
-        self.target_guild_names = target_guild_names
-        return self
-
-    def with_created_at(self, created_at: int) -> SendBox:
-        self.created_at = created_at
-        return self
-
-    def with_updated_at(self, updated_at: int) -> SendBox:
-        self.updated_at = updated_at
-        return self
-
-    def with_revision(self, revision: int) -> SendBox:
-        self.revision = revision
-        return self
-
-    @classmethod
-    def create_grn(
-        cls,
-        region,
-        owner_id,
-        namespace_name,
-        user_id,
-        guild_model_name,
-    ):
-        return 'grn:gs2:{region}:{ownerId}:guild:{namespaceName}:user:{userId}:sendBox:{guildModelName}'.format(
-            region=region,
-            ownerId=owner_id,
-            namespaceName=namespace_name,
-            userId=user_id,
-            guildModelName=guild_model_name,
-        )
-
-    @classmethod
-    def get_region_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):user:(?P<userId>.+):sendBox:(?P<guildModelName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('region')
-
-    @classmethod
-    def get_owner_id_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):user:(?P<userId>.+):sendBox:(?P<guildModelName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('owner_id')
-
-    @classmethod
-    def get_namespace_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):user:(?P<userId>.+):sendBox:(?P<guildModelName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('namespace_name')
-
-    @classmethod
-    def get_user_id_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):user:(?P<userId>.+):sendBox:(?P<guildModelName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('user_id')
-
-    @classmethod
-    def get_guild_model_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):user:(?P<userId>.+):sendBox:(?P<guildModelName>.+)', grn)
-        if match is None:
-            return None
-        return match.group('guild_model_name')
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[SendBox]:
-        if data is None:
-            return None
-        return SendBox()\
-            .with_send_box_id(data.get('sendBoxId'))\
-            .with_user_id(data.get('userId'))\
-            .with_guild_model_name(data.get('guildModelName'))\
-            .with_target_guild_names(None if data.get('targetGuildNames') is None else [
-                data.get('targetGuildNames')[i]
-                for i in range(len(data.get('targetGuildNames')))
-            ])\
-            .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))\
-            .with_revision(data.get('revision'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "sendBoxId": self.send_box_id,
-            "userId": self.user_id,
-            "guildModelName": self.guild_model_name,
-            "targetGuildNames": None if self.target_guild_names is None else [
-                self.target_guild_names[i]
-                for i in range(len(self.target_guild_names))
-            ],
-            "createdAt": self.created_at,
-            "updatedAt": self.updated_at,
-            "revision": self.revision,
-        }
-
-
-class Inbox(core.Gs2Model):
-    inbox_id: str = None
-    guild_name: str = None
-    from_user_ids: List[str] = None
-    receive_member_requests: List[ReceiveMemberRequest] = None
-    created_at: int = None
-    updated_at: int = None
-    revision: int = None
-
-    def with_inbox_id(self, inbox_id: str) -> Inbox:
-        self.inbox_id = inbox_id
-        return self
-
-    def with_guild_name(self, guild_name: str) -> Inbox:
-        self.guild_name = guild_name
-        return self
-
-    def with_from_user_ids(self, from_user_ids: List[str]) -> Inbox:
-        self.from_user_ids = from_user_ids
-        return self
-
-    def with_receive_member_requests(self, receive_member_requests: List[ReceiveMemberRequest]) -> Inbox:
-        self.receive_member_requests = receive_member_requests
-        return self
-
-    def with_created_at(self, created_at: int) -> Inbox:
-        self.created_at = created_at
-        return self
-
-    def with_updated_at(self, updated_at: int) -> Inbox:
-        self.updated_at = updated_at
-        return self
-
-    def with_revision(self, revision: int) -> Inbox:
-        self.revision = revision
-        return self
-
-    @classmethod
-    def create_grn(
-        cls,
-        region,
-        owner_id,
-        namespace_name,
-        guild_model_name,
-        guild_name,
-    ):
-        return 'grn:gs2:{region}:{ownerId}:guild:{namespaceName}:guild:{guildModelName}:{guildName}:inbox'.format(
-            region=region,
-            ownerId=owner_id,
-            namespaceName=namespace_name,
-            guildModelName=guild_model_name,
-            guildName=guild_name,
-        )
-
-    @classmethod
-    def get_region_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):inbox', grn)
-        if match is None:
-            return None
-        return match.group('region')
-
-    @classmethod
-    def get_owner_id_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):inbox', grn)
-        if match is None:
-            return None
-        return match.group('owner_id')
-
-    @classmethod
-    def get_namespace_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):inbox', grn)
-        if match is None:
-            return None
-        return match.group('namespace_name')
-
-    @classmethod
-    def get_guild_model_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):inbox', grn)
-        if match is None:
-            return None
-        return match.group('guild_model_name')
-
-    @classmethod
-    def get_guild_name_from_grn(
-        cls,
-        grn: str,
-    ) -> Optional[str]:
-        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):guild:(?P<namespaceName>.+):guild:(?P<guildModelName>.+):(?P<guildName>.+):inbox', grn)
-        if match is None:
-            return None
-        return match.group('guild_name')
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[Inbox]:
-        if data is None:
-            return None
-        return Inbox()\
-            .with_inbox_id(data.get('inboxId'))\
-            .with_guild_name(data.get('guildName'))\
-            .with_from_user_ids(None if data.get('fromUserIds') is None else [
-                data.get('fromUserIds')[i]
-                for i in range(len(data.get('fromUserIds')))
-            ])\
-            .with_receive_member_requests(None if data.get('receiveMemberRequests') is None else [
-                ReceiveMemberRequest.from_dict(data.get('receiveMemberRequests')[i])
-                for i in range(len(data.get('receiveMemberRequests')))
-            ])\
-            .with_created_at(data.get('createdAt'))\
-            .with_updated_at(data.get('updatedAt'))\
-            .with_revision(data.get('revision'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "inboxId": self.inbox_id,
-            "guildName": self.guild_name,
-            "fromUserIds": None if self.from_user_ids is None else [
-                self.from_user_ids[i]
-                for i in range(len(self.from_user_ids))
-            ],
-            "receiveMemberRequests": None if self.receive_member_requests is None else [
-                self.receive_member_requests[i].to_dict() if self.receive_member_requests[i] else None
-                for i in range(len(self.receive_member_requests))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
