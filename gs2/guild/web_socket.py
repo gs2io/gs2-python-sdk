@@ -134,6 +134,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["updateGuildScript"] = request.update_guild_script.to_dict()
         if request.join_guild_script is not None:
             body["joinGuildScript"] = request.join_guild_script.to_dict()
+        if request.receive_join_request_script is not None:
+            body["receiveJoinRequestScript"] = request.receive_join_request_script.to_dict()
         if request.leave_guild_script is not None:
             body["leaveGuildScript"] = request.leave_guild_script.to_dict()
         if request.change_role_script is not None:
@@ -375,6 +377,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["updateGuildScript"] = request.update_guild_script.to_dict()
         if request.join_guild_script is not None:
             body["joinGuildScript"] = request.join_guild_script.to_dict()
+        if request.receive_join_request_script is not None:
+            body["receiveJoinRequestScript"] = request.receive_join_request_script.to_dict()
         if request.leave_guild_script is not None:
             body["leaveGuildScript"] = request.leave_guild_script.to_dict()
         if request.change_role_script is not None:

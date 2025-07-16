@@ -1593,6 +1593,7 @@ class Namespace(core.Gs2Model):
     create_guild_script: ScriptSetting = None
     update_guild_script: ScriptSetting = None
     join_guild_script: ScriptSetting = None
+    receive_join_request_script: ScriptSetting = None
     leave_guild_script: ScriptSetting = None
     change_role_script: ScriptSetting = None
     delete_guild_script: ScriptSetting = None
@@ -1647,6 +1648,10 @@ class Namespace(core.Gs2Model):
 
     def with_join_guild_script(self, join_guild_script: ScriptSetting) -> Namespace:
         self.join_guild_script = join_guild_script
+        return self
+
+    def with_receive_join_request_script(self, receive_join_request_script: ScriptSetting) -> Namespace:
+        self.receive_join_request_script = receive_join_request_script
         return self
 
     def with_leave_guild_script(self, leave_guild_script: ScriptSetting) -> Namespace:
@@ -1751,6 +1756,7 @@ class Namespace(core.Gs2Model):
             .with_create_guild_script(ScriptSetting.from_dict(data.get('createGuildScript')))\
             .with_update_guild_script(ScriptSetting.from_dict(data.get('updateGuildScript')))\
             .with_join_guild_script(ScriptSetting.from_dict(data.get('joinGuildScript')))\
+            .with_receive_join_request_script(ScriptSetting.from_dict(data.get('receiveJoinRequestScript')))\
             .with_leave_guild_script(ScriptSetting.from_dict(data.get('leaveGuildScript')))\
             .with_change_role_script(ScriptSetting.from_dict(data.get('changeRoleScript')))\
             .with_delete_guild_script(ScriptSetting.from_dict(data.get('deleteGuildScript')))\
@@ -1773,6 +1779,7 @@ class Namespace(core.Gs2Model):
             "createGuildScript": self.create_guild_script.to_dict() if self.create_guild_script else None,
             "updateGuildScript": self.update_guild_script.to_dict() if self.update_guild_script else None,
             "joinGuildScript": self.join_guild_script.to_dict() if self.join_guild_script else None,
+            "receiveJoinRequestScript": self.receive_join_request_script.to_dict() if self.receive_join_request_script else None,
             "leaveGuildScript": self.leave_guild_script.to_dict() if self.leave_guild_script else None,
             "changeRoleScript": self.change_role_script.to_dict() if self.change_role_script else None,
             "deleteGuildScript": self.delete_guild_script.to_dict() if self.delete_guild_script else None,
