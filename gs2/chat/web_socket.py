@@ -3367,3 +3367,885 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
         if async_result[0].error:
             raise async_result[0].error
         return async_result[0].result
+
+    def _describe_category_models(
+        self,
+        request: DescribeCategoryModelsRequest,
+        callback: Callable[[AsyncResult[DescribeCategoryModelsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='categoryModel',
+            function='describeCategoryModels',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeCategoryModelsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_category_models(
+        self,
+        request: DescribeCategoryModelsRequest,
+    ) -> DescribeCategoryModelsResult:
+        async_result = []
+        with timeout(30):
+            self._describe_category_models(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_category_models_async(
+        self,
+        request: DescribeCategoryModelsRequest,
+    ) -> DescribeCategoryModelsResult:
+        async_result = []
+        self._describe_category_models(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_category_model(
+        self,
+        request: GetCategoryModelRequest,
+        callback: Callable[[AsyncResult[GetCategoryModelResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='categoryModel',
+            function='getCategoryModel',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.category is not None:
+            body["category"] = request.category
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetCategoryModelResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_category_model(
+        self,
+        request: GetCategoryModelRequest,
+    ) -> GetCategoryModelResult:
+        async_result = []
+        with timeout(30):
+            self._get_category_model(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_category_model_async(
+        self,
+        request: GetCategoryModelRequest,
+    ) -> GetCategoryModelResult:
+        async_result = []
+        self._get_category_model(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_category_model_masters(
+        self,
+        request: DescribeCategoryModelMastersRequest,
+        callback: Callable[[AsyncResult[DescribeCategoryModelMastersResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='categoryModelMaster',
+            function='describeCategoryModelMasters',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeCategoryModelMastersResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_category_model_masters(
+        self,
+        request: DescribeCategoryModelMastersRequest,
+    ) -> DescribeCategoryModelMastersResult:
+        async_result = []
+        with timeout(30):
+            self._describe_category_model_masters(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_category_model_masters_async(
+        self,
+        request: DescribeCategoryModelMastersRequest,
+    ) -> DescribeCategoryModelMastersResult:
+        async_result = []
+        self._describe_category_model_masters(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _create_category_model_master(
+        self,
+        request: CreateCategoryModelMasterRequest,
+        callback: Callable[[AsyncResult[CreateCategoryModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='categoryModelMaster',
+            function='createCategoryModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.category is not None:
+            body["category"] = request.category
+        if request.description is not None:
+            body["description"] = request.description
+        if request.reject_access_token_post is not None:
+            body["rejectAccessTokenPost"] = request.reject_access_token_post
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CreateCategoryModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def create_category_model_master(
+        self,
+        request: CreateCategoryModelMasterRequest,
+    ) -> CreateCategoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._create_category_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def create_category_model_master_async(
+        self,
+        request: CreateCategoryModelMasterRequest,
+    ) -> CreateCategoryModelMasterResult:
+        async_result = []
+        self._create_category_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_category_model_master(
+        self,
+        request: GetCategoryModelMasterRequest,
+        callback: Callable[[AsyncResult[GetCategoryModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='categoryModelMaster',
+            function='getCategoryModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.category is not None:
+            body["category"] = request.category
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetCategoryModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_category_model_master(
+        self,
+        request: GetCategoryModelMasterRequest,
+    ) -> GetCategoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_category_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_category_model_master_async(
+        self,
+        request: GetCategoryModelMasterRequest,
+    ) -> GetCategoryModelMasterResult:
+        async_result = []
+        self._get_category_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_category_model_master(
+        self,
+        request: UpdateCategoryModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCategoryModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='categoryModelMaster',
+            function='updateCategoryModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.category is not None:
+            body["category"] = request.category
+        if request.description is not None:
+            body["description"] = request.description
+        if request.reject_access_token_post is not None:
+            body["rejectAccessTokenPost"] = request.reject_access_token_post
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateCategoryModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_category_model_master(
+        self,
+        request: UpdateCategoryModelMasterRequest,
+    ) -> UpdateCategoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_category_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_category_model_master_async(
+        self,
+        request: UpdateCategoryModelMasterRequest,
+    ) -> UpdateCategoryModelMasterResult:
+        async_result = []
+        self._update_category_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _delete_category_model_master(
+        self,
+        request: DeleteCategoryModelMasterRequest,
+        callback: Callable[[AsyncResult[DeleteCategoryModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='categoryModelMaster',
+            function='deleteCategoryModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.category is not None:
+            body["category"] = request.category
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DeleteCategoryModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def delete_category_model_master(
+        self,
+        request: DeleteCategoryModelMasterRequest,
+    ) -> DeleteCategoryModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._delete_category_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def delete_category_model_master_async(
+        self,
+        request: DeleteCategoryModelMasterRequest,
+    ) -> DeleteCategoryModelMasterResult:
+        async_result = []
+        self._delete_category_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _export_master(
+        self,
+        request: ExportMasterRequest,
+        callback: Callable[[AsyncResult[ExportMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='currentModelMaster',
+            function='exportMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ExportMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def export_master(
+        self,
+        request: ExportMasterRequest,
+    ) -> ExportMasterResult:
+        async_result = []
+        with timeout(30):
+            self._export_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def export_master_async(
+        self,
+        request: ExportMasterRequest,
+    ) -> ExportMasterResult:
+        async_result = []
+        self._export_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _get_current_model_master(
+        self,
+        request: GetCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[GetCurrentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='currentModelMaster',
+            function='getCurrentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetCurrentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_current_model_master(
+        self,
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._get_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_current_model_master_async(
+        self,
+        request: GetCurrentModelMasterRequest,
+    ) -> GetCurrentModelMasterResult:
+        async_result = []
+        self._get_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _pre_update_current_model_master(
+        self,
+        request: PreUpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[PreUpdateCurrentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='currentModelMaster',
+            function='preUpdateCurrentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PreUpdateCurrentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def pre_update_current_model_master(
+        self,
+        request: PreUpdateCurrentModelMasterRequest,
+    ) -> PreUpdateCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._pre_update_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def pre_update_current_model_master_async(
+        self,
+        request: PreUpdateCurrentModelMasterRequest,
+    ) -> PreUpdateCurrentModelMasterResult:
+        async_result = []
+        self._pre_update_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_model_master(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='currentModelMaster',
+            function='updateCurrentModelMaster',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.mode is not None:
+            body["mode"] = request.mode
+        if request.settings is not None:
+            body["settings"] = request.settings
+        if request.upload_token is not None:
+            body["uploadToken"] = request.upload_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateCurrentModelMasterResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_current_model_master(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
+        async_result = []
+        with timeout(30):
+            self._update_current_model_master(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_current_model_master_async(
+        self,
+        request: UpdateCurrentModelMasterRequest,
+    ) -> UpdateCurrentModelMasterResult:
+        async_result = []
+        self._update_current_model_master(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _update_current_model_master_from_git_hub(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+        callback: Callable[[AsyncResult[UpdateCurrentModelMasterFromGitHubResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="chat",
+            component='currentModelMaster',
+            function='updateCurrentModelMasterFromGitHub',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.checkout_setting is not None:
+            body["checkoutSetting"] = request.checkout_setting.to_dict()
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=UpdateCurrentModelMasterFromGitHubResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def update_current_model_master_from_git_hub(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
+        async_result = []
+        with timeout(30):
+            self._update_current_model_master_from_git_hub(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def update_current_model_master_from_git_hub_async(
+        self,
+        request: UpdateCurrentModelMasterFromGitHubRequest,
+    ) -> UpdateCurrentModelMasterFromGitHubResult:
+        async_result = []
+        self._update_current_model_master_from_git_hub(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result

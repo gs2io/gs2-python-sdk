@@ -19,6 +19,82 @@ from typing import *
 from gs2 import core
 
 
+class GitHubCheckoutSetting(core.Gs2Model):
+    api_key_id: str = None
+    repository_name: str = None
+    source_path: str = None
+    reference_type: str = None
+    commit_hash: str = None
+    branch_name: str = None
+    tag_name: str = None
+
+    def with_api_key_id(self, api_key_id: str) -> GitHubCheckoutSetting:
+        self.api_key_id = api_key_id
+        return self
+
+    def with_repository_name(self, repository_name: str) -> GitHubCheckoutSetting:
+        self.repository_name = repository_name
+        return self
+
+    def with_source_path(self, source_path: str) -> GitHubCheckoutSetting:
+        self.source_path = source_path
+        return self
+
+    def with_reference_type(self, reference_type: str) -> GitHubCheckoutSetting:
+        self.reference_type = reference_type
+        return self
+
+    def with_commit_hash(self, commit_hash: str) -> GitHubCheckoutSetting:
+        self.commit_hash = commit_hash
+        return self
+
+    def with_branch_name(self, branch_name: str) -> GitHubCheckoutSetting:
+        self.branch_name = branch_name
+        return self
+
+    def with_tag_name(self, tag_name: str) -> GitHubCheckoutSetting:
+        self.tag_name = tag_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GitHubCheckoutSetting]:
+        if data is None:
+            return None
+        return GitHubCheckoutSetting()\
+            .with_api_key_id(data.get('apiKeyId'))\
+            .with_repository_name(data.get('repositoryName'))\
+            .with_source_path(data.get('sourcePath'))\
+            .with_reference_type(data.get('referenceType'))\
+            .with_commit_hash(data.get('commitHash'))\
+            .with_branch_name(data.get('branchName'))\
+            .with_tag_name(data.get('tagName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "apiKeyId": self.api_key_id,
+            "repositoryName": self.repository_name,
+            "sourcePath": self.source_path,
+            "referenceType": self.reference_type,
+            "commitHash": self.commit_hash,
+            "branchName": self.branch_name,
+            "tagName": self.tag_name,
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -194,6 +270,324 @@ class NotificationType(core.Gs2Model):
         return {
             "category": self.category,
             "enableTransferMobilePushNotification": self.enable_transfer_mobile_push_notification,
+        }
+
+
+class CurrentModelMaster(core.Gs2Model):
+    namespace_id: str = None
+    settings: str = None
+
+    def with_namespace_id(self, namespace_id: str) -> CurrentModelMaster:
+        self.namespace_id = namespace_id
+        return self
+
+    def with_settings(self, settings: str) -> CurrentModelMaster:
+        self.settings = settings
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:chat:{namespaceName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CurrentModelMaster]:
+        if data is None:
+            return None
+        return CurrentModelMaster()\
+            .with_namespace_id(data.get('namespaceId'))\
+            .with_settings(data.get('settings'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceId": self.namespace_id,
+            "settings": self.settings,
+        }
+
+
+class CategoryModelMaster(core.Gs2Model):
+    category_model_id: str = None
+    category: int = None
+    description: str = None
+    reject_access_token_post: str = None
+    created_at: int = None
+    updated_at: int = None
+    revision: int = None
+
+    def with_category_model_id(self, category_model_id: str) -> CategoryModelMaster:
+        self.category_model_id = category_model_id
+        return self
+
+    def with_category(self, category: int) -> CategoryModelMaster:
+        self.category = category
+        return self
+
+    def with_description(self, description: str) -> CategoryModelMaster:
+        self.description = description
+        return self
+
+    def with_reject_access_token_post(self, reject_access_token_post: str) -> CategoryModelMaster:
+        self.reject_access_token_post = reject_access_token_post
+        return self
+
+    def with_created_at(self, created_at: int) -> CategoryModelMaster:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> CategoryModelMaster:
+        self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> CategoryModelMaster:
+        self.revision = revision
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        category,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:chat:{namespaceName}:model:{category}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            category=category,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+):model:(?P<category>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+):model:(?P<category>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+):model:(?P<category>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_category_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+):model:(?P<category>.+)', grn)
+        if match is None:
+            return None
+        return match.group('category')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CategoryModelMaster]:
+        if data is None:
+            return None
+        return CategoryModelMaster()\
+            .with_category_model_id(data.get('categoryModelId'))\
+            .with_category(data.get('category'))\
+            .with_description(data.get('description'))\
+            .with_reject_access_token_post(data.get('rejectAccessTokenPost'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "categoryModelId": self.category_model_id,
+            "category": self.category,
+            "description": self.description,
+            "rejectAccessTokenPost": self.reject_access_token_post,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+            "revision": self.revision,
+        }
+
+
+class CategoryModel(core.Gs2Model):
+    category_model_id: str = None
+    category: int = None
+    reject_access_token_post: str = None
+
+    def with_category_model_id(self, category_model_id: str) -> CategoryModel:
+        self.category_model_id = category_model_id
+        return self
+
+    def with_category(self, category: int) -> CategoryModel:
+        self.category = category
+        return self
+
+    def with_reject_access_token_post(self, reject_access_token_post: str) -> CategoryModel:
+        self.reject_access_token_post = reject_access_token_post
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        category,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:chat:{namespaceName}:model:{category}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            category=category,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+):model:(?P<category>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+):model:(?P<category>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+):model:(?P<category>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_category_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):chat:(?P<namespaceName>.+):model:(?P<category>.+)', grn)
+        if match is None:
+            return None
+        return match.group('category')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CategoryModel]:
+        if data is None:
+            return None
+        return CategoryModel()\
+            .with_category_model_id(data.get('categoryModelId'))\
+            .with_category(data.get('category'))\
+            .with_reject_access_token_post(data.get('rejectAccessTokenPost'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "categoryModelId": self.category_model_id,
+            "category": self.category,
+            "rejectAccessTokenPost": self.reject_access_token_post,
         }
 
 

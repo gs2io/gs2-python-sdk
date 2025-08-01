@@ -1526,3 +1526,437 @@ class UnsubscribeByUserIdResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
         }
+
+
+class DescribeCategoryModelsResult(core.Gs2Result):
+    items: List[CategoryModel] = None
+
+    def with_items(self, items: List[CategoryModel]) -> DescribeCategoryModelsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeCategoryModelsResult]:
+        if data is None:
+            return None
+        return DescribeCategoryModelsResult()\
+            .with_items(None if data.get('items') is None else [
+                CategoryModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+        }
+
+
+class GetCategoryModelResult(core.Gs2Result):
+    item: CategoryModel = None
+
+    def with_item(self, item: CategoryModel) -> GetCategoryModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetCategoryModelResult]:
+        if data is None:
+            return None
+        return GetCategoryModelResult()\
+            .with_item(CategoryModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeCategoryModelMastersResult(core.Gs2Result):
+    items: List[CategoryModelMaster] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[CategoryModelMaster]) -> DescribeCategoryModelMastersResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeCategoryModelMastersResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeCategoryModelMastersResult]:
+        if data is None:
+            return None
+        return DescribeCategoryModelMastersResult()\
+            .with_items(None if data.get('items') is None else [
+                CategoryModelMaster.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateCategoryModelMasterResult(core.Gs2Result):
+    item: CategoryModelMaster = None
+
+    def with_item(self, item: CategoryModelMaster) -> CreateCategoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateCategoryModelMasterResult]:
+        if data is None:
+            return None
+        return CreateCategoryModelMasterResult()\
+            .with_item(CategoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetCategoryModelMasterResult(core.Gs2Result):
+    item: CategoryModelMaster = None
+
+    def with_item(self, item: CategoryModelMaster) -> GetCategoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetCategoryModelMasterResult]:
+        if data is None:
+            return None
+        return GetCategoryModelMasterResult()\
+            .with_item(CategoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateCategoryModelMasterResult(core.Gs2Result):
+    item: CategoryModelMaster = None
+
+    def with_item(self, item: CategoryModelMaster) -> UpdateCategoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCategoryModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateCategoryModelMasterResult()\
+            .with_item(CategoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteCategoryModelMasterResult(core.Gs2Result):
+    item: CategoryModelMaster = None
+
+    def with_item(self, item: CategoryModelMaster) -> DeleteCategoryModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteCategoryModelMasterResult]:
+        if data is None:
+            return None
+        return DeleteCategoryModelMasterResult()\
+            .with_item(CategoryModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ExportMasterResult(core.Gs2Result):
+    item: CurrentModelMaster = None
+
+    def with_item(self, item: CurrentModelMaster) -> ExportMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExportMasterResult]:
+        if data is None:
+            return None
+        return ExportMasterResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetCurrentModelMasterResult(core.Gs2Result):
+    item: CurrentModelMaster = None
+
+    def with_item(self, item: CurrentModelMaster) -> GetCurrentModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetCurrentModelMasterResult]:
+        if data is None:
+            return None
+        return GetCurrentModelMasterResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class PreUpdateCurrentModelMasterResult(core.Gs2Result):
+    upload_token: str = None
+    upload_url: str = None
+
+    def with_upload_token(self, upload_token: str) -> PreUpdateCurrentModelMasterResult:
+        self.upload_token = upload_token
+        return self
+
+    def with_upload_url(self, upload_url: str) -> PreUpdateCurrentModelMasterResult:
+        self.upload_url = upload_url
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreUpdateCurrentModelMasterResult]:
+        if data is None:
+            return None
+        return PreUpdateCurrentModelMasterResult()\
+            .with_upload_token(data.get('uploadToken'))\
+            .with_upload_url(data.get('uploadUrl'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "uploadToken": self.upload_token,
+            "uploadUrl": self.upload_url,
+        }
+
+
+class UpdateCurrentModelMasterResult(core.Gs2Result):
+    item: CurrentModelMaster = None
+
+    def with_item(self, item: CurrentModelMaster) -> UpdateCurrentModelMasterResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCurrentModelMasterResult]:
+        if data is None:
+            return None
+        return UpdateCurrentModelMasterResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateCurrentModelMasterFromGitHubResult(core.Gs2Result):
+    item: CurrentModelMaster = None
+
+    def with_item(self, item: CurrentModelMaster) -> UpdateCurrentModelMasterFromGitHubResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCurrentModelMasterFromGitHubResult]:
+        if data is None:
+            return None
+        return UpdateCurrentModelMasterFromGitHubResult()\
+            .with_item(CurrentModelMaster.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }

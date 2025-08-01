@@ -2651,3 +2651,540 @@ class UnsubscribeByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "timeOffsetToken": self.time_offset_token,
         }
+
+
+class DescribeCategoryModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeCategoryModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeCategoryModelsRequest]:
+        if data is None:
+            return None
+        return DescribeCategoryModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetCategoryModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    category: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetCategoryModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_category(self, category: int) -> GetCategoryModelRequest:
+        self.category = category
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetCategoryModelRequest]:
+        if data is None:
+            return None
+        return GetCategoryModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_category(data.get('category'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "category": self.category,
+        }
+
+
+class DescribeCategoryModelMastersRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeCategoryModelMastersRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeCategoryModelMastersRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeCategoryModelMastersRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeCategoryModelMastersRequest]:
+        if data is None:
+            return None
+        return DescribeCategoryModelMastersRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateCategoryModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    category: int = None
+    description: str = None
+    reject_access_token_post: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateCategoryModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_category(self, category: int) -> CreateCategoryModelMasterRequest:
+        self.category = category
+        return self
+
+    def with_description(self, description: str) -> CreateCategoryModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_reject_access_token_post(self, reject_access_token_post: str) -> CreateCategoryModelMasterRequest:
+        self.reject_access_token_post = reject_access_token_post
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateCategoryModelMasterRequest]:
+        if data is None:
+            return None
+        return CreateCategoryModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_category(data.get('category'))\
+            .with_description(data.get('description'))\
+            .with_reject_access_token_post(data.get('rejectAccessTokenPost'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "category": self.category,
+            "description": self.description,
+            "rejectAccessTokenPost": self.reject_access_token_post,
+        }
+
+
+class GetCategoryModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    category: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetCategoryModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_category(self, category: int) -> GetCategoryModelMasterRequest:
+        self.category = category
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetCategoryModelMasterRequest]:
+        if data is None:
+            return None
+        return GetCategoryModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_category(data.get('category'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "category": self.category,
+        }
+
+
+class UpdateCategoryModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    category: int = None
+    description: str = None
+    reject_access_token_post: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateCategoryModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_category(self, category: int) -> UpdateCategoryModelMasterRequest:
+        self.category = category
+        return self
+
+    def with_description(self, description: str) -> UpdateCategoryModelMasterRequest:
+        self.description = description
+        return self
+
+    def with_reject_access_token_post(self, reject_access_token_post: str) -> UpdateCategoryModelMasterRequest:
+        self.reject_access_token_post = reject_access_token_post
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCategoryModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateCategoryModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_category(data.get('category'))\
+            .with_description(data.get('description'))\
+            .with_reject_access_token_post(data.get('rejectAccessTokenPost'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "category": self.category,
+            "description": self.description,
+            "rejectAccessTokenPost": self.reject_access_token_post,
+        }
+
+
+class DeleteCategoryModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    category: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteCategoryModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_category(self, category: int) -> DeleteCategoryModelMasterRequest:
+        self.category = category
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteCategoryModelMasterRequest]:
+        if data is None:
+            return None
+        return DeleteCategoryModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_category(data.get('category'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "category": self.category,
+        }
+
+
+class ExportMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ExportMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExportMasterRequest]:
+        if data is None:
+            return None
+        return ExportMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class GetCurrentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetCurrentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetCurrentModelMasterRequest]:
+        if data is None:
+            return None
+        return GetCurrentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class PreUpdateCurrentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PreUpdateCurrentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreUpdateCurrentModelMasterRequest]:
+        if data is None:
+            return None
+        return PreUpdateCurrentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+        }
+
+
+class UpdateCurrentModelMasterRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    mode: str = None
+    settings: str = None
+    upload_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentModelMasterRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_mode(self, mode: str) -> UpdateCurrentModelMasterRequest:
+        self.mode = mode
+        return self
+
+    def with_settings(self, settings: str) -> UpdateCurrentModelMasterRequest:
+        self.settings = settings
+        return self
+
+    def with_upload_token(self, upload_token: str) -> UpdateCurrentModelMasterRequest:
+        self.upload_token = upload_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCurrentModelMasterRequest]:
+        if data is None:
+            return None
+        return UpdateCurrentModelMasterRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_mode(data.get('mode'))\
+            .with_settings(data.get('settings'))\
+            .with_upload_token(data.get('uploadToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "mode": self.mode,
+            "settings": self.settings,
+            "uploadToken": self.upload_token,
+        }
+
+
+class UpdateCurrentModelMasterFromGitHubRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    checkout_setting: GitHubCheckoutSetting = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateCurrentModelMasterFromGitHubRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_checkout_setting(self, checkout_setting: GitHubCheckoutSetting) -> UpdateCurrentModelMasterFromGitHubRequest:
+        self.checkout_setting = checkout_setting
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateCurrentModelMasterFromGitHubRequest]:
+        if data is None:
+            return None
+        return UpdateCurrentModelMasterFromGitHubRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_checkout_setting(GitHubCheckoutSetting.from_dict(data.get('checkoutSetting')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "checkoutSetting": self.checkout_setting.to_dict() if self.checkout_setting else None,
+        }
