@@ -753,6 +753,7 @@ class SetUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     allow_concurrent_access: bool = None
+    force: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetUserIdRequest:
@@ -765,6 +766,10 @@ class SetUserIdRequest(core.Gs2Request):
 
     def with_allow_concurrent_access(self, allow_concurrent_access: bool) -> SetUserIdRequest:
         self.allow_concurrent_access = allow_concurrent_access
+        return self
+
+    def with_force(self, force: bool) -> SetUserIdRequest:
+        self.force = force
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> SetUserIdRequest:
@@ -792,13 +797,15 @@ class SetUserIdRequest(core.Gs2Request):
         return SetUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_allow_concurrent_access(data.get('allowConcurrentAccess'))
+            .with_allow_concurrent_access(data.get('allowConcurrentAccess'))\
+            .with_force(data.get('force'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "allowConcurrentAccess": self.allow_concurrent_access,
+            "force": self.force,
         }
 
 
@@ -808,6 +815,7 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     allow_concurrent_access: bool = None
+    force: bool = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -821,6 +829,10 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
 
     def with_allow_concurrent_access(self, allow_concurrent_access: bool) -> SetUserIdByUserIdRequest:
         self.allow_concurrent_access = allow_concurrent_access
+        return self
+
+    def with_force(self, force: bool) -> SetUserIdByUserIdRequest:
+        self.force = force
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> SetUserIdByUserIdRequest:
@@ -853,6 +865,7 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_allow_concurrent_access(data.get('allowConcurrentAccess'))\
+            .with_force(data.get('force'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -860,6 +873,7 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "allowConcurrentAccess": self.allow_concurrent_access,
+            "force": self.force,
             "timeOffsetToken": self.time_offset_token,
         }
 

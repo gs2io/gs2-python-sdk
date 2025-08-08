@@ -1021,7 +1021,6 @@ class SubscribeRankingModelMaster(core.Gs2Model):
     minimum_value: int = None
     maximum_value: int = None
     sum: bool = None
-    score_ttl_days: int = None
     order_direction: str = None
     entry_period_event_id: str = None
     access_period_event_id: str = None
@@ -1055,10 +1054,6 @@ class SubscribeRankingModelMaster(core.Gs2Model):
 
     def with_sum(self, sum: bool) -> SubscribeRankingModelMaster:
         self.sum = sum
-        return self
-
-    def with_score_ttl_days(self, score_ttl_days: int) -> SubscribeRankingModelMaster:
-        self.score_ttl_days = score_ttl_days
         return self
 
     def with_order_direction(self, order_direction: str) -> SubscribeRankingModelMaster:
@@ -1166,7 +1161,6 @@ class SubscribeRankingModelMaster(core.Gs2Model):
             .with_minimum_value(data.get('minimumValue'))\
             .with_maximum_value(data.get('maximumValue'))\
             .with_sum(data.get('sum'))\
-            .with_score_ttl_days(data.get('scoreTtlDays'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_access_period_event_id(data.get('accessPeriodEventId'))\
@@ -1183,7 +1177,6 @@ class SubscribeRankingModelMaster(core.Gs2Model):
             "minimumValue": self.minimum_value,
             "maximumValue": self.maximum_value,
             "sum": self.sum,
-            "scoreTtlDays": self.score_ttl_days,
             "orderDirection": self.order_direction,
             "entryPeriodEventId": self.entry_period_event_id,
             "accessPeriodEventId": self.access_period_event_id,
@@ -1911,7 +1904,6 @@ class ClusterRankingModelMaster(core.Gs2Model):
     minimum_value: int = None
     maximum_value: int = None
     sum: bool = None
-    score_ttl_days: int = None
     order_direction: str = None
     entry_period_event_id: str = None
     ranking_rewards: List[RankingReward] = None
@@ -1951,10 +1943,6 @@ class ClusterRankingModelMaster(core.Gs2Model):
 
     def with_sum(self, sum: bool) -> ClusterRankingModelMaster:
         self.sum = sum
-        return self
-
-    def with_score_ttl_days(self, score_ttl_days: int) -> ClusterRankingModelMaster:
-        self.score_ttl_days = score_ttl_days
         return self
 
     def with_order_direction(self, order_direction: str) -> ClusterRankingModelMaster:
@@ -2071,7 +2059,6 @@ class ClusterRankingModelMaster(core.Gs2Model):
             .with_minimum_value(data.get('minimumValue'))\
             .with_maximum_value(data.get('maximumValue'))\
             .with_sum(data.get('sum'))\
-            .with_score_ttl_days(data.get('scoreTtlDays'))\
             .with_order_direction(data.get('orderDirection'))\
             .with_entry_period_event_id(data.get('entryPeriodEventId'))\
             .with_ranking_rewards(None if data.get('rankingRewards') is None else [
@@ -2094,7 +2081,6 @@ class ClusterRankingModelMaster(core.Gs2Model):
             "minimumValue": self.minimum_value,
             "maximumValue": self.maximum_value,
             "sum": self.sum,
-            "scoreTtlDays": self.score_ttl_days,
             "orderDirection": self.order_direction,
             "entryPeriodEventId": self.entry_period_event_id,
             "rankingRewards": None if self.ranking_rewards is None else [

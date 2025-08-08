@@ -3805,8 +3805,6 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["maximumValue"] = request.maximum_value
         if request.sum is not None:
             body["sum"] = request.sum
-        if request.score_ttl_days is not None:
-            body["scoreTtlDays"] = request.score_ttl_days
         if request.order_direction is not None:
             body["orderDirection"] = request.order_direction
         if request.ranking_rewards is not None:
@@ -3978,8 +3976,6 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["maximumValue"] = request.maximum_value
         if request.sum is not None:
             body["sum"] = request.sum
-        if request.score_ttl_days is not None:
-            body["scoreTtlDays"] = request.score_ttl_days
         if request.order_direction is not None:
             body["orderDirection"] = request.order_direction
         if request.ranking_rewards is not None:
@@ -6366,8 +6362,6 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["maximumValue"] = request.maximum_value
         if request.sum is not None:
             body["sum"] = request.sum
-        if request.score_ttl_days is not None:
-            body["scoreTtlDays"] = request.score_ttl_days
         if request.order_direction is not None:
             body["orderDirection"] = request.order_direction
         if request.entry_period_event_id is not None:
@@ -6530,8 +6524,6 @@ class Gs2Ranking2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["maximumValue"] = request.maximum_value
         if request.sum is not None:
             body["sum"] = request.sum
-        if request.score_ttl_days is not None:
-            body["scoreTtlDays"] = request.score_ttl_days
         if request.order_direction is not None:
             body["orderDirection"] = request.order_direction
         if request.entry_period_event_id is not None:

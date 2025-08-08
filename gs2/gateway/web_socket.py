@@ -1227,6 +1227,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["accessToken"] = request.access_token
         if request.allow_concurrent_access is not None:
             body["allowConcurrentAccess"] = request.allow_concurrent_access
+        if request.force is not None:
+            body["force"] = request.force
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1306,6 +1308,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.allow_concurrent_access is not None:
             body["allowConcurrentAccess"] = request.allow_concurrent_access
+        if request.force is not None:
+            body["force"] = request.force
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

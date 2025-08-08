@@ -1235,6 +1235,8 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         }
         if request.allow_concurrent_access is not None:
             body["allowConcurrentAccess"] = request.allow_concurrent_access
+        if request.force is not None:
+            body["force"] = request.force
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1314,6 +1316,8 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         }
         if request.allow_concurrent_access is not None:
             body["allowConcurrentAccess"] = request.allow_concurrent_access
+        if request.force is not None:
+            body["force"] = request.force
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
