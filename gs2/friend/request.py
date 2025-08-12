@@ -2484,6 +2484,7 @@ class DescribeSendRequestsRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
+    with_profile: bool = None
     page_token: str = None
     limit: int = None
 
@@ -2493,6 +2494,10 @@ class DescribeSendRequestsRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DescribeSendRequestsRequest:
         self.access_token = access_token
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> DescribeSendRequestsRequest:
+        self.with_profile = with_profile
         return self
 
     def with_page_token(self, page_token: str) -> DescribeSendRequestsRequest:
@@ -2524,6 +2529,7 @@ class DescribeSendRequestsRequest(core.Gs2Request):
         return DescribeSendRequestsRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
+            .with_with_profile(data.get('withProfile'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -2531,6 +2537,7 @@ class DescribeSendRequestsRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
+            "withProfile": self.with_profile,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -2541,6 +2548,7 @@ class DescribeSendRequestsByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    with_profile: bool = None
     page_token: str = None
     limit: int = None
     time_offset_token: str = None
@@ -2551,6 +2559,10 @@ class DescribeSendRequestsByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DescribeSendRequestsByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> DescribeSendRequestsByUserIdRequest:
+        self.with_profile = with_profile
         return self
 
     def with_page_token(self, page_token: str) -> DescribeSendRequestsByUserIdRequest:
@@ -2586,6 +2598,7 @@ class DescribeSendRequestsByUserIdRequest(core.Gs2Request):
         return DescribeSendRequestsByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_with_profile(data.get('withProfile'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -2594,6 +2607,7 @@ class DescribeSendRequestsByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "withProfile": self.with_profile,
             "pageToken": self.page_token,
             "limit": self.limit,
             "timeOffsetToken": self.time_offset_token,
@@ -2606,6 +2620,7 @@ class GetSendRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
+    with_profile: bool = None
 
     def with_namespace_name(self, namespace_name: str) -> GetSendRequestRequest:
         self.namespace_name = namespace_name
@@ -2617,6 +2632,10 @@ class GetSendRequestRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> GetSendRequestRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> GetSendRequestRequest:
+        self.with_profile = with_profile
         return self
 
     def get(self, key, default=None):
@@ -2640,13 +2659,15 @@ class GetSendRequestRequest(core.Gs2Request):
         return GetSendRequestRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_target_user_id(data.get('targetUserId'))
+            .with_target_user_id(data.get('targetUserId'))\
+            .with_with_profile(data.get('withProfile'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "targetUserId": self.target_user_id,
+            "withProfile": self.with_profile,
         }
 
 
@@ -2656,6 +2677,7 @@ class GetSendRequestByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    with_profile: bool = None
     time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetSendRequestByUserIdRequest:
@@ -2668,6 +2690,10 @@ class GetSendRequestByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> GetSendRequestByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> GetSendRequestByUserIdRequest:
+        self.with_profile = with_profile
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> GetSendRequestByUserIdRequest:
@@ -2696,6 +2722,7 @@ class GetSendRequestByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_target_user_id(data.get('targetUserId'))\
+            .with_with_profile(data.get('withProfile'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2703,6 +2730,7 @@ class GetSendRequestByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "targetUserId": self.target_user_id,
+            "withProfile": self.with_profile,
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -2946,6 +2974,7 @@ class DescribeReceiveRequestsRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
+    with_profile: bool = None
     page_token: str = None
     limit: int = None
 
@@ -2955,6 +2984,10 @@ class DescribeReceiveRequestsRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> DescribeReceiveRequestsRequest:
         self.access_token = access_token
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> DescribeReceiveRequestsRequest:
+        self.with_profile = with_profile
         return self
 
     def with_page_token(self, page_token: str) -> DescribeReceiveRequestsRequest:
@@ -2986,6 +3019,7 @@ class DescribeReceiveRequestsRequest(core.Gs2Request):
         return DescribeReceiveRequestsRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
+            .with_with_profile(data.get('withProfile'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -2993,6 +3027,7 @@ class DescribeReceiveRequestsRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
+            "withProfile": self.with_profile,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -3003,6 +3038,7 @@ class DescribeReceiveRequestsByUserIdRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     user_id: str = None
+    with_profile: bool = None
     page_token: str = None
     limit: int = None
     time_offset_token: str = None
@@ -3013,6 +3049,10 @@ class DescribeReceiveRequestsByUserIdRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> DescribeReceiveRequestsByUserIdRequest:
         self.user_id = user_id
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> DescribeReceiveRequestsByUserIdRequest:
+        self.with_profile = with_profile
         return self
 
     def with_page_token(self, page_token: str) -> DescribeReceiveRequestsByUserIdRequest:
@@ -3048,6 +3088,7 @@ class DescribeReceiveRequestsByUserIdRequest(core.Gs2Request):
         return DescribeReceiveRequestsByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_with_profile(data.get('withProfile'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
@@ -3056,6 +3097,7 @@ class DescribeReceiveRequestsByUserIdRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "withProfile": self.with_profile,
             "pageToken": self.page_token,
             "limit": self.limit,
             "timeOffsetToken": self.time_offset_token,
@@ -3068,6 +3110,7 @@ class GetReceiveRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     from_user_id: str = None
+    with_profile: bool = None
 
     def with_namespace_name(self, namespace_name: str) -> GetReceiveRequestRequest:
         self.namespace_name = namespace_name
@@ -3079,6 +3122,10 @@ class GetReceiveRequestRequest(core.Gs2Request):
 
     def with_from_user_id(self, from_user_id: str) -> GetReceiveRequestRequest:
         self.from_user_id = from_user_id
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> GetReceiveRequestRequest:
+        self.with_profile = with_profile
         return self
 
     def get(self, key, default=None):
@@ -3102,13 +3149,15 @@ class GetReceiveRequestRequest(core.Gs2Request):
         return GetReceiveRequestRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_from_user_id(data.get('fromUserId'))
+            .with_from_user_id(data.get('fromUserId'))\
+            .with_with_profile(data.get('withProfile'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "fromUserId": self.from_user_id,
+            "withProfile": self.with_profile,
         }
 
 
@@ -3118,6 +3167,7 @@ class GetReceiveRequestByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     from_user_id: str = None
+    with_profile: bool = None
     time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> GetReceiveRequestByUserIdRequest:
@@ -3130,6 +3180,10 @@ class GetReceiveRequestByUserIdRequest(core.Gs2Request):
 
     def with_from_user_id(self, from_user_id: str) -> GetReceiveRequestByUserIdRequest:
         self.from_user_id = from_user_id
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> GetReceiveRequestByUserIdRequest:
+        self.with_profile = with_profile
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> GetReceiveRequestByUserIdRequest:
@@ -3158,6 +3212,7 @@ class GetReceiveRequestByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_from_user_id(data.get('fromUserId'))\
+            .with_with_profile(data.get('withProfile'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -3165,6 +3220,7 @@ class GetReceiveRequestByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "fromUserId": self.from_user_id,
+            "withProfile": self.with_profile,
             "timeOffsetToken": self.time_offset_token,
         }
 

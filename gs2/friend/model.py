@@ -207,6 +207,7 @@ class PublicProfile(core.Gs2Model):
 class ReceiveFriendRequest(core.Gs2Model):
     user_id: str = None
     target_user_id: str = None
+    public_profile: str = None
 
     def with_user_id(self, user_id: str) -> ReceiveFriendRequest:
         self.user_id = user_id
@@ -214,6 +215,10 @@ class ReceiveFriendRequest(core.Gs2Model):
 
     def with_target_user_id(self, target_user_id: str) -> ReceiveFriendRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_public_profile(self, public_profile: str) -> ReceiveFriendRequest:
+        self.public_profile = public_profile
         return self
 
     @classmethod
@@ -243,18 +248,21 @@ class ReceiveFriendRequest(core.Gs2Model):
             return None
         return ReceiveFriendRequest()\
             .with_user_id(data.get('userId'))\
-            .with_target_user_id(data.get('targetUserId'))
+            .with_target_user_id(data.get('targetUserId'))\
+            .with_public_profile(data.get('publicProfile'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "targetUserId": self.target_user_id,
+            "publicProfile": self.public_profile,
         }
 
 
 class SendFriendRequest(core.Gs2Model):
     user_id: str = None
     target_user_id: str = None
+    public_profile: str = None
 
     def with_user_id(self, user_id: str) -> SendFriendRequest:
         self.user_id = user_id
@@ -262,6 +270,10 @@ class SendFriendRequest(core.Gs2Model):
 
     def with_target_user_id(self, target_user_id: str) -> SendFriendRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_public_profile(self, public_profile: str) -> SendFriendRequest:
+        self.public_profile = public_profile
         return self
 
     @classmethod
@@ -291,18 +303,21 @@ class SendFriendRequest(core.Gs2Model):
             return None
         return SendFriendRequest()\
             .with_user_id(data.get('userId'))\
-            .with_target_user_id(data.get('targetUserId'))
+            .with_target_user_id(data.get('targetUserId'))\
+            .with_public_profile(data.get('publicProfile'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "targetUserId": self.target_user_id,
+            "publicProfile": self.public_profile,
         }
 
 
 class FriendRequest(core.Gs2Model):
     user_id: str = None
     target_user_id: str = None
+    public_profile: str = None
 
     def with_user_id(self, user_id: str) -> FriendRequest:
         self.user_id = user_id
@@ -310,6 +325,10 @@ class FriendRequest(core.Gs2Model):
 
     def with_target_user_id(self, target_user_id: str) -> FriendRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_public_profile(self, public_profile: str) -> FriendRequest:
+        self.public_profile = public_profile
         return self
 
     @classmethod
@@ -339,12 +358,14 @@ class FriendRequest(core.Gs2Model):
             return None
         return FriendRequest()\
             .with_user_id(data.get('userId'))\
-            .with_target_user_id(data.get('targetUserId'))
+            .with_target_user_id(data.get('targetUserId'))\
+            .with_public_profile(data.get('publicProfile'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "targetUserId": self.target_user_id,
+            "publicProfile": self.public_profile,
         }
 
 

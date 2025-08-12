@@ -3312,6 +3312,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            query_strings["withProfile"] = request.with_profile
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -3391,6 +3393,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            query_strings["withProfile"] = request.with_profile
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -3470,6 +3474,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            query_strings["withProfile"] = request.with_profile
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3546,6 +3552,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            query_strings["withProfile"] = request.with_profile
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3930,6 +3938,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            query_strings["withProfile"] = request.with_profile
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -4009,6 +4019,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            query_strings["withProfile"] = request.with_profile
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -4088,6 +4100,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            query_strings["withProfile"] = request.with_profile
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -4164,6 +4178,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            query_strings["withProfile"] = request.with_profile
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
