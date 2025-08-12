@@ -1290,6 +1290,7 @@ class GetEventResult(core.Gs2Result):
     schedule_start_at: int = None
     schedule_end_at: int = None
     repeat_schedule: RepeatSchedule = None
+    is_global_schedule: bool = None
 
     def with_item(self, item: Event) -> GetEventResult:
         self.item = item
@@ -1309,6 +1310,10 @@ class GetEventResult(core.Gs2Result):
 
     def with_repeat_schedule(self, repeat_schedule: RepeatSchedule) -> GetEventResult:
         self.repeat_schedule = repeat_schedule
+        return self
+
+    def with_is_global_schedule(self, is_global_schedule: bool) -> GetEventResult:
+        self.is_global_schedule = is_global_schedule
         return self
 
     def get(self, key, default=None):
@@ -1334,7 +1339,8 @@ class GetEventResult(core.Gs2Result):
             .with_in_schedule(data.get('inSchedule'))\
             .with_schedule_start_at(data.get('scheduleStartAt'))\
             .with_schedule_end_at(data.get('scheduleEndAt'))\
-            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))
+            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))\
+            .with_is_global_schedule(data.get('isGlobalSchedule'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1343,6 +1349,7 @@ class GetEventResult(core.Gs2Result):
             "scheduleStartAt": self.schedule_start_at,
             "scheduleEndAt": self.schedule_end_at,
             "repeatSchedule": self.repeat_schedule.to_dict() if self.repeat_schedule else None,
+            "isGlobalSchedule": self.is_global_schedule,
         }
 
 
@@ -1352,6 +1359,7 @@ class GetEventByUserIdResult(core.Gs2Result):
     schedule_start_at: int = None
     schedule_end_at: int = None
     repeat_schedule: RepeatSchedule = None
+    is_global_schedule: bool = None
 
     def with_item(self, item: Event) -> GetEventByUserIdResult:
         self.item = item
@@ -1371,6 +1379,10 @@ class GetEventByUserIdResult(core.Gs2Result):
 
     def with_repeat_schedule(self, repeat_schedule: RepeatSchedule) -> GetEventByUserIdResult:
         self.repeat_schedule = repeat_schedule
+        return self
+
+    def with_is_global_schedule(self, is_global_schedule: bool) -> GetEventByUserIdResult:
+        self.is_global_schedule = is_global_schedule
         return self
 
     def get(self, key, default=None):
@@ -1396,7 +1408,8 @@ class GetEventByUserIdResult(core.Gs2Result):
             .with_in_schedule(data.get('inSchedule'))\
             .with_schedule_start_at(data.get('scheduleStartAt'))\
             .with_schedule_end_at(data.get('scheduleEndAt'))\
-            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))
+            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))\
+            .with_is_global_schedule(data.get('isGlobalSchedule'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -1405,6 +1418,7 @@ class GetEventByUserIdResult(core.Gs2Result):
             "scheduleStartAt": self.schedule_start_at,
             "scheduleEndAt": self.schedule_end_at,
             "repeatSchedule": self.repeat_schedule.to_dict() if self.repeat_schedule else None,
+            "isGlobalSchedule": self.is_global_schedule,
         }
 
 
@@ -1443,6 +1457,36 @@ class GetRawEventResult(core.Gs2Result):
 
 
 class VerifyEventResult(core.Gs2Result):
+    item: Event = None
+    in_schedule: bool = None
+    schedule_start_at: int = None
+    schedule_end_at: int = None
+    repeat_schedule: RepeatSchedule = None
+    is_global_schedule: bool = None
+
+    def with_item(self, item: Event) -> VerifyEventResult:
+        self.item = item
+        return self
+
+    def with_in_schedule(self, in_schedule: bool) -> VerifyEventResult:
+        self.in_schedule = in_schedule
+        return self
+
+    def with_schedule_start_at(self, schedule_start_at: int) -> VerifyEventResult:
+        self.schedule_start_at = schedule_start_at
+        return self
+
+    def with_schedule_end_at(self, schedule_end_at: int) -> VerifyEventResult:
+        self.schedule_end_at = schedule_end_at
+        return self
+
+    def with_repeat_schedule(self, repeat_schedule: RepeatSchedule) -> VerifyEventResult:
+        self.repeat_schedule = repeat_schedule
+        return self
+
+    def with_is_global_schedule(self, is_global_schedule: bool) -> VerifyEventResult:
+        self.is_global_schedule = is_global_schedule
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1463,13 +1507,55 @@ class VerifyEventResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyEventResult()\
+            .with_item(Event.from_dict(data.get('item')))\
+            .with_in_schedule(data.get('inSchedule'))\
+            .with_schedule_start_at(data.get('scheduleStartAt'))\
+            .with_schedule_end_at(data.get('scheduleEndAt'))\
+            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))\
+            .with_is_global_schedule(data.get('isGlobalSchedule'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
+            "inSchedule": self.in_schedule,
+            "scheduleStartAt": self.schedule_start_at,
+            "scheduleEndAt": self.schedule_end_at,
+            "repeatSchedule": self.repeat_schedule.to_dict() if self.repeat_schedule else None,
+            "isGlobalSchedule": self.is_global_schedule,
         }
 
 
 class VerifyEventByUserIdResult(core.Gs2Result):
+    item: Event = None
+    in_schedule: bool = None
+    schedule_start_at: int = None
+    schedule_end_at: int = None
+    repeat_schedule: RepeatSchedule = None
+    is_global_schedule: bool = None
+
+    def with_item(self, item: Event) -> VerifyEventByUserIdResult:
+        self.item = item
+        return self
+
+    def with_in_schedule(self, in_schedule: bool) -> VerifyEventByUserIdResult:
+        self.in_schedule = in_schedule
+        return self
+
+    def with_schedule_start_at(self, schedule_start_at: int) -> VerifyEventByUserIdResult:
+        self.schedule_start_at = schedule_start_at
+        return self
+
+    def with_schedule_end_at(self, schedule_end_at: int) -> VerifyEventByUserIdResult:
+        self.schedule_end_at = schedule_end_at
+        return self
+
+    def with_repeat_schedule(self, repeat_schedule: RepeatSchedule) -> VerifyEventByUserIdResult:
+        self.repeat_schedule = repeat_schedule
+        return self
+
+    def with_is_global_schedule(self, is_global_schedule: bool) -> VerifyEventByUserIdResult:
+        self.is_global_schedule = is_global_schedule
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1490,14 +1576,56 @@ class VerifyEventByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyEventByUserIdResult()\
+            .with_item(Event.from_dict(data.get('item')))\
+            .with_in_schedule(data.get('inSchedule'))\
+            .with_schedule_start_at(data.get('scheduleStartAt'))\
+            .with_schedule_end_at(data.get('scheduleEndAt'))\
+            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))\
+            .with_is_global_schedule(data.get('isGlobalSchedule'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
+            "inSchedule": self.in_schedule,
+            "scheduleStartAt": self.schedule_start_at,
+            "scheduleEndAt": self.schedule_end_at,
+            "repeatSchedule": self.repeat_schedule.to_dict() if self.repeat_schedule else None,
+            "isGlobalSchedule": self.is_global_schedule,
         }
 
 
 class VerifyEventByStampTaskResult(core.Gs2Result):
+    item: Event = None
+    in_schedule: bool = None
+    schedule_start_at: int = None
+    schedule_end_at: int = None
+    repeat_schedule: RepeatSchedule = None
+    is_global_schedule: bool = None
     new_context_stack: str = None
+
+    def with_item(self, item: Event) -> VerifyEventByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_in_schedule(self, in_schedule: bool) -> VerifyEventByStampTaskResult:
+        self.in_schedule = in_schedule
+        return self
+
+    def with_schedule_start_at(self, schedule_start_at: int) -> VerifyEventByStampTaskResult:
+        self.schedule_start_at = schedule_start_at
+        return self
+
+    def with_schedule_end_at(self, schedule_end_at: int) -> VerifyEventByStampTaskResult:
+        self.schedule_end_at = schedule_end_at
+        return self
+
+    def with_repeat_schedule(self, repeat_schedule: RepeatSchedule) -> VerifyEventByStampTaskResult:
+        self.repeat_schedule = repeat_schedule
+        return self
+
+    def with_is_global_schedule(self, is_global_schedule: bool) -> VerifyEventByStampTaskResult:
+        self.is_global_schedule = is_global_schedule
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyEventByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -1522,10 +1650,22 @@ class VerifyEventByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyEventByStampTaskResult()\
+            .with_item(Event.from_dict(data.get('item')))\
+            .with_in_schedule(data.get('inSchedule'))\
+            .with_schedule_start_at(data.get('scheduleStartAt'))\
+            .with_schedule_end_at(data.get('scheduleEndAt'))\
+            .with_repeat_schedule(RepeatSchedule.from_dict(data.get('repeatSchedule')))\
+            .with_is_global_schedule(data.get('isGlobalSchedule'))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
+            "inSchedule": self.in_schedule,
+            "scheduleStartAt": self.schedule_start_at,
+            "scheduleEndAt": self.schedule_end_at,
+            "repeatSchedule": self.repeat_schedule.to_dict() if self.repeat_schedule else None,
+            "isGlobalSchedule": self.is_global_schedule,
             "newContextStack": self.new_context_stack,
         }
 
