@@ -1532,7 +1532,6 @@ class FreezeMasterDataRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FreezeMasterDataRequest:
         self.namespace_name = namespace_name
@@ -1540,10 +1539,6 @@ class FreezeMasterDataRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> FreezeMasterDataRequest:
         self.access_token = access_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> FreezeMasterDataRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1581,7 +1576,6 @@ class FreezeMasterDataByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FreezeMasterDataByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1593,10 +1587,6 @@ class FreezeMasterDataByUserIdRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> FreezeMasterDataByUserIdRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> FreezeMasterDataByUserIdRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1688,7 +1678,6 @@ class FreezeMasterDataBySignedTimestampRequest(core.Gs2Request):
     body: str = None
     signature: str = None
     key_id: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FreezeMasterDataBySignedTimestampRequest:
         self.namespace_name = namespace_name
@@ -1708,10 +1697,6 @@ class FreezeMasterDataBySignedTimestampRequest(core.Gs2Request):
 
     def with_key_id(self, key_id: str) -> FreezeMasterDataBySignedTimestampRequest:
         self.key_id = key_id
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> FreezeMasterDataBySignedTimestampRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1755,7 +1740,6 @@ class FreezeMasterDataByTimestampRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     timestamp: int = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FreezeMasterDataByTimestampRequest:
         self.namespace_name = namespace_name
@@ -1767,10 +1751,6 @@ class FreezeMasterDataByTimestampRequest(core.Gs2Request):
 
     def with_timestamp(self, timestamp: int) -> FreezeMasterDataByTimestampRequest:
         self.timestamp = timestamp
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> FreezeMasterDataByTimestampRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

@@ -125,6 +125,8 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             body["depositBalanceScript"] = request.deposit_balance_script.to_dict()
         if request.withdraw_balance_script is not None:
             body["withdrawBalanceScript"] = request.withdraw_balance_script.to_dict()
+        if request.verify_receipt_script is not None:
+            body["verifyReceiptScript"] = request.verify_receipt_script.to_dict()
         if request.subscribe_script is not None:
             body["subscribeScript"] = request.subscribe_script
         if request.renew_script is not None:
@@ -363,6 +365,8 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             body["depositBalanceScript"] = request.deposit_balance_script.to_dict()
         if request.withdraw_balance_script is not None:
             body["withdrawBalanceScript"] = request.withdraw_balance_script.to_dict()
+        if request.verify_receipt_script is not None:
+            body["verifyReceiptScript"] = request.verify_receipt_script.to_dict()
         if request.subscribe_script is not None:
             body["subscribeScript"] = request.subscribe_script
         if request.renew_script is not None:

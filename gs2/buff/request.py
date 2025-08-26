@@ -1044,7 +1044,6 @@ class ApplyBuffRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     access_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ApplyBuffRequest:
         self.namespace_name = namespace_name
@@ -1052,10 +1051,6 @@ class ApplyBuffRequest(core.Gs2Request):
 
     def with_access_token(self, access_token: str) -> ApplyBuffRequest:
         self.access_token = access_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> ApplyBuffRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1093,7 +1088,6 @@ class ApplyBuffByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> ApplyBuffByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1105,10 +1099,6 @@ class ApplyBuffByUserIdRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> ApplyBuffByUserIdRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> ApplyBuffByUserIdRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

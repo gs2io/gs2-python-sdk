@@ -67,7 +67,6 @@ class CreateNamespaceRequest(core.Gs2Request):
     description: str = None
     transaction_setting: TransactionSetting = None
     lottery_trigger_script_id: str = None
-    choice_prize_table_script_id: str = None
     log_setting: LogSetting = None
     queue_namespace_id: str = None
     key_id: str = None
@@ -86,10 +85,6 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_lottery_trigger_script_id(self, lottery_trigger_script_id: str) -> CreateNamespaceRequest:
         self.lottery_trigger_script_id = lottery_trigger_script_id
-        return self
-
-    def with_choice_prize_table_script_id(self, choice_prize_table_script_id: str) -> CreateNamespaceRequest:
-        self.choice_prize_table_script_id = choice_prize_table_script_id
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -127,7 +122,6 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_lottery_trigger_script_id(data.get('lotteryTriggerScriptId'))\
-            .with_choice_prize_table_script_id(data.get('choicePrizeTableScriptId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))
@@ -138,7 +132,6 @@ class CreateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "lotteryTriggerScriptId": self.lottery_trigger_script_id,
-            "choicePrizeTableScriptId": self.choice_prize_table_script_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
@@ -224,7 +217,6 @@ class UpdateNamespaceRequest(core.Gs2Request):
     description: str = None
     transaction_setting: TransactionSetting = None
     lottery_trigger_script_id: str = None
-    choice_prize_table_script_id: str = None
     log_setting: LogSetting = None
     queue_namespace_id: str = None
     key_id: str = None
@@ -243,10 +235,6 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_lottery_trigger_script_id(self, lottery_trigger_script_id: str) -> UpdateNamespaceRequest:
         self.lottery_trigger_script_id = lottery_trigger_script_id
-        return self
-
-    def with_choice_prize_table_script_id(self, choice_prize_table_script_id: str) -> UpdateNamespaceRequest:
-        self.choice_prize_table_script_id = choice_prize_table_script_id
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -284,7 +272,6 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_lottery_trigger_script_id(data.get('lotteryTriggerScriptId'))\
-            .with_choice_prize_table_script_id(data.get('choicePrizeTableScriptId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))
@@ -295,7 +282,6 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "lotteryTriggerScriptId": self.lottery_trigger_script_id,
-            "choicePrizeTableScriptId": self.choice_prize_table_script_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,

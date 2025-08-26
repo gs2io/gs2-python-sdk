@@ -1313,7 +1313,6 @@ class PredictionRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     category_name: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PredictionRequest:
         self.namespace_name = namespace_name
@@ -1325,10 +1324,6 @@ class PredictionRequest(core.Gs2Request):
 
     def with_category_name(self, category_name: str) -> PredictionRequest:
         self.category_name = category_name
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> PredictionRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -1369,7 +1364,6 @@ class PredictionByUserIdRequest(core.Gs2Request):
     user_id: str = None
     category_name: str = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> PredictionByUserIdRequest:
         self.namespace_name = namespace_name
@@ -1385,10 +1379,6 @@ class PredictionByUserIdRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> PredictionByUserIdRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> PredictionByUserIdRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):

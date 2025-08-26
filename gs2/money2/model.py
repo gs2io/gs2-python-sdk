@@ -2743,6 +2743,7 @@ class Namespace(core.Gs2Model):
     platform_setting: PlatformSetting = None
     deposit_balance_script: ScriptSetting = None
     withdraw_balance_script: ScriptSetting = None
+    verify_receipt_script: ScriptSetting = None
     subscribe_script: str = None
     renew_script: str = None
     unsubscribe_script: str = None
@@ -2783,6 +2784,10 @@ class Namespace(core.Gs2Model):
 
     def with_withdraw_balance_script(self, withdraw_balance_script: ScriptSetting) -> Namespace:
         self.withdraw_balance_script = withdraw_balance_script
+        return self
+
+    def with_verify_receipt_script(self, verify_receipt_script: ScriptSetting) -> Namespace:
+        self.verify_receipt_script = verify_receipt_script
         return self
 
     def with_subscribe_script(self, subscribe_script: str) -> Namespace:
@@ -2891,6 +2896,7 @@ class Namespace(core.Gs2Model):
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
             .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
             .with_withdraw_balance_script(ScriptSetting.from_dict(data.get('withdrawBalanceScript')))\
+            .with_verify_receipt_script(ScriptSetting.from_dict(data.get('verifyReceiptScript')))\
             .with_subscribe_script(data.get('subscribeScript'))\
             .with_renew_script(data.get('renewScript'))\
             .with_unsubscribe_script(data.get('unsubscribeScript'))\
@@ -2911,6 +2917,7 @@ class Namespace(core.Gs2Model):
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
             "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
             "withdrawBalanceScript": self.withdraw_balance_script.to_dict() if self.withdraw_balance_script else None,
+            "verifyReceiptScript": self.verify_receipt_script.to_dict() if self.verify_receipt_script else None,
             "subscribeScript": self.subscribe_script,
             "renewScript": self.renew_script,
             "unsubscribeScript": self.unsubscribe_script,

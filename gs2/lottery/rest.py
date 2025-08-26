@@ -119,8 +119,6 @@ class Gs2LotteryRestClient(rest.AbstractGs2RestClient):
             body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.lottery_trigger_script_id is not None:
             body["lotteryTriggerScriptId"] = request.lottery_trigger_script_id
-        if request.choice_prize_table_script_id is not None:
-            body["choicePrizeTableScriptId"] = request.choice_prize_table_script_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
         if request.queue_namespace_id is not None:
@@ -349,8 +347,6 @@ class Gs2LotteryRestClient(rest.AbstractGs2RestClient):
             body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.lottery_trigger_script_id is not None:
             body["lotteryTriggerScriptId"] = request.lottery_trigger_script_id
-        if request.choice_prize_table_script_id is not None:
-            body["choicePrizeTableScriptId"] = request.choice_prize_table_script_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
         if request.queue_namespace_id is not None:

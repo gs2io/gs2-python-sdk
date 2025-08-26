@@ -2576,7 +2576,6 @@ class FindPlatformIdRequest(core.Gs2Request):
     access_token: str = None
     type: int = None
     user_identifier: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FindPlatformIdRequest:
         self.namespace_name = namespace_name
@@ -2592,10 +2591,6 @@ class FindPlatformIdRequest(core.Gs2Request):
 
     def with_user_identifier(self, user_identifier: str) -> FindPlatformIdRequest:
         self.user_identifier = user_identifier
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> FindPlatformIdRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
@@ -2639,7 +2634,6 @@ class FindPlatformIdByUserIdRequest(core.Gs2Request):
     type: int = None
     user_identifier: str = None
     time_offset_token: str = None
-    duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FindPlatformIdByUserIdRequest:
         self.namespace_name = namespace_name
@@ -2659,10 +2653,6 @@ class FindPlatformIdByUserIdRequest(core.Gs2Request):
 
     def with_time_offset_token(self, time_offset_token: str) -> FindPlatformIdByUserIdRequest:
         self.time_offset_token = time_offset_token
-        return self
-
-    def with_duplication_avoider(self, duplication_avoider: str) -> FindPlatformIdByUserIdRequest:
-        self.duplication_avoider = duplication_avoider
         return self
 
     def get(self, key, default=None):
