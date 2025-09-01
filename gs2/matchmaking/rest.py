@@ -3865,13 +3865,14 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
             seasonName=request.season_name if request.season_name is not None and request.season_name != '' else 'null',
             season=request.season if request.season is not None and request.season != '' else 'null',
-            tier=request.tier if request.tier is not None and request.tier != '' else 'null',
         )
 
         headers = self._create_authorized_headers()
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.tier is not None:
+            query_strings["tier"] = request.tier
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:

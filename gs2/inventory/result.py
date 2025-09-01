@@ -2477,6 +2477,11 @@ class DeleteInventoryByUserIdResult(core.Gs2Result):
 
 
 class VerifyInventoryCurrentMaxCapacityResult(core.Gs2Result):
+    item: Inventory = None
+
+    def with_item(self, item: Inventory) -> VerifyInventoryCurrentMaxCapacityResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2497,13 +2502,20 @@ class VerifyInventoryCurrentMaxCapacityResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyInventoryCurrentMaxCapacityResult()\
+            .with_item(Inventory.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyInventoryCurrentMaxCapacityByUserIdResult(core.Gs2Result):
+    item: Inventory = None
+
+    def with_item(self, item: Inventory) -> VerifyInventoryCurrentMaxCapacityByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2524,14 +2536,21 @@ class VerifyInventoryCurrentMaxCapacityByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyInventoryCurrentMaxCapacityByUserIdResult()\
+            .with_item(Inventory.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyInventoryCurrentMaxCapacityByStampTaskResult(core.Gs2Result):
+    item: Inventory = None
     new_context_stack: str = None
+
+    def with_item(self, item: Inventory) -> VerifyInventoryCurrentMaxCapacityByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyInventoryCurrentMaxCapacityByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -2556,10 +2575,12 @@ class VerifyInventoryCurrentMaxCapacityByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyInventoryCurrentMaxCapacityByStampTaskResult()\
+            .with_item(Inventory.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
@@ -3256,6 +3277,11 @@ class DeleteItemSetByUserIdResult(core.Gs2Result):
 
 
 class VerifyItemSetResult(core.Gs2Result):
+    items: List[ItemSet] = None
+
+    def with_items(self, items: List[ItemSet]) -> VerifyItemSetResult:
+        self.items = items
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -3276,13 +3302,26 @@ class VerifyItemSetResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyItemSetResult()\
+            .with_items(None if data.get('items') is None else [
+                ItemSet.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
         }
 
 
 class VerifyItemSetByUserIdResult(core.Gs2Result):
+    items: List[ItemSet] = None
+
+    def with_items(self, items: List[ItemSet]) -> VerifyItemSetByUserIdResult:
+        self.items = items
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -3303,9 +3342,17 @@ class VerifyItemSetByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyItemSetByUserIdResult()\
+            .with_items(None if data.get('items') is None else [
+                ItemSet.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
         }
 
 
@@ -3494,7 +3541,12 @@ class ConsumeItemSetByStampTaskResult(core.Gs2Result):
 
 
 class VerifyItemSetByStampTaskResult(core.Gs2Result):
+    items: List[ItemSet] = None
     new_context_stack: str = None
+
+    def with_items(self, items: List[ItemSet]) -> VerifyItemSetByStampTaskResult:
+        self.items = items
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyItemSetByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -3519,10 +3571,18 @@ class VerifyItemSetByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyItemSetByStampTaskResult()\
+            .with_items(None if data.get('items') is None else [
+                ItemSet.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
             "newContextStack": self.new_context_stack,
         }
 
@@ -4735,6 +4795,11 @@ class DeleteSimpleItemsByUserIdResult(core.Gs2Result):
 
 
 class VerifySimpleItemResult(core.Gs2Result):
+    item: SimpleItem = None
+
+    def with_item(self, item: SimpleItem) -> VerifySimpleItemResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -4755,13 +4820,20 @@ class VerifySimpleItemResult(core.Gs2Result):
         if data is None:
             return None
         return VerifySimpleItemResult()\
+            .with_item(SimpleItem.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifySimpleItemByUserIdResult(core.Gs2Result):
+    item: SimpleItem = None
+
+    def with_item(self, item: SimpleItem) -> VerifySimpleItemByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -4782,9 +4854,11 @@ class VerifySimpleItemByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifySimpleItemByUserIdResult()\
+            .with_item(SimpleItem.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -4916,7 +4990,12 @@ class SetSimpleItemsByStampSheetResult(core.Gs2Result):
 
 
 class VerifySimpleItemByStampTaskResult(core.Gs2Result):
+    item: SimpleItem = None
     new_context_stack: str = None
+
+    def with_item(self, item: SimpleItem) -> VerifySimpleItemByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifySimpleItemByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -4941,10 +5020,12 @@ class VerifySimpleItemByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifySimpleItemByStampTaskResult()\
+            .with_item(SimpleItem.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
@@ -5296,6 +5377,11 @@ class DeleteBigItemByUserIdResult(core.Gs2Result):
 
 
 class VerifyBigItemResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> VerifyBigItemResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -5316,13 +5402,20 @@ class VerifyBigItemResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyBigItemResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyBigItemByUserIdResult(core.Gs2Result):
+    item: BigItem = None
+
+    def with_item(self, item: BigItem) -> VerifyBigItemByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -5343,9 +5436,11 @@ class VerifyBigItemByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyBigItemByUserIdResult()\
+            .with_item(BigItem.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -5459,7 +5554,12 @@ class SetBigItemByStampSheetResult(core.Gs2Result):
 
 
 class VerifyBigItemByStampTaskResult(core.Gs2Result):
+    item: BigItem = None
     new_context_stack: str = None
+
+    def with_item(self, item: BigItem) -> VerifyBigItemByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyBigItemByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -5484,9 +5584,11 @@ class VerifyBigItemByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyBigItemByStampTaskResult()\
+            .with_item(BigItem.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }

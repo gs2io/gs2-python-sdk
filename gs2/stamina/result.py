@@ -2344,6 +2344,11 @@ class DeleteStaminaByUserIdResult(core.Gs2Result):
 
 
 class VerifyStaminaValueResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaValueResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2364,13 +2369,20 @@ class VerifyStaminaValueResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaValueResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaValueByUserIdResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaValueByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2391,13 +2403,20 @@ class VerifyStaminaValueByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaValueByUserIdResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaMaxValueResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaMaxValueResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2418,13 +2437,20 @@ class VerifyStaminaMaxValueResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaMaxValueResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaMaxValueByUserIdResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaMaxValueByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2445,13 +2471,20 @@ class VerifyStaminaMaxValueByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaMaxValueByUserIdResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaRecoverIntervalMinutesResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaRecoverIntervalMinutesResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2472,13 +2505,20 @@ class VerifyStaminaRecoverIntervalMinutesResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaRecoverIntervalMinutesResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaRecoverIntervalMinutesByUserIdResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaRecoverIntervalMinutesByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2499,13 +2539,20 @@ class VerifyStaminaRecoverIntervalMinutesByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaRecoverIntervalMinutesByUserIdResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaRecoverValueResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaRecoverValueResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2526,13 +2573,20 @@ class VerifyStaminaRecoverValueResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaRecoverValueResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaRecoverValueByUserIdResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaRecoverValueByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2553,13 +2607,20 @@ class VerifyStaminaRecoverValueByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaRecoverValueByUserIdResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaOverflowValueResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaOverflowValueResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2580,13 +2641,20 @@ class VerifyStaminaOverflowValueResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaOverflowValueResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyStaminaOverflowValueByUserIdResult(core.Gs2Result):
+    item: Stamina = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaOverflowValueByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2607,9 +2675,11 @@ class VerifyStaminaOverflowValueByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaOverflowValueByUserIdResult()\
+            .with_item(Stamina.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -2943,7 +3013,12 @@ class ConsumeStaminaByStampTaskResult(core.Gs2Result):
 
 
 class VerifyStaminaValueByStampTaskResult(core.Gs2Result):
+    item: Stamina = None
     new_context_stack: str = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaValueByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyStaminaValueByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -2968,16 +3043,23 @@ class VerifyStaminaValueByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaValueByStampTaskResult()\
+            .with_item(Stamina.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
 
 class VerifyStaminaMaxValueByStampTaskResult(core.Gs2Result):
+    item: Stamina = None
     new_context_stack: str = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaMaxValueByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyStaminaMaxValueByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -3002,16 +3084,23 @@ class VerifyStaminaMaxValueByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaMaxValueByStampTaskResult()\
+            .with_item(Stamina.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
 
 class VerifyStaminaRecoverIntervalMinutesByStampTaskResult(core.Gs2Result):
+    item: Stamina = None
     new_context_stack: str = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaRecoverIntervalMinutesByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyStaminaRecoverIntervalMinutesByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -3036,16 +3125,23 @@ class VerifyStaminaRecoverIntervalMinutesByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaRecoverIntervalMinutesByStampTaskResult()\
+            .with_item(Stamina.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
 
 class VerifyStaminaRecoverValueByStampTaskResult(core.Gs2Result):
+    item: Stamina = None
     new_context_stack: str = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaRecoverValueByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyStaminaRecoverValueByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -3070,16 +3166,23 @@ class VerifyStaminaRecoverValueByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaRecoverValueByStampTaskResult()\
+            .with_item(Stamina.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
 
 class VerifyStaminaOverflowValueByStampTaskResult(core.Gs2Result):
+    item: Stamina = None
     new_context_stack: str = None
+
+    def with_item(self, item: Stamina) -> VerifyStaminaOverflowValueByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyStaminaOverflowValueByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -3104,9 +3207,11 @@ class VerifyStaminaOverflowValueByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyStaminaOverflowValueByStampTaskResult()\
+            .with_item(Stamina.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }

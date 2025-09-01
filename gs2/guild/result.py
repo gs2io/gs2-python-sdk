@@ -1416,6 +1416,11 @@ class DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult(core.Gs2Result):
 
 
 class VerifyCurrentMaximumMemberCountResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> VerifyCurrentMaximumMemberCountResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1436,13 +1441,20 @@ class VerifyCurrentMaximumMemberCountResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCurrentMaximumMemberCountResult()\
+            .with_item(Guild.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyCurrentMaximumMemberCountByGuildNameResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> VerifyCurrentMaximumMemberCountByGuildNameResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1463,13 +1475,20 @@ class VerifyCurrentMaximumMemberCountByGuildNameResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCurrentMaximumMemberCountByGuildNameResult()\
+            .with_item(Guild.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyIncludeMemberResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> VerifyIncludeMemberResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1490,13 +1509,20 @@ class VerifyIncludeMemberResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyIncludeMemberResult()\
+            .with_item(Guild.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyIncludeMemberByUserIdResult(core.Gs2Result):
+    item: Guild = None
+
+    def with_item(self, item: Guild) -> VerifyIncludeMemberByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1517,9 +1543,11 @@ class VerifyIncludeMemberByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyIncludeMemberByUserIdResult()\
+            .with_item(Guild.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -1777,7 +1805,12 @@ class SetMaximumCurrentMaximumMemberCountByStampSheetResult(core.Gs2Result):
 
 
 class VerifyCurrentMaximumMemberCountByStampTaskResult(core.Gs2Result):
+    item: Guild = None
     new_context_stack: str = None
+
+    def with_item(self, item: Guild) -> VerifyCurrentMaximumMemberCountByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyCurrentMaximumMemberCountByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -1802,16 +1835,23 @@ class VerifyCurrentMaximumMemberCountByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCurrentMaximumMemberCountByStampTaskResult()\
+            .with_item(Guild.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
 
 class VerifyIncludeMemberByStampTaskResult(core.Gs2Result):
+    item: Guild = None
     new_context_stack: str = None
+
+    def with_item(self, item: Guild) -> VerifyIncludeMemberByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyIncludeMemberByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -1836,10 +1876,12 @@ class VerifyIncludeMemberByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyIncludeMemberByStampTaskResult()\
+            .with_item(Guild.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 

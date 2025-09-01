@@ -689,6 +689,11 @@ class DeleteCompleteByUserIdResult(core.Gs2Result):
 
 
 class VerifyCompleteResult(core.Gs2Result):
+    item: Complete = None
+
+    def with_item(self, item: Complete) -> VerifyCompleteResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -709,13 +714,20 @@ class VerifyCompleteResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCompleteResult()\
+            .with_item(Complete.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyCompleteByUserIdResult(core.Gs2Result):
+    item: Complete = None
+
+    def with_item(self, item: Complete) -> VerifyCompleteByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -736,9 +748,11 @@ class VerifyCompleteByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCompleteByUserIdResult()\
+            .with_item(Complete.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -859,7 +873,12 @@ class RevertReceiveByStampSheetResult(core.Gs2Result):
 
 
 class VerifyCompleteByStampTaskResult(core.Gs2Result):
+    item: Complete = None
     new_context_stack: str = None
+
+    def with_item(self, item: Complete) -> VerifyCompleteByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyCompleteByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -884,10 +903,12 @@ class VerifyCompleteByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCompleteByStampTaskResult()\
+            .with_item(Complete.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
@@ -2084,6 +2105,11 @@ class GetCounterByUserIdResult(core.Gs2Result):
 
 
 class VerifyCounterValueResult(core.Gs2Result):
+    item: Counter = None
+
+    def with_item(self, item: Counter) -> VerifyCounterValueResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2104,13 +2130,20 @@ class VerifyCounterValueResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCounterValueResult()\
+            .with_item(Counter.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyCounterValueByUserIdResult(core.Gs2Result):
+    item: Counter = None
+
+    def with_item(self, item: Counter) -> VerifyCounterValueByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2131,9 +2164,11 @@ class VerifyCounterValueByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCounterValueByUserIdResult()\
+            .with_item(Counter.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -2470,7 +2505,12 @@ class ResetByStampTaskResult(core.Gs2Result):
 
 
 class VerifyCounterValueByStampTaskResult(core.Gs2Result):
+    item: Counter = None
     new_context_stack: str = None
+
+    def with_item(self, item: Counter) -> VerifyCounterValueByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyCounterValueByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -2495,10 +2535,12 @@ class VerifyCounterValueByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyCounterValueByStampTaskResult()\
+            .with_item(Counter.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 

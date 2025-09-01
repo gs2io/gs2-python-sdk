@@ -3653,6 +3653,8 @@ class Gs2FriendWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["accessToken"] = request.access_token
         if request.target_user_id is not None:
             body["targetUserId"] = request.target_user_id
+        if request.with_profile is not None:
+            body["withProfile"] = request.with_profile
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3732,6 +3734,8 @@ class Gs2FriendWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.target_user_id is not None:
             body["targetUserId"] = request.target_user_id
+        if request.with_profile is not None:
+            body["withProfile"] = request.with_profile
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

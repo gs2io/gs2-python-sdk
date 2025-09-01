@@ -2741,6 +2741,7 @@ class SendRequestRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     target_user_id: str = None
+    with_profile: bool = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SendRequestRequest:
@@ -2753,6 +2754,10 @@ class SendRequestRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> SendRequestRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> SendRequestRequest:
+        self.with_profile = with_profile
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> SendRequestRequest:
@@ -2780,13 +2785,15 @@ class SendRequestRequest(core.Gs2Request):
         return SendRequestRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_target_user_id(data.get('targetUserId'))
+            .with_target_user_id(data.get('targetUserId'))\
+            .with_with_profile(data.get('withProfile'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "targetUserId": self.target_user_id,
+            "withProfile": self.with_profile,
         }
 
 
@@ -2796,6 +2803,7 @@ class SendRequestByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     target_user_id: str = None
+    with_profile: bool = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -2809,6 +2817,10 @@ class SendRequestByUserIdRequest(core.Gs2Request):
 
     def with_target_user_id(self, target_user_id: str) -> SendRequestByUserIdRequest:
         self.target_user_id = target_user_id
+        return self
+
+    def with_with_profile(self, with_profile: bool) -> SendRequestByUserIdRequest:
+        self.with_profile = with_profile
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> SendRequestByUserIdRequest:
@@ -2841,6 +2853,7 @@ class SendRequestByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_target_user_id(data.get('targetUserId'))\
+            .with_with_profile(data.get('withProfile'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2848,6 +2861,7 @@ class SendRequestByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "targetUserId": self.target_user_id,
+            "withProfile": self.with_profile,
             "timeOffsetToken": self.time_offset_token,
         }
 

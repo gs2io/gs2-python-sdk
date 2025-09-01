@@ -1036,6 +1036,11 @@ class DeleteTriggerByUserIdResult(core.Gs2Result):
 
 
 class VerifyTriggerResult(core.Gs2Result):
+    item: Trigger = None
+
+    def with_item(self, item: Trigger) -> VerifyTriggerResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1056,13 +1061,20 @@ class VerifyTriggerResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyTriggerResult()\
+            .with_item(Trigger.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyTriggerByUserIdResult(core.Gs2Result):
+    item: Trigger = None
+
+    def with_item(self, item: Trigger) -> VerifyTriggerByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1083,9 +1095,11 @@ class VerifyTriggerByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyTriggerByUserIdResult()\
+            .with_item(Trigger.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -1131,7 +1145,12 @@ class DeleteTriggerByStampTaskResult(core.Gs2Result):
 
 
 class VerifyTriggerByStampTaskResult(core.Gs2Result):
+    item: Trigger = None
     new_context_stack: str = None
+
+    def with_item(self, item: Trigger) -> VerifyTriggerByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyTriggerByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -1156,10 +1175,12 @@ class VerifyTriggerByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyTriggerByStampTaskResult()\
+            .with_item(Trigger.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 

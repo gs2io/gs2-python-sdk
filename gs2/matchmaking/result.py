@@ -1966,6 +1966,11 @@ class GetSeasonGatheringResult(core.Gs2Result):
 
 
 class VerifyIncludeParticipantResult(core.Gs2Result):
+    item: SeasonGathering = None
+
+    def with_item(self, item: SeasonGathering) -> VerifyIncludeParticipantResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1986,13 +1991,20 @@ class VerifyIncludeParticipantResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyIncludeParticipantResult()\
+            .with_item(SeasonGathering.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyIncludeParticipantByUserIdResult(core.Gs2Result):
+    item: SeasonGathering = None
+
+    def with_item(self, item: SeasonGathering) -> VerifyIncludeParticipantByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -2013,9 +2025,11 @@ class VerifyIncludeParticipantByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyIncludeParticipantByUserIdResult()\
+            .with_item(SeasonGathering.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -2054,7 +2068,12 @@ class DeleteSeasonGatheringResult(core.Gs2Result):
 
 
 class VerifyIncludeParticipantByStampTaskResult(core.Gs2Result):
+    item: SeasonGathering = None
     new_context_stack: str = None
+
+    def with_item(self, item: SeasonGathering) -> VerifyIncludeParticipantByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyIncludeParticipantByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -2079,10 +2098,12 @@ class VerifyIncludeParticipantByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyIncludeParticipantByStampTaskResult()\
+            .with_item(SeasonGathering.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 

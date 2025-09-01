@@ -1682,6 +1682,11 @@ class DeleteStatusByUserIdResult(core.Gs2Result):
 
 
 class VerifyRankResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> VerifyRankResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1702,13 +1707,20 @@ class VerifyRankResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyRankResult()\
+            .with_item(Status.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyRankByUserIdResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> VerifyRankByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1729,13 +1741,20 @@ class VerifyRankByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyRankByUserIdResult()\
+            .with_item(Status.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyRankCapResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> VerifyRankCapResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1756,13 +1775,20 @@ class VerifyRankCapResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyRankCapResult()\
+            .with_item(Status.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
 class VerifyRankCapByUserIdResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> VerifyRankCapByUserIdResult:
+        self.item = item
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1783,9 +1809,11 @@ class VerifyRankCapByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyRankCapByUserIdResult()\
+            .with_item(Status.from_dict(data.get('item')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
         }
 
 
@@ -2193,7 +2221,12 @@ class MultiplyAcquireActionsByStampSheetResult(core.Gs2Result):
 
 
 class VerifyRankByStampTaskResult(core.Gs2Result):
+    item: Status = None
     new_context_stack: str = None
+
+    def with_item(self, item: Status) -> VerifyRankByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyRankByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -2218,16 +2251,23 @@ class VerifyRankByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyRankByStampTaskResult()\
+            .with_item(Status.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
 
 
 class VerifyRankCapByStampTaskResult(core.Gs2Result):
+    item: Status = None
     new_context_stack: str = None
+
+    def with_item(self, item: Status) -> VerifyRankCapByStampTaskResult:
+        self.item = item
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> VerifyRankCapByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -2252,9 +2292,11 @@ class VerifyRankCapByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return VerifyRankCapByStampTaskResult()\
+            .with_item(Status.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
             "newContextStack": self.new_context_stack,
         }
