@@ -19,6 +19,82 @@ from typing import *
 from gs2 import core
 
 
+class TransactionSetting(core.Gs2Model):
+    enable_auto_run: bool = None
+    enable_atomic_commit: bool = None
+    transaction_use_distributor: bool = None
+    acquire_action_use_job_queue: bool = None
+    distributor_namespace_id: str = None
+    key_id: str = None
+    queue_namespace_id: str = None
+
+    def with_enable_auto_run(self, enable_auto_run: bool) -> TransactionSetting:
+        self.enable_auto_run = enable_auto_run
+        return self
+
+    def with_enable_atomic_commit(self, enable_atomic_commit: bool) -> TransactionSetting:
+        self.enable_atomic_commit = enable_atomic_commit
+        return self
+
+    def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
+        self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
+        self.acquire_action_use_job_queue = acquire_action_use_job_queue
+        return self
+
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
+        self.distributor_namespace_id = distributor_namespace_id
+        return self
+
+    def with_key_id(self, key_id: str) -> TransactionSetting:
+        self.key_id = key_id
+        return self
+
+    def with_queue_namespace_id(self, queue_namespace_id: str) -> TransactionSetting:
+        self.queue_namespace_id = queue_namespace_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TransactionSetting]:
+        if data is None:
+            return None
+        return TransactionSetting()\
+            .with_enable_auto_run(data.get('enableAutoRun'))\
+            .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
+            .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_key_id(data.get('keyId'))\
+            .with_queue_namespace_id(data.get('queueNamespaceId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "enableAutoRun": self.enable_auto_run,
+            "enableAtomicCommit": self.enable_atomic_commit,
+            "transactionUseDistributor": self.transaction_use_distributor,
+            "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "keyId": self.key_id,
+            "queueNamespaceId": self.queue_namespace_id,
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -256,6 +332,7 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     server_type: str = None
     server_spec: str = None
     create_notification: NotificationSetting = None
@@ -274,6 +351,10 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_server_type(self, server_type: str) -> Namespace:
@@ -369,6 +450,7 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_server_type(data.get('serverType'))\
             .with_server_spec(data.get('serverSpec'))\
             .with_create_notification(NotificationSetting.from_dict(data.get('createNotification')))\
@@ -382,6 +464,7 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "serverType": self.server_type,
             "serverSpec": self.server_spec,
             "createNotification": self.create_notification.to_dict() if self.create_notification else None,

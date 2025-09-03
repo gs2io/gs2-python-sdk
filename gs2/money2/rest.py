@@ -117,6 +117,8 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             body["currencyUsagePriority"] = request.currency_usage_priority
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.shared_free_currency is not None:
             body["sharedFreeCurrency"] = request.shared_free_currency
         if request.platform_setting is not None:
@@ -359,6 +361,8 @@ class Gs2Money2RestClient(rest.AbstractGs2RestClient):
             body["currencyUsagePriority"] = request.currency_usage_priority
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.platform_setting is not None:
             body["platformSetting"] = request.platform_setting.to_dict()
         if request.deposit_balance_script is not None:

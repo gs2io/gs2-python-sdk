@@ -116,6 +116,8 @@ class Gs2StaminaWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.overflow_trigger_script is not None:
             body["overflowTriggerScript"] = request.overflow_trigger_script
         if request.log_setting is not None:
@@ -335,6 +337,8 @@ class Gs2StaminaWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.overflow_trigger_script is not None:
             body["overflowTriggerScript"] = request.overflow_trigger_script
         if request.log_setting is not None:

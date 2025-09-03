@@ -116,6 +116,8 @@ class Gs2MoneyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.priority is not None:
             body["priority"] = request.priority
         if request.share_free is not None:
@@ -351,6 +353,8 @@ class Gs2MoneyWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.priority is not None:
             body["priority"] = request.priority
         if request.apple_key is not None:

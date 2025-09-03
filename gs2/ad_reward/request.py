@@ -64,10 +64,11 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     context_stack: str = None
     name: str = None
+    description: str = None
+    transaction_setting: TransactionSetting = None
     admob: AdMob = None
     unity_ad: UnityAd = None
     app_lovin_maxes: List[AppLovinMax] = None
-    description: str = None
     acquire_point_script: ScriptSetting = None
     consume_point_script: ScriptSetting = None
     change_point_notification: NotificationSetting = None
@@ -75,6 +76,14 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
         self.name = name
+        return self
+
+    def with_description(self, description: str) -> CreateNamespaceRequest:
+        self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_admob(self, admob: AdMob) -> CreateNamespaceRequest:
@@ -87,10 +96,6 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_app_lovin_maxes(self, app_lovin_maxes: List[AppLovinMax]) -> CreateNamespaceRequest:
         self.app_lovin_maxes = app_lovin_maxes
-        return self
-
-    def with_description(self, description: str) -> CreateNamespaceRequest:
-        self.description = description
         return self
 
     def with_acquire_point_script(self, acquire_point_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -129,13 +134,14 @@ class CreateNamespaceRequest(core.Gs2Request):
             return None
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
+            .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_admob(AdMob.from_dict(data.get('admob')))\
             .with_unity_ad(UnityAd.from_dict(data.get('unityAd')))\
             .with_app_lovin_maxes(None if data.get('appLovinMaxes') is None else [
                 AppLovinMax.from_dict(data.get('appLovinMaxes')[i])
                 for i in range(len(data.get('appLovinMaxes')))
             ])\
-            .with_description(data.get('description'))\
             .with_acquire_point_script(ScriptSetting.from_dict(data.get('acquirePointScript')))\
             .with_consume_point_script(ScriptSetting.from_dict(data.get('consumePointScript')))\
             .with_change_point_notification(NotificationSetting.from_dict(data.get('changePointNotification')))\
@@ -144,13 +150,14 @@ class CreateNamespaceRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
+            "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "admob": self.admob.to_dict() if self.admob else None,
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
             "appLovinMaxes": None if self.app_lovin_maxes is None else [
                 self.app_lovin_maxes[i].to_dict() if self.app_lovin_maxes[i] else None
                 for i in range(len(self.app_lovin_maxes))
             ],
-            "description": self.description,
             "acquirePointScript": self.acquire_point_script.to_dict() if self.acquire_point_script else None,
             "consumePointScript": self.consume_point_script.to_dict() if self.consume_point_script else None,
             "changePointNotification": self.change_point_notification.to_dict() if self.change_point_notification else None,
@@ -235,6 +242,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     admob: AdMob = None
     unity_ad: UnityAd = None
     app_lovin_maxes: List[AppLovinMax] = None
@@ -249,6 +257,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_admob(self, admob: AdMob) -> UpdateNamespaceRequest:
@@ -300,6 +312,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_admob(AdMob.from_dict(data.get('admob')))\
             .with_unity_ad(UnityAd.from_dict(data.get('unityAd')))\
             .with_app_lovin_maxes(None if data.get('appLovinMaxes') is None else [
@@ -315,6 +328,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "admob": self.admob.to_dict() if self.admob else None,
             "unityAd": self.unity_ad.to_dict() if self.unity_ad else None,
             "appLovinMaxes": None if self.app_lovin_maxes is None else [

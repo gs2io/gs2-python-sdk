@@ -116,6 +116,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.change_notification is not None:
             body["changeNotification"] = request.change_notification.to_dict()
         if request.join_notification is not None:
@@ -359,6 +361,8 @@ class Gs2GuildWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.change_notification is not None:
             body["changeNotification"] = request.change_notification.to_dict()
         if request.join_notification is not None:

@@ -115,6 +115,8 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.change_password_if_take_over is not None:
             body["changePasswordIfTakeOver"] = request.change_password_if_take_over
         if request.different_user_id_for_login_and_data_retention is not None:
@@ -351,6 +353,8 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         }
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.change_password_if_take_over is not None:
             body["changePasswordIfTakeOver"] = request.change_password_if_take_over
         if request.create_account_script is not None:

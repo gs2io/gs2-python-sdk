@@ -115,6 +115,8 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.firebase_secret is not None:
             body["firebaseSecret"] = request.firebase_secret
         if request.log_setting is not None:
@@ -337,6 +339,8 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         }
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.firebase_secret is not None:
             body["firebaseSecret"] = request.firebase_secret
         if request.log_setting is not None:

@@ -1584,6 +1584,7 @@ class Namespace(core.Gs2Model):
     namespace_id: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     change_notification: NotificationSetting = None
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
@@ -1612,6 +1613,10 @@ class Namespace(core.Gs2Model):
 
     def with_description(self, description: str) -> Namespace:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_change_notification(self, change_notification: NotificationSetting) -> Namespace:
@@ -1747,6 +1752,7 @@ class Namespace(core.Gs2Model):
             .with_namespace_id(data.get('namespaceId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_change_notification(NotificationSetting.from_dict(data.get('changeNotification')))\
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
@@ -1770,6 +1776,7 @@ class Namespace(core.Gs2Model):
             "namespaceId": self.namespace_id,
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "changeNotification": self.change_notification.to_dict() if self.change_notification else None,
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,

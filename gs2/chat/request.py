@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     allow_create_room: bool = None
     message_life_time_days: int = None
     post_message_script: ScriptSetting = None
@@ -81,6 +82,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_allow_create_room(self, allow_create_room: bool) -> CreateNamespaceRequest:
@@ -140,6 +145,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_allow_create_room(data.get('allowCreateRoom'))\
             .with_message_life_time_days(data.get('messageLifeTimeDays'))\
             .with_post_message_script(ScriptSetting.from_dict(data.get('postMessageScript')))\
@@ -154,6 +160,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "allowCreateRoom": self.allow_create_room,
             "messageLifeTimeDays": self.message_life_time_days,
             "postMessageScript": self.post_message_script.to_dict() if self.post_message_script else None,
@@ -243,6 +250,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     allow_create_room: bool = None
     message_life_time_days: int = None
     post_message_script: ScriptSetting = None
@@ -259,6 +267,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_allow_create_room(self, allow_create_room: bool) -> UpdateNamespaceRequest:
@@ -318,6 +330,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_allow_create_room(data.get('allowCreateRoom'))\
             .with_message_life_time_days(data.get('messageLifeTimeDays'))\
             .with_post_message_script(ScriptSetting.from_dict(data.get('postMessageScript')))\
@@ -332,6 +345,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "allowCreateRoom": self.allow_create_room,
             "messageLifeTimeDays": self.message_life_time_days,
             "postMessageScript": self.post_message_script.to_dict() if self.post_message_script else None,

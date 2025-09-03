@@ -66,6 +66,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     currency_usage_priority: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     shared_free_currency: bool = None
     platform_setting: PlatformSetting = None
     deposit_balance_script: ScriptSetting = None
@@ -88,6 +89,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_shared_free_currency(self, shared_free_currency: bool) -> CreateNamespaceRequest:
@@ -156,6 +161,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_currency_usage_priority(data.get('currencyUsagePriority'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_shared_free_currency(data.get('sharedFreeCurrency'))\
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
             .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
@@ -173,6 +179,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "currencyUsagePriority": self.currency_usage_priority,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "sharedFreeCurrency": self.shared_free_currency,
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
             "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
@@ -265,6 +272,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     currency_usage_priority: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     platform_setting: PlatformSetting = None
     deposit_balance_script: ScriptSetting = None
     withdraw_balance_script: ScriptSetting = None
@@ -286,6 +294,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_platform_setting(self, platform_setting: PlatformSetting) -> UpdateNamespaceRequest:
@@ -350,6 +362,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_currency_usage_priority(data.get('currencyUsagePriority'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_platform_setting(PlatformSetting.from_dict(data.get('platformSetting')))\
             .with_deposit_balance_script(ScriptSetting.from_dict(data.get('depositBalanceScript')))\
             .with_withdraw_balance_script(ScriptSetting.from_dict(data.get('withdrawBalanceScript')))\
@@ -366,6 +379,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "currencyUsagePriority": self.currency_usage_priority,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "platformSetting": self.platform_setting.to_dict() if self.platform_setting else None,
             "depositBalanceScript": self.deposit_balance_script.to_dict() if self.deposit_balance_script else None,
             "withdrawBalanceScript": self.withdraw_balance_script.to_dict() if self.withdraw_balance_script else None,

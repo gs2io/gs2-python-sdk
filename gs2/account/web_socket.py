@@ -116,6 +116,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.change_password_if_take_over is not None:
             body["changePasswordIfTakeOver"] = request.change_password_if_take_over
         if request.different_user_id_for_login_and_data_retention is not None:
@@ -349,6 +351,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.change_password_if_take_over is not None:
             body["changePasswordIfTakeOver"] = request.change_password_if_take_over
         if request.create_account_script is not None:

@@ -115,6 +115,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.assume_user_id is not None:
             body["assumeUserId"] = request.assume_user_id
         if request.accept_version_script is not None:
@@ -341,6 +343,8 @@ class Gs2VersionRestClient(rest.AbstractGs2RestClient):
         }
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.assume_user_id is not None:
             body["assumeUserId"] = request.assume_user_id
         if request.accept_version_script is not None:

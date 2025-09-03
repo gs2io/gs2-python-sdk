@@ -114,6 +114,10 @@ class Gs2AdRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.name is not None:
             body["name"] = request.name
+        if request.description is not None:
+            body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.admob is not None:
             body["admob"] = request.admob.to_dict()
         if request.unity_ad is not None:
@@ -123,8 +127,6 @@ class Gs2AdRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.app_lovin_maxes
             ]
-        if request.description is not None:
-            body["description"] = request.description
         if request.acquire_point_script is not None:
             body["acquirePointScript"] = request.acquire_point_script.to_dict()
         if request.consume_point_script is not None:
@@ -348,6 +350,8 @@ class Gs2AdRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.admob is not None:
             body["admob"] = request.admob.to_dict()
         if request.unity_ad is not None:

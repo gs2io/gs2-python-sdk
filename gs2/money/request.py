@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     priority: str = None
     share_free: bool = None
     currency: str = None
@@ -82,6 +83,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_priority(self, priority: str) -> CreateNamespaceRequest:
@@ -145,6 +150,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_priority(data.get('priority'))\
             .with_share_free(data.get('shareFree'))\
             .with_currency(data.get('currency'))\
@@ -160,6 +166,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "priority": self.priority,
             "shareFree": self.share_free,
             "currency": self.currency,
@@ -250,6 +257,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     priority: str = None
     apple_key: str = None
     google_key: str = None
@@ -265,6 +273,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_priority(self, priority: str) -> UpdateNamespaceRequest:
@@ -320,6 +332,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_priority(data.get('priority'))\
             .with_apple_key(data.get('appleKey'))\
             .with_google_key(data.get('googleKey'))\
@@ -333,6 +346,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "priority": self.priority,
             "appleKey": self.apple_key,
             "googleKey": self.google_key,

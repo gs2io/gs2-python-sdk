@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     entry_script: ScriptSetting = None
     duplicate_entry_script: str = None
     log_setting: LogSetting = None
@@ -75,6 +76,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_entry_script(self, entry_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -110,6 +115,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_entry_script(ScriptSetting.from_dict(data.get('entryScript')))\
             .with_duplicate_entry_script(data.get('duplicateEntryScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
@@ -118,6 +124,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "entryScript": self.entry_script.to_dict() if self.entry_script else None,
             "duplicateEntryScript": self.duplicate_entry_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
@@ -201,6 +208,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     entry_script: ScriptSetting = None
     duplicate_entry_script: str = None
     log_setting: LogSetting = None
@@ -211,6 +219,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_entry_script(self, entry_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -246,6 +258,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_entry_script(ScriptSetting.from_dict(data.get('entryScript')))\
             .with_duplicate_entry_script(data.get('duplicateEntryScript'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
@@ -254,6 +267,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "entryScript": self.entry_script.to_dict() if self.entry_script else None,
             "duplicateEntryScript": self.duplicate_entry_script,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,

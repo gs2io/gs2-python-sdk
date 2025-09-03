@@ -116,6 +116,8 @@ class Gs2JobQueueWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.enable_auto_run is not None:
             body["enableAutoRun"] = request.enable_auto_run
         if request.push_notification is not None:
@@ -339,6 +341,8 @@ class Gs2JobQueueWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.enable_auto_run is not None:
             body["enableAutoRun"] = request.enable_auto_run
         if request.push_notification is not None:

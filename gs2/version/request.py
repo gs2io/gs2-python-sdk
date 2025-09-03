@@ -65,6 +65,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     assume_user_id: str = None
     accept_version_script: ScriptSetting = None
     check_version_trigger_script_id: str = None
@@ -76,6 +77,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> CreateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_assume_user_id(self, assume_user_id: str) -> CreateNamespaceRequest:
@@ -115,6 +120,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return CreateNamespaceRequest()\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_assume_user_id(data.get('assumeUserId'))\
             .with_accept_version_script(ScriptSetting.from_dict(data.get('acceptVersionScript')))\
             .with_check_version_trigger_script_id(data.get('checkVersionTriggerScriptId'))\
@@ -124,6 +130,7 @@ class CreateNamespaceRequest(core.Gs2Request):
         return {
             "name": self.name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "assumeUserId": self.assume_user_id,
             "acceptVersionScript": self.accept_version_script.to_dict() if self.accept_version_script else None,
             "checkVersionTriggerScriptId": self.check_version_trigger_script_id,
@@ -208,6 +215,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     description: str = None
+    transaction_setting: TransactionSetting = None
     assume_user_id: str = None
     accept_version_script: ScriptSetting = None
     check_version_trigger_script_id: str = None
@@ -219,6 +227,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_description(self, description: str) -> UpdateNamespaceRequest:
         self.description = description
+        return self
+
+    def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
+        self.transaction_setting = transaction_setting
         return self
 
     def with_assume_user_id(self, assume_user_id: str) -> UpdateNamespaceRequest:
@@ -258,6 +270,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return UpdateNamespaceRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
+            .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_assume_user_id(data.get('assumeUserId'))\
             .with_accept_version_script(ScriptSetting.from_dict(data.get('acceptVersionScript')))\
             .with_check_version_trigger_script_id(data.get('checkVersionTriggerScriptId'))\
@@ -267,6 +280,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "description": self.description,
+            "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "assumeUserId": self.assume_user_id,
             "acceptVersionScript": self.accept_version_script.to_dict() if self.accept_version_script else None,
             "checkVersionTriggerScriptId": self.check_version_trigger_script_id,

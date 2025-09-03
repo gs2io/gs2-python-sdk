@@ -115,6 +115,8 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.acquire_script is not None:
             body["acquireScript"] = request.acquire_script.to_dict()
         if request.overflow_script is not None:
@@ -349,6 +351,8 @@ class Gs2InventoryRestClient(rest.AbstractGs2RestClient):
         }
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.acquire_script is not None:
             body["acquireScript"] = request.acquire_script.to_dict()
         if request.overflow_script is not None:

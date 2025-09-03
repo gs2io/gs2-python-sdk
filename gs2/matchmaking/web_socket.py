@@ -116,6 +116,8 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["name"] = request.name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.enable_rating is not None:
             body["enableRating"] = request.enable_rating
         if request.enable_disconnect_detection is not None:
@@ -367,6 +369,8 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["namespaceName"] = request.namespace_name
         if request.description is not None:
             body["description"] = request.description
+        if request.transaction_setting is not None:
+            body["transactionSetting"] = request.transaction_setting.to_dict()
         if request.enable_rating is not None:
             body["enableRating"] = request.enable_rating
         if request.enable_disconnect_detection is not None:
