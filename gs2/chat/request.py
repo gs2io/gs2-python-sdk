@@ -20,8 +20,13 @@ from .model import *
 class DescribeNamespacesRequest(core.Gs2Request):
 
     context_stack: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeNamespacesRequest:
+        self.name_prefix = name_prefix
+        return self
 
     def with_page_token(self, page_token: str) -> DescribeNamespacesRequest:
         self.page_token = page_token
@@ -50,11 +55,13 @@ class DescribeNamespacesRequest(core.Gs2Request):
         if data is None:
             return None
         return DescribeNamespacesRequest()\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -742,11 +749,16 @@ class DescribeRoomsRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeRoomsRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeRoomsRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeRoomsRequest:
@@ -777,12 +789,14 @@ class DescribeRoomsRequest(core.Gs2Request):
             return None
         return DescribeRoomsRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -1983,12 +1997,17 @@ class DescribeSubscribesRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     access_token: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSubscribesRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeSubscribesRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_access_token(self, access_token: str) -> DescribeSubscribesRequest:
@@ -2023,6 +2042,7 @@ class DescribeSubscribesRequest(core.Gs2Request):
             return None
         return DescribeSubscribesRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_access_token(data.get('accessToken'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
@@ -2030,6 +2050,7 @@ class DescribeSubscribesRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "accessToken": self.access_token,
             "pageToken": self.page_token,
             "limit": self.limit,
@@ -2040,6 +2061,7 @@ class DescribeSubscribesByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     user_id: str = None
     page_token: str = None
     limit: int = None
@@ -2047,6 +2069,10 @@ class DescribeSubscribesByUserIdRequest(core.Gs2Request):
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSubscribesByUserIdRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeSubscribesByUserIdRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_user_id(self, user_id: str) -> DescribeSubscribesByUserIdRequest:
@@ -2085,6 +2111,7 @@ class DescribeSubscribesByUserIdRequest(core.Gs2Request):
             return None
         return DescribeSubscribesByUserIdRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_user_id(data.get('userId'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))\
@@ -2093,6 +2120,7 @@ class DescribeSubscribesByUserIdRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "userId": self.user_id,
             "pageToken": self.page_token,
             "limit": self.limit,

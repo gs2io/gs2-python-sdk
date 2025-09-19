@@ -20,8 +20,13 @@ from .model import *
 class DescribeNamespacesRequest(core.Gs2Request):
 
     context_stack: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeNamespacesRequest:
+        self.name_prefix = name_prefix
+        return self
 
     def with_page_token(self, page_token: str) -> DescribeNamespacesRequest:
         self.page_token = page_token
@@ -50,11 +55,13 @@ class DescribeNamespacesRequest(core.Gs2Request):
         if data is None:
             return None
         return DescribeNamespacesRequest()\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -728,11 +735,16 @@ class DescribeInventoryModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeInventoryModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeInventoryModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeInventoryModelMastersRequest:
@@ -763,12 +775,14 @@ class DescribeInventoryModelMastersRequest(core.Gs2Request):
             return None
         return DescribeInventoryModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -1519,11 +1533,16 @@ class DescribeSimpleInventoryModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSimpleInventoryModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeSimpleInventoryModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeSimpleInventoryModelMastersRequest:
@@ -1554,12 +1573,14 @@ class DescribeSimpleInventoryModelMastersRequest(core.Gs2Request):
             return None
         return DescribeSimpleInventoryModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -1849,6 +1870,7 @@ class DescribeSimpleItemModelMastersRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     inventory_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
@@ -1858,6 +1880,10 @@ class DescribeSimpleItemModelMastersRequest(core.Gs2Request):
 
     def with_inventory_name(self, inventory_name: str) -> DescribeSimpleItemModelMastersRequest:
         self.inventory_name = inventory_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeSimpleItemModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeSimpleItemModelMastersRequest:
@@ -1889,6 +1915,7 @@ class DescribeSimpleItemModelMastersRequest(core.Gs2Request):
         return DescribeSimpleItemModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_inventory_name(data.get('inventoryName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -1896,6 +1923,7 @@ class DescribeSimpleItemModelMastersRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "inventoryName": self.inventory_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -2226,11 +2254,16 @@ class DescribeBigInventoryModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeBigInventoryModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeBigInventoryModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeBigInventoryModelMastersRequest:
@@ -2261,12 +2294,14 @@ class DescribeBigInventoryModelMastersRequest(core.Gs2Request):
             return None
         return DescribeBigInventoryModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -2556,6 +2591,7 @@ class DescribeBigItemModelMastersRequest(core.Gs2Request):
     context_stack: str = None
     namespace_name: str = None
     inventory_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
@@ -2565,6 +2601,10 @@ class DescribeBigItemModelMastersRequest(core.Gs2Request):
 
     def with_inventory_name(self, inventory_name: str) -> DescribeBigItemModelMastersRequest:
         self.inventory_name = inventory_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeBigItemModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeBigItemModelMastersRequest:
@@ -2596,6 +2636,7 @@ class DescribeBigItemModelMastersRequest(core.Gs2Request):
         return DescribeBigItemModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_inventory_name(data.get('inventoryName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
@@ -2603,6 +2644,7 @@ class DescribeBigItemModelMastersRequest(core.Gs2Request):
         return {
             "namespaceName": self.namespace_name,
             "inventoryName": self.inventory_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }

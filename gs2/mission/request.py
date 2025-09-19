@@ -1298,11 +1298,16 @@ class DescribeCounterModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeCounterModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeCounterModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeCounterModelMastersRequest:
@@ -1333,12 +1338,14 @@ class DescribeCounterModelMastersRequest(core.Gs2Request):
             return None
         return DescribeCounterModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -1588,11 +1595,16 @@ class DescribeMissionGroupModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeMissionGroupModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeMissionGroupModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeMissionGroupModelMastersRequest:
@@ -1623,12 +1635,14 @@ class DescribeMissionGroupModelMastersRequest(core.Gs2Request):
             return None
         return DescribeMissionGroupModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -1935,8 +1949,13 @@ class DeleteMissionGroupModelMasterRequest(core.Gs2Request):
 class DescribeNamespacesRequest(core.Gs2Request):
 
     context_stack: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeNamespacesRequest:
+        self.name_prefix = name_prefix
+        return self
 
     def with_page_token(self, page_token: str) -> DescribeNamespacesRequest:
         self.page_token = page_token
@@ -1965,11 +1984,13 @@ class DescribeNamespacesRequest(core.Gs2Request):
         if data is None:
             return None
         return DescribeNamespacesRequest()\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -4267,12 +4288,17 @@ class DescribeMissionTaskModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     mission_group_name: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeMissionTaskModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeMissionTaskModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_mission_group_name(self, mission_group_name: str) -> DescribeMissionTaskModelMastersRequest:
@@ -4307,6 +4333,7 @@ class DescribeMissionTaskModelMastersRequest(core.Gs2Request):
             return None
         return DescribeMissionTaskModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_mission_group_name(data.get('missionGroupName'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
@@ -4314,6 +4341,7 @@ class DescribeMissionTaskModelMastersRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "missionGroupName": self.mission_group_name,
             "pageToken": self.page_token,
             "limit": self.limit,

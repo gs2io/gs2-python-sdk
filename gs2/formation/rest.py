@@ -37,6 +37,8 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.name_prefix is not None:
+            query_strings["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -1161,6 +1163,8 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.name_prefix is not None:
+            query_strings["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -1693,6 +1697,8 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.name_prefix is not None:
+            query_strings["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:
@@ -2227,6 +2233,8 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.name_prefix is not None:
+            query_strings["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             query_strings["pageToken"] = request.page_token
         if request.limit is not None:

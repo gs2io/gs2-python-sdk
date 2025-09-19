@@ -20,8 +20,13 @@ from .model import *
 class DescribeNamespacesRequest(core.Gs2Request):
 
     context_stack: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeNamespacesRequest:
+        self.name_prefix = name_prefix
+        return self
 
     def with_page_token(self, page_token: str) -> DescribeNamespacesRequest:
         self.page_token = page_token
@@ -50,11 +55,13 @@ class DescribeNamespacesRequest(core.Gs2Request):
         if data is None:
             return None
         return DescribeNamespacesRequest()\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -709,11 +716,16 @@ class DescribeGlobalRankingModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeGlobalRankingModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeGlobalRankingModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeGlobalRankingModelMastersRequest:
@@ -744,12 +756,14 @@ class DescribeGlobalRankingModelMastersRequest(core.Gs2Request):
             return None
         return DescribeGlobalRankingModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -2788,11 +2802,16 @@ class DescribeClusterRankingModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeClusterRankingModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeClusterRankingModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeClusterRankingModelMastersRequest:
@@ -2823,12 +2842,14 @@ class DescribeClusterRankingModelMastersRequest(core.Gs2Request):
             return None
         return DescribeClusterRankingModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -5049,11 +5070,16 @@ class DescribeSubscribeRankingModelMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSubscribeRankingModelMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeSubscribeRankingModelMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeSubscribeRankingModelMastersRequest:
@@ -5084,12 +5110,14 @@ class DescribeSubscribeRankingModelMastersRequest(core.Gs2Request):
             return None
         return DescribeSubscribeRankingModelMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }

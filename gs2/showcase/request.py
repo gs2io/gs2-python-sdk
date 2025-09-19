@@ -20,8 +20,13 @@ from .model import *
 class DescribeNamespacesRequest(core.Gs2Request):
 
     context_stack: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeNamespacesRequest:
+        self.name_prefix = name_prefix
+        return self
 
     def with_page_token(self, page_token: str) -> DescribeNamespacesRequest:
         self.page_token = page_token
@@ -50,11 +55,13 @@ class DescribeNamespacesRequest(core.Gs2Request):
         if data is None:
             return None
         return DescribeNamespacesRequest()\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -672,11 +679,16 @@ class DescribeSalesItemMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSalesItemMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeSalesItemMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeSalesItemMastersRequest:
@@ -707,12 +719,14 @@ class DescribeSalesItemMastersRequest(core.Gs2Request):
             return None
         return DescribeSalesItemMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -1000,11 +1014,16 @@ class DescribeSalesItemGroupMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeSalesItemGroupMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeSalesItemGroupMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeSalesItemGroupMastersRequest:
@@ -1035,12 +1054,14 @@ class DescribeSalesItemGroupMastersRequest(core.Gs2Request):
             return None
         return DescribeSalesItemGroupMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -1276,11 +1297,16 @@ class DescribeShowcaseMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeShowcaseMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeShowcaseMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeShowcaseMastersRequest:
@@ -1311,12 +1337,14 @@ class DescribeShowcaseMastersRequest(core.Gs2Request):
             return None
         return DescribeShowcaseMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
@@ -2145,11 +2173,16 @@ class DescribeRandomShowcaseMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
+    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeRandomShowcaseMastersRequest:
         self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeRandomShowcaseMastersRequest:
+        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeRandomShowcaseMastersRequest:
@@ -2180,12 +2213,14 @@ class DescribeRandomShowcaseMastersRequest(core.Gs2Request):
             return None
         return DescribeRandomShowcaseMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }

@@ -39,6 +39,8 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
+        if request.name_prefix is not None:
+            body["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
@@ -1077,6 +1079,8 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
+        if request.name_prefix is not None:
+            body["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
@@ -1482,6 +1486,8 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
+        if request.name_prefix is not None:
+            body["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
@@ -1867,6 +1873,8 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
+        if request.name_prefix is not None:
+            body["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
@@ -3099,6 +3107,8 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.namespace_name is not None:
             body["namespaceName"] = request.namespace_name
+        if request.name_prefix is not None:
+            body["namePrefix"] = request.name_prefix
         if request.page_token is not None:
             body["pageToken"] = request.page_token
         if request.limit is not None:
