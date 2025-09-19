@@ -707,16 +707,11 @@ class DescribeStateMachineMastersRequest(core.Gs2Request):
 
     context_stack: str = None
     namespace_name: str = None
-    name_prefix: str = None
     page_token: str = None
     limit: int = None
 
     def with_namespace_name(self, namespace_name: str) -> DescribeStateMachineMastersRequest:
         self.namespace_name = namespace_name
-        return self
-
-    def with_name_prefix(self, name_prefix: str) -> DescribeStateMachineMastersRequest:
-        self.name_prefix = name_prefix
         return self
 
     def with_page_token(self, page_token: str) -> DescribeStateMachineMastersRequest:
@@ -747,14 +742,12 @@ class DescribeStateMachineMastersRequest(core.Gs2Request):
             return None
         return DescribeStateMachineMastersRequest()\
             .with_namespace_name(data.get('namespaceName'))\
-            .with_name_prefix(data.get('namePrefix'))\
             .with_page_token(data.get('pageToken'))\
             .with_limit(data.get('limit'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
-            "namePrefix": self.name_prefix,
             "pageToken": self.page_token,
             "limit": self.limit,
         }
