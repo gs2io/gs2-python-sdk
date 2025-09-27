@@ -520,6 +520,7 @@ class ScriptSetting(core.Gs2Model):
 class TransactionSetting(core.Gs2Model):
     enable_atomic_commit: bool = None
     transaction_use_distributor: bool = None
+    commit_script_result_in_use_distributor: bool = None
     acquire_action_use_job_queue: bool = None
     distributor_namespace_id: str = None
     queue_namespace_id: str = None
@@ -530,6 +531,10 @@ class TransactionSetting(core.Gs2Model):
 
     def with_transaction_use_distributor(self, transaction_use_distributor: bool) -> TransactionSetting:
         self.transaction_use_distributor = transaction_use_distributor
+        return self
+
+    def with_commit_script_result_in_use_distributor(self, commit_script_result_in_use_distributor: bool) -> TransactionSetting:
+        self.commit_script_result_in_use_distributor = commit_script_result_in_use_distributor
         return self
 
     def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
@@ -565,6 +570,7 @@ class TransactionSetting(core.Gs2Model):
         return TransactionSetting()\
             .with_enable_atomic_commit(data.get('enableAtomicCommit'))\
             .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
+            .with_commit_script_result_in_use_distributor(data.get('commitScriptResultInUseDistributor'))\
             .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -573,6 +579,7 @@ class TransactionSetting(core.Gs2Model):
         return {
             "enableAtomicCommit": self.enable_atomic_commit,
             "transactionUseDistributor": self.transaction_use_distributor,
+            "commitScriptResultInUseDistributor": self.commit_script_result_in_use_distributor,
             "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
             "distributorNamespaceId": self.distributor_namespace_id,
             "queueNamespaceId": self.queue_namespace_id,
