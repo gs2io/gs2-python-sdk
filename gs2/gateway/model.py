@@ -265,6 +265,7 @@ class WebSocketSession(core.Gs2Model):
     connection_id: str = None
     namespace_name: str = None
     user_id: str = None
+    session_id: str = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -283,6 +284,10 @@ class WebSocketSession(core.Gs2Model):
 
     def with_user_id(self, user_id: str) -> WebSocketSession:
         self.user_id = user_id
+        return self
+
+    def with_session_id(self, session_id: str) -> WebSocketSession:
+        self.session_id = session_id
         return self
 
     def with_created_at(self, created_at: int) -> WebSocketSession:
@@ -387,6 +392,7 @@ class WebSocketSession(core.Gs2Model):
             .with_connection_id(data.get('connectionId'))\
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
+            .with_session_id(data.get('sessionId'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -397,6 +403,7 @@ class WebSocketSession(core.Gs2Model):
             "connectionId": self.connection_id,
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
+            "sessionId": self.session_id,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,

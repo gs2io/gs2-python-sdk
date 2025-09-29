@@ -774,6 +774,7 @@ class SetUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     allow_concurrent_access: bool = None
+    session_id: str = None
     force: bool = None
     duplication_avoider: str = None
 
@@ -787,6 +788,10 @@ class SetUserIdRequest(core.Gs2Request):
 
     def with_allow_concurrent_access(self, allow_concurrent_access: bool) -> SetUserIdRequest:
         self.allow_concurrent_access = allow_concurrent_access
+        return self
+
+    def with_session_id(self, session_id: str) -> SetUserIdRequest:
+        self.session_id = session_id
         return self
 
     def with_force(self, force: bool) -> SetUserIdRequest:
@@ -819,6 +824,7 @@ class SetUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
             .with_allow_concurrent_access(data.get('allowConcurrentAccess'))\
+            .with_session_id(data.get('sessionId'))\
             .with_force(data.get('force'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -826,6 +832,7 @@ class SetUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "allowConcurrentAccess": self.allow_concurrent_access,
+            "sessionId": self.session_id,
             "force": self.force,
         }
 
@@ -836,6 +843,7 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     allow_concurrent_access: bool = None
+    session_id: str = None
     force: bool = None
     time_offset_token: str = None
     duplication_avoider: str = None
@@ -850,6 +858,10 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
 
     def with_allow_concurrent_access(self, allow_concurrent_access: bool) -> SetUserIdByUserIdRequest:
         self.allow_concurrent_access = allow_concurrent_access
+        return self
+
+    def with_session_id(self, session_id: str) -> SetUserIdByUserIdRequest:
+        self.session_id = session_id
         return self
 
     def with_force(self, force: bool) -> SetUserIdByUserIdRequest:
@@ -886,6 +898,7 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_allow_concurrent_access(data.get('allowConcurrentAccess'))\
+            .with_session_id(data.get('sessionId'))\
             .with_force(data.get('force'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
@@ -894,6 +907,7 @@ class SetUserIdByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "allowConcurrentAccess": self.allow_concurrent_access,
+            "sessionId": self.session_id,
             "force": self.force,
             "timeOffsetToken": self.time_offset_token,
         }
