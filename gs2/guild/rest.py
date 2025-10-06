@@ -127,6 +127,8 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             body["leaveNotification"] = request.leave_notification.to_dict()
         if request.change_member_notification is not None:
             body["changeMemberNotification"] = request.change_member_notification.to_dict()
+        if request.change_member_notification_ignore_change_metadata is not None:
+            body["changeMemberNotificationIgnoreChangeMetadata"] = request.change_member_notification_ignore_change_metadata
         if request.receive_request_notification is not None:
             body["receiveRequestNotification"] = request.receive_request_notification.to_dict()
         if request.remove_request_notification is not None:
@@ -375,6 +377,8 @@ class Gs2GuildRestClient(rest.AbstractGs2RestClient):
             body["leaveNotification"] = request.leave_notification.to_dict()
         if request.change_member_notification is not None:
             body["changeMemberNotification"] = request.change_member_notification.to_dict()
+        if request.change_member_notification_ignore_change_metadata is not None:
+            body["changeMemberNotificationIgnoreChangeMetadata"] = request.change_member_notification_ignore_change_metadata
         if request.receive_request_notification is not None:
             body["receiveRequestNotification"] = request.receive_request_notification.to_dict()
         if request.remove_request_notification is not None:

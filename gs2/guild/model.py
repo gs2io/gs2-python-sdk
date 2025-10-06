@@ -1603,6 +1603,7 @@ class Namespace(core.Gs2Model):
     join_notification: NotificationSetting = None
     leave_notification: NotificationSetting = None
     change_member_notification: NotificationSetting = None
+    change_member_notification_ignore_change_metadata: bool = None
     receive_request_notification: NotificationSetting = None
     remove_request_notification: NotificationSetting = None
     create_guild_script: ScriptSetting = None
@@ -1647,6 +1648,10 @@ class Namespace(core.Gs2Model):
 
     def with_change_member_notification(self, change_member_notification: NotificationSetting) -> Namespace:
         self.change_member_notification = change_member_notification
+        return self
+
+    def with_change_member_notification_ignore_change_metadata(self, change_member_notification_ignore_change_metadata: bool) -> Namespace:
+        self.change_member_notification_ignore_change_metadata = change_member_notification_ignore_change_metadata
         return self
 
     def with_receive_request_notification(self, receive_request_notification: NotificationSetting) -> Namespace:
@@ -1771,6 +1776,7 @@ class Namespace(core.Gs2Model):
             .with_join_notification(NotificationSetting.from_dict(data.get('joinNotification')))\
             .with_leave_notification(NotificationSetting.from_dict(data.get('leaveNotification')))\
             .with_change_member_notification(NotificationSetting.from_dict(data.get('changeMemberNotification')))\
+            .with_change_member_notification_ignore_change_metadata(data.get('changeMemberNotificationIgnoreChangeMetadata'))\
             .with_receive_request_notification(NotificationSetting.from_dict(data.get('receiveRequestNotification')))\
             .with_remove_request_notification(NotificationSetting.from_dict(data.get('removeRequestNotification')))\
             .with_create_guild_script(ScriptSetting.from_dict(data.get('createGuildScript')))\
@@ -1795,6 +1801,7 @@ class Namespace(core.Gs2Model):
             "joinNotification": self.join_notification.to_dict() if self.join_notification else None,
             "leaveNotification": self.leave_notification.to_dict() if self.leave_notification else None,
             "changeMemberNotification": self.change_member_notification.to_dict() if self.change_member_notification else None,
+            "changeMemberNotificationIgnoreChangeMetadata": self.change_member_notification_ignore_change_metadata,
             "receiveRequestNotification": self.receive_request_notification.to_dict() if self.receive_request_notification else None,
             "removeRequestNotification": self.remove_request_notification.to_dict() if self.remove_request_notification else None,
             "createGuildScript": self.create_guild_script.to_dict() if self.create_guild_script else None,
