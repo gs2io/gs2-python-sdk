@@ -23,6 +23,7 @@ class NotificationSetting(core.Gs2Model):
     gateway_namespace_id: str = None
     enable_transfer_mobile_notification: bool = None
     sound: str = None
+    enable: str = None
 
     def with_gateway_namespace_id(self, gateway_namespace_id: str) -> NotificationSetting:
         self.gateway_namespace_id = gateway_namespace_id
@@ -34,6 +35,10 @@ class NotificationSetting(core.Gs2Model):
 
     def with_sound(self, sound: str) -> NotificationSetting:
         self.sound = sound
+        return self
+
+    def with_enable(self, enable: str) -> NotificationSetting:
+        self.enable = enable
         return self
 
     def get(self, key, default=None):
@@ -57,13 +62,15 @@ class NotificationSetting(core.Gs2Model):
         return NotificationSetting()\
             .with_gateway_namespace_id(data.get('gatewayNamespaceId'))\
             .with_enable_transfer_mobile_notification(data.get('enableTransferMobileNotification'))\
-            .with_sound(data.get('sound'))
+            .with_sound(data.get('sound'))\
+            .with_enable(data.get('enable'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "gatewayNamespaceId": self.gateway_namespace_id,
             "enableTransferMobileNotification": self.enable_transfer_mobile_notification,
             "sound": self.sound,
+            "enable": self.enable,
         }
 
 
