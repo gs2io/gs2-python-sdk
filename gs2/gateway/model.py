@@ -136,6 +136,75 @@ class LogSetting(core.Gs2Model):
         }
 
 
+class SendNotificationEntry(core.Gs2Model):
+    user_id: str = None
+    issuer: str = None
+    subject: str = None
+    payload: str = None
+    enable_transfer_mobile_notification: bool = None
+    sound: str = None
+
+    def with_user_id(self, user_id: str) -> SendNotificationEntry:
+        self.user_id = user_id
+        return self
+
+    def with_issuer(self, issuer: str) -> SendNotificationEntry:
+        self.issuer = issuer
+        return self
+
+    def with_subject(self, subject: str) -> SendNotificationEntry:
+        self.subject = subject
+        return self
+
+    def with_payload(self, payload: str) -> SendNotificationEntry:
+        self.payload = payload
+        return self
+
+    def with_enable_transfer_mobile_notification(self, enable_transfer_mobile_notification: bool) -> SendNotificationEntry:
+        self.enable_transfer_mobile_notification = enable_transfer_mobile_notification
+        return self
+
+    def with_sound(self, sound: str) -> SendNotificationEntry:
+        self.sound = sound
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SendNotificationEntry]:
+        if data is None:
+            return None
+        return SendNotificationEntry()\
+            .with_user_id(data.get('userId'))\
+            .with_issuer(data.get('issuer'))\
+            .with_subject(data.get('subject'))\
+            .with_payload(data.get('payload'))\
+            .with_enable_transfer_mobile_notification(data.get('enableTransferMobileNotification'))\
+            .with_sound(data.get('sound'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "issuer": self.issuer,
+            "subject": self.subject,
+            "payload": self.payload,
+            "enableTransferMobileNotification": self.enable_transfer_mobile_notification,
+            "sound": self.sound,
+        }
+
+
 class FirebaseToken(core.Gs2Model):
     firebase_token_id: str = None
     user_id: str = None
