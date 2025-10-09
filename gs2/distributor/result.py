@@ -1538,6 +1538,16 @@ class BatchExecuteApiResult(core.Gs2Result):
 
 
 class IfExpressionByUserIdResult(core.Gs2Result):
+    item: TransactionResult = None
+    expression_result: bool = None
+
+    def with_item(self, item: TransactionResult) -> IfExpressionByUserIdResult:
+        self.item = item
+        return self
+
+    def with_expression_result(self, expression_result: bool) -> IfExpressionByUserIdResult:
+        self.expression_result = expression_result
+        return self
 
     def get(self, key, default=None):
         items = self.to_dict()
@@ -1558,9 +1568,13 @@ class IfExpressionByUserIdResult(core.Gs2Result):
         if data is None:
             return None
         return IfExpressionByUserIdResult()\
+            .with_item(TransactionResult.from_dict(data.get('item')))\
+            .with_expression_result(data.get('expressionResult'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
+            "expressionResult": self.expression_result,
         }
 
 
@@ -1619,7 +1633,17 @@ class OrExpressionByUserIdResult(core.Gs2Result):
 
 
 class IfExpressionByStampTaskResult(core.Gs2Result):
+    item: TransactionResult = None
+    expression_result: bool = None
     new_context_stack: str = None
+
+    def with_item(self, item: TransactionResult) -> IfExpressionByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_expression_result(self, expression_result: bool) -> IfExpressionByStampTaskResult:
+        self.expression_result = expression_result
+        return self
 
     def with_new_context_stack(self, new_context_stack: str) -> IfExpressionByStampTaskResult:
         self.new_context_stack = new_context_stack
@@ -1644,10 +1668,14 @@ class IfExpressionByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return IfExpressionByStampTaskResult()\
+            .with_item(TransactionResult.from_dict(data.get('item')))\
+            .with_expression_result(data.get('expressionResult'))\
             .with_new_context_stack(data.get('newContextStack'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "item": self.item.to_dict() if self.item else None,
+            "expressionResult": self.expression_result,
             "newContextStack": self.new_context_stack,
         }
 
