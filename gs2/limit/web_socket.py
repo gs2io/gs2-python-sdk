@@ -120,6 +120,8 @@ class Gs2LimitWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.count_up_script is not None:
+            body["countUpScript"] = request.count_up_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -339,6 +341,8 @@ class Gs2LimitWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.count_up_script is not None:
+            body["countUpScript"] = request.count_up_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 

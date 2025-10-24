@@ -73,6 +73,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    count_up_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -85,6 +86,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_count_up_script(self, count_up_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.count_up_script = count_up_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -113,6 +118,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_count_up_script(ScriptSetting.from_dict(data.get('countUpScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -120,6 +126,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "countUpScript": self.count_up_script.to_dict() if self.count_up_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -202,6 +209,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    count_up_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -214,6 +222,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_count_up_script(self, count_up_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.count_up_script = count_up_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -242,6 +254,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_count_up_script(ScriptSetting.from_dict(data.get('countUpScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -249,6 +262,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "countUpScript": self.count_up_script.to_dict() if self.count_up_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
