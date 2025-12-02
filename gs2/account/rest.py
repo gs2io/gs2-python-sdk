@@ -3607,6 +3607,8 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
         query_strings = {
             'contextStack': request.context_stack,
         }
+        if request.dont_resolve_data_owner is not None:
+            query_strings["dontResolveDataOwner"] = request.dont_resolve_data_owner
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

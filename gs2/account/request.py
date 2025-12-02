@@ -2647,6 +2647,7 @@ class FindPlatformIdByUserIdRequest(core.Gs2Request):
     user_id: str = None
     type: int = None
     user_identifier: str = None
+    dont_resolve_data_owner: bool = None
     time_offset_token: str = None
 
     def with_namespace_name(self, namespace_name: str) -> FindPlatformIdByUserIdRequest:
@@ -2663,6 +2664,10 @@ class FindPlatformIdByUserIdRequest(core.Gs2Request):
 
     def with_user_identifier(self, user_identifier: str) -> FindPlatformIdByUserIdRequest:
         self.user_identifier = user_identifier
+        return self
+
+    def with_dont_resolve_data_owner(self, dont_resolve_data_owner: bool) -> FindPlatformIdByUserIdRequest:
+        self.dont_resolve_data_owner = dont_resolve_data_owner
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> FindPlatformIdByUserIdRequest:
@@ -2692,6 +2697,7 @@ class FindPlatformIdByUserIdRequest(core.Gs2Request):
             .with_user_id(data.get('userId'))\
             .with_type(data.get('type'))\
             .with_user_identifier(data.get('userIdentifier'))\
+            .with_dont_resolve_data_owner(data.get('dontResolveDataOwner'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2700,6 +2706,7 @@ class FindPlatformIdByUserIdRequest(core.Gs2Request):
             "userId": self.user_id,
             "type": self.type,
             "userIdentifier": self.user_identifier,
+            "dontResolveDataOwner": self.dont_resolve_data_owner,
             "timeOffsetToken": self.time_offset_token,
         }
 

@@ -3619,6 +3619,8 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["type"] = request.type
         if request.user_identifier is not None:
             body["userIdentifier"] = request.user_identifier
+        if request.dont_resolve_data_owner is not None:
+            body["dontResolveDataOwner"] = request.dont_resolve_data_owner
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
