@@ -57,6 +57,7 @@ class GitHubApiKey(core.Gs2Model):
     api_key_id: str = None
     name: str = None
     description: str = None
+    api_key: str = None
     encryption_key_name: str = None
     created_at: int = None
     updated_at: int = None
@@ -72,6 +73,10 @@ class GitHubApiKey(core.Gs2Model):
 
     def with_description(self, description: str) -> GitHubApiKey:
         self.description = description
+        return self
+
+    def with_api_key(self, api_key: str) -> GitHubApiKey:
+        self.api_key = api_key
         return self
 
     def with_encryption_key_name(self, encryption_key_name: str) -> GitHubApiKey:
@@ -167,6 +172,7 @@ class GitHubApiKey(core.Gs2Model):
             .with_api_key_id(data.get('apiKeyId'))\
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
+            .with_api_key(data.get('apiKey'))\
             .with_encryption_key_name(data.get('encryptionKeyName'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -177,6 +183,7 @@ class GitHubApiKey(core.Gs2Model):
             "apiKeyId": self.api_key_id,
             "name": self.name,
             "description": self.description,
+            "apiKey": self.api_key,
             "encryptionKeyName": self.encryption_key_name,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

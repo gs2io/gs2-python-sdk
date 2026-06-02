@@ -60,6 +60,803 @@ class InGameLogTag(core.Gs2Model):
         }
 
 
+class MetricModel(core.Gs2Model):
+    name: str = None
+    type: str = None
+    labels: List[str] = None
+
+    def with_name(self, name: str) -> MetricModel:
+        self.name = name
+        return self
+
+    def with_type(self, type: str) -> MetricModel:
+        self.type = type
+        return self
+
+    def with_labels(self, labels: List[str]) -> MetricModel:
+        self.labels = labels
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+    ):
+        return ''.format(
+        )
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[MetricModel]:
+        if data is None:
+            return None
+        return MetricModel()\
+            .with_name(data.get('name'))\
+            .with_type(data.get('type'))\
+            .with_labels(None if data.get('labels') is None else [
+                data.get('labels')[i]
+                for i in range(len(data.get('labels')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "type": self.type,
+            "labels": None if self.labels is None else [
+                self.labels[i]
+                for i in range(len(self.labels))
+            ],
+        }
+
+
+class Trace(core.Gs2Model):
+    trace_id: str = None
+    spans: List[LogEntry] = None
+    truncated: bool = None
+
+    def with_trace_id(self, trace_id: str) -> Trace:
+        self.trace_id = trace_id
+        return self
+
+    def with_spans(self, spans: List[LogEntry]) -> Trace:
+        self.spans = spans
+        return self
+
+    def with_truncated(self, truncated: bool) -> Trace:
+        self.truncated = truncated
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Trace]:
+        if data is None:
+            return None
+        return Trace()\
+            .with_trace_id(data.get('traceId'))\
+            .with_spans(None if data.get('spans') is None else [
+                LogEntry.from_dict(data.get('spans')[i])
+                for i in range(len(data.get('spans')))
+            ])\
+            .with_truncated(data.get('truncated'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "traceId": self.trace_id,
+            "spans": None if self.spans is None else [
+                self.spans[i].to_dict() if self.spans[i] else None
+                for i in range(len(self.spans))
+            ],
+            "truncated": self.truncated,
+        }
+
+
+class TimeseriesValue(core.Gs2Model):
+    key: str = None
+    value: float = None
+
+    def with_key(self, key: str) -> TimeseriesValue:
+        self.key = key
+        return self
+
+    def with_value(self, value: float) -> TimeseriesValue:
+        self.value = value
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TimeseriesValue]:
+        if data is None:
+            return None
+        return TimeseriesValue()\
+            .with_key(data.get('key'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "key": self.key,
+            "value": self.value,
+        }
+
+
+class TimeseriesPoint(core.Gs2Model):
+    timestamp: int = None
+    values: List[TimeseriesValue] = None
+
+    def with_timestamp(self, timestamp: int) -> TimeseriesPoint:
+        self.timestamp = timestamp
+        return self
+
+    def with_values(self, values: List[TimeseriesValue]) -> TimeseriesPoint:
+        self.values = values
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TimeseriesPoint]:
+        if data is None:
+            return None
+        return TimeseriesPoint()\
+            .with_timestamp(data.get('timestamp'))\
+            .with_values(None if data.get('values') is None else [
+                TimeseriesValue.from_dict(data.get('values')[i])
+                for i in range(len(data.get('values')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "timestamp": self.timestamp,
+            "values": None if self.values is None else [
+                self.values[i].to_dict() if self.values[i] else None
+                for i in range(len(self.values))
+            ],
+        }
+
+
+class TimeseriesMetadata(core.Gs2Model):
+    keys: List[str] = None
+    group_by: List[str] = None
+
+    def with_keys(self, keys: List[str]) -> TimeseriesMetadata:
+        self.keys = keys
+        return self
+
+    def with_group_by(self, group_by: List[str]) -> TimeseriesMetadata:
+        self.group_by = group_by
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TimeseriesMetadata]:
+        if data is None:
+            return None
+        return TimeseriesMetadata()\
+            .with_keys(None if data.get('keys') is None else [
+                data.get('keys')[i]
+                for i in range(len(data.get('keys')))
+            ])\
+            .with_group_by(None if data.get('groupBy') is None else [
+                data.get('groupBy')[i]
+                for i in range(len(data.get('groupBy')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "keys": None if self.keys is None else [
+                self.keys[i]
+                for i in range(len(self.keys))
+            ],
+            "groupBy": None if self.group_by is None else [
+                self.group_by[i]
+                for i in range(len(self.group_by))
+            ],
+        }
+
+
+class NumericRange(core.Gs2Model):
+    min: float = None
+    max: float = None
+
+    def with_min(self, min: float) -> NumericRange:
+        self.min = min
+        return self
+
+    def with_max(self, max: float) -> NumericRange:
+        self.max = max
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[NumericRange]:
+        if data is None:
+            return None
+        return NumericRange()\
+            .with_min(data.get('min'))\
+            .with_max(data.get('max'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "min": self.min,
+            "max": self.max,
+        }
+
+
+class LogEntry(core.Gs2Model):
+    timestamp: int = None
+    status: str = None
+    duration: int = None
+    line: str = None
+    labels: List[Label] = None
+
+    def with_timestamp(self, timestamp: int) -> LogEntry:
+        self.timestamp = timestamp
+        return self
+
+    def with_status(self, status: str) -> LogEntry:
+        self.status = status
+        return self
+
+    def with_duration(self, duration: int) -> LogEntry:
+        self.duration = duration
+        return self
+
+    def with_line(self, line: str) -> LogEntry:
+        self.line = line
+        return self
+
+    def with_labels(self, labels: List[Label]) -> LogEntry:
+        self.labels = labels
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[LogEntry]:
+        if data is None:
+            return None
+        return LogEntry()\
+            .with_timestamp(data.get('timestamp'))\
+            .with_status(data.get('status'))\
+            .with_duration(data.get('duration'))\
+            .with_line(data.get('line'))\
+            .with_labels(None if data.get('labels') is None else [
+                Label.from_dict(data.get('labels')[i])
+                for i in range(len(data.get('labels')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "timestamp": self.timestamp,
+            "status": self.status,
+            "duration": self.duration,
+            "line": self.line,
+            "labels": None if self.labels is None else [
+                self.labels[i].to_dict() if self.labels[i] else None
+                for i in range(len(self.labels))
+            ],
+        }
+
+
+class Label(core.Gs2Model):
+    key: str = None
+    value: str = None
+
+    def with_key(self, key: str) -> Label:
+        self.key = key
+        return self
+
+    def with_value(self, value: str) -> Label:
+        self.value = value
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Label]:
+        if data is None:
+            return None
+        return Label()\
+            .with_key(data.get('key'))\
+            .with_value(data.get('value'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "key": self.key,
+            "value": self.value,
+        }
+
+
+class FacetValueCount(core.Gs2Model):
+    value: str = None
+    count: int = None
+
+    def with_value(self, value: str) -> FacetValueCount:
+        self.value = value
+        return self
+
+    def with_count(self, count: int) -> FacetValueCount:
+        self.count = count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FacetValueCount]:
+        if data is None:
+            return None
+        return FacetValueCount()\
+            .with_value(data.get('value'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "value": self.value,
+            "count": self.count,
+        }
+
+
+class Facet(core.Gs2Model):
+    field: str = None
+    values: List[FacetValueCount] = None
+    range: NumericRange = None
+    global_range: NumericRange = None
+
+    def with_field(self, field: str) -> Facet:
+        self.field = field
+        return self
+
+    def with_values(self, values: List[FacetValueCount]) -> Facet:
+        self.values = values
+        return self
+
+    def with_range(self, range: NumericRange) -> Facet:
+        self.range = range
+        return self
+
+    def with_global_range(self, global_range: NumericRange) -> Facet:
+        self.global_range = global_range
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Facet]:
+        if data is None:
+            return None
+        return Facet()\
+            .with_field(data.get('field'))\
+            .with_values(None if data.get('values') is None else [
+                FacetValueCount.from_dict(data.get('values')[i])
+                for i in range(len(data.get('values')))
+            ])\
+            .with_range(NumericRange.from_dict(data.get('range')))\
+            .with_global_range(NumericRange.from_dict(data.get('globalRange')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "field": self.field,
+            "values": None if self.values is None else [
+                self.values[i].to_dict() if self.values[i] else None
+                for i in range(len(self.values))
+            ],
+            "range": self.range.to_dict() if self.range else None,
+            "globalRange": self.global_range.to_dict() if self.global_range else None,
+        }
+
+
+class AggregationConfig(core.Gs2Model):
+    type: str = None
+    field: str = None
+
+    def with_type(self, type: str) -> AggregationConfig:
+        self.type = type
+        return self
+
+    def with_field(self, field: str) -> AggregationConfig:
+        self.field = field
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AggregationConfig]:
+        if data is None:
+            return None
+        return AggregationConfig()\
+            .with_type(data.get('type'))\
+            .with_field(data.get('field'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "type": self.type,
+            "field": self.field,
+        }
+
+
+class Dashboard(core.Gs2Model):
+    dashboard_id: str = None
+    name: str = None
+    display_name: str = None
+    description: str = None
+    payload: str = None
+    created_at: int = None
+    updated_at: int = None
+
+    def with_dashboard_id(self, dashboard_id: str) -> Dashboard:
+        self.dashboard_id = dashboard_id
+        return self
+
+    def with_name(self, name: str) -> Dashboard:
+        self.name = name
+        return self
+
+    def with_display_name(self, display_name: str) -> Dashboard:
+        self.display_name = display_name
+        return self
+
+    def with_description(self, description: str) -> Dashboard:
+        self.description = description
+        return self
+
+    def with_payload(self, payload: str) -> Dashboard:
+        self.payload = payload
+        return self
+
+    def with_created_at(self, created_at: int) -> Dashboard:
+        self.created_at = created_at
+        return self
+
+    def with_updated_at(self, updated_at: int) -> Dashboard:
+        self.updated_at = updated_at
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        dashboard_name,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:log:{namespaceName}:dashboard:{dashboardName}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            dashboardName=dashboard_name,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):dashboard:(?P<dashboardName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):dashboard:(?P<dashboardName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):dashboard:(?P<dashboardName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_dashboard_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):dashboard:(?P<dashboardName>.+)', grn)
+        if match is None:
+            return None
+        return match.group('dashboard_name')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Dashboard]:
+        if data is None:
+            return None
+        return Dashboard()\
+            .with_dashboard_id(data.get('dashboardId'))\
+            .with_name(data.get('name'))\
+            .with_display_name(data.get('displayName'))\
+            .with_description(data.get('description'))\
+            .with_payload(data.get('payload'))\
+            .with_created_at(data.get('createdAt'))\
+            .with_updated_at(data.get('updatedAt'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "dashboardId": self.dashboard_id,
+            "name": self.name,
+            "displayName": self.display_name,
+            "description": self.description,
+            "payload": self.payload,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+        }
+
+
+class FacetModel(core.Gs2Model):
+    facet_model_id: str = None
+    field: str = None
+    type: str = None
+    display_name: str = None
+    order: int = None
+
+    def with_facet_model_id(self, facet_model_id: str) -> FacetModel:
+        self.facet_model_id = facet_model_id
+        return self
+
+    def with_field(self, field: str) -> FacetModel:
+        self.field = field
+        return self
+
+    def with_type(self, type: str) -> FacetModel:
+        self.type = type
+        return self
+
+    def with_display_name(self, display_name: str) -> FacetModel:
+        self.display_name = display_name
+        return self
+
+    def with_order(self, order: int) -> FacetModel:
+        self.order = order
+        return self
+
+    @classmethod
+    def create_grn(
+        cls,
+        region,
+        owner_id,
+        namespace_name,
+        field,
+    ):
+        return 'grn:gs2:{region}:{ownerId}:log:{namespaceName}:model:facet:{field}'.format(
+            region=region,
+            ownerId=owner_id,
+            namespaceName=namespace_name,
+            field=field,
+        )
+
+    @classmethod
+    def get_region_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):model:facet:(?P<field>.+)', grn)
+        if match is None:
+            return None
+        return match.group('region')
+
+    @classmethod
+    def get_owner_id_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):model:facet:(?P<field>.+)', grn)
+        if match is None:
+            return None
+        return match.group('owner_id')
+
+    @classmethod
+    def get_namespace_name_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):model:facet:(?P<field>.+)', grn)
+        if match is None:
+            return None
+        return match.group('namespace_name')
+
+    @classmethod
+    def get_field_from_grn(
+        cls,
+        grn: str,
+    ) -> Optional[str]:
+        match = re.search('grn:gs2:(?P<region>.+):(?P<ownerId>.+):log:(?P<namespaceName>.+):model:facet:(?P<field>.+)', grn)
+        if match is None:
+            return None
+        return match.group('field')
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[FacetModel]:
+        if data is None:
+            return None
+        return FacetModel()\
+            .with_facet_model_id(data.get('facetModelId'))\
+            .with_field(data.get('field'))\
+            .with_type(data.get('type'))\
+            .with_display_name(data.get('displayName'))\
+            .with_order(data.get('order'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "facetModelId": self.facet_model_id,
+            "field": self.field,
+            "type": self.type,
+            "displayName": self.display_name,
+            "order": self.order,
+        }
+
+
 class Insight(core.Gs2Model):
     insight_id: str = None
     name: str = None

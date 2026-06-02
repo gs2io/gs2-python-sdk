@@ -1744,3 +1744,1153 @@ class DeleteInsightRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "insightName": self.insight_name,
         }
+
+
+class DescribeFacetModelsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name_prefix: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeFacetModelsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeFacetModelsRequest:
+        self.name_prefix = name_prefix
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeFacetModelsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeFacetModelsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeFacetModelsRequest]:
+        if data is None:
+            return None
+        return DescribeFacetModelsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateFacetModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    field: str = None
+    type: str = None
+    display_name: str = None
+    order: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateFacetModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_field(self, field: str) -> CreateFacetModelRequest:
+        self.field = field
+        return self
+
+    def with_type(self, type: str) -> CreateFacetModelRequest:
+        self.type = type
+        return self
+
+    def with_display_name(self, display_name: str) -> CreateFacetModelRequest:
+        self.display_name = display_name
+        return self
+
+    def with_order(self, order: int) -> CreateFacetModelRequest:
+        self.order = order
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateFacetModelRequest]:
+        if data is None:
+            return None
+        return CreateFacetModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_field(data.get('field'))\
+            .with_type(data.get('type'))\
+            .with_display_name(data.get('displayName'))\
+            .with_order(data.get('order'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "field": self.field,
+            "type": self.type,
+            "displayName": self.display_name,
+            "order": self.order,
+        }
+
+
+class GetFacetModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    field: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetFacetModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_field(self, field: str) -> GetFacetModelRequest:
+        self.field = field
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetFacetModelRequest]:
+        if data is None:
+            return None
+        return GetFacetModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_field(data.get('field'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "field": self.field,
+        }
+
+
+class UpdateFacetModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    field: str = None
+    type: str = None
+    display_name: str = None
+    order: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateFacetModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_field(self, field: str) -> UpdateFacetModelRequest:
+        self.field = field
+        return self
+
+    def with_type(self, type: str) -> UpdateFacetModelRequest:
+        self.type = type
+        return self
+
+    def with_display_name(self, display_name: str) -> UpdateFacetModelRequest:
+        self.display_name = display_name
+        return self
+
+    def with_order(self, order: int) -> UpdateFacetModelRequest:
+        self.order = order
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateFacetModelRequest]:
+        if data is None:
+            return None
+        return UpdateFacetModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_field(data.get('field'))\
+            .with_type(data.get('type'))\
+            .with_display_name(data.get('displayName'))\
+            .with_order(data.get('order'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "field": self.field,
+            "type": self.type,
+            "displayName": self.display_name,
+            "order": self.order,
+        }
+
+
+class DeleteFacetModelRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    field: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteFacetModelRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_field(self, field: str) -> DeleteFacetModelRequest:
+        self.field = field
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteFacetModelRequest]:
+        if data is None:
+            return None
+        return DeleteFacetModelRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_field(data.get('field'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "field": self.field,
+        }
+
+
+class DescribeDashboardsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name_prefix: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeDashboardsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeDashboardsRequest:
+        self.name_prefix = name_prefix
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeDashboardsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeDashboardsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeDashboardsRequest]:
+        if data is None:
+            return None
+        return DescribeDashboardsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class CreateDashboardRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    display_name: str = None
+    description: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CreateDashboardRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_display_name(self, display_name: str) -> CreateDashboardRequest:
+        self.display_name = display_name
+        return self
+
+    def with_description(self, description: str) -> CreateDashboardRequest:
+        self.description = description
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateDashboardRequest]:
+        if data is None:
+            return None
+        return CreateDashboardRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_display_name(data.get('displayName'))\
+            .with_description(data.get('description'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "displayName": self.display_name,
+            "description": self.description,
+        }
+
+
+class GetDashboardRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    dashboard_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetDashboardRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_dashboard_name(self, dashboard_name: str) -> GetDashboardRequest:
+        self.dashboard_name = dashboard_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetDashboardRequest]:
+        if data is None:
+            return None
+        return GetDashboardRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_dashboard_name(data.get('dashboardName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "dashboardName": self.dashboard_name,
+        }
+
+
+class UpdateDashboardRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    dashboard_name: str = None
+    display_name: str = None
+    description: str = None
+    payload: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> UpdateDashboardRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_dashboard_name(self, dashboard_name: str) -> UpdateDashboardRequest:
+        self.dashboard_name = dashboard_name
+        return self
+
+    def with_display_name(self, display_name: str) -> UpdateDashboardRequest:
+        self.display_name = display_name
+        return self
+
+    def with_description(self, description: str) -> UpdateDashboardRequest:
+        self.description = description
+        return self
+
+    def with_payload(self, payload: str) -> UpdateDashboardRequest:
+        self.payload = payload
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateDashboardRequest]:
+        if data is None:
+            return None
+        return UpdateDashboardRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_dashboard_name(data.get('dashboardName'))\
+            .with_display_name(data.get('displayName'))\
+            .with_description(data.get('description'))\
+            .with_payload(data.get('payload'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "dashboardName": self.dashboard_name,
+            "displayName": self.display_name,
+            "description": self.description,
+            "payload": self.payload,
+        }
+
+
+class DuplicateDashboardRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    dashboard_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DuplicateDashboardRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_dashboard_name(self, dashboard_name: str) -> DuplicateDashboardRequest:
+        self.dashboard_name = dashboard_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DuplicateDashboardRequest]:
+        if data is None:
+            return None
+        return DuplicateDashboardRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_dashboard_name(data.get('dashboardName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "dashboardName": self.dashboard_name,
+        }
+
+
+class DeleteDashboardRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    dashboard_name: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> DeleteDashboardRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_dashboard_name(self, dashboard_name: str) -> DeleteDashboardRequest:
+        self.dashboard_name = dashboard_name
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteDashboardRequest]:
+        if data is None:
+            return None
+        return DeleteDashboardRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_dashboard_name(data.get('dashboardName'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "dashboardName": self.dashboard_name,
+        }
+
+
+class QueryLogRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    begin: int = None
+    end: int = None
+    query: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> QueryLogRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_begin(self, begin: int) -> QueryLogRequest:
+        self.begin = begin
+        return self
+
+    def with_end(self, end: int) -> QueryLogRequest:
+        self.end = end
+        return self
+
+    def with_query(self, query: str) -> QueryLogRequest:
+        self.query = query
+        return self
+
+    def with_page_token(self, page_token: str) -> QueryLogRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> QueryLogRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryLogRequest]:
+        if data is None:
+            return None
+        return QueryLogRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_begin(data.get('begin'))\
+            .with_end(data.get('end'))\
+            .with_query(data.get('query'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "begin": self.begin,
+            "end": self.end,
+            "query": self.query,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetLogRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    log_request_id: str = None
+    begin: int = None
+    end: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetLogRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_log_request_id(self, log_request_id: str) -> GetLogRequest:
+        self.log_request_id = log_request_id
+        return self
+
+    def with_begin(self, begin: int) -> GetLogRequest:
+        self.begin = begin
+        return self
+
+    def with_end(self, end: int) -> GetLogRequest:
+        self.end = end
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetLogRequest]:
+        if data is None:
+            return None
+        return GetLogRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_log_request_id(data.get('logRequestId'))\
+            .with_begin(data.get('begin'))\
+            .with_end(data.get('end'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "logRequestId": self.log_request_id,
+            "begin": self.begin,
+            "end": self.end,
+        }
+
+
+class QueryFacetsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    begin: int = None
+    end: int = None
+    query: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> QueryFacetsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_begin(self, begin: int) -> QueryFacetsRequest:
+        self.begin = begin
+        return self
+
+    def with_end(self, end: int) -> QueryFacetsRequest:
+        self.end = end
+        return self
+
+    def with_query(self, query: str) -> QueryFacetsRequest:
+        self.query = query
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryFacetsRequest]:
+        if data is None:
+            return None
+        return QueryFacetsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_begin(data.get('begin'))\
+            .with_end(data.get('end'))\
+            .with_query(data.get('query'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "begin": self.begin,
+            "end": self.end,
+            "query": self.query,
+        }
+
+
+class QueryTimeseriesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    begin: int = None
+    end: int = None
+    query: str = None
+    group_by: List[str] = None
+    aggregation: AggregationConfig = None
+    interval: int = None
+    series_limit: int = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> QueryTimeseriesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_begin(self, begin: int) -> QueryTimeseriesRequest:
+        self.begin = begin
+        return self
+
+    def with_end(self, end: int) -> QueryTimeseriesRequest:
+        self.end = end
+        return self
+
+    def with_query(self, query: str) -> QueryTimeseriesRequest:
+        self.query = query
+        return self
+
+    def with_group_by(self, group_by: List[str]) -> QueryTimeseriesRequest:
+        self.group_by = group_by
+        return self
+
+    def with_aggregation(self, aggregation: AggregationConfig) -> QueryTimeseriesRequest:
+        self.aggregation = aggregation
+        return self
+
+    def with_interval(self, interval: int) -> QueryTimeseriesRequest:
+        self.interval = interval
+        return self
+
+    def with_series_limit(self, series_limit: int) -> QueryTimeseriesRequest:
+        self.series_limit = series_limit
+        return self
+
+    def with_page_token(self, page_token: str) -> QueryTimeseriesRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> QueryTimeseriesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryTimeseriesRequest]:
+        if data is None:
+            return None
+        return QueryTimeseriesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_begin(data.get('begin'))\
+            .with_end(data.get('end'))\
+            .with_query(data.get('query'))\
+            .with_group_by(None if data.get('groupBy') is None else [
+                data.get('groupBy')[i]
+                for i in range(len(data.get('groupBy')))
+            ])\
+            .with_aggregation(AggregationConfig.from_dict(data.get('aggregation')))\
+            .with_interval(data.get('interval'))\
+            .with_series_limit(data.get('seriesLimit'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "begin": self.begin,
+            "end": self.end,
+            "query": self.query,
+            "groupBy": None if self.group_by is None else [
+                self.group_by[i]
+                for i in range(len(self.group_by))
+            ],
+            "aggregation": self.aggregation.to_dict() if self.aggregation else None,
+            "interval": self.interval,
+            "seriesLimit": self.series_limit,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class GetTraceRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    trace_id: str = None
+    begin: int = None
+    end: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> GetTraceRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_trace_id(self, trace_id: str) -> GetTraceRequest:
+        self.trace_id = trace_id
+        return self
+
+    def with_begin(self, begin: int) -> GetTraceRequest:
+        self.begin = begin
+        return self
+
+    def with_end(self, end: int) -> GetTraceRequest:
+        self.end = end
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTraceRequest]:
+        if data is None:
+            return None
+        return GetTraceRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_trace_id(data.get('traceId'))\
+            .with_begin(data.get('begin'))\
+            .with_end(data.get('end'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "traceId": self.trace_id,
+            "begin": self.begin,
+            "end": self.end,
+        }
+
+
+class QueryMetricsTimeseriesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    begin: int = None
+    end: int = None
+    query: str = None
+    group_by: List[str] = None
+    aggregations: List[AggregationConfig] = None
+    interval: int = None
+    series_limit: int = None
+    order_key: str = None
+    order_by: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> QueryMetricsTimeseriesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_begin(self, begin: int) -> QueryMetricsTimeseriesRequest:
+        self.begin = begin
+        return self
+
+    def with_end(self, end: int) -> QueryMetricsTimeseriesRequest:
+        self.end = end
+        return self
+
+    def with_query(self, query: str) -> QueryMetricsTimeseriesRequest:
+        self.query = query
+        return self
+
+    def with_group_by(self, group_by: List[str]) -> QueryMetricsTimeseriesRequest:
+        self.group_by = group_by
+        return self
+
+    def with_aggregations(self, aggregations: List[AggregationConfig]) -> QueryMetricsTimeseriesRequest:
+        self.aggregations = aggregations
+        return self
+
+    def with_interval(self, interval: int) -> QueryMetricsTimeseriesRequest:
+        self.interval = interval
+        return self
+
+    def with_series_limit(self, series_limit: int) -> QueryMetricsTimeseriesRequest:
+        self.series_limit = series_limit
+        return self
+
+    def with_order_key(self, order_key: str) -> QueryMetricsTimeseriesRequest:
+        self.order_key = order_key
+        return self
+
+    def with_order_by(self, order_by: str) -> QueryMetricsTimeseriesRequest:
+        self.order_by = order_by
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryMetricsTimeseriesRequest]:
+        if data is None:
+            return None
+        return QueryMetricsTimeseriesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_begin(data.get('begin'))\
+            .with_end(data.get('end'))\
+            .with_query(data.get('query'))\
+            .with_group_by(None if data.get('groupBy') is None else [
+                data.get('groupBy')[i]
+                for i in range(len(data.get('groupBy')))
+            ])\
+            .with_aggregations(None if data.get('aggregations') is None else [
+                AggregationConfig.from_dict(data.get('aggregations')[i])
+                for i in range(len(data.get('aggregations')))
+            ])\
+            .with_interval(data.get('interval'))\
+            .with_series_limit(data.get('seriesLimit'))\
+            .with_order_key(data.get('orderKey'))\
+            .with_order_by(data.get('orderBy'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "begin": self.begin,
+            "end": self.end,
+            "query": self.query,
+            "groupBy": None if self.group_by is None else [
+                self.group_by[i]
+                for i in range(len(self.group_by))
+            ],
+            "aggregations": None if self.aggregations is None else [
+                self.aggregations[i].to_dict() if self.aggregations[i] else None
+                for i in range(len(self.aggregations))
+            ],
+            "interval": self.interval,
+            "seriesLimit": self.series_limit,
+            "orderKey": self.order_key,
+            "orderBy": self.order_by,
+        }
+
+
+class DescribeMetricsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    name_prefix: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeMetricsRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_name_prefix(self, name_prefix: str) -> DescribeMetricsRequest:
+        self.name_prefix = name_prefix
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeMetricsRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeMetricsRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeMetricsRequest]:
+        if data is None:
+            return None
+        return DescribeMetricsRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_name_prefix(data.get('namePrefix'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "namePrefix": self.name_prefix,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeLabelValuesRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    metric_name: str = None
+    label_name_prefix: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> DescribeLabelValuesRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_metric_name(self, metric_name: str) -> DescribeLabelValuesRequest:
+        self.metric_name = metric_name
+        return self
+
+    def with_label_name_prefix(self, label_name_prefix: str) -> DescribeLabelValuesRequest:
+        self.label_name_prefix = label_name_prefix
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeLabelValuesRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeLabelValuesRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeLabelValuesRequest]:
+        if data is None:
+            return None
+        return DescribeLabelValuesRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_metric_name(data.get('metricName'))\
+            .with_label_name_prefix(data.get('labelNamePrefix'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "metricName": self.metric_name,
+            "labelNamePrefix": self.label_name_prefix,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }

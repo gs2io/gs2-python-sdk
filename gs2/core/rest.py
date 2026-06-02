@@ -13,8 +13,11 @@
 # on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
+import gzip
+import json
 import time
 from collections import deque
+from io import BytesIO
 from typing import Dict, Any, Callable, TypeVar, Type, Deque, Generic
 from netrc import netrc, NetrcParseError  # メインスレッド以外でimportするとデッドロックするらしい https://github.com/kennethreitz/requests/issues/2925
 
@@ -27,10 +30,22 @@ from ..core.util import timeout
 T = TypeVar('T')
 
 
+def _compress_body(data: Dict[str, Any]) -> bytes:
+    """
+    リクエストボディをgzip圧縮する
+    :param data: 圧縮するデータ
+    :return: gzip圧縮されたバイト列
+    """
+    json_str = json.dumps(data)
+    buf = BytesIO()
+    with gzip.GzipFile(fileobj=buf, mode='wb') as gz:
+        gz.write(json_str.encode('utf-8'))
+    return buf.getvalue()
+
+
 def _parse_response(response: requests.Response) -> Dict[str, Any]:
     if response.status_code == 200:
         try:
-            import json
             return json.loads(response.text)
         except ValueError:
             from ..core.exception import UnknownException
@@ -129,11 +144,15 @@ class Gs2RestSession(ISession):
             self,
             credential: IGs2Credential,
             region: str,
+            enable_request_compression: bool = True,
+            enable_response_decompression: bool = True,
     ):
         """
         コンストラクタ
         :param credential: クレデンシャル
-        :param region: クレデンシャル
+        :param region: リージョン
+        :param enable_request_compression: リクエストボディのgzip圧縮を有効にするか（デフォルト: True）
+        :param enable_response_decompression: レスポンスのgzip展開を有効にするか（デフォルト: True）
         """
         super().__init__()
         self._credential = credential
@@ -142,6 +161,8 @@ class Gs2RestSession(ISession):
         self._connection = None
         self._connection_thread = None
         self._job_queue = deque()
+        self._enable_request_compression = enable_request_compression
+        self._enable_response_decompression = enable_response_decompression
 
     @property
     def credential(self) -> IGs2Credential:
@@ -159,32 +180,63 @@ class Gs2RestSession(ISession):
     def connection(self) -> requests.Session:
         return self._connection
 
+    @property
+    def enable_request_compression(self) -> bool:
+        return self._enable_request_compression
+
+    @property
+    def enable_response_decompression(self) -> bool:
+        return self._enable_response_decompression
+
     def _send(self, job: NetworkJob):
         if not self._connection:
             raise BrokenPipeError()
 
+        headers = dict(job.headers)
+
+        if self._enable_response_decompression:
+            headers['Accept-Encoding'] = 'gzip'
+
         if job.method == 'GET':
             response = self.connection.get(
                 url=job.url,
-                headers=job.headers,
+                headers=headers,
                 params=job.query_strings,
             )
         elif job.method == 'POST':
-            response = self.connection.post(
-                url=job.url,
-                headers=job.headers,
-                json=job.body,
-            )
+            if self._enable_request_compression and job.body:
+                headers['Content-Encoding'] = 'gzip'
+                headers['Content-Type'] = 'application/json'
+                response = self.connection.post(
+                    url=job.url,
+                    headers=headers,
+                    data=_compress_body(job.body),
+                )
+            else:
+                response = self.connection.post(
+                    url=job.url,
+                    headers=headers,
+                    json=job.body,
+                )
         elif job.method == 'PUT':
-            response = self.connection.put(
-                url=job.url,
-                headers=job.headers,
-                json=job.body,
-            )
+            if self._enable_request_compression and job.body:
+                headers['Content-Encoding'] = 'gzip'
+                headers['Content-Type'] = 'application/json'
+                response = self.connection.put(
+                    url=job.url,
+                    headers=headers,
+                    data=_compress_body(job.body),
+                )
+            else:
+                response = self.connection.put(
+                    url=job.url,
+                    headers=headers,
+                    json=job.body,
+                )
         elif job.method == 'DELETE':
             response = self.connection.delete(
                 url=job.url,
-                headers=job.headers,
+                headers=headers,
                 params=job.query_strings,
             )
         else:

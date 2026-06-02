@@ -1094,3 +1094,780 @@ class DeleteInsightResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
         }
+
+
+class DescribeFacetModelsResult(core.Gs2Result):
+    items: List[FacetModel] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[FacetModel]) -> DescribeFacetModelsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeFacetModelsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeFacetModelsResult]:
+        if data is None:
+            return None
+        return DescribeFacetModelsResult()\
+            .with_items(None if data.get('items') is None else [
+                FacetModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateFacetModelResult(core.Gs2Result):
+    item: FacetModel = None
+
+    def with_item(self, item: FacetModel) -> CreateFacetModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateFacetModelResult]:
+        if data is None:
+            return None
+        return CreateFacetModelResult()\
+            .with_item(FacetModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetFacetModelResult(core.Gs2Result):
+    item: FacetModel = None
+
+    def with_item(self, item: FacetModel) -> GetFacetModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetFacetModelResult]:
+        if data is None:
+            return None
+        return GetFacetModelResult()\
+            .with_item(FacetModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateFacetModelResult(core.Gs2Result):
+    item: FacetModel = None
+
+    def with_item(self, item: FacetModel) -> UpdateFacetModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateFacetModelResult]:
+        if data is None:
+            return None
+        return UpdateFacetModelResult()\
+            .with_item(FacetModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteFacetModelResult(core.Gs2Result):
+    item: FacetModel = None
+
+    def with_item(self, item: FacetModel) -> DeleteFacetModelResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteFacetModelResult]:
+        if data is None:
+            return None
+        return DeleteFacetModelResult()\
+            .with_item(FacetModel.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeDashboardsResult(core.Gs2Result):
+    items: List[Dashboard] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[Dashboard]) -> DescribeDashboardsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeDashboardsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeDashboardsResult]:
+        if data is None:
+            return None
+        return DescribeDashboardsResult()\
+            .with_items(None if data.get('items') is None else [
+                Dashboard.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class CreateDashboardResult(core.Gs2Result):
+    item: Dashboard = None
+
+    def with_item(self, item: Dashboard) -> CreateDashboardResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CreateDashboardResult]:
+        if data is None:
+            return None
+        return CreateDashboardResult()\
+            .with_item(Dashboard.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class GetDashboardResult(core.Gs2Result):
+    item: Dashboard = None
+
+    def with_item(self, item: Dashboard) -> GetDashboardResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetDashboardResult]:
+        if data is None:
+            return None
+        return GetDashboardResult()\
+            .with_item(Dashboard.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class UpdateDashboardResult(core.Gs2Result):
+    item: Dashboard = None
+
+    def with_item(self, item: Dashboard) -> UpdateDashboardResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UpdateDashboardResult]:
+        if data is None:
+            return None
+        return UpdateDashboardResult()\
+            .with_item(Dashboard.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DuplicateDashboardResult(core.Gs2Result):
+    item: Dashboard = None
+
+    def with_item(self, item: Dashboard) -> DuplicateDashboardResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DuplicateDashboardResult]:
+        if data is None:
+            return None
+        return DuplicateDashboardResult()\
+            .with_item(Dashboard.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DeleteDashboardResult(core.Gs2Result):
+    item: Dashboard = None
+
+    def with_item(self, item: Dashboard) -> DeleteDashboardResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DeleteDashboardResult]:
+        if data is None:
+            return None
+        return DeleteDashboardResult()\
+            .with_item(Dashboard.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class QueryLogResult(core.Gs2Result):
+    items: List[LogEntry] = None
+    total_entry_count: int = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[LogEntry]) -> QueryLogResult:
+        self.items = items
+        return self
+
+    def with_total_entry_count(self, total_entry_count: int) -> QueryLogResult:
+        self.total_entry_count = total_entry_count
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> QueryLogResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryLogResult]:
+        if data is None:
+            return None
+        return QueryLogResult()\
+            .with_items(None if data.get('items') is None else [
+                LogEntry.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_total_entry_count(data.get('totalEntryCount'))\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "totalEntryCount": self.total_entry_count,
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetLogResult(core.Gs2Result):
+    item: LogEntry = None
+
+    def with_item(self, item: LogEntry) -> GetLogResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetLogResult]:
+        if data is None:
+            return None
+        return GetLogResult()\
+            .with_item(LogEntry.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class QueryFacetsResult(core.Gs2Result):
+    items: List[Facet] = None
+
+    def with_items(self, items: List[Facet]) -> QueryFacetsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryFacetsResult]:
+        if data is None:
+            return None
+        return QueryFacetsResult()\
+            .with_items(None if data.get('items') is None else [
+                Facet.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+        }
+
+
+class QueryTimeseriesResult(core.Gs2Result):
+    items: List[TimeseriesPoint] = None
+    timeseries_metadata: TimeseriesMetadata = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[TimeseriesPoint]) -> QueryTimeseriesResult:
+        self.items = items
+        return self
+
+    def with_timeseries_metadata(self, timeseries_metadata: TimeseriesMetadata) -> QueryTimeseriesResult:
+        self.timeseries_metadata = timeseries_metadata
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> QueryTimeseriesResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryTimeseriesResult]:
+        if data is None:
+            return None
+        return QueryTimeseriesResult()\
+            .with_items(None if data.get('items') is None else [
+                TimeseriesPoint.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_timeseries_metadata(TimeseriesMetadata.from_dict(data.get('timeseriesMetadata')))\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "timeseriesMetadata": self.timeseries_metadata.to_dict() if self.timeseries_metadata else None,
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class GetTraceResult(core.Gs2Result):
+    trace: Trace = None
+    parallels: List[Trace] = None
+    parallel_truncated: bool = None
+
+    def with_trace(self, trace: Trace) -> GetTraceResult:
+        self.trace = trace
+        return self
+
+    def with_parallels(self, parallels: List[Trace]) -> GetTraceResult:
+        self.parallels = parallels
+        return self
+
+    def with_parallel_truncated(self, parallel_truncated: bool) -> GetTraceResult:
+        self.parallel_truncated = parallel_truncated
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetTraceResult]:
+        if data is None:
+            return None
+        return GetTraceResult()\
+            .with_trace(Trace.from_dict(data.get('trace')))\
+            .with_parallels(None if data.get('parallels') is None else [
+                Trace.from_dict(data.get('parallels')[i])
+                for i in range(len(data.get('parallels')))
+            ])\
+            .with_parallel_truncated(data.get('parallelTruncated'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "trace": self.trace.to_dict() if self.trace else None,
+            "parallels": None if self.parallels is None else [
+                self.parallels[i].to_dict() if self.parallels[i] else None
+                for i in range(len(self.parallels))
+            ],
+            "parallelTruncated": self.parallel_truncated,
+        }
+
+
+class QueryMetricsTimeseriesResult(core.Gs2Result):
+    items: List[TimeseriesPoint] = None
+    timeseries_metadata: TimeseriesMetadata = None
+
+    def with_items(self, items: List[TimeseriesPoint]) -> QueryMetricsTimeseriesResult:
+        self.items = items
+        return self
+
+    def with_timeseries_metadata(self, timeseries_metadata: TimeseriesMetadata) -> QueryMetricsTimeseriesResult:
+        self.timeseries_metadata = timeseries_metadata
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[QueryMetricsTimeseriesResult]:
+        if data is None:
+            return None
+        return QueryMetricsTimeseriesResult()\
+            .with_items(None if data.get('items') is None else [
+                TimeseriesPoint.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_timeseries_metadata(TimeseriesMetadata.from_dict(data.get('timeseriesMetadata')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "timeseriesMetadata": self.timeseries_metadata.to_dict() if self.timeseries_metadata else None,
+        }
+
+
+class DescribeMetricsResult(core.Gs2Result):
+    items: List[MetricModel] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[MetricModel]) -> DescribeMetricsResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeMetricsResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeMetricsResult]:
+        if data is None:
+            return None
+        return DescribeMetricsResult()\
+            .with_items(None if data.get('items') is None else [
+                MetricModel.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeLabelValuesResult(core.Gs2Result):
+    items: List[Label] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[Label]) -> DescribeLabelValuesResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeLabelValuesResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeLabelValuesResult]:
+        if data is None:
+            return None
+        return DescribeLabelValuesResult()\
+            .with_items(None if data.get('items') is None else [
+                Label.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
