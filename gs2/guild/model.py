@@ -744,6 +744,7 @@ class CurrentGuildMaster(core.Gs2Model):
 class LastGuildMasterActivity(core.Gs2Model):
     user_id: str = None
     updated_at: int = None
+    revision: int = None
 
     def with_user_id(self, user_id: str) -> LastGuildMasterActivity:
         self.user_id = user_id
@@ -751,6 +752,10 @@ class LastGuildMasterActivity(core.Gs2Model):
 
     def with_updated_at(self, updated_at: int) -> LastGuildMasterActivity:
         self.updated_at = updated_at
+        return self
+
+    def with_revision(self, revision: int) -> LastGuildMasterActivity:
+        self.revision = revision
         return self
 
     @classmethod
@@ -840,12 +845,14 @@ class LastGuildMasterActivity(core.Gs2Model):
             return None
         return LastGuildMasterActivity()\
             .with_user_id(data.get('userId'))\
-            .with_updated_at(data.get('updatedAt'))
+            .with_updated_at(data.get('updatedAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
             "updatedAt": self.updated_at,
+            "revision": self.revision,
         }
 
 
@@ -855,6 +862,7 @@ class JoinedGuild(core.Gs2Model):
     guild_name: str = None
     user_id: str = None
     created_at: int = None
+    revision: int = None
 
     def with_joined_guild_id(self, joined_guild_id: str) -> JoinedGuild:
         self.joined_guild_id = joined_guild_id
@@ -874,6 +882,10 @@ class JoinedGuild(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> JoinedGuild:
         self.created_at = created_at
+        return self
+
+    def with_revision(self, revision: int) -> JoinedGuild:
+        self.revision = revision
         return self
 
     @classmethod
@@ -978,7 +990,8 @@ class JoinedGuild(core.Gs2Model):
             .with_guild_model_name(data.get('guildModelName'))\
             .with_guild_name(data.get('guildName'))\
             .with_user_id(data.get('userId'))\
-            .with_created_at(data.get('createdAt'))
+            .with_created_at(data.get('createdAt'))\
+            .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -987,6 +1000,7 @@ class JoinedGuild(core.Gs2Model):
             "guildName": self.guild_name,
             "userId": self.user_id,
             "createdAt": self.created_at,
+            "revision": self.revision,
         }
 
 

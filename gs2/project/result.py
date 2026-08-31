@@ -365,6 +365,40 @@ class DeleteAccountResult(core.Gs2Result):
         }
 
 
+class GetServiceVersionResult(core.Gs2Result):
+    item: str = None
+
+    def with_item(self, item: str) -> GetServiceVersionResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetServiceVersionResult]:
+        if data is None:
+            return None
+        return GetServiceVersionResult()\
+            .with_item(data.get('item'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item,
+        }
+
+
 class DescribeProjectsResult(core.Gs2Result):
     items: List[Project] = None
     next_page_token: str = None
@@ -968,6 +1002,46 @@ class DescribeBillingsResult(core.Gs2Result):
         if data is None:
             return None
         return DescribeBillingsResult()\
+            .with_items(None if data.get('items') is None else [
+                Billing.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+        }
+
+
+class GetBillingsResult(core.Gs2Result):
+    items: List[Billing] = None
+
+    def with_items(self, items: List[Billing]) -> GetBillingsResult:
+        self.items = items
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBillingsResult]:
+        if data is None:
+            return None
+        return GetBillingsResult()\
             .with_items(None if data.get('items') is None else [
                 Billing.from_dict(data.get('items')[i])
                 for i in range(len(data.get('items')))

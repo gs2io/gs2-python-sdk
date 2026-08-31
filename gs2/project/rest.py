@@ -765,6 +765,76 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _get_service_version(
+        self,
+        request: GetServiceVersionRequest,
+        callback: Callable[[AsyncResult[GetServiceVersionResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/system/version"
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetServiceVersionResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_service_version(
+        self,
+        request: GetServiceVersionRequest,
+    ) -> GetServiceVersionResult:
+        async_result = []
+        with timeout(30):
+            self._get_service_version(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_service_version_async(
+        self,
+        request: GetServiceVersionRequest,
+    ) -> GetServiceVersionResult:
+        async_result = []
+        self._get_service_version(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_projects(
         self,
         request: DescribeProjectsRequest,
@@ -1328,7 +1398,8 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
-        ) + "/account/me/project/{projectName}/region/{regionName}/activate/wait".format(
+        ) + "/system/{ownerId}/project/region/{regionName}/activate/wait".format(
+            ownerId=request.owner_id if request.owner_id is not None and request.owner_id != '' else 'null',
             projectName=request.project_name if request.project_name is not None and request.project_name != '' else 'null',
             regionName=request.region_name if request.region_name is not None and request.region_name != '' else 'null',
         )
@@ -2001,6 +2072,81 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _get_billings(
+        self,
+        request: GetBillingsRequest,
+        callback: Callable[[AsyncResult[GetBillingsResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='project',
+            region=self.session.region,
+        ) + "/billing/{year}/{month}".format(
+            year=request.year if request.year is not None and request.year != '' else 'null',
+            month=request.month if request.month is not None and request.month != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+        if request.service is not None:
+            query_strings["service"] = request.service
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='GET',
+            result_type=GetBillingsResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def get_billings(
+        self,
+        request: GetBillingsRequest,
+    ) -> GetBillingsResult:
+        async_result = []
+        with timeout(30):
+            self._get_billings(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_billings_async(
+        self,
+        request: GetBillingsRequest,
+    ) -> GetBillingsResult:
+        async_result = []
+        self._get_billings(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_dump_progresses(
         self,
         request: DescribeDumpProgressesRequest,
@@ -2168,8 +2314,6 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         }
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.microservice_name is not None:
-            body["microserviceName"] = request.microservice_name
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2605,7 +2749,8 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
-        ) + "/account/me/project/clean/progress/{transactionId}/wait".format(
+        ) + "/system/{ownerId}/project/clean/progress/{transactionId}/wait".format(
+            ownerId=request.owner_id if request.owner_id is not None and request.owner_id != '' else 'null',
             transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
         )
 
@@ -2615,8 +2760,6 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         }
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.microservice_name is not None:
-            body["microserviceName"] = request.microservice_name
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2907,7 +3050,8 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         url = Gs2Constant.ENDPOINT_HOST.format(
             service='project',
             region=self.session.region,
-        ) + "/account/me/project/import/progress/{transactionId}/wait".format(
+        ) + "/system/{ownerId}/project/import/progress/{transactionId}/wait".format(
+            ownerId=request.owner_id if request.owner_id is not None and request.owner_id != '' else 'null',
             transactionId=request.transaction_id if request.transaction_id is not None and request.transaction_id != '' else 'null',
         )
 
@@ -2917,8 +3061,6 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         }
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.microservice_name is not None:
-            body["microserviceName"] = request.microservice_name
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

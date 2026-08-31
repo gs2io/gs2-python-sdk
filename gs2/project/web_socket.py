@@ -756,6 +756,75 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _get_service_version(
+        self,
+        request: GetServiceVersionRequest,
+        callback: Callable[[AsyncResult[GetServiceVersionResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="project",
+            component='account',
+            function='getServiceVersion',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetServiceVersionResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_service_version(
+        self,
+        request: GetServiceVersionRequest,
+    ) -> GetServiceVersionResult:
+        async_result = []
+        with timeout(30):
+            self._get_service_version(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_service_version_async(
+        self,
+        request: GetServiceVersionRequest,
+    ) -> GetServiceVersionResult:
+        async_result = []
+        self._get_service_version(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_projects(
         self,
         request: DescribeProjectsRequest,
@@ -1322,6 +1391,8 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
+        if request.owner_id is not None:
+            body["ownerId"] = request.owner_id
         if request.project_name is not None:
             body["projectName"] = request.project_name
         if request.region_name is not None:
@@ -1982,6 +2053,81 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _get_billings(
+        self,
+        request: GetBillingsRequest,
+        callback: Callable[[AsyncResult[GetBillingsResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="project",
+            component='billing',
+            function='getBillings',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.year is not None:
+            body["year"] = request.year
+        if request.month is not None:
+            body["month"] = request.month
+        if request.service is not None:
+            body["service"] = request.service
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=GetBillingsResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def get_billings(
+        self,
+        request: GetBillingsRequest,
+    ) -> GetBillingsResult:
+        async_result = []
+        with timeout(30):
+            self._get_billings(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def get_billings_async(
+        self,
+        request: GetBillingsRequest,
+    ) -> GetBillingsResult:
+        async_result = []
+        self._get_billings(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_dump_progresses(
         self,
         request: DescribeDumpProgressesRequest,
@@ -2149,8 +2295,6 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["transactionId"] = request.transaction_id
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.microservice_name is not None:
-            body["microserviceName"] = request.microservice_name
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
@@ -2587,12 +2731,12 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
+        if request.owner_id is not None:
+            body["ownerId"] = request.owner_id
         if request.transaction_id is not None:
             body["transactionId"] = request.transaction_id
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.microservice_name is not None:
-            body["microserviceName"] = request.microservice_name
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
@@ -2885,12 +3029,12 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
 
         if request.context_stack:
             body['contextStack'] = str(request.context_stack)
+        if request.owner_id is not None:
+            body["ownerId"] = request.owner_id
         if request.transaction_id is not None:
             body["transactionId"] = request.transaction_id
         if request.user_id is not None:
             body["userId"] = request.user_id
-        if request.microservice_name is not None:
-            body["microserviceName"] = request.microservice_name
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

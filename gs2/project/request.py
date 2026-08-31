@@ -461,6 +461,35 @@ class DeleteAccountRequest(core.Gs2Request):
         }
 
 
+class GetServiceVersionRequest(core.Gs2Request):
+
+    context_stack: str = None
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetServiceVersionRequest]:
+        if data is None:
+            return None
+        return GetServiceVersionRequest()\
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+        }
+
+
 class DescribeProjectsRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -898,8 +927,13 @@ class ActivateRegionRequest(core.Gs2Request):
 class WaitActivateRegionRequest(core.Gs2Request):
 
     context_stack: str = None
+    owner_id: str = None
     project_name: str = None
     region_name: str = None
+
+    def with_owner_id(self, owner_id: str) -> WaitActivateRegionRequest:
+        self.owner_id = owner_id
+        return self
 
     def with_project_name(self, project_name: str) -> WaitActivateRegionRequest:
         self.project_name = project_name
@@ -928,11 +962,13 @@ class WaitActivateRegionRequest(core.Gs2Request):
         if data is None:
             return None
         return WaitActivateRegionRequest()\
+            .with_owner_id(data.get('ownerId'))\
             .with_project_name(data.get('projectName'))\
             .with_region_name(data.get('regionName'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "ownerId": self.owner_id,
             "projectName": self.project_name,
             "regionName": self.region_name,
         }
@@ -1352,6 +1388,56 @@ class DescribeBillingsRequest(core.Gs2Request):
         }
 
 
+class GetBillingsRequest(core.Gs2Request):
+
+    context_stack: str = None
+    year: int = None
+    month: int = None
+    service: str = None
+
+    def with_year(self, year: int) -> GetBillingsRequest:
+        self.year = year
+        return self
+
+    def with_month(self, month: int) -> GetBillingsRequest:
+        self.month = month
+        return self
+
+    def with_service(self, service: str) -> GetBillingsRequest:
+        self.service = service
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[GetBillingsRequest]:
+        if data is None:
+            return None
+        return GetBillingsRequest()\
+            .with_year(data.get('year'))\
+            .with_month(data.get('month'))\
+            .with_service(data.get('service'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "year": self.year,
+            "month": self.month,
+            "service": self.service,
+        }
+
+
 class DescribeDumpProgressesRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -1437,7 +1523,6 @@ class WaitDumpUserDataRequest(core.Gs2Request):
     owner_id: str = None
     transaction_id: str = None
     user_id: str = None
-    microservice_name: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1451,10 +1536,6 @@ class WaitDumpUserDataRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> WaitDumpUserDataRequest:
         self.user_id = user_id
-        return self
-
-    def with_microservice_name(self, microservice_name: str) -> WaitDumpUserDataRequest:
-        self.microservice_name = microservice_name
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> WaitDumpUserDataRequest:
@@ -1487,7 +1568,6 @@ class WaitDumpUserDataRequest(core.Gs2Request):
             .with_owner_id(data.get('ownerId'))\
             .with_transaction_id(data.get('transactionId'))\
             .with_user_id(data.get('userId'))\
-            .with_microservice_name(data.get('microserviceName'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1495,7 +1575,6 @@ class WaitDumpUserDataRequest(core.Gs2Request):
             "ownerId": self.owner_id,
             "transactionId": self.transaction_id,
             "userId": self.user_id,
-            "microserviceName": self.microservice_name,
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -1709,11 +1788,15 @@ class GetCleanProgressRequest(core.Gs2Request):
 class WaitCleanUserDataRequest(core.Gs2Request):
 
     context_stack: str = None
+    owner_id: str = None
     transaction_id: str = None
     user_id: str = None
-    microservice_name: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
+
+    def with_owner_id(self, owner_id: str) -> WaitCleanUserDataRequest:
+        self.owner_id = owner_id
+        return self
 
     def with_transaction_id(self, transaction_id: str) -> WaitCleanUserDataRequest:
         self.transaction_id = transaction_id
@@ -1721,10 +1804,6 @@ class WaitCleanUserDataRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> WaitCleanUserDataRequest:
         self.user_id = user_id
-        return self
-
-    def with_microservice_name(self, microservice_name: str) -> WaitCleanUserDataRequest:
-        self.microservice_name = microservice_name
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> WaitCleanUserDataRequest:
@@ -1754,16 +1833,16 @@ class WaitCleanUserDataRequest(core.Gs2Request):
         if data is None:
             return None
         return WaitCleanUserDataRequest()\
+            .with_owner_id(data.get('ownerId'))\
             .with_transaction_id(data.get('transactionId'))\
             .with_user_id(data.get('userId'))\
-            .with_microservice_name(data.get('microserviceName'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "ownerId": self.owner_id,
             "transactionId": self.transaction_id,
             "userId": self.user_id,
-            "microserviceName": self.microservice_name,
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -1898,11 +1977,15 @@ class GetImportProgressRequest(core.Gs2Request):
 class WaitImportUserDataRequest(core.Gs2Request):
 
     context_stack: str = None
+    owner_id: str = None
     transaction_id: str = None
     user_id: str = None
-    microservice_name: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
+
+    def with_owner_id(self, owner_id: str) -> WaitImportUserDataRequest:
+        self.owner_id = owner_id
+        return self
 
     def with_transaction_id(self, transaction_id: str) -> WaitImportUserDataRequest:
         self.transaction_id = transaction_id
@@ -1910,10 +1993,6 @@ class WaitImportUserDataRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> WaitImportUserDataRequest:
         self.user_id = user_id
-        return self
-
-    def with_microservice_name(self, microservice_name: str) -> WaitImportUserDataRequest:
-        self.microservice_name = microservice_name
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> WaitImportUserDataRequest:
@@ -1943,16 +2022,16 @@ class WaitImportUserDataRequest(core.Gs2Request):
         if data is None:
             return None
         return WaitImportUserDataRequest()\
+            .with_owner_id(data.get('ownerId'))\
             .with_transaction_id(data.get('transactionId'))\
             .with_user_id(data.get('userId'))\
-            .with_microservice_name(data.get('microserviceName'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "ownerId": self.owner_id,
             "transactionId": self.transaction_id,
             "userId": self.user_id,
-            "microserviceName": self.microservice_name,
             "timeOffsetToken": self.time_offset_token,
         }
 
