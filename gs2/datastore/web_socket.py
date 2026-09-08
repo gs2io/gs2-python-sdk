@@ -120,6 +120,8 @@ class Gs2DatastoreWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
         if request.done_upload_script is not None:
@@ -341,6 +343,8 @@ class Gs2DatastoreWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
         if request.done_upload_script is not None:

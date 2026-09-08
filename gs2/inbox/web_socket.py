@@ -122,6 +122,8 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["isAutomaticDeletingEnabled"] = request.is_automatic_deleting_enabled
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.receive_message_script is not None:
             body["receiveMessageScript"] = request.receive_message_script.to_dict()
         if request.read_message_script is not None:
@@ -355,6 +357,8 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["isAutomaticDeletingEnabled"] = request.is_automatic_deleting_enabled
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.receive_message_script is not None:
             body["receiveMessageScript"] = request.receive_message_script.to_dict()
         if request.read_message_script is not None:

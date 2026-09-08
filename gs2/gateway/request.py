@@ -73,6 +73,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     firebase_secret: str = None
     log_setting: LogSetting = None
 
@@ -86,6 +87,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_firebase_secret(self, firebase_secret: str) -> CreateNamespaceRequest:
@@ -118,6 +123,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_firebase_secret(data.get('firebaseSecret'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
@@ -126,6 +132,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "firebaseSecret": self.firebase_secret,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
@@ -209,6 +216,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     firebase_secret: str = None
     log_setting: LogSetting = None
 
@@ -222,6 +230,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_firebase_secret(self, firebase_secret: str) -> UpdateNamespaceRequest:
@@ -254,6 +266,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_firebase_secret(data.get('firebaseSecret'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
@@ -262,6 +275,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "firebaseSecret": self.firebase_secret,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }

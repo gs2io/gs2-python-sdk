@@ -74,6 +74,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     description: str = None
     is_automatic_deleting_enabled: bool = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     receive_message_script: ScriptSetting = None
     read_message_script: ScriptSetting = None
     delete_message_script: ScriptSetting = None
@@ -96,6 +97,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_receive_message_script(self, receive_message_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -149,6 +154,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_is_automatic_deleting_enabled(data.get('isAutomaticDeletingEnabled'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_receive_message_script(ScriptSetting.from_dict(data.get('receiveMessageScript')))\
             .with_read_message_script(ScriptSetting.from_dict(data.get('readMessageScript')))\
             .with_delete_message_script(ScriptSetting.from_dict(data.get('deleteMessageScript')))\
@@ -163,6 +169,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "isAutomaticDeletingEnabled": self.is_automatic_deleting_enabled,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "receiveMessageScript": self.receive_message_script.to_dict() if self.receive_message_script else None,
             "readMessageScript": self.read_message_script.to_dict() if self.read_message_script else None,
             "deleteMessageScript": self.delete_message_script.to_dict() if self.delete_message_script else None,
@@ -252,6 +259,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     description: str = None
     is_automatic_deleting_enabled: bool = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     receive_message_script: ScriptSetting = None
     read_message_script: ScriptSetting = None
     delete_message_script: ScriptSetting = None
@@ -274,6 +282,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_receive_message_script(self, receive_message_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -327,6 +339,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_is_automatic_deleting_enabled(data.get('isAutomaticDeletingEnabled'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_receive_message_script(ScriptSetting.from_dict(data.get('receiveMessageScript')))\
             .with_read_message_script(ScriptSetting.from_dict(data.get('readMessageScript')))\
             .with_delete_message_script(ScriptSetting.from_dict(data.get('deleteMessageScript')))\
@@ -341,6 +354,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "isAutomaticDeletingEnabled": self.is_automatic_deleting_enabled,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "receiveMessageScript": self.receive_message_script.to_dict() if self.receive_message_script else None,
             "readMessageScript": self.read_message_script.to_dict() if self.read_message_script else None,
             "deleteMessageScript": self.delete_message_script.to_dict() if self.delete_message_script else None,

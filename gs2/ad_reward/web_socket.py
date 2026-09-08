@@ -120,6 +120,8 @@ class Gs2AdRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.admob is not None:
             body["admob"] = request.admob.to_dict()
         if request.unity_ad is not None:
@@ -354,6 +356,8 @@ class Gs2AdRewardWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.admob is not None:
             body["admob"] = request.admob.to_dict()
         if request.unity_ad is not None:

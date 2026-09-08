@@ -73,6 +73,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     change_password_if_take_over: bool = None
     different_user_id_for_login_and_data_retention: bool = None
     create_account_script: ScriptSetting = None
@@ -93,6 +94,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_change_password_if_take_over(self, change_password_if_take_over: bool) -> CreateNamespaceRequest:
@@ -153,6 +158,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_change_password_if_take_over(data.get('changePasswordIfTakeOver'))\
             .with_different_user_id_for_login_and_data_retention(data.get('differentUserIdForLoginAndDataRetention'))\
             .with_create_account_script(ScriptSetting.from_dict(data.get('createAccountScript')))\
@@ -168,6 +174,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "changePasswordIfTakeOver": self.change_password_if_take_over,
             "differentUserIdForLoginAndDataRetention": self.different_user_id_for_login_and_data_retention,
             "createAccountScript": self.create_account_script.to_dict() if self.create_account_script else None,
@@ -258,6 +265,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     change_password_if_take_over: bool = None
     create_account_script: ScriptSetting = None
     authentication_script: ScriptSetting = None
@@ -277,6 +285,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_change_password_if_take_over(self, change_password_if_take_over: bool) -> UpdateNamespaceRequest:
@@ -333,6 +345,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_change_password_if_take_over(data.get('changePasswordIfTakeOver'))\
             .with_create_account_script(ScriptSetting.from_dict(data.get('createAccountScript')))\
             .with_authentication_script(ScriptSetting.from_dict(data.get('authenticationScript')))\
@@ -347,6 +360,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "changePasswordIfTakeOver": self.change_password_if_take_over,
             "createAccountScript": self.create_account_script.to_dict() if self.create_account_script else None,
             "authenticationScript": self.authentication_script.to_dict() if self.authentication_script else None,

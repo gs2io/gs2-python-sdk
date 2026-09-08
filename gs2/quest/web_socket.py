@@ -120,6 +120,8 @@ class Gs2QuestWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.start_quest_script is not None:
             body["startQuestScript"] = request.start_quest_script.to_dict()
         if request.complete_quest_script is not None:
@@ -349,6 +351,8 @@ class Gs2QuestWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.start_quest_script is not None:
             body["startQuestScript"] = request.start_quest_script.to_dict()
         if request.complete_quest_script is not None:

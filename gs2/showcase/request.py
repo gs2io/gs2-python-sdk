@@ -73,6 +73,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     buy_script: ScriptSetting = None
     queue_namespace_id: str = None
     key_id: str = None
@@ -88,6 +89,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_buy_script(self, buy_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -128,6 +133,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_buy_script(ScriptSetting.from_dict(data.get('buyScript')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
             .with_key_id(data.get('keyId'))\
@@ -138,6 +144,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "buyScript": self.buy_script.to_dict() if self.buy_script else None,
             "queueNamespaceId": self.queue_namespace_id,
             "keyId": self.key_id,
@@ -223,6 +230,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     buy_script: ScriptSetting = None
     log_setting: LogSetting = None
     queue_namespace_id: str = None
@@ -238,6 +246,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_buy_script(self, buy_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -278,6 +290,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_buy_script(ScriptSetting.from_dict(data.get('buyScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))\
@@ -288,6 +301,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "buyScript": self.buy_script.to_dict() if self.buy_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "queueNamespaceId": self.queue_namespace_id,

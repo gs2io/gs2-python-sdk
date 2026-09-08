@@ -119,6 +119,8 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.priority is not None:
             body["priority"] = request.priority
         if request.share_free is not None:
@@ -359,6 +361,8 @@ class Gs2MoneyRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.priority is not None:
             body["priority"] = request.priority
         if request.apple_key is not None:

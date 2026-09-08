@@ -120,6 +120,8 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.allow_create_room is not None:
             body["allowCreateRoom"] = request.allow_create_room
         if request.message_life_time_days is not None:
@@ -355,6 +357,8 @@ class Gs2ChatWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.allow_create_room is not None:
             body["allowCreateRoom"] = request.allow_create_room
         if request.message_life_time_days is not None:

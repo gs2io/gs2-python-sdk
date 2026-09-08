@@ -120,6 +120,8 @@ class Gs2RealtimeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.server_type is not None:
             body["serverType"] = request.server_type
         if request.server_spec is not None:
@@ -345,6 +347,8 @@ class Gs2RealtimeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.server_type is not None:
             body["serverType"] = request.server_type
         if request.server_spec is not None:

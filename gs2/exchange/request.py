@@ -75,6 +75,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     enable_await_exchange: bool = None
     enable_direct_exchange: bool = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     exchange_script: ScriptSetting = None
     incremental_exchange_script: ScriptSetting = None
     acquire_await_script: ScriptSetting = None
@@ -100,6 +101,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_exchange_script(self, exchange_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -150,6 +155,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_enable_await_exchange(data.get('enableAwaitExchange'))\
             .with_enable_direct_exchange(data.get('enableDirectExchange'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_incremental_exchange_script(ScriptSetting.from_dict(data.get('incrementalExchangeScript')))\
             .with_acquire_await_script(ScriptSetting.from_dict(data.get('acquireAwaitScript')))\
@@ -164,6 +170,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "enableAwaitExchange": self.enable_await_exchange,
             "enableDirectExchange": self.enable_direct_exchange,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "incrementalExchangeScript": self.incremental_exchange_script.to_dict() if self.incremental_exchange_script else None,
             "acquireAwaitScript": self.acquire_await_script.to_dict() if self.acquire_await_script else None,
@@ -253,6 +260,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     enable_await_exchange: bool = None
     enable_direct_exchange: bool = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     exchange_script: ScriptSetting = None
     incremental_exchange_script: ScriptSetting = None
     acquire_await_script: ScriptSetting = None
@@ -278,6 +286,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_exchange_script(self, exchange_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -328,6 +340,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_enable_await_exchange(data.get('enableAwaitExchange'))\
             .with_enable_direct_exchange(data.get('enableDirectExchange'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_exchange_script(ScriptSetting.from_dict(data.get('exchangeScript')))\
             .with_incremental_exchange_script(ScriptSetting.from_dict(data.get('incrementalExchangeScript')))\
             .with_acquire_await_script(ScriptSetting.from_dict(data.get('acquireAwaitScript')))\
@@ -342,6 +355,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "enableAwaitExchange": self.enable_await_exchange,
             "enableDirectExchange": self.enable_direct_exchange,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "exchangeScript": self.exchange_script.to_dict() if self.exchange_script else None,
             "incrementalExchangeScript": self.incremental_exchange_script.to_dict() if self.incremental_exchange_script else None,
             "acquireAwaitScript": self.acquire_await_script.to_dict() if self.acquire_await_script else None,

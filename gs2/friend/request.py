@@ -73,6 +73,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     follow_script: ScriptSetting = None
     unfollow_script: ScriptSetting = None
     send_request_script: ScriptSetting = None
@@ -99,6 +100,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_follow_script(self, follow_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -183,6 +188,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_follow_script(ScriptSetting.from_dict(data.get('followScript')))\
             .with_unfollow_script(ScriptSetting.from_dict(data.get('unfollowScript')))\
             .with_send_request_script(ScriptSetting.from_dict(data.get('sendRequestScript')))\
@@ -204,6 +210,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "followScript": self.follow_script.to_dict() if self.follow_script else None,
             "unfollowScript": self.unfollow_script.to_dict() if self.unfollow_script else None,
             "sendRequestScript": self.send_request_script.to_dict() if self.send_request_script else None,
@@ -300,6 +307,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     follow_script: ScriptSetting = None
     unfollow_script: ScriptSetting = None
     send_request_script: ScriptSetting = None
@@ -326,6 +334,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_follow_script(self, follow_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -410,6 +422,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_follow_script(ScriptSetting.from_dict(data.get('followScript')))\
             .with_unfollow_script(ScriptSetting.from_dict(data.get('unfollowScript')))\
             .with_send_request_script(ScriptSetting.from_dict(data.get('sendRequestScript')))\
@@ -431,6 +444,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "followScript": self.follow_script.to_dict() if self.follow_script else None,
             "unfollowScript": self.unfollow_script.to_dict() if self.unfollow_script else None,
             "sendRequestScript": self.send_request_script.to_dict() if self.send_request_script else None,

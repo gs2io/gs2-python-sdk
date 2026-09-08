@@ -119,6 +119,8 @@ class Gs2ShowcaseRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.buy_script is not None:
             body["buyScript"] = request.buy_script.to_dict()
         if request.queue_namespace_id is not None:
@@ -347,6 +349,8 @@ class Gs2ShowcaseRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.buy_script is not None:
             body["buyScript"] = request.buy_script.to_dict()
         if request.log_setting is not None:

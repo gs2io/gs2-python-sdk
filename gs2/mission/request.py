@@ -2002,6 +2002,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     mission_complete_script: ScriptSetting = None
     counter_increment_script: ScriptSetting = None
     receive_rewards_script: ScriptSetting = None
@@ -2020,6 +2021,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_mission_complete_script(self, mission_complete_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -2072,6 +2077,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_mission_complete_script(ScriptSetting.from_dict(data.get('missionCompleteScript')))\
             .with_counter_increment_script(ScriptSetting.from_dict(data.get('counterIncrementScript')))\
             .with_receive_rewards_script(ScriptSetting.from_dict(data.get('receiveRewardsScript')))\
@@ -2085,6 +2091,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "missionCompleteScript": self.mission_complete_script.to_dict() if self.mission_complete_script else None,
             "counterIncrementScript": self.counter_increment_script.to_dict() if self.counter_increment_script else None,
             "receiveRewardsScript": self.receive_rewards_script.to_dict() if self.receive_rewards_script else None,
@@ -2173,6 +2180,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     mission_complete_script: ScriptSetting = None
     counter_increment_script: ScriptSetting = None
     receive_rewards_script: ScriptSetting = None
@@ -2191,6 +2199,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_mission_complete_script(self, mission_complete_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -2243,6 +2255,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_mission_complete_script(ScriptSetting.from_dict(data.get('missionCompleteScript')))\
             .with_counter_increment_script(ScriptSetting.from_dict(data.get('counterIncrementScript')))\
             .with_receive_rewards_script(ScriptSetting.from_dict(data.get('receiveRewardsScript')))\
@@ -2256,6 +2269,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "missionCompleteScript": self.mission_complete_script.to_dict() if self.mission_complete_script else None,
             "counterIncrementScript": self.counter_increment_script.to_dict() if self.counter_increment_script else None,
             "receiveRewardsScript": self.receive_rewards_script.to_dict() if self.receive_rewards_script else None,

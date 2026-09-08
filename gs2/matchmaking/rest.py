@@ -119,6 +119,8 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.enable_rating is not None:
             body["enableRating"] = request.enable_rating
         if request.enable_disconnect_detection is not None:
@@ -375,6 +377,8 @@ class Gs2MatchmakingRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.enable_rating is not None:
             body["enableRating"] = request.enable_rating
         if request.enable_disconnect_detection is not None:

@@ -119,6 +119,8 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.enable_auto_run is not None:
             body["enableAutoRun"] = request.enable_auto_run
         if request.push_notification is not None:
@@ -347,6 +349,8 @@ class Gs2JobQueueRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.enable_auto_run is not None:
             body["enableAutoRun"] = request.enable_auto_run
         if request.push_notification is not None:

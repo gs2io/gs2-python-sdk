@@ -119,6 +119,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.follow_script is not None:
             body["followScript"] = request.follow_script.to_dict()
         if request.unfollow_script is not None:
@@ -369,6 +371,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.follow_script is not None:
             body["followScript"] = request.follow_script.to_dict()
         if request.unfollow_script is not None:

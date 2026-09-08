@@ -73,6 +73,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     acquire_script: ScriptSetting = None
     overflow_script: ScriptSetting = None
     consume_script: ScriptSetting = None
@@ -92,6 +93,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_acquire_script(self, acquire_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -148,6 +153,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_acquire_script(ScriptSetting.from_dict(data.get('acquireScript')))\
             .with_overflow_script(ScriptSetting.from_dict(data.get('overflowScript')))\
             .with_consume_script(ScriptSetting.from_dict(data.get('consumeScript')))\
@@ -162,6 +168,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "acquireScript": self.acquire_script.to_dict() if self.acquire_script else None,
             "overflowScript": self.overflow_script.to_dict() if self.overflow_script else None,
             "consumeScript": self.consume_script.to_dict() if self.consume_script else None,
@@ -251,6 +258,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     acquire_script: ScriptSetting = None
     overflow_script: ScriptSetting = None
     consume_script: ScriptSetting = None
@@ -270,6 +278,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_acquire_script(self, acquire_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -326,6 +338,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_acquire_script(ScriptSetting.from_dict(data.get('acquireScript')))\
             .with_overflow_script(ScriptSetting.from_dict(data.get('overflowScript')))\
             .with_consume_script(ScriptSetting.from_dict(data.get('consumeScript')))\
@@ -340,6 +353,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "acquireScript": self.acquire_script.to_dict() if self.acquire_script else None,
             "overflowScript": self.overflow_script.to_dict() if self.overflow_script else None,
             "consumeScript": self.consume_script.to_dict() if self.consume_script else None,

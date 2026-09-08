@@ -73,6 +73,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     rank_cap_script_id: str = None
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
@@ -90,6 +91,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_rank_cap_script_id(self, rank_cap_script_id: str) -> CreateNamespaceRequest:
@@ -138,6 +143,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_rank_cap_script_id(data.get('rankCapScriptId'))\
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
@@ -150,6 +156,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "rankCapScriptId": self.rank_cap_script_id,
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,
@@ -237,6 +244,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     namespace_name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     rank_cap_script_id: str = None
     change_experience_script: ScriptSetting = None
     change_rank_script: ScriptSetting = None
@@ -254,6 +262,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_rank_cap_script_id(self, rank_cap_script_id: str) -> UpdateNamespaceRequest:
@@ -302,6 +314,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_rank_cap_script_id(data.get('rankCapScriptId'))\
             .with_change_experience_script(ScriptSetting.from_dict(data.get('changeExperienceScript')))\
             .with_change_rank_script(ScriptSetting.from_dict(data.get('changeRankScript')))\
@@ -314,6 +327,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "rankCapScriptId": self.rank_cap_script_id,
             "changeExperienceScript": self.change_experience_script.to_dict() if self.change_experience_script else None,
             "changeRankScript": self.change_rank_script.to_dict() if self.change_rank_script else None,

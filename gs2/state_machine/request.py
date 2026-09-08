@@ -74,6 +74,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     description: str = None
     support_speculative_execution: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     start_script: ScriptSetting = None
     pass_script: ScriptSetting = None
     error_script: ScriptSetting = None
@@ -94,6 +95,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> CreateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> CreateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_start_script(self, start_script: ScriptSetting) -> CreateNamespaceRequest:
@@ -139,6 +144,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_support_speculative_execution(data.get('supportSpeculativeExecution'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_start_script(ScriptSetting.from_dict(data.get('startScript')))\
             .with_pass_script(ScriptSetting.from_dict(data.get('passScript')))\
             .with_error_script(ScriptSetting.from_dict(data.get('errorScript')))\
@@ -151,6 +157,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "supportSpeculativeExecution": self.support_speculative_execution,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "startScript": self.start_script.to_dict() if self.start_script else None,
             "passScript": self.pass_script.to_dict() if self.pass_script else None,
             "errorScript": self.error_script.to_dict() if self.error_script else None,
@@ -238,6 +245,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     description: str = None
     support_speculative_execution: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     start_script: ScriptSetting = None
     pass_script: ScriptSetting = None
     error_script: ScriptSetting = None
@@ -258,6 +266,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> UpdateNamespaceRequest:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> UpdateNamespaceRequest:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_start_script(self, start_script: ScriptSetting) -> UpdateNamespaceRequest:
@@ -303,6 +315,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_description(data.get('description'))\
             .with_support_speculative_execution(data.get('supportSpeculativeExecution'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_start_script(ScriptSetting.from_dict(data.get('startScript')))\
             .with_pass_script(ScriptSetting.from_dict(data.get('passScript')))\
             .with_error_script(ScriptSetting.from_dict(data.get('errorScript')))\
@@ -315,6 +328,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "description": self.description,
             "supportSpeculativeExecution": self.support_speculative_execution,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "startScript": self.start_script.to_dict() if self.start_script else None,
             "passScript": self.pass_script.to_dict() if self.pass_script else None,
             "errorScript": self.error_script.to_dict() if self.error_script else None,

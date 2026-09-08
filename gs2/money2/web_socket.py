@@ -122,6 +122,8 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.shared_free_currency is not None:
             body["sharedFreeCurrency"] = request.shared_free_currency
         if request.platform_setting is not None:
@@ -363,6 +365,8 @@ class Gs2Money2WebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.transaction_setting is not None:
             body["transactionSetting"] = request.transaction_setting.to_dict()
+        if request.transaction_setting_v2 is not None:
+            body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.platform_setting is not None:
             body["platformSetting"] = request.platform_setting.to_dict()
         if request.deposit_balance_script is not None:

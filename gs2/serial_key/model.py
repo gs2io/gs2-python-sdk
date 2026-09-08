@@ -95,12 +95,54 @@ class GitHubCheckoutSetting(core.Gs2Model):
         }
 
 
+class TransactionSettingV2(core.Gs2Model):
+    distributor_namespace_id: str = None
+    enable_parallel_execution: bool = None
+
+    def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSettingV2:
+        self.distributor_namespace_id = distributor_namespace_id
+        return self
+
+    def with_enable_parallel_execution(self, enable_parallel_execution: bool) -> TransactionSettingV2:
+        self.enable_parallel_execution = enable_parallel_execution
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[TransactionSettingV2]:
+        if data is None:
+            return None
+        return TransactionSettingV2()\
+            .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
+            .with_enable_parallel_execution(data.get('enableParallelExecution'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "distributorNamespaceId": self.distributor_namespace_id,
+            "enableParallelExecution": self.enable_parallel_execution,
+        }
+
+
 class TransactionSetting(core.Gs2Model):
     enable_auto_run: bool = None
     enable_atomic_commit: bool = None
     transaction_use_distributor: bool = None
     commit_script_result_in_use_distributor: bool = None
     acquire_action_use_job_queue: bool = None
+    enable_sequential_execution: bool = None
     distributor_namespace_id: str = None
     key_id: str = None
     queue_namespace_id: str = None
@@ -123,6 +165,10 @@ class TransactionSetting(core.Gs2Model):
 
     def with_acquire_action_use_job_queue(self, acquire_action_use_job_queue: bool) -> TransactionSetting:
         self.acquire_action_use_job_queue = acquire_action_use_job_queue
+        return self
+
+    def with_enable_sequential_execution(self, enable_sequential_execution: bool) -> TransactionSetting:
+        self.enable_sequential_execution = enable_sequential_execution
         return self
 
     def with_distributor_namespace_id(self, distributor_namespace_id: str) -> TransactionSetting:
@@ -161,6 +207,7 @@ class TransactionSetting(core.Gs2Model):
             .with_transaction_use_distributor(data.get('transactionUseDistributor'))\
             .with_commit_script_result_in_use_distributor(data.get('commitScriptResultInUseDistributor'))\
             .with_acquire_action_use_job_queue(data.get('acquireActionUseJobQueue'))\
+            .with_enable_sequential_execution(data.get('enableSequentialExecution'))\
             .with_distributor_namespace_id(data.get('distributorNamespaceId'))\
             .with_key_id(data.get('keyId'))\
             .with_queue_namespace_id(data.get('queueNamespaceId'))
@@ -172,6 +219,7 @@ class TransactionSetting(core.Gs2Model):
             "transactionUseDistributor": self.transaction_use_distributor,
             "commitScriptResultInUseDistributor": self.commit_script_result_in_use_distributor,
             "acquireActionUseJobQueue": self.acquire_action_use_job_queue,
+            "enableSequentialExecution": self.enable_sequential_execution,
             "distributorNamespaceId": self.distributor_namespace_id,
             "keyId": self.key_id,
             "queueNamespaceId": self.queue_namespace_id,
@@ -851,6 +899,7 @@ class Namespace(core.Gs2Model):
     name: str = None
     description: str = None
     transaction_setting: TransactionSetting = None
+    transaction_setting_v2: TransactionSettingV2 = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -870,6 +919,10 @@ class Namespace(core.Gs2Model):
 
     def with_transaction_setting(self, transaction_setting: TransactionSetting) -> Namespace:
         self.transaction_setting = transaction_setting
+        return self
+
+    def with_transaction_setting_v2(self, transaction_setting_v2: TransactionSettingV2) -> Namespace:
+        self.transaction_setting_v2 = transaction_setting_v2
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -954,6 +1007,7 @@ class Namespace(core.Gs2Model):
             .with_name(data.get('name'))\
             .with_description(data.get('description'))\
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
+            .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -965,6 +1019,7 @@ class Namespace(core.Gs2Model):
             "name": self.name,
             "description": self.description,
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
+            "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
