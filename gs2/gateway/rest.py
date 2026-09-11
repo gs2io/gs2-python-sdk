@@ -123,6 +123,8 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
             body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.firebase_secret is not None:
             body["firebaseSecret"] = request.firebase_secret
+        if request.firebase_project_id is not None:
+            body["firebaseProjectId"] = request.firebase_project_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -349,6 +351,8 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
             body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.firebase_secret is not None:
             body["firebaseSecret"] = request.firebase_secret
+        if request.firebase_project_id is not None:
+            body["firebaseProjectId"] = request.firebase_project_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -1644,6 +1648,8 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         }
         if request.token is not None:
             body["token"] = request.token
+        if request.locale is not None:
+            body["locale"] = request.locale
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1723,6 +1729,8 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
         }
         if request.token is not None:
             body["token"] = request.token
+        if request.locale is not None:
+            body["locale"] = request.locale
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

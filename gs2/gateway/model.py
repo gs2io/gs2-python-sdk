@@ -257,6 +257,7 @@ class FirebaseToken(core.Gs2Model):
     firebase_token_id: str = None
     user_id: str = None
     token: str = None
+    locale: str = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -271,6 +272,10 @@ class FirebaseToken(core.Gs2Model):
 
     def with_token(self, token: str) -> FirebaseToken:
         self.token = token
+        return self
+
+    def with_locale(self, locale: str) -> FirebaseToken:
+        self.locale = locale
         return self
 
     def with_created_at(self, created_at: int) -> FirebaseToken:
@@ -362,6 +367,7 @@ class FirebaseToken(core.Gs2Model):
             .with_firebase_token_id(data.get('firebaseTokenId'))\
             .with_user_id(data.get('userId'))\
             .with_token(data.get('token'))\
+            .with_locale(data.get('locale'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -371,6 +377,7 @@ class FirebaseToken(core.Gs2Model):
             "firebaseTokenId": self.firebase_token_id,
             "userId": self.user_id,
             "token": self.token,
+            "locale": self.locale,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -534,6 +541,7 @@ class Namespace(core.Gs2Model):
     transaction_setting: TransactionSetting = None
     transaction_setting_v2: TransactionSettingV2 = None
     firebase_secret: str = None
+    firebase_project_id: str = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -561,6 +569,10 @@ class Namespace(core.Gs2Model):
 
     def with_firebase_secret(self, firebase_secret: str) -> Namespace:
         self.firebase_secret = firebase_secret
+        return self
+
+    def with_firebase_project_id(self, firebase_project_id: str) -> Namespace:
+        self.firebase_project_id = firebase_project_id
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -647,6 +659,7 @@ class Namespace(core.Gs2Model):
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_firebase_secret(data.get('firebaseSecret'))\
+            .with_firebase_project_id(data.get('firebaseProjectId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -660,6 +673,7 @@ class Namespace(core.Gs2Model):
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "firebaseSecret": self.firebase_secret,
+            "firebaseProjectId": self.firebase_project_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

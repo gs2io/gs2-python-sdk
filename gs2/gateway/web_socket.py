@@ -124,6 +124,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.firebase_secret is not None:
             body["firebaseSecret"] = request.firebase_secret
+        if request.firebase_project_id is not None:
+            body["firebaseProjectId"] = request.firebase_project_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -347,6 +349,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["transactionSettingV2"] = request.transaction_setting_v2.to_dict()
         if request.firebase_secret is not None:
             body["firebaseSecret"] = request.firebase_secret
+        if request.firebase_project_id is not None:
+            body["firebaseProjectId"] = request.firebase_project_id
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -1636,6 +1640,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["accessToken"] = request.access_token
         if request.token is not None:
             body["token"] = request.token
+        if request.locale is not None:
+            body["locale"] = request.locale
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1715,6 +1721,8 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["userId"] = request.user_id
         if request.token is not None:
             body["token"] = request.token
+        if request.locale is not None:
+            body["locale"] = request.locale
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

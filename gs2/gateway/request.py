@@ -75,6 +75,7 @@ class CreateNamespaceRequest(core.Gs2Request):
     transaction_setting: TransactionSetting = None
     transaction_setting_v2: TransactionSettingV2 = None
     firebase_secret: str = None
+    firebase_project_id: str = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -95,6 +96,10 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_firebase_secret(self, firebase_secret: str) -> CreateNamespaceRequest:
         self.firebase_secret = firebase_secret
+        return self
+
+    def with_firebase_project_id(self, firebase_project_id: str) -> CreateNamespaceRequest:
+        self.firebase_project_id = firebase_project_id
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
@@ -125,6 +130,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_firebase_secret(data.get('firebaseSecret'))\
+            .with_firebase_project_id(data.get('firebaseProjectId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -134,6 +140,7 @@ class CreateNamespaceRequest(core.Gs2Request):
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "firebaseSecret": self.firebase_secret,
+            "firebaseProjectId": self.firebase_project_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -218,6 +225,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
     transaction_setting: TransactionSetting = None
     transaction_setting_v2: TransactionSettingV2 = None
     firebase_secret: str = None
+    firebase_project_id: str = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -238,6 +246,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_firebase_secret(self, firebase_secret: str) -> UpdateNamespaceRequest:
         self.firebase_secret = firebase_secret
+        return self
+
+    def with_firebase_project_id(self, firebase_project_id: str) -> UpdateNamespaceRequest:
+        self.firebase_project_id = firebase_project_id
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
@@ -268,6 +280,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_transaction_setting(TransactionSetting.from_dict(data.get('transactionSetting')))\
             .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_firebase_secret(data.get('firebaseSecret'))\
+            .with_firebase_project_id(data.get('firebaseProjectId'))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -277,6 +290,7 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "transactionSetting": self.transaction_setting.to_dict() if self.transaction_setting else None,
             "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "firebaseSecret": self.firebase_secret,
+            "firebaseProjectId": self.firebase_project_id,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -1107,6 +1121,7 @@ class SetFirebaseTokenRequest(core.Gs2Request):
     namespace_name: str = None
     access_token: str = None
     token: str = None
+    locale: str = None
     duplication_avoider: str = None
 
     def with_namespace_name(self, namespace_name: str) -> SetFirebaseTokenRequest:
@@ -1119,6 +1134,10 @@ class SetFirebaseTokenRequest(core.Gs2Request):
 
     def with_token(self, token: str) -> SetFirebaseTokenRequest:
         self.token = token
+        return self
+
+    def with_locale(self, locale: str) -> SetFirebaseTokenRequest:
+        self.locale = locale
         return self
 
     def with_duplication_avoider(self, duplication_avoider: str) -> SetFirebaseTokenRequest:
@@ -1146,13 +1165,15 @@ class SetFirebaseTokenRequest(core.Gs2Request):
         return SetFirebaseTokenRequest()\
             .with_namespace_name(data.get('namespaceName'))\
             .with_access_token(data.get('accessToken'))\
-            .with_token(data.get('token'))
+            .with_token(data.get('token'))\
+            .with_locale(data.get('locale'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "namespaceName": self.namespace_name,
             "accessToken": self.access_token,
             "token": self.token,
+            "locale": self.locale,
         }
 
 
@@ -1162,6 +1183,7 @@ class SetFirebaseTokenByUserIdRequest(core.Gs2Request):
     namespace_name: str = None
     user_id: str = None
     token: str = None
+    locale: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1175,6 +1197,10 @@ class SetFirebaseTokenByUserIdRequest(core.Gs2Request):
 
     def with_token(self, token: str) -> SetFirebaseTokenByUserIdRequest:
         self.token = token
+        return self
+
+    def with_locale(self, locale: str) -> SetFirebaseTokenByUserIdRequest:
+        self.locale = locale
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> SetFirebaseTokenByUserIdRequest:
@@ -1207,6 +1233,7 @@ class SetFirebaseTokenByUserIdRequest(core.Gs2Request):
             .with_namespace_name(data.get('namespaceName'))\
             .with_user_id(data.get('userId'))\
             .with_token(data.get('token'))\
+            .with_locale(data.get('locale'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1214,6 +1241,7 @@ class SetFirebaseTokenByUserIdRequest(core.Gs2Request):
             "namespaceName": self.namespace_name,
             "userId": self.user_id,
             "token": self.token,
+            "locale": self.locale,
             "timeOffsetToken": self.time_offset_token,
         }
 
