@@ -17,12 +17,64 @@
 from __future__ import annotations
 from abc import abstractmethod
 from typing import Optional, Dict, Any, Generic, TypeVar, Callable, List
+from urllib.parse import urlparse
 
 
 class Gs2Constant(object):
 
     ENDPOINT_HOST = "https://{service}.{region}.gen2.gs2io.com"
     WS_ENDPOINT_HOST = "wss://gateway-ws.{region}.gen2.gs2io.com"
+
+    # Steady（専用フリート）の基点への接続段階（DNS / TCP dial / TLS handshake）の上限秒。
+    # フリートが手放した公開 IP は SYN を落とすので、OS 既定（1〜2 分）に任せない。
+    # 共有クラウド（steady_endpoint 未設定）の挙動は不変。
+    STEADY_CONNECT_TIMEOUT = 5
+
+
+# ---------------------------------------------------------------- Steady（専用フリート）の基点
+#
+# フリートは 1 つの名前（steady_endpoint、例 https://bs-dev.ap-northeast-1.dev.gen2.gs2io.com）で受け、
+# REST は <steady>/<service>/...、WebSocket は wss://<host>/ を使う。名前はフリートのノードへ直接
+# 解決される（間に ALB は無い）ので、フリートが手放した公開 IP に当たると SYN が落ちる。
+# そのため Steady のときだけ接続段階に上限（Gs2Constant.STEADY_CONNECT_TIMEOUT）を置き、接続段階の
+# 失敗（1 バイトも送っていない）だけは同じ要求をもう 1 回だけ送る。送信後の失敗は届いたかもしれない
+# ので再送しない（非冪等要求の二重実行を作らない）。
+
+
+def normalize_steady_endpoint(value: Optional[str]) -> str:
+    """
+    Steady の基点を正規化する（前後の空白と末尾の / を落とす）。None / 空は '' を返す。
+    """
+    if value is None:
+        return ''
+    return str(value).strip().rstrip('/')
+
+
+def steady_web_socket_url(steady: Optional[str]) -> str:
+    """
+    Steady の基点から WebSocket の接続先（wss://<host>/）を作る。基点が空 / 壊れていれば ''。
+    ★http:// の基点（ローカルの試験・開発）は ws:// に、https:// は wss:// に。
+    """
+    base = normalize_steady_endpoint(steady)
+    if not base:
+        return ''
+    parsed = urlparse(base)
+    if not parsed.netloc:
+        return ''
+    scheme = 'ws' if parsed.scheme == 'http' else 'wss'
+    return '{}://{}/'.format(scheme, parsed.netloc)
+
+
+def is_steady_url(steady: Optional[str], request_url: str) -> bool:
+    """
+    要求 URL が Steady の基点宛か。★前方一致だけでは駄目（bs.example.test.evil を弾く）なので
+    区切りの / まで見る。
+    """
+    base = normalize_steady_endpoint(steady)
+    if not base:
+        return False
+    request_url = str(request_url)
+    return request_url == base or request_url.startswith(base + '/')
 
 
 class IGs2Credential:

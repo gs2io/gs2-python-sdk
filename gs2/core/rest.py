@@ -13,12 +13,14 @@
 # on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
+import functools
 import gzip
 import json
+import re
 import time
 from collections import deque
 from io import BytesIO
-from typing import Dict, Any, Callable, TypeVar, Type, Deque, Generic
+from typing import Dict, Any, Callable, TypeVar, Type, Deque, Generic, Optional
 from netrc import netrc, NetrcParseError  # メインスレッド以外でimportするとデッドロックするらしい https://github.com/kennethreitz/requests/issues/2925
 
 import requests
@@ -80,6 +82,98 @@ def _parse_response(response: requests.Response) -> Dict[str, Any]:
     else:
         from ..core.exception import UnknownException
         raise UnknownException(response.text)
+
+
+# urllib3 の「接続を張れなかった」例外の型名。
+# NameResolutionError は urllib3 2.x で足された（NewConnectionError の派生）ので、
+# import ではなく名前で見る（urllib3 1.x でも動く）。
+_CONNECT_FAILURE_CAUSE_NAMES = frozenset({
+    'NewConnectionError',
+    'NameResolutionError',
+    'ConnectTimeoutError',
+})
+
+
+def _iter_cause_chain(error: BaseException):
+    """
+    例外の cause 連鎖（MaxRetryError の .reason、__cause__ / __context__、args に積まれた例外）を辿る。
+    """
+    seen = set()
+    stack = [error]
+    while stack:
+        current = stack.pop()
+        if not isinstance(current, BaseException) or id(current) in seen:
+            continue
+        seen.add(id(current))
+        yield current
+        for nxt in (
+                getattr(current, 'reason', None),
+                getattr(current, '__cause__', None),
+                getattr(current, '__context__', None),
+        ):
+            if isinstance(nxt, BaseException):
+                stack.append(nxt)
+        for arg in getattr(current, 'args', ()) or ():
+            if isinstance(arg, BaseException):
+                stack.append(arg)
+
+
+def _is_connect_failure(error: Optional[BaseException]) -> bool:
+    """
+    「1 バイトも送っていない」失敗か（DNS / TCP の接続拒否・接続タイムアウト / TLS）。
+    ★これだけが Steady の再送の対象 ―― 送信後の失敗（読み取りタイムアウト、
+    ProtocolError "Connection aborted"、HTTP の誤り）は届いたかもしれないので再送しない。
+    """
+    if error is None:
+        return False
+    if isinstance(error, requests.exceptions.ConnectTimeout):
+        return True
+    if isinstance(error, requests.exceptions.SSLError):
+        return True
+    if isinstance(error, requests.exceptions.ConnectionError):
+        for cause in _iter_cause_chain(error):
+            for klass in type(cause).__mro__:
+                if klass.__name__ in _CONNECT_FAILURE_CAUSE_NAMES:
+                    return True
+        return False
+    return False
+
+
+# 共有クラウドの template 宛の URL を見分けるための印（{service} の位置）。
+# re.escape が触らない文字を使う。
+_SERVICE_MARK = '\x00'
+
+
+@functools.lru_cache(maxsize=None)
+def _shared_cloud_url_pattern(template: str, region: str):
+    """
+    共有クラウドの template（Gs2Constant.ENDPOINT_HOST）に当たる URL の接頭辞を拾う正規表現。
+    {service} はサービス名の捕獲に、{region} はセッションのリージョンに置き換える。
+    """
+    filled = template.replace('{service}', _SERVICE_MARK).replace('{region}', region)
+    return re.compile('^' + re.escape(filled).replace(_SERVICE_MARK, '([^/]+)') + '(?=/|$)')
+
+
+def _rewrite_to_steady(steady: Optional[str], region: str, url: str) -> str:
+    """
+    共有クラウドの template 宛の URL を <steady>/<service> 宛に読み替える。
+    当てはまらない URL（すでに Steady 宛、別ホストなど）はそのまま返す。
+
+    ★生成クライアント（src/gs2/<service>/rest.py）は Gs2Constant.ENDPOINT_HOST.format(...) で
+    自分で URL を組み、セッションにサービス名を渡さない。生成物を 1 行も触らずに Steady へ
+    向けるには、送る直前にセッション側で読み替えるしか無い（Go は生成コードが
+    session.EndpointHost(service, ...) を呼ぶので読み替えが要らない）。
+    """
+    base = normalize_steady_endpoint(steady)
+    if not base:
+        return url
+    template = Gs2Constant.ENDPOINT_HOST
+    if '{service}' not in template:
+        return url
+    matched = _shared_cloud_url_pattern(template, region).match(url)
+    if matched is None:
+        return url
+    return base + '/' + matched.group(1) + url[matched.end():]
 
 
 class NetworkJob:
@@ -146,6 +240,7 @@ class Gs2RestSession(ISession):
             region: str,
             enable_request_compression: bool = True,
             enable_response_decompression: bool = True,
+            steady_endpoint: Optional[str] = None,
     ):
         """
         コンストラクタ
@@ -153,6 +248,7 @@ class Gs2RestSession(ISession):
         :param region: リージョン
         :param enable_request_compression: リクエストボディのgzip圧縮を有効にするか（デフォルト: True）
         :param enable_response_decompression: レスポンスのgzip展開を有効にするか（デフォルト: True）
+        :param steady_endpoint: Steady（専用フリート）の基点（https://<host>）。None なら共有クラウド（URL は従来どおり）
         """
         super().__init__()
         self._credential = credential
@@ -163,6 +259,7 @@ class Gs2RestSession(ISession):
         self._job_queue = deque()
         self._enable_request_compression = enable_request_compression
         self._enable_response_decompression = enable_response_decompression
+        self._steady_endpoint = normalize_steady_endpoint(steady_endpoint) or None
 
     @property
     def credential(self) -> IGs2Credential:
@@ -188,6 +285,104 @@ class Gs2RestSession(ISession):
     def enable_response_decompression(self) -> bool:
         return self._enable_response_decompression
 
+    @property
+    def steady_endpoint(self) -> Optional[str]:
+        """
+        Steady（専用フリート）の基点（https://<host>）。未設定なら None。
+        """
+        return self._steady_endpoint
+
+    @steady_endpoint.setter
+    def steady_endpoint(self, value: Optional[str]):
+        self._steady_endpoint = normalize_steady_endpoint(value) or None
+
+    def endpoint_host(
+            self,
+            service: str,
+    ) -> str:
+        """
+        サービスの接続先。優先順: steady_endpoint ＞ 共有クラウドの Gs2Constant.ENDPOINT_HOST。
+        steady_endpoint が未設定なら従来の Gs2Constant.ENDPOINT_HOST.format(...) と byte 単位で同じ。
+        ★Python の生成クライアントには「サービスごとの override」（Go の EndpointHost の第 2 引数）が
+        無いので、ここでは扱わない。template の差し替え（Gs2Constant.ENDPOINT_HOST の書き換え）は
+        従来どおり効くが、Steady が設定されていればそれより Steady が強い。
+        :param service: サービス名（例: 'account'）
+        """
+        base = normalize_steady_endpoint(self._steady_endpoint)
+        if not base:
+            return Gs2Constant.ENDPOINT_HOST.format(
+                service=service,
+                region=self.region,
+            )
+        return base + '/' + service
+
+    def _do_request(
+            self,
+            url: str,
+            headers: Dict[str, Any],
+            job: NetworkJob,
+            steady: bool,
+    ) -> requests.Response:
+        """
+        1 回の HTTP 要求。★Steady の基点宛のときだけ接続段階（DNS / TCP / TLS）に上限を置く
+        （読み取りは従来どおり無期限 ―― GS2 には長く待つ API があるので要求全体の上限は置かない）。
+        :param steady: url が Steady の基点宛か
+        """
+        kwargs = {}
+        if steady:
+            kwargs['timeout'] = (Gs2Constant.STEADY_CONNECT_TIMEOUT, None)
+
+        if job.method == 'GET':
+            return self.connection.get(
+                url=url,
+                headers=headers,
+                params=job.query_strings,
+                **kwargs
+            )
+        elif job.method == 'POST':
+            if self._enable_request_compression and job.body:
+                headers['Content-Encoding'] = 'gzip'
+                headers['Content-Type'] = 'application/json'
+                return self.connection.post(
+                    url=url,
+                    headers=headers,
+                    data=_compress_body(job.body),
+                    **kwargs
+                )
+            else:
+                return self.connection.post(
+                    url=url,
+                    headers=headers,
+                    json=job.body,
+                    **kwargs
+                )
+        elif job.method == 'PUT':
+            if self._enable_request_compression and job.body:
+                headers['Content-Encoding'] = 'gzip'
+                headers['Content-Type'] = 'application/json'
+                return self.connection.put(
+                    url=url,
+                    headers=headers,
+                    data=_compress_body(job.body),
+                    **kwargs
+                )
+            else:
+                return self.connection.put(
+                    url=url,
+                    headers=headers,
+                    json=job.body,
+                    **kwargs
+                )
+        elif job.method == 'DELETE':
+            return self.connection.delete(
+                url=url,
+                headers=headers,
+                params=job.query_strings,
+                **kwargs
+            )
+        else:
+            raise AttributeError()
+
     def _send(self, job: NetworkJob):
         if not self._connection:
             raise BrokenPipeError()
@@ -197,50 +392,30 @@ class Gs2RestSession(ISession):
         if self._enable_response_decompression:
             headers['Accept-Encoding'] = 'gzip'
 
-        if job.method == 'GET':
-            response = self.connection.get(
-                url=job.url,
-                headers=headers,
-                params=job.query_strings,
+        # ★job.url は読み取り専用なので、読み替えた宛先はローカルに持つ。
+        url = _rewrite_to_steady(self._steady_endpoint, self.region, job.url)
+        steady = is_steady_url(self._steady_endpoint, url)
+
+        try:
+            try:
+                response = self._do_request(url, headers, job, steady)
+            except requests.exceptions.RequestException as e:
+                # ★Steady の再送: 基点への**接続段階**の失敗（DNS / dial / TLS。1 バイトも送っていない）
+                # だけ、同じ要求をもう 1 回だけ送る。フリートが手放した IP に当たったとき、名前を
+                # 引き直して別のノードへ着く機会を 1 回だけ作る。送信後の失敗は届いたかもしれない
+                # ので再送しない。3 回目は無い。
+                if steady and _is_connect_failure(e):
+                    response = self._do_request(url, headers, job, steady)
+                else:
+                    raise
+        except requests.exceptions.RequestException as e:
+            # ★生の requests 例外は callback に渡す（receive_handler のスレッドを殺さない）
+            job.callback(
+                AsyncResult(
+                    error=e,
+                )
             )
-        elif job.method == 'POST':
-            if self._enable_request_compression and job.body:
-                headers['Content-Encoding'] = 'gzip'
-                headers['Content-Type'] = 'application/json'
-                response = self.connection.post(
-                    url=job.url,
-                    headers=headers,
-                    data=_compress_body(job.body),
-                )
-            else:
-                response = self.connection.post(
-                    url=job.url,
-                    headers=headers,
-                    json=job.body,
-                )
-        elif job.method == 'PUT':
-            if self._enable_request_compression and job.body:
-                headers['Content-Encoding'] = 'gzip'
-                headers['Content-Type'] = 'application/json'
-                response = self.connection.put(
-                    url=job.url,
-                    headers=headers,
-                    data=_compress_body(job.body),
-                )
-            else:
-                response = self.connection.put(
-                    url=job.url,
-                    headers=headers,
-                    json=job.body,
-                )
-        elif job.method == 'DELETE':
-            response = self.connection.delete(
-                url=job.url,
-                headers=headers,
-                params=job.query_strings,
-            )
-        else:
-            raise AttributeError()
+            return
 
         try:
             job.callback(
@@ -287,9 +462,9 @@ class Gs2RestSession(ISession):
                         )
                     )
                 else:
-                    url = Gs2Constant.ENDPOINT_HOST.format(
+                    # ★プロジェクトトークンのログインも Steady 配下へ（<steady>/identifier/projectToken/login）。
+                    url = self.endpoint_host(
                         service='identifier',
-                        region=self.region,
                     ) + "/projectToken/login"
                     body = {
                         "client_id": self.credential.client_id,

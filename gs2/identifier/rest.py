@@ -30,9 +30,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user"
 
         headers = self._create_authorized_headers()
@@ -104,9 +103,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user"
 
         headers = self._create_authorized_headers()
@@ -178,9 +176,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -252,9 +249,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -324,9 +320,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -396,9 +391,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/securityPolicy"
 
         headers = self._create_authorized_headers()
@@ -470,9 +464,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/securityPolicy/common"
 
         headers = self._create_authorized_headers()
@@ -544,9 +537,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/securityPolicy"
 
         headers = self._create_authorized_headers()
@@ -620,9 +612,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/securityPolicy/{securityPolicyName}".format(
             securityPolicyName=request.security_policy_name if request.security_policy_name is not None and request.security_policy_name != '' else 'null',
         )
@@ -696,9 +687,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/securityPolicy/{securityPolicyName}".format(
             securityPolicyName=request.security_policy_name if request.security_policy_name is not None and request.security_policy_name != '' else 'null',
         )
@@ -768,9 +758,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/securityPolicy/{securityPolicyName}".format(
             securityPolicyName=request.security_policy_name if request.security_policy_name is not None and request.security_policy_name != '' else 'null',
         )
@@ -840,9 +829,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/identifier".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -916,9 +904,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/identifier".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -988,9 +975,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/identifier/{clientId}".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
             clientId=request.client_id if request.client_id is not None and request.client_id != '' else 'null',
@@ -1061,9 +1047,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/identifier/{clientId}".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
             clientId=request.client_id if request.client_id is not None and request.client_id != '' else 'null',
@@ -1134,9 +1119,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/identifier/{clientId}/guard".format(
             clientId=request.client_id if request.client_id is not None and request.client_id != '' else 'null',
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
@@ -1207,9 +1191,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/identifier/{clientId}/guard".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
             clientId=request.client_id if request.client_id is not None and request.client_id != '' else 'null',
@@ -1282,9 +1265,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/identifier/{clientId}/guard/{guardNamespaceId}".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
             clientId=request.client_id if request.client_id is not None and request.client_id != '' else 'null',
@@ -1356,9 +1338,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/system/version"
 
         headers = self._create_authorized_headers()
@@ -1426,9 +1407,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/password".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -1500,9 +1480,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/password/entity".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -1572,9 +1551,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/mfa".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -1644,9 +1622,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/mfa/challenge".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -1718,9 +1695,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/mfa".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -1790,9 +1766,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/password/entity".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -1862,9 +1837,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/securityPolicy".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -1934,9 +1908,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/securityPolicy".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
         )
@@ -2008,9 +1981,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/user/{userName}/securityPolicy/{securityPolicyId}".format(
             userName=request.user_name if request.user_name is not None and request.user_name != '' else 'null',
             securityPolicyId=request.security_policy_id if request.security_policy_id is not None and request.security_policy_id != '' else 'null',
@@ -2081,9 +2053,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/projectToken/login"
 
         headers = self._create_authorized_headers()
@@ -2155,9 +2126,8 @@ class Gs2IdentifierRestClient(rest.AbstractGs2RestClient):
         is_blocking: bool,
     ):
 
-        url = Gs2Constant.ENDPOINT_HOST.format(
+        url = self.session.endpoint_host(
             service='identifier',
-            region=self.session.region,
         ) + "/projectToken/login/user"
 
         headers = self._create_authorized_headers()

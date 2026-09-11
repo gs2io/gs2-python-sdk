@@ -15,7 +15,7 @@
 # permissions and limitations under the License.
 import time
 from collections import deque
-from typing import Callable, Type, Deque
+from typing import Callable, Type, Deque, Optional
 from netrc import netrc, NetrcParseError  # メインスレッド以外でimportするとデッドロックするらしい https://github.com/kennethreitz/requests/issues/2925
 
 import websocket
@@ -98,11 +98,14 @@ class Gs2WebSocketSession(ISession):
             self,
             credential: IGs2Credential,
             region: str,
+            steady_endpoint: Optional[str] = None,
     ):
         """
         コンストラクタ
         :param credential: クレデンシャル
         :param region: クレデンシャル
+        :param steady_endpoint: Steady（専用フリート）の基点（https://<host>）。None なら共有クラウド（接続先は従来どおり）。
+            設定すると接続先は wss://<host>/（基点が http:// なら ws://）になり、handshake に上限が付く
         """
         super().__init__()
         self._credential = credential
@@ -110,6 +113,7 @@ class Gs2WebSocketSession(ISession):
         self._region = region
         self._connection = None
         self._job_queue = deque()
+        self._steady_endpoint = normalize_steady_endpoint(steady_endpoint) or None
 
     @property
     def credential(self) -> IGs2Credential:
@@ -126,6 +130,29 @@ class Gs2WebSocketSession(ISession):
     @property
     def connection(self) -> websocket.WebSocketApp:
         return self._connection
+
+    @property
+    def steady_endpoint(self) -> Optional[str]:
+        """
+        Steady（専用フリート）の基点（https://<host>）。未設定なら None。
+        """
+        return self._steady_endpoint
+
+    @steady_endpoint.setter
+    def steady_endpoint(self, value: Optional[str]):
+        self._steady_endpoint = normalize_steady_endpoint(value) or None
+
+    def _web_socket_url(self) -> str:
+        """
+        接続先。優先順: steady_endpoint（wss://<host>/）＞ Gs2Constant.WS_ENDPOINT_HOST。
+        steady_endpoint が未設定なら従来と byte 単位で同じ文字列。
+        """
+        url = steady_web_socket_url(self._steady_endpoint)
+        if url:
+            return url
+        return Gs2Constant.WS_ENDPOINT_HOST.format(
+            region=self.region,
+        )
 
     def send(self, job: NetworkJob):
         if not self._connection:
@@ -153,6 +180,7 @@ class Gs2WebSocketSession(ISession):
                 import simplejson as json
 
                 opened = []
+                closed = []
                 def on_message(ws, message):
                     response = json.loads(message)
                     request_id = response.get('requestId')
@@ -191,22 +219,50 @@ class Gs2WebSocketSession(ISession):
                 def on_open(ws):
                     opened.append(True)
 
+                def on_close(ws, *args):
+                    closed.append(True)
+
                 websocket.enableTrace(False)
                 self._connection = websocket.WebSocketApp(
-                    Gs2Constant.WS_ENDPOINT_HOST.format(
-                        region=self.region,
-                    ),
+                    self._web_socket_url(),
                     on_message=on_message,
                     on_error=on_error,
                     on_open=on_open,
+                    on_close=on_close,
                 )
 
                 def run():
                     self._connection.run_forever(ping_interval=10)
                 thread.start_new_thread(run, ())
 
+                # ★Steady のときだけ handshake の待ちを有界にする（基点はフリートのノードへ直接
+                # 解決されるので、手放された公開 IP に当たると open も close も来ず固まる）。
+                # 共有クラウドは従来どおり connect() 側の 30 秒に任せる。繋ぎ直しは入れない。
+                connect_timeout = None
+                if normalize_steady_endpoint(self._steady_endpoint):
+                    connect_timeout = Gs2Constant.STEADY_CONNECT_TIMEOUT
+
+                started = time.time()
                 while not opened and self._connection:
+                    if connect_timeout is not None and (closed or time.time() - started > connect_timeout):
+                        break
                     time.sleep(0.1)
+
+                if connect_timeout is not None and not opened:
+                    # 開けなかった: 接続を畳んで誤りを返す（別の経路へ繋ぎ直すことはしない）
+                    failed = self._connection
+                    self._connection = None
+                    if failed is not None:
+                        try:
+                            failed.close()
+                        except Exception:
+                            pass
+                    raise ConnectionError(
+                        'failed to connect to {} within {} seconds'.format(
+                            self._web_socket_url(),
+                            connect_timeout,
+                        )
+                    )
 
                 if isinstance(self.credential, ProjectTokenGs2Credential):
                     self._project_token = self.credential.project_token
