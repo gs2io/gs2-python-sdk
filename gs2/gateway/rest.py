@@ -1421,6 +1421,11 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
             body["enableTransferMobileNotification"] = request.enable_transfer_mobile_notification
         if request.sound is not None:
             body["sound"] = request.sound
+        if request.mobile_notification_messages is not None:
+            body["mobileNotificationMessages"] = [
+                item.to_dict()
+                for item in request.mobile_notification_messages
+            ]
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2116,6 +2121,11 @@ class Gs2GatewayRestClient(rest.AbstractGs2RestClient):
             body["payload"] = request.payload
         if request.sound is not None:
             body["sound"] = request.sound
+        if request.mobile_notification_messages is not None:
+            body["mobileNotificationMessages"] = [
+                item.to_dict()
+                for item in request.mobile_notification_messages
+            ]
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

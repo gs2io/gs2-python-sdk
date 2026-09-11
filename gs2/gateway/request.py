@@ -950,6 +950,7 @@ class SendNotificationRequest(core.Gs2Request):
     payload: str = None
     enable_transfer_mobile_notification: bool = None
     sound: str = None
+    mobile_notification_messages: List[MobileNotificationMessage] = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -975,6 +976,10 @@ class SendNotificationRequest(core.Gs2Request):
 
     def with_sound(self, sound: str) -> SendNotificationRequest:
         self.sound = sound
+        return self
+
+    def with_mobile_notification_messages(self, mobile_notification_messages: List[MobileNotificationMessage]) -> SendNotificationRequest:
+        self.mobile_notification_messages = mobile_notification_messages
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> SendNotificationRequest:
@@ -1010,6 +1015,10 @@ class SendNotificationRequest(core.Gs2Request):
             .with_payload(data.get('payload'))\
             .with_enable_transfer_mobile_notification(data.get('enableTransferMobileNotification'))\
             .with_sound(data.get('sound'))\
+            .with_mobile_notification_messages(None if data.get('mobileNotificationMessages') is None else [
+                MobileNotificationMessage.from_dict(data.get('mobileNotificationMessages')[i])
+                for i in range(len(data.get('mobileNotificationMessages')))
+            ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1020,6 +1029,10 @@ class SendNotificationRequest(core.Gs2Request):
             "payload": self.payload,
             "enableTransferMobileNotification": self.enable_transfer_mobile_notification,
             "sound": self.sound,
+            "mobileNotificationMessages": None if self.mobile_notification_messages is None else [
+                self.mobile_notification_messages[i].to_dict() if self.mobile_notification_messages[i] else None
+                for i in range(len(self.mobile_notification_messages))
+            ],
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -1450,6 +1463,7 @@ class SendMobileNotificationByUserIdRequest(core.Gs2Request):
     subject: str = None
     payload: str = None
     sound: str = None
+    mobile_notification_messages: List[MobileNotificationMessage] = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1471,6 +1485,10 @@ class SendMobileNotificationByUserIdRequest(core.Gs2Request):
 
     def with_sound(self, sound: str) -> SendMobileNotificationByUserIdRequest:
         self.sound = sound
+        return self
+
+    def with_mobile_notification_messages(self, mobile_notification_messages: List[MobileNotificationMessage]) -> SendMobileNotificationByUserIdRequest:
+        self.mobile_notification_messages = mobile_notification_messages
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> SendMobileNotificationByUserIdRequest:
@@ -1505,6 +1523,10 @@ class SendMobileNotificationByUserIdRequest(core.Gs2Request):
             .with_subject(data.get('subject'))\
             .with_payload(data.get('payload'))\
             .with_sound(data.get('sound'))\
+            .with_mobile_notification_messages(None if data.get('mobileNotificationMessages') is None else [
+                MobileNotificationMessage.from_dict(data.get('mobileNotificationMessages')[i])
+                for i in range(len(data.get('mobileNotificationMessages')))
+            ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1514,5 +1536,9 @@ class SendMobileNotificationByUserIdRequest(core.Gs2Request):
             "subject": self.subject,
             "payload": self.payload,
             "sound": self.sound,
+            "mobileNotificationMessages": None if self.mobile_notification_messages is None else [
+                self.mobile_notification_messages[i].to_dict() if self.mobile_notification_messages[i] else None
+                for i in range(len(self.mobile_notification_messages))
+            ],
             "timeOffsetToken": self.time_offset_token,
         }

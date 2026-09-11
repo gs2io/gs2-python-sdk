@@ -496,10 +496,59 @@ class LogSetting(core.Gs2Model):
         }
 
 
+class MobileNotificationMessage(core.Gs2Model):
+    locale: str = None
+    title: str = None
+    message: str = None
+
+    def with_locale(self, locale: str) -> MobileNotificationMessage:
+        self.locale = locale
+        return self
+
+    def with_title(self, title: str) -> MobileNotificationMessage:
+        self.title = title
+        return self
+
+    def with_message(self, message: str) -> MobileNotificationMessage:
+        self.message = message
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[MobileNotificationMessage]:
+        if data is None:
+            return None
+        return MobileNotificationMessage()\
+            .with_locale(data.get('locale'))\
+            .with_title(data.get('title'))\
+            .with_message(data.get('message'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "locale": self.locale,
+            "title": self.title,
+            "message": self.message,
+        }
+
+
 class NotificationSetting(core.Gs2Model):
     gateway_namespace_id: str = None
     enable_transfer_mobile_notification: bool = None
     sound: str = None
+    mobile_notification_messages: List[MobileNotificationMessage] = None
     enable: str = None
 
     def with_gateway_namespace_id(self, gateway_namespace_id: str) -> NotificationSetting:
@@ -512,6 +561,10 @@ class NotificationSetting(core.Gs2Model):
 
     def with_sound(self, sound: str) -> NotificationSetting:
         self.sound = sound
+        return self
+
+    def with_mobile_notification_messages(self, mobile_notification_messages: List[MobileNotificationMessage]) -> NotificationSetting:
+        self.mobile_notification_messages = mobile_notification_messages
         return self
 
     def with_enable(self, enable: str) -> NotificationSetting:
@@ -540,6 +593,10 @@ class NotificationSetting(core.Gs2Model):
             .with_gateway_namespace_id(data.get('gatewayNamespaceId'))\
             .with_enable_transfer_mobile_notification(data.get('enableTransferMobileNotification'))\
             .with_sound(data.get('sound'))\
+            .with_mobile_notification_messages(None if data.get('mobileNotificationMessages') is None else [
+                MobileNotificationMessage.from_dict(data.get('mobileNotificationMessages')[i])
+                for i in range(len(data.get('mobileNotificationMessages')))
+            ])\
             .with_enable(data.get('enable'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -547,6 +604,10 @@ class NotificationSetting(core.Gs2Model):
             "gatewayNamespaceId": self.gateway_namespace_id,
             "enableTransferMobileNotification": self.enable_transfer_mobile_notification,
             "sound": self.sound,
+            "mobileNotificationMessages": None if self.mobile_notification_messages is None else [
+                self.mobile_notification_messages[i].to_dict() if self.mobile_notification_messages[i] else None
+                for i in range(len(self.mobile_notification_messages))
+            ],
             "enable": self.enable,
         }
 

@@ -1413,6 +1413,11 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["enableTransferMobileNotification"] = request.enable_transfer_mobile_notification
         if request.sound is not None:
             body["sound"] = request.sound
+        if request.mobile_notification_messages is not None:
+            body["mobileNotificationMessages"] = [
+                item.to_dict()
+                for item in request.mobile_notification_messages
+            ]
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
@@ -2110,6 +2115,11 @@ class Gs2GatewayWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["payload"] = request.payload
         if request.sound is not None:
             body["sound"] = request.sound
+        if request.mobile_notification_messages is not None:
+            body["mobileNotificationMessages"] = [
+                item.to_dict()
+                for item in request.mobile_notification_messages
+            ]
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

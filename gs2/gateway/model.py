@@ -184,6 +184,54 @@ class LogSetting(core.Gs2Model):
         }
 
 
+class MobileNotificationMessage(core.Gs2Model):
+    locale: str = None
+    title: str = None
+    message: str = None
+
+    def with_locale(self, locale: str) -> MobileNotificationMessage:
+        self.locale = locale
+        return self
+
+    def with_title(self, title: str) -> MobileNotificationMessage:
+        self.title = title
+        return self
+
+    def with_message(self, message: str) -> MobileNotificationMessage:
+        self.message = message
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[MobileNotificationMessage]:
+        if data is None:
+            return None
+        return MobileNotificationMessage()\
+            .with_locale(data.get('locale'))\
+            .with_title(data.get('title'))\
+            .with_message(data.get('message'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "locale": self.locale,
+            "title": self.title,
+            "message": self.message,
+        }
+
+
 class SendNotificationEntry(core.Gs2Model):
     user_id: str = None
     issuer: str = None
@@ -191,6 +239,7 @@ class SendNotificationEntry(core.Gs2Model):
     payload: str = None
     enable_transfer_mobile_notification: bool = None
     sound: str = None
+    mobile_notification_messages: List[MobileNotificationMessage] = None
 
     def with_user_id(self, user_id: str) -> SendNotificationEntry:
         self.user_id = user_id
@@ -214,6 +263,10 @@ class SendNotificationEntry(core.Gs2Model):
 
     def with_sound(self, sound: str) -> SendNotificationEntry:
         self.sound = sound
+        return self
+
+    def with_mobile_notification_messages(self, mobile_notification_messages: List[MobileNotificationMessage]) -> SendNotificationEntry:
+        self.mobile_notification_messages = mobile_notification_messages
         return self
 
     def get(self, key, default=None):
@@ -240,7 +293,11 @@ class SendNotificationEntry(core.Gs2Model):
             .with_subject(data.get('subject'))\
             .with_payload(data.get('payload'))\
             .with_enable_transfer_mobile_notification(data.get('enableTransferMobileNotification'))\
-            .with_sound(data.get('sound'))
+            .with_sound(data.get('sound'))\
+            .with_mobile_notification_messages(None if data.get('mobileNotificationMessages') is None else [
+                MobileNotificationMessage.from_dict(data.get('mobileNotificationMessages')[i])
+                for i in range(len(data.get('mobileNotificationMessages')))
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -250,6 +307,10 @@ class SendNotificationEntry(core.Gs2Model):
             "payload": self.payload,
             "enableTransferMobileNotification": self.enable_transfer_mobile_notification,
             "sound": self.sound,
+            "mobileNotificationMessages": None if self.mobile_notification_messages is None else [
+                self.mobile_notification_messages[i].to_dict() if self.mobile_notification_messages[i] else None
+                for i in range(len(self.mobile_notification_messages))
+            ],
         }
 
 
