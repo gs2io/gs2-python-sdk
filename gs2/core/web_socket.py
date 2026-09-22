@@ -13,13 +13,13 @@
 # on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
+import threading
 import time
 from collections import deque
 from typing import Callable, Type, Deque, Optional
 from netrc import netrc, NetrcParseError  # メインスレッド以外でimportするとデッドロックするらしい https://github.com/kennethreitz/requests/issues/2925
 
 import websocket
-import _thread as thread
 
 from ..core.exception import *
 from ..core.model import *
@@ -112,7 +112,14 @@ class Gs2WebSocketSession(ISession):
         self._project_token = None
         self._region = region
         self._connection = None
+        # _job_queue は応答待ちの要求。★送信（呼び出し側のスレッド）と受信（run_forever のスレッド）の
+        # 両方から触るので _lock で守り、応答が来たもの・接続が切れたものは必ず取り除く。
         self._job_queue = deque()
+        # ★_lock は _job_queue と _connection を守る。コールバックは錠を手放してから呼ぶ
+        # （コールバックは connect() 等でこのセッションへ入り直すので、持ったまま呼ぶと固まる）。
+        self._lock = threading.RLock()
+        # ★受信スレッド（run_forever）。接続が切れたら必ず抜ける。
+        self._receive_thread = None
         self._steady_endpoint = normalize_steady_endpoint(steady_endpoint) or None
 
     @property
@@ -154,17 +161,85 @@ class Gs2WebSocketSession(ISession):
             region=self.region,
         )
 
-    def send(self, job: NetworkJob):
-        if not self._connection:
-            raise BrokenPipeError()
-        import simplejson as json
-        self._job_queue.append(job)
-        try:
-            self._connection.send(json.dumps(job.body))
-        except websocket._exceptions.WebSocketConnectionClosedException:
+    def _take_job(self, request_id: str) -> Optional[NetworkJob]:
+        """
+        request_id の要求を応答待ちの行列から外して返す（無ければ None）。
+        ★同じ要求に二度コールバックしないための唯一の出口。
+        """
+        with self._lock:
+            for job in self._job_queue:
+                if job.request_id == request_id:
+                    self._job_queue.remove(job)
+                    return job
+        return None
+
+    def _drop_connection(self, connection, cause=None):
+        """
+        切れた接続を捨て、応答待ちの要求すべてに BrokenPipeError を返す。
+
+        ★サーバーが応答を返さずに接続を閉じること（gateway の setUserId が自分自身の接続を切る形、
+        ノードの停止、ネットワーク断）があるので、閉じたと分かった時点で待ち中の呼び出しを
+        必ず終わらせる。以前は誰も終わらせず、同期呼び出しが返らなかった。
+        ★既に別の接続へ差し替わっていたら（disconnect → connect の後）何もしない。
+        """
+        with self._lock:
+            if connection is not None and self._connection is not None and self._connection is not connection:
+                return
+            current = self._connection if self._connection is not None else connection
             self._connection = None
-            self.connect()
-            self._connection.send(json.dumps(job.body))
+            self._project_token = None
+            jobs = list(self._job_queue)
+            self._job_queue.clear()
+
+        if current is not None:
+            try:
+                current.close()
+            except Exception:
+                pass
+
+        # ★コールバックは錠の外で呼ぶ。
+        for job in jobs:
+            try:
+                job.callback(
+                    AsyncResult(
+                        error=BrokenPipeError(
+                            'websocket connection closed before the response arrived{}'.format(
+                                '' if cause is None else ': {}'.format(cause),
+                            )
+                        ),
+                    )
+                )
+            except Exception:
+                pass
+
+    def send(self, job: NetworkJob):
+        import simplejson as json
+        with self._lock:
+            connection = self._connection
+            if not connection:
+                # ★切れた後の送信はその場で失敗させる（待たせない）。
+                raise BrokenPipeError('websocket connection is not available')
+            self._job_queue.append(job)
+
+        try:
+            payload = json.dumps(job.body)
+        except Exception:
+            self._take_job(job.request_id)
+            raise
+
+        try:
+            # ★websocket-client の送信は enable_multithread=True で直列化されているので、ここで
+            # 錠を持つ必要はない（持ったまま書くと受信側の切断処理まで止まる）。
+            connection.send(payload)
+        except Exception as e:
+            # ★書けなかった要求は届いていない。待ち行列から外し、繋ぎ直しも再送もしない。
+            # 以前はここで connect() して再送していたので、同じ要求が二度届きうる上、繋ぎ直しの
+            # ログイン待ち（最大 30 秒）の間、呼び出しが止まっていた。
+            self._take_job(job.request_id)
+            if isinstance(e, (websocket._exceptions.WebSocketConnectionClosedException, OSError)):
+                self._drop_connection(connection, e)
+                raise BrokenPipeError('failed to send over websocket: {}'.format(e))
+            raise
 
     def on_notification(self, message):
         pass
@@ -189,51 +264,59 @@ class Gs2WebSocketSession(ISession):
                             response.get('body')
                         )
                     else:
-                        target_job = [
-                            job
-                            for job in self._job_queue
-                            if job.request_id == request_id
-                        ]
-                        if target_job:
+                        # ★行列から外してから呼ぶ（外すのは _take_job だけ。二重コールバックを作らない）。
+                        target_job = self._take_job(request_id)
+                        if target_job is not None:
                             try:
                                 status = response.get('status')
                                 result = response.get('body')
-                                target_job[0].callback(
+                                target_job.callback(
                                     AsyncResult(
-                                        result=target_job[0].result_type.from_dict(_parse_response(status, result)),
+                                        result=target_job.result_type.from_dict(_parse_response(status, result)),
                                     )
                                 )
                             except Gs2Exception as e:
-                                target_job[0].callback(
+                                target_job.callback(
                                     AsyncResult(
                                         error=e,
                                     )
                                 )
-                            finally:
-                                self._job_queue.remove(target_job[0])
 
                 def on_error(ws, error):
-                    print(error)
-                    ws.close()
+                    # ★読み書きの誤り（Close フレーム無しの切断を含む）。接続を捨て、待ち中の要求
+                    # すべてに誤りを返す。run_forever はこの後 teardown して抜ける。
+                    self._drop_connection(ws, error)
 
                 def on_open(ws):
                     opened.append(True)
 
                 def on_close(ws, *args):
                     closed.append(True)
+                    # ★サーバーが応答を返さずに閉じた場合もここに来る。待ち中の要求を終わらせる。
+                    self._drop_connection(ws, 'closed by peer {}'.format(args) if args else 'closed by peer')
 
                 websocket.enableTrace(False)
-                self._connection = websocket.WebSocketApp(
+                connection = websocket.WebSocketApp(
                     self._web_socket_url(),
                     on_message=on_message,
                     on_error=on_error,
                     on_open=on_open,
                     on_close=on_close,
                 )
+                self._connection = connection
 
+                # ★受信は run_forever に任せる。接続が切れると run_forever は on_error / on_close を
+                # 呼んでから戻るので、このスレッドはそこで終わる（残らない）。スレッドを名前付きで
+                # 持つのは、終わったことを確かめられるようにするため。
                 def run():
-                    self._connection.run_forever(ping_interval=10)
-                thread.start_new_thread(run, ())
+                    connection.run_forever(ping_interval=10)
+
+                self._receive_thread = threading.Thread(
+                    target=run,
+                    name='gs2-websocket-receive',
+                    daemon=True,
+                )
+                self._receive_thread.start()
 
                 # ★Steady のときだけ handshake の待ちを有界にする（基点はフリートのノードへ直接
                 # 解決されるので、手放された公開 IP に当たると open も close も来ず固まる）。
@@ -350,20 +433,12 @@ class Gs2WebSocketSession(ISession):
             self._project_token = async_result[0].result.access_token
 
     def disconnect(self):
-        if self._connection:
-            try:
-                self._connection.close()
-            except:
-                pass
-            self._connection = None
-        for job in self._job_queue:
-            job.callback(
-                AsyncResult(
-                    error=BrokenPipeError(),
-                )
-            )
-        self._job_queue.clear()
-        self._project_token = None
+        """
+        接続を閉じる。★応答待ちの要求には BrokenPipeError が返る（待たせたままにしない）。
+        """
+        with self._lock:
+            connection = self._connection
+        self._drop_connection(connection, 'disconnect')
 
 
 class AbstractGs2WebSocketClient(object):

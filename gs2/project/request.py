@@ -553,6 +553,7 @@ class CreateProjectRequest(core.Gs2Request):
     enable_event_bridge: str = None
     event_bridge_aws_account_id: str = None
     event_bridge_aws_region: str = None
+    data_store_key_scheme: str = None
 
     def with_account_token(self, account_token: str) -> CreateProjectRequest:
         self.account_token = account_token
@@ -594,6 +595,10 @@ class CreateProjectRequest(core.Gs2Request):
         self.event_bridge_aws_region = event_bridge_aws_region
         return self
 
+    def with_data_store_key_scheme(self, data_store_key_scheme: str) -> CreateProjectRequest:
+        self.data_store_key_scheme = data_store_key_scheme
+        return self
+
     def get(self, key, default=None):
         items = self.to_dict()
         if key in items.keys():
@@ -622,7 +627,8 @@ class CreateProjectRequest(core.Gs2Request):
             .with_billing_method_name(data.get('billingMethodName'))\
             .with_enable_event_bridge(data.get('enableEventBridge'))\
             .with_event_bridge_aws_account_id(data.get('eventBridgeAwsAccountId'))\
-            .with_event_bridge_aws_region(data.get('eventBridgeAwsRegion'))
+            .with_event_bridge_aws_region(data.get('eventBridgeAwsRegion'))\
+            .with_data_store_key_scheme(data.get('dataStoreKeyScheme'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -636,6 +642,7 @@ class CreateProjectRequest(core.Gs2Request):
             "enableEventBridge": self.enable_event_bridge,
             "eventBridgeAwsAccountId": self.event_bridge_aws_account_id,
             "eventBridgeAwsRegion": self.event_bridge_aws_region,
+            "dataStoreKeyScheme": self.data_store_key_scheme,
         }
 
 

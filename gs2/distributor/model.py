@@ -921,6 +921,61 @@ class AcquireAction(core.Gs2Model):
         }
 
 
+class UserDataEntry(core.Gs2Model):
+    service: str = None
+    namespace_name: str = None
+    kind: str = None
+    payload: str = None
+
+    def with_service(self, service: str) -> UserDataEntry:
+        self.service = service
+        return self
+
+    def with_namespace_name(self, namespace_name: str) -> UserDataEntry:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_kind(self, kind: str) -> UserDataEntry:
+        self.kind = kind
+        return self
+
+    def with_payload(self, payload: str) -> UserDataEntry:
+        self.payload = payload
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UserDataEntry]:
+        if data is None:
+            return None
+        return UserDataEntry()\
+            .with_service(data.get('service'))\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_kind(data.get('kind'))\
+            .with_payload(data.get('payload'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "service": self.service,
+            "namespaceName": self.namespace_name,
+            "kind": self.kind,
+            "payload": self.payload,
+        }
+
+
 class BatchResultPayload(core.Gs2Model):
     request_id: str = None
     status_code: int = None

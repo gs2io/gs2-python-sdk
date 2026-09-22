@@ -1868,6 +1868,113 @@ class BatchExecuteApiRequest(core.Gs2Request):
         }
 
 
+class DescribeUserDataRequest(core.Gs2Request):
+
+    context_stack: str = None
+    access_token: str = None
+    page_token: str = None
+    limit: int = None
+
+    def with_access_token(self, access_token: str) -> DescribeUserDataRequest:
+        self.access_token = access_token
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeUserDataRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeUserDataRequest:
+        self.limit = limit
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUserDataRequest]:
+        if data is None:
+            return None
+        return DescribeUserDataRequest()\
+            .with_access_token(data.get('accessToken'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "accessToken": self.access_token,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+        }
+
+
+class DescribeUserDataByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    user_id: str = None
+    page_token: str = None
+    limit: int = None
+    time_offset_token: str = None
+
+    def with_user_id(self, user_id: str) -> DescribeUserDataByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_page_token(self, page_token: str) -> DescribeUserDataByUserIdRequest:
+        self.page_token = page_token
+        return self
+
+    def with_limit(self, limit: int) -> DescribeUserDataByUserIdRequest:
+        self.limit = limit
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> DescribeUserDataByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUserDataByUserIdRequest]:
+        if data is None:
+            return None
+        return DescribeUserDataByUserIdRequest()\
+            .with_user_id(data.get('userId'))\
+            .with_page_token(data.get('pageToken'))\
+            .with_limit(data.get('limit'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "pageToken": self.page_token,
+            "limit": self.limit,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class IfExpressionByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None

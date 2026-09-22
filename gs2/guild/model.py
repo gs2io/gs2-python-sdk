@@ -541,12 +541,17 @@ class IgnoreUser(core.Gs2Model):
 
 class SendMemberRequest(core.Gs2Model):
     user_id: str = None
+    target_guild_model_name: str = None
     target_guild_name: str = None
     metadata: str = None
     created_at: int = None
 
     def with_user_id(self, user_id: str) -> SendMemberRequest:
         self.user_id = user_id
+        return self
+
+    def with_target_guild_model_name(self, target_guild_model_name: str) -> SendMemberRequest:
+        self.target_guild_model_name = target_guild_model_name
         return self
 
     def with_target_guild_name(self, target_guild_name: str) -> SendMemberRequest:
@@ -588,6 +593,7 @@ class SendMemberRequest(core.Gs2Model):
             return None
         return SendMemberRequest()\
             .with_user_id(data.get('userId'))\
+            .with_target_guild_model_name(data.get('targetGuildModelName'))\
             .with_target_guild_name(data.get('targetGuildName'))\
             .with_metadata(data.get('metadata'))\
             .with_created_at(data.get('createdAt'))
@@ -595,6 +601,7 @@ class SendMemberRequest(core.Gs2Model):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "targetGuildModelName": self.target_guild_model_name,
             "targetGuildName": self.target_guild_name,
             "metadata": self.metadata,
             "createdAt": self.created_at,

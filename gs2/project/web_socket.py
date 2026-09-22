@@ -937,6 +937,8 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["eventBridgeAwsAccountId"] = request.event_bridge_aws_account_id
         if request.event_bridge_aws_region is not None:
             body["eventBridgeAwsRegion"] = request.event_bridge_aws_region
+        if request.data_store_key_scheme is not None:
+            body["dataStoreKeyScheme"] = request.data_store_key_scheme
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

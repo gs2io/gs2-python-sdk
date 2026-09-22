@@ -1030,6 +1030,7 @@ class Project(core.Gs2Model):
     currency: str = None
     event_bridge_aws_account_id: str = None
     event_bridge_aws_region: str = None
+    data_store_key_scheme: str = None
     created_at: int = None
     updated_at: int = None
 
@@ -1075,6 +1076,10 @@ class Project(core.Gs2Model):
 
     def with_event_bridge_aws_region(self, event_bridge_aws_region: str) -> Project:
         self.event_bridge_aws_region = event_bridge_aws_region
+        return self
+
+    def with_data_store_key_scheme(self, data_store_key_scheme: str) -> Project:
+        self.data_store_key_scheme = data_store_key_scheme
         return self
 
     def with_created_at(self, created_at: int) -> Project:
@@ -1149,6 +1154,7 @@ class Project(core.Gs2Model):
             .with_currency(data.get('currency'))\
             .with_event_bridge_aws_account_id(data.get('eventBridgeAwsAccountId'))\
             .with_event_bridge_aws_region(data.get('eventBridgeAwsRegion'))\
+            .with_data_store_key_scheme(data.get('dataStoreKeyScheme'))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))
 
@@ -1168,6 +1174,7 @@ class Project(core.Gs2Model):
             "currency": self.currency,
             "eventBridgeAwsAccountId": self.event_bridge_aws_account_id,
             "eventBridgeAwsRegion": self.event_bridge_aws_region,
+            "dataStoreKeyScheme": self.data_store_key_scheme,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }
