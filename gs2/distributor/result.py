@@ -1537,100 +1537,6 @@ class BatchExecuteApiResult(core.Gs2Result):
         }
 
 
-class DescribeUserDataResult(core.Gs2Result):
-    items: List[UserDataEntry] = None
-    next_page_token: str = None
-
-    def with_items(self, items: List[UserDataEntry]) -> DescribeUserDataResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribeUserDataResult:
-        self.next_page_token = next_page_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeUserDataResult]:
-        if data is None:
-            return None
-        return DescribeUserDataResult()\
-            .with_items(None if data.get('items') is None else [
-                UserDataEntry.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-            "nextPageToken": self.next_page_token,
-        }
-
-
-class DescribeUserDataByUserIdResult(core.Gs2Result):
-    items: List[UserDataEntry] = None
-    next_page_token: str = None
-
-    def with_items(self, items: List[UserDataEntry]) -> DescribeUserDataByUserIdResult:
-        self.items = items
-        return self
-
-    def with_next_page_token(self, next_page_token: str) -> DescribeUserDataByUserIdResult:
-        self.next_page_token = next_page_token
-        return self
-
-    def get(self, key, default=None):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return default
-
-    def __getitem__(self, key):
-        items = self.to_dict()
-        if key in items.keys():
-            return items[key]
-        return None
-
-    @staticmethod
-    def from_dict(
-        data: Dict[str, Any],
-    ) -> Optional[DescribeUserDataByUserIdResult]:
-        if data is None:
-            return None
-        return DescribeUserDataByUserIdResult()\
-            .with_items(None if data.get('items') is None else [
-                UserDataEntry.from_dict(data.get('items')[i])
-                for i in range(len(data.get('items')))
-            ])\
-            .with_next_page_token(data.get('nextPageToken'))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "items": None if self.items is None else [
-                self.items[i].to_dict() if self.items[i] else None
-                for i in range(len(self.items))
-            ],
-            "nextPageToken": self.next_page_token,
-        }
-
-
 class IfExpressionByUserIdResult(core.Gs2Result):
     item: TransactionResult = None
     expression_result: bool = None
@@ -1907,6 +1813,100 @@ class GetStampSheetResultByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class DescribeUserDataResult(core.Gs2Result):
+    items: List[UserDataEntry] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[UserDataEntry]) -> DescribeUserDataResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeUserDataResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUserDataResult]:
+        if data is None:
+            return None
+        return DescribeUserDataResult()\
+            .with_items(None if data.get('items') is None else [
+                UserDataEntry.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
+        }
+
+
+class DescribeUserDataByUserIdResult(core.Gs2Result):
+    items: List[UserDataEntry] = None
+    next_page_token: str = None
+
+    def with_items(self, items: List[UserDataEntry]) -> DescribeUserDataByUserIdResult:
+        self.items = items
+        return self
+
+    def with_next_page_token(self, next_page_token: str) -> DescribeUserDataByUserIdResult:
+        self.next_page_token = next_page_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[DescribeUserDataByUserIdResult]:
+        if data is None:
+            return None
+        return DescribeUserDataByUserIdResult()\
+            .with_items(None if data.get('items') is None else [
+                UserDataEntry.from_dict(data.get('items')[i])
+                for i in range(len(data.get('items')))
+            ])\
+            .with_next_page_token(data.get('nextPageToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": None if self.items is None else [
+                self.items[i].to_dict() if self.items[i] else None
+                for i in range(len(self.items))
+            ],
+            "nextPageToken": self.next_page_token,
         }
 
 

@@ -2814,160 +2814,6 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
-    def _describe_user_data(
-        self,
-        request: DescribeUserDataRequest,
-        callback: Callable[[AsyncResult[DescribeUserDataResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="distributor",
-            component='distribute',
-            function='describeUserData',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.access_token is not None:
-            body["accessToken"] = request.access_token
-        if request.page_token is not None:
-            body["pageToken"] = request.page_token
-        if request.limit is not None:
-            body["limit"] = request.limit
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-        if request.access_token:
-            body["xGs2AccessToken"] = request.access_token
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeUserDataResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_user_data(
-        self,
-        request: DescribeUserDataRequest,
-    ) -> DescribeUserDataResult:
-        async_result = []
-        with timeout(30):
-            self._describe_user_data(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_user_data_async(
-        self,
-        request: DescribeUserDataRequest,
-    ) -> DescribeUserDataResult:
-        async_result = []
-        self._describe_user_data(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-    def _describe_user_data_by_user_id(
-        self,
-        request: DescribeUserDataByUserIdRequest,
-        callback: Callable[[AsyncResult[DescribeUserDataByUserIdResult]], None],
-    ):
-        import uuid
-
-        request_id = str(uuid.uuid4())
-        body = self._create_metadata(
-            service="distributor",
-            component='distribute',
-            function='describeUserDataByUserId',
-            request_id=request_id,
-        )
-
-        if request.context_stack:
-            body['contextStack'] = str(request.context_stack)
-        if request.user_id is not None:
-            body["userId"] = request.user_id
-        if request.page_token is not None:
-            body["pageToken"] = request.page_token
-        if request.limit is not None:
-            body["limit"] = request.limit
-        if request.time_offset_token is not None:
-            body["timeOffsetToken"] = request.time_offset_token
-
-        if request.request_id:
-            body["xGs2RequestId"] = request.request_id
-
-        self.session.send(
-            web_socket.NetworkJob(
-                request_id=request_id,
-                result_type=DescribeUserDataByUserIdResult,
-                callback=callback,
-                body=body,
-            )
-        )
-
-    def describe_user_data_by_user_id(
-        self,
-        request: DescribeUserDataByUserIdRequest,
-    ) -> DescribeUserDataByUserIdResult:
-        async_result = []
-        with timeout(30):
-            self._describe_user_data_by_user_id(
-                request,
-                lambda result: async_result.append(result),
-            )
-
-        with timeout(30):
-            while not async_result:
-                time.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
-
-    async def describe_user_data_by_user_id_async(
-        self,
-        request: DescribeUserDataByUserIdRequest,
-    ) -> DescribeUserDataByUserIdResult:
-        async_result = []
-        self._describe_user_data_by_user_id(
-            request,
-            lambda result: async_result.append(result),
-        )
-
-        import asyncio
-        with timeout(30):
-            while not async_result:
-                await asyncio.sleep(0.01)
-
-        if async_result[0].error:
-            raise async_result[0].error
-        return async_result[0].result
-
     def _if_expression_by_user_id(
         self,
         request: IfExpressionByUserIdRequest,
@@ -3583,6 +3429,160 @@ class Gs2DistributorWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> GetStampSheetResultByUserIdResult:
         async_result = []
         self._get_stamp_sheet_result_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_user_data(
+        self,
+        request: DescribeUserDataRequest,
+        callback: Callable[[AsyncResult[DescribeUserDataResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='userDataEntry',
+            function='describeUserData',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeUserDataResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_user_data(
+        self,
+        request: DescribeUserDataRequest,
+    ) -> DescribeUserDataResult:
+        async_result = []
+        with timeout(30):
+            self._describe_user_data(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_user_data_async(
+        self,
+        request: DescribeUserDataRequest,
+    ) -> DescribeUserDataResult:
+        async_result = []
+        self._describe_user_data(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _describe_user_data_by_user_id(
+        self,
+        request: DescribeUserDataByUserIdRequest,
+        callback: Callable[[AsyncResult[DescribeUserDataByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="distributor",
+            component='userDataEntry',
+            function='describeUserDataByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.page_token is not None:
+            body["pageToken"] = request.page_token
+        if request.limit is not None:
+            body["limit"] = request.limit
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=DescribeUserDataByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def describe_user_data_by_user_id(
+        self,
+        request: DescribeUserDataByUserIdRequest,
+    ) -> DescribeUserDataByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._describe_user_data_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def describe_user_data_by_user_id_async(
+        self,
+        request: DescribeUserDataByUserIdRequest,
+    ) -> DescribeUserDataByUserIdResult:
+        async_result = []
+        self._describe_user_data_by_user_id(
             request,
             lambda result: async_result.append(result),
         )
