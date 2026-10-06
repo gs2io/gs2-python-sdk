@@ -1875,6 +1875,11 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["targetInventoryModelId"] = request.target_inventory_model_id
         if request.grade_model_id is not None:
             body["gradeModelId"] = request.grade_model_id
+        if request.group_key_hierarchy is not None:
+            body["groupKeyHierarchy"] = [
+                item
+                for item in request.group_key_hierarchy
+            ]
         if request.grade_entries is not None:
             body["gradeEntries"] = [
                 item.to_dict()
@@ -2034,6 +2039,11 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["targetInventoryModelId"] = request.target_inventory_model_id
         if request.grade_model_id is not None:
             body["gradeModelId"] = request.grade_model_id
+        if request.group_key_hierarchy is not None:
+            body["groupKeyHierarchy"] = [
+                item
+                for item in request.group_key_hierarchy
+            ]
         if request.grade_entries is not None:
             body["gradeEntries"] = [
                 item.to_dict()
@@ -2449,6 +2459,13 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item
                 for item in request.materials
             ]
+        if request.recipe_name is not None:
+            body["recipeName"] = request.recipe_name
+        if request.recipe_materials is not None:
+            body["recipeMaterials"] = [
+                item.to_dict()
+                for item in request.recipe_materials
+            ]
         if request.config is not None:
             body["config"] = [
                 item.to_dict()
@@ -2539,6 +2556,13 @@ class Gs2EnhanceWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["materials"] = [
                 item
                 for item in request.materials
+            ]
+        if request.recipe_name is not None:
+            body["recipeName"] = request.recipe_name
+        if request.recipe_materials is not None:
+            body["recipeMaterials"] = [
+                item.to_dict()
+                for item in request.recipe_materials
             ]
         if request.config is not None:
             body["config"] = [

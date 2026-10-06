@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: gs2
-Version: 1.1.254
+Version: 1.1.255
 Summary: GS2 SDK for Python.
 Home-page: https://gs2.io/
 Author: Game Server Services, Inc.
@@ -9,7 +9,8 @@ License: Apache License 2.0
 Platform: UNKNOWN
 Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 3
-Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.10
 
 UNKNOWN
 

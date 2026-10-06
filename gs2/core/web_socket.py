@@ -104,21 +104,14 @@ class Gs2WebSocketSession(ISession):
         コンストラクタ
         :param credential: クレデンシャル
         :param region: クレデンシャル
-        :param steady_endpoint: Steady（専用フリート）の基点（https://<host>）。None なら共有クラウド（接続先は従来どおり）。
-            設定すると接続先は wss://<host>/（基点が http:// なら ws://）になり、handshake に上限が付く
         """
         super().__init__()
         self._credential = credential
         self._project_token = None
         self._region = region
         self._connection = None
-        # _job_queue は応答待ちの要求。★送信（呼び出し側のスレッド）と受信（run_forever のスレッド）の
-        # 両方から触るので _lock で守り、応答が来たもの・接続が切れたものは必ず取り除く。
         self._job_queue = deque()
-        # ★_lock は _job_queue と _connection を守る。コールバックは錠を手放してから呼ぶ
-        # （コールバックは connect() 等でこのセッションへ入り直すので、持ったまま呼ぶと固まる）。
         self._lock = threading.RLock()
-        # ★受信スレッド（run_forever）。接続が切れたら必ず抜ける。
         self._receive_thread = None
         self._steady_endpoint = normalize_steady_endpoint(steady_endpoint) or None
 
@@ -140,9 +133,6 @@ class Gs2WebSocketSession(ISession):
 
     @property
     def steady_endpoint(self) -> Optional[str]:
-        """
-        Steady（専用フリート）の基点（https://<host>）。未設定なら None。
-        """
         return self._steady_endpoint
 
     @steady_endpoint.setter
@@ -150,10 +140,6 @@ class Gs2WebSocketSession(ISession):
         self._steady_endpoint = normalize_steady_endpoint(value) or None
 
     def _web_socket_url(self) -> str:
-        """
-        接続先。優先順: steady_endpoint（wss://<host>/）＞ Gs2Constant.WS_ENDPOINT_HOST。
-        steady_endpoint が未設定なら従来と byte 単位で同じ文字列。
-        """
         url = steady_web_socket_url(self._steady_endpoint)
         if url:
             return url
@@ -162,10 +148,6 @@ class Gs2WebSocketSession(ISession):
         )
 
     def _take_job(self, request_id: str) -> Optional[NetworkJob]:
-        """
-        request_id の要求を応答待ちの行列から外して返す（無ければ None）。
-        ★同じ要求に二度コールバックしないための唯一の出口。
-        """
         with self._lock:
             for job in self._job_queue:
                 if job.request_id == request_id:
@@ -174,14 +156,6 @@ class Gs2WebSocketSession(ISession):
         return None
 
     def _drop_connection(self, connection, cause=None):
-        """
-        切れた接続を捨て、応答待ちの要求すべてに BrokenPipeError を返す。
-
-        ★サーバーが応答を返さずに接続を閉じること（gateway の setUserId が自分自身の接続を切る形、
-        ノードの停止、ネットワーク断）があるので、閉じたと分かった時点で待ち中の呼び出しを
-        必ず終わらせる。以前は誰も終わらせず、同期呼び出しが返らなかった。
-        ★既に別の接続へ差し替わっていたら（disconnect → connect の後）何もしない。
-        """
         with self._lock:
             if connection is not None and self._connection is not None and self._connection is not connection:
                 return
@@ -197,7 +171,6 @@ class Gs2WebSocketSession(ISession):
             except Exception:
                 pass
 
-        # ★コールバックは錠の外で呼ぶ。
         for job in jobs:
             try:
                 job.callback(
@@ -217,7 +190,6 @@ class Gs2WebSocketSession(ISession):
         with self._lock:
             connection = self._connection
             if not connection:
-                # ★切れた後の送信はその場で失敗させる（待たせない）。
                 raise BrokenPipeError('websocket connection is not available')
             self._job_queue.append(job)
 
@@ -228,13 +200,8 @@ class Gs2WebSocketSession(ISession):
             raise
 
         try:
-            # ★websocket-client の送信は enable_multithread=True で直列化されているので、ここで
-            # 錠を持つ必要はない（持ったまま書くと受信側の切断処理まで止まる）。
             connection.send(payload)
         except Exception as e:
-            # ★書けなかった要求は届いていない。待ち行列から外し、繋ぎ直しも再送もしない。
-            # 以前はここで connect() して再送していたので、同じ要求が二度届きうる上、繋ぎ直しの
-            # ログイン待ち（最大 30 秒）の間、呼び出しが止まっていた。
             self._take_job(job.request_id)
             if isinstance(e, (websocket._exceptions.WebSocketConnectionClosedException, OSError)):
                 self._drop_connection(connection, e)
@@ -264,7 +231,6 @@ class Gs2WebSocketSession(ISession):
                             response.get('body')
                         )
                     else:
-                        # ★行列から外してから呼ぶ（外すのは _take_job だけ。二重コールバックを作らない）。
                         target_job = self._take_job(request_id)
                         if target_job is not None:
                             try:
@@ -283,8 +249,6 @@ class Gs2WebSocketSession(ISession):
                                 )
 
                 def on_error(ws, error):
-                    # ★読み書きの誤り（Close フレーム無しの切断を含む）。接続を捨て、待ち中の要求
-                    # すべてに誤りを返す。run_forever はこの後 teardown して抜ける。
                     self._drop_connection(ws, error)
 
                 def on_open(ws):
@@ -292,7 +256,6 @@ class Gs2WebSocketSession(ISession):
 
                 def on_close(ws, *args):
                     closed.append(True)
-                    # ★サーバーが応答を返さずに閉じた場合もここに来る。待ち中の要求を終わらせる。
                     self._drop_connection(ws, 'closed by peer {}'.format(args) if args else 'closed by peer')
 
                 websocket.enableTrace(False)
@@ -305,9 +268,6 @@ class Gs2WebSocketSession(ISession):
                 )
                 self._connection = connection
 
-                # ★受信は run_forever に任せる。接続が切れると run_forever は on_error / on_close を
-                # 呼んでから戻るので、このスレッドはそこで終わる（残らない）。スレッドを名前付きで
-                # 持つのは、終わったことを確かめられるようにするため。
                 def run():
                     connection.run_forever(ping_interval=10)
 
@@ -318,9 +278,6 @@ class Gs2WebSocketSession(ISession):
                 )
                 self._receive_thread.start()
 
-                # ★Steady のときだけ handshake の待ちを有界にする（基点はフリートのノードへ直接
-                # 解決されるので、手放された公開 IP に当たると open も close も来ず固まる）。
-                # 共有クラウドは従来どおり connect() 側の 30 秒に任せる。繋ぎ直しは入れない。
                 connect_timeout = None
                 if normalize_steady_endpoint(self._steady_endpoint):
                     connect_timeout = Gs2Constant.STEADY_CONNECT_TIMEOUT
@@ -332,7 +289,6 @@ class Gs2WebSocketSession(ISession):
                     time.sleep(0.1)
 
                 if connect_timeout is not None and not opened:
-                    # 開けなかった: 接続を畳んで誤りを返す（別の経路へ繋ぎ直すことはしない）
                     failed = self._connection
                     self._connection = None
                     if failed is not None:
@@ -433,9 +389,6 @@ class Gs2WebSocketSession(ISession):
             self._project_token = async_result[0].result.access_token
 
     def disconnect(self):
-        """
-        接続を閉じる。★応答待ちの要求には BrokenPipeError が返る（待たせたままにしない）。
-        """
         with self._lock:
             connection = self._connection
         self._drop_connection(connection, 'disconnect')

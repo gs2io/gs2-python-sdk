@@ -356,16 +356,305 @@ class Config(core.Gs2Model):
         }
 
 
+class UnleashMaterialSelection(core.Gs2Model):
+    name: str = None
+    item_set_ids: List[str] = None
+
+    def with_name(self, name: str) -> UnleashMaterialSelection:
+        self.name = name
+        return self
+
+    def with_item_set_ids(self, item_set_ids: List[str]) -> UnleashMaterialSelection:
+        self.item_set_ids = item_set_ids
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashMaterialSelection]:
+        if data is None:
+            return None
+        return UnleashMaterialSelection()\
+            .with_name(data.get('name'))\
+            .with_item_set_ids(None if data.get('itemSetIds') is None else [
+                data.get('itemSetIds')[i]
+                for i in range(len(data.get('itemSetIds')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "itemSetIds": None if self.item_set_ids is None else [
+                self.item_set_ids[i]
+                for i in range(len(self.item_set_ids))
+            ],
+        }
+
+
+class UnleashQuantityMaterialSetting(core.Gs2Model):
+    match_type: str = None
+    material_inventory_model_id: str = None
+    item_model_id: str = None
+    count: int = None
+
+    def with_match_type(self, match_type: str) -> UnleashQuantityMaterialSetting:
+        self.match_type = match_type
+        return self
+
+    def with_material_inventory_model_id(self, material_inventory_model_id: str) -> UnleashQuantityMaterialSetting:
+        self.material_inventory_model_id = material_inventory_model_id
+        return self
+
+    def with_item_model_id(self, item_model_id: str) -> UnleashQuantityMaterialSetting:
+        self.item_model_id = item_model_id
+        return self
+
+    def with_count(self, count: int) -> UnleashQuantityMaterialSetting:
+        self.count = count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashQuantityMaterialSetting]:
+        if data is None:
+            return None
+        return UnleashQuantityMaterialSetting()\
+            .with_match_type(data.get('matchType'))\
+            .with_material_inventory_model_id(data.get('materialInventoryModelId'))\
+            .with_item_model_id(data.get('itemModelId'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "matchType": self.match_type,
+            "materialInventoryModelId": self.material_inventory_model_id,
+            "itemModelId": self.item_model_id,
+            "count": self.count,
+        }
+
+
+class UnleashIndividualMaterialSetting(core.Gs2Model):
+    match_type: str = None
+    grade_condition: str = None
+    grade_value: int = None
+    count: int = None
+
+    def with_match_type(self, match_type: str) -> UnleashIndividualMaterialSetting:
+        self.match_type = match_type
+        return self
+
+    def with_grade_condition(self, grade_condition: str) -> UnleashIndividualMaterialSetting:
+        self.grade_condition = grade_condition
+        return self
+
+    def with_grade_value(self, grade_value: int) -> UnleashIndividualMaterialSetting:
+        self.grade_value = grade_value
+        return self
+
+    def with_count(self, count: int) -> UnleashIndividualMaterialSetting:
+        self.count = count
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashIndividualMaterialSetting]:
+        if data is None:
+            return None
+        return UnleashIndividualMaterialSetting()\
+            .with_match_type(data.get('matchType'))\
+            .with_grade_condition(data.get('gradeCondition'))\
+            .with_grade_value(data.get('gradeValue'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "matchType": self.match_type,
+            "gradeCondition": self.grade_condition,
+            "gradeValue": self.grade_value,
+            "count": self.count,
+        }
+
+
+class UnleashMaterial(core.Gs2Model):
+    name: str = None
+    material_type: str = None
+    individual_setting: UnleashIndividualMaterialSetting = None
+    quantity_setting: UnleashQuantityMaterialSetting = None
+
+    def with_name(self, name: str) -> UnleashMaterial:
+        self.name = name
+        return self
+
+    def with_material_type(self, material_type: str) -> UnleashMaterial:
+        self.material_type = material_type
+        return self
+
+    def with_individual_setting(self, individual_setting: UnleashIndividualMaterialSetting) -> UnleashMaterial:
+        self.individual_setting = individual_setting
+        return self
+
+    def with_quantity_setting(self, quantity_setting: UnleashQuantityMaterialSetting) -> UnleashMaterial:
+        self.quantity_setting = quantity_setting
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashMaterial]:
+        if data is None:
+            return None
+        return UnleashMaterial()\
+            .with_name(data.get('name'))\
+            .with_material_type(data.get('materialType'))\
+            .with_individual_setting(UnleashIndividualMaterialSetting.from_dict(data.get('individualSetting')))\
+            .with_quantity_setting(UnleashQuantityMaterialSetting.from_dict(data.get('quantitySetting')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "materialType": self.material_type,
+            "individualSetting": self.individual_setting.to_dict() if self.individual_setting else None,
+            "quantitySetting": self.quantity_setting.to_dict() if self.quantity_setting else None,
+        }
+
+
+class UnleashRecipe(core.Gs2Model):
+    name: str = None
+    metadata: str = None
+    target_group_keys: List[str] = None
+    materials: List[UnleashMaterial] = None
+
+    def with_name(self, name: str) -> UnleashRecipe:
+        self.name = name
+        return self
+
+    def with_metadata(self, metadata: str) -> UnleashRecipe:
+        self.metadata = metadata
+        return self
+
+    def with_target_group_keys(self, target_group_keys: List[str]) -> UnleashRecipe:
+        self.target_group_keys = target_group_keys
+        return self
+
+    def with_materials(self, materials: List[UnleashMaterial]) -> UnleashRecipe:
+        self.materials = materials
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[UnleashRecipe]:
+        if data is None:
+            return None
+        return UnleashRecipe()\
+            .with_name(data.get('name'))\
+            .with_metadata(data.get('metadata'))\
+            .with_target_group_keys(None if data.get('targetGroupKeys') is None else [
+                data.get('targetGroupKeys')[i]
+                for i in range(len(data.get('targetGroupKeys')))
+            ])\
+            .with_materials(None if data.get('materials') is None else [
+                UnleashMaterial.from_dict(data.get('materials')[i])
+                for i in range(len(data.get('materials')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "metadata": self.metadata,
+            "targetGroupKeys": None if self.target_group_keys is None else [
+                self.target_group_keys[i]
+                for i in range(len(self.target_group_keys))
+            ],
+            "materials": None if self.materials is None else [
+                self.materials[i].to_dict() if self.materials[i] else None
+                for i in range(len(self.materials))
+            ],
+        }
+
+
 class UnleashRateEntryModel(core.Gs2Model):
     grade_value: int = None
+    type: str = None
     need_count: int = None
+    recipes: List[UnleashRecipe] = None
 
     def with_grade_value(self, grade_value: int) -> UnleashRateEntryModel:
         self.grade_value = grade_value
         return self
 
+    def with_type(self, type: str) -> UnleashRateEntryModel:
+        self.type = type
+        return self
+
     def with_need_count(self, need_count: int) -> UnleashRateEntryModel:
         self.need_count = need_count
+        return self
+
+    def with_recipes(self, recipes: List[UnleashRecipe]) -> UnleashRateEntryModel:
+        self.recipes = recipes
         return self
 
     def get(self, key, default=None):
@@ -388,12 +677,22 @@ class UnleashRateEntryModel(core.Gs2Model):
             return None
         return UnleashRateEntryModel()\
             .with_grade_value(data.get('gradeValue'))\
-            .with_need_count(data.get('needCount'))
+            .with_type(data.get('type'))\
+            .with_need_count(data.get('needCount'))\
+            .with_recipes(None if data.get('recipes') is None else [
+                UnleashRecipe.from_dict(data.get('recipes')[i])
+                for i in range(len(data.get('recipes')))
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "gradeValue": self.grade_value,
+            "type": self.type,
             "needCount": self.need_count,
+            "recipes": None if self.recipes is None else [
+                self.recipes[i].to_dict() if self.recipes[i] else None
+                for i in range(len(self.recipes))
+            ],
         }
 
 
@@ -722,6 +1021,7 @@ class UnleashRateModelMaster(core.Gs2Model):
     metadata: str = None
     target_inventory_model_id: str = None
     grade_model_id: str = None
+    group_key_hierarchy: List[str] = None
     grade_entries: List[UnleashRateEntryModel] = None
     created_at: int = None
     updated_at: int = None
@@ -749,6 +1049,10 @@ class UnleashRateModelMaster(core.Gs2Model):
 
     def with_grade_model_id(self, grade_model_id: str) -> UnleashRateModelMaster:
         self.grade_model_id = grade_model_id
+        return self
+
+    def with_group_key_hierarchy(self, group_key_hierarchy: List[str]) -> UnleashRateModelMaster:
+        self.group_key_hierarchy = group_key_hierarchy
         return self
 
     def with_grade_entries(self, grade_entries: List[UnleashRateEntryModel]) -> UnleashRateModelMaster:
@@ -847,6 +1151,10 @@ class UnleashRateModelMaster(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
             .with_grade_model_id(data.get('gradeModelId'))\
+            .with_group_key_hierarchy(None if data.get('groupKeyHierarchy') is None else [
+                data.get('groupKeyHierarchy')[i]
+                for i in range(len(data.get('groupKeyHierarchy')))
+            ])\
             .with_grade_entries(None if data.get('gradeEntries') is None else [
                 UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
                 for i in range(len(data.get('gradeEntries')))
@@ -863,6 +1171,10 @@ class UnleashRateModelMaster(core.Gs2Model):
             "metadata": self.metadata,
             "targetInventoryModelId": self.target_inventory_model_id,
             "gradeModelId": self.grade_model_id,
+            "groupKeyHierarchy": None if self.group_key_hierarchy is None else [
+                self.group_key_hierarchy[i]
+                for i in range(len(self.group_key_hierarchy))
+            ],
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries))
@@ -880,6 +1192,7 @@ class UnleashRateModel(core.Gs2Model):
     metadata: str = None
     target_inventory_model_id: str = None
     grade_model_id: str = None
+    group_key_hierarchy: List[str] = None
     grade_entries: List[UnleashRateEntryModel] = None
 
     def with_unleash_rate_model_id(self, unleash_rate_model_id: str) -> UnleashRateModel:
@@ -904,6 +1217,10 @@ class UnleashRateModel(core.Gs2Model):
 
     def with_grade_model_id(self, grade_model_id: str) -> UnleashRateModel:
         self.grade_model_id = grade_model_id
+        return self
+
+    def with_group_key_hierarchy(self, group_key_hierarchy: List[str]) -> UnleashRateModel:
+        self.group_key_hierarchy = group_key_hierarchy
         return self
 
     def with_grade_entries(self, grade_entries: List[UnleashRateEntryModel]) -> UnleashRateModel:
@@ -990,6 +1307,10 @@ class UnleashRateModel(core.Gs2Model):
             .with_metadata(data.get('metadata'))\
             .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
             .with_grade_model_id(data.get('gradeModelId'))\
+            .with_group_key_hierarchy(None if data.get('groupKeyHierarchy') is None else [
+                data.get('groupKeyHierarchy')[i]
+                for i in range(len(data.get('groupKeyHierarchy')))
+            ])\
             .with_grade_entries(None if data.get('gradeEntries') is None else [
                 UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
                 for i in range(len(data.get('gradeEntries')))
@@ -1003,6 +1324,10 @@ class UnleashRateModel(core.Gs2Model):
             "metadata": self.metadata,
             "targetInventoryModelId": self.target_inventory_model_id,
             "gradeModelId": self.grade_model_id,
+            "groupKeyHierarchy": None if self.group_key_hierarchy is None else [
+                self.group_key_hierarchy[i]
+                for i in range(len(self.group_key_hierarchy))
+            ],
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries))

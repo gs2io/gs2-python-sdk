@@ -1292,6 +1292,7 @@ class CreateUnleashRateModelMasterRequest(core.Gs2Request):
     metadata: str = None
     target_inventory_model_id: str = None
     grade_model_id: str = None
+    group_key_hierarchy: List[str] = None
     grade_entries: List[UnleashRateEntryModel] = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateUnleashRateModelMasterRequest:
@@ -1316,6 +1317,10 @@ class CreateUnleashRateModelMasterRequest(core.Gs2Request):
 
     def with_grade_model_id(self, grade_model_id: str) -> CreateUnleashRateModelMasterRequest:
         self.grade_model_id = grade_model_id
+        return self
+
+    def with_group_key_hierarchy(self, group_key_hierarchy: List[str]) -> CreateUnleashRateModelMasterRequest:
+        self.group_key_hierarchy = group_key_hierarchy
         return self
 
     def with_grade_entries(self, grade_entries: List[UnleashRateEntryModel]) -> CreateUnleashRateModelMasterRequest:
@@ -1347,6 +1352,10 @@ class CreateUnleashRateModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
             .with_grade_model_id(data.get('gradeModelId'))\
+            .with_group_key_hierarchy(None if data.get('groupKeyHierarchy') is None else [
+                data.get('groupKeyHierarchy')[i]
+                for i in range(len(data.get('groupKeyHierarchy')))
+            ])\
             .with_grade_entries(None if data.get('gradeEntries') is None else [
                 UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
                 for i in range(len(data.get('gradeEntries')))
@@ -1360,6 +1369,10 @@ class CreateUnleashRateModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "targetInventoryModelId": self.target_inventory_model_id,
             "gradeModelId": self.grade_model_id,
+            "groupKeyHierarchy": None if self.group_key_hierarchy is None else [
+                self.group_key_hierarchy[i]
+                for i in range(len(self.group_key_hierarchy))
+            ],
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries))
@@ -1419,6 +1432,7 @@ class UpdateUnleashRateModelMasterRequest(core.Gs2Request):
     metadata: str = None
     target_inventory_model_id: str = None
     grade_model_id: str = None
+    group_key_hierarchy: List[str] = None
     grade_entries: List[UnleashRateEntryModel] = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateUnleashRateModelMasterRequest:
@@ -1443,6 +1457,10 @@ class UpdateUnleashRateModelMasterRequest(core.Gs2Request):
 
     def with_grade_model_id(self, grade_model_id: str) -> UpdateUnleashRateModelMasterRequest:
         self.grade_model_id = grade_model_id
+        return self
+
+    def with_group_key_hierarchy(self, group_key_hierarchy: List[str]) -> UpdateUnleashRateModelMasterRequest:
+        self.group_key_hierarchy = group_key_hierarchy
         return self
 
     def with_grade_entries(self, grade_entries: List[UnleashRateEntryModel]) -> UpdateUnleashRateModelMasterRequest:
@@ -1474,6 +1492,10 @@ class UpdateUnleashRateModelMasterRequest(core.Gs2Request):
             .with_metadata(data.get('metadata'))\
             .with_target_inventory_model_id(data.get('targetInventoryModelId'))\
             .with_grade_model_id(data.get('gradeModelId'))\
+            .with_group_key_hierarchy(None if data.get('groupKeyHierarchy') is None else [
+                data.get('groupKeyHierarchy')[i]
+                for i in range(len(data.get('groupKeyHierarchy')))
+            ])\
             .with_grade_entries(None if data.get('gradeEntries') is None else [
                 UnleashRateEntryModel.from_dict(data.get('gradeEntries')[i])
                 for i in range(len(data.get('gradeEntries')))
@@ -1487,6 +1509,10 @@ class UpdateUnleashRateModelMasterRequest(core.Gs2Request):
             "metadata": self.metadata,
             "targetInventoryModelId": self.target_inventory_model_id,
             "gradeModelId": self.grade_model_id,
+            "groupKeyHierarchy": None if self.group_key_hierarchy is None else [
+                self.group_key_hierarchy[i]
+                for i in range(len(self.group_key_hierarchy))
+            ],
             "gradeEntries": None if self.grade_entries is None else [
                 self.grade_entries[i].to_dict() if self.grade_entries[i] else None
                 for i in range(len(self.grade_entries))
@@ -1771,6 +1797,8 @@ class UnleashRequest(core.Gs2Request):
     access_token: str = None
     target_item_set_id: str = None
     materials: List[str] = None
+    recipe_name: str = None
+    recipe_materials: List[UnleashMaterialSelection] = None
     config: List[Config] = None
     duplication_avoider: str = None
 
@@ -1792,6 +1820,14 @@ class UnleashRequest(core.Gs2Request):
 
     def with_materials(self, materials: List[str]) -> UnleashRequest:
         self.materials = materials
+        return self
+
+    def with_recipe_name(self, recipe_name: str) -> UnleashRequest:
+        self.recipe_name = recipe_name
+        return self
+
+    def with_recipe_materials(self, recipe_materials: List[UnleashMaterialSelection]) -> UnleashRequest:
+        self.recipe_materials = recipe_materials
         return self
 
     def with_config(self, config: List[Config]) -> UnleashRequest:
@@ -1829,6 +1865,11 @@ class UnleashRequest(core.Gs2Request):
                 data.get('materials')[i]
                 for i in range(len(data.get('materials')))
             ])\
+            .with_recipe_name(data.get('recipeName'))\
+            .with_recipe_materials(None if data.get('recipeMaterials') is None else [
+                UnleashMaterialSelection.from_dict(data.get('recipeMaterials')[i])
+                for i in range(len(data.get('recipeMaterials')))
+            ])\
             .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')))
@@ -1843,6 +1884,11 @@ class UnleashRequest(core.Gs2Request):
             "materials": None if self.materials is None else [
                 self.materials[i]
                 for i in range(len(self.materials))
+            ],
+            "recipeName": self.recipe_name,
+            "recipeMaterials": None if self.recipe_materials is None else [
+                self.recipe_materials[i].to_dict() if self.recipe_materials[i] else None
+                for i in range(len(self.recipe_materials))
             ],
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None
@@ -1859,6 +1905,8 @@ class UnleashByUserIdRequest(core.Gs2Request):
     user_id: str = None
     target_item_set_id: str = None
     materials: List[str] = None
+    recipe_name: str = None
+    recipe_materials: List[UnleashMaterialSelection] = None
     config: List[Config] = None
     time_offset_token: str = None
     duplication_avoider: str = None
@@ -1881,6 +1929,14 @@ class UnleashByUserIdRequest(core.Gs2Request):
 
     def with_materials(self, materials: List[str]) -> UnleashByUserIdRequest:
         self.materials = materials
+        return self
+
+    def with_recipe_name(self, recipe_name: str) -> UnleashByUserIdRequest:
+        self.recipe_name = recipe_name
+        return self
+
+    def with_recipe_materials(self, recipe_materials: List[UnleashMaterialSelection]) -> UnleashByUserIdRequest:
+        self.recipe_materials = recipe_materials
         return self
 
     def with_config(self, config: List[Config]) -> UnleashByUserIdRequest:
@@ -1922,6 +1978,11 @@ class UnleashByUserIdRequest(core.Gs2Request):
                 data.get('materials')[i]
                 for i in range(len(data.get('materials')))
             ])\
+            .with_recipe_name(data.get('recipeName'))\
+            .with_recipe_materials(None if data.get('recipeMaterials') is None else [
+                UnleashMaterialSelection.from_dict(data.get('recipeMaterials')[i])
+                for i in range(len(data.get('recipeMaterials')))
+            ])\
             .with_config(None if data.get('config') is None else [
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')))
@@ -1937,6 +1998,11 @@ class UnleashByUserIdRequest(core.Gs2Request):
             "materials": None if self.materials is None else [
                 self.materials[i]
                 for i in range(len(self.materials))
+            ],
+            "recipeName": self.recipe_name,
+            "recipeMaterials": None if self.recipe_materials is None else [
+                self.recipe_materials[i].to_dict() if self.recipe_materials[i] else None
+                for i in range(len(self.recipe_materials))
             ],
             "config": None if self.config is None else [
                 self.config[i].to_dict() if self.config[i] else None

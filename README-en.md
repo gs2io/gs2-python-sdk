@@ -21,7 +21,7 @@ Follow the instructions in [GS2 Setup](https://docs.gs2.io/en/get_start/tutorial
 
 ### Requirements
 
-- python 3.6+
+- Python 3.10+
 
 [⇒Start using GS2 - SDK - Various programming languages](https://docs.gs2.io/en/get_start/#various-programming-languages)
 
