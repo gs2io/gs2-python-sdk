@@ -76,6 +76,9 @@ class CreateNamespaceRequest(core.Gs2Request):
     transaction_setting_v2: TransactionSettingV2 = None
     server_type: str = None
     server_spec: str = None
+    object_catalog: str = None
+    state_machine_namespace_id: str = None
+    state_machine_version: int = None
     create_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
@@ -101,6 +104,18 @@ class CreateNamespaceRequest(core.Gs2Request):
 
     def with_server_spec(self, server_spec: str) -> CreateNamespaceRequest:
         self.server_spec = server_spec
+        return self
+
+    def with_object_catalog(self, object_catalog: str) -> CreateNamespaceRequest:
+        self.object_catalog = object_catalog
+        return self
+
+    def with_state_machine_namespace_id(self, state_machine_namespace_id: str) -> CreateNamespaceRequest:
+        self.state_machine_namespace_id = state_machine_namespace_id
+        return self
+
+    def with_state_machine_version(self, state_machine_version: int) -> CreateNamespaceRequest:
+        self.state_machine_version = state_machine_version
         return self
 
     def with_create_notification(self, create_notification: NotificationSetting) -> CreateNamespaceRequest:
@@ -136,6 +151,9 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_server_type(data.get('serverType'))\
             .with_server_spec(data.get('serverSpec'))\
+            .with_object_catalog(data.get('objectCatalog'))\
+            .with_state_machine_namespace_id(data.get('stateMachineNamespaceId'))\
+            .with_state_machine_version(data.get('stateMachineVersion'))\
             .with_create_notification(NotificationSetting.from_dict(data.get('createNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
@@ -147,6 +165,9 @@ class CreateNamespaceRequest(core.Gs2Request):
             "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "serverType": self.server_type,
             "serverSpec": self.server_spec,
+            "objectCatalog": self.object_catalog,
+            "stateMachineNamespaceId": self.state_machine_namespace_id,
+            "stateMachineVersion": self.state_machine_version,
             "createNotification": self.create_notification.to_dict() if self.create_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
@@ -233,6 +254,9 @@ class UpdateNamespaceRequest(core.Gs2Request):
     transaction_setting_v2: TransactionSettingV2 = None
     server_type: str = None
     server_spec: str = None
+    object_catalog: str = None
+    state_machine_namespace_id: str = None
+    state_machine_version: int = None
     create_notification: NotificationSetting = None
     log_setting: LogSetting = None
 
@@ -258,6 +282,18 @@ class UpdateNamespaceRequest(core.Gs2Request):
 
     def with_server_spec(self, server_spec: str) -> UpdateNamespaceRequest:
         self.server_spec = server_spec
+        return self
+
+    def with_object_catalog(self, object_catalog: str) -> UpdateNamespaceRequest:
+        self.object_catalog = object_catalog
+        return self
+
+    def with_state_machine_namespace_id(self, state_machine_namespace_id: str) -> UpdateNamespaceRequest:
+        self.state_machine_namespace_id = state_machine_namespace_id
+        return self
+
+    def with_state_machine_version(self, state_machine_version: int) -> UpdateNamespaceRequest:
+        self.state_machine_version = state_machine_version
         return self
 
     def with_create_notification(self, create_notification: NotificationSetting) -> UpdateNamespaceRequest:
@@ -293,6 +329,9 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_server_type(data.get('serverType'))\
             .with_server_spec(data.get('serverSpec'))\
+            .with_object_catalog(data.get('objectCatalog'))\
+            .with_state_machine_namespace_id(data.get('stateMachineNamespaceId'))\
+            .with_state_machine_version(data.get('stateMachineVersion'))\
             .with_create_notification(NotificationSetting.from_dict(data.get('createNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
@@ -304,6 +343,9 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "serverType": self.server_type,
             "serverSpec": self.server_spec,
+            "objectCatalog": self.object_catalog,
+            "stateMachineNamespaceId": self.state_machine_namespace_id,
+            "stateMachineVersion": self.state_machine_version,
             "createNotification": self.create_notification.to_dict() if self.create_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
