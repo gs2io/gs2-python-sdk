@@ -19,6 +19,81 @@ from typing import *
 from gs2 import core
 
 
+class StateMachineSetting(core.Gs2Model):
+    namespace_id: str = None
+    version: int = None
+
+    def with_namespace_id(self, namespace_id: str) -> StateMachineSetting:
+        self.namespace_id = namespace_id
+        return self
+
+    def with_version(self, version: int) -> StateMachineSetting:
+        self.version = version
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[StateMachineSetting]:
+        if data is None:
+            return None
+        return StateMachineSetting()\
+            .with_namespace_id(data.get('namespaceId'))\
+            .with_version(data.get('version'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceId": self.namespace_id,
+            "version": self.version,
+        }
+
+
+class SyncSetting(core.Gs2Model):
+    object_catalog: str = None
+
+    def with_object_catalog(self, object_catalog: str) -> SyncSetting:
+        self.object_catalog = object_catalog
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[SyncSetting]:
+        if data is None:
+            return None
+        return SyncSetting()\
+            .with_object_catalog(data.get('objectCatalog'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "objectCatalog": self.object_catalog,
+        }
+
+
 class TransactionSettingV2(core.Gs2Model):
     distributor_namespace_id: str = None
     enable_parallel_execution: bool = None
@@ -459,9 +534,8 @@ class Namespace(core.Gs2Model):
     transaction_setting_v2: TransactionSettingV2 = None
     server_type: str = None
     server_spec: str = None
-    object_catalog: str = None
-    state_machine_namespace_id: str = None
-    state_machine_version: int = None
+    sync_setting: SyncSetting = None
+    state_machine_setting: StateMachineSetting = None
     create_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
@@ -496,16 +570,12 @@ class Namespace(core.Gs2Model):
         self.server_spec = server_spec
         return self
 
-    def with_object_catalog(self, object_catalog: str) -> Namespace:
-        self.object_catalog = object_catalog
+    def with_sync_setting(self, sync_setting: SyncSetting) -> Namespace:
+        self.sync_setting = sync_setting
         return self
 
-    def with_state_machine_namespace_id(self, state_machine_namespace_id: str) -> Namespace:
-        self.state_machine_namespace_id = state_machine_namespace_id
-        return self
-
-    def with_state_machine_version(self, state_machine_version: int) -> Namespace:
-        self.state_machine_version = state_machine_version
+    def with_state_machine_setting(self, state_machine_setting: StateMachineSetting) -> Namespace:
+        self.state_machine_setting = state_machine_setting
         return self
 
     def with_create_notification(self, create_notification: NotificationSetting) -> Namespace:
@@ -597,9 +667,8 @@ class Namespace(core.Gs2Model):
             .with_transaction_setting_v2(TransactionSettingV2.from_dict(data.get('transactionSettingV2')))\
             .with_server_type(data.get('serverType'))\
             .with_server_spec(data.get('serverSpec'))\
-            .with_object_catalog(data.get('objectCatalog'))\
-            .with_state_machine_namespace_id(data.get('stateMachineNamespaceId'))\
-            .with_state_machine_version(data.get('stateMachineVersion'))\
+            .with_sync_setting(SyncSetting.from_dict(data.get('syncSetting')))\
+            .with_state_machine_setting(StateMachineSetting.from_dict(data.get('stateMachineSetting')))\
             .with_create_notification(NotificationSetting.from_dict(data.get('createNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
@@ -615,9 +684,8 @@ class Namespace(core.Gs2Model):
             "transactionSettingV2": self.transaction_setting_v2.to_dict() if self.transaction_setting_v2 else None,
             "serverType": self.server_type,
             "serverSpec": self.server_spec,
-            "objectCatalog": self.object_catalog,
-            "stateMachineNamespaceId": self.state_machine_namespace_id,
-            "stateMachineVersion": self.state_machine_version,
+            "syncSetting": self.sync_setting.to_dict() if self.sync_setting else None,
+            "stateMachineSetting": self.state_machine_setting.to_dict() if self.state_machine_setting else None,
             "createNotification": self.create_notification.to_dict() if self.create_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,

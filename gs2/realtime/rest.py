@@ -125,12 +125,10 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
             body["serverType"] = request.server_type
         if request.server_spec is not None:
             body["serverSpec"] = request.server_spec
-        if request.object_catalog is not None:
-            body["objectCatalog"] = request.object_catalog
-        if request.state_machine_namespace_id is not None:
-            body["stateMachineNamespaceId"] = request.state_machine_namespace_id
-        if request.state_machine_version is not None:
-            body["stateMachineVersion"] = request.state_machine_version
+        if request.sync_setting is not None:
+            body["syncSetting"] = request.sync_setting.to_dict()
+        if request.state_machine_setting is not None:
+            body["stateMachineSetting"] = request.state_machine_setting.to_dict()
         if request.create_notification is not None:
             body["createNotification"] = request.create_notification.to_dict()
         if request.log_setting is not None:
@@ -361,12 +359,10 @@ class Gs2RealtimeRestClient(rest.AbstractGs2RestClient):
             body["serverType"] = request.server_type
         if request.server_spec is not None:
             body["serverSpec"] = request.server_spec
-        if request.object_catalog is not None:
-            body["objectCatalog"] = request.object_catalog
-        if request.state_machine_namespace_id is not None:
-            body["stateMachineNamespaceId"] = request.state_machine_namespace_id
-        if request.state_machine_version is not None:
-            body["stateMachineVersion"] = request.state_machine_version
+        if request.sync_setting is not None:
+            body["syncSetting"] = request.sync_setting.to_dict()
+        if request.state_machine_setting is not None:
+            body["stateMachineSetting"] = request.state_machine_setting.to_dict()
         if request.create_notification is not None:
             body["createNotification"] = request.create_notification.to_dict()
         if request.log_setting is not None:
