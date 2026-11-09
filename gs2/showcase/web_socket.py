@@ -1181,6 +1181,11 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.acquire_actions
             ]
+        if request.bonuses is not None:
+            body["bonuses"] = [
+                item.to_dict()
+                for item in request.bonuses
+            ]
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -1345,6 +1350,11 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["acquireActions"] = [
                 item.to_dict()
                 for item in request.acquire_actions
+            ]
+        if request.bonuses is not None:
+            body["bonuses"] = [
+                item.to_dict()
+                for item in request.bonuses
             ]
 
         if request.request_id:
@@ -3036,6 +3046,8 @@ class Gs2ShowcaseWebSocketClient(web_socket.AbstractGs2WebSocketClient):
                 item.to_dict()
                 for item in request.config
             ]
+        if request.route_key is not None:
+            body["routeKey"] = request.route_key
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

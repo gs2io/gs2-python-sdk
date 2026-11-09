@@ -756,6 +756,7 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
     verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
+    bonuses: List[Bonus] = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateSalesItemMasterRequest:
         self.namespace_name = namespace_name
@@ -783,6 +784,10 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> CreateSalesItemMasterRequest:
         self.acquire_actions = acquire_actions
+        return self
+
+    def with_bonuses(self, bonuses: List[Bonus]) -> CreateSalesItemMasterRequest:
+        self.bonuses = bonuses
         return self
 
     def get(self, key, default=None):
@@ -819,6 +824,10 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
             .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')))
+            ])\
+            .with_bonuses(None if data.get('bonuses') is None else [
+                Bonus.from_dict(data.get('bonuses')[i])
+                for i in range(len(data.get('bonuses')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -838,6 +847,10 @@ class CreateSalesItemMasterRequest(core.Gs2Request):
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions))
+            ],
+            "bonuses": None if self.bonuses is None else [
+                self.bonuses[i].to_dict() if self.bonuses[i] else None
+                for i in range(len(self.bonuses))
             ],
         }
 
@@ -895,6 +908,7 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
     verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
+    bonuses: List[Bonus] = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateSalesItemMasterRequest:
         self.namespace_name = namespace_name
@@ -922,6 +936,10 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> UpdateSalesItemMasterRequest:
         self.acquire_actions = acquire_actions
+        return self
+
+    def with_bonuses(self, bonuses: List[Bonus]) -> UpdateSalesItemMasterRequest:
+        self.bonuses = bonuses
         return self
 
     def get(self, key, default=None):
@@ -958,6 +976,10 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
             .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')))
+            ])\
+            .with_bonuses(None if data.get('bonuses') is None else [
+                Bonus.from_dict(data.get('bonuses')[i])
+                for i in range(len(data.get('bonuses')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -977,6 +999,10 @@ class UpdateSalesItemMasterRequest(core.Gs2Request):
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions))
+            ],
+            "bonuses": None if self.bonuses is None else [
+                self.bonuses[i].to_dict() if self.bonuses[i] else None
+                for i in range(len(self.bonuses))
             ],
         }
 
@@ -2103,6 +2129,7 @@ class BuyByUserIdRequest(core.Gs2Request):
     user_id: str = None
     quantity: int = None
     config: List[Config] = None
+    route_key: str = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -2128,6 +2155,10 @@ class BuyByUserIdRequest(core.Gs2Request):
 
     def with_config(self, config: List[Config]) -> BuyByUserIdRequest:
         self.config = config
+        return self
+
+    def with_route_key(self, route_key: str) -> BuyByUserIdRequest:
+        self.route_key = route_key
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> BuyByUserIdRequest:
@@ -2166,6 +2197,7 @@ class BuyByUserIdRequest(core.Gs2Request):
                 Config.from_dict(data.get('config')[i])
                 for i in range(len(data.get('config')))
             ])\
+            .with_route_key(data.get('routeKey'))\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -2179,6 +2211,7 @@ class BuyByUserIdRequest(core.Gs2Request):
                 self.config[i].to_dict() if self.config[i] else None
                 for i in range(len(self.config))
             ],
+            "routeKey": self.route_key,
             "timeOffsetToken": self.time_offset_token,
         }
 

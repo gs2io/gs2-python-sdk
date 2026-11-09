@@ -1193,6 +1193,11 @@ class Gs2ShowcaseRestClient(rest.AbstractGs2RestClient):
                 item.to_dict()
                 for item in request.acquire_actions
             ]
+        if request.bonuses is not None:
+            body["bonuses"] = [
+                item.to_dict()
+                for item in request.bonuses
+            ]
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -1357,6 +1362,11 @@ class Gs2ShowcaseRestClient(rest.AbstractGs2RestClient):
             body["acquireActions"] = [
                 item.to_dict()
                 for item in request.acquire_actions
+            ]
+        if request.bonuses is not None:
+            body["bonuses"] = [
+                item.to_dict()
+                for item in request.bonuses
             ]
 
         if request.request_id:
@@ -3061,6 +3071,8 @@ class Gs2ShowcaseRestClient(rest.AbstractGs2RestClient):
                 item.to_dict()
                 for item in request.config
             ]
+        if request.route_key is not None:
+            body["routeKey"] = request.route_key
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

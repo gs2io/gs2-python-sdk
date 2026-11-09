@@ -356,6 +356,53 @@ class Config(core.Gs2Model):
         }
 
 
+class Bonus(core.Gs2Model):
+    route_key: str = None
+    acquire_actions: List[AcquireAction] = None
+
+    def with_route_key(self, route_key: str) -> Bonus:
+        self.route_key = route_key
+        return self
+
+    def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> Bonus:
+        self.acquire_actions = acquire_actions
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[Bonus]:
+        if data is None:
+            return None
+        return Bonus()\
+            .with_route_key(data.get('routeKey'))\
+            .with_acquire_actions(None if data.get('acquireActions') is None else [
+                AcquireAction.from_dict(data.get('acquireActions')[i])
+                for i in range(len(data.get('acquireActions')))
+            ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "routeKey": self.route_key,
+            "acquireActions": None if self.acquire_actions is None else [
+                self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
+                for i in range(len(self.acquire_actions))
+            ],
+        }
+
+
 class AcquireAction(core.Gs2Model):
     action: str = None
     request: str = None
@@ -1352,6 +1399,7 @@ class SalesItem(core.Gs2Model):
     verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
+    bonuses: List[Bonus] = None
 
     def with_name(self, name: str) -> SalesItem:
         self.name = name
@@ -1371,6 +1419,10 @@ class SalesItem(core.Gs2Model):
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> SalesItem:
         self.acquire_actions = acquire_actions
+        return self
+
+    def with_bonuses(self, bonuses: List[Bonus]) -> SalesItem:
+        self.bonuses = bonuses
         return self
 
     def get(self, key, default=None):
@@ -1405,6 +1457,10 @@ class SalesItem(core.Gs2Model):
             .with_acquire_actions(None if data.get('acquireActions') is None else [
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')))
+            ])\
+            .with_bonuses(None if data.get('bonuses') is None else [
+                Bonus.from_dict(data.get('bonuses')[i])
+                for i in range(len(data.get('bonuses')))
             ])
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1422,6 +1478,10 @@ class SalesItem(core.Gs2Model):
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions))
+            ],
+            "bonuses": None if self.bonuses is None else [
+                self.bonuses[i].to_dict() if self.bonuses[i] else None
+                for i in range(len(self.bonuses))
             ],
         }
 
@@ -1813,6 +1873,7 @@ class SalesItemMaster(core.Gs2Model):
     verify_actions: List[VerifyAction] = None
     consume_actions: List[ConsumeAction] = None
     acquire_actions: List[AcquireAction] = None
+    bonuses: List[Bonus] = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -1843,6 +1904,10 @@ class SalesItemMaster(core.Gs2Model):
 
     def with_acquire_actions(self, acquire_actions: List[AcquireAction]) -> SalesItemMaster:
         self.acquire_actions = acquire_actions
+        return self
+
+    def with_bonuses(self, bonuses: List[Bonus]) -> SalesItemMaster:
+        self.bonuses = bonuses
         return self
 
     def with_created_at(self, created_at: int) -> SalesItemMaster:
@@ -1947,6 +2012,10 @@ class SalesItemMaster(core.Gs2Model):
                 AcquireAction.from_dict(data.get('acquireActions')[i])
                 for i in range(len(data.get('acquireActions')))
             ])\
+            .with_bonuses(None if data.get('bonuses') is None else [
+                Bonus.from_dict(data.get('bonuses')[i])
+                for i in range(len(data.get('bonuses')))
+            ])\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -1968,6 +2037,10 @@ class SalesItemMaster(core.Gs2Model):
             "acquireActions": None if self.acquire_actions is None else [
                 self.acquire_actions[i].to_dict() if self.acquire_actions[i] else None
                 for i in range(len(self.acquire_actions))
+            ],
+            "bonuses": None if self.bonuses is None else [
+                self.bonuses[i].to_dict() if self.bonuses[i] else None
+                for i in range(len(self.bonuses))
             ],
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
