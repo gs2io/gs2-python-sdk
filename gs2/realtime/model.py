@@ -19,6 +19,47 @@ from typing import *
 from gs2 import core
 
 
+class ParticipantSetting(core.Gs2Model):
+    user_id: str = None
+    script_id: str = None
+
+    def with_user_id(self, user_id: str) -> ParticipantSetting:
+        self.user_id = user_id
+        return self
+
+    def with_script_id(self, script_id: str) -> ParticipantSetting:
+        self.script_id = script_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ParticipantSetting]:
+        if data is None:
+            return None
+        return ParticipantSetting()\
+            .with_user_id(data.get('userId'))\
+            .with_script_id(data.get('scriptId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "userId": self.user_id,
+            "scriptId": self.script_id,
+        }
+
+
 class StateMachineSetting(core.Gs2Model):
     namespace_id: str = None
     version: int = None
@@ -536,6 +577,7 @@ class Namespace(core.Gs2Model):
     server_spec: str = None
     sync_setting: SyncSetting = None
     state_machine_setting: StateMachineSetting = None
+    participant_setting: ParticipantSetting = None
     create_notification: NotificationSetting = None
     log_setting: LogSetting = None
     created_at: int = None
@@ -576,6 +618,10 @@ class Namespace(core.Gs2Model):
 
     def with_state_machine_setting(self, state_machine_setting: StateMachineSetting) -> Namespace:
         self.state_machine_setting = state_machine_setting
+        return self
+
+    def with_participant_setting(self, participant_setting: ParticipantSetting) -> Namespace:
+        self.participant_setting = participant_setting
         return self
 
     def with_create_notification(self, create_notification: NotificationSetting) -> Namespace:
@@ -669,6 +715,7 @@ class Namespace(core.Gs2Model):
             .with_server_spec(data.get('serverSpec'))\
             .with_sync_setting(SyncSetting.from_dict(data.get('syncSetting')))\
             .with_state_machine_setting(StateMachineSetting.from_dict(data.get('stateMachineSetting')))\
+            .with_participant_setting(ParticipantSetting.from_dict(data.get('participantSetting')))\
             .with_create_notification(NotificationSetting.from_dict(data.get('createNotification')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
@@ -686,6 +733,7 @@ class Namespace(core.Gs2Model):
             "serverSpec": self.server_spec,
             "syncSetting": self.sync_setting.to_dict() if self.sync_setting else None,
             "stateMachineSetting": self.state_machine_setting.to_dict() if self.state_machine_setting else None,
+            "participantSetting": self.participant_setting.to_dict() if self.participant_setting else None,
             "createNotification": self.create_notification.to_dict() if self.create_notification else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,

@@ -130,6 +130,8 @@ class Gs2RealtimeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["syncSetting"] = request.sync_setting.to_dict()
         if request.state_machine_setting is not None:
             body["stateMachineSetting"] = request.state_machine_setting.to_dict()
+        if request.participant_setting is not None:
+            body["participantSetting"] = request.participant_setting.to_dict()
         if request.create_notification is not None:
             body["createNotification"] = request.create_notification.to_dict()
         if request.log_setting is not None:
@@ -361,6 +363,8 @@ class Gs2RealtimeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["syncSetting"] = request.sync_setting.to_dict()
         if request.state_machine_setting is not None:
             body["stateMachineSetting"] = request.state_machine_setting.to_dict()
+        if request.participant_setting is not None:
+            body["participantSetting"] = request.participant_setting.to_dict()
         if request.create_notification is not None:
             body["createNotification"] = request.create_notification.to_dict()
         if request.log_setting is not None:
