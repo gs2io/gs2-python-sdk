@@ -3639,6 +3639,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            body["withProfile"] = request.with_profile
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -3717,6 +3719,8 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.with_profile is not None:
+            body["withProfile"] = request.with_profile
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
