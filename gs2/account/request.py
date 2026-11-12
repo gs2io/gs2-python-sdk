@@ -1323,6 +1323,113 @@ class AuthenticationRequest(core.Gs2Request):
         }
 
 
+class PreviewTakeOverRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+    user_identifier: str = None
+    password: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PreviewTakeOverRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> PreviewTakeOverRequest:
+        self.type = type
+        return self
+
+    def with_user_identifier(self, user_identifier: str) -> PreviewTakeOverRequest:
+        self.user_identifier = user_identifier
+        return self
+
+    def with_password(self, password: str) -> PreviewTakeOverRequest:
+        self.password = password
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreviewTakeOverRequest]:
+        if data is None:
+            return None
+        return PreviewTakeOverRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))\
+            .with_user_identifier(data.get('userIdentifier'))\
+            .with_password(data.get('password'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+            "userIdentifier": self.user_identifier,
+            "password": self.password,
+        }
+
+
+class PreviewTakeOverOpenIdConnectRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    type: int = None
+    id_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> PreviewTakeOverOpenIdConnectRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_type(self, type: int) -> PreviewTakeOverOpenIdConnectRequest:
+        self.type = type
+        return self
+
+    def with_id_token(self, id_token: str) -> PreviewTakeOverOpenIdConnectRequest:
+        self.id_token = id_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreviewTakeOverOpenIdConnectRequest]:
+        if data is None:
+            return None
+        return PreviewTakeOverOpenIdConnectRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_type(data.get('type'))\
+            .with_id_token(data.get('idToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "type": self.type,
+            "idToken": self.id_token,
+        }
+
+
 class RequestDeletionRequest(core.Gs2Request):
 
     context_stack: str = None

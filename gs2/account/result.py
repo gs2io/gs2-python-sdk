@@ -832,6 +832,128 @@ class AuthenticationResult(core.Gs2Result):
         }
 
 
+class PreviewTakeOverResult(core.Gs2Result):
+    item: Account = None
+    ban_statuses: List[BanStatus] = None
+    token: str = None
+    expire: int = None
+
+    def with_item(self, item: Account) -> PreviewTakeOverResult:
+        self.item = item
+        return self
+
+    def with_ban_statuses(self, ban_statuses: List[BanStatus]) -> PreviewTakeOverResult:
+        self.ban_statuses = ban_statuses
+        return self
+
+    def with_token(self, token: str) -> PreviewTakeOverResult:
+        self.token = token
+        return self
+
+    def with_expire(self, expire: int) -> PreviewTakeOverResult:
+        self.expire = expire
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreviewTakeOverResult]:
+        if data is None:
+            return None
+        return PreviewTakeOverResult()\
+            .with_item(Account.from_dict(data.get('item')))\
+            .with_ban_statuses(None if data.get('banStatuses') is None else [
+                BanStatus.from_dict(data.get('banStatuses')[i])
+                for i in range(len(data.get('banStatuses')))
+            ])\
+            .with_token(data.get('token'))\
+            .with_expire(data.get('expire'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "banStatuses": None if self.ban_statuses is None else [
+                self.ban_statuses[i].to_dict() if self.ban_statuses[i] else None
+                for i in range(len(self.ban_statuses))
+            ],
+            "token": self.token,
+            "expire": self.expire,
+        }
+
+
+class PreviewTakeOverOpenIdConnectResult(core.Gs2Result):
+    item: Account = None
+    ban_statuses: List[BanStatus] = None
+    token: str = None
+    expire: int = None
+
+    def with_item(self, item: Account) -> PreviewTakeOverOpenIdConnectResult:
+        self.item = item
+        return self
+
+    def with_ban_statuses(self, ban_statuses: List[BanStatus]) -> PreviewTakeOverOpenIdConnectResult:
+        self.ban_statuses = ban_statuses
+        return self
+
+    def with_token(self, token: str) -> PreviewTakeOverOpenIdConnectResult:
+        self.token = token
+        return self
+
+    def with_expire(self, expire: int) -> PreviewTakeOverOpenIdConnectResult:
+        self.expire = expire
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[PreviewTakeOverOpenIdConnectResult]:
+        if data is None:
+            return None
+        return PreviewTakeOverOpenIdConnectResult()\
+            .with_item(Account.from_dict(data.get('item')))\
+            .with_ban_statuses(None if data.get('banStatuses') is None else [
+                BanStatus.from_dict(data.get('banStatuses')[i])
+                for i in range(len(data.get('banStatuses')))
+            ])\
+            .with_token(data.get('token'))\
+            .with_expire(data.get('expire'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "banStatuses": None if self.ban_statuses is None else [
+                self.ban_statuses[i].to_dict() if self.ban_statuses[i] else None
+                for i in range(len(self.ban_statuses))
+            ],
+            "token": self.token,
+            "expire": self.expire,
+        }
+
+
 class RequestDeletionResult(core.Gs2Result):
     item: Account = None
 

@@ -1795,6 +1795,158 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _preview_take_over(
+        self,
+        request: PreviewTakeOverRequest,
+        callback: Callable[[AsyncResult[PreviewTakeOverResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='account',
+            function='previewTakeOver',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+        if request.user_identifier is not None:
+            body["userIdentifier"] = request.user_identifier
+        if request.password is not None:
+            body["password"] = request.password
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PreviewTakeOverResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def preview_take_over(
+        self,
+        request: PreviewTakeOverRequest,
+    ) -> PreviewTakeOverResult:
+        async_result = []
+        with timeout(30):
+            self._preview_take_over(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def preview_take_over_async(
+        self,
+        request: PreviewTakeOverRequest,
+    ) -> PreviewTakeOverResult:
+        async_result = []
+        self._preview_take_over(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _preview_take_over_open_id_connect(
+        self,
+        request: PreviewTakeOverOpenIdConnectRequest,
+        callback: Callable[[AsyncResult[PreviewTakeOverOpenIdConnectResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='account',
+            function='previewTakeOverOpenIdConnect',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.type is not None:
+            body["type"] = request.type
+        if request.id_token is not None:
+            body["idToken"] = request.id_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=PreviewTakeOverOpenIdConnectResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def preview_take_over_open_id_connect(
+        self,
+        request: PreviewTakeOverOpenIdConnectRequest,
+    ) -> PreviewTakeOverOpenIdConnectResult:
+        async_result = []
+        with timeout(30):
+            self._preview_take_over_open_id_connect(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def preview_take_over_open_id_connect_async(
+        self,
+        request: PreviewTakeOverOpenIdConnectRequest,
+    ) -> PreviewTakeOverOpenIdConnectResult:
+        async_result = []
+        self._preview_take_over_open_id_connect(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _request_deletion(
         self,
         request: RequestDeletionRequest,
