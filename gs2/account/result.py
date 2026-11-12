@@ -832,6 +832,176 @@ class AuthenticationResult(core.Gs2Result):
         }
 
 
+class RequestDeletionResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> RequestDeletionResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RequestDeletionResult]:
+        if data is None:
+            return None
+        return RequestDeletionResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class RequestDeletionByUserIdResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> RequestDeletionByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RequestDeletionByUserIdResult]:
+        if data is None:
+            return None
+        return RequestDeletionByUserIdResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class CancelDeletionResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> CancelDeletionResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CancelDeletionResult]:
+        if data is None:
+            return None
+        return CancelDeletionResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class CancelDeletionByUserIdResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> CancelDeletionByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CancelDeletionByUserIdResult]:
+        if data is None:
+            return None
+        return CancelDeletionByUserIdResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class ExecuteDeletionByUserIdResult(core.Gs2Result):
+    item: Account = None
+
+    def with_item(self, item: Account) -> ExecuteDeletionByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExecuteDeletionByUserIdResult]:
+        if data is None:
+            return None
+        return ExecuteDeletionByUserIdResult()\
+            .with_item(Account.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DescribeTakeOversResult(core.Gs2Result):
     items: List[TakeOver] = None
     next_page_token: str = None

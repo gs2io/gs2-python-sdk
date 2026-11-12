@@ -137,6 +137,14 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             body["banScript"] = request.ban_script.to_dict()
         if request.un_ban_script is not None:
             body["unBanScript"] = request.un_ban_script.to_dict()
+        if request.account_deletion_setting is not None:
+            body["accountDeletionSetting"] = request.account_deletion_setting.to_dict()
+        if request.request_deletion_script is not None:
+            body["requestDeletionScript"] = request.request_deletion_script.to_dict()
+        if request.cancel_deletion_script is not None:
+            body["cancelDeletionScript"] = request.cancel_deletion_script.to_dict()
+        if request.execute_deletion_script is not None:
+            body["executeDeletionScript"] = request.execute_deletion_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -375,6 +383,14 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             body["banScript"] = request.ban_script.to_dict()
         if request.un_ban_script is not None:
             body["unBanScript"] = request.un_ban_script.to_dict()
+        if request.account_deletion_setting is not None:
+            body["accountDeletionSetting"] = request.account_deletion_setting.to_dict()
+        if request.request_deletion_script is not None:
+            body["requestDeletionScript"] = request.request_deletion_script.to_dict()
+        if request.cancel_deletion_script is not None:
+            body["cancelDeletionScript"] = request.cancel_deletion_script.to_dict()
+        if request.execute_deletion_script is not None:
+            body["executeDeletionScript"] = request.execute_deletion_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -1778,6 +1794,392 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
     ) -> AuthenticationResult:
         async_result = []
         self._authentication(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _request_deletion(
+        self,
+        request: RequestDeletionRequest,
+        callback: Callable[[AsyncResult[RequestDeletionResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/me/deletion".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RequestDeletionResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def request_deletion(
+        self,
+        request: RequestDeletionRequest,
+    ) -> RequestDeletionResult:
+        async_result = []
+        with timeout(30):
+            self._request_deletion(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def request_deletion_async(
+        self,
+        request: RequestDeletionRequest,
+    ) -> RequestDeletionResult:
+        async_result = []
+        self._request_deletion(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _request_deletion_by_user_id(
+        self,
+        request: RequestDeletionByUserIdRequest,
+        callback: Callable[[AsyncResult[RequestDeletionByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/deletion".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=RequestDeletionByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def request_deletion_by_user_id(
+        self,
+        request: RequestDeletionByUserIdRequest,
+    ) -> RequestDeletionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._request_deletion_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def request_deletion_by_user_id_async(
+        self,
+        request: RequestDeletionByUserIdRequest,
+    ) -> RequestDeletionByUserIdResult:
+        async_result = []
+        self._request_deletion_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _cancel_deletion(
+        self,
+        request: CancelDeletionRequest,
+        callback: Callable[[AsyncResult[CancelDeletionResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/deletion/cancel".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.password is not None:
+            body["password"] = request.password
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=CancelDeletionResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def cancel_deletion(
+        self,
+        request: CancelDeletionRequest,
+    ) -> CancelDeletionResult:
+        async_result = []
+        with timeout(30):
+            self._cancel_deletion(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def cancel_deletion_async(
+        self,
+        request: CancelDeletionRequest,
+    ) -> CancelDeletionResult:
+        async_result = []
+        self._cancel_deletion(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _cancel_deletion_by_user_id(
+        self,
+        request: CancelDeletionByUserIdRequest,
+        callback: Callable[[AsyncResult[CancelDeletionByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/deletion".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        query_strings = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='DELETE',
+            result_type=CancelDeletionByUserIdResult,
+            callback=callback,
+            headers=headers,
+            query_strings=query_strings,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def cancel_deletion_by_user_id(
+        self,
+        request: CancelDeletionByUserIdRequest,
+    ) -> CancelDeletionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._cancel_deletion_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def cancel_deletion_by_user_id_async(
+        self,
+        request: CancelDeletionByUserIdRequest,
+    ) -> CancelDeletionByUserIdResult:
+        async_result = []
+        self._cancel_deletion_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _execute_deletion_by_user_id(
+        self,
+        request: ExecuteDeletionByUserIdRequest,
+        callback: Callable[[AsyncResult[ExecuteDeletionByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/deletion/execute".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=ExecuteDeletionByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def execute_deletion_by_user_id(
+        self,
+        request: ExecuteDeletionByUserIdRequest,
+    ) -> ExecuteDeletionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._execute_deletion_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def execute_deletion_by_user_id_async(
+        self,
+        request: ExecuteDeletionByUserIdRequest,
+    ) -> ExecuteDeletionByUserIdResult:
+        async_result = []
+        self._execute_deletion_by_user_id(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

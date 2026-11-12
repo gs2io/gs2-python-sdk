@@ -82,6 +82,10 @@ class CreateNamespaceRequest(core.Gs2Request):
     do_take_over_script: ScriptSetting = None
     ban_script: ScriptSetting = None
     un_ban_script: ScriptSetting = None
+    account_deletion_setting: AccountDeletionSetting = None
+    request_deletion_script: ScriptSetting = None
+    cancel_deletion_script: ScriptSetting = None
+    execute_deletion_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_name(self, name: str) -> CreateNamespaceRequest:
@@ -132,6 +136,22 @@ class CreateNamespaceRequest(core.Gs2Request):
         self.un_ban_script = un_ban_script
         return self
 
+    def with_account_deletion_setting(self, account_deletion_setting: AccountDeletionSetting) -> CreateNamespaceRequest:
+        self.account_deletion_setting = account_deletion_setting
+        return self
+
+    def with_request_deletion_script(self, request_deletion_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.request_deletion_script = request_deletion_script
+        return self
+
+    def with_cancel_deletion_script(self, cancel_deletion_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.cancel_deletion_script = cancel_deletion_script
+        return self
+
+    def with_execute_deletion_script(self, execute_deletion_script: ScriptSetting) -> CreateNamespaceRequest:
+        self.execute_deletion_script = execute_deletion_script
+        return self
+
     def with_log_setting(self, log_setting: LogSetting) -> CreateNamespaceRequest:
         self.log_setting = log_setting
         return self
@@ -167,6 +187,10 @@ class CreateNamespaceRequest(core.Gs2Request):
             .with_do_take_over_script(ScriptSetting.from_dict(data.get('doTakeOverScript')))\
             .with_ban_script(ScriptSetting.from_dict(data.get('banScript')))\
             .with_un_ban_script(ScriptSetting.from_dict(data.get('unBanScript')))\
+            .with_account_deletion_setting(AccountDeletionSetting.from_dict(data.get('accountDeletionSetting')))\
+            .with_request_deletion_script(ScriptSetting.from_dict(data.get('requestDeletionScript')))\
+            .with_cancel_deletion_script(ScriptSetting.from_dict(data.get('cancelDeletionScript')))\
+            .with_execute_deletion_script(ScriptSetting.from_dict(data.get('executeDeletionScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -183,6 +207,10 @@ class CreateNamespaceRequest(core.Gs2Request):
             "doTakeOverScript": self.do_take_over_script.to_dict() if self.do_take_over_script else None,
             "banScript": self.ban_script.to_dict() if self.ban_script else None,
             "unBanScript": self.un_ban_script.to_dict() if self.un_ban_script else None,
+            "accountDeletionSetting": self.account_deletion_setting.to_dict() if self.account_deletion_setting else None,
+            "requestDeletionScript": self.request_deletion_script.to_dict() if self.request_deletion_script else None,
+            "cancelDeletionScript": self.cancel_deletion_script.to_dict() if self.cancel_deletion_script else None,
+            "executeDeletionScript": self.execute_deletion_script.to_dict() if self.execute_deletion_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -273,6 +301,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
     do_take_over_script: ScriptSetting = None
     ban_script: ScriptSetting = None
     un_ban_script: ScriptSetting = None
+    account_deletion_setting: AccountDeletionSetting = None
+    request_deletion_script: ScriptSetting = None
+    cancel_deletion_script: ScriptSetting = None
+    execute_deletion_script: ScriptSetting = None
     log_setting: LogSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateNamespaceRequest:
@@ -319,6 +351,22 @@ class UpdateNamespaceRequest(core.Gs2Request):
         self.un_ban_script = un_ban_script
         return self
 
+    def with_account_deletion_setting(self, account_deletion_setting: AccountDeletionSetting) -> UpdateNamespaceRequest:
+        self.account_deletion_setting = account_deletion_setting
+        return self
+
+    def with_request_deletion_script(self, request_deletion_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.request_deletion_script = request_deletion_script
+        return self
+
+    def with_cancel_deletion_script(self, cancel_deletion_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.cancel_deletion_script = cancel_deletion_script
+        return self
+
+    def with_execute_deletion_script(self, execute_deletion_script: ScriptSetting) -> UpdateNamespaceRequest:
+        self.execute_deletion_script = execute_deletion_script
+        return self
+
     def with_log_setting(self, log_setting: LogSetting) -> UpdateNamespaceRequest:
         self.log_setting = log_setting
         return self
@@ -353,6 +401,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
             .with_do_take_over_script(ScriptSetting.from_dict(data.get('doTakeOverScript')))\
             .with_ban_script(ScriptSetting.from_dict(data.get('banScript')))\
             .with_un_ban_script(ScriptSetting.from_dict(data.get('unBanScript')))\
+            .with_account_deletion_setting(AccountDeletionSetting.from_dict(data.get('accountDeletionSetting')))\
+            .with_request_deletion_script(ScriptSetting.from_dict(data.get('requestDeletionScript')))\
+            .with_cancel_deletion_script(ScriptSetting.from_dict(data.get('cancelDeletionScript')))\
+            .with_execute_deletion_script(ScriptSetting.from_dict(data.get('executeDeletionScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -368,6 +420,10 @@ class UpdateNamespaceRequest(core.Gs2Request):
             "doTakeOverScript": self.do_take_over_script.to_dict() if self.do_take_over_script else None,
             "banScript": self.ban_script.to_dict() if self.ban_script else None,
             "unBanScript": self.un_ban_script.to_dict() if self.un_ban_script else None,
+            "accountDeletionSetting": self.account_deletion_setting.to_dict() if self.account_deletion_setting else None,
+            "requestDeletionScript": self.request_deletion_script.to_dict() if self.request_deletion_script else None,
+            "cancelDeletionScript": self.cancel_deletion_script.to_dict() if self.cancel_deletion_script else None,
+            "executeDeletionScript": self.execute_deletion_script.to_dict() if self.execute_deletion_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
         }
 
@@ -1263,6 +1319,281 @@ class AuthenticationRequest(core.Gs2Request):
             "userId": self.user_id,
             "keyId": self.key_id,
             "password": self.password,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class RequestDeletionRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RequestDeletionRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> RequestDeletionRequest:
+        self.access_token = access_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RequestDeletionRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RequestDeletionRequest]:
+        if data is None:
+            return None
+        return RequestDeletionRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+        }
+
+
+class RequestDeletionByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> RequestDeletionByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> RequestDeletionByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> RequestDeletionByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> RequestDeletionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[RequestDeletionByUserIdRequest]:
+        if data is None:
+            return None
+        return RequestDeletionByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class CancelDeletionRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    password: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CancelDeletionRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> CancelDeletionRequest:
+        self.user_id = user_id
+        return self
+
+    def with_password(self, password: str) -> CancelDeletionRequest:
+        self.password = password
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CancelDeletionRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CancelDeletionRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CancelDeletionRequest]:
+        if data is None:
+            return None
+        return CancelDeletionRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_password(data.get('password'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "password": self.password,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class CancelDeletionByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> CancelDeletionByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> CancelDeletionByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> CancelDeletionByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> CancelDeletionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[CancelDeletionByUserIdRequest]:
+        if data is None:
+            return None
+        return CancelDeletionByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class ExecuteDeletionByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> ExecuteDeletionByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> ExecuteDeletionByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> ExecuteDeletionByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> ExecuteDeletionByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[ExecuteDeletionByUserIdRequest]:
+        if data is None:
+            return None
+        return ExecuteDeletionByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
             "timeOffsetToken": self.time_offset_token,
         }
 

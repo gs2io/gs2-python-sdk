@@ -2762,6 +2762,11 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         }
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.exclude_microservices is not None:
+            body["excludeMicroservices"] = [
+                item
+                for item in request.exclude_microservices
+            ]
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -2838,6 +2843,11 @@ class Gs2ProjectRestClient(rest.AbstractGs2RestClient):
         body = {
             'contextStack': request.context_stack,
         }
+        if request.exclude_microservices is not None:
+            body["excludeMicroservices"] = [
+                item
+                for item in request.exclude_microservices
+            ]
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

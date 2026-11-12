@@ -138,6 +138,14 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["banScript"] = request.ban_script.to_dict()
         if request.un_ban_script is not None:
             body["unBanScript"] = request.un_ban_script.to_dict()
+        if request.account_deletion_setting is not None:
+            body["accountDeletionSetting"] = request.account_deletion_setting.to_dict()
+        if request.request_deletion_script is not None:
+            body["requestDeletionScript"] = request.request_deletion_script.to_dict()
+        if request.cancel_deletion_script is not None:
+            body["cancelDeletionScript"] = request.cancel_deletion_script.to_dict()
+        if request.execute_deletion_script is not None:
+            body["executeDeletionScript"] = request.execute_deletion_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -373,6 +381,14 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["banScript"] = request.ban_script.to_dict()
         if request.un_ban_script is not None:
             body["unBanScript"] = request.un_ban_script.to_dict()
+        if request.account_deletion_setting is not None:
+            body["accountDeletionSetting"] = request.account_deletion_setting.to_dict()
+        if request.request_deletion_script is not None:
+            body["requestDeletionScript"] = request.request_deletion_script.to_dict()
+        if request.cancel_deletion_script is not None:
+            body["cancelDeletionScript"] = request.cancel_deletion_script.to_dict()
+        if request.execute_deletion_script is not None:
+            body["executeDeletionScript"] = request.execute_deletion_script.to_dict()
         if request.log_setting is not None:
             body["logSetting"] = request.log_setting.to_dict()
 
@@ -1766,6 +1782,393 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> AuthenticationResult:
         async_result = []
         self._authentication(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _request_deletion(
+        self,
+        request: RequestDeletionRequest,
+        callback: Callable[[AsyncResult[RequestDeletionResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='account',
+            function='requestDeletion',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=RequestDeletionResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def request_deletion(
+        self,
+        request: RequestDeletionRequest,
+    ) -> RequestDeletionResult:
+        async_result = []
+        with timeout(30):
+            self._request_deletion(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def request_deletion_async(
+        self,
+        request: RequestDeletionRequest,
+    ) -> RequestDeletionResult:
+        async_result = []
+        self._request_deletion(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _request_deletion_by_user_id(
+        self,
+        request: RequestDeletionByUserIdRequest,
+        callback: Callable[[AsyncResult[RequestDeletionByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='account',
+            function='requestDeletionByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=RequestDeletionByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def request_deletion_by_user_id(
+        self,
+        request: RequestDeletionByUserIdRequest,
+    ) -> RequestDeletionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._request_deletion_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def request_deletion_by_user_id_async(
+        self,
+        request: RequestDeletionByUserIdRequest,
+    ) -> RequestDeletionByUserIdResult:
+        async_result = []
+        self._request_deletion_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _cancel_deletion(
+        self,
+        request: CancelDeletionRequest,
+        callback: Callable[[AsyncResult[CancelDeletionResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='account',
+            function='cancelDeletion',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.password is not None:
+            body["password"] = request.password
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CancelDeletionResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def cancel_deletion(
+        self,
+        request: CancelDeletionRequest,
+    ) -> CancelDeletionResult:
+        async_result = []
+        with timeout(30):
+            self._cancel_deletion(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def cancel_deletion_async(
+        self,
+        request: CancelDeletionRequest,
+    ) -> CancelDeletionResult:
+        async_result = []
+        self._cancel_deletion(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _cancel_deletion_by_user_id(
+        self,
+        request: CancelDeletionByUserIdRequest,
+        callback: Callable[[AsyncResult[CancelDeletionByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='account',
+            function='cancelDeletionByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=CancelDeletionByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def cancel_deletion_by_user_id(
+        self,
+        request: CancelDeletionByUserIdRequest,
+    ) -> CancelDeletionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._cancel_deletion_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def cancel_deletion_by_user_id_async(
+        self,
+        request: CancelDeletionByUserIdRequest,
+    ) -> CancelDeletionByUserIdResult:
+        async_result = []
+        self._cancel_deletion_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _execute_deletion_by_user_id(
+        self,
+        request: ExecuteDeletionByUserIdRequest,
+        callback: Callable[[AsyncResult[ExecuteDeletionByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='account',
+            function='executeDeletionByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=ExecuteDeletionByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def execute_deletion_by_user_id(
+        self,
+        request: ExecuteDeletionByUserIdRequest,
+    ) -> ExecuteDeletionByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._execute_deletion_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def execute_deletion_by_user_id_async(
+        self,
+        request: ExecuteDeletionByUserIdRequest,
+    ) -> ExecuteDeletionByUserIdResult:
+        async_result = []
+        self._execute_deletion_by_user_id(
             request,
             lambda result: async_result.append(result),
         )

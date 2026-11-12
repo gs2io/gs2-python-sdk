@@ -2739,6 +2739,11 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["transactionId"] = request.transaction_id
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.exclude_microservices is not None:
+            body["excludeMicroservices"] = [
+                item
+                for item in request.exclude_microservices
+            ]
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 
@@ -2814,6 +2819,11 @@ class Gs2ProjectWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body['contextStack'] = str(request.context_stack)
         if request.user_id is not None:
             body["userId"] = request.user_id
+        if request.exclude_microservices is not None:
+            body["excludeMicroservices"] = [
+                item
+                for item in request.exclude_microservices
+            ]
         if request.time_offset_token is not None:
             body["timeOffsetToken"] = request.time_offset_token
 

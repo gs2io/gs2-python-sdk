@@ -150,6 +150,54 @@ class TransactionSetting(core.Gs2Model):
         }
 
 
+class AccountDeletionSetting(core.Gs2Model):
+    grace_period_minutes: int = None
+    login_during_grace_period: str = None
+    clean_user_data_scope: str = None
+
+    def with_grace_period_minutes(self, grace_period_minutes: int) -> AccountDeletionSetting:
+        self.grace_period_minutes = grace_period_minutes
+        return self
+
+    def with_login_during_grace_period(self, login_during_grace_period: str) -> AccountDeletionSetting:
+        self.login_during_grace_period = login_during_grace_period
+        return self
+
+    def with_clean_user_data_scope(self, clean_user_data_scope: str) -> AccountDeletionSetting:
+        self.clean_user_data_scope = clean_user_data_scope
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[AccountDeletionSetting]:
+        if data is None:
+            return None
+        return AccountDeletionSetting()\
+            .with_grace_period_minutes(data.get('gracePeriodMinutes'))\
+            .with_login_during_grace_period(data.get('loginDuringGracePeriod'))\
+            .with_clean_user_data_scope(data.get('cleanUserDataScope'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "gracePeriodMinutes": self.grace_period_minutes,
+            "loginDuringGracePeriod": self.login_during_grace_period,
+            "cleanUserDataScope": self.clean_user_data_scope,
+        }
+
+
 class LogSetting(core.Gs2Model):
     logging_namespace_id: str = None
 
@@ -1309,6 +1357,8 @@ class Account(core.Gs2Model):
     ban_statuses: List[BanStatus] = None
     banned: bool = None
     last_authenticated_at: int = None
+    deletion_requested_at: int = None
+    deletion_scheduled_at: int = None
     created_at: int = None
     revision: int = None
 
@@ -1338,6 +1388,14 @@ class Account(core.Gs2Model):
 
     def with_last_authenticated_at(self, last_authenticated_at: int) -> Account:
         self.last_authenticated_at = last_authenticated_at
+        return self
+
+    def with_deletion_requested_at(self, deletion_requested_at: int) -> Account:
+        self.deletion_requested_at = deletion_requested_at
+        return self
+
+    def with_deletion_scheduled_at(self, deletion_scheduled_at: int) -> Account:
+        self.deletion_scheduled_at = deletion_scheduled_at
         return self
 
     def with_created_at(self, created_at: int) -> Account:
@@ -1432,6 +1490,8 @@ class Account(core.Gs2Model):
             ])\
             .with_banned(data.get('banned'))\
             .with_last_authenticated_at(data.get('lastAuthenticatedAt'))\
+            .with_deletion_requested_at(data.get('deletionRequestedAt'))\
+            .with_deletion_scheduled_at(data.get('deletionScheduledAt'))\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
@@ -1447,6 +1507,8 @@ class Account(core.Gs2Model):
             ],
             "banned": self.banned,
             "lastAuthenticatedAt": self.last_authenticated_at,
+            "deletionRequestedAt": self.deletion_requested_at,
+            "deletionScheduledAt": self.deletion_scheduled_at,
             "createdAt": self.created_at,
             "revision": self.revision,
         }
@@ -1466,6 +1528,10 @@ class Namespace(core.Gs2Model):
     do_take_over_script: ScriptSetting = None
     ban_script: ScriptSetting = None
     un_ban_script: ScriptSetting = None
+    account_deletion_setting: AccountDeletionSetting = None
+    request_deletion_script: ScriptSetting = None
+    cancel_deletion_script: ScriptSetting = None
+    execute_deletion_script: ScriptSetting = None
     log_setting: LogSetting = None
     created_at: int = None
     updated_at: int = None
@@ -1521,6 +1587,22 @@ class Namespace(core.Gs2Model):
 
     def with_un_ban_script(self, un_ban_script: ScriptSetting) -> Namespace:
         self.un_ban_script = un_ban_script
+        return self
+
+    def with_account_deletion_setting(self, account_deletion_setting: AccountDeletionSetting) -> Namespace:
+        self.account_deletion_setting = account_deletion_setting
+        return self
+
+    def with_request_deletion_script(self, request_deletion_script: ScriptSetting) -> Namespace:
+        self.request_deletion_script = request_deletion_script
+        return self
+
+    def with_cancel_deletion_script(self, cancel_deletion_script: ScriptSetting) -> Namespace:
+        self.cancel_deletion_script = cancel_deletion_script
+        return self
+
+    def with_execute_deletion_script(self, execute_deletion_script: ScriptSetting) -> Namespace:
+        self.execute_deletion_script = execute_deletion_script
         return self
 
     def with_log_setting(self, log_setting: LogSetting) -> Namespace:
@@ -1614,6 +1696,10 @@ class Namespace(core.Gs2Model):
             .with_do_take_over_script(ScriptSetting.from_dict(data.get('doTakeOverScript')))\
             .with_ban_script(ScriptSetting.from_dict(data.get('banScript')))\
             .with_un_ban_script(ScriptSetting.from_dict(data.get('unBanScript')))\
+            .with_account_deletion_setting(AccountDeletionSetting.from_dict(data.get('accountDeletionSetting')))\
+            .with_request_deletion_script(ScriptSetting.from_dict(data.get('requestDeletionScript')))\
+            .with_cancel_deletion_script(ScriptSetting.from_dict(data.get('cancelDeletionScript')))\
+            .with_execute_deletion_script(ScriptSetting.from_dict(data.get('executeDeletionScript')))\
             .with_log_setting(LogSetting.from_dict(data.get('logSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
@@ -1634,6 +1720,10 @@ class Namespace(core.Gs2Model):
             "doTakeOverScript": self.do_take_over_script.to_dict() if self.do_take_over_script else None,
             "banScript": self.ban_script.to_dict() if self.ban_script else None,
             "unBanScript": self.un_ban_script.to_dict() if self.un_ban_script else None,
+            "accountDeletionSetting": self.account_deletion_setting.to_dict() if self.account_deletion_setting else None,
+            "requestDeletionScript": self.request_deletion_script.to_dict() if self.request_deletion_script else None,
+            "cancelDeletionScript": self.cancel_deletion_script.to_dict() if self.cancel_deletion_script else None,
+            "executeDeletionScript": self.execute_deletion_script.to_dict() if self.execute_deletion_script else None,
             "logSetting": self.log_setting.to_dict() if self.log_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,

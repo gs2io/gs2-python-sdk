@@ -1798,6 +1798,7 @@ class WaitCleanUserDataRequest(core.Gs2Request):
     owner_id: str = None
     transaction_id: str = None
     user_id: str = None
+    exclude_microservices: List[str] = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
@@ -1811,6 +1812,10 @@ class WaitCleanUserDataRequest(core.Gs2Request):
 
     def with_user_id(self, user_id: str) -> WaitCleanUserDataRequest:
         self.user_id = user_id
+        return self
+
+    def with_exclude_microservices(self, exclude_microservices: List[str]) -> WaitCleanUserDataRequest:
+        self.exclude_microservices = exclude_microservices
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> WaitCleanUserDataRequest:
@@ -1843,6 +1848,10 @@ class WaitCleanUserDataRequest(core.Gs2Request):
             .with_owner_id(data.get('ownerId'))\
             .with_transaction_id(data.get('transactionId'))\
             .with_user_id(data.get('userId'))\
+            .with_exclude_microservices(None if data.get('excludeMicroservices') is None else [
+                data.get('excludeMicroservices')[i]
+                for i in range(len(data.get('excludeMicroservices')))
+            ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1850,6 +1859,10 @@ class WaitCleanUserDataRequest(core.Gs2Request):
             "ownerId": self.owner_id,
             "transactionId": self.transaction_id,
             "userId": self.user_id,
+            "excludeMicroservices": None if self.exclude_microservices is None else [
+                self.exclude_microservices[i]
+                for i in range(len(self.exclude_microservices))
+            ],
             "timeOffsetToken": self.time_offset_token,
         }
 
@@ -1858,11 +1871,16 @@ class CleanUserDataRequest(core.Gs2Request):
 
     context_stack: str = None
     user_id: str = None
+    exclude_microservices: List[str] = None
     time_offset_token: str = None
     duplication_avoider: str = None
 
     def with_user_id(self, user_id: str) -> CleanUserDataRequest:
         self.user_id = user_id
+        return self
+
+    def with_exclude_microservices(self, exclude_microservices: List[str]) -> CleanUserDataRequest:
+        self.exclude_microservices = exclude_microservices
         return self
 
     def with_time_offset_token(self, time_offset_token: str) -> CleanUserDataRequest:
@@ -1893,11 +1911,19 @@ class CleanUserDataRequest(core.Gs2Request):
             return None
         return CleanUserDataRequest()\
             .with_user_id(data.get('userId'))\
+            .with_exclude_microservices(None if data.get('excludeMicroservices') is None else [
+                data.get('excludeMicroservices')[i]
+                for i in range(len(data.get('excludeMicroservices')))
+            ])\
             .with_time_offset_token(data.get('timeOffsetToken'))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "userId": self.user_id,
+            "excludeMicroservices": None if self.exclude_microservices is None else [
+                self.exclude_microservices[i]
+                for i in range(len(self.exclude_microservices))
+            ],
             "timeOffsetToken": self.time_offset_token,
         }
 
