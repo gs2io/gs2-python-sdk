@@ -507,6 +507,54 @@ class ScopeValue(core.Gs2Model):
         }
 
 
+class IssuedCodeSetting(core.Gs2Model):
+    expires_days: int = None
+    max_failed_attempts: int = None
+    delete_on_use: bool = None
+
+    def with_expires_days(self, expires_days: int) -> IssuedCodeSetting:
+        self.expires_days = expires_days
+        return self
+
+    def with_max_failed_attempts(self, max_failed_attempts: int) -> IssuedCodeSetting:
+        self.max_failed_attempts = max_failed_attempts
+        return self
+
+    def with_delete_on_use(self, delete_on_use: bool) -> IssuedCodeSetting:
+        self.delete_on_use = delete_on_use
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IssuedCodeSetting]:
+        if data is None:
+            return None
+        return IssuedCodeSetting()\
+            .with_expires_days(data.get('expiresDays'))\
+            .with_max_failed_attempts(data.get('maxFailedAttempts'))\
+            .with_delete_on_use(data.get('deleteOnUse'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "expiresDays": self.expires_days,
+            "maxFailedAttempts": self.max_failed_attempts,
+            "deleteOnUse": self.delete_on_use,
+        }
+
+
 class OpenIdConnectSetting(core.Gs2Model):
     configuration_path: str = None
     client_id: str = None
@@ -698,7 +746,9 @@ class TakeOverTypeModelMaster(core.Gs2Model):
     type: int = None
     description: str = None
     metadata: str = None
+    take_over_method: str = None
     open_id_connect_setting: OpenIdConnectSetting = None
+    issued_code_setting: IssuedCodeSetting = None
     created_at: int = None
     updated_at: int = None
     revision: int = None
@@ -719,8 +769,16 @@ class TakeOverTypeModelMaster(core.Gs2Model):
         self.metadata = metadata
         return self
 
+    def with_take_over_method(self, take_over_method: str) -> TakeOverTypeModelMaster:
+        self.take_over_method = take_over_method
+        return self
+
     def with_open_id_connect_setting(self, open_id_connect_setting: OpenIdConnectSetting) -> TakeOverTypeModelMaster:
         self.open_id_connect_setting = open_id_connect_setting
+        return self
+
+    def with_issued_code_setting(self, issued_code_setting: IssuedCodeSetting) -> TakeOverTypeModelMaster:
+        self.issued_code_setting = issued_code_setting
         return self
 
     def with_created_at(self, created_at: int) -> TakeOverTypeModelMaster:
@@ -813,7 +871,9 @@ class TakeOverTypeModelMaster(core.Gs2Model):
             .with_type(data.get('type'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
+            .with_take_over_method(data.get('takeOverMethod'))\
             .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))\
+            .with_issued_code_setting(IssuedCodeSetting.from_dict(data.get('issuedCodeSetting')))\
             .with_created_at(data.get('createdAt'))\
             .with_updated_at(data.get('updatedAt'))\
             .with_revision(data.get('revision'))
@@ -824,7 +884,9 @@ class TakeOverTypeModelMaster(core.Gs2Model):
             "type": self.type,
             "description": self.description,
             "metadata": self.metadata,
+            "takeOverMethod": self.take_over_method,
             "openIdConnectSetting": self.open_id_connect_setting.to_dict() if self.open_id_connect_setting else None,
+            "issuedCodeSetting": self.issued_code_setting.to_dict() if self.issued_code_setting else None,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "revision": self.revision,
@@ -835,7 +897,9 @@ class TakeOverTypeModel(core.Gs2Model):
     take_over_type_model_id: str = None
     type: int = None
     metadata: str = None
+    take_over_method: str = None
     open_id_connect_setting: OpenIdConnectSetting = None
+    issued_code_setting: IssuedCodeSetting = None
 
     def with_take_over_type_model_id(self, take_over_type_model_id: str) -> TakeOverTypeModel:
         self.take_over_type_model_id = take_over_type_model_id
@@ -849,8 +913,16 @@ class TakeOverTypeModel(core.Gs2Model):
         self.metadata = metadata
         return self
 
+    def with_take_over_method(self, take_over_method: str) -> TakeOverTypeModel:
+        self.take_over_method = take_over_method
+        return self
+
     def with_open_id_connect_setting(self, open_id_connect_setting: OpenIdConnectSetting) -> TakeOverTypeModel:
         self.open_id_connect_setting = open_id_connect_setting
+        return self
+
+    def with_issued_code_setting(self, issued_code_setting: IssuedCodeSetting) -> TakeOverTypeModel:
+        self.issued_code_setting = issued_code_setting
         return self
 
     @classmethod
@@ -930,14 +1002,18 @@ class TakeOverTypeModel(core.Gs2Model):
             .with_take_over_type_model_id(data.get('takeOverTypeModelId'))\
             .with_type(data.get('type'))\
             .with_metadata(data.get('metadata'))\
-            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))
+            .with_take_over_method(data.get('takeOverMethod'))\
+            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))\
+            .with_issued_code_setting(IssuedCodeSetting.from_dict(data.get('issuedCodeSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "takeOverTypeModelId": self.take_over_type_model_id,
             "type": self.type,
             "metadata": self.metadata,
+            "takeOverMethod": self.take_over_method,
             "openIdConnectSetting": self.open_id_connect_setting.to_dict() if self.open_id_connect_setting else None,
+            "issuedCodeSetting": self.issued_code_setting.to_dict() if self.issued_code_setting else None,
         }
 
 
@@ -1213,6 +1289,8 @@ class TakeOver(core.Gs2Model):
     user_identifier: str = None
     password: str = None
     created_at: int = None
+    expires_at: int = None
+    failed_attempts: int = None
     revision: int = None
 
     def with_take_over_id(self, take_over_id: str) -> TakeOver:
@@ -1237,6 +1315,14 @@ class TakeOver(core.Gs2Model):
 
     def with_created_at(self, created_at: int) -> TakeOver:
         self.created_at = created_at
+        return self
+
+    def with_expires_at(self, expires_at: int) -> TakeOver:
+        self.expires_at = expires_at
+        return self
+
+    def with_failed_attempts(self, failed_attempts: int) -> TakeOver:
+        self.failed_attempts = failed_attempts
         return self
 
     def with_revision(self, revision: int) -> TakeOver:
@@ -1335,6 +1421,8 @@ class TakeOver(core.Gs2Model):
             .with_user_identifier(data.get('userIdentifier'))\
             .with_password(data.get('password'))\
             .with_created_at(data.get('createdAt'))\
+            .with_expires_at(data.get('expiresAt'))\
+            .with_failed_attempts(data.get('failedAttempts'))\
             .with_revision(data.get('revision'))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -1345,6 +1433,8 @@ class TakeOver(core.Gs2Model):
             "userIdentifier": self.user_identifier,
             "password": self.password,
             "createdAt": self.created_at,
+            "expiresAt": self.expires_at,
+            "failedAttempts": self.failed_attempts,
             "revision": self.revision,
         }
 

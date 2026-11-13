@@ -1286,6 +1286,88 @@ class CreateTakeOverByUserIdResult(core.Gs2Result):
         }
 
 
+class IssueTakeOverCodeResult(core.Gs2Result):
+    item: TakeOver = None
+    password: str = None
+
+    def with_item(self, item: TakeOver) -> IssueTakeOverCodeResult:
+        self.item = item
+        return self
+
+    def with_password(self, password: str) -> IssueTakeOverCodeResult:
+        self.password = password
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IssueTakeOverCodeResult]:
+        if data is None:
+            return None
+        return IssueTakeOverCodeResult()\
+            .with_item(TakeOver.from_dict(data.get('item')))\
+            .with_password(data.get('password'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "password": self.password,
+        }
+
+
+class IssueTakeOverCodeByUserIdResult(core.Gs2Result):
+    item: TakeOver = None
+    password: str = None
+
+    def with_item(self, item: TakeOver) -> IssueTakeOverCodeByUserIdResult:
+        self.item = item
+        return self
+
+    def with_password(self, password: str) -> IssueTakeOverCodeByUserIdResult:
+        self.password = password
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IssueTakeOverCodeByUserIdResult]:
+        if data is None:
+            return None
+        return IssueTakeOverCodeByUserIdResult()\
+            .with_item(TakeOver.from_dict(data.get('item')))\
+            .with_password(data.get('password'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "password": self.password,
+        }
+
+
 class CreateTakeOverOpenIdConnectResult(core.Gs2Result):
     item: TakeOver = None
 

@@ -1971,6 +1971,113 @@ class CreateTakeOverByUserIdRequest(core.Gs2Request):
         }
 
 
+class IssueTakeOverCodeRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    type: int = None
+
+    def with_namespace_name(self, namespace_name: str) -> IssueTakeOverCodeRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> IssueTakeOverCodeRequest:
+        self.access_token = access_token
+        return self
+
+    def with_type(self, type: int) -> IssueTakeOverCodeRequest:
+        self.type = type
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IssueTakeOverCodeRequest]:
+        if data is None:
+            return None
+        return IssueTakeOverCodeRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_type(data.get('type'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "type": self.type,
+        }
+
+
+class IssueTakeOverCodeByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    type: int = None
+    time_offset_token: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> IssueTakeOverCodeByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> IssueTakeOverCodeByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_type(self, type: int) -> IssueTakeOverCodeByUserIdRequest:
+        self.type = type
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> IssueTakeOverCodeByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[IssueTakeOverCodeByUserIdRequest]:
+        if data is None:
+            return None
+        return IssueTakeOverCodeByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_type(data.get('type'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "type": self.type,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class CreateTakeOverOpenIdConnectRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -3645,7 +3752,9 @@ class CreateTakeOverTypeModelMasterRequest(core.Gs2Request):
     type: int = None
     description: str = None
     metadata: str = None
+    take_over_method: str = None
     open_id_connect_setting: OpenIdConnectSetting = None
+    issued_code_setting: IssuedCodeSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateTakeOverTypeModelMasterRequest:
         self.namespace_name = namespace_name
@@ -3663,8 +3772,16 @@ class CreateTakeOverTypeModelMasterRequest(core.Gs2Request):
         self.metadata = metadata
         return self
 
+    def with_take_over_method(self, take_over_method: str) -> CreateTakeOverTypeModelMasterRequest:
+        self.take_over_method = take_over_method
+        return self
+
     def with_open_id_connect_setting(self, open_id_connect_setting: OpenIdConnectSetting) -> CreateTakeOverTypeModelMasterRequest:
         self.open_id_connect_setting = open_id_connect_setting
+        return self
+
+    def with_issued_code_setting(self, issued_code_setting: IssuedCodeSetting) -> CreateTakeOverTypeModelMasterRequest:
+        self.issued_code_setting = issued_code_setting
         return self
 
     def get(self, key, default=None):
@@ -3690,7 +3807,9 @@ class CreateTakeOverTypeModelMasterRequest(core.Gs2Request):
             .with_type(data.get('type'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))
+            .with_take_over_method(data.get('takeOverMethod'))\
+            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))\
+            .with_issued_code_setting(IssuedCodeSetting.from_dict(data.get('issuedCodeSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3698,7 +3817,9 @@ class CreateTakeOverTypeModelMasterRequest(core.Gs2Request):
             "type": self.type,
             "description": self.description,
             "metadata": self.metadata,
+            "takeOverMethod": self.take_over_method,
             "openIdConnectSetting": self.open_id_connect_setting.to_dict() if self.open_id_connect_setting else None,
+            "issuedCodeSetting": self.issued_code_setting.to_dict() if self.issued_code_setting else None,
         }
 
 
@@ -3752,7 +3873,9 @@ class UpdateTakeOverTypeModelMasterRequest(core.Gs2Request):
     type: int = None
     description: str = None
     metadata: str = None
+    take_over_method: str = None
     open_id_connect_setting: OpenIdConnectSetting = None
+    issued_code_setting: IssuedCodeSetting = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateTakeOverTypeModelMasterRequest:
         self.namespace_name = namespace_name
@@ -3770,8 +3893,16 @@ class UpdateTakeOverTypeModelMasterRequest(core.Gs2Request):
         self.metadata = metadata
         return self
 
+    def with_take_over_method(self, take_over_method: str) -> UpdateTakeOverTypeModelMasterRequest:
+        self.take_over_method = take_over_method
+        return self
+
     def with_open_id_connect_setting(self, open_id_connect_setting: OpenIdConnectSetting) -> UpdateTakeOverTypeModelMasterRequest:
         self.open_id_connect_setting = open_id_connect_setting
+        return self
+
+    def with_issued_code_setting(self, issued_code_setting: IssuedCodeSetting) -> UpdateTakeOverTypeModelMasterRequest:
+        self.issued_code_setting = issued_code_setting
         return self
 
     def get(self, key, default=None):
@@ -3797,7 +3928,9 @@ class UpdateTakeOverTypeModelMasterRequest(core.Gs2Request):
             .with_type(data.get('type'))\
             .with_description(data.get('description'))\
             .with_metadata(data.get('metadata'))\
-            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))
+            .with_take_over_method(data.get('takeOverMethod'))\
+            .with_open_id_connect_setting(OpenIdConnectSetting.from_dict(data.get('openIdConnectSetting')))\
+            .with_issued_code_setting(IssuedCodeSetting.from_dict(data.get('issuedCodeSetting')))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -3805,7 +3938,9 @@ class UpdateTakeOverTypeModelMasterRequest(core.Gs2Request):
             "type": self.type,
             "description": self.description,
             "metadata": self.metadata,
+            "takeOverMethod": self.take_over_method,
             "openIdConnectSetting": self.open_id_connect_setting.to_dict() if self.open_id_connect_setting else None,
+            "issuedCodeSetting": self.issued_code_setting.to_dict() if self.issued_code_setting else None,
         }
 
 

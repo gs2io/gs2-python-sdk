@@ -2668,6 +2668,157 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _issue_take_over_code(
+        self,
+        request: IssueTakeOverCodeRequest,
+        callback: Callable[[AsyncResult[IssueTakeOverCodeResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/me/takeover/type/{type}/issue".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=IssueTakeOverCodeResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def issue_take_over_code(
+        self,
+        request: IssueTakeOverCodeRequest,
+    ) -> IssueTakeOverCodeResult:
+        async_result = []
+        with timeout(30):
+            self._issue_take_over_code(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def issue_take_over_code_async(
+        self,
+        request: IssueTakeOverCodeRequest,
+    ) -> IssueTakeOverCodeResult:
+        async_result = []
+        self._issue_take_over_code(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _issue_take_over_code_by_user_id(
+        self,
+        request: IssueTakeOverCodeByUserIdRequest,
+        callback: Callable[[AsyncResult[IssueTakeOverCodeByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='account',
+            region=self.session.region,
+        ) + "/{namespaceName}/account/{userId}/takeover/type/{type}/issue".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            type=request.type if request.type is not None and request.type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=IssueTakeOverCodeByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def issue_take_over_code_by_user_id(
+        self,
+        request: IssueTakeOverCodeByUserIdRequest,
+    ) -> IssueTakeOverCodeByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._issue_take_over_code_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def issue_take_over_code_by_user_id_async(
+        self,
+        request: IssueTakeOverCodeByUserIdRequest,
+    ) -> IssueTakeOverCodeByUserIdResult:
+        async_result = []
+        self._issue_take_over_code_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _create_take_over_open_id_connect(
         self,
         request: CreateTakeOverOpenIdConnectRequest,
@@ -4932,8 +5083,12 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.take_over_method is not None:
+            body["takeOverMethod"] = request.take_over_method
         if request.open_id_connect_setting is not None:
             body["openIdConnectSetting"] = request.open_id_connect_setting.to_dict()
+        if request.issued_code_setting is not None:
+            body["issuedCodeSetting"] = request.issued_code_setting.to_dict()
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id
@@ -5084,8 +5239,12 @@ class Gs2AccountRestClient(rest.AbstractGs2RestClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.take_over_method is not None:
+            body["takeOverMethod"] = request.take_over_method
         if request.open_id_connect_setting is not None:
             body["openIdConnectSetting"] = request.open_id_connect_setting.to_dict()
+        if request.issued_code_setting is not None:
+            body["issuedCodeSetting"] = request.issued_code_setting.to_dict()
 
         if request.request_id:
             headers["X-GS2-REQUEST-ID"] = request.request_id

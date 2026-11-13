@@ -2658,6 +2658,160 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _issue_take_over_code(
+        self,
+        request: IssueTakeOverCodeRequest,
+        callback: Callable[[AsyncResult[IssueTakeOverCodeResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOver',
+            function='issueTakeOverCode',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.type is not None:
+            body["type"] = request.type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=IssueTakeOverCodeResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def issue_take_over_code(
+        self,
+        request: IssueTakeOverCodeRequest,
+    ) -> IssueTakeOverCodeResult:
+        async_result = []
+        with timeout(30):
+            self._issue_take_over_code(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def issue_take_over_code_async(
+        self,
+        request: IssueTakeOverCodeRequest,
+    ) -> IssueTakeOverCodeResult:
+        async_result = []
+        self._issue_take_over_code(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _issue_take_over_code_by_user_id(
+        self,
+        request: IssueTakeOverCodeByUserIdRequest,
+        callback: Callable[[AsyncResult[IssueTakeOverCodeByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="account",
+            component='takeOver',
+            function='issueTakeOverCodeByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.type is not None:
+            body["type"] = request.type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=IssueTakeOverCodeByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def issue_take_over_code_by_user_id(
+        self,
+        request: IssueTakeOverCodeByUserIdRequest,
+    ) -> IssueTakeOverCodeByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._issue_take_over_code_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def issue_take_over_code_by_user_id_async(
+        self,
+        request: IssueTakeOverCodeByUserIdRequest,
+    ) -> IssueTakeOverCodeByUserIdResult:
+        async_result = []
+        self._issue_take_over_code_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _create_take_over_open_id_connect(
         self,
         request: CreateTakeOverOpenIdConnectRequest,
@@ -4946,8 +5100,12 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.take_over_method is not None:
+            body["takeOverMethod"] = request.take_over_method
         if request.open_id_connect_setting is not None:
             body["openIdConnectSetting"] = request.open_id_connect_setting.to_dict()
+        if request.issued_code_setting is not None:
+            body["issuedCodeSetting"] = request.issued_code_setting.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -5098,8 +5256,12 @@ class Gs2AccountWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["description"] = request.description
         if request.metadata is not None:
             body["metadata"] = request.metadata
+        if request.take_over_method is not None:
+            body["takeOverMethod"] = request.take_over_method
         if request.open_id_connect_setting is not None:
             body["openIdConnectSetting"] = request.open_id_connect_setting.to_dict()
+        if request.issued_code_setting is not None:
+            body["issuedCodeSetting"] = request.issued_code_setting.to_dict()
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
