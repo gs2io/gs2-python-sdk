@@ -1479,6 +1479,169 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_point(
+        self,
+        request: VerifyPointRequest,
+        callback: Callable[[AsyncResult[VerifyPointResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ad-reward',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/point/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.point is not None:
+            body["point"] = request.point
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyPointResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_point(
+        self,
+        request: VerifyPointRequest,
+    ) -> VerifyPointResult:
+        async_result = []
+        with timeout(30):
+            self._verify_point(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_point_async(
+        self,
+        request: VerifyPointRequest,
+    ) -> VerifyPointResult:
+        async_result = []
+        self._verify_point(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_point_by_user_id(
+        self,
+        request: VerifyPointByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyPointByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ad-reward',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/point/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.point is not None:
+            body["point"] = request.point
+        if request.multiply_value_specifying_quantity is not None:
+            body["multiplyValueSpecifyingQuantity"] = request.multiply_value_specifying_quantity
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyPointByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_point_by_user_id(
+        self,
+        request: VerifyPointByUserIdRequest,
+    ) -> VerifyPointByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_point_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_point_by_user_id_async(
+        self,
+        request: VerifyPointByUserIdRequest,
+    ) -> VerifyPointByUserIdResult:
+        async_result = []
+        self._verify_point_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_point_by_user_id(
         self,
         request: DeletePointByUserIdRequest,
@@ -1616,6 +1779,80 @@ class Gs2AdRewardRestClient(rest.AbstractGs2RestClient):
     ) -> ConsumePointByStampTaskResult:
         async_result = []
         self._consume_point_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_point_by_stamp_task(
+        self,
+        request: VerifyPointByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyPointByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='ad-reward',
+            region=self.session.region,
+        ) + "/point/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyPointByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_point_by_stamp_task(
+        self,
+        request: VerifyPointByStampTaskRequest,
+    ) -> VerifyPointByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_point_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_point_by_stamp_task_async(
+        self,
+        request: VerifyPointByStampTaskRequest,
+    ) -> VerifyPointByStampTaskResult:
+        async_result = []
+        self._verify_point_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
