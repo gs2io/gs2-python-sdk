@@ -5202,6 +5202,172 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_rating(
+        self,
+        request: VerifyRatingRequest,
+        callback: Callable[[AsyncResult[VerifyRatingResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='rating',
+            function='verifyRating',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.rating_name is not None:
+            body["ratingName"] = request.rating_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.rate_value is not None:
+            body["rateValue"] = request.rate_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRatingResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rating(
+        self,
+        request: VerifyRatingRequest,
+    ) -> VerifyRatingResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rating(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rating_async(
+        self,
+        request: VerifyRatingRequest,
+    ) -> VerifyRatingResult:
+        async_result = []
+        self._verify_rating(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_rating_by_user_id(
+        self,
+        request: VerifyRatingByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyRatingByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='rating',
+            function='verifyRatingByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.rating_name is not None:
+            body["ratingName"] = request.rating_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.rate_value is not None:
+            body["rateValue"] = request.rate_value
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRatingByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rating_by_user_id(
+        self,
+        request: VerifyRatingByUserIdRequest,
+    ) -> VerifyRatingByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rating_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rating_by_user_id_async(
+        self,
+        request: VerifyRatingByUserIdRequest,
+    ) -> VerifyRatingByUserIdResult:
+        async_result = []
+        self._verify_rating_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _put_result(
         self,
         request: PutResultRequest,
@@ -5346,6 +5512,79 @@ class Gs2MatchmakingWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteRatingResult:
         async_result = []
         self._delete_rating(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_rating_by_stamp_task(
+        self,
+        request: VerifyRatingByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyRatingByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="matchmaking",
+            component='rating',
+            function='verifyRatingByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyRatingByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_rating_by_stamp_task(
+        self,
+        request: VerifyRatingByStampTaskRequest,
+    ) -> VerifyRatingByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_rating_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_rating_by_stamp_task_async(
+        self,
+        request: VerifyRatingByStampTaskRequest,
+    ) -> VerifyRatingByStampTaskResult:
+        async_result = []
+        self._verify_rating_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

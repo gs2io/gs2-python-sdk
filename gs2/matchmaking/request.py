@@ -3970,6 +3970,151 @@ class GetRatingByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyRatingRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    rating_name: str = None
+    verify_type: str = None
+    rate_value: float = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyRatingRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyRatingRequest:
+        self.access_token = access_token
+        return self
+
+    def with_rating_name(self, rating_name: str) -> VerifyRatingRequest:
+        self.rating_name = rating_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyRatingRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_rate_value(self, rate_value: float) -> VerifyRatingRequest:
+        self.rate_value = rate_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRatingRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRatingRequest]:
+        if data is None:
+            return None
+        return VerifyRatingRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_rating_name(data.get('ratingName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_rate_value(data.get('rateValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "ratingName": self.rating_name,
+            "verifyType": self.verify_type,
+            "rateValue": self.rate_value,
+        }
+
+
+class VerifyRatingByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    rating_name: str = None
+    verify_type: str = None
+    rate_value: float = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyRatingByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyRatingByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_rating_name(self, rating_name: str) -> VerifyRatingByUserIdRequest:
+        self.rating_name = rating_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyRatingByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_rate_value(self, rate_value: float) -> VerifyRatingByUserIdRequest:
+        self.rate_value = rate_value
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyRatingByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyRatingByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRatingByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyRatingByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_rating_name(data.get('ratingName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_rate_value(data.get('rateValue'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "ratingName": self.rating_name,
+            "verifyType": self.verify_type,
+            "rateValue": self.rate_value,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class PutResultRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -4085,6 +4230,49 @@ class DeleteRatingRequest(core.Gs2Request):
             "userId": self.user_id,
             "ratingName": self.rating_name,
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyRatingByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyRatingByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyRatingByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRatingByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyRatingByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
         }
 
 

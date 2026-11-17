@@ -2432,6 +2432,74 @@ class GetRatingByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyRatingResult(core.Gs2Result):
+    item: Rating = None
+
+    def with_item(self, item: Rating) -> VerifyRatingResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRatingResult]:
+        if data is None:
+            return None
+        return VerifyRatingResult()\
+            .with_item(Rating.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyRatingByUserIdResult(core.Gs2Result):
+    item: Rating = None
+
+    def with_item(self, item: Rating) -> VerifyRatingByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRatingByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyRatingByUserIdResult()\
+            .with_item(Rating.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class PutResultResult(core.Gs2Result):
     items: List[Rating] = None
 
@@ -2503,6 +2571,47 @@ class DeleteRatingResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyRatingByStampTaskResult(core.Gs2Result):
+    item: Rating = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Rating) -> VerifyRatingByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyRatingByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyRatingByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyRatingByStampTaskResult()\
+            .with_item(Rating.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
         }
 
 
