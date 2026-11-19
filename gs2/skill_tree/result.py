@@ -1339,6 +1339,74 @@ class GetStatusByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyStatusResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> VerifyStatusResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStatusResult]:
+        if data is None:
+            return None
+        return VerifyStatusResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyStatusByUserIdResult(core.Gs2Result):
+    item: Status = None
+
+    def with_item(self, item: Status) -> VerifyStatusByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStatusByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyStatusByUserIdResult()\
+            .with_item(Status.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class ResetResult(core.Gs2Result):
     item: Status = None
     transaction_id: str = None
@@ -1570,6 +1638,47 @@ class MarkRestrainByStampTaskResult(core.Gs2Result):
         if data is None:
             return None
         return MarkRestrainByStampTaskResult()\
+            .with_item(Status.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
+        }
+
+
+class VerifyStatusByStampTaskResult(core.Gs2Result):
+    item: Status = None
+    new_context_stack: str = None
+
+    def with_item(self, item: Status) -> VerifyStatusByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyStatusByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyStatusByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyStatusByStampTaskResult()\
             .with_item(Status.from_dict(data.get('item')))\
             .with_new_context_stack(data.get('newContextStack'))
 

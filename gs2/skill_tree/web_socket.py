@@ -2535,6 +2535,172 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_status(
+        self,
+        request: VerifyStatusRequest,
+        callback: Callable[[AsyncResult[VerifyStatusResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="skillTree",
+            component='status',
+            function='verifyStatus',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.node_model_name is not None:
+            body["nodeModelName"] = request.node_model_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStatusResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_status(
+        self,
+        request: VerifyStatusRequest,
+    ) -> VerifyStatusResult:
+        async_result = []
+        with timeout(30):
+            self._verify_status(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_status_async(
+        self,
+        request: VerifyStatusRequest,
+    ) -> VerifyStatusResult:
+        async_result = []
+        self._verify_status(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_status_by_user_id(
+        self,
+        request: VerifyStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyStatusByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="skillTree",
+            component='status',
+            function='verifyStatusByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.node_model_name is not None:
+            body["nodeModelName"] = request.node_model_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStatusByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_status_by_user_id(
+        self,
+        request: VerifyStatusByUserIdRequest,
+    ) -> VerifyStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_status_by_user_id_async(
+        self,
+        request: VerifyStatusByUserIdRequest,
+    ) -> VerifyStatusByUserIdResult:
+        async_result = []
+        self._verify_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _reset(
         self,
         request: ResetRequest,
@@ -2836,6 +3002,79 @@ class Gs2SkillTreeWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> MarkRestrainByStampTaskResult:
         async_result = []
         self._mark_restrain_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_status_by_stamp_task(
+        self,
+        request: VerifyStatusByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyStatusByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="skillTree",
+            component='status',
+            function='verifyStatusByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyStatusByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_status_by_stamp_task(
+        self,
+        request: VerifyStatusByStampTaskRequest,
+    ) -> VerifyStatusByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_status_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_status_by_stamp_task_async(
+        self,
+        request: VerifyStatusByStampTaskRequest,
+    ) -> VerifyStatusByStampTaskResult:
+        async_result = []
+        self._verify_status_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )
