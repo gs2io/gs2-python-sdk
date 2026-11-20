@@ -2654,6 +2654,151 @@ class GetCompletedQuestListByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyCompletedQuestListRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    quest_group_name: str = None
+    quest_name: str = None
+    verify_type: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyCompletedQuestListRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyCompletedQuestListRequest:
+        self.access_token = access_token
+        return self
+
+    def with_quest_group_name(self, quest_group_name: str) -> VerifyCompletedQuestListRequest:
+        self.quest_group_name = quest_group_name
+        return self
+
+    def with_quest_name(self, quest_name: str) -> VerifyCompletedQuestListRequest:
+        self.quest_name = quest_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyCompletedQuestListRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCompletedQuestListRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompletedQuestListRequest]:
+        if data is None:
+            return None
+        return VerifyCompletedQuestListRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_quest_group_name(data.get('questGroupName'))\
+            .with_quest_name(data.get('questName'))\
+            .with_verify_type(data.get('verifyType'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "questGroupName": self.quest_group_name,
+            "questName": self.quest_name,
+            "verifyType": self.verify_type,
+        }
+
+
+class VerifyCompletedQuestListByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    quest_group_name: str = None
+    quest_name: str = None
+    verify_type: str = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyCompletedQuestListByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyCompletedQuestListByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_quest_group_name(self, quest_group_name: str) -> VerifyCompletedQuestListByUserIdRequest:
+        self.quest_group_name = quest_group_name
+        return self
+
+    def with_quest_name(self, quest_name: str) -> VerifyCompletedQuestListByUserIdRequest:
+        self.quest_name = quest_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyCompletedQuestListByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyCompletedQuestListByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyCompletedQuestListByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompletedQuestListByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyCompletedQuestListByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_quest_group_name(data.get('questGroupName'))\
+            .with_quest_name(data.get('questName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "questGroupName": self.quest_group_name,
+            "questName": self.quest_name,
+            "verifyType": self.verify_type,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DeleteCompletedQuestListByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2713,6 +2858,49 @@ class DeleteCompletedQuestListByUserIdRequest(core.Gs2Request):
             "questGroupName": self.quest_group_name,
             "userId": self.user_id,
             "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyCompletedQuestListByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyCompletedQuestListByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyCompletedQuestListByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompletedQuestListByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyCompletedQuestListByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
         }
 
 

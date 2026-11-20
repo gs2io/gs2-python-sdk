@@ -3548,6 +3548,172 @@ class Gs2QuestWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_completed_quest_list(
+        self,
+        request: VerifyCompletedQuestListRequest,
+        callback: Callable[[AsyncResult[VerifyCompletedQuestListResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="quest",
+            component='completedQuestList',
+            function='verifyCompletedQuestList',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.quest_group_name is not None:
+            body["questGroupName"] = request.quest_group_name
+        if request.quest_name is not None:
+            body["questName"] = request.quest_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCompletedQuestListResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_completed_quest_list(
+        self,
+        request: VerifyCompletedQuestListRequest,
+    ) -> VerifyCompletedQuestListResult:
+        async_result = []
+        with timeout(30):
+            self._verify_completed_quest_list(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_completed_quest_list_async(
+        self,
+        request: VerifyCompletedQuestListRequest,
+    ) -> VerifyCompletedQuestListResult:
+        async_result = []
+        self._verify_completed_quest_list(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_completed_quest_list_by_user_id(
+        self,
+        request: VerifyCompletedQuestListByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyCompletedQuestListByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="quest",
+            component='completedQuestList',
+            function='verifyCompletedQuestListByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.quest_group_name is not None:
+            body["questGroupName"] = request.quest_group_name
+        if request.quest_name is not None:
+            body["questName"] = request.quest_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCompletedQuestListByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_completed_quest_list_by_user_id(
+        self,
+        request: VerifyCompletedQuestListByUserIdRequest,
+    ) -> VerifyCompletedQuestListByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_completed_quest_list_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_completed_quest_list_by_user_id_async(
+        self,
+        request: VerifyCompletedQuestListByUserIdRequest,
+    ) -> VerifyCompletedQuestListByUserIdResult:
+        async_result = []
+        self._verify_completed_quest_list_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_completed_quest_list_by_user_id(
         self,
         request: DeleteCompletedQuestListByUserIdRequest,
@@ -3614,6 +3780,79 @@ class Gs2QuestWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DeleteCompletedQuestListByUserIdResult:
         async_result = []
         self._delete_completed_quest_list_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_completed_quest_list_by_stamp_task(
+        self,
+        request: VerifyCompletedQuestListByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyCompletedQuestListByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="quest",
+            component='completedQuestList',
+            function='verifyCompletedQuestListByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyCompletedQuestListByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_completed_quest_list_by_stamp_task(
+        self,
+        request: VerifyCompletedQuestListByStampTaskRequest,
+    ) -> VerifyCompletedQuestListByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_completed_quest_list_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_completed_quest_list_by_stamp_task_async(
+        self,
+        request: VerifyCompletedQuestListByStampTaskRequest,
+    ) -> VerifyCompletedQuestListByStampTaskResult:
+        async_result = []
+        self._verify_completed_quest_list_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

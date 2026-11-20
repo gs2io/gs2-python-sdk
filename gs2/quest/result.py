@@ -1829,6 +1829,74 @@ class GetCompletedQuestListByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyCompletedQuestListResult(core.Gs2Result):
+    item: CompletedQuestList = None
+
+    def with_item(self, item: CompletedQuestList) -> VerifyCompletedQuestListResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompletedQuestListResult]:
+        if data is None:
+            return None
+        return VerifyCompletedQuestListResult()\
+            .with_item(CompletedQuestList.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyCompletedQuestListByUserIdResult(core.Gs2Result):
+    item: CompletedQuestList = None
+
+    def with_item(self, item: CompletedQuestList) -> VerifyCompletedQuestListByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompletedQuestListByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyCompletedQuestListByUserIdResult()\
+            .with_item(CompletedQuestList.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteCompletedQuestListByUserIdResult(core.Gs2Result):
     item: CompletedQuestList = None
 
@@ -1860,6 +1928,47 @@ class DeleteCompletedQuestListByUserIdResult(core.Gs2Result):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyCompletedQuestListByStampTaskResult(core.Gs2Result):
+    item: CompletedQuestList = None
+    new_context_stack: str = None
+
+    def with_item(self, item: CompletedQuestList) -> VerifyCompletedQuestListByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyCompletedQuestListByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyCompletedQuestListByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyCompletedQuestListByStampTaskResult()\
+            .with_item(CompletedQuestList.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
         }
 
 
