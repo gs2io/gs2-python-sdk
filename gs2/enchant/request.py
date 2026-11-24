@@ -1896,6 +1896,179 @@ class GetBalanceParameterStatusByUserIdRequest(core.Gs2Request):
         }
 
 
+class VerifyBalanceParameterStatusRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    parameter_name: str = None
+    property_id: str = None
+    parameter_value_name: str = None
+    verify_type: str = None
+    parameter_value: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyBalanceParameterStatusRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyBalanceParameterStatusRequest:
+        self.access_token = access_token
+        return self
+
+    def with_parameter_name(self, parameter_name: str) -> VerifyBalanceParameterStatusRequest:
+        self.parameter_name = parameter_name
+        return self
+
+    def with_property_id(self, property_id: str) -> VerifyBalanceParameterStatusRequest:
+        self.property_id = property_id
+        return self
+
+    def with_parameter_value_name(self, parameter_value_name: str) -> VerifyBalanceParameterStatusRequest:
+        self.parameter_value_name = parameter_value_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyBalanceParameterStatusRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_parameter_value(self, parameter_value: int) -> VerifyBalanceParameterStatusRequest:
+        self.parameter_value = parameter_value
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyBalanceParameterStatusRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBalanceParameterStatusRequest]:
+        if data is None:
+            return None
+        return VerifyBalanceParameterStatusRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_parameter_name(data.get('parameterName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_parameter_value_name(data.get('parameterValueName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_parameter_value(data.get('parameterValue'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "parameterName": self.parameter_name,
+            "propertyId": self.property_id,
+            "parameterValueName": self.parameter_value_name,
+            "verifyType": self.verify_type,
+            "parameterValue": self.parameter_value,
+        }
+
+
+class VerifyBalanceParameterStatusByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    parameter_name: str = None
+    property_id: str = None
+    parameter_value_name: str = None
+    verify_type: str = None
+    parameter_value: int = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_parameter_name(self, parameter_name: str) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.parameter_name = parameter_name
+        return self
+
+    def with_property_id(self, property_id: str) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.property_id = property_id
+        return self
+
+    def with_parameter_value_name(self, parameter_value_name: str) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.parameter_value_name = parameter_value_name
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_parameter_value(self, parameter_value: int) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.parameter_value = parameter_value
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyBalanceParameterStatusByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBalanceParameterStatusByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyBalanceParameterStatusByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_parameter_name(data.get('parameterName'))\
+            .with_property_id(data.get('propertyId'))\
+            .with_parameter_value_name(data.get('parameterValueName'))\
+            .with_verify_type(data.get('verifyType'))\
+            .with_parameter_value(data.get('parameterValue'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "parameterName": self.parameter_name,
+            "propertyId": self.property_id,
+            "parameterValueName": self.parameter_value_name,
+            "verifyType": self.verify_type,
+            "parameterValue": self.parameter_value,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
 class DeleteBalanceParameterStatusByUserIdRequest(core.Gs2Request):
 
     context_stack: str = None
@@ -2211,6 +2384,49 @@ class SetBalanceParameterStatusByStampSheetRequest(core.Gs2Request):
     def to_dict(self) -> Dict[str, Any]:
         return {
             "stampSheet": self.stamp_sheet,
+            "keyId": self.key_id,
+        }
+
+
+class VerifyBalanceParameterStatusByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyBalanceParameterStatusByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyBalanceParameterStatusByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBalanceParameterStatusByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyBalanceParameterStatusByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
             "keyId": self.key_id,
         }
 

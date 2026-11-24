@@ -1339,6 +1339,74 @@ class GetBalanceParameterStatusByUserIdResult(core.Gs2Result):
         }
 
 
+class VerifyBalanceParameterStatusResult(core.Gs2Result):
+    item: BalanceParameterStatus = None
+
+    def with_item(self, item: BalanceParameterStatus) -> VerifyBalanceParameterStatusResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBalanceParameterStatusResult]:
+        if data is None:
+            return None
+        return VerifyBalanceParameterStatusResult()\
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
+class VerifyBalanceParameterStatusByUserIdResult(core.Gs2Result):
+    item: BalanceParameterStatus = None
+
+    def with_item(self, item: BalanceParameterStatus) -> VerifyBalanceParameterStatusByUserIdResult:
+        self.item = item
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBalanceParameterStatusByUserIdResult]:
+        if data is None:
+            return None
+        return VerifyBalanceParameterStatusByUserIdResult()\
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+        }
+
+
 class DeleteBalanceParameterStatusByUserIdResult(core.Gs2Result):
     item: BalanceParameterStatus = None
 
@@ -1534,6 +1602,47 @@ class SetBalanceParameterStatusByStampSheetResult(core.Gs2Result):
         return {
             "item": self.item.to_dict() if self.item else None,
             "old": self.old.to_dict() if self.old else None,
+        }
+
+
+class VerifyBalanceParameterStatusByStampTaskResult(core.Gs2Result):
+    item: BalanceParameterStatus = None
+    new_context_stack: str = None
+
+    def with_item(self, item: BalanceParameterStatus) -> VerifyBalanceParameterStatusByStampTaskResult:
+        self.item = item
+        return self
+
+    def with_new_context_stack(self, new_context_stack: str) -> VerifyBalanceParameterStatusByStampTaskResult:
+        self.new_context_stack = new_context_stack
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyBalanceParameterStatusByStampTaskResult]:
+        if data is None:
+            return None
+        return VerifyBalanceParameterStatusByStampTaskResult()\
+            .with_item(BalanceParameterStatus.from_dict(data.get('item')))\
+            .with_new_context_stack(data.get('newContextStack'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "item": self.item.to_dict() if self.item else None,
+            "newContextStack": self.new_context_stack,
         }
 
 

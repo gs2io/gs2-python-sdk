@@ -2847,6 +2847,173 @@ class Gs2EnchantRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_balance_parameter_status(
+        self,
+        request: VerifyBalanceParameterStatusRequest,
+        callback: Callable[[AsyncResult[VerifyBalanceParameterStatusResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enchant',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/status/balance/{parameterName}/{propertyId}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            parameterName=request.parameter_name if request.parameter_name is not None and request.parameter_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.parameter_value_name is not None:
+            body["parameterValueName"] = request.parameter_value_name
+        if request.parameter_value is not None:
+            body["parameterValue"] = request.parameter_value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyBalanceParameterStatusResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_balance_parameter_status(
+        self,
+        request: VerifyBalanceParameterStatusRequest,
+    ) -> VerifyBalanceParameterStatusResult:
+        async_result = []
+        with timeout(30):
+            self._verify_balance_parameter_status(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_balance_parameter_status_async(
+        self,
+        request: VerifyBalanceParameterStatusRequest,
+    ) -> VerifyBalanceParameterStatusResult:
+        async_result = []
+        self._verify_balance_parameter_status(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_balance_parameter_status_by_user_id(
+        self,
+        request: VerifyBalanceParameterStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyBalanceParameterStatusByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enchant',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/status/balance/{parameterName}/{propertyId}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            parameterName=request.parameter_name if request.parameter_name is not None and request.parameter_name != '' else 'null',
+            propertyId=request.property_id if request.property_id is not None and request.property_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.parameter_value_name is not None:
+            body["parameterValueName"] = request.parameter_value_name
+        if request.parameter_value is not None:
+            body["parameterValue"] = request.parameter_value
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyBalanceParameterStatusByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_balance_parameter_status_by_user_id(
+        self,
+        request: VerifyBalanceParameterStatusByUserIdRequest,
+    ) -> VerifyBalanceParameterStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_balance_parameter_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_balance_parameter_status_by_user_id_async(
+        self,
+        request: VerifyBalanceParameterStatusByUserIdRequest,
+    ) -> VerifyBalanceParameterStatusByUserIdResult:
+        async_result = []
+        self._verify_balance_parameter_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_balance_parameter_status_by_user_id(
         self,
         request: DeleteBalanceParameterStatusByUserIdRequest,
@@ -3228,6 +3395,80 @@ class Gs2EnchantRestClient(rest.AbstractGs2RestClient):
     ) -> SetBalanceParameterStatusByStampSheetResult:
         async_result = []
         self._set_balance_parameter_status_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_balance_parameter_status_by_stamp_task(
+        self,
+        request: VerifyBalanceParameterStatusByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyBalanceParameterStatusByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='enchant',
+            region=self.session.region,
+        ) + "/stamp/balance/parameter/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyBalanceParameterStatusByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_balance_parameter_status_by_stamp_task(
+        self,
+        request: VerifyBalanceParameterStatusByStampTaskRequest,
+    ) -> VerifyBalanceParameterStatusByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_balance_parameter_status_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_balance_parameter_status_by_stamp_task_async(
+        self,
+        request: VerifyBalanceParameterStatusByStampTaskRequest,
+    ) -> VerifyBalanceParameterStatusByStampTaskResult:
+        async_result = []
+        self._verify_balance_parameter_status_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,

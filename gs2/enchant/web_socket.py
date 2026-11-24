@@ -2817,6 +2817,180 @@ class Gs2EnchantWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_balance_parameter_status(
+        self,
+        request: VerifyBalanceParameterStatusRequest,
+        callback: Callable[[AsyncResult[VerifyBalanceParameterStatusResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="enchant",
+            component='balanceParameterStatus',
+            function='verifyBalanceParameterStatus',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.parameter_name is not None:
+            body["parameterName"] = request.parameter_name
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.parameter_value_name is not None:
+            body["parameterValueName"] = request.parameter_value_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.parameter_value is not None:
+            body["parameterValue"] = request.parameter_value
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyBalanceParameterStatusResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_balance_parameter_status(
+        self,
+        request: VerifyBalanceParameterStatusRequest,
+    ) -> VerifyBalanceParameterStatusResult:
+        async_result = []
+        with timeout(30):
+            self._verify_balance_parameter_status(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_balance_parameter_status_async(
+        self,
+        request: VerifyBalanceParameterStatusRequest,
+    ) -> VerifyBalanceParameterStatusResult:
+        async_result = []
+        self._verify_balance_parameter_status(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_balance_parameter_status_by_user_id(
+        self,
+        request: VerifyBalanceParameterStatusByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyBalanceParameterStatusByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="enchant",
+            component='balanceParameterStatus',
+            function='verifyBalanceParameterStatusByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.parameter_name is not None:
+            body["parameterName"] = request.parameter_name
+        if request.property_id is not None:
+            body["propertyId"] = request.property_id
+        if request.parameter_value_name is not None:
+            body["parameterValueName"] = request.parameter_value_name
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.parameter_value is not None:
+            body["parameterValue"] = request.parameter_value
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyBalanceParameterStatusByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_balance_parameter_status_by_user_id(
+        self,
+        request: VerifyBalanceParameterStatusByUserIdRequest,
+    ) -> VerifyBalanceParameterStatusByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_balance_parameter_status_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_balance_parameter_status_by_user_id_async(
+        self,
+        request: VerifyBalanceParameterStatusByUserIdRequest,
+    ) -> VerifyBalanceParameterStatusByUserIdResult:
+        async_result = []
+        self._verify_balance_parameter_status_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _delete_balance_parameter_status_by_user_id(
         self,
         request: DeleteBalanceParameterStatusByUserIdRequest,
@@ -3203,6 +3377,79 @@ class Gs2EnchantWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> SetBalanceParameterStatusByStampSheetResult:
         async_result = []
         self._set_balance_parameter_status_by_stamp_sheet(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_balance_parameter_status_by_stamp_task(
+        self,
+        request: VerifyBalanceParameterStatusByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyBalanceParameterStatusByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="enchant",
+            component='balanceParameterStatus',
+            function='verifyBalanceParameterStatusByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyBalanceParameterStatusByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_balance_parameter_status_by_stamp_task(
+        self,
+        request: VerifyBalanceParameterStatusByStampTaskRequest,
+    ) -> VerifyBalanceParameterStatusByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_balance_parameter_status_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_balance_parameter_status_by_stamp_task_async(
+        self,
+        request: VerifyBalanceParameterStatusByStampTaskRequest,
+    ) -> VerifyBalanceParameterStatusByStampTaskResult:
+        async_result = []
+        self._verify_balance_parameter_status_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )
