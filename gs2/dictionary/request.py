@@ -1872,6 +1872,206 @@ class VerifyEntryByStampTaskRequest(core.Gs2Request):
         }
 
 
+class VerifyEntryCountRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    access_token: str = None
+    entry_model_names: List[str] = None
+    verify_type: str = None
+    count: int = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyEntryCountRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_access_token(self, access_token: str) -> VerifyEntryCountRequest:
+        self.access_token = access_token
+        return self
+
+    def with_entry_model_names(self, entry_model_names: List[str]) -> VerifyEntryCountRequest:
+        self.entry_model_names = entry_model_names
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyEntryCountRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_count(self, count: int) -> VerifyEntryCountRequest:
+        self.count = count
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyEntryCountRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyEntryCountRequest]:
+        if data is None:
+            return None
+        return VerifyEntryCountRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_access_token(data.get('accessToken'))\
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
+                data.get('entryModelNames')[i]
+                for i in range(len(data.get('entryModelNames')))
+            ])\
+            .with_verify_type(data.get('verifyType'))\
+            .with_count(data.get('count'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "accessToken": self.access_token,
+            "entryModelNames": None if self.entry_model_names is None else [
+                self.entry_model_names[i]
+                for i in range(len(self.entry_model_names))
+            ],
+            "verifyType": self.verify_type,
+            "count": self.count,
+        }
+
+
+class VerifyEntryCountByUserIdRequest(core.Gs2Request):
+
+    context_stack: str = None
+    namespace_name: str = None
+    user_id: str = None
+    entry_model_names: List[str] = None
+    verify_type: str = None
+    count: int = None
+    time_offset_token: str = None
+    duplication_avoider: str = None
+
+    def with_namespace_name(self, namespace_name: str) -> VerifyEntryCountByUserIdRequest:
+        self.namespace_name = namespace_name
+        return self
+
+    def with_user_id(self, user_id: str) -> VerifyEntryCountByUserIdRequest:
+        self.user_id = user_id
+        return self
+
+    def with_entry_model_names(self, entry_model_names: List[str]) -> VerifyEntryCountByUserIdRequest:
+        self.entry_model_names = entry_model_names
+        return self
+
+    def with_verify_type(self, verify_type: str) -> VerifyEntryCountByUserIdRequest:
+        self.verify_type = verify_type
+        return self
+
+    def with_count(self, count: int) -> VerifyEntryCountByUserIdRequest:
+        self.count = count
+        return self
+
+    def with_time_offset_token(self, time_offset_token: str) -> VerifyEntryCountByUserIdRequest:
+        self.time_offset_token = time_offset_token
+        return self
+
+    def with_duplication_avoider(self, duplication_avoider: str) -> VerifyEntryCountByUserIdRequest:
+        self.duplication_avoider = duplication_avoider
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyEntryCountByUserIdRequest]:
+        if data is None:
+            return None
+        return VerifyEntryCountByUserIdRequest()\
+            .with_namespace_name(data.get('namespaceName'))\
+            .with_user_id(data.get('userId'))\
+            .with_entry_model_names(None if data.get('entryModelNames') is None else [
+                data.get('entryModelNames')[i]
+                for i in range(len(data.get('entryModelNames')))
+            ])\
+            .with_verify_type(data.get('verifyType'))\
+            .with_count(data.get('count'))\
+            .with_time_offset_token(data.get('timeOffsetToken'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "namespaceName": self.namespace_name,
+            "userId": self.user_id,
+            "entryModelNames": None if self.entry_model_names is None else [
+                self.entry_model_names[i]
+                for i in range(len(self.entry_model_names))
+            ],
+            "verifyType": self.verify_type,
+            "count": self.count,
+            "timeOffsetToken": self.time_offset_token,
+        }
+
+
+class VerifyEntryCountByStampTaskRequest(core.Gs2Request):
+
+    context_stack: str = None
+    stamp_task: str = None
+    key_id: str = None
+
+    def with_stamp_task(self, stamp_task: str) -> VerifyEntryCountByStampTaskRequest:
+        self.stamp_task = stamp_task
+        return self
+
+    def with_key_id(self, key_id: str) -> VerifyEntryCountByStampTaskRequest:
+        self.key_id = key_id
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyEntryCountByStampTaskRequest]:
+        if data is None:
+            return None
+        return VerifyEntryCountByStampTaskRequest()\
+            .with_stamp_task(data.get('stampTask'))\
+            .with_key_id(data.get('keyId'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "stampTask": self.stamp_task,
+            "keyId": self.key_id,
+        }
+
+
 class DescribeLikesRequest(core.Gs2Request):
 
     context_stack: str = None
