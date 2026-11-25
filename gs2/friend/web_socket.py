@@ -1574,6 +1574,241 @@ class Gs2FriendWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_follow(
+        self,
+        request: VerifyFollowRequest,
+        callback: Callable[[AsyncResult[VerifyFollowResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='follow',
+            function='verifyFollow',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.target_user_id is not None:
+            body["targetUserId"] = request.target_user_id
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFollowResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_follow(
+        self,
+        request: VerifyFollowRequest,
+    ) -> VerifyFollowResult:
+        async_result = []
+        with timeout(30):
+            self._verify_follow(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_follow_async(
+        self,
+        request: VerifyFollowRequest,
+    ) -> VerifyFollowResult:
+        async_result = []
+        self._verify_follow(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_follow_by_user_id(
+        self,
+        request: VerifyFollowByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyFollowByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='follow',
+            function='verifyFollowByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.target_user_id is not None:
+            body["targetUserId"] = request.target_user_id
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFollowByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_follow_by_user_id(
+        self,
+        request: VerifyFollowByUserIdRequest,
+    ) -> VerifyFollowByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_follow_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_follow_by_user_id_async(
+        self,
+        request: VerifyFollowByUserIdRequest,
+    ) -> VerifyFollowByUserIdResult:
+        async_result = []
+        self._verify_follow_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_follow_by_stamp_task(
+        self,
+        request: VerifyFollowByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyFollowByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='follow',
+            function='verifyFollowByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFollowByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_follow_by_stamp_task(
+        self,
+        request: VerifyFollowByStampTaskRequest,
+    ) -> VerifyFollowByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_follow_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_follow_by_stamp_task_async(
+        self,
+        request: VerifyFollowByStampTaskRequest,
+    ) -> VerifyFollowByStampTaskResult:
+        async_result = []
+        self._verify_follow_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_friends(
         self,
         request: DescribeFriendsRequest,
@@ -1723,6 +1958,476 @@ class Gs2FriendWebSocketClient(web_socket.AbstractGs2WebSocketClient):
     ) -> DescribeFriendsByUserIdResult:
         async_result = []
         self._describe_friends_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend(
+        self,
+        request: VerifyFriendRequest,
+        callback: Callable[[AsyncResult[VerifyFriendResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='friend',
+            function='verifyFriend',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.target_user_id is not None:
+            body["targetUserId"] = request.target_user_id
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFriendResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_friend(
+        self,
+        request: VerifyFriendRequest,
+    ) -> VerifyFriendResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_async(
+        self,
+        request: VerifyFriendRequest,
+    ) -> VerifyFriendResult:
+        async_result = []
+        self._verify_friend(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_by_user_id(
+        self,
+        request: VerifyFriendByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyFriendByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='friend',
+            function='verifyFriendByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.target_user_id is not None:
+            body["targetUserId"] = request.target_user_id
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFriendByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_friend_by_user_id(
+        self,
+        request: VerifyFriendByUserIdRequest,
+    ) -> VerifyFriendByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_by_user_id_async(
+        self,
+        request: VerifyFriendByUserIdRequest,
+    ) -> VerifyFriendByUserIdResult:
+        async_result = []
+        self._verify_friend_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_by_stamp_task(
+        self,
+        request: VerifyFriendByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyFriendByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='friend',
+            function='verifyFriendByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFriendByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_friend_by_stamp_task(
+        self,
+        request: VerifyFriendByStampTaskRequest,
+    ) -> VerifyFriendByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_by_stamp_task_async(
+        self,
+        request: VerifyFriendByStampTaskRequest,
+    ) -> VerifyFriendByStampTaskResult:
+        async_result = []
+        self._verify_friend_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_count(
+        self,
+        request: VerifyFriendCountRequest,
+        callback: Callable[[AsyncResult[VerifyFriendCountResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='friend',
+            function='verifyFriendCount',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.access_token is not None:
+            body["accessToken"] = request.access_token
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.access_token:
+            body["xGs2AccessToken"] = request.access_token
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFriendCountResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_friend_count(
+        self,
+        request: VerifyFriendCountRequest,
+    ) -> VerifyFriendCountResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_count(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_count_async(
+        self,
+        request: VerifyFriendCountRequest,
+    ) -> VerifyFriendCountResult:
+        async_result = []
+        self._verify_friend_count(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_count_by_user_id(
+        self,
+        request: VerifyFriendCountByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyFriendCountByUserIdResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='friend',
+            function='verifyFriendCountByUserId',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.namespace_name is not None:
+            body["namespaceName"] = request.namespace_name
+        if request.user_id is not None:
+            body["userId"] = request.user_id
+        if request.verify_type is not None:
+            body["verifyType"] = request.verify_type
+        if request.count is not None:
+            body["count"] = request.count
+        if request.time_offset_token is not None:
+            body["timeOffsetToken"] = request.time_offset_token
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+        if request.duplication_avoider:
+            body["xGs2DuplicationAvoider"] = request.duplication_avoider
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFriendCountByUserIdResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_friend_count_by_user_id(
+        self,
+        request: VerifyFriendCountByUserIdRequest,
+    ) -> VerifyFriendCountByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_count_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_count_by_user_id_async(
+        self,
+        request: VerifyFriendCountByUserIdRequest,
+    ) -> VerifyFriendCountByUserIdResult:
+        async_result = []
+        self._verify_friend_count_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_count_by_stamp_task(
+        self,
+        request: VerifyFriendCountByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyFriendCountByStampTaskResult]], None],
+    ):
+        import uuid
+
+        request_id = str(uuid.uuid4())
+        body = self._create_metadata(
+            service="friend",
+            component='friend',
+            function='verifyFriendCountByStampTask',
+            request_id=request_id,
+        )
+
+        if request.context_stack:
+            body['contextStack'] = str(request.context_stack)
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            body["xGs2RequestId"] = request.request_id
+
+        self.session.send(
+            web_socket.NetworkJob(
+                request_id=request_id,
+                result_type=VerifyFriendCountByStampTaskResult,
+                callback=callback,
+                body=body,
+            )
+        )
+
+    def verify_friend_count_by_stamp_task(
+        self,
+        request: VerifyFriendCountByStampTaskRequest,
+    ) -> VerifyFriendCountByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_count_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+            )
+
+        with timeout(30):
+            while not async_result:
+                time.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_count_by_stamp_task_async(
+        self,
+        request: VerifyFriendCountByStampTaskRequest,
+    ) -> VerifyFriendCountByStampTaskResult:
+        async_result = []
+        self._verify_friend_count_by_stamp_task(
             request,
             lambda result: async_result.append(result),
         )

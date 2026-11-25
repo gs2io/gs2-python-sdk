@@ -1585,6 +1585,237 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_follow(
+        self,
+        request: VerifyFollowRequest,
+        callback: Callable[[AsyncResult[VerifyFollowResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/follow/{targetUserId}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            targetUserId=request.target_user_id if request.target_user_id is not None and request.target_user_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFollowResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_follow(
+        self,
+        request: VerifyFollowRequest,
+    ) -> VerifyFollowResult:
+        async_result = []
+        with timeout(30):
+            self._verify_follow(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_follow_async(
+        self,
+        request: VerifyFollowRequest,
+    ) -> VerifyFollowResult:
+        async_result = []
+        self._verify_follow(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_follow_by_user_id(
+        self,
+        request: VerifyFollowByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyFollowByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/follow/{targetUserId}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            targetUserId=request.target_user_id if request.target_user_id is not None and request.target_user_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFollowByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_follow_by_user_id(
+        self,
+        request: VerifyFollowByUserIdRequest,
+    ) -> VerifyFollowByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_follow_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_follow_by_user_id_async(
+        self,
+        request: VerifyFollowByUserIdRequest,
+    ) -> VerifyFollowByUserIdResult:
+        async_result = []
+        self._verify_follow_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_follow_by_stamp_task(
+        self,
+        request: VerifyFollowByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyFollowByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/stamp/follow/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFollowByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_follow_by_stamp_task(
+        self,
+        request: VerifyFollowByStampTaskRequest,
+    ) -> VerifyFollowByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_follow_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_follow_by_stamp_task_async(
+        self,
+        request: VerifyFollowByStampTaskRequest,
+    ) -> VerifyFollowByStampTaskResult:
+        async_result = []
+        self._verify_follow_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_friends(
         self,
         request: DescribeFriendsRequest,
@@ -1732,6 +1963,470 @@ class Gs2FriendRestClient(rest.AbstractGs2RestClient):
     ) -> DescribeFriendsByUserIdResult:
         async_result = []
         self._describe_friends_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend(
+        self,
+        request: VerifyFriendRequest,
+        callback: Callable[[AsyncResult[VerifyFriendResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/friend/{targetUserId}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            targetUserId=request.target_user_id if request.target_user_id is not None and request.target_user_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFriendResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_friend(
+        self,
+        request: VerifyFriendRequest,
+    ) -> VerifyFriendResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_async(
+        self,
+        request: VerifyFriendRequest,
+    ) -> VerifyFriendResult:
+        async_result = []
+        self._verify_friend(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_by_user_id(
+        self,
+        request: VerifyFriendByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyFriendByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/friend/{targetUserId}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            targetUserId=request.target_user_id if request.target_user_id is not None and request.target_user_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFriendByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_friend_by_user_id(
+        self,
+        request: VerifyFriendByUserIdRequest,
+    ) -> VerifyFriendByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_by_user_id_async(
+        self,
+        request: VerifyFriendByUserIdRequest,
+    ) -> VerifyFriendByUserIdResult:
+        async_result = []
+        self._verify_friend_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_by_stamp_task(
+        self,
+        request: VerifyFriendByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyFriendByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/stamp/friend/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFriendByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_friend_by_stamp_task(
+        self,
+        request: VerifyFriendByStampTaskRequest,
+    ) -> VerifyFriendByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_by_stamp_task_async(
+        self,
+        request: VerifyFriendByStampTaskRequest,
+    ) -> VerifyFriendByStampTaskResult:
+        async_result = []
+        self._verify_friend_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_count(
+        self,
+        request: VerifyFriendCountRequest,
+        callback: Callable[[AsyncResult[VerifyFriendCountResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/friendCount/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFriendCountResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_friend_count(
+        self,
+        request: VerifyFriendCountRequest,
+    ) -> VerifyFriendCountResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_count(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_count_async(
+        self,
+        request: VerifyFriendCountRequest,
+    ) -> VerifyFriendCountResult:
+        async_result = []
+        self._verify_friend_count(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_count_by_user_id(
+        self,
+        request: VerifyFriendCountByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyFriendCountByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/friendCount/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFriendCountByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_friend_count_by_user_id(
+        self,
+        request: VerifyFriendCountByUserIdRequest,
+    ) -> VerifyFriendCountByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_count_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_count_by_user_id_async(
+        self,
+        request: VerifyFriendCountByUserIdRequest,
+    ) -> VerifyFriendCountByUserIdResult:
+        async_result = []
+        self._verify_friend_count_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_friend_count_by_stamp_task(
+        self,
+        request: VerifyFriendCountByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyFriendCountByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='friend',
+            region=self.session.region,
+        ) + "/stamp/friend/count/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFriendCountByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_friend_count_by_stamp_task(
+        self,
+        request: VerifyFriendCountByStampTaskRequest,
+    ) -> VerifyFriendCountByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_friend_count_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_friend_count_by_stamp_task_async(
+        self,
+        request: VerifyFriendCountByStampTaskRequest,
+    ) -> VerifyFriendCountByStampTaskResult:
+        async_result = []
+        self._verify_friend_count_by_stamp_task(
             request,
             lambda result: async_result.append(result),
             is_blocking=False,
