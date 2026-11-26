@@ -5105,6 +5105,255 @@ class Gs2FormationRestClient(rest.AbstractGs2RestClient):
             raise async_result[0].error
         return async_result[0].result
 
+    def _verify_form(
+        self,
+        request: VerifyFormRequest,
+        callback: Callable[[AsyncResult[VerifyFormResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='formation',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            moldModelName=request.mold_model_name if request.mold_model_name is not None and request.mold_model_name != '' else 'null',
+            index=request.index if request.index is not None and request.index != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.slot_name is not None:
+            body["slotName"] = request.slot_name
+        if request.property_id_regex is not None:
+            body["propertyIdRegex"] = request.property_id_regex
+        if request.count_type is not None:
+            body["countType"] = request.count_type
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.access_token:
+            headers["X-GS2-ACCESS-TOKEN"] = request.access_token
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFormResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_form(
+        self,
+        request: VerifyFormRequest,
+    ) -> VerifyFormResult:
+        async_result = []
+        with timeout(30):
+            self._verify_form(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_form_async(
+        self,
+        request: VerifyFormRequest,
+    ) -> VerifyFormResult:
+        async_result = []
+        self._verify_form(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_form_by_user_id(
+        self,
+        request: VerifyFormByUserIdRequest,
+        callback: Callable[[AsyncResult[VerifyFormByUserIdResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='formation',
+            region=self.session.region,
+        ) + "/{namespaceName}/user/{userId}/mold/{moldModelName}/form/{index}/verify/{verifyType}".format(
+            namespaceName=request.namespace_name if request.namespace_name is not None and request.namespace_name != '' else 'null',
+            userId=request.user_id if request.user_id is not None and request.user_id != '' else 'null',
+            moldModelName=request.mold_model_name if request.mold_model_name is not None and request.mold_model_name != '' else 'null',
+            index=request.index if request.index is not None and request.index != '' else 'null',
+            verifyType=request.verify_type if request.verify_type is not None and request.verify_type != '' else 'null',
+        )
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.slot_name is not None:
+            body["slotName"] = request.slot_name
+        if request.property_id_regex is not None:
+            body["propertyIdRegex"] = request.property_id_regex
+        if request.count_type is not None:
+            body["countType"] = request.count_type
+        if request.count is not None:
+            body["count"] = request.count
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        if request.duplication_avoider:
+            headers["X-GS2-DUPLICATION-AVOIDER"] = request.duplication_avoider
+        if request.time_offset_token:
+            headers["X-GS2-TIME-OFFSET-TOKEN"] = request.time_offset_token
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFormByUserIdResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_form_by_user_id(
+        self,
+        request: VerifyFormByUserIdRequest,
+    ) -> VerifyFormByUserIdResult:
+        async_result = []
+        with timeout(30):
+            self._verify_form_by_user_id(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_form_by_user_id_async(
+        self,
+        request: VerifyFormByUserIdRequest,
+    ) -> VerifyFormByUserIdResult:
+        async_result = []
+        self._verify_form_by_user_id(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+    def _verify_form_by_stamp_task(
+        self,
+        request: VerifyFormByStampTaskRequest,
+        callback: Callable[[AsyncResult[VerifyFormByStampTaskResult]], None],
+        is_blocking: bool,
+    ):
+
+        url = Gs2Constant.ENDPOINT_HOST.format(
+            service='formation',
+            region=self.session.region,
+        ) + "/stamp/form/verify"
+
+        headers = self._create_authorized_headers()
+        body = {
+            'contextStack': request.context_stack,
+        }
+        if request.stamp_task is not None:
+            body["stampTask"] = request.stamp_task
+        if request.key_id is not None:
+            body["keyId"] = request.key_id
+
+        if request.request_id:
+            headers["X-GS2-REQUEST-ID"] = request.request_id
+        _job = rest.NetworkJob(
+            url=url,
+            method='POST',
+            result_type=VerifyFormByStampTaskResult,
+            callback=callback,
+            headers=headers,
+            body=body,
+        )
+
+        self.session.send(
+            job=_job,
+            is_blocking=is_blocking,
+        )
+
+    def verify_form_by_stamp_task(
+        self,
+        request: VerifyFormByStampTaskRequest,
+    ) -> VerifyFormByStampTaskResult:
+        async_result = []
+        with timeout(30):
+            self._verify_form_by_stamp_task(
+                request,
+                lambda result: async_result.append(result),
+                is_blocking=True,
+            )
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
+
+    async def verify_form_by_stamp_task_async(
+        self,
+        request: VerifyFormByStampTaskRequest,
+    ) -> VerifyFormByStampTaskResult:
+        async_result = []
+        self._verify_form_by_stamp_task(
+            request,
+            lambda result: async_result.append(result),
+            is_blocking=False,
+        )
+
+        import asyncio
+        with timeout(30):
+            while not async_result:
+                await asyncio.sleep(0.01)
+
+        if async_result[0].error:
+            raise async_result[0].error
+        return async_result[0].result
+
     def _describe_property_forms(
         self,
         request: DescribePropertyFormsRequest,
