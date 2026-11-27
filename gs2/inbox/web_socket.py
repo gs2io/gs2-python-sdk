@@ -3068,6 +3068,11 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["expiresAt"] = request.expires_at
         if request.message_reception_period_event_id is not None:
             body["messageReceptionPeriodEventId"] = request.message_reception_period_event_id
+        if request.verify_actions is not None:
+            body["verifyActions"] = [
+                item.to_dict()
+                for item in request.verify_actions
+            ]
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id
@@ -3227,6 +3232,11 @@ class Gs2InboxWebSocketClient(web_socket.AbstractGs2WebSocketClient):
             body["expiresAt"] = request.expires_at
         if request.message_reception_period_event_id is not None:
             body["messageReceptionPeriodEventId"] = request.message_reception_period_event_id
+        if request.verify_actions is not None:
+            body["verifyActions"] = [
+                item.to_dict()
+                for item in request.verify_actions
+            ]
 
         if request.request_id:
             body["xGs2RequestId"] = request.request_id

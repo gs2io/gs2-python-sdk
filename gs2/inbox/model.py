@@ -472,6 +472,47 @@ class Config(core.Gs2Model):
         }
 
 
+class VerifyAction(core.Gs2Model):
+    action: str = None
+    request: str = None
+
+    def with_action(self, action: str) -> VerifyAction:
+        self.action = action
+        return self
+
+    def with_request(self, request: str) -> VerifyAction:
+        self.request = request
+        return self
+
+    def get(self, key, default=None):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return default
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return None
+
+    @staticmethod
+    def from_dict(
+        data: Dict[str, Any],
+    ) -> Optional[VerifyAction]:
+        if data is None:
+            return None
+        return VerifyAction()\
+            .with_action(data.get('action'))\
+            .with_request(data.get('request'))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "action": self.action,
+            "request": self.request,
+        }
+
+
 class AcquireAction(core.Gs2Model):
     action: str = None
     request: str = None
@@ -699,6 +740,7 @@ class GlobalMessage(core.Gs2Model):
     expires_time_span: TimeSpan = None
     expires_at: int = None
     message_reception_period_event_id: str = None
+    verify_actions: List[VerifyAction] = None
 
     def with_global_message_id(self, global_message_id: str) -> GlobalMessage:
         self.global_message_id = global_message_id
@@ -726,6 +768,10 @@ class GlobalMessage(core.Gs2Model):
 
     def with_message_reception_period_event_id(self, message_reception_period_event_id: str) -> GlobalMessage:
         self.message_reception_period_event_id = message_reception_period_event_id
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> GlobalMessage:
+        self.verify_actions = verify_actions
         return self
 
     @classmethod
@@ -811,7 +857,11 @@ class GlobalMessage(core.Gs2Model):
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_expires_at(data.get('expiresAt'))\
-            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))
+            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))\
+            .with_verify_actions(None if data.get('verifyActions') is None else [
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')))
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -825,6 +875,10 @@ class GlobalMessage(core.Gs2Model):
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
             "messageReceptionPeriodEventId": self.message_reception_period_event_id,
+            "verifyActions": None if self.verify_actions is None else [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions))
+            ],
         }
 
 
@@ -836,6 +890,7 @@ class GlobalMessageMaster(core.Gs2Model):
     expires_time_span: TimeSpan = None
     expires_at: int = None
     message_reception_period_event_id: str = None
+    verify_actions: List[VerifyAction] = None
     created_at: int = None
     revision: int = None
 
@@ -865,6 +920,10 @@ class GlobalMessageMaster(core.Gs2Model):
 
     def with_message_reception_period_event_id(self, message_reception_period_event_id: str) -> GlobalMessageMaster:
         self.message_reception_period_event_id = message_reception_period_event_id
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> GlobalMessageMaster:
+        self.verify_actions = verify_actions
         return self
 
     def with_created_at(self, created_at: int) -> GlobalMessageMaster:
@@ -959,6 +1018,10 @@ class GlobalMessageMaster(core.Gs2Model):
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_expires_at(data.get('expiresAt'))\
             .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))\
+            .with_verify_actions(None if data.get('verifyActions') is None else [
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')))
+            ])\
             .with_created_at(data.get('createdAt'))\
             .with_revision(data.get('revision'))
 
@@ -974,6 +1037,10 @@ class GlobalMessageMaster(core.Gs2Model):
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
             "messageReceptionPeriodEventId": self.message_reception_period_event_id,
+            "verifyActions": None if self.verify_actions is None else [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions))
+            ],
             "createdAt": self.created_at,
             "revision": self.revision,
         }

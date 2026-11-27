@@ -2177,6 +2177,7 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
     expires_time_span: TimeSpan = None
     expires_at: int = None
     message_reception_period_event_id: str = None
+    verify_actions: List[VerifyAction] = None
 
     def with_namespace_name(self, namespace_name: str) -> CreateGlobalMessageMasterRequest:
         self.namespace_name = namespace_name
@@ -2204,6 +2205,10 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
 
     def with_message_reception_period_event_id(self, message_reception_period_event_id: str) -> CreateGlobalMessageMasterRequest:
         self.message_reception_period_event_id = message_reception_period_event_id
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> CreateGlobalMessageMasterRequest:
+        self.verify_actions = verify_actions
         return self
 
     def get(self, key, default=None):
@@ -2234,7 +2239,11 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_expires_at(data.get('expiresAt'))\
-            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))
+            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))\
+            .with_verify_actions(None if data.get('verifyActions') is None else [
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')))
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2248,6 +2257,10 @@ class CreateGlobalMessageMasterRequest(core.Gs2Request):
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
             "messageReceptionPeriodEventId": self.message_reception_period_event_id,
+            "verifyActions": None if self.verify_actions is None else [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions))
+            ],
         }
 
 
@@ -2304,6 +2317,7 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
     expires_time_span: TimeSpan = None
     expires_at: int = None
     message_reception_period_event_id: str = None
+    verify_actions: List[VerifyAction] = None
 
     def with_namespace_name(self, namespace_name: str) -> UpdateGlobalMessageMasterRequest:
         self.namespace_name = namespace_name
@@ -2331,6 +2345,10 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
 
     def with_message_reception_period_event_id(self, message_reception_period_event_id: str) -> UpdateGlobalMessageMasterRequest:
         self.message_reception_period_event_id = message_reception_period_event_id
+        return self
+
+    def with_verify_actions(self, verify_actions: List[VerifyAction]) -> UpdateGlobalMessageMasterRequest:
+        self.verify_actions = verify_actions
         return self
 
     def get(self, key, default=None):
@@ -2361,7 +2379,11 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
             ])\
             .with_expires_time_span(TimeSpan.from_dict(data.get('expiresTimeSpan')))\
             .with_expires_at(data.get('expiresAt'))\
-            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))
+            .with_message_reception_period_event_id(data.get('messageReceptionPeriodEventId'))\
+            .with_verify_actions(None if data.get('verifyActions') is None else [
+                VerifyAction.from_dict(data.get('verifyActions')[i])
+                for i in range(len(data.get('verifyActions')))
+            ])
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -2375,6 +2397,10 @@ class UpdateGlobalMessageMasterRequest(core.Gs2Request):
             "expiresTimeSpan": self.expires_time_span.to_dict() if self.expires_time_span else None,
             "expiresAt": self.expires_at,
             "messageReceptionPeriodEventId": self.message_reception_period_event_id,
+            "verifyActions": None if self.verify_actions is None else [
+                self.verify_actions[i].to_dict() if self.verify_actions[i] else None
+                for i in range(len(self.verify_actions))
+            ],
         }
 
 
